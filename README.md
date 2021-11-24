@@ -1,2 +1,2 @@
 # Burq Suite
-An RISC-V all in one Suite.
+An All in one RISC-V Suite.
