@@ -1,0 +1,492 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-size: 14px;
+	font-family: 'Open Sans', sans-serif;
+}
+textarea{
+    background: url(http://i.imgur.com/2cOaJ.png);
+	background-attachment: local;
+	background-repeat: no-repeat;
+	padding-left: 35px;
+	padding-top: 10px;
+    border-color: #ccc;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    color: white;
+    border: none;
+            outline: none;
+}
+
+textarea::after,textarea:focus{
+    border: none;
+}
+
+input{
+    border: none;
+    outline: none;
+    background-color: #2d2b55;
+    color: white;
+}
+
+.flexbox-parent {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background: rgb(255, 255, 255);
+}
+div .main-header{
+	margin: 0% !important;
+}
+.flexbox-item-grow {
+	flex: 1;
+	min-height: 0;
+	/* width: 60p; */
+}
+div .cl55 a{
+
+	border: 1px solid white;
+	margin-left: 25px;
+	margin-top: 10px;
+	padding-bottom: 0px !important;
+	padding-top: 0px !important;
+
+}
+@media screen and (max-width: 1300px){
+	div .cl55{
+
+		padding-bottom: 100px !important;
+	
+	}
+}
+header {
+	background-color: #15232c;
+	padding: 4px 6px;
+	height: 24px;
+	font-size: 12px;
+	color: white;
+	 
+}
+	
+header ul li  {
+
+    margin-right:14px;
+    	
+}
+
+
+footer {
+	background-color: #007ACC;
+	padding: 2px;
+	color: #fff;
+	height: 22px;
+	font-size: 12px;
+}
+    footer	>div {
+		padding: 1px 8px;
+	}
+	
+	footer .fa {
+		font-size:14px;
+	}
+		
+	footer ul li{
+		 
+			flex: 1;
+			min-width: 32px;
+			padding-right: 8px;
+		
+	}
+	
+	footer .app-git ul li:first-child{
+		 
+			 
+				flex: 3;
+			
+		
+	}
+	
+	footer .app-encoding {
+		width: 200px;
+		text-align: right;
+    }
+	footer .app-encoding	ul {
+			justify-content: flex-end;
+    }	
+    footer .app-encoding	ul li {
+        flex: 1;
+    }
+		
+	
+	
+
+
+header ul, footer ul {
+	 
+		padding: 0px;
+		margin: 0px;
+		list-style-type: none;
+		display: flex;
+	
+}
+
+/* and ka masla hai idhr */
+aside ,.sidebar{
+	 
+		min-width: 45px;
+		padding: 8px;
+		background-color: #252526;
+		color: #ADADAD;
+	
+}
+aside{
+	background-color: #122738 !important;
+}
+.sidebar{
+	background-color: #15232c !important;
+}
+
+.main {
+	overflow: auto;
+	height: auto;
+	flex: 4;
+	display:flex;
+	flex-direction: column;
+	background-color: #1E1E1E;
+	color: #D4D4D4;
+}
+			
+.pull-left{
+	background-color: #1f4663;
+}
+.main .main-header {
+		min-height:32px;
+		padding:6px;
+		box-shadow: 0 -8px 8px 10px black;
+		margin-bottom:4px;
+}		
+.main .main-header	ul {
+			display:flex;
+			margin:0px;
+			padding:0px;
+			list-style-type:none;
+}
+.main .main-header	ul li {
+				margin-right:12px;
+			
+		}
+		
+		.main .main-header .icons ul {
+			 
+				justify-content: flex-end;
+
+	}
+	.cl22{
+		background-color: #15232c !important	;
+	}
+	
+	.main .main-body {
+		overflow: auto;
+		height: auto;
+		padding:8px;
+	}
+	.clo4 li{
+		border: 1px solid white;
+		padding-left: 2.5rem;
+		padding-right: 2.5rem;
+	}
+	.clo4 li a{
+		text-decoration: none;
+		color: white;
+		font-size: 11px;
+		/* padding-left: 5rem; */
+		/* padding-right: 2px; */
+		text-align: center;
+	  }
+	.clo5{
+		margin-bottom: 5px;
+		display: flex;
+		padding: 5px;
+		width: 100%;
+		background-color: #15232c !important;
+	
+		
+	  }
+	  /* .clo4:nth-child(1){
+		padding-left: 10rem;
+	  
+	  } */
+
+.toolbar {
+	width: 10px;
+	/* padding: 8px 2px; */
+	text-align: center;
+	background-color: #333333;
+	color: #ADADAD;
+	font-size: 2em;
+
+}	
+.toolbar i:hover {
+		color: #dcdcdc;
+	}
+
+	.topnav {
+		overflow: hidden;
+		background-color: #333;
+	  }
+	  
+	  .topnav a {
+		float: left;
+		display: block;
+		color: #f2f2f2;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 17px;
+	  }
+	  
+	  .topnav a:hover {
+		background-color: #ddd;
+		color: black;
+	  }
+	  
+	  .topnav a.active {
+		background-color: #04AA6D;
+		color: white;
+	  }
+	  
+	  .topnav .icon {
+		display: none;
+	  }
+	  
+	  @media screen and (max-width: 600px) {
+		.topnav a:not(:first-child) {display: none;}
+		.topnav a.icon {
+		  float: right;
+		  display: block;
+		}
+	  }
+	  
+	  @media screen and (max-width: 600px) {
+		.topnav.responsive {position: relative;}
+		.topnav.responsive .icon {
+		  position: absolute;
+		  right: 0;
+		  top: 0;
+		}
+		.topnav.responsive a {
+		  float: none;
+		  display: block;
+		  text-align: left;
+		}
+	  }
+
+
+.fill-area {
+	display: flex;
+}
+#fff{
+    margin-left: 40px;
+    border: 1px solid white;
+    padding: 3px 5px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  min-height: 10px;
+}
+
+::-webkit-scrollbar-thumb:vertical:active {
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-border-radius: 100px;
+}   
+
+.window {
+	border-radius: 3px;
+	background: #19354a;
+	/* color: red; */
+	overflow: hidden;
+	/* position: relative; */
+	/* margin: 0 auto; */
+	/* margin-bottom: px; */
+	width: 100%;
+	/* height: 20%; */
+	padding-bottom: 200px;
+}
+.window :before {
+	  
+	  display: block;
+	  height: 48px;
+	  background: blue;
+	}
+	
+.window :after {
+	  
+	  position: absolute;
+	  left: 12px;
+	  right: 0;
+	  top: -3px;
+	  font-family: "Times New Roman", Times, serif;
+	  font-size: 96px;
+	  color: #fff;
+	  line-height: 0;
+	  letter-spacing: -12px;
+	}
+  
+  
+  .terminal {
+	margin: 20px;
+	font-family: monospace;
+	font-size: 16px;
+	color: #22da26;
+	/* resize: ; */
+  }
+.command { 
+	  width: 0%;
+	  white-space: nowrap;
+	  overflow: hidden;
+	  animation: write-command 5s both;
+}
+.command :before {
+		content: '$ ';
+		color: #22da26;
+	  }
+	
+.log {
+	  white-space: nowrap;
+	  overflow: hidden;
+	  animation: write-log 5s both;
+	}
+  
+	p:nth-child(2) {
+	  animation-delay: 2s;
+	}
+	
+	p:nth-child(3) {
+	  animation-delay: 8s;
+	}
+	.topnav a i::before{
+		background: none !important;
+	}
+	.topnav a:hover{
+		background-color :#19354a !important;
+	}
+		/* .topnav a #cl0{
+			margin-left: 30rem;		
+		}	 */
+  
+  @keyframes write-command {
+	0% {
+	  width: 0%;
+	}
+	
+	
+	100% {
+	  width: 100%;
+	}
+  }
+  
+  /* @keyframes write-log {
+	0% {
+	  height: 0;
+	}
+	
+	16% {
+	  height: 0;
+	}
+	
+	17% {
+	  height: 18px;
+	}
+	
+	33% {
+	  height: 18px;
+	}
+	
+	34% {
+	  height: 37px;
+	}
+	
+	51% {
+	  height: 37px;
+	}
+	
+	52% {
+	  height: 55px;
+	}
+	
+	69% {
+	  height: 55px;
+	}
+	
+	70% {
+	  height: 74px;
+	}
+	
+	87% {
+	  height: 74px;
+	}
+	
+	88% {
+	  height: 92px;
+	}
+	
+	88% {
+	  height: 92px;
+	}
+	
+	99% {
+	  height: 92px;
+	}
+	
+	100% {
+	  height: 110px;
+	}
+  } */
+/*terminal */
+  .topnav {
+	overflow: hidden;
+	background-color: #19354a	;
+	margin-top: 0%;
+	padding-bottom: 10px;
+	width: 100%;
+  }
+  
+  .topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+  }
+  
+  .topnav a:hover {
+	background-color: #ddd;
+	color: black;
+  }
+  .cl1{
+	 padding-left: 25rem;
+	 text-align: left;
+  }
+
+  
