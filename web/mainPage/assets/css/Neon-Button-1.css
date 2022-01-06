@@ -1,0 +1,29 @@
+.btn-neon {
+  /*width: 250px;*/
+  /*text-shadow: 0 1px 0 #fff;*/
+  background-image: -webkit-linear-gradient(top,#000000 0,#000000 100%);
+  background-image: -o-linear-gradient(top,#000000 0,#000000 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#000),to(#000));
+  background-image: linear-gradient(to bottom,#000000 0,#000000 100%);
+  transition: all 1s;
+  /*box-shadow: 0 0 #000;*/
+  /*text-shadow: 0 0 0px #000000;*/
+  color: #666666;
+  border-color: #333;
+}
+
+neon.button.cssbtn-neon:focus, .btn-neon:hover, .btn-neon:active {
+  text-shadow: 0 4px 0 #000000;
+  background-color: #000;
+  color: #06e1ff;
+  /*box-shadow: 2px 2px #666;*/
+  /*text-shadow: 1px 4px 6px #ffffff;*/
+  border-color: #06e1ff;
+}
+
+body {
+  background-color: #000000;
+  /*margin-top: 50px;*/
+  /*margin-left: 50px;*/
+}
+

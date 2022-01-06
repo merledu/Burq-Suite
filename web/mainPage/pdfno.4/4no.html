@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp">
+
+
+	<!-- build:css css/app.css -->
+	<link rel="stylesheet" href="less/4no.css" />
+	<!-- endbuild -->
+</head>
+
+<body>
+	<script>
+		function close(){
+		  var x = document.getElementById("cl0");
+		  if (x.style.display === "none") {
+			x.style.display = "block";
+		  } else {
+			x.style.display = "none";
+		  }
+		}
+		</script>
+
+
+	<div class="flexbox-parent">
+		<header>
+			<ul>
+				<li><img src="img/bijli.jpg" alt="" srcset="" width="40px" height="50px" style="padding-bottom:25px;"></li>
+				<li>File</li>
+				<li>Edit</li>
+				<li>View</li>
+				<li>Goto</li>
+				<li>Help</li>
+				<li><a onclick="mytoggle()" style="text-decoration: none;color: white;">terminal</a></li>
+			</ul>
+		</header>
+		<div class="fill-area content flexbox-item-grow " style="background-color: #15232c;">
+			<aside class="toolbar">
+				<br>
+				<i class="fa fa-files-o" aria-hidden="true" style="font-size: 25px;"></i>
+				<br><br>
+				<i class="fa fa-search" aria-hidden="true" style="font-size: 25px;"></i>
+				<br><br>
+				<i class="fa fa-play" aria-hidden="true" style="font-size: 25px;"></i>
+				<br><br>
+				<i class="fa fa-bug" aria-hidden="true" style="font-size: 25px;"></i>
+				<br><br>
+				<i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+			</aside>
+			<aside class="flexbox-item-grow sidebar">
+				<div style="width: 100%; background-color: #0c151c;">
+				Explorer<span style="padding-left: 15rem;">...</span> 	
+			</div>
+				<br>
+				<details style="cursor: pointer;" style="background-color: #15232c;">
+					<summary>
+						<span class="material-icons-sharp" style="padding-top: 3px; font-size: 12px;">
+							expand_more
+							</span><span style="background-color: #15232c !important;"> Folder Name </span>
+					</summary>
+					<br>
+					<p>
+						Filename1
+					</p>
+					<p>
+						Filename1
+					</p>
+					<p>
+						Filename1
+					</p>
+					<p>
+						Filename1
+					</p>
+				</details>
+			</aside>
+			<div class="flexbox-item-grow main" >
+			
+				<div class="topnav cl55" id="myTopnav" style="z-index: 3; padding-bottom: 40px;">
+					<a href="#home" >verify RTL</a>
+					<a href="#news">Upload Bit Stream</a>
+					<a href="#contact">Upload</a>
+					<a href="#about">Export CSV</a>
+					<a href="#about">Generate report</a>
+					<a href="#about">Generate Log</a>
+					<a href="#about">Generate</a>
+					<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+					  <i class="fa fa-bars"></i>
+					</a>
+				  </div>
+
+
+				<div class="main-header" style="height: 100px; padding: 0.19px;background-color: #192732; margin-top: 2rem;">
+					<!-- <<div class="pull-left">Breadcrumbs</div>  -->
+					<div class="pull-left" id="fff" >Filename1  &nbsp;&nbsp;<span class="material-icons-sharp" style="font-size: 10px; padding-left: 15px;">
+						close
+						</span></div>
+					<div class="pull-left" id="fff" >chisel code  &nbsp;&nbsp;<span class="material-icons-sharp" style="font-size: 10px; padding-left: 15px;">
+						close
+						</span></div>
+					
+					<div class="icons text-right pull-right">
+						<ul>
+							<li><i class="fa fa-check"></i></li>
+							<li><i class="fa fa-check"></i></li>
+							<li><i class="fa fa-check"></i></li>
+						</ul>
+					</div>
+				</div>
+				<div class="main-body" style="background-color: #16202a;">
+					<textarea rows="100" cols="100" style="height: 100%;width: 100%;"></textarea>
+					
+				</div>
+				<div class="window" id="cl0">
+					
+					<div class="terminal" >
+						<!-- <span>Problem</span><span>Problem</span> -->
+						<div class="topnav">
+							<a  href="#home">PROBLEMS</a>
+							<a href="#news">OUTPUT</a>
+							<a href="#contact">TERMINAL</a>
+							<a href="#about">DEBUG CONSOLE</a>
+							<a href="#"  onclick="mytoggle()" style="float: right;"> <i class="fa fa-times" aria-hidden="true" style="color: white;"></i></a> 
+
+							
+						  </div>
+						  
+						
+						  
+					  <p class="command">git clone https://github.com/schacon/ticgit</p>
+					  <p class="log">
+						<span>
+						  Cloning into 'ticgit'...<br />
+						  remote: Reusing existing pack: 1857, done.<br />
+						  remote: Total 1857 (delta 0), reused 0 (delta 0)<br />
+						  Receiving objects: 100% (1857/1857), 374.35 KiB | 268.00 KiB/s, done.<br />
+						  Resolving deltas: 100% (772/772), done.<br />
+						  Checking connectivity... done.
+						</span>
+					  </p>
+					  <p class="command">rm -rf ticgit</p>
+					</div>
+				  </div>
+			
+			</div>
+		</div>
+		
+
+		
+	</div>
+
+	<script>
+		function mytoggle(){
+		  var x = document.getElementById("cl0");
+		  if (x.style.display === "none") {
+			x.style.display = "block";
+		  } else {
+			x.style.display = "none";
+		  }
+		}
+		</script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+.mynav div {
+  margin-right: 20px;
+}
+
+.myicon {
+  justify-content: space-between;
+  margin: 12px;
+}
+
+.fa.fa-star {
+  margin: 12px;
+}
+
