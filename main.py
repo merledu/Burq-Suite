@@ -1,5 +1,4 @@
 from eel import init, start, expose
-from os import mkdir
 
 # Initializes the frontend
 init('web')
@@ -11,8 +10,16 @@ def new_file(filename):
     with open(f"New Files Test/{filename}", 'x', encoding='UTF-8') as f:
         f.write('')
 
+
 @expose
-def new_folder(foldername): pass
+def open_file(filename):
+    with open(f"New Files Test/{filename}", 'r', encoding='UTF-8') as f:
+        content = f.read()
+    return content
+
+
+def display(): pass
+
 
 # Starts the program
 start('mainPage/in.html')
