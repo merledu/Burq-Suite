@@ -17,7 +17,9 @@ def open_file(filename):
         content = f.read()
     return content
 
-
+@expose
+def displaywindow(): 
+    start('assets2/index.html' ,size=(1000, 700))
 def display(): pass
 
 
