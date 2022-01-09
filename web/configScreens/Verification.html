@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<style>
+    body{
+            overflow-y:scroll !important;
+        }
+</style>
+    <section class="clean-block">
+        <div class="topmost_bar">
+            <img src="assets/img/veriy.png" />
+            Verification
+        </div>
+        <div class="main_space">
+            <div class="container">
+                <div class="d-flex justify-content-around">
+                        <div class="col-md-5 bordered-box">
+                            <h3> Select Core </h3>
+                            <input type="radio" name="core" value="32 Bit" checked />
+                            <label> Core 1 </label>
+                            <br>
+                            <input type="radio" name="core" value="64 Bit" />
+                            <label> Core 2 </label>
+                            <br>
+                            <input type="radio" name="core" value="64 Bit" />
+                            <label> Core 3 </label>
+                            <br>
+                            <br>
+                            <button class="btn btn-outline-light"> Add New Core + </button>
+                        </div>
+                   
+                        
+                        <div class="col-md-5 bordered-box">
+                            <h3> Select ISS </h3>
+                            <input type="radio" name="iss" value="32 Bit" checked />
+                            <label> Spike </label>
+                            <br>
+                            <input type="radio" name="iss" value="64 Bit" />
+                            <label> Whisper </label>
+                            <br>
+                            <input type="radio" name="iss" value="64 Bit" />
+                            <label> OVPSim </label>
+                            <br>
+                            <br>
+                            <button class="btn btn-outline-light"> Add New ISS + </button>
+
+                            
+                        </div>
+                    </div>
+
+                <br>
+                <br>
+                <br>
+                <div class="d-flex justify-content-end">
+                    <button onclick="closeThisWindow()" class="btn fin-btn"> Select Test Cases <span>></span> </button>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </section>
+    
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function closeThisWindow(){
+            window.location.href = "Verification2.html"
+        }
+    </script>
+</body>
+</html>

@@ -23,10 +23,13 @@ def open_file(filename):
 def displaywindow(): 
     eel.start('assets2/index.html' , size=(1024, 768), position=(0,0), port=8081)
 
+@expose
+def showSocConfig():
+    eel.start('configScreens/configSoc.html' , size=(1024, 768), position=(0,0), port=8082)
 
 
 def display(): pass
 
 
 # Starts the program
-start('mainPage/mainPage.html', port=8005)
+start('mainPage/mainPage.html', port=8007)

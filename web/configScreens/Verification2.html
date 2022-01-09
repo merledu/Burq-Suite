@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <style>
+        body{
+                overflow-y:scroll !important;
+            }
+    </style>
+    <section class="clean-block">
+        <div class="topmost_bar">
+            <img src="assets/img/veriy.png" />
+            Verification
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <div class="main_space" style="height:100%">
+            <div class="container">
+                <div class="d-flex justify-content-around">
+                        <div class="col-md-5 bordered-box">
+                            <h3> Select Test Cases </h3>
+                            <input type="checkbox" name="tst" id="select-all" />
+                            <label> Select All </label>
+                            <br />
+                            <input type="checkbox" name="tst" disabled checked />
+                            <label> Basic Test Case </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 1 </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 2 </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 3 </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 4 </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 5 </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 6 </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 7 </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 8 </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 9 </label>
+                            <br />
+                            <input type="checkbox" name="tst" />
+                            <label> Test Case 10 </label>
+                            <br />
+                            <br>
+                            <button class="btn btn-outline-light"> Add Custom Test Case + </button>
+                        </div>
+                   <script>
+                       $('#select-all').click(function(event) {   
+                            if(this.checked) {
+                                // Iterate each checkbox
+                                $(':checkbox').each(function() {
+                                    this.checked = true;                        
+                                });
+                            } else {
+                                $(':checkbox').each(function() {
+                                    this.checked = false;                       
+                                });
+                            }
+                        }); 
+                   </script>
+                        
+                        
+                    </div>
+
+                <br>
+                <br>
+                <br>
+                <div class="d-flex justify-content-end">
+                    <button onclick="closeThisWindow()" class="btn fin-btn"> Start Verification <span>></span> </button>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </section>
+    
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function closeThisWindow(){
+            window.location.href = "Verification3.html"
+        }
+    </script>
+</body>
+</html>

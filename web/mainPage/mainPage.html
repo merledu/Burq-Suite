@@ -37,7 +37,7 @@
 <body style="/*border-color: rgb(21,35,45);*//*height: auto;*/overflow-y: hidden;/*margin-right: 0px;*//*width: 100%;*//*margin-bottom: 0;*//*background: rgb(230,220,220);*/">
     <div class="mynav" style="display: flex;background-color: #15232D;align-items: center; ">
         
-        <div onclick="open_main()"><img src="assets/img/HD-wallpaper-chip-processor-circuit-core-3d-thumbnail.jpg" style="height: 40PX;width: 40PX;margin-right: 10;margin-top: 1px;"></div>
+        <div onclick="open_main()"><img src="assets/img/bijli.png" style="height:30px;margin-right: 10;margin-top: 1px;"></div>
         <div><button class="btn btn-primary" area-expanded="false" type="button" data-bs-toggle="dropdown" style="background: #15232D;;border-style: none;height: 30px;text-decoration: none;"><a href="#" style="color: rgb(237,242,248);text-decoration: none;" >File<span class="caret"></span></a></button>
             
             <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
@@ -125,21 +125,21 @@
         <div class="upar-wala-button" style="margin-right:  0PX;">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><button class=" btn btn-neon" type="button" onclick="dwindow()">Generate RTL</button></div>
+                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" onclick="gen_rtl()" id="gen-rtl">Generate RTL</button></div>
                 </div>
             </div>
         </div>
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><button class=" btn btn-neon" type="button" onclick="verifywindow()">Verify RTL</button></div>
+                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" onclick="verify_rtl()"id="verify-rtl" >Verify RTL</button></div>
                 </div>
             </div>
         </div>
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><button class=" btn btn-neon" type="button" >Generate Report</button>
+                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" id="gen-report" onclick="gen_report()" >Generate Report</button>
 </div>
                 </div>
             </div>
@@ -147,33 +147,33 @@
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><button class=" btn btn-neon" type="button">Generate log </button></div>
+                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" id="gen-log" onclick="gen_log()">Generate log </button></div>
                 </div>
             </div>
         </div>
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><button class=" btn btn-neon" type="button">Export CSV</button></div>
+                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" id="export-csv" >Export CSV</button></div>
                 </div>
             </div>
         </div>
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><button class=" btn btn-neon" type="button">Upload</button></div>
+                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" id="upload-test">Upload Test</button></div>
                 </div>
             </div>
         </div>
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><button class=" btn btn-neon" type="button" onclick="displaywindow()">Upload bit stream</button></div>
+                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" onclick="displaywindow()" id="upload-bs">Upload bit stream</button></div>
                 </div>
             </div>
         </div>
     </div>
-    <div style="display: flex;width: auto;height: 80vh;">
+    <div style="display: flex;width: auto;height: 85vh;">
         <style>
             /* Style the tab */
             .vertical-tabs .tab {
@@ -405,15 +405,109 @@
             </div>
 
             <div id="Search" class="tabcontent2" style="background: #15232D;height: 100%;/*width: 200px;*//*display: flex;*/margin-left: 0px;/*margin-top: 47px;*/">
-                Search
+                <div style="background: #0c151b;height: 50px;width: 200px;display: flex;align-items:center; padding:20px 10px;color:white"> <b>Search</b>
+                    
+                    <div>
+                        <button class="btn btn-primary " area-expanded="false" type="button" data-bs-toggle="dropdown" style="margin-left: 90px;background: #0c151b;border-style: none;height: 30px;"><i class="icon-options d-xl-flex justify-content-xl-start align-items-xl-end" style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;"></i><span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                            <li><i class="typcn typcn-tick  " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></i></li>
+                            <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none; margin-bottom: 10px;">
+                                <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;">New Folder</a></i></li>
+                            <li>
+                                <button id="newfile" style="border: none; background-color: inherit;" onclick="new_file()">
+                                    <i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                        New File
+                                    <!-- <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">New File</a>--></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <style>
+                    .search-box{
+                        background-color:rgba(255, 255, 255, 0.5);
+                        color:#fff;
+                        margin-top: 20px;
+                        /* margin-left: 10px; */
+                        margin-right: 22px;
+                        padding:10px
+                    }
+                    .search-box::placeholder{
+                        color:white
+                    }
+                </style>
+                <div>
+                    <input type="text" placeholder="Search" class="search-box" />
+                </div>
             
             </div>
             <div id="Extensions" class="tabcontent2" style="background: #15232D;height: 100%;/*width: 200px;*//*display: flex;*/margin-left: 0px;/*margin-top: 47px;*/">
-                Extensions
+                <div style="background: #0c151b;height: 50px;width: 200px;display: flex;align-items:center; padding:10px 10px;color:white"> <b>Extensions</b>
+                    
+                    <div>
+                        <button class="btn btn-primary " area-expanded="false" type="button" data-bs-toggle="dropdown" style="margin-left: 70px;background: #0c151b;border-style: none;height: 30px;"><i class="icon-options d-xl-flex justify-content-xl-start align-items-xl-end" style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;"></i><span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                            <li><i class="typcn typcn-tick  " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></i></li>
+                            <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none; margin-bottom: 10px;">
+                                <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;">New Folder</a></i></li>
+                            <li>
+                                <button id="newfile" style="border: none; background-color: inherit;" onclick="new_file()">
+                                    <i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                        New File
+                                    <!-- <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">New File</a>--></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <style>
+                    .search-box{
+                        background-color:rgba(255, 255, 255, 0.5);
+                        color:#fff;
+                        margin-top: 20px;
+                        /* margin-left: 10px; */
+                        margin-right: 22px;
+                        padding:10px
+                    }
+                    .search-box::placeholder{
+                        color:white
+                    }
+                </style>
+                <div>
+                    <input type="text" placeholder="Extensions" class="search-box" />
+                </div>
             
             </div>
             <div id="Debug" class="tabcontent2" style="background: #15232D;height: 100%;/*width: 200px;*//*display: flex;*/margin-left: 0px;/*margin-top: 47px;*/">
-                Debug
+                <div style="background: #0c151b;height: 50px;width: 200px;display: flex;align-items:center; padding:20px 10px;color:white"> <b>Debugger</b>
+                    
+                    <div>
+                        <button class="btn btn-primary " area-expanded="false" type="button" data-bs-toggle="dropdown" style="margin-left: 90px;background: #0c151b;border-style: none;height: 30px;"><i class="icon-options d-xl-flex justify-content-xl-start align-items-xl-end" style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;"></i><span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                            <li><i class="typcn typcn-tick  " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></i></li>
+                            <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none; margin-bottom: 10px;">
+                                <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;">New Folder</a></i></li>
+                            <li>
+                                <button id="newfile" style="border: none; background-color: inherit;" onclick="new_file()">
+                                    <i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                        New File
+                                    <!-- <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">New File</a>--></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                
+                     
             
             </div>
         </div>
@@ -480,13 +574,13 @@
                                 </div>
                                 <div>
                                     <div class="container">
-                                        <div style="margin-right: 200px;margin-left: 100px;">   <button class=" btn btn-neon bwidth
+                                        <div style="margin-right: 200px;margin-left: 100px;">   <button onclick="CoreConfigOpen()" class=" btn btn-neon bwidth
                             "  class="fa fa-star" type="button" style="text-align: left; padding:10px">  <i class="fas fa-ticket-alt" type="file-plus"> </i>               Custom Config Core </button></div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="container">
-                                        <div style="margin-right: 200px;margin-left: 100px;"><button class=" btn btn-neon bwidth
+                                        <div style="margin-right: 200px;margin-left: 100px;"><button onclick="verificationOpen()" class=" btn btn-neon bwidth
                             "  class="fa fa-star" type="button" style="text-align: left;padding: 10px;"><i class="fa fa-check-circle" type="file-plus"> </i> Verification                
                             </button></div>
                                     </div>
@@ -771,6 +865,8 @@
         }
         var terminal = document.getElementById("terminal-btn");
         terminal.classList.add("active");
+        var rtl_btn = document.getElementById("gen-rtl");
+        rtl_btn.classList.remove("disabled");
     }
     function open_main(){
         var mm=document.getElementById("mainscreen");
@@ -837,20 +933,50 @@
         eel.displaywindow()
     }
 
-    var Window;
+    var SoCWindow;
   
         // Function that open the new Window
         function SocConfigOpen() {
-            Window = window.open("../configScreens/configSoc.html", "Configure SoC", "fullscreen=yes, resizeable=no");
+            SoCWindow = window.open("../configScreens/configSoc.html", "Configure SoC", "fullscreen=yes, resizeable=no");
             console.log("OPENEDDD");
             console.log(Window.closed);
         }
 
-        if(Window.closed == true){            
+        if(SoCWindow.closed == true){            
             console.log("CLOSEEDDDDD");
             open_editor();
         }
+
+        function CoreConfigOpen(){
+            var Window = window.open("../configScreens/configCore.html", "Configure Core", "top=150, left=150, height=500, width=1000, resizeable=no");
+        }
+
+        function verificationOpen(){
+            var Window = window.open("../configScreens/Verification.html", "Configure Core", "top=150, left=150, height=500, width=1000, resizeable=no");
+        }
     
+        function gen_rtl(){
+            var rtl_btn = document.getElementById("verify-rtl");
+            rtl_btn.classList.remove("disabled");
+        }
+        function verify_rtl(){
+            var report_btn = document.getElementById("gen-report");
+            report_btn.classList.remove("disabled");
+            var upload_bs_btn = document.getElementById("upload-bs");
+            upload_bs_btn.classList.remove("disabled");
+            var upload_test_btn = document.getElementById("upload-test");
+            upload_test_btn.classList.remove("disabled");
+            var Window = window.open("../configScreens/Verification.html", "Configure Core", "top=150, left=150, height=500, width=1000, resizeable=no");
+        }
+        function gen_report(){
+            var log_btn = document.getElementById("gen-log");
+            log_btn.classList.remove("disabled");
+
+        }
+        function gen_log(){
+            var csv_btn = document.getElementById("export-csv");
+            csv_btn.classList.remove("disabled");
+        }
     </script>
 
 </body>
