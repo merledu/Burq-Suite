@@ -224,7 +224,7 @@
                
             </div>
         </div>
-        <div style="margin-top: 0px;width: 100%;height: 100%; background: #15232D">
+        <div style="margin-top: 0px;width: 100%;height: 100%; background: #002240">
             <div style="height: 30px;background: #15232D;display: flex; width:auto;">
                 
                 <div style=" display: flex; height: 30px;width: 100%;/*border-style: solid;*/border-color: rgb(25,53,73);border-radius: 2px;border-top-left-radius: 3pxpx;border-top-right-radius: 3px;border-bottom-right-radius: 3px;border-bottom-left-radius: 3px;display: flex;background: #15232D;">
@@ -309,9 +309,9 @@
                                 </div>
                             </div>
                             </div>
-                            <div id="terminall" >
-                                <div  class="main-body" style="background-color: #14ad2b;">
-                                    <textarea id="editor" name="editor" rows="100" cols="100" style="height: 100%;width: 100%;background-color: aqua;"></textarea>
+                            <div id="terminall">
+                                <div  class="main-body" id="text" style="background-color: #14ad2b;">
+                                    <textarea id="editor" name="editor"></textarea>
                                 </div>
                                 <div class="window"id="cl0" style="background-color: #002240"  >
 					
@@ -347,6 +347,7 @@
                                   </div>
                             
                             </div>
+                                
                         </div>
                         </div>
                         </div>
@@ -380,10 +381,10 @@
           var y=document.getElementById("text");
 		  if (x.style.display === "none") {
 			x.style.display = "block";
-            y.rows="10";
+            y.style.height = "40vh";
 		  } else {
 			x.style.display = "none";
-            y.rows="100";
+            y.style.height = "80vh";
 		  }
 		}
     let editor = CodeMirror.fromTextArea(
@@ -393,9 +394,11 @@
             matchBrackets: true,
             theme: "erlang-dark",
             mode: "text/x-scala",
-            autoRefresh: true
+            autoRefresh: true,
+            scrollbars:true,
+            
         }
-    );
+    ).setSize(null, "100%");
     function dwindow(){
         eel.displaywindow()
     }
