@@ -21,7 +21,7 @@ def open_file(filename):
 
 @expose
 def displaywindow(): 
-    eel.start('assets2/index.html' , size=(200, 200), port=8080)
+    eel.start('assets2/index.html' , size=(200, 200), port=8081)
 
 def display(): pass
 
