@@ -11,3 +11,55 @@
   margin: 12px;
 }
 
+body{
+  overflow: hidden;
+}
+
+.topmost_bar{
+  height:80px;
+  text-align: center;
+  padding:20px 20px;
+  background-color: #15232d;
+  color:white;
+  font-size: 20px;
+}
+.topmost_bar img {
+  height:40px;
+}
+
+.clean-block{
+  height:100%;
+}
+
+.main_space{
+  background-color: #193549;
+  height:100vh;
+  color:white;
+  padding-top: 30px;
+}
+
+.bordered-box{
+  border: 1px solid #ffffff0a;
+  padding: 20px 20px;
+  border-radius: 10px;
+  box-shadow: 12px 12px 0px 0px #ffffff66;
+  background-color: #082132
+}
+
+.fin-btn{
+  color: white;
+  border:1px solid white;
+  border-radius:5px;
+  margin-right: 30px;
+  margin-top: 10px;
+}
+.fin-btn:hover{
+  color:#193549;
+  background-color:white;
+  border:1px solid #193549
+}
+.fin-btn span{
+  letter-spacing:0px;
+  font-size: 110%;
+}
+

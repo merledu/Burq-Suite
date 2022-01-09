@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Config SoC</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <section class="clean-block">
+        <div class="topmost_bar">
+            <img src="assets/img/chip_icon.png" />
+            Custom Configure SoC
+        </div>
+        <div class="main_space">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="bordered-box">
+                            <h3> Select ISA </h3>
+                            <input type="radio" name="isa" value="32 Bit" checked />
+                            <label> 32 Bit </label>
+                            <br>
+                            <input type="radio" name="isa" value="64 Bit" />
+                            <label> 64 Bit </label>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="bordered-box">
+                            <h3> Select Extensions </h3>
+                            <input type="checkbox" name="ext" disabled checked />
+                            <label> Integer (I) </label>
+                            <br />
+                            <input type="checkbox" name="ext" />
+                            <label> Multiplier (M) </label>
+                            <br />
+                            <input type="checkbox" name="ext" />
+                            <label> Floating Point (F) </label>
+                            <br />
+                            <input type="checkbox" name="ext" />
+                            <label> Compressed (C) </label>
+                            <br />
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="bordered-box" style="height:100%">
+                            <h3> Select Device(s) </h3>
+                            <input type="checkbox" name="dev" disabled checked />
+                            <label> General Purpose Input Output (GPIO) </label>
+                            <br>
+                            <input type="checkbox" name="dev" />
+                            <label> Serial Peripheral Interface (SPI) </label>
+                            <br>
+                            <input type="checkbox" name="dev" />
+                            <label> Universal Asynchronous Receiver Transmitter (UART) </label>
+                            <br>
+                            <input type="checkbox" name="dev" />
+                            <label> Timer </label>
+                            <br>
+                            <input type="checkbox" name="dev" />
+                            <label> Inter Integrated Circuit (I<sup>2</sup>C) </label>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="bordered-box" style="height:100%">
+                            <h3> Select Bus Interconnect </h3>
+                            <input type="radio" name="bus" checked>
+                            <label> Wishbone </label>
+                            <br />
+                            <input type="radio" name="bus">
+                            <label> Tilelink Uncached Lightweight (TL-UL) </label>
+                            <br />
+                            <input type="radio" name="bus">
+                            <label> Tilelink Cached (TL-C) </label>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn fin-btn"> Finalize SoC <span>></span> </button>
+            </div>
+        </div>
+        
+    </section>
+    
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
