@@ -22,7 +22,7 @@ neon.button.cssbtn-neon:focus, .btn-neon:hover, .btn-neon:active {
   /*background-color: #000000;*/
   color: #10c4ed;
   box-shadow: 2px 2px #666;
-  text-shadow: 1px 4px 6px #d5550e;
+  /* text-shadow: 1px 4px 6px #d5550e; */
   border-color: #06e1ff;
 }
 

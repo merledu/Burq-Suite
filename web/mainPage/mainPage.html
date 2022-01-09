@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>guisuite</title>
+    <title>Burq Suite</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
@@ -208,70 +208,61 @@
                         </ul>
                     </div>
                 </div>
-                <div  class="dropdown" style="background: #193549;width: 200px;height: 29px;display: flex;border-color: rgb(147,149,152);">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" area-expanded="false" type="button" data-bs-toggle="dropdown" style="height: 29px;width: 71.4px;color: rgb(255, 255, 255);background: rgb(25,53,73);border-style: none;">Folder <span class="caret"></span>
-                        </button>
-                        <ul id="tree" class="dropdown-menu" style="width: 200px; background:#15232D; color: rgb(255, 255, 255);">
-                            <!-- <li><a href="#" style="color: rgb(255, 255, 255); text-decoration: none;">filename1</a></li>
-                            <li><a href="#" style="color: rgb(255, 255, 255); text-decoration: none;">filename2</a></li>
-                            <li><a href="#" style="color: rgb(255, 255, 255); text-decoration: none;">filename3</a></li> -->
-                        </ul>
-                    </div> 
                 
-                </div>
                 
                
             </div>
         </div>
         <div style="margin-top: 0px;width: 100%;height: 100%; background: #002240">
-            <div style="height: 30px;background: #15232D;display: flex; width:auto;">
+            
+            <div id="mainscreen" style="background: #193549;height: 100%;width: 100%;">
+                <div style="height: 30px;background: #15232D;display: flex; width:100%;">
                 
-                <div style=" display: flex; height: 30px;width: 100%;/*border-style: solid;*/border-color: rgb(25,53,73);border-radius: 2px;border-top-left-radius: 3pxpx;border-top-right-radius: 3px;border-bottom-right-radius: 3px;border-bottom-left-radius: 3px;display: flex;background: #15232D;">
-                    
-                    
-                            
-                    <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="currentColor"></path>
-                    
-                        </svg></button>
-                    </div>
-                        <div> <button class="btn btn-primary" area-expanded="false" type="button" data-bs-toggle="dropdown" style="margin-right: 10px;background: #15232D;border-style: none;height: 30px;"><i class="icon-options d-xl-flex justify-content-xl-start align-items-xl-end" style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;"></i><span class="caret"></span></button>
-                            <ul class="dropdown-menu" style="width: 200px; background:#193549 ; color: rgb(255, 255, 255);">
+                    <div style=" display: flex; height: 30px;width: 100%;/*border-style: solid;*/border-color: rgb(25,53,73);border-radius: 2px;border-top-left-radius: 3pxpx;border-top-right-radius: 3px;border-bottom-right-radius: 3px;border-bottom-left-radius: 3px;display: flex;background: #15232D;">
+                        
+                        
                                 
-                                <li><i class="typcn typcn-tick  " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
-                                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></i></li>
-                                <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none; margin-bottom: 10px;">
-                                    <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;"> Folder</a></i></li>
-                                <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
-                                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;"> Author</a></i></li>
-                            </ul>
+                        <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="currentColor"></path>
+                        
+                            </svg></button>
                         </div>
-                    
-                            
-                        </div>
-            <div id="mainscreen" style="background: #193549;height: 100%;width: auto;display: flex;">
-                
-                            <div style="margin-top: 80px;height: auto;margin-left: 90px;">
-                                
-                                
-                                <h1 style="color: rgb(238,241,244);margin-left: 70px;font-size: 36px;">Start</h1>
-                                <div style="display: flex;margin-left: 100px;" onclick="open_terminal()"><i class="fa fa-file-text" style="color: rgb(242,245,248);margin-top: 10px;font-size: 17px;"></i><a href="#" style="color: rgb(255,255,255);margin-left: 10px;margin-top: 9px;text-decoration: none;">Open File</a></div>
-                                <div style="display: flex;margin-left: 10px;"onclick="open_terminal()"><i class="fa fa-folder-open" style="margin-left: 90px;color: rgb(240,244,248);margin-top: 10px;"></i><a href="#" style="color: rgb(238,244,252);width: 200px;margin-left: 10px;margin-top: 9px;text-decoration: none;">Open Folder</a></div>
-                                <div style="display: flex;border-style: none;margin-left: 10px;/*margin-left: 10px;*/"onclick="open_terminal()"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-file-plus" style="margin-left: 80px;color: rgb(224,230,237);width: 36.7px;height: 22px;margin-top: 5px;">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
-                                        <line x1="12" y1="11" x2="12" y2="17"></line>
-                                        <line x1="9" y1="14" x2="15" y2="14"></line>
-                                    </svg><a href="#" style="color: rgb(238,240,244);margin-top: 9px;text-decoration: none;">New File</a></div>
-                                <div>
-                                    <h1 style="margin-left: 70px;color: rgb(241,244,247);font-size: 36px;margin-top: 15px;text-decoration: none;">Recents</h1>
-                                </div>
-                                <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename1</a></div>
-                                <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename2</a></div>
-                                <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename3</a></div>
-                                <div style="margin-left: 110px;color: rgb(240,242,245);"></div>
+                            <div> <button class="btn btn-primary" area-expanded="false" type="button" data-bs-toggle="dropdown" style="margin-right: 10px;background: #15232D;border-style: none;height: 30px;"><i class="icon-options d-xl-flex justify-content-xl-start align-items-xl-end" style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;"></i><span class="caret"></span></button>
+                                <ul class="dropdown-menu" style="width: 200px; background:#193549 ; color: rgb(255, 255, 255);">
+                                    
+                                    <li><i class="typcn typcn-tick  " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                        <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></i></li>
+                                    <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none; margin-bottom: 10px;">
+                                        <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;"> Folder</a></i></li>
+                                    <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                        <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;"> Author</a></i></li>
+                                </ul>
                             </div>
+                        
+                                
+                            </div>
+                            <div class="d-flex">
+                                <div style="margin-top: 80px;height: auto;margin-left: 90px;">
+                                    
+                                    
+                                    <h1 style="color: rgb(238,241,244);margin-left: 70px;font-size: 36px;">Start</h1>
+                                    <div style="display: flex;margin-left: 100px;" onclick="open_editor()"><i class="fa fa-file-text" style="color: rgb(242,245,248);margin-top: 10px;font-size: 17px;"></i><a href="#" style="color: rgb(255,255,255);margin-left: 10px;margin-top: 9px;text-decoration: none;">Open File</a></div>
+                                    <div style="display: flex;margin-left: 10px;"onclick="open_editor()"><i class="fa fa-folder-open" style="margin-left: 90px;color: rgb(240,244,248);margin-top: 10px;"></i><a href="#" style="color: rgb(238,244,252);width: 200px;margin-left: 10px;margin-top: 9px;text-decoration: none;">Open Folder</a></div>
+                                    <div style="display: flex;border-style: none;margin-left: 10px;/*margin-left: 10px;*/"onclick="open_editor()"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-file-plus" style="margin-left: 80px;color: rgb(224,230,237);width: 36.7px;height: 22px;margin-top: 5px;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                            <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                                            <line x1="12" y1="11" x2="12" y2="17"></line>
+                                            <line x1="9" y1="14" x2="15" y2="14"></line>
+                                        </svg><a href="#" style="color: rgb(238,240,244);margin-top: 9px;text-decoration: none;">New File</a></div>
+                                    <div>
+                                        <h1 style="margin-left: 70px;color: rgb(241,244,247);font-size: 36px;margin-top: 15px;text-decoration: none;">Recents</h1>
+                                    </div>
+                                    <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename1</a></div>
+                                    <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename2</a></div>
+                                    <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename3</a></div>
+                                    <div style="margin-left: 110px;color: rgb(240,242,245);"></div>
+                                </div>
+                            
                             <div style="margin-top: 80px;/*width: 100%;*/">
                                 <div>
                                     <h1 style="margin-top: 0px;margin-left: 80px;color: rgb(241,245,248);font-size: 32px;">Select your project</h1>
@@ -309,10 +300,114 @@
                                 </div>
                             </div>
                             </div>
-                            <div id="terminall">
-                                <div  class="main-body" id="text" style="background-color: #14ad2b;">
-                                    <textarea id="editor" name="editor"></textarea>
+                        </div>
+                            <div id="editor_screen">
+                                <style>
+                                    /* Style the tab */
+                                    .tab {
+                                    overflow: hidden;
+                                    border: none;
+                                    background-color: #15232D;
+                                    height: 30px
+                                    }
+
+                                    .tablinks{
+                                        color: white;
+                                        border: solid 1px #ffffff1c !important;
+                                        border-right: none !important; 
+                                    }
+                                    /* Style the buttons that are used to open the tab content */
+                                    .tab button {
+                                    background-color: #0f181f;
+                                    float: left;
+                                    border: none;
+                                    outline: none;
+                                    cursor: pointer;
+                                    padding: 5px 16px;
+                                    /* transition: 0.3s; */
+                                    }
+                                    
+
+                                    /* Change background color of buttons on hover */
+                                    .tab button:hover {
+                                    background-color: #0f181ff1;
+                                    }
+
+                                    /* Create an active/current tablink class */
+                                    .tab button.active {
+                                    background-color: #2870a7;
+                                    }
+
+                                    /* Style the tab content */
+                                    .tabcontent {
+                                    display: none;
+                                    padding: 6px 12px;
+                                    border: 1px solid #ccc;
+                                    border-top: none;
+                                    height:31vh;
+                                    }
+                                    .closetab{
+                                        color:white;
+                                        background-color: none;
+                                        padding: 0px 0px 0px 20px;
+                                    }
+                                    .closetab:hover{
+                                        color:rgb(124, 123, 123)
+                                    }
+                                    
+                                </style>
+                                <div id="text">
+                                    <!-- Tab links -->
+                                    <div class="tab">
+                                        <button id="file1-tab" class="tablinks" onclick="openTab(event, 'file1')">file1 <span class="closetab" onclick="closeTab('file1')">x</span> </button>
+                                        <button id="file2-tab" class="tablinks" onclick="openTab(event, 'file2')">file2 <span class="closetab" onclick="closeTab('file2')">x</span></button>
+                                        <button id="file3-tab" class="tablinks" onclick="openTab(event, 'file3')">file3 <span class="closetab" onclick="closeTab('file3')">x</span></button>
+                                    </div>
+                                    
+                                    <!-- Tab content -->
+                                    <div id="file1" class="tabcontent">
+                                            <textarea class="editorx" name="editor"></textarea>
+                                    </div>
+                                    
+                                    <div id="file2" class="tabcontent">
+                                            <textarea class="editorx" name="editor"></textarea>
+                                    </div>
+                                    
+                                    <div id="file3" class="tabcontent">
+                                            <textarea class="editorx" name="editor"></textarea>
+                                    </div>
                                 </div>
+                                <script>
+                                    function openTab(evt, tabName) {
+                                        // Declare all variables
+                                        var i, tabcontent, tablinks;
+
+                                        // Get all elements with class="tabcontent" and hide them
+                                        tabcontent = document.getElementsByClassName("tabcontent");
+                                        for (i = 0; i < tabcontent.length; i++) {
+                                            tabcontent[i].style.display = "none";
+                                        }
+
+                                        // Get all elements with class="tablinks" and remove the class "active"
+                                        tablinks = document.getElementsByClassName("tablinks");
+                                        for (i = 0; i < tablinks.length; i++) {
+                                            tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                        }
+
+                                        // Show the current tab, and add an "active" class to the button that opened the tab
+                                        document.getElementById(tabName).style.display = "block";
+                                        evt.currentTarget.className += " active";
+                                    }
+                                    function closeTab(evt, tabName) {
+
+                                        // Show the current tab, and add an "active" class to the button that opened the tab
+                                        // document.getElementById(tabName).style.display = "none";
+                                        document.getElementById(tabName.concat("-tab")).style.display = "none";
+                                    }
+                                </script>
+                                <!-- <div  class="main-body" id="text" style="background-color: #14ad2b;">
+                                    <textarea id="editor" name="editor"></textarea>
+                                </div> -->
                                 <div class="window"id="cl0" style="background-color: #002240"  >
 					
                                     <div class="terminal" style="background-color: #002240">
@@ -363,32 +458,52 @@
                 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script>
-    function open_terminal(){
-        var t=document.getElementById("terminall");
+    function open_editor(){
+        var t=document.getElementById("editor_screen");
         t.classList.add("opent");
         var m=document.getElementById("mainscreen");
         m.classList.add("hidet");
-        }
+    }
     function open_main(){
         var mm=document.getElementById("mainscreen");
         mm.classList.remove("hidet");
-        var mmm=document.getElementById("terminall");
+        var mmm=document.getElementById("editor_screen");
         mmm.classList.remove("opent");
-       
     }
     function mytoggle(){
 		  var x = document.getElementById("cl0");
-          var y=document.getElementById("text");
+          var y=document.getElementsByClassName("tabcontent");
+
 		  if (x.style.display === "none") {
 			x.style.display = "block";
-            y.style.height = "40vh";
+            for(let i=0;i<y.length; i++){
+                y[i].style.height = "40vh";
+            }  
 		  } else {
 			x.style.display = "none";
-            y.style.height = "80vh";
+            for(let i=0;i<y.length; i++){
+                y[i].style.height = "75vh";
+            } 
 		  }
 		}
-    let editor = CodeMirror.fromTextArea(
-        document.getElementById("editor"),
+    let editor = document.getElementsByClassName("editorx");
+    for(let i = 0; i<editor.length;i++){
+        CodeMirror.fromTextArea(
+        editor[i],
+        {
+            lineNumbers: true,
+            matchBrackets: true,
+            theme: "erlang-dark",
+            mode: "text/x-scala",
+            autoRefresh: true,
+            scrollbars:true,
+            
+        }
+    ).setSize(null, "100%")
+    }
+    forEach(function(x){
+        CodeMirror.fromTextArea(
+        x,
         {
             lineNumbers: true,
             matchBrackets: true,
@@ -399,6 +514,7 @@
             
         }
     ).setSize(null, "100%");
+    }) ;
     function dwindow(){
         eel.displaywindow()
     }
