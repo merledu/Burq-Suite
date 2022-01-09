@@ -1,4 +1,6 @@
+import eel
 from eel import init, start, expose
+
 
 # Initializes the frontend
 init('web')
@@ -19,9 +21,10 @@ def open_file(filename):
 
 @expose
 def displaywindow(): 
-    start('assets2/index.html' ,size=(1000, 700))
+    eel.start('assets2/index.html' , size=(200, 200), port=8080)
+
 def display(): pass
 
 
 # Starts the program
-start('mainPage/in.html')
+start('mainPage/in.html', port=8005)
