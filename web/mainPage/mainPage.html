@@ -940,11 +940,14 @@
             SoCWindow = window.open("../configScreens/configSoc.html", "Configure SoC", "fullscreen=yes, resizeable=no");
             console.log("OPENEDDD");
             console.log(Window.closed);
+            open_editor(); 
         }
 
-        if(SoCWindow.closed == true){            
+        if(SoCWindow.closed == true){  
+                   
             console.log("CLOSEEDDDDD");
-            open_editor();
+            open_editor(); 
+            
         }
 
         function CoreConfigOpen(){
@@ -958,6 +961,7 @@
         function gen_rtl(){
             var rtl_btn = document.getElementById("verify-rtl");
             rtl_btn.classList.remove("disabled");
+            open_editor(); 
         }
         function verify_rtl(){
             var report_btn = document.getElementById("gen-report");
