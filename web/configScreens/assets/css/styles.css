@@ -63,3 +63,13 @@ body{
   font-size: 110%;
 }
 
+.fpga-btn{
+  color:white;
+  border:1px solid white;
+  padding:10px 40px;
+}
+.fpga-btn:hover{
+  color:#193549;
+  background-color:white;
+  border:1px solid #193549
+}

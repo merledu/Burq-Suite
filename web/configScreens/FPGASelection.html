@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select FPGA</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <style>
+        body{
+            overflow-y: scroll;    
+        }
+        .active{
+            color:#193549 !important;
+            background-color:white !important;
+            border:1px solid #193549 !important;
+        }
+    </style>
+
+    <section class="clean-block">
+        <div class="topmost_bar">
+            <img src="assets/img/fpga.png" />
+            Select FPGA Board
+        </div>
+        <div class="main_space">
+            <div class="container">
+                <div class="col-md-12 bordered-box text-center">
+
+                    <h3>Clock Frequency</h3>
+                    <br>
+                    <label> Enter Clock Frequency </label>
+                    <input type="number" value="5" min="5" max="100" style="width:60px" />
+                    <label>MHz</label>
+                    <br>
+                    <br>
+                </div>
+                <br>
+                <br>
+                <div class="col-md-12 bordered-box text-center">
+                    <h3>Select FPGA Board</h3>
+                    <br>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button onclick="selFPGA(event)" class="btn fpga-btn"> Arty A-7 </button>
+                        <button onclick="selFPGA(event)" class="btn fpga-btn"> Arty A-7 </button>
+                        <button onclick="selFPGA(event)" class="btn fpga-btn"> Arty A-7 </button>
+                        <button onclick="selFPGA(event)" class="btn fpga-btn"> Arty A-7 </button>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button onclick="selFPGA(event)" class="btn fpga-btn"> Zybo Z-7 </button>
+                        <button onclick="selFPGA(event)" class="btn fpga-btn"> Zybo Z-7 </button>
+                        <button onclick="selFPGA(event)" class="btn fpga-btn"> Zybo Z-7 </button>
+                        <button onclick="selFPGA(event)" class="btn fpga-btn"> Zybo Z-7 </button>
+                    </div>
+                    <br>
+                    
+                </div>
+                <br>
+                <div class="d-flex justify-content-end">
+                    <button class="btn fin-btn"> Next <span>></span> </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function selFPGA(evt){
+            console.log(evt);
+            fpgas = document.getElementsByClassName("fpga-btn");
+            for(let i=0;i<fpgas.length;i++){
+                fpgas[i].classList.remove("active");
+            }
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+
+</body>
+</html>
