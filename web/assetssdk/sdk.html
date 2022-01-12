@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" style="/*height: 58px;*/">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>guisuite</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700">
+    <link rel="stylesheet" href="fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="fonts/typicons.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="acss/Button-Change-Text-on-Hover.css">
+    <link rel="stylesheet" href="css/Navigation-Clean.css">
+    <link rel="stylesheet" href="css/Neon-Button-1.css">
+    <link rel="stylesheet" href="css/Neon-Button.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- build:css css/app.css -->
+	<link rel="stylesheet" href="./task/css/4no.css" />
+	<!-- endbuild -->
+
+    <!-- Syntax Highlighting -->
+    <script src="codemirror/codemirror-5.65.0/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="codemirror/codemirror-5.65.0/theme/erlang-dark.css">
+    <link rel="stylesheet" href="acodemirror/codemirror-5.65.0/lib/codemirror.css">
+    <script src="codemirror/codemirror-5.65.0/mode/clike/clike.js"></script>
+    <script src="codemirror/codemirror-5.65.0/addon/display/autorefresh.js"></script>
+
+    <!-- Backend -->
+    <script src="/eel.js" type="text/javascript"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body style="/*border-color: rgb(21,35,45);*//*height: auto;*/overflow-y: hidden;/*margin-right: 0px;*//*width: 100%;*//*margin-bottom: 0;*//*background: rgb(230,220,220);*/">
+    <div class="mynav" style="display: flex;background-color: #15232D;align-items: center; ">
+        
+        <div onclick="open_main()"><img src="img/HD-wallpaper-chip-processor-circuit-core-3d-thumbnail.jpg" style="height: 40PX;width: 40PX;margin-right: 10;margin-top: 1px;"></div>
+        <div><button class="btn btn-primary" area-expanded="false" type="button" data-bs-toggle="dropdown" style="background: #15232D;;border-style: none;height: 30px;text-decoration: none;"><a href="#" style="color: rgb(237,242,248);text-decoration: none;" >File<span class="caret"></span></a></button>
+            
+            <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                <li>
+                    <a href="#" style="margin-left:10px; color: rgb(253, 246, 246); text-decoration: none;">Open Editor</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(245, 245, 245); text-decoration: none;"> Folder</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(255, 253, 253); text-decoration: none;"> Author</a></li>
+            </ul>
+        </div>
+        
+        <div><button class="btn btn-primary" onclick="mytoggle()" area-expanded="false" type="button" data-bs-toggle="dropdown" style=" background: #15232D;;border-style: none;height: 30px;"><a href="#" style="color: rgb(237,242,248); text-decoration: none;">Edit<span class="caret"></span></a></button>
+            
+            <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                <li>
+                    <a href="#" style="margin-left:10px; color: rgb(247, 242, 242); text-decoration: none;">Open Editor</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(248, 241, 241); text-decoration: none;"> Folder</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(245, 237, 237); text-decoration: none;"> Author</a></li>
+            </ul>
+            
+        </div>
+        <div><button class="btn btn-primary" area-expanded="false" type="button" data-bs-toggle="dropdown" style="background: #15232D;border-style: none;height: 30px;"><a href="#" style="color: rgb(237,242,248); text-decoration: none;">View<span class="caret"></span></a></button>
+            
+            <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                             
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(252, 247, 247); text-decoration: none;">Open Editor</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(247, 235, 235); text-decoration: none;"> Folder</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(248, 244, 244); text-decoration: none;"> Author</a></li>
+            </ul>
+        </div>
+        <div><button class="btn btn-primary" area-expanded="false" type="button" data-bs-toggle="dropdown" style="background: #15232D;;border-style: none;height: 30px;"><a href="#" style="color: rgb(237,242,248); text-decoration: none;">Go<span class="caret"></span></a></button>
+            
+            <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                             
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;"> Folder</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;"> Author</a></li>
+            </ul>
+        </div>
+        <div><button class="btn btn-primary" area-expanded="false" type="button" data-bs-toggle="dropdown" style="background: #15232D;;border-style: none;height: 30px;"><a href="#" style="color: rgb(237,242,248); text-decoration: none;">Run<span class="caret"></span></a></button>
+            
+            <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                            
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;"> Folder</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;"> Author</a></li>
+            </ul>
+        </div>
+        <div><button class="btn btn-primary"  onclick="mytoggle()" area-expanded="false" type="button" data-bs-toggle="dropdown" style="background: #15232D;;border-style: none;height: 30px; "><a href="#" style="color: rgb(237,242,248); text-decoration: none;">Terminal</a></button>
+            
+            
+        </div>
+        <div><button class="btn btn-primary" area-expanded="false" type="button" data-bs-toggle="dropdown" style="background: #15232D;border-style: none;height: 30px;"><a href="#" style="color: rgb(237,242,248); text-decoration: none;">Help<span class="caret"></span></a></button>
+            
+            <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                             
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;"> Folder</a></li>
+                <li>
+                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;"> Author</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="divrow" style="display: flex;color: rgb(21,35,45);background: #15232d; /*float: left;*//*width: 100%;*/flex-wrap: wrap;/*justify-content: flex-end;*/">
+        <div class="upar-wala-button" style="margin-right:  0PX; margin-left: 60px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12"><i class="fa fa-home" style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;font-size: 18px;"></i></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12"><i class="fa fa-arrow-right " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;font-size: 18px;margin-left: 10px;"></i></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12"><i class="fa fa-trash" style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;font-size: 18px;margin-left: 10px;"></i>
+</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12"><i class="fa fa-check-circle " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;font-size: 18px;margin-left: 10px;"></i></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div style="display: flex;width: auto;height: 100vh;">
+        <div class="row1" style="width: 70px;height: 100%;background: #122738;/*display: flex;*/text-align: left;margin-top: 0px;">
+            <div style="/*display: flex;*/margin-top: 10px;"><button class="btn btn-primary" type="button" style="background-color: #122738;opacity: 1;border-style: none;"><i class="fa fa-file-text-o d-xl-flex m-auto justify-content-xl-center align-items-xl-center" style="color: rgb(234,241,248);margin-left: 0PX;/*height: 244px;*/width: 156;font-size: 20px;"></i></button></div>
+            <div><button class="btn btn-primary" type="button" style="height: 40PX;width: 40PX;margin-top: 20PX;background-color: #122738;border-style: none;/*border-left-style: solid;*/"><i class="fa fa-search" style="color: rgb(234,240,245);margin-left: 0PX;height: 20px;margin-top: 0PX;font-size: 20px;"></i></button></div>
+            <div style="margin-top: 20px;"><button class="btn btn-primary" type="button" style="background-color: #122738;border-style: none;"><i class="typcn typcn-media-fast-forward" style="color: rgb(241,243,245);margin-left: 0PX;height: 100%;width: 30px;margin-top: 0PX;font-size: 25px;"></i></button></div>
+            <div style="margin-top: 20px;"></div><button class="btn btn-primary" type="button" style="background-color: #122738;border-style: none;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="height: 30px;color: rgb(243,246,248);margin-left: 0PX;width: 25px;/*margin-top: 10px;*/">
+                    <path d="M10 11C10 10.4477 10.4477 10 11 10H13C13.5523 10 14 10.4477 14 11C14 11.5523 13.5523 12 13 12H11C10.4477 12 10 11.5523 10 11Z" fill="currentColor"></path>
+                    <path d="M11 14C10.4477 14 10 14.4477 10 15C10 15.5523 10.4477 16 11 16H13C13.5523 16 14 15.5523 14 15C14 14.4477 13.5523 14 13 14H11Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.09447 4.74918C8.41606 4.03243 8 3.0648 8 2H10C10 3.10457 10.8954 4 12 4C13.1046 4 14 3.10457 14 2H16C16 3.0648 15.5839 4.03243 14.9055 4.74918C16.1782 5.45491 17.1673 6.6099 17.6586 8H19C19.5523 8 20 8.44772 20 9C20 9.55229 19.5523 10 19 10H18V12H19C19.5523 12 20 12.4477 20 13C20 13.5523 19.5523 14 19 14H18V16H19C19.5523 16 20 16.4477 20 17C20 17.5523 19.5523 18 19 18H17.6586C16.8349 20.3304 14.6124 22 12 22C9.38756 22 7.16508 20.3304 6.34141 18H5C4.44772 18 4 17.5523 4 17C4 16.4477 4.44772 16 5 16H6V14H5C4.44772 14 4 13.5523 4 13C4 12.4477 4.44772 12 5 12H6V10H5C4.44772 10 4 9.55229 4 9C4 8.44772 4.44772 8 5 8H6.34141C6.83274 6.6099 7.82181 5.45491 9.09447 4.74918ZM8 16V10C8 7.79086 9.79086 6 12 6C14.2091 6 16 7.79086 16 10V16C16 18.2091 14.2091 20 12 20C9.79086 20 8 18.2091 8 16Z" fill="currentColor"></path>
+                </svg></button>
+        </div>
+        <div style="margin-top: 0px;height: 100%">
+            <div style="background: #15232D;height: 100%;/*width: 200px;*//*display: flex;*/margin-left: 0px;/*margin-top: 47px;*/">
+
+                
+                <div style="background: #0c151b;height: 30px;width: 200px;display: flex;"><button class="btn btn-primary" type="button" style="background: #0c151b;border-style: none;">Explorer</button>
+                    
+                    <div>
+                        <button class="btn btn-primary " area-expanded="false" type="button" data-bs-toggle="dropdown" style="margin-left: 90px;background: #0c151b;border-style: none;height: 30px;"><i class="icon-options d-xl-flex justify-content-xl-start align-items-xl-end" style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;"></i><span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="width: 200px; background:#15232D ; color: rgb(255, 255, 255);">
+                            
+                            <li><i class="typcn typcn-tick  " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></i></li>
+                            <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none; margin-bottom: 10px;">
+                                <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;">New Folder</a></i></li>
+                            <li>
+                                <button id="newfile" style="border: none; background-color: inherit;" onclick="new_file()">
+                                    <i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                        New File
+                                    <!-- <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">New File</a>--></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div  class="dropdown" style="background: #193549;width: 200px;height: 29px;display: flex;border-color: rgb(147,149,152);">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" area-expanded="false" type="button" data-bs-toggle="dropdown" style="height: 29px;width: 71.4px;color: rgb(255, 255, 255);background: rgb(25,53,73);border-style: none;">Folder <span class="caret"></span>
+                        </button>
+                        <ul id="tree" class="dropdown-menu" style="width: 200px; background:#15232D; color: rgb(255, 255, 255);">
+                            <!-- <li><a href="#" style="color: rgb(255, 255, 255); text-decoration: none;">filename1</a></li>
+                            <li><a href="#" style="color: rgb(255, 255, 255); text-decoration: none;">filename2</a></li>
+                            <li><a href="#" style="color: rgb(255, 255, 255); text-decoration: none;">filename3</a></li> -->
+                        </ul>
+                    </div> 
+                
+                </div>
+                
+               
+            </div>
+        </div>
+        <div style="margin-top: 0px;width: 100%;height: 100%; background: #15232D">
+            <div style="height: 30px;background: #15232D;display: flex; width:auto;">
+                
+                <div style=" display: flex; height: 30px;width: 100%;/*border-style: solid;*/border-color: rgb(25,53,73);border-radius: 2px;border-top-left-radius: 3pxpx;border-top-right-radius: 3px;border-bottom-right-radius: 3px;border-bottom-left-radius: 3px;display: flex;background: #15232D;">
+                    
+                    
+                            
+                    <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="currentColor"></path>
+                    
+                        </svg></button>
+                    </div>
+                        <div> <button class="btn btn-primary" area-expanded="false" type="button" data-bs-toggle="dropdown" style="margin-right: 10px;background: #15232D;border-style: none;height: 30px;"><i class="icon-options d-xl-flex justify-content-xl-start align-items-xl-end" style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;"></i><span class="caret"></span></button>
+                            <ul class="dropdown-menu" style="width: 200px; background:#193549 ; color: rgb(255, 255, 255);">
+                                
+                                <li><i class="typcn typcn-tick  " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;">Open Editor</a></i></li>
+                                <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none; margin-bottom: 10px;">
+                                    <a href="#" style="margin-left:10px;margin-top: 10px;color: rgb(255, 255, 255); text-decoration: none;"> Folder</a></i></li>
+                                <li><i class="typcn typcn-tick " style="width: 20px;height: 20px;color: rgb(222,227,232);margin: 0px;border-style: none;">
+                                    <a href="#" style="margin-left:10px;color: rgb(255, 255, 255); text-decoration: none;"> Author</a></i></li>
+                            </ul>
+                        </div>
+                    
+                            
+                        </div>
+            <div id="mainscreen" style="background: #193549;height: 100%;width: auto;display: flex;">
+                
+                            
+                                
+                            <div style="margin-top: 80px; margin-left: 250px;/*width: 100%; */">
+                                <div >
+                                    <h1 style="margin-top: 0px;margin-left: 80px;color: rgb(241,245,248);font-size: 32px;">Select your project</h1>
+                                </div>
+                                <div>
+                                    <div class="container">
+                                        <div style="display: flex;margin-left: 100px;"><button class=" btn btn-neon bwidth" class="fa fa-star" type="button" style="text-align: left;"><i class="fa fa-plus-square-o" type="file-plus"></i> New Project
+                            </button>
+                            </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="container">
+                                        <div style="margin-right: 200px;margin-left: 100px;">  <a href="./task/htmlfile.html" style="color: rgb(255, 255, 255); text-decoration: none;"> <button class=" btn btn-neon bwidth
+                            "  class="fa fa-star" type="button" style="text-align: left;">  <i class="fa fa-download"  type="file-plus"> </i>               Import Project</a> </button></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="container">
+                                        <div style="margin-right: 200px;margin-left: 100px;"><button class=" btn btn-neon bwidth
+                            "  class="fa fa-star" type="button" style="text-align: left;"><i class="fa fa-file" type="file-plus"> </i> Open Project              
+                            </button></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="container">
+                                        <div style="margin-right: 200px;margin-left: 100px;"><button class=" btn btn-neon bwidth"  class="fa fa-star" type="button" style="text-align: left;">   <i class="fas fa-archive" type="file-plus"> </i> Project Examples </button></div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            </div>
+                            <div id="terminall" >
+                                <div  class="main-body" style="background-color: #14ad2b;">
+                                    <textarea id="editor" name="editor" rows="100" cols="100" style="height: 100%;width: 100%;background-color: aqua;"></textarea>
+                                </div>
+                                <div class="window"id="cl0" style="background-color: #002240"  >
+					
+                                    <div class="terminal" style="background-color: #002240">
+                                        <!-- <span>Problem</span><span>Problem</span> -->
+                                        <div class="topnav" style="background-color: #002240">
+                                            <a  href="#home" style="font-style: normal;font-size: 15px;">PROBLEMS</a>
+                                            <a href="#news" style="font-style: normal;font-size: 15px;">OUTPUT</a>
+                                            <a href="#contact" style="font-style: normal;font-size: 15px;">TERMINAL</a>
+                                            <a href="#about"style="font-style: normal;font-size: 15px;">DEBUG CONSOLE</a>
+                                            <a href="#" onclick="mytoggle()" style="float: right;"> <i class="fa fa-times"  aria-hidden="true" style="color: white;"></i></a> 
+                
+                                            
+                
+                                            
+                                          </div>
+                                          
+                                        
+                                          
+                                      <p class="command">git clone https://github.com/schacon/ticgit</p>
+                                      <p class="log">
+                                        <span>
+                                          Cloning into 'ticgit'...<br />
+                                          remote: Reusing existing pack: 1857, done.<br />
+                                          remote: Total 1857 (delta 0), reused 0 (delta 0)<br />
+                                          Receiving objects: 100% (1857/1857), 374.35 KiB | 268.00 KiB/s, done.<br />
+                                          Resolving deltas: 100% (772/772), done.<br />
+                                          Checking connectivity... done.
+                                        </span>
+                                      </p>
+                                      <p class="command">rm -rf ticgit</p>
+                                   
+                                  </div>
+                            
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        
+                        
+                
+                        
+                    
+                            
+                        
+                
+                
+                
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+    function open_terminal(){
+        var t=document.getElementById("terminall");
+        t.classList.add("opent");
+        var m=document.getElementById("mainscreen");
+        m.classList.add("hidet");
+        }
+    function open_main(){
+        var mm=document.getElementById("mainscreen");
+        mm.classList.remove("hidet");
+        var mmm=document.getElementById("terminall");
+        mmm.classList.remove("opent");
+       
+    }
+    function mytoggle(){
+		  var x = document.getElementById("cl0");
+          var y=document.getElementById("text");
+		  if (x.style.display === "none") {
+			x.style.display = "block";
+            y.rows="10";
+		  } else {
+			x.style.display = "none";
+            y.rows="100";
+		  }
+		}
+    let editor = CodeMirror.fromTextArea(
+        document.getElementById("editor"),
+        {
+            lineNumbers: true,
+            matchBrackets: true,
+            theme: "erlang-dark",
+            mode: "text/x-scala",
+            autoRefresh: true
+        }
+    );
+    function dwindow(){
+        eel.displaywindow()
+    }
+    
+    </script>
+
+</body>
+
+</html>
