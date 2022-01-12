@@ -33,7 +33,8 @@ body{
 
 .main_space{
   background-color: #193549;
-  height:100vh;
+  min-height:100vh;
+  height:100%;
   color:white;
   padding-top: 30px;
 }

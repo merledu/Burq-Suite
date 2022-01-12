@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Test</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Syntax Highlighting -->
+    <script src="../mainPage/assets/codemirror/codemirror-5.65.0/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="../mainPage/assets/codemirror/codemirror-5.65.0/theme/ayu-dark.css">
+    <link rel="stylesheet" href="../mainPage/assets/codemirror/codemirror-5.65.0/lib/codemirror.css">
+    <script src="../mainPage/assets/codemirror/codemirror-5.65.0/mode/clike/clike.js"></script>
+    <script src="../mainPage/assets/codemirror/codemirror-5.65.0/addon/display/autorefresh.js"></script>
+
+</head>
+<body>
+    <style>
+        body{
+            overflow-y: scroll;
+        }
+        .hide{
+            display:none
+        }
+    </style>
+    <section class="clean-block">
+        <div class="topmost_bar">
+            <img src="assets/img/fpga.png" />
+            Custom Code
+        </div>
+        <div class="main_space">
+            <div class="container">
+                <div class="col-md-12 bordered-box">
+                    <textarea id="editor"></textarea>
+                </div>
+                <br>
+                <br>
+                <div class="d-flex justify-content-between">
+                    <button onclick="window.location.href = 'FPGAUpload.html'" class="btn fin-btn">< Back</button>
+                    <button onclick="runCode()" class="btn fin-btn">Run Code</button>
+                    <button onclick="window.close()" id="upload" class="btn fin-btn disabled">Upload <span>^</span> </button>
+                </div>
+                <br>
+                <div class="hide" id="output" style="text-align:center">
+                    <b>Program OUTPUT </b>
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function runCode() {
+            var btn=document.getElementById("upload");
+            btn.classList.remove("disabled");
+            var output=document.getElementById("output");
+            output.classList.remove("hide");
+        }
+
+        var editor = document.getElementById("editor");
+        CodeMirror.fromTextArea(
+            editor,
+            {
+                lineNumbers: true,
+                matchBrackets: true,
+                theme: "ayu-dark",
+                mode: "text/x-scala",
+                autoRefresh: true,
+                scrollbars:true,
+                
+            }
+        ).setSize(null, "100%");
+    </script>
+</body>
+</html>

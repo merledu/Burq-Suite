@@ -9,7 +9,43 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    
+    <style>
+        body{
+            overflow-y: scroll;
+        }
+    </style>
+    <section class="clean-block">
+        <div class="topmost_bar">
+            <img src="assets/img/fpga.png" />
+            Mapping I/Os to FPGA
+        </div>
+        <div class="main_space">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 bordered-box">
+                        <img src="assets/img/arty.png" style="width:100%" />
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4 bordered-box">
+                        <ul>
+                            <li>LED -- I\O</li>
+                            <li>LED -- I\O</li>
+                            <li>LED -- I\O</li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="d-flex justify-content-between">
+                    <button onclick="window.location.href = 'FPGASelection.html'" class="btn fin-btn"> <span><</span> Back  </button>
+                    <button onclick="window.location.href = 'FPGAMapped.html'" class="btn fin-btn"> Next <span>></span>   </button>
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

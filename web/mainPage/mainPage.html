@@ -168,7 +168,7 @@
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" onclick="displaywindow()" id="upload-bs">Upload bit stream</button></div>
+                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" onclick="uploadStream()" id="upload-bs">Upload Bit Stream</button></div>
                 </div>
             </div>
         </div>
@@ -948,6 +948,10 @@
 
         function CoreConfigOpen(){
             var Window = window.open("../configScreens/configCore.html", "Configure Core", "top=150, left=150, height=500, width=1000, resizeable=no");
+        }
+
+        function uploadStream(){
+            var Window = window.open("../configScreens/FPGASelection.html", "Select FPGA", "top=150, left=150, height=500, width=1000, resizeable=no");
         }
 
         function verificationOpen(){
