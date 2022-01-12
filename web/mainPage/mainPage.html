@@ -539,7 +539,12 @@
                                 
                             </div>
                             <div class="d-flex">
-                                <div style="margin-top: 80px;height: auto;margin-left: 90px;">
+                                <style>
+                                    .hideSDK{
+                                        display:none;
+                                    }
+                                </style>
+                                <div id="main2" style="margin-top: 80px;height: auto;margin-left: 90px;">
                                     
                                     
                                     <h1 style="color: rgb(238,241,244);margin-left: 70px;font-size: 36px;">Start</h1>
@@ -560,8 +565,8 @@
                                     <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename3</a></div>
                                     <div style="margin-left: 110px;color: rgb(240,242,245);"></div>
                                 </div>
-                            
-                            <div style="margin-top: 80px;/*width: 100%;*/">
+                                
+                            <div id="main" style="margin-top: 80px;/*width: 100%;*/">
                                 <div>
                                     <h1 style="margin-top: 0px;margin-left: 80px;color: rgb(241,245,248);font-size: 32px;">Select your project</h1>
                                 </div>
@@ -588,10 +593,42 @@
                                 
                                 <div>
                                     <div class="container">
-                                        <div style="margin-right: 200px;margin-left: 100px;"><button class=" btn btn-neon bwidth
+                                        <div style="margin-right: 200px;margin-left: 100px;"><button onclick="openSDK()" class=" btn btn-neon bwidth
                             "  class="fa fa-star" type="button" style="text-align: left;padding: 10px;">   <i class="fas fa-suitcase" type="file-plus"> </i> Software Development Kit </button></div>
                                     </div>
                                 </div>
+                            </div>
+                            
+                            <div id="sdk" class="hideSDK" style="margin-top: 80px; margin-left: 250px;/*width: 100%; */">
+                                <div >
+                                    <h1 style="margin-top: 0px;margin-left: 80px;color: rgb(241,245,248);font-size: 32px;">Select your project</h1>
+                                </div>
+                                <div>
+                                    <div class="container">
+                                        <div style="display: flex;margin-left: 100px;"><button class=" btn btn-neon bwidth" class="fa fa-star" type="button" style="text-align: left;"><i class="fa fa-plus-square-o" type="file-plus"></i> New Project
+                            </button>
+                            </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="container">
+                                        <div style="margin-right: 200px;margin-left: 100px;">  <a href="./task/htmlfile.html" style="color: rgb(255, 255, 255); text-decoration: none;"> <button class=" btn btn-neon bwidth
+                            "  class="fa fa-star" type="button" style="text-align: left;">  <i class="fa fa-download"  type="file-plus"> </i>               Import Project</a> </button></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="container">
+                                        <div style="margin-right: 200px;margin-left: 100px;"><button class=" btn btn-neon bwidth
+                            "  class="fa fa-star" type="button" style="text-align: left;"><i class="fa fa-file" type="file-plus"> </i> Open Project              
+                            </button></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="container">
+                                        <div style="margin-right: 200px;margin-left: 100px;"><button class=" btn btn-neon bwidth"  class="fa fa-star" type="button" style="text-align: left;">   <i class="fas fa-archive" type="file-plus"> </i> Project Examples </button></div>
+                                    </div>
+                                </div>
+                                
                             </div>
                             </div>
                         </div>
@@ -848,6 +885,15 @@
                 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script>
+
+        function openSDK(){
+            var sdk = document.getElementById("sdk");
+            sdk.classList.remove("hideSDK");
+            var main = document.getElementById("main");
+            main.classList.add("hideSDK");
+            var main2 = document.getElementById("main2");
+            main2.classList.add("hideSDK");
+        }
     function open_editor(){
         var t=document.getElementById("editor_screen");
         t.classList.add("opent");
@@ -876,6 +922,13 @@
             btns[i].classList.add("disabled");
             btns[i].classList.remove("active")
         }
+        var sdk = document.getElementById("sdk");
+        sdk.classList.add("hideSDK");
+        var main = document.getElementById("main");
+        main.classList.remove("hideSDK");
+        var main2 = document.getElementById("main2");
+        main2.classList.remove("hideSDK");
+
     }
     function mytoggle(env){
 		  var x = document.getElementById("cl0");
