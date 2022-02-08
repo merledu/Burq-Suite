@@ -29,7 +29,9 @@ def showSocConfig():
 
 
 def display(): pass
-
+@expose
+def db():
+    eel.open_file()
 
 # Starts the program
 start('mainPage/mainPage.html', port=8007)

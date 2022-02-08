@@ -34,7 +34,7 @@
                             <label> Core 3 </label>
                             <br>
                             <br>
-                            <button class="btn btn-outline-light"> Add New Core + </button>
+                            <button class="btn btn-outline-light" onclick="openfile()"> Add New Core + </button>
                         </div>
                    
                         
@@ -50,7 +50,7 @@
                             <label> OVPSim </label>
                             <br>
                             <br>
-                            <button class="btn btn-outline-light"> Add New ISS + </button>
+                            <button class="btn btn-outline-light" onclick="openfile()"> Add New ISS + </button>
 
                             
                         </div>
@@ -74,6 +74,22 @@
         function closeThisWindow(){
             window.location.href = "Verification2.html"
         }
+        function openfile(){
+            
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = _ => {
+                // you can use this method to get file and perform respective operations
+                        let files =   Array.from(input.files);
+                        console.log(files);
+                        var iin = input.getElementById("fileDialogId").value()
+                        alert(iin)
+                        submitOK = "true";
+                    };
+            input.click();
+            
+            
+            }
     </script>
 </body>
 </html>

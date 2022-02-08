@@ -36,7 +36,7 @@
                               </ol>
                               <p>Error happened due to XYZ Reason</p>
                             
-                            <button class="btn btn-outline-light"> Add Custom Test Case + </button>
+                            <button class="btn btn-outline-light" onclick="openfile()"> Add Custom Test Case + </button>
                         </div>
                  
                     </div>
@@ -59,6 +59,22 @@
         function closeThisWindow(){
             window.close()
         }
+        function openfile(){
+            
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = _ => {
+                // you can use this method to get file and perform respective operations
+                        let files =   Array.from(input.files);
+                        console.log(files);
+                        var iin = input.getElementById("fileDialogId").value()
+                        alert(iin)
+                        submitOK = "true";
+                    };
+            input.click();
+            
+            
+            }
     </script>
 </body>
 </html>

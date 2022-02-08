@@ -121,11 +121,14 @@
             </ul>
         </div>
     </div>
-    <div class="divrow" style="display: flex;justify-content:space-evenly; color: rgb(21,35,45);background: #15232d;/*float: left;*//*width: 100%;*/flex-wrap: wrap;/*justify-content: flex-end;*/">
+    <div class="newrow" id="nsdrow" style="display: none ;background-color: rgb(21,35,45);">
+
+    </div>
+    <div class="divrow" id="hbd">
         <div class="upar-wala-button" style="margin-right:  0PX;">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12"><button class=" btn btn-neon disabled" type="button" onclick="gen_rtl()" id="gen-rtl">Generate RTL</button></div>
+                <div class="row"  >
+                    <div class="col-md-12" ><button class=" btn btn-neon disabled" type="button" onclick="gen_rtl()" id="gen-rtl">Generate RTL</button></div>
                 </div>
             </div>
         </div>
@@ -550,17 +553,17 @@
                                     <h1 style="color: rgb(238,241,244);margin-left: 70px;font-size: 36px;">Start</h1>
                                     <div style="display: flex;margin-left: 100px;" onclick="open_editor()"><i class="fa fa-file-text" style="color: rgb(242,245,248);margin-top: 10px;font-size: 17px;"></i><a href="#" style="color: rgb(255,255,255);margin-left: 10px;margin-top: 9px;text-decoration: none;">Open File</a></div>
                                     <div style="display: flex;margin-left: 10px;"onclick="open_editor()"><i class="fa fa-folder-open" style="margin-left: 90px;color: rgb(240,244,248);margin-top: 10px;"></i><a href="#" style="color: rgb(238,244,252);width: 200px;margin-left: 10px;margin-top: 9px;text-decoration: none;">Open Folder</a></div>
-                                    <div style="display: flex;border-style: none;margin-left: 10px;/*margin-left: 10px;*/"onclick="open_editor()"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-file-plus" style="margin-left: 80px;color: rgb(224,230,237);width: 36.7px;height: 22px;margin-top: 5px;">
+                                    <div style="display: flex;border-style: none;margin-left: 10px;/*margin-left: 10px;*/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-file-plus" style="margin-left: 80px;color: rgb(224,230,237);width: 36.7px;height: 22px;margin-top: 5px;">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
                                             <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
                                             <line x1="12" y1="11" x2="12" y2="17"></line>
                                             <line x1="9" y1="14" x2="15" y2="14"></line>
-                                        </svg><a href="#" style="color: rgb(238,240,244);margin-top: 9px;text-decoration: none;">New File</a></div>
+                                        </svg><a href="#" style="color: rgb(238,240,244);margin-top: 9px;text-decoration: none;" onclick="openfile()" id="fileDialogId">New File</a></div>
                                     <div>
                                         <h1 style="margin-left: 70px;color: rgb(241,244,247);font-size: 36px;margin-top: 15px;text-decoration: none;">Recents</h1>
                                     </div>
-                                    <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename1</a></div>
+                                    <div style="display: flex;margin-left: 100px;"><i class="fa fa-file"  style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename1</a></div>
                                     <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename2</a></div>
                                     <div style="display: flex;margin-left: 100px;"><i class="fa fa-file" style="color: rgb(241,245,248);margin-top: 10px;"></i><a href="#" style="margin-left: 10px;color: rgb(231,236,242);margin-top: 9px;text-decoration: none;">filename3</a></div>
                                     <div style="margin-left: 110px;color: rgb(240,242,245);"></div>
@@ -593,7 +596,7 @@
                                 
                                 <div>
                                     <div class="container">
-                                        <div style="margin-right: 200px;margin-left: 100px;"><button onclick="openSDK()" class=" btn btn-neon bwidth
+                                        <div style="margin-right: 200px;margin-left: 100px;"><button  onclick=" openSDK()" class=" btn btn-neon bwidth
                             "  class="fa fa-star" type="button" style="text-align: left;padding: 10px;">   <i class="fas fa-suitcase" type="file-plus"> </i> Software Development Kit </button></div>
                                     </div>
                                 </div>
@@ -612,7 +615,7 @@
                                 </div>
                                 <div>
                                     <div class="container">
-                                        <div style="margin-right: 200px;margin-left: 100px;">  <a href="./task/htmlfile.html" style="color: rgb(255, 255, 255); text-decoration: none;"> <button class=" btn btn-neon bwidth
+                                        <div style="margin-right: 200px;margin-left: 100px;">  <a href="#" style="color: rgb(255, 255, 255); text-decoration: none;"> <button class=" btn btn-neon bwidth
                             "  class="fa fa-star" type="button" style="text-align: left;">  <i class="fa fa-download"  type="file-plus"> </i>               Import Project</a> </button></div>
                                     </div>
                                 </div>
@@ -708,6 +711,7 @@
                                             <textarea class="editorx" name="editor"></textarea>
                                     </div>
                                 </div>
+                               
                                 <script>
                                     function openTab(evt, tabName) {
                                         // Declare all variables
@@ -887,13 +891,43 @@
     <script>
 
         function openSDK(){
+            
             var sdk = document.getElementById("sdk");
             sdk.classList.remove("hideSDK");
+            
+           
             var main = document.getElementById("main");
             main.classList.add("hideSDK");
             var main2 = document.getElementById("main2");
             main2.classList.add("hideSDK");
+            hidebutton();
+        
+
         }
+        function hidebutton(){
+            var hb = document.getElementById("hbd");
+            hb.classList.add("hideb");
+            var hd = document.getElementById("nsdrow");
+            hd.classList.add("nsrow");
+        }
+        
+        function openfile(){
+            
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = _ => {
+                // you can use this method to get file and perform respective operations
+                        let files =   Array.from(input.files);
+                         document.write(files);
+                        //return(files)
+                        
+                    };
+            input.click();
+            
+            
+            
+            }
+
     function open_editor(){
         var t=document.getElementById("editor_screen");
         t.classList.add("opent");
@@ -917,6 +951,10 @@
         mmm.classList.remove("opent");
         var a=document.getElementById("accord");
         a.classList.remove("opena");
+        var hd = document.getElementById("nsdrow");
+            hd.classList.remove("nsrow");
+        var hb = document.getElementById("hbd");
+            hb.classList.remove("hideb");
         var btns = document.getElementsByClassName("nechy-btn");
         for(let i=0;i<btns.length;i++){
             btns[i].classList.add("disabled");
@@ -928,6 +966,7 @@
         main.classList.remove("hideSDK");
         var main2 = document.getElementById("main2");
         main2.classList.remove("hideSDK");
+        
 
     }
     function mytoggle(env){
@@ -1034,6 +1073,7 @@
             var csv_btn = document.getElementById("export-csv");
             csv_btn.classList.remove("disabled");
         }
+        
     </script>
 
 </body>

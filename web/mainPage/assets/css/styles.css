@@ -26,3 +26,20 @@
 #text{
   height:40vh;
 }
+.hideb{
+  display: none !important;
+
+}
+.divrow{
+  display: flex;justify-content:space-evenly; color: rgb(21,35,45);background: #15232d;/*float: left;*//*width: 100%;*/flex-wrap: wrap;/*justify-content: flex-end;*/
+}
+.newrow{width: 100%;height: 40px;display: none;color: rgb(21,35,45);background: #15232d;
+  
+  display: flex;justify-content:space-evenly; color: rgb(21,35,45);background: #15232d;/*float: left;*//*width: 100%;*/flex-wrap: wrap;/*justify-content: flex-end;*/
+}
+.drow{
+  display: none;
+}
+.nsrow{
+  display: block !important;
+}

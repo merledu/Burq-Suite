@@ -62,7 +62,10 @@
                             <label> Test Case 10 </label>
                             <br />
                             <br>
-                            <button class="btn btn-outline-light"> Add Custom Test Case + </button>
+                           
+                                <button class="btn btn-outline-light" id="hidecorebtn"  onclick="openfile()" > Add Custom Test Case + </button>
+                           
+                          
                         </div>
                    <script>
                        $('#select-all').click(function(event) {   
@@ -96,10 +99,34 @@
     </section>
     
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    
     <script>
         function closeThisWindow(){
             window.location.href = "Verification3.html"
         }
+        function addtest(){
+            
+            var vv = document.getElementsById("hidecorebtn");
+            vv.classList.add("hidebtn");
+            var ff=document.getElementsById("fname")
+            ff.classList.add("showinputbox")
+        }
+        function openfile(){
+            
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = _ => {
+                // you can use this method to get file and perform respective operations
+                        let files =   Array.from(input.files);
+                        console.log(files);
+                        var iin = input.getElementById("fileDialogId").value()
+                        alert(iin)
+                        submitOK = "true";
+                    };
+            input.click();
+            
+            
+            }
     </script>
 </body>
 </html>

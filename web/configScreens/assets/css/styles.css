@@ -74,3 +74,10 @@ body{
   background-color:white;
   border:1px solid #193549
 }
+.showinputbox {
+  display: block !important;
+
+}
+.hidebtn {
+  display: none;
+}
