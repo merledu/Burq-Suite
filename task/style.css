@@ -1,0 +1,70 @@
+.abc{
+    background-color: #0c151b #193549 #2870a7;
+}
+body{
+    background-color: #193549 !important;
+}
+
+.heading{
+    text-align: center;
+    color: white;
+    height: 100px;
+    background-color: #0c151b;
+    align-items: center !important;
+    line-height: 100px;
+    margin-bottom: 0px;
+        border-bottom: 1px solid #548ea5;
+
+}
+
+.title{
+    color: white;
+    text-align: center !important;
+    justify-content: center !important;
+    width: 300px;
+    background-color: #0c151b;
+    align-items: center !important;
+    line-height: 100px;
+    display: flex;
+    flex: 1;
+    margin-bottom: 0px;
+    height: auto;
+    
+}
+.buttonsDiv{
+    padding: 10px;
+    display: flex;
+    flex: 3;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    height: auto;
+    align-items: center !important;
+    /* line-height: 100px; */
+}
+.buttons{
+    background-color: #0c151b;
+    color: white;
+    border-radius: 5px;
+    border: 1px #0c151b solid;
+    width: 150px;
+
+    height: 40px;
+    margin: 3px;
+}
+.buttons:hover{
+    background-color: #193549;
+    color: white;
+    border: 1px white solid;
+    font-weight: bold;
+}
+.contentDiv{
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    /* margin-top: -10px; */
+    border-bottom: 1px solid #548ea5;
+    /* height: 100px;/ */
+}
+*{
+    /* border: 1px solid white; */
+}
