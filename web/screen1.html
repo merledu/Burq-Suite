@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/splash.css" rel="stylesheet" />
+</head>
+<body>
+    <style>
+        body{
+            overflow-y: scroll;    
+        }
+        .active{
+            color:#193549 !important;
+            background-color:white !important;
+            border:1px solid #193549 !important;
+        }
+    </style>
+
+        
+        <div class="row">
+            <div class="col-3 frs">
+                <div class="container">
+                    
+
+                    <h3> <img src="assets/icons/flash.png"  /> The Burq Suite <span>v0.0.1</span> </h3>
+                    <div class="button-div">
+                       
+                        <button onclick="sel(event)" class="btn temp-btn" >
+                            <img src="assets/icons/caret-down.png"  style="height: 20px; width: 20px;"/>
+                           <span>  Custom Config Soc</span>
+                             
+                        </button>
+                        <br>
+                        <br>
+                        <button onclick="sel(event)" class="btn temp-btn">
+                            <span>Custom Config Core</span>
+                            
+                           
+                        </button>
+                        <br>
+                        <br>
+                        <button onclick="sel(event)" class="btn temp-btn">
+                            <span>Custom Components</span>
+                             
+                        </button>
+                        <br>
+                        <br>
+                        <button onclick="sel(event)" class="btn temp-btn">
+                            <span>Verification</span>
+                             
+                        </button>
+                        <br>
+                        <br>
+                        <button onclick="sel(event)" class="btn temp-btn">
+                            <span>Software Development Kit</span>
+                             
+                        </button>
+                  
+                </div>
+
+                   
+                </div>
+            </div>
+            <div class="col-9 sec">
+
+                
+                <div id="sec1">
+                    <h2 class="head">Choose Projects</h2>
+                </div>
+                <div id="sec2" >
+                    <h5 class="tile">Project Location</h5>
+                    
+                    
+                        <input type="file" id="file" class="inputfile" onchange='uploadFile(this)'/>
+                        <label for="file">
+                          <span id="file-name" class="file-box"></span>
+                          <span class="file-button">
+                            <i class="fa fa-upload" aria-hidden="true"></i>
+                            Select
+                          </span>
+                        </label>
+                        
+                   
+            </div>
+            <div id="sec3" > 
+                <h2 class="info1" style="display:none;">Custom Config Core</h2>
+                <div class="selectbutton" style="display:none;">
+                    <div class="col-2 frs">
+                        <button class="btn temp-btn1" onclick="sel1(event)">
+                            <span>Cores</span>
+                            <br>
+                            
+                        </button>
+                        <br>
+                        <br>
+                        <button class="btn temp-btn1" onclick="sel1(event)">
+                            <span>buses</span>
+                            <br>
+                            
+                        </button>
+                        <br>
+                        <br>
+                        <button class="btn temp-btn1"onclick="sel1(event)">
+                            <span>Devices</span>
+                            <br>
+                            
+                        </button>
+                        <br>
+                        <br>
+                    
+
+                    </div>
+                    
+                    <br>
+                    <div class="selectdiv">
+                        <div class="bordered-box1">
+                            <h3> Select ISA </h3>
+                            <input type="radio" name="isa" value="32 Bit" checked />
+                            <label> 32 Bit </label>
+                            <br>
+                            <input type="radio" name="isa" value="64 Bit" />
+                            <label> 64 Bit </label>
+                        </div>
+                        <div class="bordered-box">
+                            <h3> Select Extensions </h3>
+                            <input type="checkbox" name="ext" disabled checked />
+                            <label> Integer (I) </label>
+                            <br />
+                            <input type="checkbox" name="ext" />
+                            <label> Multiplier (M) </label>
+                            <br />
+                            <input type="checkbox" name="ext" />
+                            <label> Floating Point (F)  </label>
+                            
+                            <br />
+                            <input type="checkbox" name="ext" />
+                            <label> Compressed (C) </label>
+                            <br />
+                        </div>
+                        <div class="bordered-box" >
+                            <h3> Select Bus Interconnect </h3>
+                            <input type="radio" name="bus" checked>
+                            <label> Wishbone </label>
+                            <br />
+                            <input type="radio" name="bus">
+                            <label> Tilelink Uncached   </label>
+                           
+                            <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lightweight</label>
+                            <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (TL-UL)</label>
+                           
+                            <br />
+                            <input type="radio" name="bus">
+                            <label> Tilelink  </label>
+                            <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cached (TL-C) </label>
+                            <br />
+                        </div>
+                        
+                    </div>
+                    <div class="selectdiv2" >
+                        
+                        
+                        <div class="bordered-box3"style="display: none;" >
+                            <h3> Select Bus Interconnect </h3>
+                            <input type="radio" name="bus" checked>
+                            <label> Wishbone </label>
+                            <br />
+                            <input type="radio" name="bus">
+                            <label> Tilelink Uncached  Lightweight  </label>
+                           
+                           
+                            <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (TL-UL)</label>
+                           
+                            <br />
+                            <input type="radio" name="bus">
+                            <label> Tilelink Cached (TL-C)   </label>
+                           
+                            <br />
+                        </div>
+                        
+                    </div>
+                    <div class="selectdiv3"style="display:none;">
+                        
+                        
+                        <div class="bordered-box2"style="display: none;" >
+                            <h3> Select Device(s) </h3>
+                            <input type="checkbox" name="dev" disabled checked />
+                            <label> General Purpose  </label>
+                            <label>  &nbsp;&nbsp;&nbsp; &nbsp;Input Output (GPIO) </label>
+                            <br>
+                            <input type="checkbox" name="dev" />
+                            <label> Serial Peripheral Interface (SPI) </label>
+                            <br>
+                            <input type="checkbox" name="dev" />
+                            <label> Universal Asynchronous  </label>
+                            <label>  &nbsp;&nbsp;&nbsp; &nbsp;Receiver Transmitter (UART) </label>
+                            <br>
+                            <input type="checkbox" name="dev" />
+                            <label> Timer </label>
+                            <br>
+                            <input type="checkbox" name="dev" />
+                            <label> Inter Integrated Circuit (I<sup>2</sup>C) </label>
+                            <br>
+                        </div>
+                        
+                    </div>
+                    
+                
+
+                </div>
+                <h2 class="info1" style="display: none;" >Custom Config Soc</h2>
+                <div class="selectbutton" style="display:none;" >
+                <div class="col-2 frs">
+                    <button class="btn temp-btn1" onclick="sel1(event)">
+                        <span>Cores</span>
+                        <br>
+                    </button>
+                    </div>
+                        <div class="selectdiv">
+                            <div class="bordered-box1">
+                                <h3> Select ISA </h3>
+                                <input type="radio" name="isa" value="32 Bit" checked />
+                                <label> 32 Bit </label>
+                                <br>
+                                <input type="radio" name="isa" value="64 Bit" />
+                                <label> 64 Bit </label>
+                            </div>
+                            <div class="bordered-box">
+                                <h3> Select Extensions </h3>
+                                <input type="checkbox" name="ext" disabled checked />
+                                <label> Integer (I) </label>
+                                <br />
+                                <input type="checkbox" name="ext" />
+                                <label> Multiplier (M) </label>
+                                <br />
+                                <input type="checkbox" name="ext" />
+                                <label> Floating Point (F)  </label>
+                                
+                                <br />
+                                <input type="checkbox" name="ext" />
+                                <label> Compressed (C) </label>
+                                <br />
+                            </div>
+                        
+                    
+                    <div class="col-9e" >
+                        <button class="btn temp-btn1" onclick="sel1(event)">
+                            <span>Next</span>
+                            <br>
+                        </button>
+                    </div>
+
+                </div>
+                
+                
+
+                    
+                    
+               
+        </div>
+        <div class="selectbutton" style="display:none" >
+            <div class="col-2 frs">
+                <button class="btn temp-btn1" onclick="sel1(event)">
+                    <span>Devices</span>
+                    <br>
+                </button>
+                </div>
+                <div class="selectdiv3">
+                        
+                        
+                    <div class="bordered-box2" >
+                        <h3> Select Device(s) </h3>
+                        <input type="checkbox" name="dev" disabled checked />
+                        <label> General Purpose  </label>
+                        <label>  &nbsp;&nbsp;&nbsp; &nbsp;Input Output (GPIO) </label>
+                        <br>
+                        <input type="checkbox" name="dev" />
+                        <label> Serial Peripheral Interface (SPI) </label>
+                        <br>
+                        <input type="checkbox" name="dev" />
+                        <label> Universal Asynchronous  </label>
+                        <label>  &nbsp;&nbsp;&nbsp; &nbsp;Receiver Transmitter (UART) </label>
+                        <br>
+                        <input type="checkbox" name="dev" />
+                        <label> Timer </label>
+                        <br>
+                        <input type="checkbox" name="dev" />
+                        <label> Inter Integrated Circuit (I<sup>2</sup>C) </label>
+                        <br>
+                    </div>
+                    <div class="col-9e" >
+                        <button class="btn temp-btn1" onclick="sel1(event)">
+                            <span>Next</span>
+                            <br>
+                        </button>
+                    </div>
+                    
+                </div>
+                
+        </div>
+        <div class="selectbutton" style="display: none;" >
+            <div class="col-2 frs">
+                <button class="btn temp-btn1" onclick="sel1(event)">
+                    <span>Buses</span>
+                    <br>
+                </button>
+                </div>
+                <div class="selectdiv2" >
+                        
+                        
+                    <div class="bordered-box3">
+                        <h3> Select Bus Interconnect </h3>
+                        <input type="radio" name="bus" checked>
+                        <label> Wishbone </label>
+                        <br />
+                        <input type="radio" name="bus">
+                        <label> Tilelink Uncached  Lightweight  </label>
+                       
+                       
+                        <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (TL-UL)</label>
+                       
+                        <br />
+                        <input type="radio" name="bus">
+                        <label> Tilelink Cached (TL-C)   </label>
+                       
+                        <br />
+                    </div>
+                    <div class="col-9e" >
+                        <button class="btn temp-btn1" onclick="sel1(event)">
+                            <span>Next</span>
+                            <br>
+                        </button>
+                    </div>
+                    
+                    
+
+                    
+                </div>
+        </div>
+        <h2 class="info1"  >Custom Components</h2>
+        <div class="selectbutton"  >
+        <div class="col-2 frs">
+            <button class="btn temp-btn1" onclick="sel1(event)">
+                <span>Cores</span>
+                <br>
+            </button>
+            </div>
+                <div class="selectdiv">
+                    <div class="bordered-box1">
+                        <h3> Select ISA </h3>
+                        <input type="radio" name="isa" value="32 Bit" checked />
+                        <label> 32 Bit </label>
+                        <br>
+                        <input type="radio" name="isa" value="64 Bit" />
+                        <label> 64 Bit </label>
+                    </div>
+                    <div class="bordered-box">
+                        <h3> Select Extensions </h3>
+                        <input type="checkbox" name="ext" disabled checked />
+                        <label> Integer (I) </label>
+                        <br />
+                        <input type="checkbox" name="ext" />
+                        <label> Multiplier (M) </label>
+                        <br />
+                        <input type="checkbox" name="ext" />
+                        <label> Floating Point (F)  </label>
+                        
+                        <br />
+                        <input type="checkbox" name="ext" />
+                        <label> Compressed (C) </label>
+                        <br />
+                    </div>
+                
+            
+            
+        <br>
+        <br>
+        </div>
+        
+
+        
+
+
+    <script src="bootstrap/js/bootstrap.min.js" ></script>
+    <script src="renderer.js"></script>
+    <script>
+        function uploadFile(target) {
+	document.getElementById("file-name").innerHTML = target.files[0].name;
+}
+
+function sel(evt){
+            console.log(evt);
+            fpgas = document.getElementsByClassName("temp-btn");
+            for(let i=0;i<fpgas.length;i++){
+                fpgas[i].classList.remove("active");
+            }
+            evt.currentTarget.classList.add("active");
+        }
+    function sel1(evt){
+        console.log(evt);
+        fpgas = document.getElementsByClassName("temp-btn1");
+        for(let i=0;i<fpgas.length;i++){
+            fpgas[i].classList.remove("active");
+        }
+        evt.currentTarget.classList.add("active");
+    }
+        
+    
+        
+
+    </script>
+</body>
+</html>

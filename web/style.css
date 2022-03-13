@@ -1,0 +1,306 @@
+/* ---------- GENERICS ---------- */
+.btn:focus {
+    outline: none !important;
+}  
+
+/* ---------- TOP CONTROLS ---------- */
+#controls{
+    background-color: #16161e;
+    border: #0a0e14 solid 1px;
+    height: 5vh;
+}
+#controls h5{
+    color: white;
+    padding-top: 10px;
+}
+#controls > img{
+    padding: 10px;
+    height: 58px;
+}
+
+#close_btn:hover{
+    background-color: rgb(133, 0, 0);
+}
+#maximize_btn:hover{
+    background-color: #5a8100;
+}
+#minimize_btn:hover{
+    background-color: rgb(0, 82, 149);
+}
+#close_btn:active{
+    background-color: rgb(180, 0, 0);
+}
+#maximize_btn:active{
+    background-color: #82b803;
+}
+#minimize_btn:active{
+    background-color: rgb(0, 110, 200);
+}
+.control_btns{
+    color: white !important;
+    border-radius: 100px !important;
+    margin: 10px 5px;
+    /* width: 3%; */
+}
+
+/* ---------- SIDE BAR ---------- */
+#side_controls{
+    height: 100%;
+    background-color: #16161e !important;
+    width: 4%;
+    border: #0a0e14 solid 1px;
+    padding-top: 10px;
+
+}
+.side_control_btns{
+    opacity: 0.5;
+    width: 90%;
+    margin-bottom: 30px;
+}
+.side_control_btns img {
+    height: 30px;
+}
+.side_control_btns.active{
+    opacity: 1;
+    border-left: solid white 2px;
+}
+.side_control_btns:hover{
+    opacity: 1;
+}
+
+.side_menus{
+    width: 15%;
+    background-color: #16161e;
+    height: 100%;
+    color: white;
+    border: solid #0a0e14 1px;
+}
+.side_menus > p{
+    padding: 20px;
+    border-bottom: #0a0e14 solid 1px;
+    margin-bottom: 0px !important;
+}
+
+/* ACCORDIONS FILE FOLDERSS */
+.accordion-item{
+    background-color: #16161e !important;
+    /* color: white; */
+    border: none !important;
+}
+.accordion-header{
+    background-color:#16161e !important;
+}
+.accordion-item button {
+    background-color: #16161e !important;
+    color:white;
+}
+.accordion-button{
+    font-weight: 300;
+    padding: 0.5rem 1rem !important;
+}
+.accordion-button:not(.collapsed)::after{
+    color:white;
+}
+.accordion-button::after{
+    color:white !important;
+    fill:white
+}
+.accordion-button:not(.collapsed){
+    color:white !important;
+    background-color:#30303f !important;
+}
+.accordion-button:hover{
+    background-color:#30303f !important;
+
+}
+.accordion-button:not(.collapsed)::after{
+    background-image: url("assets/icons/caret-down.png");
+}
+.accordion-button::after{
+    background-image: url("assets/icons/caret-up.png") !important;
+    height: 1rem !important;
+}
+
+
+.file-btn{
+    width: 100%;
+    text-align: left !important;
+}
+.file-btn:hover{
+    color:white !important;
+    background-color: #30303f !important;
+}
+.accordion-body{
+    background-color: #16161e;
+    padding:10px 0px 0px 10px !important;
+}
+.accordion-body .btn{
+    border-radius: 0px !important;
+}
+.accordion-button img {
+    height: 20px;
+    padding-right: 10px;
+}
+.tabcontent2{
+    display: none;
+}
+.search-box{
+    background-color: #12121a;
+    color: #fff;
+    /* margin-top: 20px; */
+    width: 90%;
+    border-radius: 5px;
+    padding: 4px 10px;
+    border-color: #ffffff2e;
+}
+.search-box::placeholder{
+    color:rgba(255, 255, 255, 0.308)
+}
+.search-box:focus{
+    outline: #ffffffa1 !important;
+    border-color:#ffffffa1 ;
+}
+
+/* ------ MAIN EDITOR ----- */
+
+#main_editor{
+    height: 100%;
+    background-color: #0a0e14;
+    width: 96%;
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #0a0e14;
+    background-color: #16161e;
+    color: white;
+  }
+  .tablinks{
+      color: #ffffff93 ;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 6%;
+  }
+  .tablinks span{
+      /* margin-left: 15px; */
+      padding: 0px 7px;
+      border-radius: 50px;
+      /* display: none; */
+      visibility: hidden;
+  }
+  .tablinks span:hover{
+    background-color: #30303f;
+}
+.tablinks:hover span{
+    /* display: block; */
+    visibility: visible;
+
+}
+.tablinks.active span{
+    /* display: block; */
+    visibility: visible;
+}
+  
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    height: 100%;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    color: white;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    /* background-color: #ccc; */
+    color: white;
+    border-bottom: solid lightskyblue 2px;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #0a0e14;
+    border-top: none;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+    /* overflow-y: scroll; */
+    height: 90%;
+
+  }
+  /* Go from zero to full opacity */
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+#tab_space{
+    height: 5vh;
+}
+
+#play_panel{
+    width: 5%;
+    background-color: #16161e;
+    border: #0a0e14 solid 1px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#play_panel img{
+    height: 35%;
+    /* margin-left: 10px; */
+    opacity: 0.5;
+}
+#play_panel img:hover{
+    opacity: 1;
+    cursor:pointer;
+    /* background-color: #30303f; */
+
+}
+/* ----- FOOTER ------ */
+
+#footer{
+    height: 3vh;
+    background-color: #16161e;
+    align-items: center;
+    width: 100%;
+}
+#foot2{
+    margin-left: 4%;
+}
+#foot2 img{
+    height: 2vh;
+    padding: 4px 0px 0px 0px;
+}
+#foot2 p {
+    color: white;
+    padding: 4px 0px 0px 4px;
+    margin-bottom: 0px !important;
+}
+#foot2 div{
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+}
+#foot2 div:hover{
+    opacity: 1;
+    background-color: #30303f;
+}
+.space-10{
+    padding-right: 10px !important;
+    padding-left: 0px !important;
+}
+.space-20{
+    padding-right: 20px !important;
+    padding-left: 0px !important;
+}

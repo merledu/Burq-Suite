@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>     
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+     <!-- Syntax Highlighting -->
+     <script src="assets/codemirror/codemirror-5.65.0/lib/codemirror.js"></script>
+     <link rel="stylesheet" href="assets/codemirror/codemirror-5.65.0/theme/ayu-dark.css">
+     <link rel="stylesheet" href="assets/codemirror/codemirror-5.65.0/lib/codemirror.css">
+     <script src="assets/codemirror/codemirror-5.65.0/mode/clike/clike.js"></script>
+     <script src="assets/codemirror/codemirror-5.65.0/addon/display/autorefresh.js"></script>
+ 
+  
+
+  </head>
+  <body>
+
+    <!-- TOP CONTROLS -->
+    <div class="d-flex justify-content-between align-items-center" id="controls">
+      <img src="assets/icons/flash.png" />
+      <h5> The Burq Suite </h5>
+      <div class="d-flex">
+        <button class="btn control_btns" id="minimize_btn"> _ </button>
+        <button class="btn control_btns" id="maximize_btn"> ☐ </button>
+        <button class="btn control_btns" id="close_btn"> X </button>  
+      </div>
+      
+    </div>
+
+    
+
+    <!-- MAIN BODY  -->
+    <div class="d-flex" style="height: 92vh;">
+
+      <!-- SIDE BAR -->
+      <div id="side_controls">
+        <button onclick="openMenu(event, 'Explorer')" class="btn tablinks2 side_control_btns"> <img src="assets/icons/file.png" /> </button>
+        <button onclick="openMenu(event, 'Search')" class="btn tablinks2 side_control_btns"> <img src="assets/icons/search.png" /> </button>
+      </div>
+        <!-- EXPLORER -->
+        <div id="Explorer" class="side_menus tabcontent2 side_menu">
+          <p>Explorer</p>
+          <div id="accord">
+            <div class="accordion">
+                <div class="accordion-item">
+                  <p class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                         <img src="assets/icons/folder.png" /> Folder 1
+                    </button>
+                </p>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul class="list-unstyled">
+                            <li><button class="btn file-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-code-fill" viewBox="0 0 16 16">
+                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM6.646 7.646a.5.5 0 1 1 .708.708L5.707 10l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 10 8.646 8.354a.5.5 0 1 1 .708-.708z"/>
+                              </svg> File 1 </button></li>
+                            <li><button class="btn file-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-code-fill" viewBox="0 0 16 16">
+                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM6.646 7.646a.5.5 0 1 1 .708.708L5.707 10l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 10 8.646 8.354a.5.5 0 1 1 .708-.708z"/>
+                              </svg> File 2 </button></li>
+                            <li><button class="btn file-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-code-fill" viewBox="0 0 16 16">
+                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM6.646 7.646a.5.5 0 1 1 .708.708L5.707 10l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 10 8.646 8.354a.5.5 0 1 1 .708-.708z"/>
+                              </svg> File 3 </button></li>
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <p class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      <img src="assets/icons/folder.png" />  Folder 2
+                    </button>
+                </p>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <p class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      <img src="assets/icons/folder.png" />  Folder 3
+                    </button>
+                </p>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        
+
+
+
+        <div id="Search" class="side_menus tabcontent2 side_menu">
+          <p>Search</p>
+          <div>
+            <input type="text" placeholder="Search" class="search-box" />
+          </div>
+        </div>
+        <!-- MAIN EDITOR -->
+
+      <div id="main_editor">
+
+        <!-- Tab links -->
+        <div id="tab_space"  class="d-flex">
+          <div class="tab" style="width: 95%;">
+            <button class="tablinks" onclick="openTab(event, 'File1')" id="defaultOpen">File1 <span>x</span> </button>
+            <button class="tablinks" onclick="openTab(event, 'File2')">File2 <span>x</span></button>
+            <button class="tablinks" onclick="openTab(event, 'File3')">File3 <span>x</span></button>
+          </div>
+          <div id="play_panel">
+            <img src="assets/icons/play.png" />
+            <img src="assets/icons/dots.png" />
+          </div>
+        </div>
+        
+
+
+        <!-- Tab content -->
+        <div id="File1" class="tabcontent">
+          <textarea class="editorx" name="editor"></textarea>
+
+        </div>
+
+        <div id="File2" class="tabcontent">
+          <textarea class="editorx" name="editor"></textarea>
+
+        </div>
+
+        <div id="File3" class="tabcontent">
+          <textarea class="editorx" name="editor"></textarea>
+
+        </div>
+
+      </div>
+
+      
+      </div>
+      <div id="footer">
+        <div id="foot1">
+
+        </div>
+        <div id="foot2" class="d-flex align-items-center">
+          <div>
+            <img src="assets/icons/cross.png" />
+            <p>3</p>
+          </div>
+          
+          <div class="space-10"></div>
+          <div>
+            <img src="assets/icons/warn.png" />
+            <p>0</p>
+          </div>
+          
+          <div class="space-20"></div>
+          <div>
+            <img src="assets/icons/cmd.png" />
+            <p>Terminal</p>
+          </div>
+          
+
+        </div>
+      </div>
+
+
+
+      
+    </div>
+    
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="script.js"></script>
+    
+  </body>
+</html>
