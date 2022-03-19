@@ -10,52 +10,244 @@
 </head>
 <body>
 
-        
-        <div class="row">
-            <div class="col-8 frs">
-                <div class="container">
+        <div id="main">
+            <div class="row">
+                <div class="col-8 frs">
+                    <div class="container">
 
-                    <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
-                    <p>Don't know where to start?</p>
-                    <p>Start with one of our templates.</p>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn temp-btn">
-                            <span>آغاز</span>
-                            <br>
-                            Aghaz SoC 
+                        <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
+                        <p>Don't know where to start?</p>
+                        <p>Start with one of our templates.</p>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn temp-btn">
+                                <span>آغاز</span>
+                                <br>
+                                Aghaz SoC 
+                            </button>
+                            <button class="btn temp-btn">
+                                <span>0101</span>
+                                <br>
+                                SPI-Flash 
+                            </button>
+                            <button class="btn temp-btn">
+                                <span>RV32-im</span>
+                                <br>
+                                Multiplier Core 
+                            </button>
+                            <button class="btn temp-btn">
+                                <span>WB</span>
+                                <br>
+                                Wishbone Bus  
+                            </button>
+                        </div>
+
+                        <p id="footer"> Powered by Micro Electronics Research Lab (MERL) - UIT  </p>
+                    </div>
+                </div>
+                <div class="col-4 sec">
+                    <div id="sec1">
+                        <h4>Recent Projects</h4>
+                    </div>
+                    <div id="sec2">
+                        <button onclick="openNewProject()" id="new-btn" class="btn new-btn">
+                            New Project
                         </button>
-                        <button class="btn temp-btn">
-                            <span>0101</span>
-                            <br>
-                            SPI-Flash 
-                        </button>
-                        <button class="btn temp-btn">
-                            <span>RV32-im</span>
-                            <br>
-                            Multiplier Core 
-                        </button>
-                        <button class="btn temp-btn">
-                            <span>WB</span>
-                            <br>
-                            Wishbone Bus  
+                        <br><br>
+                        <button class="btn open-btn">
+                            Open Project
                         </button>
                     </div>
-
-                    <p id="footer"> Powered by Micro Electronics Research Lab (MERL) - UIT  </p>
                 </div>
             </div>
-            <div class="col-4 sec">
-                <div id="sec1">
-                    <h4>Recent Projects</h4>
+        </div>
+        <div id="new">
+            <div class="row">
+                
+                <div class="col-4 sec">
+                    <div class="container">
+                        <div id="config-btns">
+                            <h4>- Project Selection -</h4>
+                            <button onclick="changeProject(event,'soc')" class="btn config-btn active">
+                                Custom Config SoC
+                            </button>
+    
+                            <button onclick="changeProject(event,'core')" class="btn config-btn">
+                                Custom Config Core
+                            </button>
+    
+                            <button onclick="changeProject(event,'comp')" class="btn config-btn">
+                                Custom Component
+                            </button>
+    
+                            <button onclick="changeProject(event,'verif')" class="btn config-btn">
+                                Verification Project
+                            </button>
+    
+                            <button onclick="changeProject(event,'dsk')" class="btn config-btn">
+                                Software Development Kit
+                            </button>
+                        </div>
+                        
+
+                    </div>
                 </div>
-                <div id="sec2">
-                    <button id="new-btn" class="btn new-btn">
-                        New Project
-                    </button>
-                    <br><br>
-                    <button class="btn open-btn">
-                        Open Project
-                    </button>
+                <div class="col-8 frs">
+                    <div class="container">
+                        <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
+                        
+                        <div id="project-name">
+                            <h5> Project Name: </h5>
+                            <input type="text" placeholder="Untitled">
+                        </div>
+                        <div id="project-browse">
+                            <h5> Project Location </h5>
+                            <input type="text" disabled value="/home/mordok/BurqSuiteProjects/Untitled" />
+                            <button class="btn browse-btn">...</button>
+                        </div>
+                        <div class="config-box" id="soc">
+                            <span class="line">
+                                <h2><span>SoC Configurations</span></h2>
+                            </span>
+
+                           
+                            <div id="core">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config active">
+                                            <p>Core</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+    
+                                    <div class="col-md-3" style="border-right: 1px solid white; height: 25%;" >
+                                        <h6 style="font-weight: lighter;">ISA</h6>
+                                        <form>
+                                            <input type="radio" name="isa" value="32 Bit" checked />
+                                            <label> 32 Bit </label>
+                                            <br>
+                                            <input type="radio" name="isa" value="64 Bit" />
+                                            <label> 64 Bit </label>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-3">
+                                        <h6 style="font-weight: lighter;">Extensions</h6>
+                                        <form>
+                                            <input type="checkbox" name="ext" disabled checked />
+                                            <label> Integer (I) </label>
+                                            <br />
+                                            <input type="checkbox" name="ext" />
+                                            <label> Multiplier (M) </label>
+                                            <br />
+                                            <input type="checkbox" name="ext" />
+                                            <label> Floating Point (F) </label>
+                                            <br />
+                                            <input type="checkbox" name="ext" />
+                                            <label> Compressed (C) </label> 
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+
+                                <div style="text-align: right;">
+                                    <button onclick="changeSoC('devices')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="devices">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config">
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Devices</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-8">
+                                        <form>
+                                            <input type="checkbox" name="dev" disabled checked />
+                                            <label> General Purpose Input Output (GPIO) </label>
+                                            <br>
+                                            <input type="checkbox" name="dev" />
+                                            <label> Serial Peripheral Interface (SPI) </label>
+                                            <br>
+                                            <input type="checkbox" name="dev" />
+                                            <label> Universal Asynchronous Receiver Transmitter (UART) </label>
+                                            <br>
+                                            <input type="checkbox" name="dev" />
+                                            <label> Timer </label>
+                                            <br>
+                                            <input type="checkbox" name="dev" />
+                                            <label> Inter Integrated Circuit (I<sup>2</sup>C) </label>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button onclick="changeSoC('core')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;" />
+                                    </button>
+
+                                    <button onclick="changeSoC('bus')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;" />
+                                    </button>
+                                </div>
+
+                                
+                            </div>
+
+
+                            <div id="bus">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config">
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config">
+                                            <p>Devices</p>
+                                        </div>
+                                        <div style="margin-bottom: 0px;" class="name-config active">
+                                            <p>Bus</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-8">
+                                        <form>
+                                            <input type="radio" name="bus" checked>
+                                            <label> Wishbone </label>
+                                            <br />
+                                            <input type="radio" name="bus">
+                                            <label> Tilelink Uncached Lightweight (TL-UL) </label>
+                                            <br />
+                                            <input type="radio" name="bus">
+                                            <label> Tilelink Cached (TL-C) </label>
+                                        </form>
+                                    </div>
+                                </div>
+        
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button onclick="changeSoC('devices')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;" />
+                                    </button>
+
+                                    <button onclick="changeSoC('bus')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;" />
+                                    </button>
+                                </div>
+
+                                
+                            </div>
+                            
+
+                            
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,15 +256,19 @@
 
 
     <script src="bootstrap/js/bootstrap.min.js" ></script>
+    <script src="script.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
     
-        function say_hello_js(x) {
-            console.log("Hello from " + x);
+        // eel.expose(say_hello_js);   
+        function say_hello_js() {
+            // console.log("Hello from " + x);
+            eel.say_hello_py("Javascript World!");  // Call a Python function
         }
+
+        say_hello_js();
         
-        say_hello_js("Javascript World!");
-        eel.say_hello_py("Javascript World!");  // Call a Python function
+        // say_hello_js("Java4script World!");
     
     </script>
 </body>

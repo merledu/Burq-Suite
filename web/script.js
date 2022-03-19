@@ -87,4 +87,60 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
   }
 
-document.getElementById("defaultOpen").click();
+// document.getElementById("defaultOpen").click();
+
+
+function openNewProject(){
+    var main = document.getElementById("main");
+    var newProj = document.getElementById("new");
+    main.style.display = "none";
+    newProj.style.display = "block";
+}
+
+function changeSoC(comp){
+    var core = document.getElementById("core");
+    var dev = document.getElementById("devices");
+    var bus = document.getElementById("bus");
+    core.style.display = "none";
+    dev.style.display = "none";
+    bus.style.display = "none";
+    if(comp === "core"){
+        core.style.display = "block";
+    } else if(comp === "devices"){
+        dev.style.display = "block";
+    } else if (comp === "bus"){
+        bus.style.display = "block";
+    }
+}
+
+function changeProject(evt,proj){
+    var soc = document.getElementById("soc");
+    // var coreP = document.getElementById("coreP");
+    // var comp = document.getElementById("comp");
+    // var verif = document.getElementById("verif");
+    // var sdk = document.getElementById("sdk");
+    soc.style.display = "none";
+    // coreP.style.display = "none";
+    // comp.style.display = "none";
+    // verif.style.display = "none";
+    // sdk.style.display = "none";
+
+    if(proj === "soc"){
+        soc.style.display = "block";
+    } 
+    // else if(proj === "core"){
+    //     coreP.style.display = "block";
+    // } else if(proj === "comp"){
+    //     comp.style.display = "block";
+    // } else if (proj === "verif"){
+    //     verif.style.display = "block";
+    // } else if (proj === "sdk"){
+    //     sdk.style.display = "block";
+    // }
+
+    var btns = document.getElementsByClassName("config-btn");
+    for (i = 0; i < btns.length; i++) {
+        btns[i].className = btns[i].className.replace(" active", "");
+      }
+    evt.currentTarget.className += " active";
+}

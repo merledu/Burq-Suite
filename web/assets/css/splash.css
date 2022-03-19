@@ -18,20 +18,20 @@ body, .row{
     background-color: #15191a;
 }
 
-h1{
+#main h1{
     padding-top: 70px;
     font-weight: 400;
     padding-bottom: 80px;
 }
 
-h1 img{
+#main h1 img{
     height: 100%;
 }
-h1 span{
+#main h1 span{
     font-size: 50%;
     color: #7c7c7c;
 }
-p{
+#main p{
     margin-bottom: 0px;
     font-size: larger;
     font-weight: 300;
@@ -47,7 +47,7 @@ p{
     box-shadow: #00000078 10px 10px 10px;
 }
 
-.frs .container div{
+#main .frs .container div{
     padding-top: 50px;
 }
 .temp-btn span{
@@ -121,4 +121,195 @@ p{
     color: white;
     width: 90%;
     background-color: transparent;
+}
+#new{
+    display: none;
+}
+
+.config-btn{
+    color: white;
+    padding: 10px;
+    background-color: #1a1d22;
+    box-shadow: #00000078 10px 10px 10px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#config-btns{
+    margin-top: 25%;
+}
+.config-btn:nth-child(2):hover{
+    color: #1a1d22;
+    background-color: #ea5485;
+}
+.config-btn:nth-child(2).active{
+    color: white;
+    background-color: #ea5485;
+    border-radius: 50px;
+    border: solid 1px rgba(255, 255, 255, 0.212);
+}
+.config-btn:nth-child(3):hover{
+    color: #1a1d22;
+    background-color: #0fc89c;
+}
+.config-btn:nth-child(3).active{
+    color: white;
+    background-color: #0fc89c;
+    border-radius: 50px;
+    border: solid 1px rgba(255, 255, 255, 0.212);
+}
+.config-btn:nth-child(4):hover{
+    color: #1a1d22;
+    background-color: #bc6ee9;
+}
+.config-btn:nth-child(4).active{
+    color: white;
+    background-color: #bc6ee9;
+    border-radius: 50px;
+    border: solid 1px rgba(255, 255, 255, 0.212);
+}
+.config-btn:nth-child(5):hover{
+    color: #1a1d22;
+    background-color: #379afc;
+}
+.config-btn:nth-child(5).active{
+    color: white;
+    background-color: #379afc;
+    border-radius: 50px;
+    border: solid 1px rgba(255, 255, 255, 0.212);
+}
+.config-btn:nth-child(6):hover{
+    color: #1a1d22;
+    background-color: white;
+}
+.config-btn:nth-child(6).active{
+    color: black;
+    background-color: white;
+    border-radius: 50px;
+    border: solid 1px rgba(255, 255, 255, 0.212);
+}
+#new h1{
+    padding-top: 30px;
+    font-weight: 400;
+    padding-bottom: 30px;
+}
+
+#new h1 img{
+    height: 100%;
+}
+#new h1 span{
+    font-size: 50%;
+    color: #7c7c7c;
+}
+#new h5{
+    font-weight: 300;
+}
+#config-btns h4{
+    color: white;
+    padding-bottom: 30px;
+    text-align: center;
+}
+#project-browse{
+    display: flex;
+    align-items: center;
+}
+#project-browse *{
+    margin-right: 20px;
+    margin-top: 20px;
+}
+#project-browse input{
+    padding: 5px;
+    font-size: medium;
+    width: 60%;
+    /* margin-right: 10px; */
+}
+.browse-btn{
+    color: white;
+    padding: 6px;
+    background-color: #1a1d22;
+    box-shadow: #00000048 2px 2px 2px;
+    width: 10%;
+    margin: 0;
+    /* margin-bottom: 30px; */
+}
+.browse-btn:hover{
+    background-color: #379afc;
+    
+}
+#project-name{
+    display: flex;
+    align-items: center;
+}
+#project-name *{
+    margin-right: 20px;
+}
+#project-name h5{
+    width: 22%;
+}
+#project-browse h5{
+    width: 22%;
+}
+#project-name input{
+    padding: 5px;
+    background-color: #1a1d22;
+    color: white;
+    width: 60%;
+}
+#project-browse input{
+    padding: 5px;
+    background-color: #1a1d22;
+    color: rgba(255, 255, 255, 0.644);
+}
+#project-name input:focus, #project-name input:active, #project-name input{
+    outline: none !important;
+}
+
+.config-box{
+    margin-top: 30px;
+}
+.line{display:block}
+.line h2{font-size:17px;font-weight: 300; padding-left: 10px; text-align:left; border-bottom:1px solid white; position:relative; }
+.line h2 span { background-color: #24272e; position: relative; top: 10px; padding: 0 10px;}
+
+.main-config{
+    margin-top: 50px;
+    height: 100%;
+}
+/* .name-config{
+    height: 50px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+} */
+.name-config{
+    padding: 10px;
+    background-color: #15191a;
+    text-align: center;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    border-radius: 10px;
+
+}
+.name-config p{
+    margin: 0px;
+}
+.name-config.active{
+    background-color: #379afc;
+}
+.ctrl-btn{
+    border-radius: 100px;
+    height: 60px;
+    width: 60px;
+    margin-top: 50px;
+}
+.ctrl-btn:hover{
+    background-color: #15191a;
+}
+#devices{
+    display: none;
+}
+#bus{
+    display: none;
 }
