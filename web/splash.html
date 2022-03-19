@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets1/css/splash.css" rel="stylesheet" />
+    <link href="assets/css/splash.css" rel="stylesheet" />
 </head>
 <body>
 
         
         <div class="row">
-            <div class="col-4 frs">
+            <div class="col-8 frs">
                 <div class="container">
 
-                    <h1> <img src="assets1/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
+                    <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
                     <p>Don't know where to start?</p>
                     <p>Start with one of our templates.</p>
                     <div class="d-flex justify-content-between">
@@ -64,12 +64,16 @@
 
 
     <script src="bootstrap/js/bootstrap.min.js" ></script>
-    <script src="renderer.js"></script>
-    <script>
-        
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
     
+        function say_hello_js(x) {
+            console.log("Hello from " + x);
+        }
         
-
+        say_hello_js("Javascript World!");
+        eel.say_hello_py("Javascript World!");  // Call a Python function
+    
     </script>
 </body>
 </html>

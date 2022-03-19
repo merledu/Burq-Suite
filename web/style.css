@@ -304,3 +304,26 @@
     padding-right: 20px !important;
     padding-left: 0px !important;
 }
+
+
+.run-btn{
+    background-color: #0023979d !important;
+    padding: 10px !important;
+    text-align: center !important;
+    color: white !important;
+    width: 80% !important;
+    border: 1px solid rgba(255, 255, 255, 0.226) !important;
+    border-radius: 0px !important;
+    /* box-shadow: 1px 1px 10px #0066ff50; */
+}
+.run-btn:hover{
+    background-color: #0a0e14 !important;
+    border-color: white !important;
+    box-shadow: 5px 1px 10px #3799fc88;
+    border-radius: 20px !important;
+}
+.run-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

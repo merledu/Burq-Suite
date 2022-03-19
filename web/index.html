@@ -38,6 +38,8 @@
       <div id="side_controls">
         <button onclick="openMenu(event, 'Explorer')" class="btn tablinks2 side_control_btns"> <img src="assets/icons/file.png" /> </button>
         <button onclick="openMenu(event, 'Search')" class="btn tablinks2 side_control_btns"> <img src="assets/icons/search.png" /> </button>
+        <button onclick="openMenu(event, 'Run')" class="btn tablinks2 side_control_btns"> <img src="assets/icons/play.png" /> </button>
+
       </div>
         <!-- EXPLORER -->
         <div id="Explorer" class="side_menus tabcontent2 side_menu">
@@ -101,6 +103,38 @@
           <div>
             <input type="text" placeholder="Search" class="search-box" />
           </div>
+        </div>
+
+        <div id="Run" class="side_menus tabcontent2 side_menu">
+          <p>Run and Debug</p>
+          <div class="run-div">
+            <button class="btn run-btn"> Generate RTL </button> 
+          </div>
+
+          <div class="run-div">
+            <button class="btn run-btn"> Verify RTL </button> 
+          </div>
+
+          <div class="run-div">
+            <button class="btn run-btn"> Generate Report </button> 
+          </div>
+
+          <div class="run-div">
+            <button class="btn run-btn"> Generate Log </button> 
+          </div>
+
+          <div class="run-div">
+            <button class="btn run-btn"> Export CSV </button> 
+          </div>
+
+          <div class="run-div">
+            <button class="btn run-btn"> Upload Test </button> 
+          </div>
+
+          <div class="run-div">
+            <button class="btn run-btn"> Upload Bitstream </button> 
+          </div>
+          
         </div>
         <!-- MAIN EDITOR -->
 
