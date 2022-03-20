@@ -8,7 +8,7 @@ const createMainWindow = () => {
     win.show();
   
     // win.loadFile("index.html")
-    win.loadURL('http://localhost:8005/index.html');
+    win.loadURL('http://localhost:8007/index.html');
   }
 
 const createSplashWindow = () => {
@@ -18,12 +18,12 @@ const createSplashWindow = () => {
  
 
     // win.loadFile("splash.html")
-    win.loadURL('http://localhost:8002/splash.html');
+    win.loadURL('http://localhost:8003/splash.html');
 }
 
 
 app.whenReady().then(() => {
-    createSplashWindow()
+    createMainWindow()
 });
 
 function openTheMainWindow(){
@@ -45,3 +45,4 @@ process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 //     win.webContents.executeJavaScript('').then(console.log("HELLLII"));
     
 // })
+

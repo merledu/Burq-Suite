@@ -235,7 +235,7 @@
                                         <img src="assets/icons/back.png" style="width: 100%;" />
                                     </button>
 
-                                    <button onclick="changeSoC('bus')" class="btn ctrl-btn">
+                                    <button onclick="goToMain()" class="btn ctrl-btn">
                                         <img src="assets/icons/next.png" style="width: 100%;" />
                                     </button>
                                 </div>
@@ -473,9 +473,15 @@
 
     <script src="bootstrap/js/bootstrap.min.js" ></script>
     <script src="script.js"></script>
+    <!-- <script src="renderer.js"></script> -->
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
     
+        function goToMain(){
+            eel.stop_everything();
+            window.close();
+        }
+
         function say_hello_js() {
             eel.say_hello_py("Javascript World!");  // Call a Python function
         }
