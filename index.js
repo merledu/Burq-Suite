@@ -7,7 +7,8 @@ const createMainWindow = () => {
     win.maximize();
     win.show();
   
-    win.loadFile("index.html")
+    // win.loadFile("index.html")
+    win.loadURL('http://localhost:8005/index.html');
   }
 
 const createSplashWindow = () => {
@@ -24,6 +25,10 @@ const createSplashWindow = () => {
 app.whenReady().then(() => {
     createSplashWindow()
 });
+
+function openTheMainWindow(){
+  createMainWindow()
+}
 
 
 app.on('window-all-closed', () => {
