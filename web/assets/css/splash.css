@@ -291,6 +291,7 @@ body, .row{
     margin-bottom: 10px;
     border-radius: 10px;
 
+
 }
 .name-config p{
     margin: 0px;
@@ -311,5 +312,35 @@ body, .row{
     display: none;
 }
 #bus{
+    display: none;
+}
+#coreP{
+    display: none;
+}
+.comp-config{
+    margin-top: 20px;
+    height: 100%;
+}
+.comp-btn{
+    padding: 10px;
+    background-color: #15191a;
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    width: 230%;
+    color: white;
+}
+.comp-btn:hover{
+    color: white;
+    background-color: #407bd9;
+}
+.comp-btn.active{
+    background-color: #379afc;
+}
+#comp-bus{
+    display: none;
+}
+.comp-core{
     display: none;
 }

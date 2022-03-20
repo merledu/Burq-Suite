@@ -12,12 +12,6 @@ if __name__ == '__main__':
 
     # say_hello_py('Python World!')
 
-    # options = {
-    #     'mode': 'custom',
-    #     'args': ['node_modules/electron/dist/electron', '.']
-    # }
-
-
     # eel.say_hello_js('Python World!')   # Call a Javascript functxion
 
     # start('splash.html', options=options)
