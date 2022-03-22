@@ -8,7 +8,7 @@ const createMainWindow = () => {
     win.show();
   
     // win.loadFile("index.html")
-    win.loadURL('http://localhost:8007/index.html');
+    win.loadURL('http://localhost:8008/index.html');
   }
 
 const createSplashWindow = () => {

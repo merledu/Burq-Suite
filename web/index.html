@@ -24,7 +24,7 @@
       <div class="d-flex">
         <button class="btn control_btns" id="minimize_btn"> _ </button>
         <button class="btn control_btns" id="maximize_btn"> ☐ </button>
-        <button class="btn control_btns" id="close_btn"> X </button>  
+        <button onclick="window.close()" class="btn control_btns" id="close_btn"> X </button>  
       </div>
       
     </div>
@@ -209,6 +209,16 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="jquery.min.js"></script>
     <script src="script.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+
+        eel.expose(pakrKayLaoFiles)
+        function pakrKayLaoFiles(strct){
+          console.log(strct);
+        }
+        
+    
+    </script>
     
   </body>
 </html>

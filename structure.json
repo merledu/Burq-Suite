@@ -1,0 +1,1440 @@
+{
+      ".": [
+            "readme.md",
+            "overview.md",
+            ".gitignore",
+            "build.sbt",
+            ".gitmodules",
+            "peripheralScript.py"
+      ],
+      "project": {
+            ".": [
+                  "build.properties"
+            ]
+      },
+      "nucleusrv": {
+            ".": [
+                  "LICENSE",
+                  "README.md",
+                  ".gitignore",
+                  "build.sbt",
+                  ".git",
+                  ".gitmodules",
+                  "scalastyle-config.xml",
+                  "scalastyle-test-config.xml",
+                  "Makefile"
+            ],
+            "project": {
+                  ".": [
+                        "build.properties",
+                        "plugins.sbt",
+                        "metals.sbt"
+                  ]
+            },
+            "tools": {
+                  ".": [
+                        "start.S",
+                        "makefile",
+                        "link.ld"
+                  ],
+                  "tests": {
+                        "fibonacci": {
+                              ".": [
+                                    "fibonacci.S",
+                                    "main.c"
+                              ]
+                        },
+                        "hello_world": {
+                              ".": [
+                                    "world.c",
+                                    "hello.c",
+                                    "main.h",
+                                    "main.c"
+                              ]
+                        },
+                        "median": {
+                              ".": [
+                                    "medain_ISS.csv",
+                                    "median_main.c",
+                                    "test.ld",
+                                    "encoding.h",
+                                    "median.dump",
+                                    ".~lock.median_Core.csv#",
+                                    "util.h",
+                                    "median",
+                                    "median.h",
+                                    "median_gendata.pl",
+                                    ".~lock.medain_ISS.csv#",
+                                    "median_test_status.png",
+                                    "openocd.cfg",
+                                    "dataset1.h",
+                                    "median_Core.csv"
+                              ]
+                        }
+                  }
+            },
+            "jigsaw": {
+                  ".": [
+                        "README.md",
+                        ".gitignore",
+                        "build.sbt",
+                        ".git",
+                        ".gitmodules"
+                  ],
+                  "project": {
+                        ".": [
+                              "build.properties",
+                              "plugins.sbt"
+                        ]
+                  },
+                  "caravan": {
+                        ".": [
+                              "LICENSE",
+                              "README.md",
+                              ".gitignore",
+                              "build.sbt",
+                              ".git"
+                        ],
+                        "project": {
+                              ".": [
+                                    "build.properties",
+                                    "plugins.sbt"
+                              ]
+                        },
+                        "docs": {
+                              ".": [
+                                    "make.bat",
+                                    "index.rst",
+                                    "wishbone.drawio",
+                                    "wavedrom.json",
+                                    "wb_timing.png",
+                                    "conf.py",
+                                    "Makefile"
+                              ],
+                              "dev": {
+                                    ".": [
+                                          "custombus.rst",
+                                          "devsetup.rst",
+                                          "fundamentals.rst",
+                                          "index.rst",
+                                          "reqrespbundle.rst",
+                                          "hierarchy.rst",
+                                          "busspecific.rst"
+                                    ]
+                              },
+                              "user": {
+                                    ".": [
+                                          "installation.rst",
+                                          "index.rst",
+                                          "introduction.rst"
+                                    ]
+                              },
+                              "images": {
+                                    ".": [
+                                          "Switch1-2.png",
+                                          "wishbone-WB_Host.png",
+                                          "harness.png",
+                                          "bus-adapters.png"
+                                    ]
+                              }
+                        },
+                        "src": {
+                              "main": {
+                                    "scala": {
+                                          "caravan": {
+                                                "bus": {
+                                                      "wishbone": {
+                                                            ".": [
+                                                                  "WishboneHost.scala",
+                                                                  "WishboneAdapter.scala",
+                                                                  "WishboneConfig.scala",
+                                                                  "Harness.scala",
+                                                                  "WishboneBus.scala",
+                                                                  "WishboneDevice.scala",
+                                                                  "WishboneErr.scala",
+                                                                  "PeripheralMap.scala"
+                                                            ]
+                                                      },
+                                                      "native": {
+                                                            ".": [
+                                                                  "NativeConfig.scala",
+                                                                  "NativeBus.scala"
+                                                            ]
+                                                      },
+                                                      "common": {
+                                                            ".": [
+                                                                  "Transaction.scala",
+                                                                  "PeripheralsMap.scala",
+                                                                  "DummyMemory.scala",
+                                                                  "BusDecoder.scala",
+                                                                  "Switch1toN.scala"
+                                                            ]
+                                                      },
+                                                      "tilelink": {
+                                                            ".": [
+                                                                  "TilelinkOpcodes.scala",
+                                                                  "Harness.scala",
+                                                                  "TilelinkAdapter.scala",
+                                                                  "TilelinkHost.scala",
+                                                                  "TilelinkConfig.scala",
+                                                                  "SwitchHarness.scala",
+                                                                  "TilelinkBus.scala",
+                                                                  "StallUnit.scala",
+                                                                  "TilelinkError.scala",
+                                                                  "TilelinkDevice.scala"
+                                                            ]
+                                                      }
+                                                }
+                                          }
+                                    }
+                              },
+                              "test": {
+                                    "scala": {
+                                          "wishbone": {
+                                                ".": [
+                                                      "GpioControllerTest.scala",
+                                                      "WishboneHostTest.scala",
+                                                      "SwitchHarnessTest.scala",
+                                                      "AdapterTest.scala",
+                                                      "HarnessTest.scala"
+                                                ]
+                                          },
+                                          "common": {
+                                                ".": [
+                                                      "HelperTraits.scala"
+                                                ]
+                                          },
+                                          "tilelink": {
+                                                ".": [
+                                                      "GPIOControllerTest.scala",
+                                                      "SwitchHarnessTest.scala",
+                                                      "AdapterTest.scala",
+                                                      "HarnessTest.scala",
+                                                      "ErrorTest.scala"
+                                                ]
+                                          }
+                                    }
+                              }
+                        }
+                  },
+                  "src": {
+                        "main": {
+                              "resources": {
+                                    "artyA7": {
+                                          ".": [
+                                                "clk_wiz_0_clk_wiz.v",
+                                                "PLL_8MHz.v"
+                                          ]
+                                    }
+                              },
+                              "scala": {
+                                    "jigsaw": {
+                                          ".": [
+                                                "Harness.scala"
+                                          ],
+                                          "fpga": {
+                                                "boards": {
+                                                      "artyA7": {
+                                                            ".": [
+                                                                  "PLL_8MHz.scala",
+                                                                  "TriStateBuffer.scala"
+                                                            ]
+                                                      }
+                                                }
+                                          },
+                                          "peripherals": {
+                                                "common": {
+                                                      ".": [
+                                                            "SubRegExt.scala",
+                                                            "SubReg.scala",
+                                                            "IntrHardware.scala"
+                                                      ]
+                                                },
+                                                "gpio": {
+                                                      ".": [
+                                                            "GpioRegistersMap.scala",
+                                                            "GpioRegBundle.scala",
+                                                            "Gpio.scala",
+                                                            "GpioRegTop.scala"
+                                                      ]
+                                                }
+                                          },
+                                          "rams": {
+                                                "fpga": {
+                                                      ".": [
+                                                            "BlockRam.scala"
+                                                      ]
+                                                }
+                                          }
+                                    }
+                              }
+                        },
+                        "test": {
+                              "scala": {
+                                    "jigsaw": {
+                                          "peripherals": {
+                                                "gpio": {
+                                                      ".": [
+                                                            "GpioTester.scala"
+                                                      ]
+                                                }
+                                          },
+                                          "rams": {
+                                                "fpga": {
+                                                      ".": [
+                                                            "TilelinkBlockRamTester.scala",
+                                                            "WishboneBlockRamTester.scala"
+                                                      ]
+                                                }
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            },
+            "caravan": {
+                  ".": [
+                        "LICENSE",
+                        "README.md",
+                        ".gitignore",
+                        "build.sbt",
+                        ".git"
+                  ],
+                  "project": {
+                        ".": [
+                              "build.properties",
+                              "plugins.sbt"
+                        ]
+                  },
+                  "docs": {
+                        ".": [
+                              "make.bat",
+                              "index.rst",
+                              "wishbone.drawio",
+                              "wavedrom.json",
+                              "wb_timing.png",
+                              "conf.py",
+                              "Makefile"
+                        ],
+                        "dev": {
+                              ".": [
+                                    "custombus.rst",
+                                    "devsetup.rst",
+                                    "fundamentals.rst",
+                                    "index.rst",
+                                    "reqrespbundle.rst",
+                                    "hierarchy.rst",
+                                    "busspecific.rst"
+                              ]
+                        },
+                        "user": {
+                              ".": [
+                                    "installation.rst",
+                                    "index.rst",
+                                    "introduction.rst"
+                              ]
+                        },
+                        "images": {
+                              ".": [
+                                    "Switch1-2.png",
+                                    "wishbone-WB_Host.png",
+                                    "harness.png",
+                                    "bus-adapters.png"
+                              ]
+                        }
+                  },
+                  "src": {
+                        "main": {
+                              "scala": {
+                                    "caravan": {
+                                          "bus": {
+                                                "wishbone": {
+                                                      ".": [
+                                                            "WishboneHost.scala",
+                                                            "WishboneAdapter.scala",
+                                                            "WishboneConfig.scala",
+                                                            "Harness.scala",
+                                                            "WishboneBus.scala",
+                                                            "WishboneDevice.scala",
+                                                            "WishboneErr.scala",
+                                                            "PeripheralMap.scala"
+                                                      ]
+                                                },
+                                                "native": {
+                                                      ".": [
+                                                            "NativeConfig.scala",
+                                                            "NativeBus.scala"
+                                                      ]
+                                                },
+                                                "common": {
+                                                      ".": [
+                                                            "Transaction.scala",
+                                                            "PeripheralsMap.scala",
+                                                            "DummyMemory.scala",
+                                                            "BusDecoder.scala",
+                                                            "Switch1toN.scala"
+                                                      ]
+                                                },
+                                                "tilelink": {
+                                                      ".": [
+                                                            "TilelinkOpcodes.scala",
+                                                            "Harness.scala",
+                                                            "TilelinkAdapter.scala",
+                                                            "TilelinkHost.scala",
+                                                            "TilelinkConfig.scala",
+                                                            "SwitchHarness.scala",
+                                                            "TilelinkBus.scala",
+                                                            "StallUnit.scala",
+                                                            "TilelinkError.scala",
+                                                            "TilelinkDevice.scala"
+                                                      ]
+                                                }
+                                          }
+                                    }
+                              }
+                        },
+                        "test": {
+                              "scala": {
+                                    "wishbone": {
+                                          ".": [
+                                                "GpioControllerTest.scala",
+                                                "WishboneHostTest.scala",
+                                                "SwitchHarnessTest.scala",
+                                                "AdapterTest.scala",
+                                                "HarnessTest.scala"
+                                          ]
+                                    },
+                                    "common": {
+                                          ".": [
+                                                "HelperTraits.scala"
+                                          ]
+                                    },
+                                    "tilelink": {
+                                          ".": [
+                                                "GPIOControllerTest.scala",
+                                                "SwitchHarnessTest.scala",
+                                                "AdapterTest.scala",
+                                                "HarnessTest.scala",
+                                                "ErrorTest.scala"
+                                          ]
+                                    }
+                              }
+                        }
+                  }
+            },
+            "src": {
+                  "main": {
+                        "cc": {
+                              ".": [
+                                    "emulator.cc"
+                              ]
+                        },
+                        "resources": {
+                              ".": [
+                                    "sram.v"
+                              ]
+                        },
+                        "scala": {
+                              "components": {
+                                    ".": [
+                                          "Main.scala",
+                                          "Execute.scala",
+                                          "PC.scala",
+                                          "HazardUnit.scala",
+                                          "MduControl.scala",
+                                          "RVFI.scala",
+                                          "SRam.scala",
+                                          "InstructionFetch.scala",
+                                          "InstructionDecode.scala",
+                                          "MDU.scala",
+                                          "Core.scala",
+                                          "Registers.scala",
+                                          "MemoryWrapper.scala",
+                                          "MemoryFetch.scala",
+                                          "ImmediateGen.scala",
+                                          "BranchUnit.scala",
+                                          "ALU.scala",
+                                          "Control.scala",
+                                          "Constants.scala",
+                                          "Top.scala",
+                                          "ForwardingUnit.scala",
+                                          "AluControl.scala",
+                                          "JumpUnit.scala",
+                                          "Adapter.scala"
+                                    ]
+                              }
+                        }
+                  },
+                  "test": {
+                        "scala": {
+                              "components": {
+                                    ".": [
+                                          "core_test.scala",
+                                          "TopTest.scala",
+                                          "Launcher.scala",
+                                          "MemoryWrapperTest.scala",
+                                          "SRamTests.scala"
+                                    ]
+                              },
+                              "utils": {
+                                    ".": [
+                                          "TutorialRunner.scala"
+                                    ]
+                              }
+                        }
+                  }
+            },
+            "riscv-target": {
+                  "nucleusrv": {
+                        ".": [
+                              "compliance_test.h",
+                              "link.ld",
+                              "makehex.py",
+                              "compliance_io.h"
+                        ],
+                        "device": {
+                              "rv32i": {
+                                    ".": [
+                                          "Makefile.include"
+                                    ]
+                              }
+                        }
+                  }
+            }
+      },
+      "jigsaw": {
+            ".": [
+                  "README.md",
+                  ".gitignore",
+                  "build.sbt",
+                  ".git"
+            ],
+            "project": {
+                  ".": [
+                        "build.properties",
+                        "plugins.sbt"
+                  ]
+            },
+            "src": {
+                  "main": {
+                        "resources": {
+                              ".": [
+                                    "uart_core.v"
+                              ],
+                              "sram": {
+                                    ".": [
+                                          "sram.v"
+                                    ]
+                              },
+                              "artyA7": {
+                                    ".": [
+                                          "clk_wiz_0_clk_wiz.v",
+                                          "PLL_8MHz.v"
+                                    ]
+                              }
+                        },
+                        "scala": {
+                              "jigsaw": {
+                                    ".": [
+                                          "uartHarness.scala",
+                                          "SramHarness.scala",
+                                          "Harness.scala",
+                                          "SpiHarness.scala"
+                                    ],
+                                    "fpga": {
+                                          "boards": {
+                                                "artyA7": {
+                                                      ".": [
+                                                            "PLL_8MHz.scala",
+                                                            "TriStateBuffer.scala"
+                                                      ]
+                                                }
+                                          }
+                                    },
+                                    "peripherals": {
+                                          "programmable_uart": {
+                                                ".": [
+                                                      "Rx.scala",
+                                                      "PUart.scala"
+                                                ]
+                                          },
+                                          "common": {
+                                                ".": [
+                                                      "SubRegExt.scala",
+                                                      "SubReg.scala",
+                                                      "IntrHardware.scala"
+                                                ]
+                                          },
+                                          "gpio": {
+                                                ".": [
+                                                      "GpioRegistersMap.scala",
+                                                      "GpioRegBundle.scala",
+                                                      "Gpio.scala",
+                                                      "GpioRegTop.scala"
+                                                ]
+                                          },
+                                          "spiflash": {
+                                                ".": [
+                                                      "Spi.scala",
+                                                      "Protocol.scala",
+                                                      "Config.scala"
+                                                ]
+                                          },
+                                          "UART": {
+                                                ".": [
+                                                      "uartRX.scala",
+                                                      "uartTX.scala",
+                                                      "UartTOP.scala",
+                                                      "uart.scala"
+                                                ]
+                                          }
+                                    },
+                                    "rams": {
+                                          "sram": {
+                                                ".": [
+                                                      "SRAM1kb.scala"
+                                                ]
+                                          },
+                                          "fpga": {
+                                                ".": [
+                                                      "BlockRam.scala"
+                                                ]
+                                          }
+                                    }
+                              }
+                        }
+                  },
+                  "test": {
+                        "scala": {
+                              "jigsaw": {
+                                    ".": [
+                                          "uartHarnessTest.scala"
+                                    ],
+                                    "peripherals": {
+                                          "programmable_uart": {
+                                                ".": [
+                                                      "PUartTester.scala"
+                                                ]
+                                          },
+                                          "spi": {
+                                                ".": [
+                                                      "SpiTester.scala"
+                                                ]
+                                          },
+                                          "gpio": {
+                                                ".": [
+                                                      "GpioTester.scala"
+                                                ]
+                                          },
+                                          "UART": {
+                                                ".": [
+                                                      "uartTest.scala",
+                                                      "uartTX_Test.scala",
+                                                      "uartTOP_Test.scala",
+                                                      "uartRX_Test.scala"
+                                                ]
+                                          }
+                                    },
+                                    "rams": {
+                                          "sram": {
+                                                ".": [
+                                                      "SRAMTests.scala"
+                                                ]
+                                          },
+                                          "fpga": {
+                                                ".": [
+                                                      "TilelinkBlockRamTester.scala",
+                                                      "WishboneBlockRamTester.scala"
+                                                ]
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            },
+            ".metals": {
+                  ".": [
+                        "metals.lock.db",
+                        "metals.h2.db"
+                  ]
+            },
+            ".vscode": {
+                  ".": [
+                        "settings.json"
+                  ]
+            }
+      },
+      ".git": {
+            ".": [
+                  "index",
+                  "config",
+                  "description",
+                  "packed-refs",
+                  "HEAD"
+            ],
+            "info": {
+                  ".": [
+                        "exclude"
+                  ]
+            },
+            "objects": {
+                  "pack": {
+                        ".": [
+                              "pack-a6b2958d0b3a5816a83ea5a5771cc926c9b518a5.pack",
+                              "pack-a6b2958d0b3a5816a83ea5a5771cc926c9b518a5.idx"
+                        ]
+                  }
+            },
+            "refs": {
+                  "heads": {
+                        ".": [
+                              "main"
+                        ]
+                  },
+                  "remotes": {
+                        "origin": {
+                              ".": [
+                                    "HEAD"
+                              ]
+                        }
+                  }
+            },
+            "logs": {
+                  ".": [
+                        "HEAD"
+                  ],
+                  "refs": {
+                        "heads": {
+                              ".": [
+                                    "main"
+                              ]
+                        },
+                        "remotes": {
+                              "origin": {
+                                    ".": [
+                                          "HEAD"
+                                    ]
+                              }
+                        }
+                  }
+            },
+            "hooks": {
+                  ".": [
+                        "pre-receive.sample",
+                        "pre-applypatch.sample",
+                        "update.sample",
+                        "push-to-checkout.sample",
+                        "pre-rebase.sample",
+                        "commit-msg.sample",
+                        "post-update.sample",
+                        "pre-push.sample",
+                        "pre-merge-commit.sample",
+                        "applypatch-msg.sample",
+                        "prepare-commit-msg.sample",
+                        "fsmonitor-watchman.sample",
+                        "pre-commit.sample"
+                  ]
+            },
+            "modules": {
+                  "nucleusrv": {
+                        ".": [
+                              "index",
+                              "config",
+                              "description",
+                              "packed-refs",
+                              "HEAD"
+                        ],
+                        "info": {
+                              ".": [
+                                    "exclude"
+                              ]
+                        },
+                        "objects": {
+                              "pack": {
+                                    ".": [
+                                          "pack-da7a27c885caf65aa4b090f6b2452b58fdad05ed.idx",
+                                          "pack-da7a27c885caf65aa4b090f6b2452b58fdad05ed.pack"
+                                    ]
+                              }
+                        },
+                        "refs": {
+                              "heads": {
+                                    ".": [
+                                          "master"
+                                    ]
+                              },
+                              "remotes": {
+                                    "origin": {
+                                          ".": [
+                                                "HEAD"
+                                          ]
+                                    }
+                              }
+                        },
+                        "logs": {
+                              ".": [
+                                    "HEAD"
+                              ],
+                              "refs": {
+                                    "heads": {
+                                          ".": [
+                                                "master"
+                                          ]
+                                    },
+                                    "remotes": {
+                                          "origin": {
+                                                ".": [
+                                                      "HEAD"
+                                                ]
+                                          }
+                                    }
+                              }
+                        },
+                        "hooks": {
+                              ".": [
+                                    "pre-receive.sample",
+                                    "pre-applypatch.sample",
+                                    "update.sample",
+                                    "push-to-checkout.sample",
+                                    "pre-rebase.sample",
+                                    "commit-msg.sample",
+                                    "post-update.sample",
+                                    "pre-push.sample",
+                                    "pre-merge-commit.sample",
+                                    "applypatch-msg.sample",
+                                    "prepare-commit-msg.sample",
+                                    "fsmonitor-watchman.sample",
+                                    "pre-commit.sample"
+                              ]
+                        },
+                        "modules": {
+                              "jigsaw": {
+                                    ".": [
+                                          "index",
+                                          "config",
+                                          "FETCH_HEAD",
+                                          "description",
+                                          "packed-refs",
+                                          "HEAD"
+                                    ],
+                                    "info": {
+                                          ".": [
+                                                "exclude"
+                                          ]
+                                    },
+                                    "objects": {
+                                          "3e": {
+                                                ".": [
+                                                      "a44ae63a6af6e8916b34aaf66d271d408d6cb5"
+                                                ]
+                                          },
+                                          "3f": {
+                                                ".": [
+                                                      "c8d60016a3c8d9c9decc887d5478b2776e424e"
+                                                ]
+                                          },
+                                          "ec": {
+                                                ".": [
+                                                      "fb75522819c9fbfe1d1ca73b52110f40587edc"
+                                                ]
+                                          },
+                                          "37": {
+                                                ".": [
+                                                      "3151ce1f22a0492ff8f1f246bcafda5489c970"
+                                                ]
+                                          },
+                                          "8e": {
+                                                ".": [
+                                                      "215e718a1c48d21ed9a82c9fffe5a53eae9c4f"
+                                                ]
+                                          },
+                                          "e6": {
+                                                ".": [
+                                                      "7ef72499b0c64e01e50eef6ba217a045b9c690"
+                                                ]
+                                          },
+                                          "bc": {
+                                                ".": [
+                                                      "54c0a11fab025e1868bc9a37d26c6781ead71b"
+                                                ]
+                                          },
+                                          "07": {
+                                                ".": [
+                                                      "d414de915332823691112003228ec30b2a574e"
+                                                ]
+                                          },
+                                          "2f": {
+                                                ".": [
+                                                      "e6862f0f50f2ab120dfe94443ca43653c66a16"
+                                                ]
+                                          },
+                                          "a1": {
+                                                ".": [
+                                                      "b9ba86a385c0f1d5e8de6c6b9b9ea746dae31e"
+                                                ]
+                                          },
+                                          "pack": {
+                                                ".": [
+                                                      "pack-31eb5c563881fc7fccf21063d6a7331787a2c5ed.idx",
+                                                      "pack-31eb5c563881fc7fccf21063d6a7331787a2c5ed.pack"
+                                                ]
+                                          },
+                                          "47": {
+                                                ".": [
+                                                      "cbfc79a9fb2c191a460edd796770946f6b148c"
+                                                ]
+                                          },
+                                          "c9": {
+                                                ".": [
+                                                      "f6faa0d3a48b2b9e0400b0dcdd321c7a9701e2"
+                                                ]
+                                          },
+                                          "62": {
+                                                ".": [
+                                                      "4162a83c8da2c73176ec015b1f7da5d2b0515a"
+                                                ]
+                                          },
+                                          "7b": {
+                                                ".": [
+                                                      "4d14b1d7056c792618e04bc204d4d2f90a158f"
+                                                ]
+                                          },
+                                          "fd": {
+                                                ".": [
+                                                      "a0c27990475dad0f0e2e350dad4773f054dcb6"
+                                                ]
+                                          },
+                                          "d5": {
+                                                ".": [
+                                                      "a20a0c111da8137b8de7921ab1d91d23e97d56"
+                                                ]
+                                          },
+                                          "41": {
+                                                ".": [
+                                                      "fbc2bfa7d60ee5b027c46be773c2201f412a77"
+                                                ]
+                                          },
+                                          "0b": {
+                                                ".": [
+                                                      "3fd758eaf9542880a050e62e011239b331eb61"
+                                                ]
+                                          },
+                                          "b9": {
+                                                ".": [
+                                                      "df669bbba3eecc88d8bf8d361cf48e19b96334"
+                                                ]
+                                          },
+                                          "c6": {
+                                                ".": [
+                                                      "8d6e6f9fdedb4fb07f3d54beb0d6f3d72b843d"
+                                                ]
+                                          },
+                                          "c2": {
+                                                ".": [
+                                                      "754fef661eaacebe2b3fc25aa82536df7de50b"
+                                                ]
+                                          },
+                                          "78": {
+                                                ".": [
+                                                      "c10facc46b98c307cc8896d11ca7b585cfb175"
+                                                ]
+                                          },
+                                          "fb": {
+                                                ".": [
+                                                      "b304920c25a510f6a809f19238bfa99ff4e916"
+                                                ]
+                                          }
+                                    },
+                                    "refs": {
+                                          "heads": {
+                                                ".": [
+                                                      "main"
+                                                ]
+                                          },
+                                          "remotes": {
+                                                "origin": {
+                                                      ".": [
+                                                            "HEAD"
+                                                      ]
+                                                }
+                                          }
+                                    },
+                                    "logs": {
+                                          ".": [
+                                                "HEAD"
+                                          ],
+                                          "refs": {
+                                                "heads": {
+                                                      ".": [
+                                                            "main"
+                                                      ]
+                                                },
+                                                "remotes": {
+                                                      "origin": {
+                                                            ".": [
+                                                                  "HEAD"
+                                                            ]
+                                                      }
+                                                }
+                                          }
+                                    },
+                                    "hooks": {
+                                          ".": [
+                                                "pre-receive.sample",
+                                                "pre-applypatch.sample",
+                                                "update.sample",
+                                                "push-to-checkout.sample",
+                                                "pre-rebase.sample",
+                                                "commit-msg.sample",
+                                                "post-update.sample",
+                                                "pre-push.sample",
+                                                "pre-merge-commit.sample",
+                                                "applypatch-msg.sample",
+                                                "prepare-commit-msg.sample",
+                                                "fsmonitor-watchman.sample",
+                                                "pre-commit.sample"
+                                          ]
+                                    },
+                                    "modules": {
+                                          "caravan": {
+                                                ".": [
+                                                      "index",
+                                                      "config",
+                                                      "description",
+                                                      "packed-refs",
+                                                      "HEAD"
+                                                ],
+                                                "info": {
+                                                      ".": [
+                                                            "exclude"
+                                                      ]
+                                                },
+                                                "objects": {
+                                                      "pack": {
+                                                            ".": [
+                                                                  "pack-84e67fad704f8c55911d7ffcf9eba374ebadc236.pack",
+                                                                  "pack-84e67fad704f8c55911d7ffcf9eba374ebadc236.idx"
+                                                            ]
+                                                      }
+                                                },
+                                                "refs": {
+                                                      "heads": {
+                                                            ".": [
+                                                                  "main"
+                                                            ]
+                                                      },
+                                                      "remotes": {
+                                                            "origin": {
+                                                                  ".": [
+                                                                        "HEAD"
+                                                                  ]
+                                                            }
+                                                      }
+                                                },
+                                                "logs": {
+                                                      ".": [
+                                                            "HEAD"
+                                                      ],
+                                                      "refs": {
+                                                            "heads": {
+                                                                  ".": [
+                                                                        "main"
+                                                                  ]
+                                                            },
+                                                            "remotes": {
+                                                                  "origin": {
+                                                                        ".": [
+                                                                              "HEAD"
+                                                                        ]
+                                                                  }
+                                                            }
+                                                      }
+                                                },
+                                                "hooks": {
+                                                      ".": [
+                                                            "pre-receive.sample",
+                                                            "pre-applypatch.sample",
+                                                            "update.sample",
+                                                            "push-to-checkout.sample",
+                                                            "pre-rebase.sample",
+                                                            "commit-msg.sample",
+                                                            "post-update.sample",
+                                                            "pre-push.sample",
+                                                            "pre-merge-commit.sample",
+                                                            "applypatch-msg.sample",
+                                                            "prepare-commit-msg.sample",
+                                                            "fsmonitor-watchman.sample",
+                                                            "pre-commit.sample"
+                                                      ]
+                                                }
+                                          }
+                                    }
+                              },
+                              "caravan": {
+                                    ".": [
+                                          "index",
+                                          "config",
+                                          "FETCH_HEAD",
+                                          "description",
+                                          "packed-refs",
+                                          "HEAD"
+                                    ],
+                                    "info": {
+                                          ".": [
+                                                "exclude"
+                                          ]
+                                    },
+                                    "objects": {
+                                          "pack": {
+                                                ".": [
+                                                      "pack-bd48847cdc14e6443a17a9c9a679a2d919cca962.idx",
+                                                      "pack-465a27d5b230cb3cdc7ea214edd7be88444faa05.pack",
+                                                      "pack-bd48847cdc14e6443a17a9c9a679a2d919cca962.pack",
+                                                      "pack-465a27d5b230cb3cdc7ea214edd7be88444faa05.idx"
+                                                ]
+                                          }
+                                    },
+                                    "refs": {
+                                          "heads": {
+                                                ".": [
+                                                      "main"
+                                                ]
+                                          },
+                                          "remotes": {
+                                                "origin": {
+                                                      ".": [
+                                                            "HEAD"
+                                                      ]
+                                                }
+                                          }
+                                    },
+                                    "logs": {
+                                          ".": [
+                                                "HEAD"
+                                          ],
+                                          "refs": {
+                                                "heads": {
+                                                      ".": [
+                                                            "main"
+                                                      ]
+                                                },
+                                                "remotes": {
+                                                      "origin": {
+                                                            ".": [
+                                                                  "HEAD"
+                                                            ]
+                                                      }
+                                                }
+                                          }
+                                    },
+                                    "hooks": {
+                                          ".": [
+                                                "pre-receive.sample",
+                                                "pre-applypatch.sample",
+                                                "update.sample",
+                                                "push-to-checkout.sample",
+                                                "pre-rebase.sample",
+                                                "commit-msg.sample",
+                                                "post-update.sample",
+                                                "pre-push.sample",
+                                                "pre-merge-commit.sample",
+                                                "applypatch-msg.sample",
+                                                "prepare-commit-msg.sample",
+                                                "fsmonitor-watchman.sample",
+                                                "pre-commit.sample"
+                                          ]
+                                    }
+                              }
+                        }
+                  },
+                  "jigsaw": {
+                        ".": [
+                              "index",
+                              "config",
+                              "description",
+                              "packed-refs",
+                              "HEAD"
+                        ],
+                        "info": {
+                              ".": [
+                                    "exclude"
+                              ]
+                        },
+                        "objects": {
+                              "pack": {
+                                    ".": [
+                                          "pack-198cea230d91347aab3d2cc0a7777ea333441336.idx",
+                                          "pack-198cea230d91347aab3d2cc0a7777ea333441336.pack"
+                                    ]
+                              }
+                        },
+                        "refs": {
+                              "heads": {
+                                    ".": [
+                                          "main"
+                                    ]
+                              },
+                              "remotes": {
+                                    "origin": {
+                                          ".": [
+                                                "HEAD"
+                                          ]
+                                    }
+                              }
+                        },
+                        "logs": {
+                              ".": [
+                                    "HEAD"
+                              ],
+                              "refs": {
+                                    "heads": {
+                                          ".": [
+                                                "main"
+                                          ]
+                                    },
+                                    "remotes": {
+                                          "origin": {
+                                                ".": [
+                                                      "HEAD"
+                                                ]
+                                          }
+                                    }
+                              }
+                        },
+                        "hooks": {
+                              ".": [
+                                    "pre-receive.sample",
+                                    "pre-applypatch.sample",
+                                    "update.sample",
+                                    "push-to-checkout.sample",
+                                    "pre-rebase.sample",
+                                    "commit-msg.sample",
+                                    "post-update.sample",
+                                    "pre-push.sample",
+                                    "pre-merge-commit.sample",
+                                    "applypatch-msg.sample",
+                                    "prepare-commit-msg.sample",
+                                    "fsmonitor-watchman.sample",
+                                    "pre-commit.sample"
+                              ]
+                        }
+                  },
+                  "caravan": {
+                        ".": [
+                              "index",
+                              "config",
+                              "description",
+                              "packed-refs",
+                              "HEAD"
+                        ],
+                        "info": {
+                              ".": [
+                                    "exclude"
+                              ]
+                        },
+                        "objects": {
+                              "pack": {
+                                    ".": [
+                                          "pack-465a27d5b230cb3cdc7ea214edd7be88444faa05.pack",
+                                          "pack-465a27d5b230cb3cdc7ea214edd7be88444faa05.idx"
+                                    ]
+                              }
+                        },
+                        "refs": {
+                              "heads": {
+                                    ".": [
+                                          "main"
+                                    ]
+                              },
+                              "remotes": {
+                                    "origin": {
+                                          ".": [
+                                                "HEAD"
+                                          ]
+                                    }
+                              }
+                        },
+                        "logs": {
+                              ".": [
+                                    "HEAD"
+                              ],
+                              "refs": {
+                                    "heads": {
+                                          ".": [
+                                                "main"
+                                          ]
+                                    },
+                                    "remotes": {
+                                          "origin": {
+                                                ".": [
+                                                      "HEAD"
+                                                ]
+                                          }
+                                    }
+                              }
+                        },
+                        "hooks": {
+                              ".": [
+                                    "pre-receive.sample",
+                                    "pre-applypatch.sample",
+                                    "update.sample",
+                                    "push-to-checkout.sample",
+                                    "pre-rebase.sample",
+                                    "commit-msg.sample",
+                                    "post-update.sample",
+                                    "pre-push.sample",
+                                    "pre-merge-commit.sample",
+                                    "applypatch-msg.sample",
+                                    "prepare-commit-msg.sample",
+                                    "fsmonitor-watchman.sample",
+                                    "pre-commit.sample"
+                              ]
+                        }
+                  }
+            }
+      },
+      "caravan": {
+            ".": [
+                  "LICENSE",
+                  "README.md",
+                  ".gitignore",
+                  "build.sbt",
+                  ".git"
+            ],
+            "project": {
+                  ".": [
+                        "build.properties",
+                        "plugins.sbt"
+                  ]
+            },
+            "docs": {
+                  ".": [
+                        "make.bat",
+                        "index.rst",
+                        "wishbone.drawio",
+                        "wavedrom.json",
+                        "wb_timing.png",
+                        "conf.py",
+                        "Makefile"
+                  ],
+                  "dev": {
+                        ".": [
+                              "custombus.rst",
+                              "devsetup.rst",
+                              "fundamentals.rst",
+                              "index.rst",
+                              "reqrespbundle.rst",
+                              "hierarchy.rst",
+                              "busspecific.rst"
+                        ]
+                  },
+                  "user": {
+                        ".": [
+                              "installation.rst",
+                              "index.rst",
+                              "introduction.rst"
+                        ]
+                  },
+                  "images": {
+                        ".": [
+                              "Switch1-2.png",
+                              "wishbone-WB_Host.png",
+                              "harness.png",
+                              "bus-adapters.png"
+                        ]
+                  }
+            },
+            "src": {
+                  "main": {
+                        "scala": {
+                              "caravan": {
+                                    "bus": {
+                                          "wishbone": {
+                                                ".": [
+                                                      "WishboneHost.scala",
+                                                      "WishboneConfig.scala",
+                                                      "Harness.scala",
+                                                      "WishboneBus.scala",
+                                                      "WishboneDevice.scala",
+                                                      "WishboneErr.scala",
+                                                      "PeripheralMap.scala"
+                                                ]
+                                          },
+                                          "native": {
+                                                ".": [
+                                                      "NativeConfig.scala",
+                                                      "NativeBus.scala"
+                                                ]
+                                          },
+                                          "common": {
+                                                ".": [
+                                                      "Transaction.scala",
+                                                      "PeripheralsMap.scala",
+                                                      "DummyMemory.scala",
+                                                      "BusDecoder.scala",
+                                                      "Switch1toN.scala"
+                                                ]
+                                          },
+                                          "tilelink": {
+                                                ".": [
+                                                      "TilelinkErr.scala",
+                                                      "TilelinkOpcodes.scala",
+                                                      "Harness.scala",
+                                                      "TilelinkHost.scala",
+                                                      "TilelinkConfig.scala",
+                                                      "SwitchHarness.scala",
+                                                      "TilelinkBus.scala",
+                                                      "StallUnit.scala",
+                                                      "TilelinkDevice.scala"
+                                                ]
+                                          }
+                                    }
+                              }
+                        }
+                  },
+                  "test": {
+                        "scala": {
+                              "wishbone": {
+                                    ".": [
+                                          "GpioControllerTest.scala",
+                                          "WishboneHostTest.scala",
+                                          "SwitchHarnessTest.scala",
+                                          "HarnessTest.scala"
+                                    ]
+                              },
+                              "common": {
+                                    ".": [
+                                          "HelperTraits.scala"
+                                    ]
+                              },
+                              "tilelink": {
+                                    ".": [
+                                          "GPIOControllerTest.scala",
+                                          "SwitchHarnessTest.scala",
+                                          "HarnessTest.scala"
+                                    ]
+                              }
+                        }
+                  }
+            }
+      },
+      "src": {
+            "main": {
+                  "scala": {
+                        ".": [
+                              "Generator.scala",
+                              "config.json",
+                              "Top.scala"
+                        ]
+                  }
+            },
+            "test": {
+                  "scala": {
+                        ".": [
+                              "GeneratorTest.scala",
+                              "TopTest.scala"
+                        ]
+                  }
+            }
+      }
+}
