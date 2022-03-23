@@ -15,21 +15,18 @@ then clone this repo
 git clone https://github.com/merledu/Burq-Suite
 ```
 
-then go into the cloned directory and checkout to this branch
+then go into the cloned directory
 ```bash
-git checkout re-designed
+cd Burq-Suite
 ```
 
 then install the required dependencied i.e electron
 ```bash
 npm install
+python3 -m pip install eel
 ```
 
 then finally run the app
 ```bash
-npm start
-<<<<<<< HEAD
+python3 main.py
 ```
-=======
-```
->>>>>>> 1ce83e79f408fe55e2f6295e4ddaae43ab85da43
