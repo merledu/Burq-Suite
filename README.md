@@ -20,7 +20,7 @@ then go into the cloned directory
 cd Burq-Suite
 ```
 
-then install the required dependencied i.e electron
+then install the required dependencied i.e electron, eel
 ```bash
 npm install
 python3 -m pip install eel
