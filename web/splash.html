@@ -101,8 +101,8 @@
                         </div>
                         <div id="project-browse">
                             <h5> Project Location </h5>
-                            <input type="text" disabled value="/home/mordok/BurqSuiteProjects/Untitled" />
-                            <button class="btn browse-btn">...</button>
+                            <div type="text" id="path" style="color: white; width: 500px; height:30px; border-bottom-color: aqua; background-color: blue;" b > </div>
+                            <button class="btn browse-btn" onclick="select()">...</button>
                         </div>
                         <div class="config-box" id="soc">
                             <span class="line">
@@ -133,16 +133,16 @@
                                     <div class="col-md-3">
                                         <h6 style="font-weight: lighter;">Extensions</h6>
                                         <form>
-                                            <input type="checkbox" name="ext" disabled checked />
+                                            <input type="checkbox" name="ext" value="i" disabled checked />
                                             <label> Integer (I) </label>
                                             <br />
-                                            <input type="checkbox" name="ext" />
+                                            <input type="checkbox" name="ext" value="m"/>
                                             <label> Multiplier (M) </label>
                                             <br />
-                                            <input type="checkbox" name="ext" />
+                                            <input type="checkbox" name="ext" value="f" />
                                             <label> Floating Point (F) </label>
                                             <br />
-                                            <input type="checkbox" name="ext" />
+                                            <input type="checkbox" name="ext" value="c"/>
                                             <label> Compressed (C) </label> 
                                         </form>
                                     </div>
@@ -169,19 +169,19 @@
                                     
                                     <div class="col-md-8">
                                         <form>
-                                            <input type="checkbox" name="dev" disabled checked />
+                                            <input type="checkbox" name="dev" value="gpio" disabled checked />
                                             <label> General Purpose Input Output (GPIO) </label>
                                             <br>
-                                            <input type="checkbox" name="dev" />
+                                            <input type="checkbox" name="dev" value="spi"/>
                                             <label> Serial Peripheral Interface (SPI) </label>
                                             <br>
-                                            <input type="checkbox" name="dev" />
+                                            <input type="checkbox" name="dev" value="uart"/>
                                             <label> Universal Asynchronous Receiver Transmitter (UART) </label>
                                             <br>
-                                            <input type="checkbox" name="dev" />
+                                            <input type="checkbox" name="dev" value="timer"/>
                                             <label> Timer </label>
                                             <br>
-                                            <input type="checkbox" name="dev" />
+                                            <input type="checkbox" name="dev" value="spi_flash"/>
                                             <label> Inter Integrated Circuit (I<sup>2</sup>C) </label>
                                         </form>
                                     </div>
@@ -217,13 +217,13 @@
                                     
                                     <div class="col-md-8">
                                         <form>
-                                            <input type="radio" name="bus" checked>
+                                            <input type="radio" name="bus" value="wb" checked>
                                             <label> Wishbone </label>
                                             <br />
-                                            <input type="radio" name="bus">
+                                            <input type="radio" name="bus" value="i2c">
                                             <label> Tilelink Uncached Lightweight (TL-UL) </label>
                                             <br />
-                                            <input type="radio" name="bus">
+                                            <input type="radio" name="bus" value="tl">
                                             <label> Tilelink Cached (TL-C) </label>
                                         </form>
                                     </div>
@@ -235,8 +235,8 @@
                                         <img src="assets/icons/back.png" style="width: 100%;" />
                                     </button>
 
-                                    <button onclick="goToMain()" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;" />
+                                    <button  onclick="seldonesoc()" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;"  />
                                     </button>
                                 </div>
 
@@ -455,7 +455,14 @@
                             </span>
                         </div>
                     </div>
-                
+                    ￼آغاز
+                    Aghaz SoC
+                    ￼0101
+                    SPI-Flash
+                    ￼RV32-im
+                    Multiplier Core
+                    ￼WB
+                    Wishbone Bus
                     
                 </div>
             </div>
@@ -469,7 +476,7 @@
     <!-- <script src="renderer.js"></script> -->
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
-    
+    eel.expose(goToMain)
         function goToMain(){
             eel.stop_everything();
             window.close();
@@ -480,6 +487,56 @@
         }
 
         say_hello_js();
+        function seldonesoc(){
+        
+        var listsoc=[];
+        //document.getElementById("result").innerHTML = "";
+            
+                var ele = document.getElementsByName('ext');
+            for(i = 0; i < ele.length; i++) {
+                  
+                  if(ele[i].type="checkbox") {
+                    
+                      
+                                  if(ele[i].checked)
+                                  listsoc.push(ele[i].value);
+                  }
+                }
+                var ele = document.getElementsByName('dev');
+            for(i =0; i < ele.length; i++) {
+                  
+                  if(ele[i].type="checkbox") {
+                    
+                      
+                                  if(ele[i].checked)
+                                  listsoc.push(ele[i].value);
+                  }
+                }
+                var ele = document.getElementsByName('bus');
+            for(i = 0; i < ele.length; i++) {
+                  
+                  if(ele[i].type="radio") {
+                    
+                      
+                                  if(ele[i].checked)
+                                  listsoc.push(ele[i].value);
+                                  
+                  }
+                }
+                eel.socdetail(listsoc);
+            }
+            function select(){
+        eel.selectFolder();
+
+
+}
+eel.expose(select_js)
+function select_js(a){
+    var showpath = document.getElementById("path");
+    showpath.innerHTML+=a;
+
+}
+            
         
     
     </script>
