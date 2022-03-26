@@ -16,6 +16,6 @@ if __name__ == '__main__':
         structure = getFileStructure(project_dir)
         eel.pakrKayLaoFiles(structure)
 
-    start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8008)
+    start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8007)
 
 

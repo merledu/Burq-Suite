@@ -101,7 +101,7 @@
                         </div>
                         <div id="project-browse">
                             <h5> Project Location </h5>
-                            <div type="text" id="path" style="color: white; width: 500px; height:30px; border-bottom-color: aqua; background-color: blue;" b > </div>
+                            <div type="text" id="path" style="color: white; width: 500px; height:30px; border-bottom-color: aqua; background-color: blue;" onfocus="value=''"  > </div>
                             <button class="btn browse-btn" onclick="select()">...</button>
                         </div>
                         <div class="config-box" id="soc">
@@ -526,6 +526,9 @@
                 eel.socdetail(listsoc);
             }
             function select(){
+                var showpath = document.getElementById("path");
+    showpath.innerHTML ="";
+
         eel.selectFolder();
 
 

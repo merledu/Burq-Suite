@@ -53,10 +53,9 @@ if __name__ == '__main__':
         directory_path = filedialog.askdirectory()
         print(directory_path)
         list1.append(directory_path)
-        print(list1[0],'o')
+        print(list1[-1],'o')
         eel.select_js(list1[0])
 
     reverter()
-    start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8013)
-
+    start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
 
