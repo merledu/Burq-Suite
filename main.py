@@ -38,7 +38,7 @@ if __name__ == '__main__':
         file.write(str(dictsoc))
         file.close()
         yourproject=list1[0]
-        os.system("cp -a web/SoC-Now-Generator/src/main/scala yourproject")
+        os.system("cp -a web/SoC-Now-Generator yourproject")
         #shutil.copytree("web/SoC-Now-Generator/src/main/scala", yourproject)
         eel.goToMain()
     
