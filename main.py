@@ -37,8 +37,9 @@ if __name__ == '__main__':
         file=open("web/SoC-Now-Generator/src/main/scala/config.json","w")
         file.write(str(dictsoc))
         file.close()
-        yourproject=list1[0]
-        os.system("cp -a web/SoC-Now-Generator yourproject")
+        yourproject=list1[-1]
+        print(yourproject)
+        os.system("cp -a web/SoC-Now-Generator /home/mahnoor/Burq-Suite/mainPage/assets")
         #shutil.copytree("web/SoC-Now-Generator/src/main/scala", yourproject)
         eel.goToMain()
     

@@ -2,7 +2,7 @@
   "name": "the-burq-suite",
   "version": "1.0.0",
   "description": "The All in One RISC-V Suite",
-  "main": "index.js", 
+  "main": "index.js",
   "scripts": {
     "start": "electron ."
   },
