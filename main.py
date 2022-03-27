@@ -1,11 +1,12 @@
-import eel,os
+import eel
 from eel import init, start
 from replacer import replacer
 from reverter import reverter
-import os ,random 
+import os 
 import tkinter 
 import tkinter.filedialog as filedialog
-import shutil
+import json
+
 
 
 if __name__ == '__main__':
@@ -35,16 +36,29 @@ if __name__ == '__main__':
                     dictsoc[key]=1
         print(dictsoc)
         file=open("web/SoC-Now-Generator/src/main/scala/config.json","w")
-        file.write(str(dictsoc))
+        
+        json.dump(dictsoc,file)
         file.close()
-        yourproject=list1[-1]
-        print(yourproject)
-        os.system("cp -a web/SoC-Now-Generator /home/mahnoor/Burq-Suite/mainPage/assets")
+        os.chdir("web/SoC-Now-Generator")
+        
+       
+        print("gdgdh")
+        os.system("pwd")
+        ff()
+        
         #shutil.copytree("web/SoC-Now-Generator/src/main/scala", yourproject)
         eel.goToMain()
-    
+    def ff():
+        os.system("./peripheralScript.py")
+        print("gdgdh2")
+        os.system("pwd")
+        yourproject=list1[-1]
+        #print(yourproject)
+        os.chdir("../../")
+        os.system(f"cp -a web/SoC-Now-Generator {yourproject}")
 
     @eel.expose
+
 
     def selectFolder():
         print("Here")
@@ -55,7 +69,7 @@ if __name__ == '__main__':
         print(directory_path)
         list1.append(directory_path)
         print(list1[-1],'o')
-        eel.select_js(list1[0])
+        eel.select_js(list1[-1])
 
     reverter()
     start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
