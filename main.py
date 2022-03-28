@@ -75,7 +75,7 @@ if __name__ == '__main__':
         print(directory_path)
         list1.append(directory_path)
         list2.append(projectnamee)
-        print(projectnamee)
+        
         
         eel.select_js(list1[-1])
 
