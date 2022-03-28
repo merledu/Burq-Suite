@@ -97,7 +97,7 @@
                         
                         <div id="project-name">
                             <h5> Project Name: </h5>
-                            <input type="text" placeholder="Untitled">
+                            <input type="text" placeholder="Untitled " id="projectname">
                         </div>
                         <div id="project-browse">
                             <h5> Project Location </h5>
@@ -526,10 +526,11 @@
                 eel.socdetail(listsoc);
             }
             function select(){
+                var projectnamee = document.getElementById("projectname").value;
                 var showpath = document.getElementById("path");
     showpath.innerHTML ="";
 
-        eel.selectFolder();
+        eel.selectFolder(projectnamee);
 
 
 }

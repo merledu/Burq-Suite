@@ -14,6 +14,7 @@ if __name__ == '__main__':
     
     init('web')
     list1 =[]  
+    list2=[]
 
     @eel.expose
     def stop_everything():
@@ -55,12 +56,17 @@ if __name__ == '__main__':
         yourproject=list1[-1]
         
         os.chdir("../../")
-        os.system(f"cp -a web/SoC-Now-Generator {yourproject}")
+        os.system(f"cd {yourproject}")
+        b=list2[-1]
+        os.system(f"mkdir {b}")
+        
+
+        os.system(f"cp -a web/SoC-Now-Generator {yourproject}/{b}")
 
     @eel.expose
 
 
-    def selectFolder():
+    def selectFolder(projectnamee):
         print("Here")
         root = tkinter.Tk()
         root.attributes("-topmost", True)
@@ -68,6 +74,8 @@ if __name__ == '__main__':
         directory_path = filedialog.askdirectory()
         print(directory_path)
         list1.append(directory_path)
+        list2.append(projectnamee)
+        print(projectnamee)
         
         eel.select_js(list1[-1])
 
