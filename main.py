@@ -44,16 +44,16 @@ if __name__ == '__main__':
        
         print("gdgdh")
         os.system("pwd")
-        ff()
+        runperipheral()
         
-        #shutil.copytree("web/SoC-Now-Generator/src/main/scala", yourproject)
+       
         eel.goToMain()
-    def ff():
+    def runperipheral():
         os.system("./peripheralScript.py")
-        print("gdgdh2")
-        os.system("pwd")
+       
+       
         yourproject=list1[-1]
-        #print(yourproject)
+        
         os.chdir("../../")
         os.system(f"cp -a web/SoC-Now-Generator {yourproject}")
 
@@ -68,7 +68,7 @@ if __name__ == '__main__':
         directory_path = filedialog.askdirectory()
         print(directory_path)
         list1.append(directory_path)
-        print(list1[-1],'o')
+        
         eel.select_js(list1[-1])
 
     reverter()
