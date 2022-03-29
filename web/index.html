@@ -108,7 +108,7 @@
         <div id="Run" class="side_menus tabcontent2 side_menu">
           <p>Run and Debug</p>
           <div class="run-div">
-            <button class="btn run-btn"> Generate RTL </button> 
+            <button class="btn run-btn" onclick="genrtl()"> Generate RTL </button> 
           </div>
 
           <div class="run-div">
@@ -218,6 +218,9 @@
         }
 
         eel.getTheFileStrucuture();
+        function genrtl(){
+          eel.genrtlpy()
+        }
         
     
     </script>
