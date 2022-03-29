@@ -6,6 +6,7 @@ import os
 import tkinter 
 import tkinter.filedialog as filedialog
 import json
+from icecream import ic
 
 
 
@@ -56,9 +57,12 @@ if __name__ == '__main__':
         yourproject=list1[-1]
         
         os.chdir("../../")
-        os.system(f"cd {yourproject}")
+        aa=os.system(f"cd {yourproject}")
+        ic(aa)
         b=list2[-1]
-        os.system(f"mkdir {b}")
+        # ww=os.system(f"mkdir {b}")
+        #ic(ww)
+        
         
 
         os.system(f"cp -a web/SoC-Now-Generator {yourproject}/{b}")
