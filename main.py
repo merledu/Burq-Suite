@@ -82,6 +82,7 @@ if __name__ == '__main__':
         
         
         eel.select_js(list1[-1])
+        eel.select_rtl(list1[-1])
 
     reverter()
     start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
