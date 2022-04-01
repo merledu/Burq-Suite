@@ -16,9 +16,10 @@ if __name__ == '__main__':
         structure = getFileStructure(project_dir)
         eel.pakrKayLaoFiles(structure)
     @eel.expose
-    def genrtlpy():
-        os.system("pwd")
-        os.chdir("web/SoC-Now-Generator")
+    def genrtlpy(a):
+        print(a)
+        
+        os.chdir(f"{a}")
         os.system("sbt 'runMain GeneratorDriver'")
 
     start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8007)
