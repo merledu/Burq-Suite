@@ -447,7 +447,159 @@
                             <span class="line">
                                 <h2><span>Verification Configurations</span></h2>
                             </span>
-                        </div>
+
+                            <div id="Vcore">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config active">
+                                            <p>Core+ISS</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+    
+                                    <div class="col-md-3" style="border-right: 1px solid white; height: 25%;" >
+                                        <h6 style="font-weight: lighter;">Core</h6>
+                                        <form>
+                                            
+                                            <input type="radio" name="isa" value="32 Bit" checked />
+                                            <label> SWERV-EH1 </label>
+                                            <br>
+                                            <input type="radio" name="isa" value="64 Bit" />
+                                            <label> SWERV-EH2</label>
+                                            <br>
+                                            <input type="radio" name="isa" value="64 Bit" />
+                                            <label> IBEX</label>
+                                            <br>
+                                            <div class="dropdown">
+                                                <button onclick="myFunction1()" class="dropbtn">Add Customize Core</button>
+                                                <div id="myDropdown" class="dropdown-content">
+                                                  <a href="#home">Home</a>
+                                                  <a href="#about">About</a>
+                                                  <a href="#contact">Contact</a>
+                                                </div>
+                                              </div>
+                                            
+                                        </form>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-3">
+                                        <h6 style="font-weight: lighter;">ISS</h6>
+                                        <form>
+                                            <input type="radio" name="ext" value="i"  checked />
+                                            <label> SPIKE </label>
+                                            <br />
+                                            <input type="radio" name="ext" value="m"/>
+                                            <label> WHISPER </label>
+                                            <br />
+                                            <input type="radio" name="ext" value="f" />
+                                            <label> OVPSIM </label>
+                                            <br />
+                                            
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                            
+
+                                <div style="text-align: right;">
+                                    <button onclick="changeV('Vdevices')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="Vdevices">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config">
+                                            <p>Core+ISS</p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Extensions</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-8">
+                                        <form>
+                                            <input type="checkbox" name="dev" value="gpio" disabled checked />
+                                            <label> General Purpose Input Output (GPIO) </label>
+                                            <br>
+                                            <input type="checkbox" name="dev" value="spi"/>
+                                            <label> Serial Peripheral Interface (SPI) </label>
+                                            <br>
+                                            <input type="checkbox" name="dev" value="uart"/>
+                                            <label> Universal Asynchronous Receiver Transmitter (UART) </label>
+                                            <br>
+                                            <input type="checkbox" name="dev" value="timer"/>
+                                            <label> Timer </label>
+                                            <br>
+                                            <input type="checkbox" name="dev" value="spi_flash"/>
+                                            <label> Inter Integrated Circuit (I<sup>2</sup>C) </label>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button onclick="changeV('Vcore')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;" />
+                                    </button>
+
+                                    <button onclick="changeV('Vbus')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;" />
+                                    </button>
+                                </div>
+
+                                
+                            </div>
+
+
+
+                            <div id="Vbus">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config">
+                                            <p>Core+ISS</p>
+                                        </div>
+                                        
+                                        <div class="name-config ">
+                                            <p>Extensions</p>
+                                        </div>
+                                        
+                                        <div style="margin-bottom: 0px;" class="name-config active">
+                                            <p>Test Cases</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-8">
+                                        <form>
+                                            <input type="radio" name="bus" value="wb" checked>
+                                            <label> Test cse </label>
+                                            <br />
+                                            <input type="radio" name="bus" value="i2c">
+                                            <label> M </label>
+                                            <br />
+                                            <input type="radio" name="bus" value="tl">
+                                            <label>F</label>
+                                        </form>
+                                    </div>
+                                </div>
+        
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button onclick="changeV('Vdevices')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;" />
+                                    </button>
+
+                                    <button   class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;"  />
+                                    </button>
+                                </div>
+
+                                
+                            </div>
+                           
+
+                           
+                            </div>
 
                         <div class="config-box" id="sdk">
                             <span class="line">
@@ -476,6 +628,8 @@
     <!-- <script src="renderer.js"></script> -->
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
+    
+
     eel.expose(goToMain)
         function goToMain(){
             eel.stop_everything();
@@ -540,6 +694,24 @@ function select_js(a){
     showpath.innerHTML+=a;
 
 }
+function myFunction1() {{
+        document.getElementById("myDropdown").classList.toggle("show1");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show1')) {
+              openDropdown.classList.remove('show1');
+            }
+          }
+        }
+      }
+    }
             
         
     
