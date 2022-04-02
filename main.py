@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     
     init('web')
-    list1 =[]  
+    list1 =[]
     list2=[]
 
     @eel.expose
