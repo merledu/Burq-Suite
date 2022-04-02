@@ -112,6 +112,21 @@ function changeSoC(comp){
         bus.style.display = "block";
     }
 }
+function changeV(comp){
+    var core = document.getElementById("Vcore");
+    var dev = document.getElementById("Vdevices");
+    var bus = document.getElementById("Vbus");
+    core.style.display = "none";
+    dev.style.display = "none";
+    bus.style.display = "none";
+    if(comp === "Vcore"){
+        core.style.display = "block";
+    } else if(comp === "Vdevices"){
+        dev.style.display = "block";
+    } else if (comp === "Vbus"){
+        bus.style.display = "block";
+    }
+}
 
 function changeProject(evt,proj){
     var soc = document.getElementById("soc");
