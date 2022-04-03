@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     
     init('web')
-    list1 =[]
+    list1 =["a"]
     list2=[]
 
     @eel.expose
@@ -77,7 +77,10 @@ if __name__ == '__main__':
         root.withdraw()
         directory_path = filedialog.askdirectory()
         print(directory_path)
+        list1.clear()
+        print(list1)
         list1.append(directory_path)
+        print(list1)
         list2.append(projectnamee)
         
         
