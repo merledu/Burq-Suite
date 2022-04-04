@@ -62,7 +62,7 @@ if __name__ == '__main__':
         b=list2[-1]
         # ww=os.system(f"mkdir {b}")
         #ic(ww)
-        file1=open("web/SoC-Now-Generator/pathfile","w")
+        file1=open("web/pathfile","w")
         file1.write(f"{yourproject}/{b}")
         file1.close()
         
