@@ -17,7 +17,7 @@ if __name__ == '__main__':
         eel.pakrKayLaoFiles(structure)
     @eel.expose
     def genrtlpy():
-        file=open("web/SoC-Now-Generator/pathfile","r")
+        file=open("web/pathfile","r")
         contents= file.readlines()
         print(contents[0])
         
