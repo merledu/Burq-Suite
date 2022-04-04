@@ -62,6 +62,9 @@ if __name__ == '__main__':
         b=list2[-1]
         # ww=os.system(f"mkdir {b}")
         #ic(ww)
+        file1=open("web/SoC-Now-Generator/pathfile","w")
+        file1.write(f"{yourproject}/{b}")
+        file1.close()
         
         
 
@@ -82,10 +85,10 @@ if __name__ == '__main__':
         list1.append(directory_path)
         print(list1)
         list2.append(projectnamee)
-        
+       
         
         eel.select_js(list1[-1])
-        eel.select_rtl(list1[-1])
+        
 
     reverter()
     start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
