@@ -482,13 +482,13 @@
                                         <h6 style="font-weight: lighter;">Core</h6>
                                         <form>
                                             
-                                            <input type="radio" name="isa" value="32 Bit" checked />
+                                            <input type="radio" name="coreV" value="SWERV-EH1" checked />
                                             <label> SWERV-EH1 </label>
                                             <br>
-                                            <input type="radio" name="isa" value="64 Bit" />
+                                            <input type="radio" name="coreV" value="SWERV-EH2" />
                                             <label> SWERV-EH2</label>
                                             <br>
-                                            <input type="radio" name="isa" value="64 Bit" />
+                                            <input type="radio" name="coreV" value="IBEX"/>
                                             <label> IBEX</label>
                                             
                                          
@@ -499,13 +499,13 @@
                                     <div class="col-md-3">
                                         <h6 style="font-weight: lighter;">ISS</h6>
                                         <form>
-                                            <input type="radio" name="ext" value="i"  checked />
+                                            <input type="radio" name="co" value="spike"  checked />
                                             <label> SPIKE </label>
                                             <br />
-                                            <input type="radio" name="ext" value="m"/>
+                                            <input type="radio" name="coreV" value="m"/>
                                             <label> WHISPER </label>
                                             <br />
-                                            <input type="radio" name="ext" value="f" />
+                                            <input type="radio" name="coreV" value="f" />
                                             <label> OVPSIM </label>
                                             <br />
                                             
@@ -519,7 +519,7 @@
                                     
                                 <div style="text-align: right;">
                                     <button onclick="changeV('Vdevices')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;" />
+                                        <img src="assets/icons/next.png" onclick="coreget()" style="width: 100%;" />
                                     </button>
                                 </div>
                             </div>
@@ -602,17 +602,24 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-md-8">
-                                        <form>
+                                    <div class="col-md-8" id="swerv" >
+                                       <form id="swervform" style="overflow-y:auto;height:180px">
+                                           
+                                       </form> 
+                                      
+                                    </div>
+                                    <div class="col-md-8" id="ibex" style="overflow-y:scroll">
+                                        <form  >
                                             <input type="radio" name="bus" value="wb" checked>
                                             <label> Test cse </label>
                                             <br />
                                             <input type="radio" name="bus" value="i2c">
-                                            <label> M </label>
+                                            <label> hhfh</label>
                                             <br />
                                             <input type="radio" name="bus" value="tl">
-                                            <label>F</label>
+                                            <label>gg</label>
                                         </form>
+                                        
                                     </div>
                                 </div>
         
@@ -739,9 +746,57 @@ function myFunction1() {{
         }
       }
     }
-            
+function coreget(){
+    var listvercore=[];
+    var ele = document.getElementsByName('coreV');
+            for(i = 0; i < ele.length; i++) {
+                  
+                  if(ele[i].type="radio") {
+                    
+                      
+                                  if(ele[i].checked)
+                                  listvercore.push(ele[i].value);
+                                  
+                  }
+                }
+                eel.verCoreTest(listvercore)
+
+} 
+eel.expose(testswerv)
+function testswerv(){
+  
+   eel.getlistswerv()
+   
+}  
+eel.expose(javatestlistswerv)
+function javatestlistswerv(listt){
+var ab=listt
+    var ss= document.getElementById('swerv');
+   var sv=document.getElementById('ibex');
+   for (var i = 0; i < ab.length; i++) {
+                var a = ab[i];
+ 
+                document.getElementById("swervform").innerHTML += 
+                            "<input type='radio' name='bus' value='wb' checked><label>"+ a +" </label><br>";
+                            
+
+   sv.classList.add('hideibex');
+   ss.classList.remove("showswerv");
+    
+}   
+}       
+eel.expose(testibex)
+function testibex(){
+   var ss= document.getElementById('swerv');
+   var sv=document.getElementById('ibex');
+
+   sv.classList.remove('hideibex');
+   ss.classList.add("showswerv");
+
+}   
+   
         
     
     </script>
 </body>
-</html>
+</html> 
