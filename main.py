@@ -2,7 +2,9 @@ import eel
 from eel import init, start
 from replacer import replacer
 from reverter import reverter
-import os 
+import os
+import sys
+
 import tkinter 
 import tkinter.filedialog as filedialog
 import json
@@ -88,7 +90,30 @@ if __name__ == '__main__':
        
         
         eel.select_js(list1[-1])
-        
+    @eel.expose
+    def verCoreTest(listver):
+        i=listver[-1]
+        if i=="SWERV-EH1":
+            eel.testswerv()
+            print(i)
+        if i=="IBEX":
+            eel.testibex()
+            print(i)
+    @eel.expose
+    def getlistswerv():
+        namelist=[]
+        root="/home/mahnoor/Burq-Suite"               
+        filepaths = [os.path.join(root,i) for i in os.listdir(root)]
+        for path in filepaths:
+            a=path.split("/")
+            namelist.append(a[4])
+            
+        print(namelist)
+        eel.javatestlistswerv(namelist)
+
+
+
+
 
     reverter()
     start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
