@@ -112,6 +112,7 @@ function changeSoC(comp){
         bus.style.display = "block";
     }
 }
+
 function changeV(comp){
     var core = document.getElementById("Vcore");
     var dev = document.getElementById("Vdevices");
@@ -127,6 +128,7 @@ function changeV(comp){
         bus.style.display = "block";
     }
 }
+
 
 function changeProject(evt,proj){
     var soc = document.getElementById("soc");
