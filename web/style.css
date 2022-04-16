@@ -2,7 +2,10 @@
 .btn:focus {
     outline: none !important;
 }  
-
+::marker{
+    display: none !important;
+    font-size: 0px !important;
+}
 /* ---------- TOP CONTROLS ---------- */
 #controls{
     background-color: #16161e;
@@ -72,6 +75,7 @@
     width: 15%;
     background-color: #16161e;
     height: 100%;
+    overflow-y: scroll;
     color: white;
     border: solid #0a0e14 1px;
 }
@@ -124,7 +128,9 @@
 
 .file-btn{
     width: 100%;
+    color: white !important;
     text-align: left !important;
+    margin-top: -25px !important;
 }
 .file-btn:hover{
     color:white !important;
