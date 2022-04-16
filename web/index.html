@@ -154,10 +154,9 @@
 
         <!-- Tab links -->
         <div id="tab_space"  class="d-flex">
-          <div class="tab" style="width: 95%;">
+          <div id="tab_records" class="tab" style="width: 95%;">
             <button class="tablinks" onclick="openTab(event, 'File1')" id="defaultOpen">File1 <span>x</span> </button>
-            <button class="tablinks" onclick="openTab(event, 'File2')">File2 <span>x</span></button>
-            <button class="tablinks" onclick="openTab(event, 'File3')">File3 <span>x</span></button>
+            
           </div>
           <div id="play_panel">
             <img src="assets/icons/play.png" />
@@ -173,15 +172,7 @@
 
         </div>
 
-        <div id="File2" class="tabcontent">
-          <textarea class="editorx" name="editor"></textarea>
-
-        </div>
-
-        <div id="File3" class="tabcontent">
-          <textarea class="editorx" name="editor"></textarea>
-
-        </div>
+        
 
       </div>
 
@@ -226,8 +217,30 @@
 
         eel.expose(pakrKayLaoFiles)
         function pakrKayLaoFiles(strct){
-          console.log(strct);
           parseFileTree2(strct);
+        }
+
+        function openTheFile(file){
+          eel.parseFilePathReq(file);
+        }
+
+        eel.expose(displayTheFile)
+        function displayTheFile(file, idOfFile, nameOfFile){
+          var tabRecords = document.getElementById("tab_records");
+          tabRecords.innerHTML += `<button id="btn=${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}')">${nameOfFile} <span>x</span> </button>`
+
+          var editorRecords = document.getElementById("main_editor");
+          editorRecords.innerHTML += ` <div id="${idOfFile}" class="tabcontent">
+          <textarea class="editorx" name="editor">${file}</textarea>
+
+        </div>`;
+
+        stylizeEditors();
+
+        var abhiWaliTab = document.getElementById(`btn-${idOfFile}`);
+        // abhiWaliTab.click();
+        openTab(abhiWaliTab, idOfFile);
+
         }
 
         
