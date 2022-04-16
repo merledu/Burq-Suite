@@ -1,5 +1,5 @@
 # Burq Suite
-An All in one RISC-V Suite.
+An All in one RISC-V Suite..
 
 
 ## How to Run

@@ -382,3 +382,9 @@ body, .row{
   .dropdown a:hover {background-color: #ddd;}
   
   .show1 {display: block;}
+.hideibex{
+    display: none !important; 
+}
+.showswerv{
+    display: none !important;
+}
