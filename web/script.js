@@ -46,23 +46,26 @@ function openMenu(evt, cityName) {
         footer.style.marginLeft = "19%";
     }
 }
-
-
-let editor = document.getElementsByClassName("editorx");
-for(let i = 0; i<editor.length;i++){
-    CodeMirror.fromTextArea(
-    editor[i],
-    {
-        lineNumbers: true,
-        matchBrackets: true,
-        theme: "ayu-dark",
-        mode: "text/x-scala",
-        autoRefresh: true,
-        scrollbars:true,
-        
+function stylizeEditors(){
+    let editor = document.getElementsByClassName("editorx");
+    for(let i = 0; i<editor.length;i++){
+        CodeMirror.fromTextArea(
+        editor[i],
+        {
+            lineNumbers: true,
+            matchBrackets: true,
+            theme: "ayu-dark",
+            mode: "text/x-scala",
+            autoRefresh: true,
+            scrollbars:true,
+            
+        }
+    ).setSize(null, "100%")
     }
-).setSize(null, "100%")
+
 }
+
+stylizeEditors();
 
 
 
