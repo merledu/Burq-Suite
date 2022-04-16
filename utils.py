@@ -1,12 +1,13 @@
 from operator import le
 import uuid
 from icecream import ic
+from itsdangerous import json
 
 theDictOfFilePaths = {}
 
-def getFileStructure():
+def getFileStructure(rootdir):
     import os
-    rootdir = "/home/mordok/hello"
+    # rootdir = "/home/mordok/hello"
     strct = {}
 
     for subdir, dirs, files in os.walk(rootdir):
@@ -15,7 +16,7 @@ def getFileStructure():
             fullFile = fullFile.replace(rootdir, "")
             allFolders = fullFile.split("/")
             # ic(fullFile)
-            id = uuid.uuid4()
+            id = str(uuid.uuid4())
             theDictOfFilePaths[id] = fullFile
 
             if len(list(allFolders)) == 1:
@@ -49,8 +50,6 @@ def getFileStructure():
 
     return strct
 
-ic(getFileStructure())
-ic(theDictOfFilePaths)
 
 # paddCounter = 0
 def parseFileStructure(strct, paddCounter=0):
@@ -61,15 +60,14 @@ def parseFileStructure(strct, paddCounter=0):
                 """
         
         for i,v in enumerate(strct):
-            id = uuid.uuid4()
-            stt = f"""<li ><button style="margin-left:{paddCounter+5}px" onclick=openTheFile("{id}") class="btn file-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-code-fill" viewBox="0 0 16 16">
+            stt += f"""<li ><button style="margin-left:{paddCounter+5}px" onclick=openTheFile("{v[0]}") class="btn file-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-code-fill" viewBox="0 0 16 16">
                                 <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM6.646 7.646a.5.5 0 1 1 .708.708L5.707 10l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 10 8.646 8.354a.5.5 0 1 1 .708-.708z"/>
-                              </svg>{v}</button></li>
+                              </svg>{v[1]}</button></li>
                     """
 
-            theDictOfFilePaths[id] = v
-
         stt += "</ul>"
+        ic(stt)
+        
 
         return stt
     else:
@@ -95,3 +93,7 @@ def parseFileStructure(strct, paddCounter=0):
             # paddCounter+=10
         
         return stt
+
+
+def pleaseParseTheFilePath(file):
+    return theDictOfFilePaths[file]
