@@ -1,10 +1,12 @@
 from operator import le
 import uuid
+from icecream import ic
 
-def getFileStructure(rootdir):
+theDictOfFilePaths = {}
+
+def getFileStructure():
     import os
-    # rootdir = '/home/mordok/mera_project/'
-
+    rootdir = "/home/mordok/hello"
     strct = {}
 
     for subdir, dirs, files in os.walk(rootdir):
@@ -12,24 +14,30 @@ def getFileStructure(rootdir):
             fullFile = os.path.join(subdir, file)
             fullFile = fullFile.replace(rootdir, "")
             allFolders = fullFile.split("/")
+            # ic(fullFile)
+            id = uuid.uuid4()
+            theDictOfFilePaths[id] = fullFile
+
             if len(list(allFolders)) == 1:
                 if "." not in strct.keys():
-                    strct["."] = [fullFile]
+                    strct["."] = [(id,fullFile)]
                 else:
-                    strct["."].append(fullFile)
+                    strct["."].append((id,fullFile))
             else:
                 
                 lalala = strct
                 
                 for i in range(len(allFolders)):
-                    if i+1 == len(allFolders)-1:
+
+                    if i+1 == len(allFolders)-1: # akkhri index -> file
+
                         if allFolders[i] in lalala.keys():
                             
-                            lalala[allFolders[i]]["."].append(allFolders[i+1])
+                            lalala[allFolders[i]]["."].append((id,allFolders[i+1]))
                             break
                         else:
                             lalala[allFolders[i]] ={
-                                ".":[allFolders[i+1]]
+                                ".":[(id,allFolders[i+1])]
                             } 
                             break
                     else:
@@ -41,7 +49,9 @@ def getFileStructure(rootdir):
 
     return strct
 
-theDictOfFilePaths = {}
+ic(getFileStructure())
+ic(theDictOfFilePaths)
+
 # paddCounter = 0
 def parseFileStructure(strct, paddCounter=0):
     if type(strct) == list:
