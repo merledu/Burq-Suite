@@ -2,7 +2,7 @@ import imp
 from multiprocessing.spawn import import_main_path
 import eel, os
 from eel import init, start
-from utils import getFileStructure, parseFileStructure      # file structure utility
+from utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath      # file structure utility
 from icecream import ic
 if __name__ == '__main__':
 
@@ -22,12 +22,23 @@ if __name__ == '__main__':
         parsedHTML = parseFileStructure(structure[""])
         # print(parsedHTML)
         eel.pakrKayLaoFiles(parsedHTML)
+
+    @eel.expose
+    def parseFilePathReq(file):
+        filePath = pleaseParseTheFilePath(file)
+        actualFilePath = os.path.join(project_dir,filePath[1:])
+        fileToRead = open(actualFilePath, "r")
+        contentOfFile = fileToRead.read()
+        fileToRead.close()
+        eel.displayTheFile(contentOfFile,file,filePath[1:])
+
     @eel.expose
     def genrtlpy():
         file=open("web/pathfile","r")
         contents= file.readlines()
         file.close()
         ic(contents[0])
+
         
         os.chdir(f"{contents[0]}/SoC-Now-Generator")
         os.system("sbt 'runMain GeneratorDriver'")
