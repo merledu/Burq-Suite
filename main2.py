@@ -30,7 +30,7 @@ if __name__ == '__main__':
         fileToRead = open(actualFilePath, "r")
         contentOfFile = fileToRead.read()
         fileToRead.close()
-        eel.displayTheFile(contentOfFile,file,filePath[1:])
+        eel.displayTheFile(contentOfFile,file,filePath[1:], filePath.split("/")[-1])
 
     @eel.expose
     def genrtlpy():
