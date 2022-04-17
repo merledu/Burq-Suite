@@ -46,11 +46,12 @@ function openMenu(evt, cityName) {
         footer.style.marginLeft = "19%";
     }
 }
-function stylizeEditors(){
-    let editor = document.getElementsByClassName("editorx");
-    for(let i = 0; i<editor.length;i++){
+function stylizeEditors(editor){
+    // let editor = document.getElementsByClassName("editorx");
+    // for(let i = 0; i<editor.length;i++){
+        console.log(editor);
         CodeMirror.fromTextArea(
-        editor[i],
+        editor,
         {
             lineNumbers: true,
             matchBrackets: true,
@@ -61,7 +62,7 @@ function stylizeEditors(){
             
         }
     ).setSize(null, "100%")
-    }
+    // }
 
 }
 
@@ -69,7 +70,7 @@ stylizeEditors();
 
 
 
-function openTab(evt, tabName) {
+function openTab(evt, tabName, fullFileName) {
     // Declare all variables
     var i, tabcontent, tablinks;
   
@@ -88,6 +89,9 @@ function openTab(evt, tabName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
+
+    var filPather = document.getElementById("tab_name_space");
+    filPather.innerHTML = fullFileName;
   }
 
 // document.getElementById("defaultOpen").click();

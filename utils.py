@@ -1,9 +1,11 @@
 from operator import le
+import re
 import uuid
 from icecream import ic
 from itsdangerous import json
 
 theDictOfFilePaths = {}
+GeneratorFileID = []
 
 def getFileStructure(rootdir):
     import os
@@ -18,7 +20,9 @@ def getFileStructure(rootdir):
             # ic(fullFile)
             id = str(uuid.uuid4())
             theDictOfFilePaths[id] = fullFile
-
+            ic(fullFile)
+            if "/src/main/scala/Generator.scala" == fullFile:
+                GeneratorFileID.append(id)
             if len(list(allFolders)) == 1:
                 if "." not in strct.keys():
                     strct["."] = [(id,fullFile)]
@@ -66,7 +70,7 @@ def parseFileStructure(strct, paddCounter=0):
                     """
 
         stt += "</ul>"
-        ic(stt)
+        # ic(stt)
         
 
         return stt
@@ -97,3 +101,7 @@ def parseFileStructure(strct, paddCounter=0):
 
 def pleaseParseTheFilePath(file):
     return theDictOfFilePaths[file]
+
+def pleaseGeneratorFileUthaKLayAao():
+    ic(GeneratorFileID)
+    return (theDictOfFilePaths[GeneratorFileID[0]],GeneratorFileID[0])

@@ -163,6 +163,10 @@
             <img src="assets/icons/dots.png" />
           </div>
         </div>
+
+        <div id="tab_name_space">
+          /home/mordok/lalala.html
+        </div>
         
 
 
@@ -215,19 +219,32 @@
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
 
+function closeTab(linkName, tabName){
+    document.getElementById(linkName).remove();
+    document.getElementById(tabName).remove();
+}
+
         eel.expose(pakrKayLaoFiles)
         function pakrKayLaoFiles(strct){
           parseFileTree2(strct);
         }
 
         function openTheFile(file){
-          eel.parseFilePathReq(file);
+          var alreadyOpependFile = document.getElementById(file);
+          // console.log(alreadyOpependFile);
+          if(alreadyOpependFile != null){
+            // openTab(alreadyOpependFile, file);
+            document.getElementById(`btn-${file}`).click();
+          } else{
+            eel.parseFilePathReq(file);
+          }
+          
         }
 
         eel.expose(displayTheFile)
         function displayTheFile(file, idOfFile, nameOfFile, onlyNameOfFile){
           var tabRecords = document.getElementById("tab_records");
-          tabRecords.innerHTML += `<button id="btn=${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}')">${onlyNameOfFile} <span>x</span> </button>`
+          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile} <span onclick="closeTab('btn-${idOfFile}', ${idOfFile}">x</span> </button>`
 
           var editorRecords = document.getElementById("main_editor");
           editorRecords.innerHTML += ` <div id="${idOfFile}" class="tabcontent">
@@ -235,12 +252,14 @@
 
         </div>`;
 
-        stylizeEditors();
+        stylizeEditors(document.getElementById(idOfFile).getElementsByClassName("editorx")[0]);
 
         var abhiWaliTab = document.getElementById(`btn-${idOfFile}`);
         // abhiWaliTab.click();
-        openTab(abhiWaliTab, idOfFile);
-
+        // console.log(abhiWaliTab);
+        abhiWaliTab.click();
+        // openTab(abhiWaliTab, idOfFile);
+        // abhiWaliTab.classList.add("active");
         }
 
         
@@ -250,7 +269,7 @@
           // var parsedHTML = parser(main);
           var tree = document.getElementById("filetree") ;
           strct.replace("::marker", "");
-          console.log(strct);
+          // console.log(strct);
           tree.innerHTML += strct;
         }
 

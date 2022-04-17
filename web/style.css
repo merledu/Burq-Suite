@@ -6,6 +6,10 @@
     display: none !important;
     font-size: 0px !important;
 }
+body{
+    max-height: 100vh;
+    overflow: hidden;
+}
 /* ---------- TOP CONTROLS ---------- */
 #controls{
     background-color: #16161e;
@@ -239,8 +243,13 @@
     border-top: none;
     animation: fadeEffect 1s; /* Fading effect takes 1 second */
     /* overflow-y: scroll; */
-    height: 90%;
+    height: 88%;
 
+  }
+  #tab_name_space{
+      background-color: #12121a;
+      color: #96d7ffa1;
+    padding:8px 10px 5px 26px;
   }
   /* Go from zero to full opacity */
 @keyframes fadeEffect {

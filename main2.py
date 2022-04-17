@@ -1,8 +1,9 @@
 import imp
 from multiprocessing.spawn import import_main_path
+from operator import ge
 import eel, os
 from eel import init, start
-from utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath      # file structure utility
+from utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath,pleaseGeneratorFileUthaKLayAao      # file structure utility
 from icecream import ic
 if __name__ == '__main__':
 
@@ -22,6 +23,14 @@ if __name__ == '__main__':
         parsedHTML = parseFileStructure(structure[""])
         # print(parsedHTML)
         eel.pakrKayLaoFiles(parsedHTML)
+        gen = pleaseGeneratorFileUthaKLayAao()
+        filepath = gen[0]
+        actualFilePath = os.path.join(project_dir,filepath[1:])
+        fileToRead = open(actualFilePath,"r")
+        contentOfFile = fileToRead.read()
+        fileToRead.close()
+        eel.displayTheFile(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
+
 
     @eel.expose
     def parseFilePathReq(file):
