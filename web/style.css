@@ -186,7 +186,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 6%;
   }
   .tablinks span{
       /* margin-left: 15px; */
