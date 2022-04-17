@@ -154,8 +154,8 @@
 
         <!-- Tab links -->
         <div id="tab_space"  class="d-flex">
-          <div id="tab_records" class="tab" style="width: 95%;">
-            <button class="tablinks" onclick="openTab(event, 'File1')" id="defaultOpen">File1 <span>x</span> </button>
+          <div id="tab_records" class="tab" style="width: 95%;overflow-x: scroll;display: flex;">
+            <button class="tablinks" id="btn-File1" onclick="openTab(event, 'File1')" id="defaultOpen">File1 <span onclick="closeTab('btn-File1','File1')">x</span> </button>
             
           </div>
           <div id="play_panel">
@@ -225,9 +225,9 @@
         }
 
         eel.expose(displayTheFile)
-        function displayTheFile(file, idOfFile, nameOfFile){
+        function displayTheFile(file, idOfFile, nameOfFile, onlyNameOfFile){
           var tabRecords = document.getElementById("tab_records");
-          tabRecords.innerHTML += `<button id="btn=${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}')">${nameOfFile} <span>x</span> </button>`
+          tabRecords.innerHTML += `<button id="btn=${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}')">${onlyNameOfFile} <span>x</span> </button>`
 
           var editorRecords = document.getElementById("main_editor");
           editorRecords.innerHTML += ` <div id="${idOfFile}" class="tabcontent">
