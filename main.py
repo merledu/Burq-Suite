@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     @eel.expose
     def stop_everything():
-        replacer()
+        replacer() 
         os.system("./openMain.sh")
         # start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8005)
 
@@ -71,6 +71,19 @@ if __name__ == '__main__':
         
 
         os.system(f"cp -a web/SoC-Now-Generator {yourproject}/{b}")
+    @eel.expose
+    def pyverification():
+        
+        
+        yourproject=list1[-1]
+        
+        aa=os.system(f"cd {yourproject}")
+        b=list2[-1]
+        file1=open("web/pathfile","w")
+        file1.write(f"{yourproject}/{b}")
+        file1.close()
+        os.system(f"cp -a web/verification {yourproject}/{b}")
+        eel.goToMain()
 
     @eel.expose
 
@@ -110,6 +123,12 @@ if __name__ == '__main__':
             
         print(namelist)
         eel.javatestlistswerv(namelist)
+    @eel.expose
+    def datasend(listt):
+        filev=open("web/pathfilev","w")
+        filev.write(listt[0])
+        filev.close()
+        print(listt)
 
 
 
