@@ -7,12 +7,17 @@ from utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath,p
 from icecream import ic
 if __name__ == '__main__':
 
-
+#type of project select
 
     f = open("web/pathfile","r")
     c = f.readlines()
+    ic(c)
     f.close()
-    project_dir = c[0]  #"/home/mordok/mera_project"
+    vf = open("web/pathfilev","r")
+    vc = vf.readlines()
+    vf.close()
+    project_dir = c[-1]
+    ic(project_dir)  #"/home/mordok/mera_project"
     
     init('web')
 
@@ -23,13 +28,15 @@ if __name__ == '__main__':
         parsedHTML = parseFileStructure(structure[""])
         # print(parsedHTML)
         eel.pakrKayLaoFiles(parsedHTML)
-        gen = pleaseGeneratorFileUthaKLayAao()
-        filepath = gen[0]
-        actualFilePath = os.path.join(project_dir,filepath[1:])
-        fileToRead = open(actualFilePath,"r")
-        contentOfFile = fileToRead.read()
-        fileToRead.close()
-        eel.displayTheFile(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
+        if vc=="soc":
+        #soc specific sab kuch
+            gen = pleaseGeneratorFileUthaKLayAao()
+            filepath = gen[0]
+            actualFilePath = os.path.join(project_dir,filepath[1:])
+            fileToRead = open(actualFilePath,"r")
+            contentOfFile = fileToRead.read()
+            fileToRead.close()
+            eel.displayTheFile(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
 
 
     @eel.expose
