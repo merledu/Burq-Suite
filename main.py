@@ -25,7 +25,7 @@ if __name__ == '__main__':
         os.system("./openMain.sh")
         # start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8005)
 
-
+#b
     @eel.expose                         # Expose this function to Javascript
     def say_hello_py(x):
         print('Hello from %s' % x)
