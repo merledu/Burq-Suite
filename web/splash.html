@@ -67,7 +67,7 @@
                     <div class="container">
                         <div id="config-btns">
                             <h4>- Project Selection -</h4>
-                            <button onclick="changeProject(event,'soc')" class="btn config-btn active">
+                            <button onclick="changeProject(event,'soc')" class="btn config-btn active" value="soc">
                                 Custom Config SoC
                             </button>
     
@@ -619,7 +619,7 @@
                                        </form> 
                                       
                                     </div>
-                                    <div class="col-md-8" id="ibex" style="overflow-y:scroll">
+                                    <div class="col-md-9" id="ibex" style="display:none;overflow-y:scroll">
                                         <form  >
                                             <input type="radio" name="bus" value="wb" checked>
                                             <label> Test cse </label>
@@ -635,12 +635,12 @@
                                 </div>
         
 
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center"style="margin: top -20px;">
                                     <button onclick="changeV('Vdevices')" class="btn ctrl-btn">
                                         <img src="assets/icons/back.png" style="width: 100%;" />
                                     </button>
 
-                                    <button   class="btn ctrl-btn">
+                                    <button  onclick="verificationdone()" class="btn ctrl-btn">
                                         <img src="assets/icons/next.png" style="width: 100%;"  />
                                     </button>
                                 </div>
@@ -805,6 +805,9 @@ function testibex(){
    ss.classList.add("showswerv");
 
 }   
+function verificationdone(){
+    eel.pyverification()
+}
    
         
     
