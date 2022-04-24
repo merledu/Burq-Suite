@@ -1,5 +1,6 @@
 // OPEN CLOSE SIDE BAAR
 
+
 function openMenu(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -48,7 +49,7 @@ function openMenu(evt, cityName) {
 }
 function stylizeEditors(editor){
     // let editor = document.getElementsByClassName("editorx");
-    // for(let i = 0; i<editor.length;i++){
+    // for(let i = 0; i<editor.length;i++),,,{
         console.log(editor);
         CodeMirror.fromTextArea(
         editor,
@@ -138,6 +139,7 @@ function changeV(comp){
 
 
 function changeProject(evt,proj){
+    var listt=[];
     var soc = document.getElementById("soc");
     var coreP = document.getElementById("coreP");
     var comp = document.getElementById("comp");
@@ -151,17 +153,28 @@ function changeProject(evt,proj){
 
     if(proj === "soc"){
         soc.style.display = "block";
+        var listt=[];
+        listt.push("soc");
+       
+
     } 
     else if(proj === "core"){
+        var listt=[];
         coreP.style.display = "block";
+        listt.push("core");
     }
     else if(proj === "comp"){
         comp.style.display = "block";
+        listt.push("comp");
     } 
     else if (proj === "verif"){
+        var listt=[];
         verif.style.display = "block";
+        listt.push("verification");
     } else if (proj === "sdk"){
+        var listt=[];
         sdk.style.display = "block";
+        listt.push("sdk");
     }
 
     var btns = document.getElementsByClassName("config-btn");
@@ -169,6 +182,7 @@ function changeProject(evt,proj){
         btns[i].className = btns[i].className.replace(" active", "");
       }
     evt.currentTarget.className += " active";
+    eel.datasend(listt)
 }
 
 function changeComponent(evt, comp){
