@@ -126,9 +126,16 @@ if __name__ == '__main__':
     @eel.expose
     def getlistibex():
         namelist=[]
-        root="/home/mahnoor/Burq-Suite/web/testcases/Self-Checking-Tests/Riscv-tests"               
+        root="/home/mahnoor/Burq-Suite/web/testcases/Self-Checking-Tests/Riscv-tests"
+        root1="/home/mahnoor/Burq-Suite/web/testcases/Self-Checking-Tests/Riscv-tests"               
         filepaths = [os.path.join(root,i) for i in os.listdir(root)]
+        filepaths1 = [os.path.join(root1,i) for i in os.listdir(root1)]
         for path in filepaths:
+            a=path.split("/")
+            namelist.append(a[8])
+            
+        print(namelist,"po")
+        for path in filepaths1:
             a=path.split("/")
             namelist.append(a[8])
             
