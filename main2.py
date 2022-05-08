@@ -17,9 +17,13 @@ if __name__ == '__main__':
     vc = vf.readlines()
     vf.close()
     project_dir = c[-1]
-    ic(project_dir)  #"/home/mordok/mera_project"
+    ic(project_dir) 
+    print(vc,"uu")
+    
     
     init('web')
+    if vc[0]=="verification":
+        eel.disablefunction()
 
     @eel.expose
     def getTheFileStrucuture():
@@ -28,7 +32,7 @@ if __name__ == '__main__':
         parsedHTML = parseFileStructure(structure[""])
         # print(parsedHTML)
         eel.pakrKayLaoFiles(parsedHTML)
-        if vc=="soc":
+        if vc[0]=='soc':
         #soc specific sab kuch
             gen = pleaseGeneratorFileUthaKLayAao()
             filepath = gen[0]
@@ -56,7 +60,9 @@ if __name__ == '__main__':
         ic(contents[0])
 
         
-        os.chdir(f"{contents[0]}/SoC-Now-Generator")
+        os.chdir(f"{contents[0]}")
+        os.system("./peripheralScript.py")
+        
         os.system("sbt 'runMain GeneratorDriver'")
 
     start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8007)

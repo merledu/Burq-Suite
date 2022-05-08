@@ -619,23 +619,16 @@
                                        </form> 
                                       
                                     </div>
-                                    <div class="col-md-9" id="ibex" style="display:none;overflow-y:scroll">
-                                        <form  >
-                                            <input type="radio" name="bus" value="wb" checked>
-                                            <label> Test cse </label>
-                                            <br />
-                                            <input type="radio" name="bus" value="i2c">
-                                            <label> hhfh</label>
-                                            <br />
-                                            <input type="radio" name="bus" value="tl">
-                                            <label>gg</label>
+                                    <div class="col-md-9" id="ibex" >
+                                        <form id="ibexform" style="overflow-y:auto;height:180px">
+                                           
                                         </form>
                                         
                                     </div>
                                 </div>
         
 
-                                <div class="d-flex justify-content-between align-items-center"style="margin: top -20px;">
+                                <div class="d-flex justify-content-between align-items-center"style="margin: top -30px;">
                                     <button onclick="changeV('Vdevices')" class="btn ctrl-btn">
                                         <img src="assets/icons/back.png" style="width: 100%;" />
                                     </button>
@@ -796,15 +789,26 @@ var ab=listt
     
 }   
 }       
-eel.expose(testibex)
-function testibex(){
+eel.expose(javatestlistibex)
+function javatestlistibex(listt){
+   var ab=listt;
    var ss= document.getElementById('swerv');
    var sv=document.getElementById('ibex');
+   for (var i = 0; i < ab.length; i++) {
+                var a = ab[i];
+               
+ 
+                document.getElementById("ibexform").innerHTML += 
+                            "<input type='radio' name='bus' value='wb' checked><label>"+ a +" </label><br>";
 
    sv.classList.remove('hideibex');
    ss.classList.add("showswerv");
-
-}   
+   }
+} 
+eel.expose(testibex)
+function testibex(){
+    eel.getlistibex()
+}  
 function verificationdone(){
     eel.pyverification()
 }

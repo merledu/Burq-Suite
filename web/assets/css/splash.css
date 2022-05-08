@@ -388,3 +388,7 @@ body, .row{
 .showswerv{
     display: none !important;
 }
+.disabled{
+
+ display: none !important;
+}

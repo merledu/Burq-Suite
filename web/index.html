@@ -120,31 +120,31 @@
         <div id="Run" class="side_menus tabcontent2 side_menu">
           <p>Run and Debug</p>
           <div class="run-div">
-            <button class="btn run-btn" onclick="genrtl()"> Generate RTL </button> 
+            <button class="btn run-btn" id="dis" onclick="genrtl()"> Generate RTL </button> 
           </div>
 
           <div class="run-div">
-            <button class="btn run-btn"> Verify RTL </button> 
+            <button class="btn run-btn" id="dis" > Verify RTL </button> 
           </div>
 
           <div class="run-div">
-            <button class="btn run-btn"> Generate Report </button> 
+            <button class="btn run-btn" id="dis" > Generate Report </button> 
           </div>
 
           <div class="run-div">
-            <button class="btn run-btn"> Generate Log </button> 
+            <button class="btn run-btn" id="dis" > Generate Log </button> 
           </div>
 
           <div class="run-div">
-            <button class="btn run-btn"> Export CSV </button> 
+            <button class="btn run-btn" id="dis" > Export CSV </button> 
           </div>
 
           <div class="run-div">
-            <button class="btn run-btn"> Upload Test </button> 
+            <button class="btn run-btn" id="dis" > Upload Test </button> 
           </div>
 
           <div class="run-div">
-            <button class="btn run-btn"> Upload Bitstream </button> 
+            <button class="btn run-btn" id="dis" > Upload Bitstream </button> 
           </div>
           
         </div>
@@ -165,8 +165,9 @@
         </div>
 
         <div id="tab_name_space">
-          /home/mordok/lalala.html
+          /home/mahnoor
         </div>
+        
         
 
 
@@ -213,6 +214,7 @@
       
     </div>
     
+    
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="jquery.min.js"></script>
     <script src="script.js"></script>
@@ -244,7 +246,7 @@ function closeTab(linkName, tabName){
         eel.expose(displayTheFile)
         function displayTheFile(file, idOfFile, nameOfFile, onlyNameOfFile){
           var tabRecords = document.getElementById("tab_records");
-          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile} <span onclick="closeTab('btn-${idOfFile}', ${idOfFile}">x</span> </button>`
+          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile} <span onclick="closeTab(btn-'${idOfFile}', '${idOfFile}')">x</span> </button>`
 
           var editorRecords = document.getElementById("main_editor");
           editorRecords.innerHTML += ` <div id="${idOfFile}" class="tabcontent">
@@ -282,6 +284,11 @@ function closeTab(linkName, tabName){
         function genrtl(){
           eel.genrtlpy()
         }
+    eel.expose(disablefunction)
+    function disablefunction(){
+      var ss=document.getElementsByClassName("run-div").disabled=true;
+      
+    }
        
         
     
