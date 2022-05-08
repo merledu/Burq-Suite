@@ -115,14 +115,25 @@ if __name__ == '__main__':
     @eel.expose
     def getlistswerv():
         namelist=[]
-        root="/home/mahnoor/Burq-Suite"               
+        root="/home/mahnoor/Burq-Suite/web/testcases/Self-Checking-Tests/Swerv_Tests"               
         filepaths = [os.path.join(root,i) for i in os.listdir(root)]
         for path in filepaths:
             a=path.split("/")
-            namelist.append(a[4])
+            namelist.append(a[8])
             
         print(namelist)
         eel.javatestlistswerv(namelist)
+    @eel.expose
+    def getlistibex():
+        namelist=[]
+        root="/home/mahnoor/Burq-Suite/web/testcases/Self-Checking-Tests/Riscv-tests"               
+        filepaths = [os.path.join(root,i) for i in os.listdir(root)]
+        for path in filepaths:
+            a=path.split("/")
+            namelist.append(a[8])
+            
+        print(namelist,"po")
+        eel.javatestlistibex(namelist)
     @eel.expose
     def datasend(listt):
         filev=open("web/pathfilev","w")

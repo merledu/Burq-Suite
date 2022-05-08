@@ -9,12 +9,13 @@ GeneratorFileID = []
 
 def getFileStructure(rootdir):
     import os
-    # rootdir = "/home/mordok/hello"
+    
     strct = {}
 
     for subdir, dirs, files in os.walk(rootdir):
         for file in files:
             fullFile = os.path.join(subdir, file)
+            print(fullFile)
             fullFile = fullFile.replace(rootdir, "")
             allFolders = fullFile.split("/")
             # ic(fullFile)
@@ -34,7 +35,7 @@ def getFileStructure(rootdir):
                 
                 for i in range(len(allFolders)):
 
-                    if i+1 == len(allFolders)-1: # akkhri index -> file
+                    if i+1 == len(allFolders)-1: 
 
                         if allFolders[i] in lalala.keys():
                             
