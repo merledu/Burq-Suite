@@ -90,7 +90,7 @@ body, .row{
     color: white;
 }
 #footer{
-    padding-top: 140px;
+    padding-top: 120px;
     font-size: small;
     font-weight: 100;
 }
@@ -315,6 +315,18 @@ body, .row{
     display: none;
 }
 #coreP{
+    display: none;
+}
+#soc{
+    display: none;
+}
+#comp{
+    display: none;
+}
+#verif{
+    display: none;
+}
+#sdk{
     display: none;
 }
 .comp-config{

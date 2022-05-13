@@ -1,10 +1,10 @@
 const { app, BrowserWindow } = require('electron');
 
 const createMainWindow = () => {
-    const win = new BrowserWindow({show: false,frame:false, webPreferences: {
+    const win = new BrowserWindow({height:800, width:1600 ,show: false,frame:false, webPreferences: {
         nodeIntegration: true
       } });
-    win.maximize();
+    
     win.show();
   
     // win.loadFile("index.html")
@@ -23,7 +23,7 @@ const createSplashWindow = () => {
 
 
 app.whenReady().then(() => {
-    createMainWindow()
+    createSplashWindow()
 });
 
 function openTheMainWindow(){

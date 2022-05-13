@@ -20,24 +20,26 @@
                         <p>Start with one of our templates.</p>
                         <div class="d-flex justify-content-between">
                             <button class="btn temp-btn">
-                                <span>آغاز</span>
+                                <span>Create</span>
                                 <br>
-                                Aghaz SoC 
+                              
+                                Custom Test 
+                                <br>(C)
                             </button>
                             <button class="btn temp-btn">
-                                <span>0101</span>
+                                <span>Custom</span>
                                 <br>
-                                SPI-Flash 
+                                Core Verification
                             </button>
                             <button class="btn temp-btn">
-                                <span>RV32-im</span>
+                                <span>Prebuilt</span>
                                 <br>
-                                Multiplier Core 
+                                Core Verification 
                             </button>
                             <button class="btn temp-btn">
-                                <span>WB</span>
+                                <span><img src="assets/icons/logo.png" style="width: 120px;"></span>
                                 <br>
-                                Wishbone Bus  
+                                About Us  
                             </button>
                         </div>
 
@@ -67,25 +69,23 @@
                     <div class="container">
                         <div id="config-btns">
                             <h4>- Project Selection -</h4>
-                            <button onclick="changeProject(event,'soc')" class="btn config-btn active" value="soc">
-                                Custom Config SoC
+                            <button onclick="changeProject(event,'soc')" class="btn config-btn" value="soc">
+                               Write Custom Test
                             </button>
     
                             <button onclick="changeProject(event,'core')" class="btn config-btn">
-                                Custom Config Core
+                                Custom config Core Verification
                             </button>
     
                             <button onclick="changeProject(event,'comp')" class="btn config-btn">
-                                Custom Component
+                                    Upload Custom Core                 
                             </button>
     
                             <button onclick="changeProject(event,'verif')" class="btn config-btn">
-                                Verification Project
+                                Prebuilt Core Verification
                             </button>
     
-                            <button onclick="changeProject(event,'sdk')" class="btn config-btn">
-                                Software Development Kit
-                            </button>
+                           
                         </div>
                         
 
@@ -100,7 +100,7 @@
                             <input type="text" placeholder="Untitled " id="projectname">
                         </div>
                         <div id="project-browse">
-                            <h5> Project Location:; </h5>
+                            <h5> Project Location </h5>
                             <div type="text" id="path" style="color: white;
                             border-right-color: #767676;
                             width: 512px;
@@ -117,154 +117,39 @@
                         </div>
                         <div class="config-box" id="soc">
                             <span class="line">
-                                <h2><span>SoC Configurations</span></h2>
+                                <h2><span>write Custom Test</span></h2>
                             </span>
+                            <button class="btn temp-btn" style="width: 300px;">
+                                <span>Write your own test</span>
+                                <br>
+                               
+                
+                            </button>
 
                            
-                            <div id="core">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config active">
-                                            <p>Core</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
-    
-                                    <div class="col-md-3" style="border-right: 1px solid white; height: 25%;" >
-                                        <h6 style="font-weight: lighter;">ISA</h6>
-                                        <form>
-                                            <input type="radio" name="isa" value="32 Bit" checked />
-                                            <label> 32 Bit </label>
-                                            <br>
-                                            <input type="radio" name="isa" value="64 Bit" />
-                                            <label> 64 Bit </label>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-3">
-                                        <h6 style="font-weight: lighter;">Extensions</h6>
-                                        <form>
-                                            <input type="checkbox" name="ext" value="i" disabled checked />
-                                            <label> Integer (I) </label>
-                                            <br />
-                                            <input type="checkbox" name="ext" value="m"/>
-                                            <label> Multiplier (M) </label>
-                                            <br />
-                                            <input type="checkbox" name="ext" value="f" />
-                                            <label> Floating Point (F) </label>
-                                            <br />
-                                            <input type="checkbox" name="ext" value="c"/>
-                                            <label> Compressed (C) </label> 
-                                        </form>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
+                           
 
-                                <div style="text-align: right;">
-                                    <button onclick="changeSoC('devices')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;" />
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div id="devices">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config">
-                                            <p>Core</p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>Devices</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-8">
-                                        <form>
-                                            <input type="checkbox" name="dev" value="gpio" disabled checked />
-                                            <label> General Purpose Input Output (GPIO) </label>
-                                            <br>
-                                            <input type="checkbox" name="dev" value="spi"/>
-                                            <label> Serial Peripheral Interface (SPI) </label>
-                                            <br>
-                                            <input type="checkbox" name="dev" value="uart"/>
-                                            <label> Universal Asynchronous Receiver Transmitter (UART) </label>
-                                            <br>
-                                            <input type="checkbox" name="dev" value="timer"/>
-                                            <label> Timer </label>
-                                            <br>
-                                            <input type="checkbox" name="dev" value="spi_flash"/>
-                                            <label> Inter Integrated Circuit (I<sup>2</sup>C) </label>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <button onclick="changeSoC('core')" class="btn ctrl-btn">
-                                        <img src="assets/icons/back.png" style="width: 100%;" />
-                                    </button>
-
-                                    <button onclick="changeSoC('bus')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;" />
-                                    </button>
-                                </div>
-
-                                
-                            </div>
-
-
-                            <div id="bus">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config">
-                                            <p>Core</p>
-                                        </div>
-                                        <div class="name-config">
-                                            <p>Devices</p>
-                                        </div>
-                                        <div style="margin-bottom: 0px;" class="name-config active">
-                                            <p>Bus</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-8">
-                                        <form>
-                                            <input type="radio" name="bus" value="wb" checked>
-                                            <label> Wishbone </label>
-                                            <br />
-                                            <input type="radio" name="bus" value="i2c">
-                                            <label> Tilelink Uncached Lightweight (TL-UL) </label>
-                                            <br />
-                                            <input type="radio" name="bus" value="tl">
-                                            <label> Tilelink Cached (TL-C) </label>
-                                        </form>
-                                    </div>
-                                </div>
-        
-
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <button onclick="changeSoC('devices')" class="btn ctrl-btn">
-                                        <img src="assets/icons/back.png" style="width: 100%;" />
-                                    </button>
+                            
 
                                     <button  onclick="seldonesoc()" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;"  />
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-left: 800px;"  />
                                     </button>
                                 </div>
 
                                 
-                            </div>
+                            
                             
 
                             
 
-                        </div>
+                       
 
 
 
                         <div class="config-box" id="coreP">
                             <span class="line">
                                 <h2><span>Core Configurations</span></h2>
-                                <div id="core">
+                                <div id="Qcore">
                                     <div class="row main-config">
                                         <div class="col-md-3">
                                             <div class="name-config active">
@@ -276,10 +161,10 @@
                                         <div class="col-md-3" style="border-right: 1px solid white; height: 25%;" >
                                             <h6 style="font-weight: lighter;">ISA</h6>
                                             <form>
-                                                <input type="radio" name="isa" value="32 Bit" checked />
+                                                <input type="radio" name="c-isa" value="32 Bit" checked />
                                                 <label> 32 Bit </label>
                                                 <br>
-                                                <input type="radio" name="isa" value="64 Bit" />
+                                                <input type="radio" name="c-isa" value="64 Bit" />
                                                 <label> 64 Bit </label>
                                             </form>
                                         </div>
@@ -287,16 +172,16 @@
                                         <div class="col-md-3">
                                             <h6 style="font-weight: lighter;">Extensions</h6>
                                             <form>
-                                                <input type="checkbox" name="ext" disabled checked />
+                                                <input type="checkbox" name="c-ext" disabled checked />
                                                 <label> Integer (I) </label>
                                                 <br />
-                                                <input type="checkbox" name="ext" />
+                                                <input type="checkbox" name="c-ext" />
                                                 <label> Multiplier (M) </label>
                                                 <br />
-                                                <input type="checkbox" name="ext" />
+                                                <input type="checkbox" name="c-ext" />
                                                 <label> Floating Point (F) </label>
                                                 <br />
-                                                <input type="checkbox" name="ext" />
+                                                <input type="checkbox" name="c-ext" />
                                                 <label> Compressed (C) </label> 
                                             </form>
                                         </div>
@@ -304,181 +189,179 @@
                                     </div>
     
                                     <div style="text-align: right;">
-                                        <button onclick="" class="btn ctrl-btn">
+                                        
+                                        <button onclick="changeC('Ccore')" class="btn ctrl-btn">
                                             <img src="assets/icons/next.png" style="width: 100%;" />
                                         </button>
                                     </div>
-                                </div>
-                            </span>
-                        </div>
+                                    </div>
+                                    <div id="Ccore">
+                                        <div class="row main-config">
+                                            <div class="col-md-2">
+                                                <div class="name-config active">
+                                                    <p>ISS</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1"></div>
+            
+                                            
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-3">
+                                                <h6 style="font-weight: lighter;">ISS</h6>
+                                                <form>
+                                                    <input type="radio" name="coreV" value="spike"   />
+                                                    <label> SPIKE </label>
+                                                    <br />
+                                                    <input type="radio" name="coreV" value="m"/>
+                                                    <label> WHISPER </label>
+                                                    <br />
+                                                    <input type="radio" name="coreV" value="f" />
+                                                    <label> OVPSIM </label>
+                                                    <br />
+                                                    
+                                                </form>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                        </div>
+                                    
+        
+                                        
+                                            
+                                        <div style="text-align: right;">
+                                            <button onclick="changeC('Qcore')" class="btn ctrl-btn">
+                                                <img src="assets/icons/back.png" style="width: 100%;" />
+                                            </button>
+                                            <button onclick="changeC('Cdevices')" class="btn ctrl-btn">
+                                                <img src="assets/icons/next.png" onclick="coreget()" style="width: 100%;" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="Cdevices">
+                                        <div class="row main-config">
+                                            <div class="col-md-3">
+                                                <div class="name-config">
+                                                    <p>Core+ISS</p>
+                                                </div>
+                                                <div class="name-config active">
+                                                    <p>Extensions</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-8">
+                                                <form>
+                                                    <div class="d-flex justify-content-between1">
+                                                        
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <button class="btn temp-btn">
+                                                            <span>I</span>
+                                                            <br>
+                                                            Integer
+                                            
+                                                        </button>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <button class="btn temp-btn">
+                                                            <span>M</span>
+                                                            <br>
+                                                            Multiplier
+                                                        </button>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <button class="btn temp-btn">
+                                                            <span>F</span>
+                                                            <br>
+                                                            Floating 
+                                                        </button>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <button class="btn temp-btn">
+                                                            <span>C</span>
+                                                            <br>
+                                                            Compressed
+                                                        </button>
+                                                        
+                                                    </div>
+                                                    
+                                                </form>
+                                              
+                                            </div>
+                                        </div>
+        
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button onclick="changeC('Ccore')" class="btn ctrl-btn">
+                                                <img src="assets/icons/back.png" style="width: 100%;" />
+                                            </button>
+        
+                                            <button onclick="changeC('Cbus')" class="btn ctrl-btn">
+                                                <img src="assets/icons/next.png" style="width: 100%;" />
+                                            </button>
+                                        </div>
+        
+                                        
+                                    </div>
+        
+        
+        
+                                    <div id="Cbus">
+                                        <div class="row main-config">
+                                            <div class="col-md-3">
+                                                <div class="name-config">
+                                                    <p>Core+ISS</p>
+                                                </div>
+                                                
+                                                <div class="name-config ">
+                                                    <p>Extensions</p>
+                                                </div>
+                                                
+                                                <div style="margin-bottom: 0px;" class="name-config active">
+                                                    <p>Test Cases</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-8" id="swerv" >
+                                               <form id="swervform" style="overflow-y:auto;height:180px">
+                                                   
+                                               </form> 
+                                              
+                                            </div>
+                                            <div class="col-md-9" id="ibex" >
+                                                <form id="ibexform" style="overflow-y:auto;height:180px">
+                                                   
+                                                </form>
+                                                
+                                            </div>
+                                        </div>
+                
+        
+                                        <div class="d-flex justify-content-between align-items-center"style="margin-top: -35px;">
+                                            <button onclick="changeC('Cdevices')" class="btn ctrl-btn">
+                                                <img src="assets/icons/back.png" style="width: 100%;" />
+                                            </button>
+        
+                                            <button  onclick="verificationdone()" class="btn ctrl-btn">
+                                                <img src="assets/icons/next.png" style="width: 100%;"  />
+                                            </button>
+                                        </div>
+        
+                                        
+                                    </div>
+                                   
+        
+                                   
+                                    </div>
+                         
 
 
                         <div class="config-box" id="comp">
                             <span class="line">
                                 <h2><span>Component Selection</span></h2>
-                                <div class="row comp-config">
-                                    <div class="col-3">
-                                        <div class="col-md-3">
-                                            <button onclick="changeComponent(event,'core')" class="btn comp-btn">
-                                                Core
-                                            </button>
-                                            <button onclick="changeComponent(event,'dev')" class="btn comp-btn active">
-                                                Devices
-                                            </button>
-                                            <button onclick="changeComponent(event,'bus')" style="margin-bottom: 0px;" class="btn comp-btn">
-                                                Bus
-                                            </button>
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="col-md-8" id="comp-dev">
-                                        <form>
-                                            <input type="checkbox" name="dev" disabled checked />
-                                            <label> General Purpose Input Output (GPIO) </label>
-                                            <br>
-                                            <input type="checkbox" name="dev" />
-                                            <label> Serial Peripheral Interface (SPI) </label>
-                                            <br>
-                                            <input type="checkbox" name="dev" />
-                                            <label> Universal Asynchronous Receiver Transmitter (UART) </label>
-                                            <br>
-                                            <input type="checkbox" name="dev" />
-                                            <label> Timer </label>
-                                            <br>
-                                            <input type="checkbox" name="dev" />
-                                            <label> Inter Integrated Circuit (I<sup>2</sup>C) </label>
-                                        </form>
-
-                                        <br>
-                                        <span class="line">
-                                            <h2><span>Connected Bus</span></h2>
-                                        </span>
-                                        <form>
-                                            <input type="radio" name="bus" checked>
-                                            <label> Wishbone </label>
-                                            <br />
-                                            <input type="radio" name="bus">
-                                            <label> Tilelink Uncached Lightweight (TL-UL) </label>
-                                            <br />
-                                            <input type="radio" name="bus">
-                                            <label> Tilelink Cached (TL-C) </label>
-                                        </form>
-
-                                        <div style="text-align: right;">
-                                            <button onclick="" class="btn ctrl-btn" style="margin-top: 0px;">
-                                                <img src="assets/icons/next.png" style="width: 100%;" />
-                                            </button>
-                                            <div class="d-flex justify-content-between">
-                                                <button class="btn temp-btn">
-                                                    <span>آغاز</span>
-                                                    <br>
-                                                    Aghaz SoC 
-                                                </button>
-                                                <button class="btn temp-btn">
-                                                    <span>0101</span>
-                                                    <br>
-                                                    SPI-Flash 
-                                                </button>
-                                                <button class="btn temp-btn">
-                                                    <span>RV32-im</span>
-                                                    <br>
-                                                    Multiplier Core 
-                                                </button>
-                                                <button class="btn temp-btn">
-                                                    <span>WB</span>
-                                                    <br>
-                                                    Wishbone Bus  
-                                                </button>
-                                            </div>   </div>
-
-                                    </div>
+                               
 
 
-                                    <div class="col-md-1 comp-core"></div>
-        
-                                    <div class="col-md-3 comp-core" style="border-right: 1px solid white; height: 25%;" >
-                                        <h6 style="font-weight: lighter;">ISA</h6>
-                                        <form>
-                                            <input type="radio" name="isa" value="32 Bit" checked />
-                                            <label> 32 Bit </label>
-                                            <br>
-                                            <input type="radio" name="isa" value="64 Bit" />
-                                            <label> 64 Bit </label>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-1 comp-core"></div>
-                                    <div class="col-md-3 comp-core">
-                                        <h6 style="font-weight: lighter;">Extensions</h6>
-                                        <form>
-                                            <input type="checkbox" name="ext" disabled checked />
-                                            <label> Integer (I) </label>
-                                            <br />
-                                            <input type="checkbox" name="ext" />
-                                            <label> Multiplier (M) </label>
-                                            <br />
-                                            <input type="checkbox" name="ext" />
-                                            <label> Floating Point (F) </label>
-                                            <br />
-                                            <input type="checkbox" name="ext" />
-                                            <label> Compressed (C) </label> 
-                                        </form>
-                                    </div>
-                                    <div class="col-md-2 comp-core"></div>
-                                    <div class="col-md-7 comp-core" style="margin-left: 15%;">
-                                        <span class="line">
-                                            <h2><span>Connected Bus</span></h2>
-                                        </span>
-                                        <form>
-                                            <input type="radio" name="bus" checked>
-                                            <label> Wishbone </label>
-                                            <br />
-                                            <input type="radio" name="bus">
-                                            <label> Tilelink Uncached Lightweight (TL-UL) </label>
-                                            <br />
-                                            <input type="radio" name="bus">
-                                            <label> Tilelink Cached (TL-C) </label>
-                                        </form>
-                                        <div style="text-align: right;">
-                                            <button onclick="" class="btn ctrl-btn" style="margin-top: 0px;">
-                                                <img src="assets/icons/next.png" style="width: 100%;" />
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-8" id="comp-bus">
-                                        <form>
-                                            <input type="radio" name="bus" checked>
-                                            <label> Wishbone </label>
-                                            <br />
-                                            <input type="radio" name="bus">
-                                            <label> Tilelink Uncached Lightweight (TL-UL) </label>
-                                            <br />
-                                            <input type="radio" name="bus">
-                                            <label> Tilelink Cached (TL-C) </label>
-                                            
-                                        </form>
-                                        <div style="text-align: right;">
-                                            <button onclick="" class="btn ctrl-btn" >
-                                                <img src="assets/icons/next.png" style="width: 100%;" />
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                   
-
-
-                                </div>
-                            </span>
-
-
-
+                            
                         </div>
 
                         <div class="config-box" id="verif">
                             <span class="line">
                                 <h2><span>Verification Configurations</span></h2>
-                            </span>
+                            
 
                             <div id="Vcore">
                                 <div class="row main-config">
@@ -510,7 +393,7 @@
                                     <div class="col-md-3">
                                         <h6 style="font-weight: lighter;">ISS</h6>
                                         <form>
-                                            <input type="radio" name="co" value="spike"  checked />
+                                            <input type="radio" name="coreV" value="spike"   />
                                             <label> SPIKE </label>
                                             <br />
                                             <input type="radio" name="coreV" value="m"/>
@@ -598,6 +481,7 @@
 
 
                             <div id="Vbus">
+
                                 <div class="row main-config">
                                     <div class="col-md-3">
                                         <div class="name-config">
@@ -628,7 +512,7 @@
                                 </div>
         
 
-                                <div class="d-flex justify-content-between align-items-center"style="margin: top -30px;">
+                                <div class="d-flex justify-content-between align-items-center"style="margin-top: -35px;">
                                     <button onclick="changeV('Vdevices')" class="btn ctrl-btn">
                                         <img src="assets/icons/back.png" style="width: 100%;" />
                                     </button>
@@ -637,13 +521,12 @@
                                         <img src="assets/icons/next.png" style="width: 100%;"  />
                                     </button>
                                 </div>
-
-                                
-                            </div>
+</div>
+                           
                            
 
                            
-                            </div>
+                            
 
                         <div class="config-box" id="sdk">
                             <span class="line">
@@ -666,6 +549,40 @@
     <!-- <script src="renderer.js"></script> -->
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
+        console.log("hello");
+
+    function getCore(){
+        console.log("getComponent");
+       
+            var theISA,theBus;
+            var theExt = [];
+
+            var isas = document.getElementsByName("isa");
+            for (var i = 0; i < isas.length; i++) {
+                if (isas[i].checked) {
+                    theISA = isas[i].value;
+                }
+            }
+
+            var exts = document.getElementsByName("ext");
+            for (var i = 0; i < exts.length; i++) {
+                if (exts[i].checked) {
+                    theExt.push(exts[i].value);
+                }
+            }
+
+            var buses = document.getElementsByName("core-bus");
+            for (var i = 0; i < buses.length; i++) {
+                if (buses[i].checked) {
+                    theBus = buses[i].value;
+                }
+            }
+
+            console.log(theBus,theISA, theExt);
+            eel.genCore(theISA, theExt, theBus);
+            eel.stop_everything();
+            window.close();
+    }
     
 
     eel.expose(goToMain)
@@ -681,41 +598,8 @@
         say_hello_js();
         function seldonesoc(){
         
-        var listsoc=[];
-        //document.getElementById("result").innerHTML = "";
-            
-                var ele = document.getElementsByName('ext');
-            for(i = 0; i < ele.length; i++) {
-                  
-                  if(ele[i].type="checkbox") {
-                    
-                      
-                                  if(ele[i].checked)
-                                  listsoc.push(ele[i].value);
-                  }
-                }
-                var ele = document.getElementsByName('dev');
-            for(i =0; i < ele.length; i++) {
-                  
-                  if(ele[i].type="checkbox") {
-                    
-                      
-                                  if(ele[i].checked)
-                                  listsoc.push(ele[i].value);
-                  }
-                }
-                var ele = document.getElementsByName('bus');
-            for(i = 0; i < ele.length; i++) {
-                  
-                  if(ele[i].type="radio") {
-                    
-                      
-                                  if(ele[i].checked)
-                                  listsoc.push(ele[i].value);
-                                  
-                  }
-                }
-                eel.socdetail(listsoc);
+        
+                eel.socdetail();
             }
             function select(){
                 var projectnamee = document.getElementById("projectname").value;

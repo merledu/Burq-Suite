@@ -21,6 +21,8 @@ function openMenu(evt, cityName) {
         //complete width of editor
         var editor = document.getElementById("main_editor");
         editor.style.width = "96%";
+        var bit_conf = document.getElementById("bitstream");
+        bit_conf.style.width = "96%";
         var footer = document.getElementById("foot2");
         footer.style.marginLeft = "4%";
         
@@ -43,6 +45,8 @@ function openMenu(evt, cityName) {
         //complete width of editor
         var editor = document.getElementById("main_editor");
         editor.style.width = "81%";
+        var bit_conf = document.getElementById("bitstream");
+        bit_conf.style.width = "81%";
         var footer = document.getElementById("foot2");
         footer.style.marginLeft = "19%";
     }
@@ -57,7 +61,7 @@ function stylizeEditors(editor){
             lineNumbers: true,
             matchBrackets: true,
             theme: "ayu-dark",
-            mode: "text/x-scala",
+            mode: "text/x-c",
             autoRefresh: true,
             scrollbars:true,
             
@@ -133,8 +137,30 @@ function changeV(comp){
     } else if(comp === "Vdevices"){
         dev.style.display = "block";
     } else if (comp === "Vbus"){
+        console.log("hello")
         bus.style.display = "block";
     }
+}
+function changeC(comp){
+    var core1= document.getElementById("Qcore");
+    var core = document.getElementById("Ccore");
+    var dev = document.getElementById("Cdevices");
+    var bus = document.getElementById("Cbus");
+    core.style.display = "none";
+    dev.style.display = "none";
+    bus.style.display = "none";
+    core1.style.display="none";
+
+    if(comp === "Ccore"){
+        core.style.display = "block";
+    } else if(comp === "Cdevices"){
+        dev.style.display = "block";
+    } else if (comp === "Cbus"){
+        bus.style.display = "block";
+    }
+ else if (comp === "Qcore"){
+    core1.style.display = "block";
+}
 }
 
 
@@ -215,3 +241,26 @@ function changeComponent(evt, comp){
     }
 
 }
+
+
+function openBitstreamConfig(){
+    var main = document.getElementById("main_editor");
+    var bitstream = document.getElementById("bitstream");
+    main.style.display = "none";
+    bitstream.style.display = "block";
+}
+function closeBitstreamConfig(){
+    var main = document.getElementById("main_editor");
+    var bitstream = document.getElementById("bitstream");
+    main.style.display = "block";
+    bitstream.style.display = "none";
+}
+
+function switchBitstreamConfig(conf){
+    var confs = document.getElementsByClassName("confs");
+    for (i = 0; i < confs.length; i++) {
+        confs[i].style.display = "none";
+    }
+    document.getElementById(conf).style.display = "block"; 
+}
+

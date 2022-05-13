@@ -106,3 +106,33 @@ def pleaseParseTheFilePath(file):
 def pleaseGeneratorFileUthaKLayAao():
     ic(GeneratorFileID)
     return (theDictOfFilePaths[GeneratorFileID[0]],GeneratorFileID[0])
+
+
+
+DRIVERS = {
+    "soc":"GeneratorDriver",
+    "coreiwb":"nucleusrv.components.CoreDriverWB",
+    "coreitl":"nucleusrv.components.CoreDriverTL",
+    "gpiowb":"jigsaw.GpioDriverWB",
+    "spiwb":"jigsaw.SpiDriverWB",
+    "uartwb":"jigsaw.UARTHarnessDriver",
+    "gpiotl":"jigsaw.GpioDriverTL",
+    "spitl":"jigsaw.SpiDriverTL",
+    "uarttl":"jigsaw.UARTHarnessDriverTL",
+    "wb":"caravan.bus.wishbone.WishboneDriver",
+    "tl":"caravan.bus.tilelink.TilelinkDriver"
+}
+
+RTL_FILES = {
+    "soc":"Generator.v",
+    "coreiwb":"Top.v",
+    "coreitl":"TopTL.v",
+    "gpiowb":"GpioWB.v",
+    "spiwb":"SpiHarness.v",
+    "uartwb":"uartHarness.v",
+    "gpiotl":"GpioTL.v",
+    "spitl":"SpiHarnessTL.v",
+    "uarttl":"uartHarness_TL.v",
+    "wb":"Harness.v",
+    "tl":"TilelinkHarness.v"
+}

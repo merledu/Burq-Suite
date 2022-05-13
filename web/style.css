@@ -10,6 +10,9 @@ body{
     max-height: 100vh;
     overflow: hidden;
 }
+#bitstream{
+    display: none;
+}
 /* ---------- TOP CONTROLS ---------- */
 #controls{
     background-color: #16161e;
@@ -362,3 +365,176 @@ body{
     background: #555;
   }
   
+
+
+  * {
+    --primary-1: 230, 15%, 22%; /* Neutral */
+    --primary-2: 230, 15%, 20%; /* Dark */
+    --primary-3: 230, 15%, 18%; /* Darker */
+    --primary-4: 230, 15%, 45%; /* Lightest */
+    --secondary: 166, 69%, 100%; /* Splash of Color */
+    --transition: cubic-bezier(0.77, 0, 0.175, 1); 
+  }
+
+  .multi-button {
+    --shadow: 0, 0%, 35%;
+    position: relative;
+    padding: .2rem;
+    background:  hsl(var(--primary-1));
+    border: 1px solid  hsl(var(--primary-2));  
+    box-shadow: 
+      1px 1px 1px hsla(var(--shadow),.12),
+      3px 3px 3px hsla(var(--shadow),.11), 
+      5px 5px 5px hsla(var(--shadow),.1),
+      7px 7px 7px hsla(var(--shadow),.09),
+      11px 11px 11px hsla(var(--shadow),.08),
+      13px 13px 13px hsla(var(--shadow),.07),
+      17px 17px 17px hsla(var(--shadow),.06),
+      19px 19px 19px hsla(var(--shadow),.05),
+      23px 23px 23px hsla(var(--shadow),.04),
+      29px 29px 29px hsla(var(--shadow),.03);
+    border-radius: 4px;
+    user-select: none;
+    text-align: center;
+  }
+  
+  .multi-button label {
+    display: inline-block;
+    position: relative;
+    padding: 2rem 2rem; 
+    color: #cfcfcf3a;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Poppins', 'Helvetica', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border: none;
+    border-radius: 2px;
+    background: none;
+    transition: all .4s var(--transition); 
+    cursor: pointer;
+  }
+  
+  
+  
+  .multi-button label:before {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 0;
+    top: 20%;
+    left: 50%;
+    background: hsla(var(--secondary),.35);
+    border-radius: 2px;  
+    transition: all .25s var(--transition);
+    
+  }
+  
+  .multi-button label:hover:before {
+    width: 80%;
+    left: 10%;
+    border-top: 1px solid hsl(var(--secondary));
+  }
+  
+  .multi-button input:checked + label:before {
+    height: 60%;
+    bottom: 20%;
+  }
+  
+  .multi-button input:checked + label {  
+    color: hsl(var(--secondary));
+    /* border-bottom: solid 1px hsl(var(--secondary)); */
+    transition-delay: .1s;
+  }
+  
+  .multi-button input[type="radio"] {
+    display: none;
+  }
+
+  .simple-borders{
+      border: 1px solid white;
+      border-radius: 25px;
+  }
+  .darker-borders{
+      background-color: #033454;
+      border-radius: 10px;
+  }
+
+#bitstream{
+    background-color: #0a0e14;
+    width: 100%;
+    color: white;
+}
+#mapFPGA{
+    display: none;
+    overflow-y: scroll;
+    max-height: 96%;
+
+}
+
+.select {
+    position: relative;
+    /* min-width: 200px; */
+    width: 100%;
+  }
+  .select svg {
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 3px);
+    width: 10px;
+    height: 6px;
+    stroke-width: 2px;
+    stroke: #9098a9;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+  .select select {
+    -webkit-appearance: none;
+    padding: 7px 40px 7px 12px;
+    width: 100%;
+    border: 1px solid #e8eaed;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 150ms ease;
+  }
+  .select select:required:invalid {
+    color: #5a667f;
+  }
+  .select select option {
+    color: #223254;
+  }
+  .select select option[value=""][disabled] {
+    display: none;
+  }
+  .select select:focus {
+    outline: none;
+    border-color: #07f;
+    box-shadow: 0 0 0 2px rgba(0,119,255,0.2);
+  }
+  .select select:hover + svg {
+    stroke: #07f;
+  }
+  .sprites {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .x-btn{
+    color: white !important;
+    background-color: #ffffff59 !important;
+    margin-right: 100px;
+    margin-top: 30px;
+    font-size: larger !important;
+  }
+  .arr-btn{
+      background: transparent;
+  }

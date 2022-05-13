@@ -1,9 +1,9 @@
 import imp
 from multiprocessing.spawn import import_main_path
 from operator import ge
-import eel, os
+import eel, os, shutil
 from eel import init, start
-from utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath,pleaseGeneratorFileUthaKLayAao      # file structure utility
+from utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath,pleaseGeneratorFileUthaKLayAao, DRIVERS, RTL_FILES     # file structure utility
 from icecream import ic
 if __name__ == '__main__':
 
@@ -25,10 +25,14 @@ if __name__ == '__main__':
     if vc[0]=="verification":
         eel.disablefunction()
 
+    
+       
+
     @eel.expose
     def getTheFileStrucuture():
         structure = getFileStructure(project_dir)
         parsedHTML = ""
+        ic(structure)
         parsedHTML = parseFileStructure(structure[""])
         # print(parsedHTML)
         eel.pakrKayLaoFiles(parsedHTML)
@@ -41,7 +45,6 @@ if __name__ == '__main__':
             contentOfFile = fileToRead.read()
             fileToRead.close()
             eel.displayTheFile(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
-
 
     @eel.expose
     def parseFilePathReq(file):
@@ -64,6 +67,9 @@ if __name__ == '__main__':
         os.system("./peripheralScript.py")
         
         os.system("sbt 'runMain GeneratorDriver'")
+
+    
+
 
     start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8007)
 

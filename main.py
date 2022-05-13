@@ -30,47 +30,29 @@ if __name__ == '__main__':
     def say_hello_py(x):
         print('Hello from %s' % x)
     @eel.expose
-    def socdetail(listsoc):
-        dictsoc={"i": 0, "m": 0, "f": 0, "c": 0, "gpio": 0, "spi": 0, "uart": 0, "timer": 0, "spi_flash": 0, "i2c": 0, "wb": 0, "tl": 0}
-        
-        for val in listsoc:
-            for key in dictsoc:
-                
-                if key==val:
-                    dictsoc[key]=1
-        print(dictsoc)
-        file=open("web/SoC-Now-Generator/src/main/scala/config.json","w")
-        
-        json.dump(dictsoc,file)
-        file.close()
-        os.chdir("web/SoC-Now-Generator")
-        
-       
-        print("gdgdh")
-        os.system("pwd")
-        runperipheral()
-        
-       
-        eel.goToMain()
-    def runperipheral():
-        os.system("./peripheralScript.py")
-       
+    def socdetail():
        
         yourproject=list1[-1]
-        
-        os.chdir("../../")
-        aa=os.system(f"cd {yourproject}")
-        ic(aa)
         b=list2[-1]
-        # ww=os.system(f"mkdir {b}")
-        #ic(ww)
         file1=open("web/pathfile","w")
         file1.write(f"{yourproject}/{b}")
         file1.close()
         
+       
+        aa=os.chdir(yourproject)
+        ic(aa)
         
-
-        os.system(f"cp -a web/SoC-Now-Generator {yourproject}/{b}")
+        ww=os.system(f"mkdir {b}")
+        ic(ww)
+       
+        er=os.chdir(b)
+        ic(er)
+        
+        os.system("touch main.c")
+        os.chdir("../../")
+        
+        eel.goToMain()
+    
     @eel.expose
     def pyverification():
         
@@ -147,6 +129,13 @@ if __name__ == '__main__':
         filev.write(listt[0])
         filev.close()
         print(listt)
+
+    @eel.expose
+    def genCore(isa,ext,bus):
+        driverKey= f"corei{bus}"
+        file = open("web/driver", "w")
+        file.write(driverKey)
+        file.close()
 
 
 
