@@ -22,8 +22,7 @@
       <img src="assets/icons/flash.png"onclick="gotosplash()"/>
       <h5> The Burq Suite </h5>
       <div class="d-flex">
-        <button class="btn control_btns" id="minimize_btn"> _ </button>
-        <button class="btn control_btns" id="maximize_btn"> ☐ </button>
+        
         <button onclick="window.close()" class="btn control_btns" id="close_btn"> X </button>  
       </div>
       
@@ -37,7 +36,7 @@
       <!-- SIDE BAR -->
       <div id="side_controls">
         <button onclick="openMenu(event, 'Explorer')" class="btn tablinks2 side_control_btns"> <img src="assets/icons/file.png" /> </button>
-        <button onclick="openMenu(event, 'Search')" class="btn tablinks2 side_control_btns"> <img src="assets/icons/search.png" /> </button>
+       
         <!-- <button onclick="openMenu(event, 'Run')" class="btn tablinks2 side_control_btns"> <img src="assets/icons/play.png" > </button> -->
 
       </div>
@@ -110,44 +109,10 @@
 
 
 
-        <div id="Search" class="side_menus tabcontent2 side_menu">
-          <p>Search</p>
-          <div>
-            <input type="text" placeholder="Search" class="search-box" />
-          </div>
-        </div>
 
-        <div id="Run" class="side_menus tabcontent2 side_menu">
-          <p>Run and Debug</p>
-          <div class="run-div">
-            <button class="btn run-btn" id="dis" onclick="genrtl()"> Generate RTL </button> 
-          </div>
-
-          <div class="run-div">
-            <button class="btn run-btn" id="dis" > Verify RTL </button> 
-          </div>
-
-          <div class="run-div">
-            <button class="btn run-btn" id="dis" > Generate Report </button> 
-          </div>
-
-          <div class="run-div">
-            <button class="btn run-btn" id="dis" > Generate Log </button> 
-          </div>
-
-          <div class="run-div">
-            <button class="btn run-btn" id="dis" > Export CSV </button> 
-          </div>
-
-          <div class="run-div">
-            <button class="btn run-btn" id="dis" > Upload Test </button> 
-          </div>
-
-          <div class="run-div">
-            <button onclick="openBitstreamConfig()" class="btn run-btn" id="dis" > Upload Bitstream </button> 
-          </div>
+       
           
-        </div>
+       
         <!-- MAIN EDITOR -->
 
       <div id="main_editor">
@@ -160,7 +125,7 @@
           </div>
           <div id="play_panel">
             <img onclick="runtest()" src="assets/icons/play.png" />
-            <img src="assets/icons/dots.png" />
+           
           </div>
         </div>
 
