@@ -6,6 +6,7 @@ from icecream import ic
 
 theDictOfFilePaths = {}
 GeneratorFileID = []
+ReportFileID = []
 
 def getFileStructure(rootdir):
     import os
@@ -22,8 +23,10 @@ def getFileStructure(rootdir):
             id = str(uuid.uuid4())
             theDictOfFilePaths[id] = fullFile
             ic(fullFile)
-            if "/src/main/scala/Generator.scala" == fullFile:
+            if "main.c" in fullFile:
                 GeneratorFileID.append(id)
+            if ".report" in fullFile:
+                ReportFileID.append(id)
             if len(list(allFolders)) == 1:
                 if "." not in strct.keys():
                     strct["."] = [(id,fullFile)]
@@ -106,6 +109,10 @@ def pleaseParseTheFilePath(file):
 def pleaseGeneratorFileUthaKLayAao():
     ic(GeneratorFileID)
     return (theDictOfFilePaths[GeneratorFileID[0]],GeneratorFileID[0])
+def pleaseReportFileUthaKLayAao():
+    ic(ReportFileID)
+    return (theDictOfFilePaths[ReportFileID[0]],ReportFileID[0])
+
 
 
 

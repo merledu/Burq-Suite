@@ -51,27 +51,38 @@ function openMenu(evt, cityName) {
         footer.style.marginLeft = "19%";
     }
 }
-function stylizeEditors(editor){
-    // let editor = document.getElementsByClassName("editorx");
-    // for(let i = 0; i<editor.length;i++),,,{
+var editors = {}
+function stylizeEditors(editor, id){
+    
         console.log(editor);
-        CodeMirror.fromTextArea(
-        editor,
-        {
-            lineNumbers: true,
-            matchBrackets: true,
-            theme: "ayu-dark",
-            mode: "text/x-c",
-            autoRefresh: true,
-            scrollbars:true,
-            
-        }
-    ).setSize(null, "100%")
-    // }
+        var cmObj = CodeMirror.fromTextArea(
+            editor,
+            {
+                lineNumbers: true,
+                matchBrackets: true,
+                theme: "ayu-dark",
+                mode: "text/x-c",
+                autoRefresh: true,
+                scrollbars:true,
+                
+            }
+        );
+        cmObj.setSize(null, "100%");
 
+        console.log(cmObj);
+        editors[id] = cmObj;
+        console.log(editors);
 }
 
-stylizeEditors();
+function getValueOfEditor(id){
+    // replace btn- from id
+    var id = id.replace("btn-", "");
+    var currentEditor = editors[id];
+    console.log(currentEditor);
+    return currentEditor.getDoc().getValue("\n");
+}
+
+
 
 
 
@@ -141,15 +152,21 @@ function changeV(comp){
         bus.style.display = "block";
     }
 }
+
+
+
+
 function changeC(comp){
     var core1= document.getElementById("Qcore");
     var core = document.getElementById("Ccore");
+    var core2 = document.getElementById("Ccore2");
     var dev = document.getElementById("Cdevices");
     var bus = document.getElementById("Cbus");
     core.style.display = "none";
     dev.style.display = "none";
     bus.style.display = "none";
     core1.style.display="none";
+    core2.style.display="none";
 
     if(comp === "Ccore"){
         core.style.display = "block";
@@ -158,11 +175,46 @@ function changeC(comp){
     } else if (comp === "Cbus"){
         bus.style.display = "block";
     }
- else if (comp === "Qcore"){
-    core1.style.display = "block";
-}
+    else if (comp === "Qcore"){
+        core1.style.display = "block";
+    }
 }
 
+function changeProject2(evt,proj){
+    var btns = document.getElementsByClassName("config-btn");
+    for (i = 0; i < btns.length; i++) {
+        btns[i].className = btns[i].className.replace(" active", "");
+      }
+    evt.currentTarget.className += " active";
+
+    var listt = [];
+
+
+    var custom_test = document.getElementById("custom_test");
+    var custom_core = document.getElementById("custom_core");
+    var prebuilt_core = document.getElementById("prebuilt_core");
+
+    custom_test.style.display = "none";
+    custom_core.style.display = "none";
+    prebuilt_core.style.display = "none";
+
+    if(proj === "custom_test"){
+        custom_test.style.display = "block";
+        listt.push("custom_test");
+    }
+    else if(proj === "custom_core"){
+        custom_core.style.display = "block";
+        listt.push("custom_core");
+    }
+    else if(proj === "prebuilt_core"){
+        prebuilt_core.style.display = "block";
+        listt.push("prebuilt_core");
+    }
+
+    eel.datasend(listt)
+
+
+}
 
 function changeProject(evt,proj){
     var listt=[];
@@ -187,6 +239,15 @@ function changeProject(evt,proj){
     else if(proj === "core"){
         var listt=[];
         coreP.style.display = "block";
+        var _core1= document.getElementById("Qcore");
+        var _core = document.getElementById("Ccore");
+        var _core2 = document.getElementById("Ccore2");
+        var _dev = document.getElementById("Cdevices");
+        var _bus = document.getElementById("Cbus");
+        _core.style.display = "none";
+        _dev.style.display = "none";
+        _bus.style.display = "none";
+        _core1.style.display="block";
         listt.push("core");
     }
     else if(proj === "comp"){
@@ -195,7 +256,18 @@ function changeProject(evt,proj){
     } 
     else if (proj === "verif"){
         var listt=[];
-        verif.style.display = "block";
+        coreP.style.display = "block";
+        var _core1= document.getElementById("Qcore");
+        var _core = document.getElementById("Ccore");
+        var _core2 = document.getElementById("Ccore2");
+        var _dev = document.getElementById("Cdevices");
+        var _bus = document.getElementById("Cbus");
+        _core.style.display = "none";
+        _dev.style.display = "none";
+        _bus.style.display = "none";
+        _core1.style.display="none";
+        _core2.style.display="block";
+        // verif.style.display = "block";
         listt.push("verification");
     } else if (proj === "sdk"){
         var listt=[];

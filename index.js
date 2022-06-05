@@ -18,12 +18,12 @@ const createSplashWindow = () => {
  
 
     // win.loadFile("splash.html")
-    win.loadURL('http://localhost:8012/splash.html');
+    win.loadURL('http://localhost:8012/splash2.html');
 }
 
 
 app.whenReady().then(() => {
-    createSplashWindow()
+    createMainWindow()
 });
 
 function openTheMainWindow(){

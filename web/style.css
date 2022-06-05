@@ -538,3 +538,10 @@ body{
   .arr-btn{
       background: transparent;
   }
+
+  .table-header{
+      color: white;
+  }
+  .table-header span{
+      font-weight: 300;
+  }

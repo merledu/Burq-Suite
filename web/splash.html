@@ -119,7 +119,7 @@
                             <span class="line">
                                 <h2><span>write Custom Test</span></h2>
                             </span>
-                            <button class="btn temp-btn" style="width: 300px;">
+                            <button class="btn temp-btn" style="width: 300px;"onclick="seldonesoc()">
                                 <span>Write your own test</span>
                                 <br>
                                
@@ -134,7 +134,7 @@
                                     <button  onclick="seldonesoc()" class="btn ctrl-btn">
                                         <img src="assets/icons/next.png" style="width: 100%;margin-left: 800px;"  />
                                     </button>
-                                </div>
+                        </div>
 
                                 
                             
@@ -195,6 +195,55 @@
                                         </button>
                                     </div>
                                     </div>
+                                    <div id="Ccore2">
+                                        <div class="row main-config">
+                                            <div class="col-md-3">
+                                                <div class="name-config active">
+                                                    <p>Core</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1"></div>
+            
+                                            <div class="col-md-6" style="border-right: 1px solid white; height: 25%;" >
+                                                <h6 style="font-weight: lighter;">Core</h6>
+                                                <form>
+                                                    <input type="radio" name="c-isa" value="32 Bit" checked />
+                                                    <label> IBEX </label>
+                                                    <br>
+                                                    <input type="radio" name="c-isa" value="64 Bit" />
+                                                    <label> SWERV-EH1 </label>
+                                                    <br>
+                                                    <input type="radio" name="c-isa" value="64 Bit" />
+                                                    <label> SWERV-EH2 </label>
+                                                </form>
+                                            </div>
+                                            <!-- <div class="col-md-1"></div> -->
+                                            <!-- <div class="col-md-3">
+                                                <h6 style="font-weight: lighter;">Extensions</h6>
+                                                <form>
+                                                    <input type="checkbox" name="c-ext" disabled checked />
+                                                    <label> Integer (I) </label>
+                                                    <br />
+                                                    <input type="checkbox" name="c-ext" />
+                                                    <label> Multiplier (M) </label>
+                                                    <br />
+                                                    <input type="checkbox" name="c-ext" />
+                                                    <label> Floating Point (F) </label>
+                                                    <br />
+                                                    <input type="checkbox" name="c-ext" />
+                                                    <label> Compressed (C) </label> 
+                                                </form>
+                                            </div> -->
+                                            <!-- <div class="col-md-2"></div> -->
+                                        </div>
+        
+                                        <div style="text-align: right;">
+                                            
+                                            <button onclick="changeC('Ccore')" class="btn ctrl-btn">
+                                                <img src="assets/icons/next.png" style="width: 100%;" />
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div id="Ccore">
                                         <div class="row main-config">
                                             <div class="col-md-2">
@@ -236,6 +285,9 @@
                                             </button>
                                         </div>
                                     </div>
+
+                                    
+
                                     <div id="Cdevices">
                                         <div class="row main-config">
                                             <div class="col-md-3">
@@ -656,25 +708,10 @@ function testswerv(){
    eel.getlistswerv()
    
 }  
-eel.expose(javatestlistswerv)
-function javatestlistswerv(listt){
-var ab=listt
-    var ss= document.getElementById('swerv');
-   var sv=document.getElementById('ibex');
-   for (var i = 0; i < ab.length; i++) {
-                var a = ab[i];
- 
-                document.getElementById("swervform").innerHTML += 
-                            "<input type='radio' name='bus' value='wb' checked><label>"+ a +" </label><br>";
-                            
-
-   sv.classList.add('hideibex');
-   ss.classList.remove("showswerv");
-    
-}   
-}       
+      
 eel.expose(javatestlistibex)
 function javatestlistibex(listt){
+    console.log(listt);
    var ab=listt;
    var ss= document.getElementById('swerv');
    var sv=document.getElementById('ibex');
