@@ -63,7 +63,7 @@ if __name__ == '__main__':
         status = []
         for i in range(2,len(content_list)):
             tests.append(content_list[i].split(":")[0])
-            status.append(content_list[i].split(":")[1])
+            status.append(content_list[i].split(":")[1:])
         eel.displayTheReport(core,iss,tests,status,p1,p2,p3)
 
 

@@ -402,7 +402,7 @@ def comparison():
 
       return "Passed"
     else:
-      return fail
+      return " ".join(fail)
 
     
 def call(inputfile1,inputfile2):              
