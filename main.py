@@ -21,8 +21,11 @@ if __name__ == '__main__':
     init('web')
     list1 =["a"]
     list2=[]
+    listuploadcore=[]
 
     currentRootDir = os.getcwd()
+    testcasepath=[]
+    logfilepath=[]
 
 
     @eel.expose
@@ -231,12 +234,71 @@ if __name__ == '__main__':
         list1.clear()
         print(list1)
         list1.append(directory_path)
-        print(list1)
+        ic(list1)
         ic(projectnamee)
         list2.append(projectnamee)
        
         
         eel.select_js(list1[-1])
+    @eel.expose
+    def selectFolder1():
+        print("Here")
+        root = tkinter.Tk()
+        root.attributes("-topmost", True)
+        root.withdraw()
+        directory_path = filedialog.askdirectory()
+        print(directory_path)
+        listuploadcore.clear()
+        print( listuploadcore)
+        listuploadcore.append(directory_path)
+        ic(listuploadcore)
+       
+        eel.select_js1(listuploadcore[-1])
+    @eel.expose
+    def selecttest():
+        print("Here")
+        root = tkinter.Tk()
+        root.attributes("-topmost", True)
+        root.withdraw()
+        directory_path = filedialog.askdirectory()
+        print(directory_path)
+        testcasepath.clear()
+        print(testcasepath)
+        testcasepath.append(directory_path)
+        ic(testcasepath)
+       
+        eel.select_jstestcase(testcasepath[-1])
+    @eel.expose
+    def selectlogfile():
+        print("Here")
+        root = tkinter.Tk()
+        root.attributes("-topmost", True)
+        root.withdraw()
+        directory_path = filedialog.askdirectory()
+        print(directory_path)
+        logfilepath.clear()
+        print(logfilepath)
+        logfilepath.append(directory_path)
+        ic(logfilepath)
+       
+        eel.select_jslog(logfilepath[-1])
+    
+      
+        
+        
+#copy corefiles in ser seleted path
+    def copycorefiles():
+        
+        
+        yourproject=list1[-1]
+        
+        aa=os.system(f"cd {yourproject}")
+        bb=listuploadcore[-1]
+        b=list2[-1]
+       
+        os.system(f"cp bb  {yourproject}/{b}")
+        
+
     @eel.expose
     def verCoreTest(listver):
         i=listver[-1]
@@ -292,7 +354,127 @@ if __name__ == '__main__':
         file = open("web/driver", "w")
         file.write(driverKey)
         file.close()
+    @eel.expose
+    def floatingpointtest():
+        
 
+        namelist=[]
+        #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
+        root="web/testcases/Self-Checking-Tests/Floating_point_tests_for_azadi"
+        # get list of directory names from root
+        for dirname in os.listdir(root):    
+        # for path in filepaths:
+            # a=path.split("/")
+            ic(dirname)
+            namelist.append(dirname)
+            
+        print(namelist)
+        eel.showfloatingTests(namelist)
+    @eel.expose
+    def merlvectortest():
+        namelist=[]
+        #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
+        root="web/testcases/Self-Checking-Tests/MERL_vector_Tests"
+        # get list of directory names from root
+        for dirname in os.listdir(root):    
+        # for path in filepaths:
+            # a=path.split("/")
+            ic(dirname)
+            namelist.append(dirname)
+            
+        print(namelist)
+        eel.showMerlTests(namelist)
+    @eel.expose
+    def riscvtest():
+        namelist=[]
+        #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
+        root="web/testcases/Self-Checking-Tests/Riscv-tests"
+        # get list of directory names from root
+        for dirname in os.listdir(root):    
+        # for path in filepaths:
+            # a=path.split("/")
+            ic(dirname)
+            namelist.append(dirname)
+            
+        print(namelist)
+        eel.showriscvTests(namelist)
+    @eel.expose
+    def selfcheckingvectortest():
+        namelist=[]
+            #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
+        root="web/testcases/Self-Checking-Tests/Self-Checking-vector-tests"
+        # get list of directory names from root
+        for dirname in os.listdir(root):    
+        # for path in filepaths:
+            # a=path.split("/")
+            ic(dirname)
+            namelist.append(dirname)
+            
+        print(namelist)
+        eel.showselfcheckingvectorTests(namelist)
+    @eel.expose
+    def swervtest():
+        namelist=[]
+            #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
+        root="web/testcases/Self-Checking-Tests/Swerv_Tests"
+        # get list of directory names from root
+        for dirname in os.listdir(root):    
+        # for path in filepaths:
+            # a=path.split("/")
+            ic(dirname)
+            namelist.append(dirname)
+            
+        print(namelist)
+        eel.showswervTests(namelist)
+    @eel.expose
+    def burqgeneratedtest():
+        namelist=[]
+            #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
+        root="web/testcases/Self-Checking-Tests/BURQ_Generated_Tests"
+        # get list of directory names from root
+        for dirname in os.listdir(root):    
+        # for path in filepaths:
+            # a=path.split("/")
+            ic(dirname)
+            namelist.append(dirname)
+            
+        print(namelist)
+        eel.showburqTests(namelist)
+
+
+
+    @eel.expose
+    def enduploadcore(getcommand,tests1):
+        ic(tests1)
+        ic(getcommand)
+
+        yourproject=list1[-1]
+        b=list2[-1]
+        file1=open("web/pathfile","w")
+        file1.write(f"{yourproject}/{b}")
+        file1.close()
+        uploadedcore=listuploadcore[-1]
+        ic(uploadedcore)
+       
+        os.chdir(yourproject)
+        
+        
+        os.system(f"mkdir {b}")
+        
+       
+        os.chdir(b)
+        os.system(f"cp -a {uploadedcore}  {yourproject}/{b}")
+        for test in tests1:
+            ic(test)
+            yy=getcommand.replace("testname",test)
+            ic(yy)
+
+    
+
+        
+
+        
+    
 
 
 

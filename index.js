@@ -23,7 +23,7 @@ const createSplashWindow = () => {
 
 
 app.whenReady().then(() => {
-    createMainWindow()
+    createSplashWindow()
 });
 
 function openTheMainWindow(){

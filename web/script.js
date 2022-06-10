@@ -193,10 +193,14 @@ function changeProject2(evt,proj){
     var custom_test = document.getElementById("custom_test");
     var custom_core = document.getElementById("custom_core");
     var prebuilt_core = document.getElementById("prebuilt_core");
+    var upload_core = document.getElementById("upload_core");
+
 
     custom_test.style.display = "none";
     custom_core.style.display = "none";
     prebuilt_core.style.display = "none";
+
+    upload_core.style.display = "none";
 
     if(proj === "custom_test"){
         custom_test.style.display = "block";
@@ -209,6 +213,10 @@ function changeProject2(evt,proj){
     else if(proj === "prebuilt_core"){
         prebuilt_core.style.display = "block";
         listt.push("prebuilt_core");
+    }
+    else if(proj === "upload_core"){
+        upload_core.style.display = "block";
+        listt.push("upload_core");
     }
 
     eel.datasend(listt)

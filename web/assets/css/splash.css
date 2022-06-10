@@ -219,7 +219,7 @@ body, .row{
 }
 #project-browse *{
     margin-right: 20px;
-    margin-top: 20px;
+    
 }
 #project-browse input{
     padding: 5px;
@@ -232,8 +232,7 @@ body, .row{
     padding: 6px;
     background-color: #1a1d22;
     box-shadow: #00000048 2px 2px 2px;
-    width: 10%;
-    margin: 0;
+   
     /* margin-bottom: 30px; */
 }
 .browse-btn:hover{

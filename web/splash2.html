@@ -109,7 +109,7 @@
                                 Custom Config Core Verification
                             </button>
     
-                            <button onclick="changeProject2(event,'comp')" class="btn config-btn">
+                            <button onclick="changeProject2(event,'upload_core')" class="btn config-btn">
                                     Upload Custom Core                 
                             </button>
     
@@ -131,23 +131,24 @@
                         
                         <div id="project-name">
                             <h5> Project Name: </h5>
-                            <input type="text" placeholder="Untitled " id="projectname">
+                            <input type="text" placeholder="Untitled " id="projectname" style="margin-top: -10px;
+                            margin-left: 19px;">
                         </div>
                         <div id="project-browse">
                             <h5> Project Location </h5>
                             <div type="text" id="path" style="color: white;
                             border-right-color: #767676;
-                            width: 512px;
+                            width: 630px;
                             padding: 5px;
                             height: 34px;
                             border-bottom-color: #767676;
                             border-left-color: #1a1d22;
                             background-color: #1a1d22;
                             border-style: solid;
-                            margin-left: 20px;
+                            margin-left: 73px;
 
                             border-top-color: #1a1d22;" onfocus="value=''"  > </div>
-                            <button class="btn browse-btn" onclick="select()">...</button>
+                            <button class="btn browse-btn" onclick="select()" style="width: 70px;">...</button>
                         </div>
 
                         <!-- ------------------------- CUSTOM TESTTTTT --------------------- -->
@@ -316,6 +317,256 @@
                         </div>
 
                         <!-- -------------------- ------------ -------------------- -->
+                        <!-- ---------------Upload Custom Core--- ---------------------->
+                         <!-- ------------------------- CUSTOM CONFIG --------------------- -->
+                         <div class="config-box" id="upload_core"  style="display: none;">
+                            <span class="line">
+                                <h2><span>Upload Custom Core</span></h2>
+                            </span>
+                            <br><br>
+                            <!-- -----------------browse folder------------------>
+                            <div id="uploadcore">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config active">
+                                            <p>Upload Core </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+    
+                                    <div class="col-md-3"  >
+                                        <h6 style="font-weight: lighter;">Upload core </h6>
+                                        
+                                        <div id="project-browse" style="width: 430px" >
+                                          
+                                            <div type="text" id="pathcore" style="color: white;
+                                            border-right-color: #767676;
+                                            width: 500px;
+                                            padding: 5px;
+                                            height: 34px;
+                                            border-bottom-color: #767676;
+                                            border-left-color: #1a1d22;
+                                            background-color: #1a1d22;
+                                            border-style: solid;
+                                           
+                
+                                            border-top-color: #1a1d22;" onfocus="value=''"  > </div>
+                                            <button class="btn browse-btn" onclick="select1()" style="width:80px;">...</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div style="text-align: right;">
+                                        
+                                    <button onclick="changecoree('command')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
+                                    </button>
+                                </div>
+                                </div>
+                          
+
+                        <!-- -----------------------------------upload core --command -------->
+                        <div id="core-command">
+                        <div class="row main-config">
+                            <div class="col-md-3">
+                                <div class="name-config active">
+                                    <p>Upload Core </p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Enter commands </p>
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+
+                            <div class="col-md-3"  >
+                                <h6 style="font-weight: lighter;width: 500px;">Enter commands to Run test case </h6>
+                                
+                              
+                                <input id="getcommands" placeholder="make -f Makefile TEST={testname}" style="background-color: black;color: white;width: 386px;">
+                                
+                            </div>
+                            <div style="    margin-left: 245px;
+                            margin-top: -43px;"><p style="color:rgba(240, 248, 255, 0.342)">e.g:  {testcommand} Test={testname}
+        
+                            </p></div>
+                            
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div style="text-align: right;">
+                            <button onclick="changecoree('uploadcore')" class="btn ctrl-btn">
+                                <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
+                            </button>    
+                            <button onclick="changecoree('uptestcase')" class="btn ctrl-btn">
+                                <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
+                            </button>
+                        </div>
+                    </div>
+                    <!-- --------------------------TESTCASE------------------------->
+                    <div id="testcase">
+                        <div class="row main-config">
+                            <div class="col-md-3">
+                                <div class="name-config active">
+                                    <p>Upload Core </p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Enter commands </p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Select locations </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6"  style="margin-left: 70px;">
+
+                            <div  >
+                                <h6 style="font-weight: lighter;">Select Your TestCase folder </h6>
+                                
+                                <div id="project-browse" style="width: 415px;" >
+                                  
+                                    <div type="text" id="pathtest" style="color: white;
+                                    border-right-color: #767676;
+                                    width: 430px;
+                                    padding: 5px;
+                                    height: 34px;
+                                    border-bottom-color: #767676;
+                                    border-left-color: #1a1d22;
+                                    background-color: #1a1d22;
+                                    border-style: solid;
+                                    margin-left: 20px;
+                                    margin-top: -11px;
+        
+                                    border-top-color: #1a1d22;" onfocus="value=''"  > </div>
+                                    <button class="btn browse-btn"onclick="selecttestcase()" style="margin-top: -10px;width: 85px;">...</button>
+                                </div>
+                            </div>
+                            <div  style="margin-top:5px;" >
+                                <h6 style="font-weight: lighter;">Select Your Core log file folder </h6>
+                                
+                                <div id="project-browse" style="width: 415px;" >
+                                  
+                                    <div type="text" id="logpath" style="color: white;
+                                    border-right-color: #767676;
+                                    width: 430px;
+                                    padding: 5px;
+                                    height: 34px;
+                                    border-bottom-color: #767676;
+                                    border-left-color: #1a1d22;
+                                    background-color: #1a1d22;
+                                    border-style: solid;
+                                    margin-left: 20px;
+                                    margin-top: -11px;
+        
+                                    border-top-color: #1a1d22;" onfocus="value=''"  > </div>
+                                    <button class="btn browse-btn" onclick="selectlog()" style="margin-top: -10px;width: 85px;">...</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                            
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div style="text-align: right;" style="margin-top: -20px;">
+                            <button  class="btn ctrl-btn">
+                                <img src="assets/icons/back.png" onclick="changecoree('command')" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
+                            </button>    
+                            <button  class="btn ctrl-btn">
+                                <img src="assets/icons/next.png" onclick="changecoree('Stestcasetype')" style="width: 100%;margin-top: -60px;" />
+                            </button>
+                        </div>
+                            </div>
+                            <!--  ------------------------- testcase sslection type ------------>
+                            <div id="testcasetype">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config active">
+                                            <p>Upload Core </p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Enter commands </p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Select locations </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"  style="margin-left: 70px;">
+        
+                                    <div  >
+                                        <h6 style="font-weight: lighter;">Select Your TestCase type</h6>
+                                        
+                                      
+                                    </div>
+                                    <div  style="margin-top:5px;" >
+                                        
+                                        
+                                        <form>
+                                            <input type="radio" id="gencoretest" name="upCore" value="burqgenerated" checked />
+                                            <label> BURQ_Generated_Tests </label>
+                                            <br>
+                                            <input  type="radio" id="gencoretest" name="upCore" value="floatingpoint" />
+                                            <label>Floating_point_tests_for_azadi </label>
+                                            <br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="merlvector" />
+                                            <label> MERL_vector_Tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="riscvtest" />
+                                            <label> Riscv-tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="selfcheckingvector" />
+                                            <label> Self-Checking-vector-tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="swervtests" />
+                                            <label>Swerv_Tests </label>
+                                        </form> 
+                                
+                                </div>
+                                    
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div style="text-align: right;" style="margin-top: -20px;">
+                                    <button  class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" onclick="changecoree('uptestcase')" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
+                                    </button>    
+                                    <button  class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" onclick="changecoree('showtests')" style="width: 100%;margin-top: -60px;" />
+                                    </button>
+                                </div>
+                                    </div>
+                            </div>
+                            <!-------------------------------SHOW TEST CASES-------------->
+                            <div id="showtest"style="margin-top:-60px;">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config">
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config">
+                                            <p>ISS</p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Test Cases</p>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-7" >
+                                        <form id="uploadcoretestcaseform" style="overflow-y:auto;height:200px">
+                                            
+                                        </form>
+                                         
+                                        
+                                       
+                                     </div>
+                                     <div style="margin-top: -40px;">
+                                       
+                                        <button onclick="changecoree('Stestcasetype')" class="btn ctrl-btn">
+                                            <img src="assets/icons/back.png" style="width: 100%;" />
+                                        </button>
+                                        <button onclick="changecoree('endcore')" class="btn ctrl-btn">
+                                            <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
+                                        </button>
+    
+                                        
+                                     </div>
+                                     
+                                </div>
+                            </div>
+                            </div>
 
                         <!-- ----------------------- PREBUILT CORE ------------------ -->
                         <div class="config-box" id="prebuilt_core">
@@ -327,6 +578,10 @@
                             <!-- -------------------- PREBUILT CORE BOX -------------------- -->
                             <div id="prebuilt-core"style="margin-top:-60px;">
                                 <div class="row main-config">
+
+
+
+
                                     <div class="col-md-3">
                                         <div class="name-config active">
                                             <p>Core</p>
@@ -587,8 +842,121 @@ function opneRecentProject(id){
                     
                 }
             }
+//Coree
+            function changecoree(comp){
 
+                
+                if(comp == "command"){
+                    document.getElementById("core-command").style.display = "block";
+                    document.getElementById("uploadcore").style.display = "none";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "none";
+                   
+                }
+                if(comp == "upcore"){
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "block";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "none";
+                   
+                }
+                if(comp == "uptestcase"){
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "none";
+                    document.getElementById("testcase").style.display = "block";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "none";
+                   
+                }
+                if(comp == "uploadcore"){
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "block";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "none";
+                   
+                }
+                if(comp == "showtests"){
+                    var selectedtesttype;
+                    var cores = document.getElementsByName("upCore");
+                    for (var j =0; j<cores.length; j++){
+                        if(cores[j].checked){
+                            selectedtesttype = cores[j].value;
+                            alert(selectedtesttype);
+                        }
+                    }
+                    
+                    if(selectedtesttype == "floatingpoint"){
+                        eel.floatingpointtest()
+                    } else if(selectedtesttype== "merlvector"){
+                        eel.merlvectortest()
+                    }
+                    else if(selectedtesttype== "riscvtest"){
+                        eel.riscvtest()
+                    }
+                    else if(selectedtesttype== "selfcheckingvector"){
+                        eel.selfcheckingvectortest()
+                    }
+                    else if(selectedtesttype== "swervtests"){
+                        eel.swervtest()
+                    }
+                    else if(selectedtesttype== "burqgenerated"){
+                        eel.burqgeneratedtest()
+                    }
+                   
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "none";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "block";
+                   
+                }
+              
+                if(comp == "Stestcasetype"){
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "none";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "block";
+                   
+                }
+                else if(comp == "endcore"){
+                    var projName = document.getElementById("projectname").value;
+                    var projDir = document.getElementById("path").innerHTML;
+                    var command=document.getElementById("getcommands").value;
+                    var uploadcore = document.getElementById("pathcore").innerHTML;
+                    var testcase = document.getElementById("pathtest").innerHTML;
+                    var logfile = document.getElementById("logpath").innerHTML;
+                    if (projName == ""){
+                        alert("Please enter a project name");
+                    }  else if (projDir == " "){
+                        alert("Please select a directory");}
+                    
+                 else if (uploadcore == " "){
+                        alert("Please Upload Core");
+            }
+             else if (command == ""){
+                        alert("Please Enter command");
+                }
+               
+            else if (testcase == ""){
+                        alert("Please select testcase folder");
+            }
+            else if (logfile == " "){
+                        alert("Please  location where log file will generate");
+                }
+            var getcommand=document.getElementById("getcommands").value;
+            var tests1 = [];
+                    var testCheckboxes1 = document.getElementsByName("uploadcoretestcaseform");
+                    for (var i = 0; i < testCheckboxes1.length; i++) {
+                        if (testCheckboxes1[i].checked) {
+                            tests1.push(testCheckboxes1[i].value);
+                        }
+                    }
 
+            eel.enduploadcore(getcommand,tests1);
+            }}
             function changeCustom(comp){
                 var core = document.getElementById("custom-core");
                 var iss = document.getElementById("custom-iss");
@@ -610,6 +978,9 @@ function opneRecentProject(id){
                     test.style.display = "block";
                 }
             }
+        
+    
+
 
             eel.expose(showIbexTests)
             function showIbexTests(listt){
@@ -645,16 +1016,65 @@ function opneRecentProject(id){
                 var projectnamee = document.getElementById("projectname").value;
                 var showpath = document.getElementById("path");
     showpath.innerHTML ="";
-    console.log(projectnamee);
+    console.log(showpath);
 
         eel.selectFolder(projectnamee);
 
+
+}
+function select1(){
+               
+                var showpath = document.getElementById("pathcore");
+    showpath.innerHTML ="";
+    
+    
+        eel.selectFolder1();
+
+
+}
+//select test case location
+function selecttestcase(){
+               
+               var showpath = document.getElementById("pathtest");
+   showpath.innerHTML ="";
+   
+       eel.selecttest();
+
+
+}
+//select log file location
+function selectlog(){
+               
+               var showpath = document.getElementById("logpath");
+   showpath.innerHTML ="";
+  
+   
+       eel.selectlogfile();
+
+
+}
+eel.expose(select_jstestcase)
+function select_jstestcase(a){
+    var showpath = document.getElementById("pathtest");
+    showpath.innerHTML+=a;
+
+}
+eel.expose(select_jslog)
+function select_jslog(a){
+    var showpath = document.getElementById("logpath");
+    showpath.innerHTML+=a;
 
 }
 //showpath
 eel.expose(select_js)
 function select_js(a){
     var showpath = document.getElementById("path");
+    showpath.innerHTML+=a;
+
+}
+eel.expose(select_js1)
+function select_js1(a){
+    var showpath = document.getElementById("pathcore");
     showpath.innerHTML+=a;
 
 }
@@ -680,7 +1100,98 @@ function seldonesoc(){
             window.close();
         }
 
-        
+  //uploadcoreprocess done
+  // copy make directry in rjct location
+  //copy all files of upload core in new made directry
+  // user will select test case so 
+  //  
+  eel.expose(showfloatingTests)
+            function showfloatingTests(listt){
+                
+                var form=document.getElementById('uploadcoretestcaseform');
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+            } 
+eel.expose(showMerlTests)
+function showMerlTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showriscvTests)
+function showriscvTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+
+}
+eel.expose(showswervTests)
+function showswervTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showburqTests)
+function showburqTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showselfcheckingvectorTests)
+function showselfcheckingvectorTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+
+}
+            //brow    
 </script>
 </body>
 </html>
