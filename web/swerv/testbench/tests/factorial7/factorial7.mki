@@ -1,0 +1,2 @@
+OFILES = Test_Factorial_0f_7values.o crt0.o
+TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g
