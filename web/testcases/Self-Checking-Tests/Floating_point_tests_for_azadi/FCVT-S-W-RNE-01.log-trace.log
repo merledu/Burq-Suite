@@ -1,0 +1,624 @@
+Info 1: 'riscvOVPsim/cpu', 0x0000000080000000(rvtest_entry_point): 0440006f j       80000044
+Info 2: 'riscvOVPsim/cpu', 0x0000000080000044(reset_vector): 00002537 lui     a0,0x2
+Info   a0 00000000 -> 00002000
+Info 3: 'riscvOVPsim/cpu', 0x0000000080000048(reset_vector+4): 80050513 addi    a0,a0,-2048
+Info   a0 00002000 -> 00001800
+Info 4: 'riscvOVPsim/cpu', 0x000000008000004c(reset_vector+8): 30052073 csrs    mstatus,a0
+Info   mstatus 00000000 -> 00001800
+Info 5: 'riscvOVPsim/cpu', 0x0000000080000050(reset_vector+c): 00000297 auipc   t0,0x0
+Info   t0 00000000 -> 80000050
+Info 6: 'riscvOVPsim/cpu', 0x0000000080000054(reset_vector+10): fb428293 addi    t0,t0,-76
+Info   t0 80000050 -> 80000004
+Info 7: 'riscvOVPsim/cpu', 0x0000000080000058(reset_vector+14): 30529073 csrw    mtvec,t0
+Info   mtvec 00000000 -> 80000004
+Info 8: 'riscvOVPsim/cpu', 0x000000008000005c(reset_vector+18): 00000297 auipc   t0,0x0
+Info   t0 80000004 -> 8000005c
+Info 9: 'riscvOVPsim/cpu', 0x0000000080000060(reset_vector+1c): 02428293 addi    t0,t0,36
+Info   t0 8000005c -> 80000080
+Info 10: 'riscvOVPsim/cpu', 0x0000000080000064(reset_vector+20): 34129073 csrw    mepc,t0
+Info   mepc 00000000 -> 80000080
+Info 11: 'riscvOVPsim/cpu', 0x0000000080000068(reset_vector+24): f1402573 csrr    a0,mhartid
+Info   a0 00001800 -> 00000000
+Info 12: 'riscvOVPsim/cpu', 0x000000008000006c(reset_vector+28): 30200073 mret
+Info   mstatus 00001800 -> 00000080
+Info 13: 'riscvOVPsim/cpu', 0x0000000080000080(rvtest_init): feedc0b7 lui     ra,0xfeedc
+Info   ra 00000000 -> feedc000
+Info 14: 'riscvOVPsim/cpu', 0x0000000080000084(rvtest_init+4): ead08093 addi    ra,ra,-339
+Info   ra feedc000 -> feedbead
+Info 15: 'riscvOVPsim/cpu', 0x0000000080000088(rvtest_init+8): ff76e137 lui     sp,0xff76e
+Info   sp 00000000 -> ff76e000
+Info 16: 'riscvOVPsim/cpu', 0x000000008000008c(rvtest_init+c): f5610113 addi    sp,sp,-170
+Info   sp ff76e000 -> ff76df56
+Info 17: 'riscvOVPsim/cpu', 0x0000000080000090(rvtest_init+10): 7fbb71b7 lui     gp,0x7fbb7
+Info   gp 00000000 -> 7fbb7000
+Info 18: 'riscvOVPsim/cpu', 0x0000000080000094(rvtest_init+14): fab18193 addi    gp,gp,-85
+Info   gp 7fbb7000 -> 7fbb6fab
+Info 19: 'riscvOVPsim/cpu', 0x0000000080000098(rvtest_init+18): bfddb237 lui     tp,0xbfddb
+Info   tp 00000000 -> bfddb000
+Info 20: 'riscvOVPsim/cpu', 0x000000008000009c(rvtest_init+1c): 7d520213 addi    tp,tp,2005
+Info   tp bfddb000 -> bfddb7d5
+Info 21: 'riscvOVPsim/cpu', 0x00000000800000a0(rvtest_init+20): 00000297 auipc   t0,0x0
+Info   t0 80000080 -> 800000a0
+Info 22: 'riscvOVPsim/cpu', 0x00000000800000a4(rvtest_init+24): 0d828293 addi    t0,t0,216
+Info   t0 800000a0 -> 80000178
+Info 23: 'riscvOVPsim/cpu', 0x00000000800000a8(rvtest_init+28): 00002317 auipc   t1,0x2
+Info   t1 00000000 -> 800020a8
+Info 24: 'riscvOVPsim/cpu', 0x00000000800000ac(rvtest_init+2c): f5830313 addi    t1,t1,-168
+Info   t1 800020a8 -> 80002000
+Info 25: 'riscvOVPsim/cpu', 0x00000000800000b0(rvtest_init+30): b7fbb3b7 lui     t2,0xb7fbb
+Info   t2 00000000 -> b7fbb000
+Info 26: 'riscvOVPsim/cpu', 0x00000000800000b4(rvtest_init+34): 6fa38393 addi    t2,t2,1786
+Info   t2 b7fbb000 -> b7fbb6fa
+Info 27: 'riscvOVPsim/cpu', 0x00000000800000b8(rvtest_init+38): 5bfde437 lui     s0,0x5bfde
+Info   s0 00000000 -> 5bfde000
+Info 28: 'riscvOVPsim/cpu', 0x00000000800000bc(rvtest_init+3c): b7d40413 addi    s0,s0,-1155
+Info   s0 5bfde000 -> 5bfddb7d
+Info 29: 'riscvOVPsim/cpu', 0x00000000800000c0(rvtest_init+40): adfef4b7 lui     s1,0xadfef
+Info   s1 00000000 -> adfef000
+Info 30: 'riscvOVPsim/cpu', 0x00000000800000c4(rvtest_init+44): dbe48493 addi    s1,s1,-578
+Info   s1 adfef000 -> adfeedbe
+Info 31: 'riscvOVPsim/cpu', 0x00000000800000c8(rvtest_init+48): 56ff7537 lui     a0,0x56ff7
+Info   a0 00000000 -> 56ff7000
+Info 32: 'riscvOVPsim/cpu', 0x00000000800000cc(rvtest_init+4c): 6df50513 addi    a0,a0,1759
+Info   a0 56ff7000 -> 56ff76df
+Info 33: 'riscvOVPsim/cpu', 0x00000000800000d0(rvtest_init+50): ab7fc5b7 lui     a1,0xab7fc
+Info   a1 00000000 -> ab7fc000
+Info 34: 'riscvOVPsim/cpu', 0x00000000800000d4(rvtest_init+54): b6f58593 addi    a1,a1,-1169
+Info   a1 ab7fc000 -> ab7fbb6f
+Info 35: 'riscvOVPsim/cpu', 0x00000000800000d8(rvtest_init+58): d5bfe637 lui     a2,0xd5bfe
+Info   a2 00000000 -> d5bfe000
+Info 36: 'riscvOVPsim/cpu', 0x00000000800000dc(rvtest_init+5c): db760613 addi    a2,a2,-585
+Info   a2 d5bfe000 -> d5bfddb7
+Info 37: 'riscvOVPsim/cpu', 0x00000000800000e0(rvtest_init+60): eadff6b7 lui     a3,0xeadff
+Info   a3 00000000 -> eadff000
+Info 38: 'riscvOVPsim/cpu', 0x00000000800000e4(rvtest_init+64): edb68693 addi    a3,a3,-293
+Info   a3 eadff000 -> eadfeedb
+Info 39: 'riscvOVPsim/cpu', 0x00000000800000e8(rvtest_init+68): f56ff737 lui     a4,0xf56ff
+Info   a4 00000000 -> f56ff000
+Info 40: 'riscvOVPsim/cpu', 0x00000000800000ec(rvtest_init+6c): 76d70713 addi    a4,a4,1901
+Info   a4 f56ff000 -> f56ff76d
+Info 41: 'riscvOVPsim/cpu', 0x00000000800000f0(rvtest_init+70): fab807b7 lui     a5,0xfab80
+Info   a5 00000000 -> fab80000
+Info 42: 'riscvOVPsim/cpu', 0x00000000800000f4(rvtest_init+74): bb678793 addi    a5,a5,-1098
+Info   a5 fab80000 -> fab7fbb6
+Info 43: 'riscvOVPsim/cpu', 0x00000000800000f8(rvtest_init+78): 7d5c0837 lui     a6,0x7d5c0
+Info   a6 00000000 -> 7d5c0000
+Info 44: 'riscvOVPsim/cpu', 0x00000000800000fc(rvtest_init+7c): ddb80813 addi    a6,a6,-549
+Info   a6 7d5c0000 -> 7d5bfddb
+Info 45: 'riscvOVPsim/cpu', 0x0000000080000100(rvtest_init+80): beae08b7 lui     a7,0xbeae0
+Info   a7 00000000 -> beae0000
+Info 46: 'riscvOVPsim/cpu', 0x0000000080000104(rvtest_init+84): eed88893 addi    a7,a7,-275
+Info   a7 beae0000 -> beadfeed
+Info 47: 'riscvOVPsim/cpu', 0x0000000080000108(rvtest_init+88): df570937 lui     s2,0xdf570
+Info   s2 00000000 -> df570000
+Info 48: 'riscvOVPsim/cpu', 0x000000008000010c(rvtest_init+8c): f7690913 addi    s2,s2,-138
+Info   s2 df570000 -> df56ff76
+Info 49: 'riscvOVPsim/cpu', 0x0000000080000110(rvtest_init+90): 6fab89b7 lui     s3,0x6fab8
+Info   s3 00000000 -> 6fab8000
+Info 50: 'riscvOVPsim/cpu', 0x0000000080000114(rvtest_init+94): fbb98993 addi    s3,s3,-69
+Info   s3 6fab8000 -> 6fab7fbb
+Info 51: 'riscvOVPsim/cpu', 0x0000000080000118(rvtest_init+98): b7d5ca37 lui     s4,0xb7d5c
+Info   s4 00000000 -> b7d5c000
+Info 52: 'riscvOVPsim/cpu', 0x000000008000011c(rvtest_init+9c): fdda0a13 addi    s4,s4,-35
+Info   s4 b7d5c000 -> b7d5bfdd
+Info 53: 'riscvOVPsim/cpu', 0x0000000080000120(rvtest_init+a0): dbeaeab7 lui     s5,0xdbeae
+Info   s5 00000000 -> dbeae000
+Info 54: 'riscvOVPsim/cpu', 0x0000000080000124(rvtest_init+a4): feea8a93 addi    s5,s5,-18
+Info   s5 dbeae000 -> dbeadfee
+Info 55: 'riscvOVPsim/cpu', 0x0000000080000128(rvtest_init+a8): 6df57b37 lui     s6,0x6df57
+Info   s6 00000000 -> 6df57000
+Info 56: 'riscvOVPsim/cpu', 0x000000008000012c(rvtest_init+ac): ff7b0b13 addi    s6,s6,-9
+Info   s6 6df57000 -> 6df56ff7
+Info 57: 'riscvOVPsim/cpu', 0x0000000080000130(rvtest_init+b0): b6fabbb7 lui     s7,0xb6fab
+Info   s7 00000000 -> b6fab000
+Info 58: 'riscvOVPsim/cpu', 0x0000000080000134(rvtest_init+b4): 7fbb8b93 addi    s7,s7,2043
+Info   s7 b6fab000 -> b6fab7fb
+Info 59: 'riscvOVPsim/cpu', 0x0000000080000138(rvtest_init+b8): db7d6c37 lui     s8,0xdb7d6
+Info   s8 00000000 -> db7d6000
+Info 60: 'riscvOVPsim/cpu', 0x000000008000013c(rvtest_init+bc): bfdc0c13 addi    s8,s8,-1027
+Info   s8 db7d6000 -> db7d5bfd
+Info 61: 'riscvOVPsim/cpu', 0x0000000080000140(rvtest_init+c0): edbebcb7 lui     s9,0xedbeb
+Info   s9 00000000 -> edbeb000
+Info 62: 'riscvOVPsim/cpu', 0x0000000080000144(rvtest_init+c4): dfec8c93 addi    s9,s9,-514
+Info   s9 edbeb000 -> edbeadfe
+Info 63: 'riscvOVPsim/cpu', 0x0000000080000148(rvtest_init+c8): 76df5d37 lui     s10,0x76df5
+Info   s10 00000000 -> 76df5000
+Info 64: 'riscvOVPsim/cpu', 0x000000008000014c(rvtest_init+cc): 6ffd0d13 addi    s10,s10,1791
+Info   s10 76df5000 -> 76df56ff
+Info 65: 'riscvOVPsim/cpu', 0x0000000080000150(rvtest_init+d0): bb6fbdb7 lui     s11,0xbb6fb
+Info   s11 00000000 -> bb6fb000
+Info 66: 'riscvOVPsim/cpu', 0x0000000080000154(rvtest_init+d4): b7fd8d93 addi    s11,s11,-1153
+Info   s11 bb6fb000 -> bb6fab7f
+Info 67: 'riscvOVPsim/cpu', 0x0000000080000158(rvtest_init+d8): ddb7de37 lui     t3,0xddb7d
+Info   t3 00000000 -> ddb7d000
+Info 68: 'riscvOVPsim/cpu', 0x000000008000015c(rvtest_init+dc): 5bfe0e13 addi    t3,t3,1471
+Info   t3 ddb7d000 -> ddb7d5bf
+Info 69: 'riscvOVPsim/cpu', 0x0000000080000160(rvtest_init+e0): eedbfeb7 lui     t4,0xeedbf
+Info   t4 00000000 -> eedbf000
+Info 70: 'riscvOVPsim/cpu', 0x0000000080000164(rvtest_init+e4): adfe8e93 addi    t4,t4,-1313
+Info   t4 eedbf000 -> eedbeadf
+Info 71: 'riscvOVPsim/cpu', 0x0000000080000168(rvtest_init+e8): f76dff37 lui     t5,0xf76df
+Info   t5 00000000 -> f76df000
+Info 72: 'riscvOVPsim/cpu', 0x000000008000016c(rvtest_init+ec): 56ff0f13 addi    t5,t5,1391
+Info   t5 f76df000 -> f76df56f
+Info 73: 'riscvOVPsim/cpu', 0x0000000080000170(rvtest_init+f0): fbb70fb7 lui     t6,0xfbb70
+Info   t6 00000000 -> fbb70000
+Info 74: 'riscvOVPsim/cpu', 0x0000000080000174(rvtest_init+f4): ab7f8f93 addi    t6,t6,-1353
+Info   t6 fbb70000 -> fbb6fab7
+Info 75: 'riscvOVPsim/cpu', 0x0000000080000178(rvtest_code_begin): 000020b7 lui     ra,0x2
+Info   ra feedbead -> 00002000
+Info 76: 'riscvOVPsim/cpu', 0x000000008000017c(rvtest_code_begin+4): 3000a073 csrs    mstatus,ra
+Info   sstatus 00000000 -> 00002000
+Info   mstatus 00000080 -> 00002080
+Info 77: 'riscvOVPsim/cpu', 0x0000000080000180(rvtest_code_begin+8): 02000093 addi    ra,zero,32
+Info   ra 00002000 -> 00000020
+Info 78: 'riscvOVPsim/cpu', 0x0000000080000184(rvtest_code_begin+c): 00309073 fssr    ra
+Info   frm 00000000 -> 00000001
+Info   fcsr 00000000 -> 00000020
+Info   sstatus 00002000 -> 80006000
+Info   mstatus 00002080 -> 80006080
+Info 79: 'riscvOVPsim/cpu', 0x0000000080000188(rvtest_code_begin+10): 00002297 auipc   t0,0x2
+Info   t0 80000178 -> 80002188
+Info 80: 'riscvOVPsim/cpu', 0x000000008000018c(rvtest_code_begin+14): e8828293 addi    t0,t0,-376
+Info   t0 80002188 -> 80002010
+Info 81: 'riscvOVPsim/cpu', 0x0000000080000190(rvtest_code_begin+18): 3f9e0f37 lui     t5,0x3f9e0
+Info   t5 f76df56f -> 3f9e0000
+Info 82: 'riscvOVPsim/cpu', 0x0000000080000194(rvtest_code_begin+1c): 419f0f13 addi    t5,t5,1049
+Info   t5 3f9e0000 -> 3f9e0419
+Info 83: 'riscvOVPsim/cpu', 0x0000000080000198(rvtest_code_begin+20): d00f0053 fcvt.s.w ft0,t5,rne
+Info   ft0 0000000000000000 -> ffffffff4e7e7810
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 84: 'riscvOVPsim/cpu', 0x000000008000019c(rvtest_code_begin+24): 003ff373 csrrci  t1,fcsr,31
+Info   t1 80002000 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 85: 'riscvOVPsim/cpu', 0x00000000800001a0(rvtest_code_begin+28): 0062a023 sw      t1,0(t0)
+Info 86: 'riscvOVPsim/cpu', 0x00000000800001a4(rvtest_code_begin+2c): e00003d3 fmv.x.s t2,ft0
+Info   t2 b7fbb6fa -> 4e7e7810
+Info 87: 'riscvOVPsim/cpu', 0x00000000800001a8(rvtest_code_begin+30): 0002a227 fsw     ft0,4(t0)
+Info 88: 'riscvOVPsim/cpu', 0x00000000800001ac(rvtest_code_begin+34): 00000e93 mv      t4,zero
+Info   t4 eedbeadf -> 00000000
+Info 89: 'riscvOVPsim/cpu', 0x00000000800001b0(rvtest_code_begin+38): d00e80d3 fcvt.s.w ft1,t4,rne
+Info   ft1 0000000000000000 -> ffffffff00000000
+Info 90: 'riscvOVPsim/cpu', 0x00000000800001b4(rvtest_code_begin+3c): 003ff373 csrrci  t1,fcsr,31
+Info   t1 00000021 -> 00000020
+Info 91: 'riscvOVPsim/cpu', 0x00000000800001b8(rvtest_code_begin+40): 0062a423 sw      t1,8(t0)
+Info 92: 'riscvOVPsim/cpu', 0x00000000800001bc(rvtest_code_begin+44): e00083d3 fmv.x.s t2,ft1
+Info   t2 4e7e7810 -> 00000000
+Info 93: 'riscvOVPsim/cpu', 0x00000000800001c0(rvtest_code_begin+48): 0012a627 fsw     ft1,12(t0)
+Info 94: 'riscvOVPsim/cpu', 0x00000000800001c4(rvtest_code_begin+4c): c1458e37 lui     t3,0xc1458
+Info   t3 ddb7d5bf -> c1458000
+Info 95: 'riscvOVPsim/cpu', 0x00000000800001c8(rvtest_code_begin+50): 794e0e13 addi    t3,t3,1940
+Info   t3 c1458000 -> c1458794
+Info 96: 'riscvOVPsim/cpu', 0x00000000800001cc(rvtest_code_begin+54): d00e0153 fcvt.s.w ft2,t3,rne
+Info   ft2 0000000000000000 -> ffffffffce7ae9e2
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 97: 'riscvOVPsim/cpu', 0x00000000800001d0(rvtest_code_begin+58): 003ff373 csrrci  t1,fcsr,31
+Info   t1 00000020 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 98: 'riscvOVPsim/cpu', 0x00000000800001d4(rvtest_code_begin+5c): 0062a823 sw      t1,16(t0)
+Info 99: 'riscvOVPsim/cpu', 0x00000000800001d8(rvtest_code_begin+60): e00103d3 fmv.x.s t2,ft2
+Info   t2 00000000 -> ce7ae9e2
+Info 100: 'riscvOVPsim/cpu', 0x00000000800001dc(rvtest_code_begin+64): 0022aa27 fsw     ft2,20(t0)
+Info 101: 'riscvOVPsim/cpu', 0x00000000800001e0(rvtest_code_begin+68): c61a5db7 lui     s11,0xc61a5
+Info   s11 bb6fab7f -> c61a5000
+Info 102: 'riscvOVPsim/cpu', 0x00000000800001e4(rvtest_code_begin+6c): 229d8d93 addi    s11,s11,553
+Info   s11 c61a5000 -> c61a5229
+Info 103: 'riscvOVPsim/cpu', 0x00000000800001e8(rvtest_code_begin+70): d00d81d3 fcvt.s.w ft3,s11,rne
+Info   ft3 0000000000000000 -> ffffffffce6796b7
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 104: 'riscvOVPsim/cpu', 0x00000000800001ec(rvtest_code_begin+74): 003ff373 csrrci  t1,fcsr,31
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 105: 'riscvOVPsim/cpu', 0x00000000800001f0(rvtest_code_begin+78): 0062ac23 sw      t1,24(t0)
+Info 106: 'riscvOVPsim/cpu', 0x00000000800001f4(rvtest_code_begin+7c): e00183d3 fmv.x.s t2,ft3
+Info   t2 ce7ae9e2 -> ce6796b7
+Info 107: 'riscvOVPsim/cpu', 0x00000000800001f8(rvtest_code_begin+80): 0032ae27 fsw     ft3,28(t0)
+Info 108: 'riscvOVPsim/cpu', 0x00000000800001fc(rvtest_code_begin+84): 4c50ed37 lui     s10,0x4c50e
+Info   s10 76df56ff -> 4c50e000
+Info 109: 'riscvOVPsim/cpu', 0x0000000080000200(rvtest_code_begin+88): 7e7d0d13 addi    s10,s10,2023
+Info   s10 4c50e000 -> 4c50e7e7
+Info 110: 'riscvOVPsim/cpu', 0x0000000080000204(rvtest_code_begin+8c): d00d0253 fcvt.s.w ft4,s10,rne
+Info   ft4 0000000000000000 -> ffffffff4e98a1d0
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 111: 'riscvOVPsim/cpu', 0x0000000080000208(rvtest_code_begin+90): 003ff373 csrrci  t1,fcsr,31
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 112: 'riscvOVPsim/cpu', 0x000000008000020c(rvtest_code_begin+94): 0262a023 sw      t1,32(t0)
+Info 113: 'riscvOVPsim/cpu', 0x0000000080000210(rvtest_code_begin+98): e00203d3 fmv.x.s t2,ft4
+Info   t2 ce6796b7 -> 4e98a1d0
+Info 114: 'riscvOVPsim/cpu', 0x0000000080000214(rvtest_code_begin+9c): 0242a227 fsw     ft4,36(t0)
+Info 115: 'riscvOVPsim/cpu', 0x0000000080000218(rvtest_code_begin+a0): 00002097 auipc   ra,0x2
+Info   ra 00000020 -> 80002218
+Info 116: 'riscvOVPsim/cpu', 0x000000008000021c(rvtest_code_begin+a4): e2008093 addi    ra,ra,-480
+Info   ra 80002218 -> 80002038
+Info 117: 'riscvOVPsim/cpu', 0x0000000080000220(rvtest_code_begin+a8): 3f800cb7 lui     s9,0x3f800
+Info   s9 edbeadfe -> 3f800000
+Info 118: 'riscvOVPsim/cpu', 0x0000000080000224(rvtest_code_begin+ac): d00c82d3 fcvt.s.w ft5,s9,rne
+Info   ft5 0000000000000000 -> ffffffff4e7e0000
+Info 119: 'riscvOVPsim/cpu', 0x0000000080000228(rvtest_code_begin+b0): 003ff173 csrrci  sp,fcsr,31
+Info   sp ff76df56 -> 00000020
+Info 120: 'riscvOVPsim/cpu', 0x000000008000022c(rvtest_code_begin+b4): 0020a023 sw      sp,0(ra)
+Info 121: 'riscvOVPsim/cpu', 0x0000000080000230(rvtest_code_begin+b8): e00281d3 fmv.x.s gp,ft5
+Info   gp 7fbb6fab -> 4e7e0000
+Info 122: 'riscvOVPsim/cpu', 0x0000000080000234(rvtest_code_begin+bc): 0050a227 fsw     ft5,4(ra)
+Info 123: 'riscvOVPsim/cpu', 0x0000000080000238(rvtest_code_begin+c0): 3a2b5c37 lui     s8,0x3a2b5
+Info   s8 db7d5bfd -> 3a2b5000
+Info 124: 'riscvOVPsim/cpu', 0x000000008000023c(rvtest_code_begin+c4): 8efc0c13 addi    s8,s8,-1809
+Info   s8 3a2b5000 -> 3a2b48ef
+Info 125: 'riscvOVPsim/cpu', 0x0000000080000240(rvtest_code_begin+c8): d00c0353 fcvt.s.w ft6,s8,rne
+Info   ft6 0000000000000000 -> ffffffff4e68ad24
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 126: 'riscvOVPsim/cpu', 0x0000000080000244(rvtest_code_begin+cc): 003ff173 csrrci  sp,fcsr,31
+Info   sp 00000020 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 127: 'riscvOVPsim/cpu', 0x0000000080000248(rvtest_code_begin+d0): 0020a423 sw      sp,8(ra)
+Info 128: 'riscvOVPsim/cpu', 0x000000008000024c(rvtest_code_begin+d4): e00301d3 fmv.x.s gp,ft6
+Info   gp 4e7e0000 -> 4e68ad24
+Info 129: 'riscvOVPsim/cpu', 0x0000000080000250(rvtest_code_begin+d8): 0060a627 fsw     ft6,12(ra)
+Info 130: 'riscvOVPsim/cpu', 0x0000000080000254(rvtest_code_begin+dc): bf800bb7 lui     s7,0xbf800
+Info   s7 b6fab7fb -> bf800000
+Info 131: 'riscvOVPsim/cpu', 0x0000000080000258(rvtest_code_begin+e0): d00b83d3 fcvt.s.w ft7,s7,rne
+Info   ft7 0000000000000000 -> ffffffffce810000
+Info 132: 'riscvOVPsim/cpu', 0x000000008000025c(rvtest_code_begin+e4): 003ff173 csrrci  sp,fcsr,31
+Info   sp 00000021 -> 00000020
+Info 133: 'riscvOVPsim/cpu', 0x0000000080000260(rvtest_code_begin+e8): 0020a823 sw      sp,16(ra)
+Info 134: 'riscvOVPsim/cpu', 0x0000000080000264(rvtest_code_begin+ec): e00381d3 fmv.x.s gp,ft7
+Info   gp 4e68ad24 -> ce810000
+Info 135: 'riscvOVPsim/cpu', 0x0000000080000268(rvtest_code_begin+f0): 0070aa27 fsw     ft7,20(ra)
+Info 136: 'riscvOVPsim/cpu', 0x000000008000026c(rvtest_code_begin+f4): 3f9e0b37 lui     s6,0x3f9e0
+Info   s6 6df56ff7 -> 3f9e0000
+Info 137: 'riscvOVPsim/cpu', 0x0000000080000270(rvtest_code_begin+f8): 419b0b13 addi    s6,s6,1049
+Info   s6 3f9e0000 -> 3f9e0419
+Info 138: 'riscvOVPsim/cpu', 0x0000000080000274(rvtest_code_begin+fc): d00b0453 fcvt.s.w fs0,s6,rne
+Info   fs0 0000000000000000 -> ffffffff4e7e7810
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 139: 'riscvOVPsim/cpu', 0x0000000080000278(rvtest_code_begin+100): 003ff173 csrrci  sp,fcsr,31
+Info   sp 00000020 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 140: 'riscvOVPsim/cpu', 0x000000008000027c(rvtest_code_begin+104): 0020ac23 sw      sp,24(ra)
+Info 141: 'riscvOVPsim/cpu', 0x0000000080000280(rvtest_code_begin+108): e00401d3 fmv.x.s gp,fs0
+Info   gp ce810000 -> 4e7e7810
+Info 142: 'riscvOVPsim/cpu', 0x0000000080000284(rvtest_code_begin+10c): 0080ae27 fsw     fs0,28(ra)
+Info 143: 'riscvOVPsim/cpu', 0x0000000080000288(rvtest_code_begin+110): 00000a93 mv      s5,zero
+Info   s5 dbeadfee -> 00000000
+Info 144: 'riscvOVPsim/cpu', 0x000000008000028c(rvtest_code_begin+114): d00a84d3 fcvt.s.w fs1,s5,rne
+Info   fs1 0000000000000000 -> ffffffff00000000
+Info 145: 'riscvOVPsim/cpu', 0x0000000080000290(rvtest_code_begin+118): 003ff173 csrrci  sp,fcsr,31
+Info   sp 00000021 -> 00000020
+Info 146: 'riscvOVPsim/cpu', 0x0000000080000294(rvtest_code_begin+11c): 0220a023 sw      sp,32(ra)
+Info 147: 'riscvOVPsim/cpu', 0x0000000080000298(rvtest_code_begin+120): e00481d3 fmv.x.s gp,fs1
+Info   gp 4e7e7810 -> 00000000
+Info 148: 'riscvOVPsim/cpu', 0x000000008000029c(rvtest_code_begin+124): 0290a227 fsw     fs1,36(ra)
+Info 149: 'riscvOVPsim/cpu', 0x00000000800002a0(rvtest_code_begin+128): 00002097 auipc   ra,0x2
+Info   ra 80002038 -> 800022a0
+Info 150: 'riscvOVPsim/cpu', 0x00000000800002a4(rvtest_code_begin+12c): dc008093 addi    ra,ra,-576
+Info   ra 800022a0 -> 80002060
+Info 151: 'riscvOVPsim/cpu', 0x00000000800002a8(rvtest_code_begin+130): c1458a37 lui     s4,0xc1458
+Info   s4 b7d5bfdd -> c1458000
+Info 152: 'riscvOVPsim/cpu', 0x00000000800002ac(rvtest_code_begin+134): 794a0a13 addi    s4,s4,1940
+Info   s4 c1458000 -> c1458794
+Info 153: 'riscvOVPsim/cpu', 0x00000000800002b0(rvtest_code_begin+138): d00a0553 fcvt.s.w fa0,s4,rne
+Info   fa0 0000000000000000 -> ffffffffce7ae9e2
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 154: 'riscvOVPsim/cpu', 0x00000000800002b4(rvtest_code_begin+13c): 003ff3f3 csrrci  t2,fcsr,31
+Info   t2 4e98a1d0 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 155: 'riscvOVPsim/cpu', 0x00000000800002b8(rvtest_code_begin+140): 0070a023 sw      t2,0(ra)
+Info 156: 'riscvOVPsim/cpu', 0x00000000800002bc(rvtest_code_begin+144): e0050453 fmv.x.s s0,fa0
+Info   s0 5bfddb7d -> ce7ae9e2
+Info 157: 'riscvOVPsim/cpu', 0x00000000800002c0(rvtest_code_begin+148): 00a0a227 fsw     fa0,4(ra)
+Info 158: 'riscvOVPsim/cpu', 0x00000000800002c4(rvtest_code_begin+14c): c61a59b7 lui     s3,0xc61a5
+Info   s3 6fab7fbb -> c61a5000
+Info 159: 'riscvOVPsim/cpu', 0x00000000800002c8(rvtest_code_begin+150): 22998993 addi    s3,s3,553
+Info   s3 c61a5000 -> c61a5229
+Info 160: 'riscvOVPsim/cpu', 0x00000000800002cc(rvtest_code_begin+154): d00985d3 fcvt.s.w fa1,s3,rne
+Info   fa1 0000000000000000 -> ffffffffce6796b7
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 161: 'riscvOVPsim/cpu', 0x00000000800002d0(rvtest_code_begin+158): 003ff3f3 csrrci  t2,fcsr,31
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 162: 'riscvOVPsim/cpu', 0x00000000800002d4(rvtest_code_begin+15c): 0070a423 sw      t2,8(ra)
+Info 163: 'riscvOVPsim/cpu', 0x00000000800002d8(rvtest_code_begin+160): e0058453 fmv.x.s s0,fa1
+Info   s0 ce7ae9e2 -> ce6796b7
+Info 164: 'riscvOVPsim/cpu', 0x00000000800002dc(rvtest_code_begin+164): 00b0a627 fsw     fa1,12(ra)
+Info 165: 'riscvOVPsim/cpu', 0x00000000800002e0(rvtest_code_begin+168): 4c50e937 lui     s2,0x4c50e
+Info   s2 df56ff76 -> 4c50e000
+Info 166: 'riscvOVPsim/cpu', 0x00000000800002e4(rvtest_code_begin+16c): 7e790913 addi    s2,s2,2023
+Info   s2 4c50e000 -> 4c50e7e7
+Info 167: 'riscvOVPsim/cpu', 0x00000000800002e8(rvtest_code_begin+170): d0090653 fcvt.s.w fa2,s2,rne
+Info   fa2 0000000000000000 -> ffffffff4e98a1d0
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 168: 'riscvOVPsim/cpu', 0x00000000800002ec(rvtest_code_begin+174): 003ff3f3 csrrci  t2,fcsr,31
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 169: 'riscvOVPsim/cpu', 0x00000000800002f0(rvtest_code_begin+178): 0070a823 sw      t2,16(ra)
+Info 170: 'riscvOVPsim/cpu', 0x00000000800002f4(rvtest_code_begin+17c): e0060453 fmv.x.s s0,fa2
+Info   s0 ce6796b7 -> 4e98a1d0
+Info 171: 'riscvOVPsim/cpu', 0x00000000800002f8(rvtest_code_begin+180): 00c0aa27 fsw     fa2,20(ra)
+Info 172: 'riscvOVPsim/cpu', 0x00000000800002fc(rvtest_code_begin+184): 3f8008b7 lui     a7,0x3f800
+Info   a7 beadfeed -> 3f800000
+Info 173: 'riscvOVPsim/cpu', 0x0000000080000300(rvtest_code_begin+188): d00886d3 fcvt.s.w fa3,a7,rne
+Info   fa3 0000000000000000 -> ffffffff4e7e0000
+Info 174: 'riscvOVPsim/cpu', 0x0000000080000304(rvtest_code_begin+18c): 003ff3f3 csrrci  t2,fcsr,31
+Info   t2 00000021 -> 00000020
+Info 175: 'riscvOVPsim/cpu', 0x0000000080000308(rvtest_code_begin+190): 0070ac23 sw      t2,24(ra)
+Info 176: 'riscvOVPsim/cpu', 0x000000008000030c(rvtest_code_begin+194): e0068453 fmv.x.s s0,fa3
+Info   s0 4e98a1d0 -> 4e7e0000
+Info 177: 'riscvOVPsim/cpu', 0x0000000080000310(rvtest_code_begin+198): 00d0ae27 fsw     fa3,28(ra)
+Info 178: 'riscvOVPsim/cpu', 0x0000000080000314(rvtest_code_begin+19c): 3a2b5837 lui     a6,0x3a2b5
+Info   a6 7d5bfddb -> 3a2b5000
+Info 179: 'riscvOVPsim/cpu', 0x0000000080000318(rvtest_code_begin+1a0): 8ef80813 addi    a6,a6,-1809
+Info   a6 3a2b5000 -> 3a2b48ef
+Info 180: 'riscvOVPsim/cpu', 0x000000008000031c(rvtest_code_begin+1a4): d0080753 fcvt.s.w fa4,a6,rne
+Info   fa4 0000000000000000 -> ffffffff4e68ad24
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 181: 'riscvOVPsim/cpu', 0x0000000080000320(rvtest_code_begin+1a8): 003ff3f3 csrrci  t2,fcsr,31
+Info   t2 00000020 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 182: 'riscvOVPsim/cpu', 0x0000000080000324(rvtest_code_begin+1ac): 0270a023 sw      t2,32(ra)
+Info 183: 'riscvOVPsim/cpu', 0x0000000080000328(rvtest_code_begin+1b0): e0070453 fmv.x.s s0,fa4
+Info   s0 4e7e0000 -> 4e68ad24
+Info 184: 'riscvOVPsim/cpu', 0x000000008000032c(rvtest_code_begin+1b4): 02e0a227 fsw     fa4,36(ra)
+Info 185: 'riscvOVPsim/cpu', 0x0000000080000330(rvtest_code_begin+1b8): 00002117 auipc   sp,0x2
+Info   sp 00000020 -> 80002330
+Info 186: 'riscvOVPsim/cpu', 0x0000000080000334(rvtest_code_begin+1bc): d5810113 addi    sp,sp,-680
+Info   sp 80002330 -> 80002088
+Info 187: 'riscvOVPsim/cpu', 0x0000000080000338(rvtest_code_begin+1c0): bf8007b7 lui     a5,0xbf800
+Info   a5 fab7fbb6 -> bf800000
+Info 188: 'riscvOVPsim/cpu', 0x000000008000033c(rvtest_code_begin+1c4): d00787d3 fcvt.s.w fa5,a5,rne
+Info   fa5 0000000000000000 -> ffffffffce810000
+Info 189: 'riscvOVPsim/cpu', 0x0000000080000340(rvtest_code_begin+1c8): 003ff1f3 csrrci  gp,fcsr,31
+Info   gp 00000000 -> 00000020
+Info 190: 'riscvOVPsim/cpu', 0x0000000080000344(rvtest_code_begin+1cc): 00312023 sw      gp,0(sp)
+Info 191: 'riscvOVPsim/cpu', 0x0000000080000348(rvtest_code_begin+1d0): e0078253 fmv.x.s tp,fa5
+Info   tp bfddb7d5 -> ce810000
+Info 192: 'riscvOVPsim/cpu', 0x000000008000034c(rvtest_code_begin+1d4): 00f12227 fsw     fa5,4(sp)
+Info 193: 'riscvOVPsim/cpu', 0x0000000080000350(rvtest_code_begin+1d8): 3f9e0737 lui     a4,0x3f9e0
+Info   a4 f56ff76d -> 3f9e0000
+Info 194: 'riscvOVPsim/cpu', 0x0000000080000354(rvtest_code_begin+1dc): 41970713 addi    a4,a4,1049
+Info   a4 3f9e0000 -> 3f9e0419
+Info 195: 'riscvOVPsim/cpu', 0x0000000080000358(rvtest_code_begin+1e0): d0070853 fcvt.s.w fa6,a4,rne
+Info   fa6 0000000000000000 -> ffffffff4e7e7810
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 196: 'riscvOVPsim/cpu', 0x000000008000035c(rvtest_code_begin+1e4): 003ff1f3 csrrci  gp,fcsr,31
+Info   gp 00000020 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 197: 'riscvOVPsim/cpu', 0x0000000080000360(rvtest_code_begin+1e8): 00312423 sw      gp,8(sp)
+Info 198: 'riscvOVPsim/cpu', 0x0000000080000364(rvtest_code_begin+1ec): e0080253 fmv.x.s tp,fa6
+Info   tp ce810000 -> 4e7e7810
+Info 199: 'riscvOVPsim/cpu', 0x0000000080000368(rvtest_code_begin+1f0): 01012627 fsw     fa6,12(sp)
+Info 200: 'riscvOVPsim/cpu', 0x000000008000036c(rvtest_code_begin+1f4): 00000693 mv      a3,zero
+Info   a3 eadfeedb -> 00000000
+Info 201: 'riscvOVPsim/cpu', 0x0000000080000370(rvtest_code_begin+1f8): d00688d3 fcvt.s.w fa7,a3,rne
+Info   fa7 0000000000000000 -> ffffffff00000000
+Info 202: 'riscvOVPsim/cpu', 0x0000000080000374(rvtest_code_begin+1fc): 003ff1f3 csrrci  gp,fcsr,31
+Info   gp 00000021 -> 00000020
+Info 203: 'riscvOVPsim/cpu', 0x0000000080000378(rvtest_code_begin+200): 00312823 sw      gp,16(sp)
+Info 204: 'riscvOVPsim/cpu', 0x000000008000037c(rvtest_code_begin+204): e0088253 fmv.x.s tp,fa7
+Info   tp 4e7e7810 -> 00000000
+Info 205: 'riscvOVPsim/cpu', 0x0000000080000380(rvtest_code_begin+208): 01112a27 fsw     fa7,20(sp)
+Info 206: 'riscvOVPsim/cpu', 0x0000000080000384(rvtest_code_begin+20c): c1458637 lui     a2,0xc1458
+Info   a2 d5bfddb7 -> c1458000
+Info 207: 'riscvOVPsim/cpu', 0x0000000080000388(rvtest_code_begin+210): 79460613 addi    a2,a2,1940
+Info   a2 c1458000 -> c1458794
+Info 208: 'riscvOVPsim/cpu', 0x000000008000038c(rvtest_code_begin+214): d0060953 fcvt.s.w fs2,a2,rne
+Info   fs2 0000000000000000 -> ffffffffce7ae9e2
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 209: 'riscvOVPsim/cpu', 0x0000000080000390(rvtest_code_begin+218): 003ff1f3 csrrci  gp,fcsr,31
+Info   gp 00000020 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 210: 'riscvOVPsim/cpu', 0x0000000080000394(rvtest_code_begin+21c): 00312c23 sw      gp,24(sp)
+Info 211: 'riscvOVPsim/cpu', 0x0000000080000398(rvtest_code_begin+220): e0090253 fmv.x.s tp,fs2
+Info   tp 00000000 -> ce7ae9e2
+Info 212: 'riscvOVPsim/cpu', 0x000000008000039c(rvtest_code_begin+224): 01212e27 fsw     fs2,28(sp)
+Info 213: 'riscvOVPsim/cpu', 0x00000000800003a0(rvtest_code_begin+228): c61a55b7 lui     a1,0xc61a5
+Info   a1 ab7fbb6f -> c61a5000
+Info 214: 'riscvOVPsim/cpu', 0x00000000800003a4(rvtest_code_begin+22c): 22958593 addi    a1,a1,553
+Info   a1 c61a5000 -> c61a5229
+Info 215: 'riscvOVPsim/cpu', 0x00000000800003a8(rvtest_code_begin+230): d00589d3 fcvt.s.w fs3,a1,rne
+Info   fs3 0000000000000000 -> ffffffffce6796b7
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 216: 'riscvOVPsim/cpu', 0x00000000800003ac(rvtest_code_begin+234): 003ff1f3 csrrci  gp,fcsr,31
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 217: 'riscvOVPsim/cpu', 0x00000000800003b0(rvtest_code_begin+238): 02312023 sw      gp,32(sp)
+Info 218: 'riscvOVPsim/cpu', 0x00000000800003b4(rvtest_code_begin+23c): e0098253 fmv.x.s tp,fs3
+Info   tp ce7ae9e2 -> ce6796b7
+Info 219: 'riscvOVPsim/cpu', 0x00000000800003b8(rvtest_code_begin+240): 03312227 fsw     fs3,36(sp)
+Info 220: 'riscvOVPsim/cpu', 0x00000000800003bc(rvtest_code_begin+244): 00002097 auipc   ra,0x2
+Info   ra 80002060 -> 800023bc
+Info 221: 'riscvOVPsim/cpu', 0x00000000800003c0(rvtest_code_begin+248): cf408093 addi    ra,ra,-780
+Info   ra 800023bc -> 800020b0
+Info 222: 'riscvOVPsim/cpu', 0x00000000800003c4(rvtest_code_begin+24c): 4c50e537 lui     a0,0x4c50e
+Info   a0 56ff76df -> 4c50e000
+Info 223: 'riscvOVPsim/cpu', 0x00000000800003c8(rvtest_code_begin+250): 7e750513 addi    a0,a0,2023
+Info   a0 4c50e000 -> 4c50e7e7
+Info 224: 'riscvOVPsim/cpu', 0x00000000800003cc(rvtest_code_begin+254): d0050a53 fcvt.s.w fs4,a0,rne
+Info   fs4 0000000000000000 -> ffffffff4e98a1d0
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 225: 'riscvOVPsim/cpu', 0x00000000800003d0(rvtest_code_begin+258): 003ff173 csrrci  sp,fcsr,31
+Info   sp 80002088 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 226: 'riscvOVPsim/cpu', 0x00000000800003d4(rvtest_code_begin+25c): 0020a023 sw      sp,0(ra)
+Info 227: 'riscvOVPsim/cpu', 0x00000000800003d8(rvtest_code_begin+260): e00a01d3 fmv.x.s gp,fs4
+Info   gp 00000021 -> 4e98a1d0
+Info 228: 'riscvOVPsim/cpu', 0x00000000800003dc(rvtest_code_begin+264): 0140a227 fsw     fs4,4(ra)
+Info 229: 'riscvOVPsim/cpu', 0x00000000800003e0(rvtest_code_begin+268): 3f8004b7 lui     s1,0x3f800
+Info   s1 adfeedbe -> 3f800000
+Info 230: 'riscvOVPsim/cpu', 0x00000000800003e4(rvtest_code_begin+26c): d0048ad3 fcvt.s.w fs5,s1,rne
+Info   fs5 0000000000000000 -> ffffffff4e7e0000
+Info 231: 'riscvOVPsim/cpu', 0x00000000800003e8(rvtest_code_begin+270): 003ff173 csrrci  sp,fcsr,31
+Info   sp 00000021 -> 00000020
+Info 232: 'riscvOVPsim/cpu', 0x00000000800003ec(rvtest_code_begin+274): 0020a423 sw      sp,8(ra)
+Info 233: 'riscvOVPsim/cpu', 0x00000000800003f0(rvtest_code_begin+278): e00a81d3 fmv.x.s gp,fs5
+Info   gp 4e98a1d0 -> 4e7e0000
+Info 234: 'riscvOVPsim/cpu', 0x00000000800003f4(rvtest_code_begin+27c): 0150a627 fsw     fs5,12(ra)
+Info 235: 'riscvOVPsim/cpu', 0x00000000800003f8(rvtest_code_begin+280): 3a2b5437 lui     s0,0x3a2b5
+Info   s0 4e68ad24 -> 3a2b5000
+Info 236: 'riscvOVPsim/cpu', 0x00000000800003fc(rvtest_code_begin+284): 8ef40413 addi    s0,s0,-1809
+Info   s0 3a2b5000 -> 3a2b48ef
+Info 237: 'riscvOVPsim/cpu', 0x0000000080000400(rvtest_code_begin+288): d0040b53 fcvt.s.w fs6,s0,rne
+Info   fs6 0000000000000000 -> ffffffff4e68ad24
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 238: 'riscvOVPsim/cpu', 0x0000000080000404(rvtest_code_begin+28c): 003ff173 csrrci  sp,fcsr,31
+Info   sp 00000020 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 239: 'riscvOVPsim/cpu', 0x0000000080000408(rvtest_code_begin+290): 0020a823 sw      sp,16(ra)
+Info 240: 'riscvOVPsim/cpu', 0x000000008000040c(rvtest_code_begin+294): e00b01d3 fmv.x.s gp,fs6
+Info   gp 4e7e0000 -> 4e68ad24
+Info 241: 'riscvOVPsim/cpu', 0x0000000080000410(rvtest_code_begin+298): 0160aa27 fsw     fs6,20(ra)
+Info 242: 'riscvOVPsim/cpu', 0x0000000080000414(rvtest_code_begin+29c): bf8003b7 lui     t2,0xbf800
+Info   t2 00000021 -> bf800000
+Info 243: 'riscvOVPsim/cpu', 0x0000000080000418(rvtest_code_begin+2a0): d0038bd3 fcvt.s.w fs7,t2,rne
+Info   fs7 0000000000000000 -> ffffffffce810000
+Info 244: 'riscvOVPsim/cpu', 0x000000008000041c(rvtest_code_begin+2a4): 003ff173 csrrci  sp,fcsr,31
+Info   sp 00000021 -> 00000020
+Info 245: 'riscvOVPsim/cpu', 0x0000000080000420(rvtest_code_begin+2a8): 0020ac23 sw      sp,24(ra)
+Info 246: 'riscvOVPsim/cpu', 0x0000000080000424(rvtest_code_begin+2ac): e00b81d3 fmv.x.s gp,fs7
+Info   gp 4e68ad24 -> ce810000
+Info 247: 'riscvOVPsim/cpu', 0x0000000080000428(rvtest_code_begin+2b0): 0170ae27 fsw     fs7,28(ra)
+Info 248: 'riscvOVPsim/cpu', 0x000000008000042c(rvtest_code_begin+2b4): 3f9e0337 lui     t1,0x3f9e0
+Info   t1 00000021 -> 3f9e0000
+Info 249: 'riscvOVPsim/cpu', 0x0000000080000430(rvtest_code_begin+2b8): 41930313 addi    t1,t1,1049
+Info   t1 3f9e0000 -> 3f9e0419
+Info 250: 'riscvOVPsim/cpu', 0x0000000080000434(rvtest_code_begin+2bc): d0030c53 fcvt.s.w fs8,t1,rne
+Info   fs8 0000000000000000 -> ffffffff4e7e7810
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 251: 'riscvOVPsim/cpu', 0x0000000080000438(rvtest_code_begin+2c0): 003ff173 csrrci  sp,fcsr,31
+Info   sp 00000020 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 252: 'riscvOVPsim/cpu', 0x000000008000043c(rvtest_code_begin+2c4): 0220a023 sw      sp,32(ra)
+Info 253: 'riscvOVPsim/cpu', 0x0000000080000440(rvtest_code_begin+2c8): e00c01d3 fmv.x.s gp,fs8
+Info   gp ce810000 -> 4e7e7810
+Info 254: 'riscvOVPsim/cpu', 0x0000000080000444(rvtest_code_begin+2cc): 0380a227 fsw     fs8,36(ra)
+Info 255: 'riscvOVPsim/cpu', 0x0000000080000448(rvtest_code_begin+2d0): 00002317 auipc   t1,0x2
+Info   t1 3f9e0419 -> 80002448
+Info 256: 'riscvOVPsim/cpu', 0x000000008000044c(rvtest_code_begin+2d4): c9030313 addi    t1,t1,-880
+Info   t1 80002448 -> 800020d8
+Info 257: 'riscvOVPsim/cpu', 0x0000000080000450(rvtest_code_begin+2d8): 00000293 mv      t0,zero
+Info   t0 80002010 -> 00000000
+Info 258: 'riscvOVPsim/cpu', 0x0000000080000454(rvtest_code_begin+2dc): d0028cd3 fcvt.s.w fs9,t0,rne
+Info   fs9 0000000000000000 -> ffffffff00000000
+Info 259: 'riscvOVPsim/cpu', 0x0000000080000458(rvtest_code_begin+2e0): 003ff3f3 csrrci  t2,fcsr,31
+Info   t2 bf800000 -> 00000020
+Info 260: 'riscvOVPsim/cpu', 0x000000008000045c(rvtest_code_begin+2e4): 00732023 sw      t2,0(t1)
+Info 261: 'riscvOVPsim/cpu', 0x0000000080000460(rvtest_code_begin+2e8): e00c8453 fmv.x.s s0,fs9
+Info   s0 3a2b48ef -> 00000000
+Info 262: 'riscvOVPsim/cpu', 0x0000000080000464(rvtest_code_begin+2ec): 01932227 fsw     fs9,4(t1)
+Info 263: 'riscvOVPsim/cpu', 0x0000000080000468(rvtest_code_begin+2f0): c1458237 lui     tp,0xc1458
+Info   tp ce6796b7 -> c1458000
+Info 264: 'riscvOVPsim/cpu', 0x000000008000046c(rvtest_code_begin+2f4): 79420213 addi    tp,tp,1940
+Info   tp c1458000 -> c1458794
+Info 265: 'riscvOVPsim/cpu', 0x0000000080000470(rvtest_code_begin+2f8): d0020d53 fcvt.s.w fs10,tp,rne
+Info   fs10 0000000000000000 -> ffffffffce7ae9e2
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 266: 'riscvOVPsim/cpu', 0x0000000080000474(rvtest_code_begin+2fc): 003ff3f3 csrrci  t2,fcsr,31
+Info   t2 00000020 -> 00000021
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 267: 'riscvOVPsim/cpu', 0x0000000080000478(rvtest_code_begin+300): 00732423 sw      t2,8(t1)
+Info 268: 'riscvOVPsim/cpu', 0x000000008000047c(rvtest_code_begin+304): e00d0453 fmv.x.s s0,fs10
+Info   s0 00000000 -> ce7ae9e2
+Info 269: 'riscvOVPsim/cpu', 0x0000000080000480(rvtest_code_begin+308): 01a32627 fsw     fs10,12(t1)
+Info 270: 'riscvOVPsim/cpu', 0x0000000080000484(rvtest_code_begin+30c): c61a51b7 lui     gp,0xc61a5
+Info   gp 4e7e7810 -> c61a5000
+Info 271: 'riscvOVPsim/cpu', 0x0000000080000488(rvtest_code_begin+310): 22918193 addi    gp,gp,553
+Info   gp c61a5000 -> c61a5229
+Info 272: 'riscvOVPsim/cpu', 0x000000008000048c(rvtest_code_begin+314): d0018dd3 fcvt.s.w fs11,gp,rne
+Info   fs11 0000000000000000 -> ffffffffce6796b7
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 273: 'riscvOVPsim/cpu', 0x0000000080000490(rvtest_code_begin+318): 003ff3f3 csrrci  t2,fcsr,31
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 274: 'riscvOVPsim/cpu', 0x0000000080000494(rvtest_code_begin+31c): 00732823 sw      t2,16(t1)
+Info 275: 'riscvOVPsim/cpu', 0x0000000080000498(rvtest_code_begin+320): e00d8453 fmv.x.s s0,fs11
+Info   s0 ce7ae9e2 -> ce6796b7
+Info 276: 'riscvOVPsim/cpu', 0x000000008000049c(rvtest_code_begin+324): 01b32a27 fsw     fs11,20(t1)
+Info 277: 'riscvOVPsim/cpu', 0x00000000800004a0(rvtest_code_begin+328): 4c50e137 lui     sp,0x4c50e
+Info   sp 00000021 -> 4c50e000
+Info 278: 'riscvOVPsim/cpu', 0x00000000800004a4(rvtest_code_begin+32c): 7e710113 addi    sp,sp,2023
+Info   sp 4c50e000 -> 4c50e7e7
+Info 279: 'riscvOVPsim/cpu', 0x00000000800004a8(rvtest_code_begin+330): d0010e53 fcvt.s.w ft8,sp,rne
+Info   ft8 0000000000000000 -> ffffffff4e98a1d0
+Info   fflags 00000000 -> 00000001
+Info   fcsr 00000020 -> 00000021
+Info 280: 'riscvOVPsim/cpu', 0x00000000800004ac(rvtest_code_begin+334): 003ff3f3 csrrci  t2,fcsr,31
+Info   fflags 00000001 -> 00000000
+Info   fcsr 00000021 -> 00000020
+Info 281: 'riscvOVPsim/cpu', 0x00000000800004b0(rvtest_code_begin+338): 00732c23 sw      t2,24(t1)
+Info 282: 'riscvOVPsim/cpu', 0x00000000800004b4(rvtest_code_begin+33c): e00e0453 fmv.x.s s0,ft8
+Info   s0 ce6796b7 -> 4e98a1d0
+Info 283: 'riscvOVPsim/cpu', 0x00000000800004b8(rvtest_code_begin+340): 01c32e27 fsw     ft8,28(t1)
+Info 284: 'riscvOVPsim/cpu', 0x00000000800004bc(rvtest_code_begin+344): 3f8000b7 lui     ra,0x3f800
+Info   ra 800020b0 -> 3f800000
+Info 285: 'riscvOVPsim/cpu', 0x00000000800004c0(rvtest_code_begin+348): d0008ed3 fcvt.s.w ft9,ra,rne
+Info   ft9 0000000000000000 -> ffffffff4e7e0000
+Info 286: 'riscvOVPsim/cpu', 0x00000000800004c4(rvtest_code_begin+34c): 003ff3f3 csrrci  t2,fcsr,31
+Info   t2 00000021 -> 00000020
+Info 287: 'riscvOVPsim/cpu', 0x00000000800004c8(rvtest_code_begin+350): 02732023 sw      t2,32(t1)
+Info 288: 'riscvOVPsim/cpu', 0x00000000800004cc(rvtest_code_begin+354): e00e8453 fmv.x.s s0,ft9
+Info   s0 4e98a1d0 -> 4e7e0000
+Info 289: 'riscvOVPsim/cpu', 0x00000000800004d0(rvtest_code_begin+358): 03d32227 fsw     ft9,36(t1)
+Info 290: 'riscvOVPsim/cpu', 0x00000000800004d4(rvtest_code_begin+35c): 00002097 auipc   ra,0x2
+Info   ra 3f800000 -> 800024d4
+Info 291: 'riscvOVPsim/cpu', 0x00000000800004d8(rvtest_code_begin+360): c2c08093 addi    ra,ra,-980
+Info   ra 800024d4 -> 80002100
+Info 292: 'riscvOVPsim/cpu', 0x00000000800004dc(rvtest_code_begin+364): 3a2b5037 lui     zero,0x3a2b5
+Info 293: 'riscvOVPsim/cpu', 0x00000000800004e0(rvtest_code_begin+368): 8ef00013 addi    zero,zero,-1809
+Info 294: 'riscvOVPsim/cpu', 0x00000000800004e4(rvtest_code_begin+36c): d0000f53 fcvt.s.w ft10,zero,rne
+Info   ft10 0000000000000000 -> ffffffff00000000
+Info 295: 'riscvOVPsim/cpu', 0x00000000800004e8(rvtest_code_begin+370): 003ff173 csrrci  sp,fcsr,31
+Info   sp 4c50e7e7 -> 00000020
+Info 296: 'riscvOVPsim/cpu', 0x00000000800004ec(rvtest_code_begin+374): 0020a023 sw      sp,0(ra)
+Info 297: 'riscvOVPsim/cpu', 0x00000000800004f0(rvtest_code_begin+378): e00f01d3 fmv.x.s gp,ft10
+Info   gp c61a5229 -> 00000000
+Info 298: 'riscvOVPsim/cpu', 0x00000000800004f4(rvtest_code_begin+37c): 01e0a227 fsw     ft10,4(ra)
+Info 299: 'riscvOVPsim/cpu', 0x00000000800004f8(rvtest_code_begin+380): 00000013 nop
+Info 300: 'riscvOVPsim/cpu', 0x00000000800004fc(rvtest_code_begin+384): 00000013 nop
+Info 301: 'riscvOVPsim/cpu', 0x0000000080000500(rvtest_code_end): 0ff0000f fence
+Info 302: 'riscvOVPsim/cpu', 0x0000000080000504(rvtest_code_end+4): 00000073 ecall
+Info   mstatus 80006080 -> 80007800
+Info   mepc 80000080 -> 80000504
+Info   mcause 00000000 -> 0000000b
+Info 303: 'riscvOVPsim/cpu', 0x0000000080000004(trap_vector): 34202f73 csrr    t5,mcause
+Info   t5 3f9e0419 -> 0000000b
+Info 304: 'riscvOVPsim/cpu', 0x0000000080000008(trap_vector+4): 00800f93 addi    t6,zero,8
+Info   t6 fbb6fab7 -> 00000008
+Info 305: 'riscvOVPsim/cpu', 0x000000008000000c(trap_vector+8): 03ff0663 beq     t5,t6,80000038
+Info 306: 'riscvOVPsim/cpu', 0x0000000080000010(trap_vector+c): 00900f93 addi    t6,zero,9
+Info   t6 00000008 -> 00000009
+Info 307: 'riscvOVPsim/cpu', 0x0000000080000014(trap_vector+10): 03ff0263 beq     t5,t6,80000038
+Info 308: 'riscvOVPsim/cpu', 0x0000000080000018(trap_vector+14): 00b00f93 addi    t6,zero,11
+Info   t6 00000009 -> 0000000b
+Info 309: 'riscvOVPsim/cpu', 0x000000008000001c(trap_vector+18): 01ff0e63 beq     t5,t6,80000038
+Info 310: 'riscvOVPsim/cpu', 0x0000000080000038(write_tohost): 00001f17 auipc   t5,0x1
+Info   t5 0000000b -> 80001038

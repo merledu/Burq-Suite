@@ -1,0 +1,101 @@
+warning: tohost and fromhost symbols not in ELF; can't communicate with target
+core   0: 0x00001000 (0x00000297) auipc   t0, 0x0
+core   0: 3 0x00001000 (0x00000297) x 5 0x00001000
+core   0: 0x00001004 (0x02028593) addi    a1, t0, 32
+core   0: 3 0x00001004 (0x02028593) x11 0x00001020
+core   0: 0x00001008 (0xf1402573) csrr    a0, mhartid
+core   0: 3 0x00001008 (0xf1402573) x10 0x00000000
+core   0: 0x0000100c (0x0182a283) lw      t0, 24(t0)
+core   0: 3 0x0000100c (0x0182a283) x 5 0x80000000 mem 0x00001018
+core   0: 0x00001010 (0x00028067) jr      t0
+core   0: 3 0x00001010 (0x00028067)
+core   0: 0x80000000 (0x00004781) c.li    a5, 0
+core   0: 3 0x80000000 (0x4781) x15 0x00000000
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x00000001
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x00000002
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x00000003
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x00000004
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x00000005
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x00000006
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x00000007
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x00000008
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x00000009
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x80000008 (0x00000785) c.addi  a5, 1
+core   0: 3 0x80000008 (0x0785) x15 0x0000000a
+core   0: 0x8000000a (0x0000bfe5) c.j     pc - 8
+core   0: 3 0x8000000a (0xbfe5)
+core   0: 0x80000002 (0x00004725) c.li    a4, 9
+core   0: 3 0x80000002 (0x4725) x14 0x00000009
+core   0: 0x80000004 (0x00f74463) blt     a4, a5, pc + 8
+core   0: 3 0x80000004 (0x00f74463)
+core   0: 0x8000000c (0x00008082) ret
+core   0: 3 0x8000000c (0x8082)
+core   0: exception trap_instruction_access_fault, epc 0x00000000
+core   0:           tval 0x00000000

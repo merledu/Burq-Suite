@@ -1,0 +1,3 @@
+bbl loader
+../pk/elf.c:41: assertion failed: IS_ELF64(eh)
+Power off

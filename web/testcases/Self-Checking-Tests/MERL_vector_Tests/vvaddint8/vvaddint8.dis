@@ -1,0 +1,158 @@
+
+/home/hshabbir/Vector-Extension/verification_codes/vvaddint8.exe:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+afffc000 <_start>:
+afffc000:	5f5550b7          	lui	ra,0x5f555
+afffc004:	55508093          	addi	ra,ra,1365 # 5f555555 <_start-0x50aa6aab>
+afffc008:	7c009073          	csrw	0x7c0,ra
+afffc00c:	4191                	li	gp,4
+afffc00e:	7f919073          	csrw	0x7f9,gp
+afffc012:	d05800b7          	lui	ra,0xd0580
+afffc016:	40044597          	auipc	a1,0x40044
+afffc01a:	fea58593          	addi	a1,a1,-22 # f0040000 <vector_data>
+afffc01e:	40044617          	auipc	a2,0x40044
+afffc022:	03c60613          	addi	a2,a2,60 # f004005a <hw_data>
+afffc026:	40044697          	auipc	a3,0x40044
+afffc02a:	03468693          	addi	a3,a3,52 # f004005a <hw_data>
+afffc02e:	d0580137          	lui	sp,0xd0580
+afffc032:	6109                	addi	sp,sp,128
+
+afffc034 <loop>:
+afffc034:	00058283          	lb	t0,0(a1)
+afffc038:	00060303          	lb	t1,0(a2)
+afffc03c:	006283b3          	add	t2,t0,t1
+afffc040:	00708023          	sb	t2,0(ra) # d0580000 <STACK+0xe053ef00>
+afffc044:	0591                	addi	a1,a1,4
+afffc046:	0611                	addi	a2,a2,4
+afffc048:	0091                	addi	ra,ra,4
+afffc04a:	fe20c5e3          	blt	ra,sp,afffc034 <loop>
+afffc04e:	02000513          	li	a0,32
+afffc052:	d05800b7          	lui	ra,0xd0580
+afffc056:	40044597          	auipc	a1,0x40044
+afffc05a:	faa58593          	addi	a1,a1,-86 # f0040000 <vector_data>
+afffc05e:	40044617          	auipc	a2,0x40044
+afffc062:	ffc60613          	addi	a2,a2,-4 # f004005a <hw_data>
+afffc066:	40044697          	auipc	a3,0x40044
+afffc06a:	ff468693          	addi	a3,a3,-12 # f004005a <hw_data>
+
+afffc06e <vvaddint8>:
+afffc06e:	000572d7          	vsetvli	t0,a0,e8,m1,tu,mu,d1
+afffc072:	02058087          	vle8.v	v1,(a1)
+afffc076:	40550533          	sub	a0,a0,t0
+afffc07a:	028a                	slli	t0,t0,0x2
+afffc07c:	9596                	add	a1,a1,t0
+afffc07e:	02060107          	vle8.v	v2,(a2)
+afffc082:	9616                	add	a2,a2,t0
+afffc084:	021101d7          	vadd.vv	v3,v1,v2
+afffc088:	020081a7          	vse8.v	v3,(ra)
+afffc08c:	9696                	add	a3,a3,t0
+afffc08e:	f165                	bnez	a0,afffc06e <vvaddint8>
+
+afffc090 <_finish>:
+afffc090:	d05801b7          	lui	gp,0xd0580
+afffc094:	0ff00293          	li	t0,255
+afffc098:	00518023          	sb	t0,0(gp) # d0580000 <STACK+0xe053ef00>
+afffc09c:	fe000ae3          	beqz	zero,afffc090 <_finish>
+afffc0a0:	0001                	nop
+afffc0a2:	0001                	nop
+afffc0a4:	0001                	nop
+afffc0a6:	0001                	nop
+afffc0a8:	0001                	nop
+afffc0aa:	0001                	nop
+afffc0ac:	0001                	nop
+afffc0ae:	0001                	nop
+afffc0b0:	0001                	nop
+afffc0b2:	0001                	nop
+afffc0b4:	0001                	nop
+afffc0b6:	0001                	nop
+afffc0b8:	0001                	nop
+afffc0ba:	0001                	nop
+afffc0bc:	0001                	nop
+afffc0be:	0001                	nop
+afffc0c0:	0001                	nop
+afffc0c2:	0001                	nop
+afffc0c4:	0001                	nop
+afffc0c6:	0001                	nop
+afffc0c8:	0001                	nop
+afffc0ca:	0001                	nop
+afffc0cc:	0001                	nop
+afffc0ce:	0001                	nop
+afffc0d0:	0001                	nop
+afffc0d2:	0001                	nop
+afffc0d4:	0001                	nop
+afffc0d6:	0001                	nop
+afffc0d8:	0001                	nop
+afffc0da:	0001                	nop
+afffc0dc:	0001                	nop
+afffc0de:	0001                	nop
+afffc0e0:	0001                	nop
+afffc0e2:	0001                	nop
+afffc0e4:	0001                	nop
+afffc0e6:	0001                	nop
+afffc0e8:	0001                	nop
+afffc0ea:	0001                	nop
+afffc0ec:	0001                	nop
+afffc0ee:	0001                	nop
+afffc0f0:	0001                	nop
+afffc0f2:	0001                	nop
+afffc0f4:	0001                	nop
+afffc0f6:	0001                	nop
+afffc0f8:	0001                	nop
+afffc0fa:	0001                	nop
+afffc0fc:	0001                	nop
+afffc0fe:	0001                	nop
+afffc100:	0001                	nop
+afffc102:	0001                	nop
+afffc104:	0001                	nop
+afffc106:	0001                	nop
+afffc108:	0001                	nop
+afffc10a:	0001                	nop
+afffc10c:	0001                	nop
+afffc10e:	0001                	nop
+afffc110:	0001                	nop
+afffc112:	0001                	nop
+afffc114:	0001                	nop
+afffc116:	0001                	nop
+afffc118:	0001                	nop
+afffc11a:	0001                	nop
+afffc11c:	0001                	nop
+afffc11e:	0001                	nop
+afffc120:	0001                	nop
+afffc122:	0001                	nop
+afffc124:	0001                	nop
+afffc126:	0001                	nop
+afffc128:	0001                	nop
+afffc12a:	0001                	nop
+afffc12c:	0001                	nop
+afffc12e:	0001                	nop
+afffc130:	0001                	nop
+afffc132:	0001                	nop
+afffc134:	0001                	nop
+afffc136:	0001                	nop
+afffc138:	0001                	nop
+afffc13a:	0001                	nop
+afffc13c:	0001                	nop
+afffc13e:	0001                	nop
+afffc140:	0001                	nop
+afffc142:	0001                	nop
+afffc144:	0001                	nop
+afffc146:	0001                	nop
+afffc148:	0001                	nop
+afffc14a:	0001                	nop
+afffc14c:	0001                	nop
+afffc14e:	0001                	nop
+afffc150:	0001                	nop
+afffc152:	0001                	nop
+afffc154:	0001                	nop
+afffc156:	0001                	nop
+afffc158:	0001                	nop
+afffc15a:	0001                	nop
+afffc15c:	0001                	nop
+afffc15e:	0001                	nop
+afffc160:	0001                	nop
+afffc162:	0001                	nop
+afffc164:	0001                	nop
+afffc166:	0001                	nop
