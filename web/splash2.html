@@ -353,6 +353,7 @@
                                             border-top-color: #1a1d22;" onfocus="value=''"  > </div>
                                             <button class="btn browse-btn" onclick="select1()" style="width:80px;">...</button>
                                         </div>
+                                        <input type='checkbox' name='checkswervtest' value='swervbased' ><label> Swerv Based Core </label> 
                                     </div>
                                     
                                     <div class="col-md-2"></div>
@@ -386,6 +387,7 @@
                                 <input id="getcommands" placeholder="make -f Makefile TEST={testname}" style="background-color: black;color: white;width: 386px;">
                                 
                             </div>
+                            
                             <div style="    margin-left: 245px;
                             margin-top: -43px;"><p style="color:rgba(240, 248, 255, 0.342)">e.g:  {testcommand} Test={testname}
         
@@ -421,22 +423,12 @@
                             <div  >
                                 <h6 style="font-weight: lighter;">Select Your TestCase folder </h6>
                                 
-                                <div id="project-browse" style="width: 415px;" >
+            <div class="col-md-3"  >
+                                    
+                                    
                                   
-                                    <div type="text" id="pathtest" style="color: white;
-                                    border-right-color: #767676;
-                                    width: 430px;
-                                    padding: 5px;
-                                    height: 34px;
-                                    border-bottom-color: #767676;
-                                    border-left-color: #1a1d22;
-                                    background-color: #1a1d22;
-                                    border-style: solid;
-                                    margin-left: 20px;
-                                    margin-top: -11px;
-        
-                                    border-top-color: #1a1d22;" onfocus="value=''"  > </div>
-                                    <button class="btn browse-btn"onclick="selecttestcase()" style="margin-top: -10px;width: 85px;">...</button>
+                                    <input id="gettestfolder" placeholder="swer-El2/tools/testbench/testfolder" style="background-color: black;color: white;width: 386px;">
+                                    
                                 </div>
                             </div>
                             <div  style="margin-top:5px;" >
@@ -444,20 +436,14 @@
                                 
                                 <div id="project-browse" style="width: 415px;" >
                                   
-                                    <div type="text" id="logpath" style="color: white;
-                                    border-right-color: #767676;
-                                    width: 430px;
-                                    padding: 5px;
-                                    height: 34px;
-                                    border-bottom-color: #767676;
-                                    border-left-color: #1a1d22;
-                                    background-color: #1a1d22;
-                                    border-style: solid;
-                                    margin-left: 20px;
-                                    margin-top: -11px;
-        
-                                    border-top-color: #1a1d22;" onfocus="value=''"  > </div>
-                                    <button class="btn browse-btn" onclick="selectlog()" style="margin-top: -10px;width: 85px;">...</button>
+                                    <div class="col-md-3"  >
+                                        
+                                        
+                                      
+                                        <input id="getlogfolder" placeholder="swerv-El2/exec.log" style="background-color: black;color: white;width: 386px;">
+                                        
+                                    </div>
+                                    
                                 </div>
                             </div>
                         
@@ -474,7 +460,7 @@
                             </button>
                         </div>
                             </div>
-                            <!--  ------------------------- testcase sslection type ------------>
+                            <!--  ------------------------- testcase selection type --------- ------------>
                             <div id="testcasetype">
                                 <div class="row main-config">
                                     <div class="col-md-3">
@@ -921,16 +907,23 @@ function opneRecentProject(id){
                     document.getElementById("testcasetype").style.display = "block";
                    
                 }
-                else if(comp == "endcore"){
+                 if(comp == "endcore"){
                     var projName = document.getElementById("projectname").value;
                     var projDir = document.getElementById("path").innerHTML;
                     var command=document.getElementById("getcommands").value;
                     var uploadcore = document.getElementById("pathcore").innerHTML;
-                    var testcase = document.getElementById("pathtest").innerHTML;
-                    var logfile = document.getElementById("logpath").innerHTML;
+                    var testcase = document.getElementById("gettestfolder").value;
+                    var logfile = document.getElementById("getlogfolder").value;
+                   
+                    var swerv=[]
+                    var checkswerv = document.getElementsByName("checkswervtest");
+                    if (checkswerv.checked){
+                        swerv.push(checkswerv.value);
+                        
+                    }
                     if (projName == ""){
                         alert("Please enter a project name");
-                    }  else if (projDir == " "){
+                    }  else if (projDir == ""){
                         alert("Please select a directory");}
                     
                  else if (uploadcore == " "){
@@ -947,15 +940,18 @@ function opneRecentProject(id){
                         alert("Please  location where log file will generate");
                 }
             var getcommand=document.getElementById("getcommands").value;
+            var gettestcasefoldername=document.getElementById("gettestfolder").value;
+            var getlogfoldername=document.getElementById("getlogfolder").value;
+            
             var tests1 = [];
-                    var testCheckboxes1 = document.getElementsByName("uploadcoretestcaseform");
+                    var testCheckboxes1 = document.getElementsByName("coreTest");
                     for (var i = 0; i < testCheckboxes1.length; i++) {
                         if (testCheckboxes1[i].checked) {
                             tests1.push(testCheckboxes1[i].value);
                         }
                     }
 
-            eel.enduploadcore(getcommand,tests1);
+            eel.enduploadcore(getcommand,tests1,gettestcasefoldername,getlogfoldername,swerv);
             }}
             function changeCustom(comp){
                 var core = document.getElementById("custom-core");

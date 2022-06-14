@@ -24,6 +24,7 @@ if __name__ == '__main__':
     listuploadcore=[]
 
     currentRootDir = os.getcwd()
+    ic(currentRootDir)
     testcasepath=[]
     logfilepath=[]
 
@@ -54,6 +55,7 @@ if __name__ == '__main__':
         file.write(type)
         file.close()
         eel.goToMain()
+
 
     @eel.expose
     def getRecords():
@@ -123,6 +125,7 @@ if __name__ == '__main__':
             file = open("records", "w+")
             file.write(f"{projPath}/{projName},prebuilt_verification\n")
             file.close()
+            
             eel.goToMain()
 
             
@@ -205,6 +208,7 @@ if __name__ == '__main__':
         file = open("records", "w+")
         file.write(f"{yourproject}/{b},custom_test\n")
         file.close()
+        os.chdir(f"{currentRootDir}")
         eel.goToMain()
     
     @eel.expose
@@ -428,6 +432,8 @@ if __name__ == '__main__':
         eel.showswervTests(namelist)
     @eel.expose
     def burqgeneratedtest():
+        os.system(f"{currentRootDir}")
+
         namelist=[]
             #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
         root="web/testcases/Self-Checking-Tests/BURQ_Generated_Tests"
@@ -444,7 +450,11 @@ if __name__ == '__main__':
 
 
     @eel.expose
-    def enduploadcore(getcommand,tests1):
+    def enduploadcore(getcommand,tests1,testcase,logfile,swerv):
+         #if isswerv==swervbased;
+        #iswerv=swerv[-1]
+        tests_status=[]
+        listcommands=[]
         ic(tests1)
         ic(getcommand)
 
@@ -455,19 +465,144 @@ if __name__ == '__main__':
         file1.close()
         uploadedcore=listuploadcore[-1]
         ic(uploadedcore)
+        #getpathcurrent=os.system("pwd")
+
        
         os.chdir(yourproject)
         
         
         os.system(f"mkdir {b}")
-        
+    
+       
+
        
         os.chdir(b)
         os.system(f"cp -a {uploadedcore}  {yourproject}/{b}")
+        os.chdir(f"{currentRootDir}")
+        os.system("export RISCV=/opt/riscv32")
+
+        os.system(f"export whisper='{currentRootDir}/web/Verification/SweRV-ISS/build-Linux/./whisper'")
+
+        os.system(f"export RV_ROOT='{currentRootDir}/web/swerv'")
+        os.system("export PATH=/opt/riscv32/bin:$PATH")
+       # if iss=="spike":
+        # os.system("export PATH=/opt/riscv/bin:$PATH")
+        # os.system("export PATH=/opt/riscv/riscv64-unknown-elf/bin:$PATH")
+
+
+        # for test in tests1:
+        #     ic(test)
+        #     yy=getcommand.replace("testname",test)
+        #     listcommands.append(yy)
+        #     ic(yy)
+        #     basename=os.path.basename(f"{p}")
+        
+        #     p=listuploadcore[-1]
+        #     os.system(f"cp -a web/testcases/Self-Checking-Tests/{test} {yourproject}/{b}/{testcase}")
+        #     os.chdir(f"{yourproject}/{b}/{testcase}/{test}")
+        #     os.system(f"riscv64-unknown-elf-gcc -o {test} {test}.c")
+        #     os.system(f"spike pk {test} > exec.log")
+        #     os.chdir(f"{getpathcurrent}")
+        #     os.chdir(f"{p}")
+        #     os.system(f"{yy}")
+        #     status = call(f"{yourproject}/{b}/{logfile}/{test}.log", f"{yourproject}/{b}/{testcase}/{test}/exec.log")
+        #     tests_status.append(status)
+
+
+            
+        #     #command skipe
+            
+            
+
+
+        #     #command for whisper
+            
+            
+        # basename=os.path.basename(f"{p}")
+        # os.chdir(f"{yourproject}")
+        # report_str = ""
+        # report_str += f"Core:{basename}\n"
+        # report_str += "Iss:Spike\n"
+        # for i,t in enumerate(tests1):
+        #     report_str += f"{t}:{tests_status[i]}\n"
+        # file = open("test_results.report", "w+")
+        # file.write(report_str[:-1])
+        # file.close()
+        # os.chdir(currentRootDir)
+        # file = open("web/pathfile", "w")
+        # file.write(f"{yourproject}/{b}")
+        # file.close()
+        # file = open("web/pathfilev", "w")
+        # file.write("uploadcore_verification")
+        # file.close()
+        # file = open("records", "w+")
+        # file.write(f"{yourproject}/{b},upload_verification\n")
+        # file.close()
+        # eel.goToMain()
+
+
+    # if iss=="whisper":
+        #os.system("export PATH=/opt/riscv/bin:$PATH")
+        #os.system("export PATH=/opt/riscv/riscv64-unknown-elf/bin:$PATH")
+
+#make -f $RV_ROOT/tools/Makefile TEST=BubbleSort
         for test in tests1:
             ic(test)
-            yy=getcommand.replace("testname",test)
-            ic(yy)
+            #yy=getcommand.replace("testname",test)
+            #listcommands.append(yy)
+            #ic(yy)
+            p=listuploadcore[-1]
+            basename=os.path.basename(f"{p}")
+            ic(basename)
+            ic(yourproject)
+            ic(b)
+        
+          
+            os.system(f"cp -a web/testcases/Self-Checking-Tests/Swerv_Tests/{test} {yourproject}/{b}/{testcase}")
+            os.chdir(f"{yourproject}/{b}/{basename}")
+            #command skipe
+            os.system(f"mkdir {test}")
+            os.chdir(f"{test}")
+            os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
+
+            os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
+           
+
+           
+            status = call(f"{test}.log", "exec.log")
+            tests_status.append(status)
+        basename=os.path.basename(f"{p}")
+        os.chdir(f"{yourproject}/{b}")
+        report_str = ""
+        report_str += f"Core:{basename}\n"
+        report_str += "Iss:Spike\n"
+        for i,t in enumerate(tests1):
+            report_str += f"{t}:{tests_status[i]}\n"
+        file = open("test_results.report", "w+")
+        file.write(report_str[:-1])
+        file.close()
+        os.chdir(currentRootDir)
+        file = open("web/pathfile", "w")
+        file.write(f"{yourproject}/{b}")
+        file.close()
+        file = open("web/pathfilev", "w")
+        file.write("uploadcore_verification")
+        file.close()
+        file = open("records", "w+")
+        file.write(f"{yourproject}/{b},upload_verification\n")
+        file.close()
+        eel.goToMain()
+
+
+
+            
+
+
+        #place testcase in test case folder
+        #make folder with testcase name
+        #run command
+        #got to log file path
+        # run iss command 
 
     
 
