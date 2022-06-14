@@ -90,6 +90,12 @@ if __name__ == '__main__':
                     # create test directory
                     os.mkdir(test)
                 os.chdir(test)
+                os.system("export RISCV=/opt/riscv32")
+
+                os.system(f"export whisper='{currentRootDir}/web/Verification/SweRV-ISS/build-Linux/./whisper'")
+
+                os.system(f"export RV_ROOT='{currentRootDir}/web/swerv'")
+                os.system("export PATH=/opt/riscv32/bin:$PATH")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                 currentProgress += perOccurProgress
                 eel.changeProgressBar(currentProgress)
