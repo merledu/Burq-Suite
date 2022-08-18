@@ -308,9 +308,8 @@ body, .row{
     width: 60px;
     margin-top: 50px;
 }
-.ctrl-btn:hover{
-    background-color: #15191a;
-}
+
+
 #devices{
     display: none;
 }

@@ -216,6 +216,7 @@ function changeProject2(evt,proj){
     }
     else if(proj === "upload_core"){
         upload_core.style.display = "block";
+        changecoree('initial');
         listt.push("upload_core");
     }
 

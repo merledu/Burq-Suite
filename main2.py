@@ -7,6 +7,8 @@ from reverter import reverter
 if __name__ == '__main__':
 
 #type of project select
+    currentRootDir = os.getcwd()
+    ic(currentRootDir)
 
     f = open("web/pathfile","r")
     c = f.readlines()
@@ -43,8 +45,13 @@ if __name__ == '__main__':
             filepath = gen[0]
             actualFilePath = os.path.join(project_dir,filepath[1:])
             fileToRead = open(actualFilePath,"r")
+            ic(fileToRead)
             contentOfFile = fileToRead.read()
+            ic(contentOfFile)
             fileToRead.close()
+            ic(filepath.split("/")[-1])
+            ic( filepath[1:])
+            ic(gen[1])
             eel.displayTheFile(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
         elif vc[0]=='prebuilt_verification':
             gen = pleaseReportFileUthaKLayAao()
@@ -97,25 +104,62 @@ if __name__ == '__main__':
         
         os.system("sbt 'runMain GeneratorDriver'")
     @eel.expose
-    def getcode(code):
+    def createuserfile(namefile):
+       
+        os.chdir(project_dir)
+        os.system(f"touch {namefile}")
+        
+        eel.cleanTheFileTree()
+       
+        getTheFileStrucuture()
+    @eel.expose
+    def addtest():
+        os.system(f"cp -a {project_dir} {currentRootDir}/web/testcases/Self-Checking-Tests/users-tests ")
+        eel.copytestdone()
+
+    @eel.expose
+    def savecode(code):
+        gen = pleaseGeneratorFileUthaKLayAao()
+        filepath = gen[0]
+        actualFilePath = os.path.join(project_dir,filepath[1:])
+        fileToRead = open(actualFilePath,"r")
+        ic(fileToRead)
+
+
+        print(code)
+
+    @eel.expose
+    def savefile(content, file):
+        os.chdir(project_dir)
+        # ic(os.path.exists(file))
+        # ic(file)
+        # ic(os.listdir("."))
+        file = open(file,"w")
+        file.write(content)
+        file.close()
+        os.chdir(currentRootDir)
+
+
+    @eel.expose
+    def getcode():
         #yahan path jahan user ne main.c save ki
         #wo open write then close
         #run riscv gcc test command 
-        #show assebly file
+        #show assembly file
 
         os.chdir(project_dir)
-        file=open("main.c","w")
-        file.write(code)
-        file.close()
+        # file=open("main.c","w")
+        # file.write(code)
+        # file.close()
 
-        proc = sp.Popen("riscv32-unknown-elf-gcc -mabi=ilp32 -march=rv32imc -nostdlib -g -o main main.c".split(), stdout=sp.PIPE, stderr=sp.PIPE)
+        proc = sp.Popen("riscv64-unknown-elf-gcc -mabi=ilp32 -march=rv32imc -nostdlib -g -o main main.c".split(), stdout=sp.PIPE, stderr=sp.PIPE)
         outs, errs = proc.communicate()
         ic(outs)
         ic(errs)
         if "error" in str(errs):
             eel.showAlert(f"Error: {errs}")
         else:
-            os.system("riscv32-unknown-elf-objdump -d main >> main.elf")
+            os.system("riscv64-unknown-elf-objdump -d main >> main.elf")
             # read main.elf and separate machine code and assembly and save in separate files
             elfFile = open("main.elf","r")
             contents = elfFile.readlines()
@@ -136,6 +180,7 @@ if __name__ == '__main__':
             eel.cleanTheFileTree()
             getTheFileStrucuture()
             eel.showAlert("Code Compiled Successfully")
+            os.chdir(f"/home/mano/Downloads/Burq-Suite")
     
 
 

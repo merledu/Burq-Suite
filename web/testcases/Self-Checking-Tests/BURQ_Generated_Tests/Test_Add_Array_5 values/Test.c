@@ -5,4 +5,5 @@ void main()
         int i,c=0;
          for(i=0;i<5;i++)
 	    c=array1[i]+array2[i];
+            printf("%d" , c);
 }

@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/icons/flash.png">
+
     <title></title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/splash.css" rel="stylesheet" />
+    <style>
+        #custom_test{
+            display: none;
+        }
+        #custom_core{
+            display: none;
+        }
+        #prebuilt_core{
+            display: none;
+        }
+               #prebuilt-test{
+            display: none;
+        }
+        #prebuilt-iss{
+            display: none;
+        }
+        #prebuilt-end{
+            display: none;
+        }
+        #prebuilt-end1{
+            display: none;
+        }
+        #swervform{
+            display: none;
+        }
+        #ibexform{
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
@@ -49,6 +80,12 @@
                 <div class="col-4 sec">
                     <div id="sec1">
                         <h4>Recent Projects</h4>
+                        <br>
+                        <div id="recents">
+                            
+
+                            
+                        </div>
                     </div>
                     <div id="sec2">
                         <button onclick="openNewProject()" id="new-btn" class="btn new-btn">
@@ -62,26 +99,24 @@
                 </div>
             </div>
         </div>
+
         <div id="new">
             <div class="row">
-                
                 <div class="col-4 sec">
                     <div class="container">
                         <div id="config-btns">
                             <h4>- Project Selection -</h4>
-                            <button onclick="changeProject(event,'soc')" class="btn config-btn" value="soc">
+                            <button onclick="changeProject2(event,'custom_test')" class="btn config-btn" value="soc">
                                Write Custom Test
                             </button>
     
-                            <button onclick="changeProject(event,'core')" class="btn config-btn">
-                                Custom config Core Verification
-                            </button>
+                         
     
-                            <button onclick="changeProject(event,'comp')" class="btn config-btn">
+                            <button onclick="changeProject2(event,'upload_core')" class="btn config-btn">
                                     Upload Custom Core                 
                             </button>
     
-                            <button onclick="changeProject(event,'verif')" class="btn config-btn">
+                            <button onclick="changeProject2(event,'prebuilt_core')" class="btn config-btn">
                                 Prebuilt Core Verification
                             </button>
     
@@ -91,367 +126,132 @@
 
                     </div>
                 </div>
+
+
                 <div class="col-8 frs">
                     <div class="container">
                         <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
                         
                         <div id="project-name">
                             <h5> Project Name: </h5>
-                            <input type="text" placeholder="Untitled " id="projectname">
+                            <input type="text" placeholder="Untitled " id="projectname" style="margin-top: -10px;
+                            margin-left: 19px;">
                         </div>
                         <div id="project-browse">
                             <h5> Project Location </h5>
                             <div type="text" id="path" style="color: white;
                             border-right-color: #767676;
-                            width: 512px;
+                            width: 630px;
                             padding: 5px;
                             height: 34px;
                             border-bottom-color: #767676;
                             border-left-color: #1a1d22;
                             background-color: #1a1d22;
                             border-style: solid;
-                            margin-left: 20px;
+                            margin-left: 73px;
 
                             border-top-color: #1a1d22;" onfocus="value=''"  > </div>
-                            <button class="btn browse-btn" onclick="select()">...</button>
+                            <button class="btn browse-btn" onclick="select()" style="width: 70px;">...</button>
                         </div>
-                        <div class="config-box" id="soc">
+
+                        <!-- ------------------------- CUSTOM TESTTTTT --------------------- -->
+                        <div class="config-box" id="custom_test">
+
                             <span class="line">
-                                <h2><span>write Custom Test</span></h2>
+                                <h2><span>Write Custom Test</span></h2>
                             </span>
-                            <button class="btn temp-btn" style="width: 300px;"onclick="seldonesoc()">
-                                <span>Write your own test</span>
-                                <br>
-                               
+                            <br><br>
+                            <button class="btn temp-btn" style="width: 300px;" onclick="seldonesoc()">
+                                <span>Write your own test</span>                              
                 
                             </button>
 
-                           
-                           
-
-                            
-
-                                    <button  onclick="seldonesoc()" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;margin-left: 800px;"  />
-                                    </button>
                         </div>
 
-                                
-                            
-                            
+                        
 
-                            
-
-                       
+                        <!-- ------------------------------------------------------------ -->
 
 
-
-                        <div class="config-box" id="coreP">
+                        <!-- ------------------------- CUSTOM CONFIG --------------------- -->
+                        <div class="config-box" id="custom_core">
                             <span class="line">
-                                <h2><span>Core Configurations</span></h2>
-                                <div id="Qcore">
-                                    <div class="row main-config">
-                                        <div class="col-md-3">
-                                            <div class="name-config active">
-                                                <p>Core</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1"></div>
-        
-                                        <div class="col-md-3" style="border-right: 1px solid white; height: 25%;" >
-                                            <h6 style="font-weight: lighter;">ISA</h6>
-                                            <form>
-                                                <input type="radio" name="c-isa" value="32 Bit" checked />
-                                                <label> 32 Bit </label>
-                                                <br>
-                                                <input type="radio" name="c-isa" value="64 Bit" />
-                                                <label> 64 Bit </label>
-                                            </form>
-                                        </div>
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-3">
-                                            <h6 style="font-weight: lighter;">Extensions</h6>
-                                            <form>
-                                                <input type="checkbox" name="c-ext" disabled checked />
-                                                <label> Integer (I) </label>
-                                                <br />
-                                                <input type="checkbox" name="c-ext" />
-                                                <label> Multiplier (M) </label>
-                                                <br />
-                                                <input type="checkbox" name="c-ext" />
-                                                <label> Floating Point (F) </label>
-                                                <br />
-                                                <input type="checkbox" name="c-ext" />
-                                                <label> Compressed (C) </label> 
-                                            </form>
-                                        </div>
-                                        <div class="col-md-2"></div>
-                                    </div>
-    
-                                    <div style="text-align: right;">
-                                        
-                                        <button onclick="changeC('Ccore')" class="btn ctrl-btn">
-                                            <img src="assets/icons/next.png" style="width: 100%;" />
-                                        </button>
-                                    </div>
-                                    </div>
-                                    <div id="Ccore2">
-                                        <div class="row main-config">
-                                            <div class="col-md-3">
-                                                <div class="name-config active">
-                                                    <p>Core</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1"></div>
-            
-                                            <div class="col-md-6" style="border-right: 1px solid white; height: 25%;" >
-                                                <h6 style="font-weight: lighter;">Core</h6>
-                                                <form>
-                                                    <input type="radio" name="c-isa" value="32 Bit" checked />
-                                                    <label> IBEX </label>
-                                                    <br>
-                                                    <input type="radio" name="c-isa" value="64 Bit" />
-                                                    <label> SWERV-EH1 </label>
-                                                    <br>
-                                                    <input type="radio" name="c-isa" value="64 Bit" />
-                                                    <label> SWERV-EH2 </label>
-                                                </form>
-                                            </div>
-                                            <!-- <div class="col-md-1"></div> -->
-                                            <!-- <div class="col-md-3">
-                                                <h6 style="font-weight: lighter;">Extensions</h6>
-                                                <form>
-                                                    <input type="checkbox" name="c-ext" disabled checked />
-                                                    <label> Integer (I) </label>
-                                                    <br />
-                                                    <input type="checkbox" name="c-ext" />
-                                                    <label> Multiplier (M) </label>
-                                                    <br />
-                                                    <input type="checkbox" name="c-ext" />
-                                                    <label> Floating Point (F) </label>
-                                                    <br />
-                                                    <input type="checkbox" name="c-ext" />
-                                                    <label> Compressed (C) </label> 
-                                                </form>
-                                            </div> -->
-                                            <!-- <div class="col-md-2"></div> -->
-                                        </div>
-        
-                                        <div style="text-align: right;">
-                                            
-                                            <button onclick="changeC('Ccore')" class="btn ctrl-btn">
-                                                <img src="assets/icons/next.png" style="width: 100%;" />
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div id="Ccore">
-                                        <div class="row main-config">
-                                            <div class="col-md-2">
-                                                <div class="name-config active">
-                                                    <p>ISS</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1"></div>
-            
-                                            
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
-                                                <h6 style="font-weight: lighter;">ISS</h6>
-                                                <form>
-                                                    <input type="radio" name="coreV" value="spike"   />
-                                                    <label> SPIKE </label>
-                                                    <br />
-                                                    <input type="radio" name="coreV" value="m"/>
-                                                    <label> WHISPER </label>
-                                                    <br />
-                                                    <input type="radio" name="coreV" value="f" />
-                                                    <label> OVPSIM </label>
-                                                    <br />
-                                                    
-                                                </form>
-                                            </div>
-                                            <div class="col-md-2"></div>
-                                        </div>
-                                    
-        
-                                        
-                                            
-                                        <div style="text-align: right;">
-                                            <button onclick="changeC('Qcore')" class="btn ctrl-btn">
-                                                <img src="assets/icons/back.png" style="width: 100%;" />
-                                            </button>
-                                            <button onclick="changeC('Cdevices')" class="btn ctrl-btn">
-                                                <img src="assets/icons/next.png" onclick="coreget()" style="width: 100%;" />
-                                            </button>
-                                        </div>
-                                    </div>
+                                <h2><span>Custom Config Core Verification</span></h2>
+                            </span>
 
-                                    
-
-                                    <div id="Cdevices">
-                                        <div class="row main-config">
-                                            <div class="col-md-3">
-                                                <div class="name-config">
-                                                    <p>Core+ISS</p>
-                                                </div>
-                                                <div class="name-config active">
-                                                    <p>Extensions</p>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-8">
-                                                <form>
-                                                    <div class="d-flex justify-content-between1">
-                                                        
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <button class="btn temp-btn">
-                                                            <span>I</span>
-                                                            <br>
-                                                            Integer
-                                            
-                                                        </button>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <button class="btn temp-btn">
-                                                            <span>M</span>
-                                                            <br>
-                                                            Multiplier
-                                                        </button>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <button class="btn temp-btn">
-                                                            <span>F</span>
-                                                            <br>
-                                                            Floating 
-                                                        </button>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <button class="btn temp-btn">
-                                                            <span>C</span>
-                                                            <br>
-                                                            Compressed
-                                                        </button>
-                                                        
-                                                    </div>
-                                                    
-                                                </form>
-                                              
-                                            </div>
-                                        </div>
-        
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <button onclick="changeC('Ccore')" class="btn ctrl-btn">
-                                                <img src="assets/icons/back.png" style="width: 100%;" />
-                                            </button>
-        
-                                            <button onclick="changeC('Cbus')" class="btn ctrl-btn">
-                                                <img src="assets/icons/next.png" style="width: 100%;" />
-                                            </button>
-                                        </div>
-        
-                                        
-                                    </div>
-        
-        
-        
-                                    <div id="Cbus">
-                                        <div class="row main-config">
-                                            <div class="col-md-3">
-                                                <div class="name-config">
-                                                    <p>Core+ISS</p>
-                                                </div>
-                                                
-                                                <div class="name-config ">
-                                                    <p>Extensions</p>
-                                                </div>
-                                                
-                                                <div style="margin-bottom: 0px;" class="name-config active">
-                                                    <p>Test Cases</p>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-8" id="swerv" >
-                                               <form id="swervform" style="overflow-y:auto;height:180px">
-                                                   
-                                               </form> 
-                                              
-                                            </div>
-                                            <div class="col-md-9" id="ibex" >
-                                                <form id="ibexform" style="overflow-y:auto;height:180px">
-                                                   
-                                                </form>
-                                                
-                                            </div>
-                                        </div>
-                
-        
-                                        <div class="d-flex justify-content-between align-items-center"style="margin-top: -35px;">
-                                            <button onclick="changeC('Cdevices')" class="btn ctrl-btn">
-                                                <img src="assets/icons/back.png" style="width: 100%;" />
-                                            </button>
-        
-                                            <button  onclick="verificationdone()" class="btn ctrl-btn">
-                                                <img src="assets/icons/next.png" style="width: 100%;"  />
-                                            </button>
-                                        </div>
-        
-                                        
-                                    </div>
-                                   
-        
-                                   
-                                    </div>
-                         
-
-
-                        <div class="config-box" id="comp">
-                            <span class="line">
-                                <h2><span>Component Selection</span></h2>
-                               
-
-
-                            
-                        </div>
-
-                        <div class="config-box" id="verif">
-                            <span class="line">
-                                <h2><span>Verification Configurations</span></h2>
-                            
-
-                            <div id="Vcore">
+                            <!-- -------------------- CUSTOM CORE BOX -------------------- -->
+                            <div id="custom-core">
                                 <div class="row main-config">
                                     <div class="col-md-3">
                                         <div class="name-config active">
-                                            <p>Core+ISS</p>
+                                            <p>Core</p>
                                         </div>
                                     </div>
                                     <div class="col-md-1"></div>
     
                                     <div class="col-md-3" style="border-right: 1px solid white; height: 25%;" >
-                                        <h6 style="font-weight: lighter;">Core</h6>
+                                        <h6 style="font-weight: lighter;">ISA</h6>
                                         <form>
-                                            
-                                            <input type="radio" name="coreV" value="SWERV-EH1" checked />
-                                            <label> SWERV-EH1 </label>
+                                            <input type="radio" name="c-isa" value="32 Bit" checked />
+                                            <label> 32 Bit </label>
                                             <br>
-                                            <input type="radio" name="coreV" value="SWERV-EH2" />
-                                            <label> SWERV-EH2</label>
-                                            <br>
-                                            <input type="radio" name="coreV" value="IBEX"/>
-                                            <label> IBEX</label>
-                                            
-                                         
-                                            
+                                            <input type="radio" name="c-isa" value="64 Bit" />
+                                            <label> 64 Bit </label>
                                         </form>
                                     </div>
                                     <div class="col-md-1"></div>
                                     <div class="col-md-3">
+                                        <h6 style="font-weight: lighter;">Extensions</h6>
+                                        <form>
+                                            <input type="checkbox" name="c-ext" disabled checked />
+                                            <label> Integer (I) </label>
+                                            <br />
+                                            <input type="checkbox" name="c-ext" />
+                                            <label> Multiplier (M) </label>
+                                            <br />
+                                            <input type="checkbox" name="c-ext" />
+                                            <label> Floating Point (F) </label>
+                                            <br />
+                                            <input type="checkbox" name="c-ext" />
+                                            <label> Compressed (C) </label> 
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div style="text-align: right;">
+                                        
+                                    <button onclick="changeCustom('iss')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- -------------------- CUSTOM ISS BOX -------------------- -->
+                            <div id="custom-iss">
+                                <div class="row main-config">
+                                    
+                                    <div class="col-md-2">
+                                        <div class="name-config">
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>ISS</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+    
+                                    
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-3">
                                         <h6 style="font-weight: lighter;">ISS</h6>
                                         <form>
-                                            <input type="radio" name="coreV" value="spike"   />
+                                            <input checked type="radio" id="customISS" name="customISS" value="spike"   />
                                             <label> SPIKE </label>
                                             <br />
-                                            <input type="radio" name="coreV" value="m"/>
+                                            <input type="radio" id="customISS" name="customISS" value="m"/>
                                             <label> WHISPER </label>
                                             <br />
-                                            <input type="radio" name="coreV" value="f" />
+                                            <input type="radio" id="customISS" name="customISS" value="f" />
                                             <label> OVPSIM </label>
                                             <br />
                                             
@@ -464,178 +264,933 @@
                                 
                                     
                                 <div style="text-align: right;">
-                                    <button onclick="changeV('Vdevices')" class="btn ctrl-btn">
+                                    <button onclick="changeCustom('core')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;" />
+                                    </button>
+                                    <button onclick="changeCustom('test')" class="btn ctrl-btn">
                                         <img src="assets/icons/next.png" onclick="coreget()" style="width: 100%;" />
                                     </button>
                                 </div>
+                            
                             </div>
-                            <div id="Vdevices">
+
+                            <!-- -------------------- CUSTOM TEST CASES BOX -------------------- -->
+                            <div id="cutom-test">
                                 <div class="row main-config">
                                     <div class="col-md-3">
                                         <div class="name-config">
-                                            <p>Core+ISS</p>
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config">
+                                            <p>ISS</p>
                                         </div>
                                         <div class="name-config active">
-                                            <p>Extensions</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-8">
-                                        <form>
-                                            <div class="d-flex justify-content-between1">
-                                                
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <button class="btn temp-btn">
-                                                    <span>I</span>
-                                                    <br>
-                                                    Integer
-                                    
-                                                </button>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <button class="btn temp-btn">
-                                                    <span>M</span>
-                                                    <br>
-                                                    Multiplier
-                                                </button>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <button class="btn temp-btn">
-                                                    <span>F</span>
-                                                    <br>
-                                                    Floating 
-                                                </button>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <button class="btn temp-btn">
-                                                    <span>C</span>
-                                                    <br>
-                                                    Compressed
-                                                </button>
-                                                
-                                            </div>
-                                            
-                                        </form>
-                                      
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <button onclick="changeV('Vcore')" class="btn ctrl-btn">
-                                        <img src="assets/icons/back.png" style="width: 100%;" />
-                                    </button>
-
-                                    <button onclick="changeV('Vbus')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;" />
-                                    </button>
-                                </div>
-
-                                
-                            </div>
-
-
-
-                            <div id="Vbus">
-
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config">
-                                            <p>Core+ISS</p>
-                                        </div>
-                                        
-                                        <div class="name-config ">
-                                            <p>Extensions</p>
-                                        </div>
-                                        
-                                        <div style="margin-bottom: 0px;" class="name-config active">
                                             <p>Test Cases</p>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-8" id="swerv" >
-                                       <form id="swervform" style="overflow-y:auto;height:180px">
-                                           
-                                       </form> 
-                                      
-                                    </div>
-                                    <div class="col-md-9" id="ibex" >
-                                        <form id="ibexform" style="overflow-y:auto;height:180px">
-                                           
-                                        </form>
-                                        
-                                    </div>
+                                        <!-- <form id="swervform" style="overflow-y:auto;height:180px">
+                                            
+                                        </form>  -->
+                                       
+                                     </div>
+                                     <!-- <div class="col-md-8" id="ibex" >
+                                         <form id="ibexform" style="overflow-y:auto;height:180px">
+                                            
+                                         </form>
+                                         
+                                     </div> -->
                                 </div>
-        
 
-                                <div class="d-flex justify-content-between align-items-center"style="margin-top: -35px;">
-                                    <button onclick="changeV('Vdevices')" class="btn ctrl-btn">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button onclick="changeCustom('iss')" class="btn ctrl-btn">
                                         <img src="assets/icons/back.png" style="width: 100%;" />
                                     </button>
 
-                                    <button  onclick="verificationdone()" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;"  />
+                                    <button onclick="changeCustom('end')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;" />
                                     </button>
                                 </div>
-</div>
-                           
-                           
-
-                           
+                            </div>
                             
 
-                        <div class="config-box" id="sdk">
+
+                        </div>
+
+                        <!-- -------------------- ------------ -------------------- -->
+                        <!-- ---------------Upload Custom Core--- ---------------------->
+                         <!-- ------------------------- CUSTOM CONFIG --------------------- -->
+                         <div class="config-box" id="upload_core"  style="display: none;">
                             <span class="line">
-                                <h2><span>SDK Configurations</span></h2>
+                                <h2><span>Upload Custom Core</span></h2>
                             </span>
+                            
+                            <!-- -----------------browse folder------------------>
+                            <div id="uploadcore">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config active">
+                                            <p>Upload Core </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+    
+                                    <div class="col-md-3"  >
+                                        <h6 style="font-weight: lighter;">Upload core </h6>
+                                        
+                                        <div id="project-browse" style="width: 483px" >
+                                          
+                                            <input type="text" id="pathcore" style="color: white;
+                                            border-right-color: #767676;
+                                            width: 550px;
+                                            padding: 5px;
+                                            height: 34px;
+                                            border-bottom-color: #767676;
+                                            border-left-color: #1a1d22;
+                                            background-color: #1a1d22;
+                                            border-style: solid;
+                                           
+                
+                                            border-top-color: #1a1d22;" disabled value=''  />
+                                            <button class="btn browse-btn" onclick="select1()" style="width:80px;">...</button>
+                                        </div>
+                                        <input type='checkbox' name='checkswervtest' value='swervbased' ><label> Swerv Based Core </label> 
+                                    </div>
+                                    
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div style="text-align: right;">
+                                        
+                                    <button onclick="changecoree('command')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
+                                    </button>
+                                </div>
+                                </div>
+                          
+
+                        <!-- -----------------------------------upload core --command -------->
+                        <div id="core-command">
+                        <div class="row main-config">
+                            <div class="col-md-3">
+                                <div class="name-config active">
+                                    <p>Upload Core </p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Enter commands </p>
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+
+                            <div class="col-md-3"  >
+                                <h6 style="font-weight: lighter;width: 500px;">Enter commands to Run test case </h6>
+                                
+                              
+                                <input id="getcommands" placeholder="make -f Makefile TEST={testname}" style="background-color: black;color: white;width: 412px;">
+                                
+                            </div>
+                            
+                            <div style="    margin-left: 245px;
+                            margin-top: -43px;"><p style="color:rgba(240, 248, 255, 0.342)">e.g:  {testcommand} Test={testname}
+        
+                            </p></div>
+                            
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div style="text-align: right;">
+                            <button onclick="changecoree('uploadcore')" class="btn ctrl-btn">
+                                <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
+                            </button>    
+                            <button onclick="changecoree('uptestcase')" class="btn ctrl-btn">
+                                <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
+                            </button>
                         </div>
                     </div>
-                  
-                    
-                    
+                    <!-- --------------------------TESTCASE------------------------->
+                    <div id="testcase">
+                        <div class="row main-config">
+                            <div class="col-md-3">
+                                <div class="name-config active">
+                                    <p>Upload Core </p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Enter commands </p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Select test cases </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6"  style="margin-left: 70px;">
+
+                            <div  >
+                                <h6 style="font-weight: lighter;">Select Your TestCase folder </h6>
+                                
+            <div class="col-md-3"  >
+                                    
+                                    
+                                  
+                                    <input id="gettestfolder" placeholder="swer-El2/tools/testbench/testfolder" style="background-color: black;color: white;width: 386px;">
+                                    
+                                </div>
+                            </div>
+                            <div  style="margin-top:5px;" >
+                                <h6 style="font-weight: lighter;">Select Your Core log file folder </h6>
+                                
+                                <div id="project-browse" style="width: 415px;" >
+                                  
+                                    <div class="col-md-3"  >
+                                        
+                                        
+                                      
+                                        <input id="getlogfolder" placeholder="swerv-El2/exec.log" style="background-color: black;color: white;width: 386px;">
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        
+                        </div>
+                            
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div style="text-align: right;" >
+                            <button  class="btn ctrl-btn">
+                                <img src="assets/icons/back.png" onclick="changecoree('command')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
+                            </button>    
+                            <button  class="btn ctrl-btn">
+                                <img src="assets/icons/next.png" onclick="changecoree('extensionselect')" style="width: 100%;margin-top: -100px;" />
+                            </button>
+                        </div>
+                            </div>
+                            <!-- ---------------------------extension selection------------------------------->
+                            <div id="extensionselection">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config active">
+                                            <p>Upload Core </p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Enter commands </p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>extension</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"  style="margin-left: 70px;">
+        
+                                    <div  >
+                                        <h6 style="font-weight: lighter;">Select Your TestCase Extension</h6>
+                                        
+                                      
+                                    </div>
+                                    <div  style="margin-top:5px;" >
+                                        
+                                        
+                                        
+                                
+                                </div>
+                                    
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div style="text-align: right;" style="margin-top: -36px;">
+                                    <button  class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" onclick="changecoree('uptestcase')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
+                                    </button>    
+                                    <button  class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" onclick="changecoree('Stestcasetype')" style="width: 100%;margin-top: -100px;" />
+                                    </button>
+                                </div>
+                                    </div>
+                            </div>
+                                       
+                               
+
+                            <!--  ------------------------- testcase selection type --------- ------------>
+                            <div id="testcasetype">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config active">
+                                            <p>Upload Core </p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Enter commands </p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Select test cases</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"  style="margin-left: 70px;">
+        
+                                    <div  >
+                                        <h6 style="font-weight: lighter;">Select Your TestCase type</h6>
+                                        
+                                      
+                                    </div>
+                                    <div  style="margin-top:5px;" >
+                                        
+                                        
+                                        <form>
+                                            <input type="radio" id="gencoretest" name="upCore" value="BURQ_Generated_Tests" checked />
+                                            <label> BURQ_Generated_Tests </label>
+                                            <br>
+                                            <input  type="radio" id="gencoretest" name="upCore" value="Floating_point_tests_for_azadi" />
+                                            <label>Floating_point_tests_for_azadi </label>
+                                            <br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="MERL_vector_Tests" />
+                                            <label> MERL_vector_Tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="Riscv-tests" />
+                                            <label> Riscv-tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="Self-Checking-vector-tests" />
+                                            <label> Self-Checking-vector-tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="Swerv_Tests" />
+                                            <label>Swerv_Tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="users-Tests" />
+                                            <label>User-Tests </label>
+                                        </form> 
+                                
+                                </div>
+                                    
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div style="text-align: right;" style="margin-top: -36px;">
+                                    <button  class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" onclick="changecoree('uptestcase')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
+                                    </button>    
+                                    <button  class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" onclick="changecoree('showtests')" style="width: 100%;margin-top: -100px;" />
+                                    </button>
+                                </div>
+                                    </div>
+                            </div>
+                            <!-------------------------------SHOW TEST CASES-------------->
+                            <div id="showtest">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config">
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config">
+                                            <p>ISS</p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Test Cases</p>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-7" >
+                                        <form id="uploadcoretestcaseform" style="overflow-y:auto;height:200px">
+                                            
+                                        </form>
+                                         
+                                        
+                                       
+                                     </div>
+                                     
+                                     <div style="margin-top: -40px;">
+                                       
+                                        <button onclick="changecoree('Stestcasetype')" class="btn ctrl-btn">
+                                            <img src="assets/icons/back.png" style="width: 100%;" />
+                                        </button>
+                                        <button onclick="changecoree('endcore')" class="btn ctrl-btn">
+                                            <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
+                                        </button>
+    
+                                        
+                                     </div>
+                                     
+                                </div>
+                            </div>
+                            <div id="prebuilt-end1">
+                                <div class="progress">
+                                    <div class="progress-bar"></div>
+                                  </div>
+                            </div>
+                           
+                            </div>
+
+                        <!-- ----------------------- PREBUILT CORE ------------------ -->
+                        <div class="config-box" id="prebuilt_core">
+                            <span class="line">
+                                <h2><span>Prebuilt Core Verification</span></h2>
+                            </span>
+                            <br><br>
+
+                            <!-- -------------------- PREBUILT CORE BOX -------------------- -->
+                            <div id="prebuilt-core"style="margin-top:-60px;">
+                                <div class="row main-config">
+
+
+
+
+                                    <div class="col-md-3">
+                                        <div class="name-config active">
+                                            <p>Core</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+    
+                                    <div class="col-md-5">
+                                        <h6 style="font-weight: lighter;">ISA</h6>
+                                        <form>
+                                            <input type="radio" id="prebuiltCore" name="prebuiltCore" value="ibex" checked />
+                                            <label> IBEX </label>
+                                            <br>
+                                            <input type="radio" id="prebuiltCore" name="prebuiltCore" value="swerv" />
+                                            <label> SWERV-EH1 </label>
+                                            <br>
+                                            <input type="radio" id="prebuiltCore" name="prebuiltCore" value="swerv" />
+                                            <label> SWERV-EL2 </label>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                                <div style="text-align: right;">
+                                        
+                                    <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-top:-20px;" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- -------------------- PREBUILT ISS BOX -------------------- -->
+                            <div id="prebuilt-iss"style="margin-top:-60px;">
+                                <div class="row main-config">
+                                    
+                                    <div class="col-md-2">
+                                        <div class="name-config">
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>ISS</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+    
+                                    
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-3">
+                                        <h6 style="font-weight: lighter;">ISS</h6>
+                                        <form>
+                                            <input checked type="radio" id="prebuiltISS" name="prebuiltISS" value="spike"   />
+                                            <label> SPIKE </label>
+                                            <br />
+                                            <input type="radio" id="prebuiltISS" name="prebuiltISS" value="whisper"/>
+                                            <label> WHISPER </label>
+                                            <br />
+                                            <input type="radio" id="prebuiltISS" name="prebuiltISS" value="ovpsim" />
+                                            <label> OVPSIM </label>
+                                            <br />
+                                            
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                            
+
+                                
+                                    
+                                <div style="text-align: right;">
+                                    <button onclick="changePrebuilt('core')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
+                                    </button>
+                                    <button onclick="changePrebuilt('test')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-top:-50px;" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- -------------------- PREBUILT TEST CASES BOX -------------------- -->
+                            <div id="prebuilt-test"style="margin-top:-60px;">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config">
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config">
+                                            <p>ISS</p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Test Cases</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-7" >
+                                        <form id="swervform" style="overflow-y:auto;height:180px">
+                                            
+                                        </form> 
+                                        <form id="ibexform" style="overflow-y:auto;height:180px">
+                                            
+                                        </form>
+                                       
+                                     </div>
+                                     <div style="margin-top: -40px;">
+                                       
+                                        <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
+                                            <img src="assets/icons/back.png" style="width: 100%;" />
+                                        </button>
+                                        <button onclick="changePrebuilt('end')" class="btn ctrl-btn">
+                                            <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
+                                        </button>
+    
+                                        
+                                     </div>
+                                     
+                                </div>
+
+                                <!-- <div class="d-flex justify-content-between align-items-center">
+                                    
+                                </div> -->
+
+                                </div>
+
+                            <!-- -------------------- PREBUILT END BOX -------------------- -->
+                            <div id="prebuilt-end">
+                                <div class="progress">
+                                    <div class="progress-bar"></div>
+                                  </div>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
 
 
 
+        <script src="bootstrap/js/bootstrap.min.js" ></script>
+        <script src="jquery.min.js"></script>
+        <script src="script.js"></script>
+        <script type="text/javascript" src="/eel.js"></script>
 
-    <script src="bootstrap/js/bootstrap.min.js" ></script>
-    <script src="script.js"></script>
-    <!-- <script src="renderer.js"></script> -->
-    <script type="text/javascript" src="/eel.js"></script>
-    <script type="text/javascript">
-        console.log("hello");
+        <script type="text/javascript">
 
-    function getCore(){
-        console.log("getComponent");
-       
-            var theISA,theBus;
-            var theExt = [];
+eel.getRecords();
 
-            var isas = document.getElementsByName("isa");
-            for (var i = 0; i < isas.length; i++) {
-                if (isas[i].checked) {
-                    theISA = isas[i].value;
+function closeRecentRecord(id){
+    eel.closeRecentRecord(id);
+    eel.getRecords();
+}
+
+function opneRecentProject(id){
+    eel.openRecentProject(id);
+}
+                                
+            eel.expose(displayRecords);
+            function displayRecords(projects, types){
+                var hello = "";
+                
+                for(let i=0;i<projects.length; i++){
+                    hello += `<div onclick="opneRecentProject('${i}')" class="record">
+                        <h5>${projects[i]}</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6>Type: ${types}</h6>
+                                    <button onclick="closeRecentRecord('${i}')" class="btn close-btn">
+                                        <img src="assets/icons/cross.png" />
+                                    </button>
+                                </div>
+                                
+                            </div>`;
                 }
+
+                var recorder = document.getElementById("recents");
+                recorder.innerHTML = hello;
             }
 
-            var exts = document.getElementsByName("ext");
-            for (var i = 0; i < exts.length; i++) {
-                if (exts[i].checked) {
-                    theExt.push(exts[i].value);
+
+           eel.expose(changeProgressBar);
+           function changeProgressBar(width){
+               document.getElementsByClassName("progress-bar")[0].style.width = width + "%";
+           }
+           eel.expose(changeProgressBar1);
+           function changeProgressBar1(width){
+               document.getElementsByClassName("progress-bar1")[0].style.width = width + "%";
+           }
+
+            function changePrebuilt(comp){
+                if(comp == "core"){
+                    document.getElementById("prebuilt-core").style.display = "block";
+                    document.getElementById("prebuilt-iss").style.display = "none";
+                    document.getElementById("prebuilt-test").style.display = "none";
+                }
+                else if(comp == "iss"){
+                    document.getElementById("prebuilt-core").style.display = "none";
+                    document.getElementById("prebuilt-iss").style.display = "block";
+                    document.getElementById("prebuilt-test").style.display = "none";
+                }
+                else if(comp == "test"){
+                    var selectedCore;
+                    var cores = document.getElementsByName("prebuiltCore");
+                    for (var j =0; j<cores.length; j++){
+                        if(cores[j].checked){
+                            selectedCore = cores[j].value;
+                        }
+                    }
+                    
+                    if(selectedCore == "swerv"){
+                        eel.getlistswerv()
+                    } else if(selectedCore == "ibex"){
+                        eel.getlistibex()
+                    }
+                    document.getElementById("prebuilt-core").style.display = "none";
+                    document.getElementById("prebuilt-iss").style.display = "none";
+                    document.getElementById("prebuilt-test").style.display = "block";
+                }
+                else if(comp == "end"){
+                    var projName = document.getElementById("projectname").value;
+                    var projDir = document.getElementById("path").innerHTML;
+                    console.log(projDir);
+                    var selectedCore, selectedIss;
+                    var cores = document.getElementsByName("prebuiltCore");
+                    var iss = document.getElementsByName("prebuiltISS");
+                    for (var j =0; j<cores.length; j++){
+                        if(cores[j].checked){
+                            selectedCore = cores[j].value;
+                        }
+                    }
+                    for (var k=0; k<iss.length; k++){
+                        if(iss[k].checked){
+                            selectedIss = iss[k].value;
+                        }
+                    }
+                    var tests = [];
+                    var testCheckboxes = document.getElementsByName("prebuiltTest");
+                    for (var i = 0; i < testCheckboxes.length; i++) {
+                        if (testCheckboxes[i].checked) {
+                            tests.push(testCheckboxes[i].value);
+                        }
+                    }
+                    if (projName == ""){
+                        alert("Please enter a project name");
+                    } else if (projDir == " "){
+                        alert("Please select a directory");
+                    } else if (tests.length == 0){
+                        alert("Please select at least one test case");
+                    } else {
+                        document.getElementById("prebuilt-core").style.display = "none";
+                        document.getElementById("prebuilt-iss").style.display = "none";
+                        document.getElementById("prebuilt-test").style.display = "none";
+                        document.getElementById("prebuilt-end").style.display = "block";
+                        // var selectedCore = document.getElementById("prebuiltCore").value;
+                        // var selectedIss = document.getElementById("prebuiltISS").value;
+                        // get prebuiltTest checkbox values
+
+                        
+                        eel.runTests(selectedCore, selectedIss,  tests, projName, projDir);
+                    }
+                    
+                    
+                    
+
+                    
                 }
             }
+//Coree
+            function changecoree(comp){
+                if(comp == "initial"){
+                        document.getElementById("core-command").style.display = "none";
+                        document.getElementById("uploadcore").style.display = "block";
+                        document.getElementById("testcase").style.display = "none";
+                        document.getElementById("testcasetype").style.display = "none";
+                        document.getElementById("showtest").style.display = "none";
+                        document.getElementById("extensionselection").style.display = "none";
+                } else if(comp == "command"){
+                    var isSwerv = document.getElementsByName("checkswervtest")[0];
+                    if(isSwerv.checked){
+                        changecoree("Stestcasetype");
+                    } else{
+                        document.getElementById("core-command").style.display = "block";
+                        document.getElementById("uploadcore").style.display = "none";
+                        document.getElementById("testcase").style.display = "none";
+                        document.getElementById("testcasetype").style.display = "none";
+                        document.getElementById("showtest").style.display = "none";
+                        document.getElementById("extensionselection").style.display = "none";
+                    }
+                    
+                   
+                }
+                if(comp == "upcore"){
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "block";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "none";
+                    document.getElementById("extensionselection").style.display = "none";
+                   
+                }
+                if(comp == "uptestcase"){
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "none";
+                    document.getElementById("testcase").style.display = "block";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "none";
+                    document.getElementById("extensionselection").style.display = "none";
+                   
+                }
+                if(comp == "uploadcore"){
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "block";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "none";
+                    document.getElementById("extensionselection").style.display = "none";
+                   
+                }
+                if(comp == "extensionselect"){
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "none";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "none";
+                    document.getElementById("extensionselection").style.display = "block";
+                   
+                }
+                if(comp == "showtests"){
+                    var selectedtesttype;
+                    var cores = document.getElementsByName("upCore");
+                    for (var j =0; j<cores.length; j++){
+                        if(cores[j].checked){
+                            selectedtesttype = cores[j].value;
+                           
+                        }
+                    }
+                    
+                    if(selectedtesttype == "Floating_point_tests_for_azadi"){
+                        eel.floatingpointtest()
+                    } else if(selectedtesttype== "MERL_vector_Tests"){
+                        eel.merlvectortest()
+                    }
+                    else if(selectedtesttype== "Riscv-tests"){
+                        eel.riscvtest()
+                    }
+                    else if(selectedtesttype== "Self-Checking-vector-tests"){
+                        eel.selfcheckingvectortest()
+                    }
+                    else if(selectedtesttype== "Swerv_Tests"){
+                        eel.swervtest()
+                    }
+                    else if(selectedtesttype== "BURQ_Generated_Tests"){
+                        eel.burqgeneratedtest()
+                    }
+                    else if(selectedtesttype=="users-Tests"){
+                        eel.usertest()
+                    }
+                   
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "none";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "block";
+                    document.getElementById("extensionselection").style.display = "none";
+                   
+                }
+              
+                if(comp == "Stestcasetype"){
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "none";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "block";
+                    document.getElementById("extensionselection").style.display = "none";
+                   
+                }
+                 if(comp == "endcore"){
 
-            var buses = document.getElementsByName("core-bus");
-            for (var i = 0; i < buses.length; i++) {
-                if (buses[i].checked) {
-                    theBus = buses[i].value;
+                    var projName = document.getElementById("projectname").value;
+                    var projDir = document.getElementById("path").innerHTML;
+                    var command=document.getElementById("getcommands").value;
+                    var uploadcore = document.getElementById("pathcore").innerHTML;
+                    var testcase = document.getElementById("gettestfolder").value;
+                    var logfile = document.getElementById("getlogfolder").value;
+                    var testtype=document.getElementsByName("upCore");
+                    
+                            
+                    if (projName == ""){
+                        alert("Please enter a project name");
+                    } else if (projDir == ""){
+                        alert("Please select a directory");
+                    } else if (uploadcore == " "){
+                        alert("Please Upload Core");
+                    } else if (command == ""){
+                        alert("Please Enter command");
+                    } else if (testcase == ""){
+                        alert("Please select testcase folder");
+                    } else if (logfile == " "){
+                        alert("Please  location where log file will generate");
+                    } else{
+
+                        
+                        var progressbar=document.getElementById("prebuilt-end1").style.display="block";
+                        var hidetest=document.getElementById("showtest").style.display="none";
+                        for (var j =0; j<testtype.length; j++){
+                            if(testtype[j].checked){
+                                selectedtype = testtype[j].value;
+                            }
+                        }
+                        
+                    
+                    
+                        var checkswerv = document.getElementsByName("checkswervtest");
+                        for (var j =0; j<checkswerv.length; j++){
+                            if(checkswerv[j].checked){
+                    
+                            var checkswervv=checkswerv[j].value;
+                            
+                            }
+                        }
+
+                        var getcommand=document.getElementById("getcommands").value;
+                        var gettestcasefoldername=document.getElementById("gettestfolder").value;
+                        var getlogfoldername=document.getElementById("getlogfolder").value;
+                        
+                        var tests1 = [];
+                                var testCheckboxes1 = document.getElementsByName("coreTest");
+                                for (var i = 0; i < testCheckboxes1.length; i++) {
+                                    if (testCheckboxes1[i].checked) {
+                                        tests1.push(testCheckboxes1[i].value);
+                                    }
+                                }
+
+                        eel.enduploadcore(getcommand,tests1,gettestcasefoldername,getlogfoldername,checkswervv,selectedtype);
+                    }
+            
+            }}
+            function changeCustom(comp){
+                var core = document.getElementById("custom-core");
+                var iss = document.getElementById("custom-iss");
+                var test = document.getElementById("custom-test");
+                core.style.display = "none";
+                iss.style.display = "none";
+                test.style.display = "none";
+
+                if(comp === "custom-core"){
+                    core.style.display = "block";
+                }
+                else if(comp === "custom-iss"){
+                    iss.style.display = "block";
+
+                }
+                else if(comp === "custom-test"){
+                    var selectedISS = document.getElementById("customISS").value;
+
+                    test.style.display = "block";
                 }
             }
-
-            console.log(theBus,theISA, theExt);
-            eel.genCore(theISA, theExt, theBus);
-            eel.stop_everything();
-            window.close();
-    }
+        
     
+
+
+            eel.expose(showIbexTests)
+            function showIbexTests(listt){
+                
+                var form=document.getElementById('ibexform');
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                        `<input type='checkbox' name='prebuiltTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+            }
+
+            eel.expose(showSwervTests)
+            function showSwervTests(listt){
+                
+                var form=document.getElementById('swervform');
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='prebuiltTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+            } 
+            //browsefile
+            function select(){
+                var projectnamee = document.getElementById("projectname").value;
+                var showpath = document.getElementById("path");
+    showpath.value ="";
+    console.log(showpath);
+
+        eel.selectFolder(projectnamee);
+
+
+}
+function select1(){
+               
+                var showpath = document.getElementById("pathcore");
+    showpath.innerHTML ="";
+    
+    
+        eel.selectFolder1();
+
+
+}
+//select test case location
+function selecttestcase(){
+               
+               var showpath = document.getElementById("pathtest");
+   showpath.innerHTML ="";
+   
+       eel.selecttest();
+
+
+}
+//select log file location
+function selectlog(){
+               
+               var showpath = document.getElementById("logpath");
+   showpath.innerHTML ="";
+  
+   
+       eel.selectlogfile();
+
+
+}
+eel.expose(select_jstestcase)
+function select_jstestcase(a){
+    var showpath = document.getElementById("pathtest");
+    showpath.innerHTML+=a;
+
+}
+eel.expose(select_jslog)
+function select_jslog(a){
+    var showpath = document.getElementById("logpath");
+    showpath.innerHTML+=a;
+
+}
+//showpath
+eel.expose(select_js)
+function select_js(a){
+    var showpath = document.getElementById("path");
+    showpath.innerHTML=a;
+
+}
+eel.expose(select_js1)
+function select_js1(a){
+    var showpath = document.getElementById("pathcore");
+    showpath.innerHTML+=a;
+
+}
+//donebutton
+function seldonesoc(){
+
+    var projName = document.getElementById("projectname").value;
+    var projDir = document.getElementById("path").value;
+    if (projName == ""){
+        alert("Please enter a project name");
+    } else if (projDir == " "){
+        alert("Please select a directory");
+    } else {
+        eel.socdetail();
+    }
+        
+        
+    }
 
     eel.expose(goToMain)
         function goToMain(){
@@ -643,99 +1198,120 @@
             window.close();
         }
 
-        function say_hello_js() {
-            eel.say_hello_py("Javascript World!");  // Call a Python function
-        }
-
-        say_hello_js();
-        function seldonesoc(){
-        
-        
-                eel.socdetail();
-            }
-            function select(){
-                var projectnamee = document.getElementById("projectname").value;
-                var showpath = document.getElementById("path");
-    showpath.innerHTML ="";
-
-        eel.selectFolder(projectnamee);
-
-
-}
-eel.expose(select_js)
-function select_js(a){
-    var showpath = document.getElementById("path");
-    showpath.innerHTML+=a;
-
-}
-function myFunction1() {{
-        document.getElementById("myDropdown").classList.toggle("show1");
-      }
-      
-      // Close the dropdown if the user clicks outside of it
-      window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
-          var dropdowns = document.getElementsByClassName("dropdown-content");
-          var i;
-          for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show1')) {
-              openDropdown.classList.remove('show1');
-            }
-          }
-        }
-      }
-    }
-function coreget(){
-    var listvercore=[];
-    var ele = document.getElementsByName('coreV');
-            for(i = 0; i < ele.length; i++) {
+  //uploadcoreprocess done
+  // copy make directry in rjct location
+  //copy all files of upload core in new made directry
+  // user will select test case so 
+  //  
+  eel.expose(showfloatingTests)
+            function showfloatingTests(listt){
+                
+                var form=document.getElementById('uploadcoretestcaseform');
+                form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
                   
-                  if(ele[i].type="radio") {
-                    
-                      
-                                  if(ele[i].checked)
-                                  listvercore.push(ele[i].value);
-                                  
-                  }
                 }
-                eel.verCoreTest(listvercore)
+                form.style.display = "block";
+            } 
+eel.expose(showMerlTests)
+function showMerlTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
 
-} 
-eel.expose(testswerv)
-function testswerv(){
-  
-   eel.getlistswerv()
-   
-}  
-      
-eel.expose(javatestlistibex)
-function javatestlistibex(listt){
-    console.log(listt);
-   var ab=listt;
-   var ss= document.getElementById('swerv');
-   var sv=document.getElementById('ibex');
-   for (var i = 0; i < ab.length; i++) {
-                var a = ab[i];
-               
- 
-                document.getElementById("ibexform").innerHTML += 
-                            "<input type='radio' name='bus' value='wb' checked><label>"+ a +" </label><br>";
-
-   sv.classList.remove('hideibex');
-   ss.classList.add("showswerv");
-   }
-} 
-eel.expose(testibex)
-function testibex(){
-    eel.getlistibex()
-}  
-function verificationdone(){
-    eel.pyverification()
 }
-   
-        
-    
-    </script>
+eel.expose(showriscvTests)
+function showriscvTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+
+}
+eel.expose(showswervTests)
+function showswervTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showburqTests)
+function showburqTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showselfcheckingvectorTests)
+function showselfcheckingvectorTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+
+}
+eel.expose(usersTests)
+function usersTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+
+}
+            //brow    
+</script>
 </body>
-</html> 
+</html>

@@ -42,7 +42,8 @@
       </div>
         <!-- EXPLORER -->
         <div id="Explorer" class="side_menus tabcontent2 side_menu">
-          <p>Explorer</p>
+          <p>Explorer <img src="assets/icons/file.png" style="height:20px;margin-left: 60px;" onclick="createfile()"></p>
+          <div id="createfile"style="display:none;"><input id="myinput" type="text" placeholder="Untitled"/></div>
           <div id="accord">
             <div id="filetree" class="accordion">
                 <!-- <div class="accordion-item">
@@ -118,13 +119,15 @@
       <div id="main_editor">
 
         <!-- Tab links -->
+
+
         <div id="tab_space"  class="d-flex">
           <div id="tab_records" class="tab" style="width: 95%;overflow-x: scroll;display: flex;">
             <!-- <button class="tablinks" id="btn-File1" onclick="openTab(event, 'File1')" id="defaultOpen">File1 <span onclick="closeTab('btn-File1','File1')">x</span> </button> -->
             
           </div>
           <div id="play_panel">
-            <img onclick="runtest()" src="assets/icons/play.png" />
+           <img src="assets/icons/file.png" onclick="addtestcase()"> <img onclick="runtest()" src="assets/icons/play.png" />
            
           </div>
         </div>
@@ -277,7 +280,7 @@ function closeTab(linkName, tabName){
         eel.expose(displayTheFile)
         function displayTheFile(file, idOfFile, nameOfFile, onlyNameOfFile){
           var tabRecords = document.getElementById("tab_records");
-          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile} <span onclick="closeTab(btn-'${idOfFile}', '${idOfFile}')">x</span> </button>`
+          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile}</button>`
 
           var editorRecords = document.getElementById("main_editor");
           editorRecords.innerHTML += ` <div id="${idOfFile}" class="tabcontent">
@@ -336,17 +339,45 @@ function closeTab(linkName, tabName){
       var ss=document.getElementsByClassName("run-div").disabled=true;
       
     }
+    ////////save file content
+  //  var input=document.getElementById("main_editor");
+  //  alert(input)
+  //  input.addEventListener("keydown", function (e) {
+  //   if (e.ctrlKey) { 
+  //     alert("done1") 
+  //     var activeTab;
+  //     var allTabs = document.getElementsByClassName("tablinks");
+  //     for(var i = 0; i < allTabs.length; i++){
+  //       if(allTabs[i].classList.contains("active")){
+  //         activeTab = allTabs[i];
+  //       }
+
+  //     }
+  //     console.log(activeTab);
+  //     alert(activeTab.id);
+  //     var allTheCode = getValueOfEditor(activeTab.id);
+  //     alert(allTheCode);
+  //     eel.savecode(allTheCode);
+  //   }
+  // });
+
+  
+    
     function runtest(){
       var activeTab;
       var allTabs = document.getElementsByClassName("tablinks");
       for(var i = 0; i < allTabs.length; i++){
-        if(allTabs[i].classList.contains("active")){
-          activeTab = allTabs[i];
-        }
+        // if(allTabs[i].classList.contains("active")){
+        activeTab = allTabs[i];
+        // console.log(activeTab.innerHTML);
+        eel.savefile(getValueOfEditor(activeTab.id), activeTab.innerHTML)
+        // alert(allTabs[i]);
+        // }
       }
-      console.log(activeTab);
-      var allTheCode = getValueOfEditor(activeTab.id);
-      eel.getcode(allTheCode);
+      // console.log(activeTab);
+      // var allTheCode = getValueOfEditor(activeTab.id);
+      eel.getcode();
+      
       
     }
     function gotosplash(){
@@ -354,7 +385,26 @@ function closeTab(linkName, tabName){
             window.close();
     }
         
-    
+    function createfile(){
+      var create=document.getElementById("createfile");
+      create.style.display="block";
+      var input1 = document.getElementById("myinput");
+     
+     
+input1.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    var namefile = document.getElementById("myinput").value;
+    alert(namefile);
+    eel.createuserfile(namefile);
+  }
+})};
+function addtestcase(){
+  eel.addtest();
+}
+eel.expose(copytestdone)
+function copytestdone(){
+  alert("Successfully added your testcase");
+}
     </script>
     
   </body>
