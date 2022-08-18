@@ -26,11 +26,11 @@ def main():
 def add5data(inputfile1):
     data_list=[]
     
-    while os.path.isfile(inputfile1) == False:
-      new_inp = input("FILE 1 doesn't exists in the folder, please enter again: ")
+    if os.path.isfile(inputfile1) == False:
+      # new_inp = input("FILE 1 doesn't exists in the folder, please enter again: ")
       # if os.path.isfile(new_inp) == True:
       #   inputfile1 = new_inp
-      break
+      return
       
     with open (inputfile1,'r') as file1 :
       
@@ -75,11 +75,11 @@ def execfiledata(inputfile2):
   ss=[]
   ss1=[]
 
-  while os.path.isfile(inputfile2) == False:
-    new_inp2 = input("FILE 2 doesn't exists in the folder, please enter again: ")
+  if os.path.isfile(inputfile2) == False:
+    # new_inp2 = input("FILE 2 doesn't exists in the folder, please enter again: ")
     # if os.path.isfile(new_inp2) == True:
     #   inputfile2 = new_inp2
-    break
+    return
 
   with open (inputfile2,'r') as file1 :   
 
