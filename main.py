@@ -1,716 +1,192 @@
-import eel
+import eel, os, shutil
 from eel import init, start
-from replacer import replacer
-from reverter import reverter
-import os,glob
-import sys
-import subprocess as sp
-
-import tkinter 
-import tkinter.filedialog as filedialog
-import json
+from scripts.utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath,pleaseGeneratorFileUthaKLayAao, pleaseReportFileUthaKLayAao, DRIVERS, RTL_FILES     # file structure utility
 from icecream import ic
-from distutils.dir_util import copy_tree
-from comparison import call
-
-
-
+import subprocess as sp
+from scripts.reverter import reverter
 if __name__ == '__main__':
 
-    
-    init('web')
-    list1 =["a"]
-    list2=[]
-    listuploadcore=[]
-
+#type of project select
     currentRootDir = os.getcwd()
     ic(currentRootDir)
-    testcasepath=[]
-    logfilepath=[]
 
+    f = open("web/pathfile","r")
+    c = f.readlines()
+    ic(c)
+    f.close()
+    vf = open("web/pathfilev","r")
+    vc = vf.readlines()
+    vf.close()
+    project_dir = c[-1]
+    ic(project_dir) 
+    print(vc,"uu")
+    
+    
+    init('web')
+    if vc[0]=="verification":
+        eel.disablefunction()
+
+    
+    @eel.expose
+    def stop_index():
+        reverter() 
+        os.system("./openMain2.sh")   
 
     @eel.expose
-    def closeRecentRecord(id):
-        file = open("records")
-        records = file.read().split("\n")
-        file.close()
-        projectToClose = records[int(id)]
-        # delete this from records
-        records.remove(projectToClose)
-        file = open("records","w")
-        file.write("\n".join(records))
-        file.close()
+    def getTheFileStrucuture():
+        structure = getFileStructure(project_dir)
+        parsedHTML = ""
+        ic(structure)
+        parsedHTML = parseFileStructure(structure[""])
+        # print(parsedHTML)
+        eel.pakrKayLaoFiles(parsedHTML)
+        if vc[0]=='custom_test':
+            gen = pleaseGeneratorFileUthaKLayAao()
+            filepath = gen[0]
+            actualFilePath = os.path.join(project_dir,filepath[1:])
+            fileToRead = open(actualFilePath,"r")
+            ic(fileToRead)
+            contentOfFile = fileToRead.read()
+            ic(contentOfFile)
+            fileToRead.close()
+            ic(filepath.split("/")[-1])
+            ic( filepath[1:])
+            ic(gen[1])
+            eel.displayTheFile(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
+        elif vc[0]=='prebuilt_verification':
+            gen = pleaseReportFileUthaKLayAao()
+            filepath = gen[0]
+            actualFilePath = os.path.join(project_dir,filepath[1:])
+            fileToRead = open(actualFilePath,"r")
+            contentOfFile = fileToRead.read()
+            fileToRead.close()
+            parseReport(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
 
-    @eel.expose
-    def openRecentProject(id):
-        file = open("records")
-        records = file.read().split("\n")
-        file.close()
-        projectToOpen = records[int(id)]
-        proj,type = projectToOpen.split(",")
-        file = open("web/pathfile","w")
-        file.write(proj)
-        file.close()
-        file = open("web/pathfilev","w")
-        file.write(type)
-        file.close()
-        eel.goToMain()
+    def parseReport(content, p1,p2,p3):
+        content_list = content.split("\n")
+        core = content_list[0].split(":")[1]
+        iss = content_list[1].split(":")[1]
+        tests = []
+        status = []
+        for i in range(2,len(content_list)):
+            tests.append(content_list[i].split(":")[0])
+            status.append(content_list[i].split(":")[1:])
+        eel.displayTheReport(core,iss,tests,status,p1,p2,p3)
 
 
-    @eel.expose
-    def getRecords():
-        file = open("records")
-        records = file.read()
-        file.close()
-        projects = []
-        types = []
-        for record in records.split("\n")[:-1]:
-            proj,type = record.split(",")
-            projects.append(proj.split("/")[-1])
-            types.append(type)
-        eel.displayRecords(projects,types)
-            
-
-    @eel.expose
-    def runTests(core, iss, tests, projName, projPath):
-        ic(projName, projPath)
-        ic(core, iss, tests)
-        root_path = os.getcwd()
-        ibex_test_path="web/testcases/Self-Checking-Tests/Riscv-tests"
-        swerv_test__path="web/swerv/"
-        tests_status = []
-        perOccurProgress = (100//len(tests))//2
-        currentProgress = 0
-        if core == "swerv" and iss == "whisper":
-            os.chdir(swerv_test__path)
-            ic(os.getcwd())
-            for test in tests:
-               
-                # check is test directory exists
-                if os.path.isdir(test) == False:
-                    # create test directory
-                    os.mkdir(test)
-                os.chdir(test)
-                os.system("export RISCV=/opt/riscv64")
-
-                os.system(f"export whisper={currentRootDir}/web/Verification/SweRV-ISS/build-Linux/./whisper")
-
-                os.system(f"export RV_ROOT={currentRootDir}/web/swerv")
-                os.system("export PATH=/opt/riscv64/bin:$PATH")
-                os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
-                currentProgress += perOccurProgress
-                eel.changeProgressBar(currentProgress)
-                os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
-                currentProgress += perOccurProgress
-                eel.changeProgressBar(currentProgress)
-                ic(os.getcwd())
-                #check is test.log and exec.log exists
-                ic(os.path.isfile(f"{test}.log"))
-                ic(os.path.isfile("exec.log"))
-                status = call(f"{test}.log", "exec.log")
-                tests_status.append(status)
-                
-            os.chdir(currentRootDir)
-            os.chdir(projPath)
-            os.mkdir(projName)
-            os.chdir(projName)
-            report_str = ""
-            report_str += f"Core:{core}\n"
-            report_str += f"Iss:{iss}\n"
-            for i,t in enumerate(tests):
-                report_str += f"{t}:{tests_status[i]}\n"
-            file = open("test_results.report", "w+")
-            file.write(report_str[:-1])
-            file.close()
-            os.chdir(currentRootDir)
-            file = open("web/pathfile", "w")
-            file.write(f"{projPath}/{projName}")
-            file.close()
-            file = open("web/pathfilev", "w")
-            file.write("prebuilt_verification")
-            file.close()
-            file = open("records", "w+")
-            file.write(f"{projPath}/{projName},prebuilt_verification\n")
-            file.close()
-            
-            eel.goToMain()
-
-            
-                
-
-            # for test in tests:
-            #     copy_tree(f"{swerv_test__path}/{test}", "/tmp/testcases/")
-            # os.chdir("web/swerv")
-            # os.system(f"export RV_ROOT={os.getcwd()}")
-            
-            # os.system("make -f $RV_ROOT/tools/Makefile TEST_DIR=/tmp/testcases/")
-            
-            # #sp.Popen("make -f $RV_ROOT/tools/Makefile TEST_DIR=/tmp/testcases/".split())
-            # #sp.Popen()
-
-            
-            # os.chdir(root_path)
-            # eel.changeProgressBar(50)
-
-        # if iss == "whisper":
-        #     print("q")
-
-        #     # os.chdir("web/whisper")
-        #     print("r")
-        #     # os.system(f"export whisper={os.getcwd()}/./whisper")
-        #     print("w")
-        #     os.chdir(root_path)
-
-        #     for test in tests:
-        #         ic(test)
-        #         os.chdir(f"{swerv_test__path}/{test}")
-        #         os.system(f"$whisper --logfile BubbleSort.log BubbleSort.exe --configfile ./snapshots/default/whisper.json")
-        #         os.system(f"riscv32-unknown-elf-gcc -mabi=ilp32 -march=rv32imc -nostdlib -g -o {test} {test}.c")
-        #         os.system(f"$whisper {test}")
-        #         os.chdir(root_path)
-        #     eel.changeProgressBar(100)
         
 
+    @eel.expose
+    def parseFilePathReq(file):
+        try:
+            filePath = pleaseParseTheFilePath(file)
+            actualFilePath = os.path.join(project_dir,filePath[1:])
+            fileToRead = open(actualFilePath, "r")
+            contentOfFile = fileToRead.read()
+            fileToRead.close()
+            if ".report" in actualFilePath:
+                parseReport(contentOfFile,file,filePath[1:], filePath.split("/")[-1])
+            else:
+                eel.displayTheFile(contentOfFile,file,filePath[1:], filePath.split("/")[-1])
+        except:
+            eel.cantOpenTheFile()
 
     @eel.expose
-    def stop_everything():
-        replacer() 
-        os.system("./openMain.sh")
-        # start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8005)
+    def genrtlpy():
+        file=open("web/pathfile","r")
+        contents= file.readlines()
+        file.close()
+        ic(contents[0])
 
-#b
-    @eel.expose                         # Expose this function to Javascript
-    def say_hello_py(x):
-        print('Hello from %s' % x)
+        
+        os.chdir(f"{contents[0]}")
+        os.system("./peripheralScript.py")
+        
+        os.system("sbt 'runMain GeneratorDriver'")
     @eel.expose
-    def socdetail():
+    def createuserfile(namefile):
        
-        yourproject=list1[-1]
-        b=list2[-1]
-        file1=open("web/pathfile","w")
-        file1.write(f"{yourproject}/{b}")
-        file1.close()
+        os.chdir(project_dir)
+        os.system(f"touch {namefile}")
         
+        eel.cleanTheFileTree()
        
-        os.chdir(yourproject)
-        
-        
-        os.system(f"mkdir {b}")
-        
-       
-        os.chdir(b)
-        
+        getTheFileStrucuture()
+    @eel.expose
+    def addtest():
+        os.system(f"cp -a {project_dir} {currentRootDir}/web/testcases/Self-Checking-Tests/users-tests ")
+        eel.copytestdone()
 
-        
-        os.system("touch main.c")
-        # list the files in the directory
-        os.system("ls")
+    @eel.expose
+    def savecode(code):
+        gen = pleaseGeneratorFileUthaKLayAao()
+        filepath = gen[0]
+        actualFilePath = os.path.join(project_dir,filepath[1:])
+        fileToRead = open(actualFilePath,"r")
+        ic(fileToRead)
 
-        f = open("main.c", "w")
-        f.write("// write your code here \n")
-        f.close()
 
+        print(code)
+
+    @eel.expose
+    def savefile(content, file):
+        os.chdir(project_dir)
+        # ic(os.path.exists(file))
+        # ic(file)
+        # ic(os.listdir("."))
+        file = open(file,"w")
+        file.write(content)
+        file.close()
         os.chdir(currentRootDir)
-        
-        file = open("records", "w+")
-        file.write(f"{yourproject}/{b},custom_test\n")
-        file.close()
-        os.chdir(f"{currentRootDir}")
-        eel.goToMain()
-    
-    @eel.expose
-    def pyverification():
-        
-        
-        yourproject=list1[-1]
-        
-        aa=os.system(f"cd {yourproject}")
-        b=list2[-1]
-        file1=open("web/pathfile","w")
-        file1.write(f"{yourproject}/{b}")
-        file1.close()
-        os.system(f"cp -a web/verification {yourproject}/{b}")
-       
-        eel.goToMain()
-
-    @eel.expose
-
-
-    def selectFolder(projectnamee):
-        print("Here")
-        root = tkinter.Tk()
-        root.attributes("-topmost", True)
-        root.withdraw()
-        directory_path = filedialog.askdirectory()
-        print(directory_path)
-        list1.clear()
-        print(list1)
-        list1.append(directory_path)
-        ic(list1)
-        ic(projectnamee)
-        list2.append(projectnamee)
-       
-        
-        eel.select_js(list1[-1])
-    @eel.expose
-    def selectFolder1():
-        print("Here")
-        root = tkinter.Tk()
-        root.attributes("-topmost", True)
-        root.withdraw()
-        directory_path = filedialog.askdirectory()
-        print(directory_path)
-        listuploadcore.clear()
-        print( listuploadcore)
-        listuploadcore.append(directory_path)
-        ic(listuploadcore)
-       
-        eel.select_js1(listuploadcore[-1])
-    @eel.expose
-    def selecttest():
-        print("Here")
-        root = tkinter.Tk()
-        root.attributes("-topmost", True)
-        root.withdraw()
-        directory_path = filedialog.askdirectory()
-        print(directory_path)
-        testcasepath.clear()
-        print(testcasepath)
-        testcasepath.append(directory_path)
-        ic(testcasepath)
-       
-        eel.select_jstestcase(testcasepath[-1])
-    @eel.expose
-    def selectlogfile():
-        print("Here")
-        root = tkinter.Tk()
-        root.attributes("-topmost", True)
-        root.withdraw()
-        directory_path = filedialog.askdirectory()
-        print(directory_path)
-        logfilepath.clear()
-        print(logfilepath)
-        logfilepath.append(directory_path)
-        ic(logfilepath)
-       
-        eel.select_jslog(logfilepath[-1])
-    
-      
-        
-        
-#copy corefiles in ser seleted path
-    def copycorefiles():
-        
-        
-        yourproject=list1[-1]
-        
-        aa=os.system(f"cd {yourproject}")
-        bb=listuploadcore[-1]
-        b=list2[-1]
-       
-        os.system(f"cp bb  {yourproject}/{b}")
-        
-
-    @eel.expose
-    def verCoreTest(listver):
-        i=listver[-1]
-        if i=="SWERV-EH1":
-            eel.testswerv()
-            print(i)
-        if i=="IBEX":
-            eel.testibex()
-            print(i)
-    @eel.expose
-    def getlistswerv():
-
-        namelist=[]
-        root="web/swerv/testbench/tests/"
-        root1="web/testcases/Self-Checking-Tests/users-tests/"
-        # get list of directory names from root
-        for dirname in os.listdir(root):    
-        # for path in filepaths:
-            # a=path.split("/")
-            ic(dirname)
-            namelist.append(dirname)
-        for dirname in os.listdir(root1):    
-        # for path in filepaths:
-            # a=path.split("/")
-            ic(dirname)
-            namelist.append(dirname)
-            
-        print(namelist)
-        eel.showSwervTests(namelist)
-    @eel.expose
-    def getlistibex():
-        namelist=[]
-        root="web/testcases/Self-Checking-Tests/Riscv-tests"
-        root1="web/testcases/Self-Checking-Tests/Riscv-tests"
-        root2="web/testcases/Self-Checking-Tests/users-tests"              
-        filepaths = [os.path.join(root,i) for i in os.listdir(root)]
-        filepaths1 = [os.path.join(root1,i) for i in os.listdir(root1)]
-        filepaths2 = [os.path.join(root1,i) for i in os.listdir(root2)]
-        for path in filepaths:
-            ic(path)
-            a=path.split("/")
-            namelist.append(a[-1])
-            
-        print(namelist,"po")
-        for path in filepaths1:
-            a=path.split("/")
-            namelist.append(a[-1])
-        for path in filepaths2:
-            a=path.split("/")
-            namelist.append(a[-1])
-            
-        print(namelist,"po")
-        eel.showIbexTests(namelist)
-    @eel.expose
-    def datasend(listt):
-        filev=open("web/pathfilev","w")
-        filev.write(listt[0])
-        filev.close()
-        print(listt)
-
-    @eel.expose
-    def genCore(isa,ext,bus):
-        driverKey= f"corei{bus}"
-        file = open("web/driver", "w")
-        file.write(driverKey)
-        file.close()
-    @eel.expose
-    def floatingpointtest():
-        
-
-        namelist=[]
-        #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/Floating_point_tests_for_azadi"
-        # get list of directory names from root
-        for dirname in os.listdir(root):    
-        # for path in filepaths:
-            # a=path.split("/")
-            ic(dirname)
-            namelist.append(dirname)
-            
-        print(namelist)
-        eel.showfloatingTests(namelist)
-    @eel.expose
-    def merlvectortest():
-        namelist=[]
-        #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/MERL_vector_Tests"
-        # get list of directory names from root
-        for dirname in os.listdir(root):    
-        # for path in filepaths:
-            # a=path.split("/")
-            ic(dirname)
-            namelist.append(dirname)
-            
-        print(namelist)
-        eel.showMerlTests(namelist)
-    @eel.expose
-    def riscvtest():
-        namelist=[]
-        #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/Riscv-tests"
-        # get list of directory names from root
-        for dirname in os.listdir(root):    
-        # for path in filepaths:
-            # a=path.split("/")
-            ic(dirname)
-            namelist.append(dirname)
-            
-        print(namelist)
-        eel.showriscvTests(namelist)
-    @eel.expose
-    def selfcheckingvectortest():
-        namelist=[]
-            #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/Self-Checking-vector-tests"
-        # get list of directory names from root
-        for dirname in os.listdir(root):    
-        # for path in filepaths:
-            # a=path.split("/")
-            ic(dirname)
-            namelist.append(dirname)
-            
-        print(namelist)
-        eel.showselfcheckingvectorTests(namelist)
-    @eel.expose
-    def usertest():
-        namelist=[]
-            #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/users-tests"
-        # get list of directory names from root
-        for dirname in os.listdir(root):    
-        # for path in filepaths:
-            # a=path.split("/")
-            ic(dirname)
-            namelist.append(dirname)
-            
-        print(namelist)
-        eel.usersTests(namelist)
-    @eel.expose
-    def swervtest():
-        namelist=[]
-            #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/Swerv_Tests"
-        # get list of directory names from root
-        for dirname in os.listdir(root):    
-        # for path in filepaths:
-            # a=path.split("/")
-            ic(dirname)
-            namelist.append(dirname)
-            
-        print(namelist)
-        eel.showswervTests(namelist)
-    @eel.expose
-    def burqgeneratedtest():
-        os.system(f"{currentRootDir}")
-
-        namelist=[]
-       
-            #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/BURQ_Generated_Tests"
-        # get list of directory names from root
-        for dirname in os.listdir(root):    
-        # for path in filepaths:
-            # a=path.split("/")
-            ic(dirname)
-            namelist.append(dirname)
-            
-        print(namelist)
-        eel.showburqTests(namelist)
-
 
 
     @eel.expose
-    def enduploadcore(getcommand,tests1,testcase,logfile,swerv,testtype):
-        ic(swerv)
-        tests_status=[]
-        listcommands=[]
-        ic(tests1)
-        ic(getcommand)
+    def getcode():
+        #yahan path jahan user ne main.c save ki
+        #wo open write then close
+        #run riscv gcc test command 
+        #show assembly file
 
-        yourproject=list1[-1]
-        b=list2[-1]
-        file1=open("web/pathfile","w")
-        file1.write(f"{yourproject}/{b}")
-        file1.close()
-        uploadedcore=listuploadcore[-1]
-        ic(uploadedcore)
-        #getpathcurrent=os.system("pwd")
-
-       
-        os.chdir(yourproject)
-        
-        
-        os.system(f"mkdir {b}")
-    
-       
-
-       
-        os.chdir(b)
-        os.system(f"cp -a {uploadedcore}  {yourproject}/{b}")
-        os.chdir(f"{currentRootDir}")
-        
-       # if iss=="spike":
-        # os.system("export PATH=/opt/riscv/bin:$PATH")
-        # os.system("export PATH=/opt/riscv/riscv64-unknown-elf/bin:$PATH")
-
-
-        # for test in tests1:
-        #     ic(test)
-        #     yy=getcommand.replace("testname",test)
-        #     listcommands.append(yy)
-        #     ic(yy)
-        #     basename=os.path.basename(f"{p}")
-        
-        #     p=listuploadcore[-1]
-        #     os.system(f"cp -a web/testcases/Self-Checking-Tests/{test} {yourproject}/{b}/{testcase}")
-        #     os.chdir(f"{yourproject}/{b}/{testcase}/{test}")
-        #     os.system(f"riscv64-unknown-elf-gcc -o {test} {test}.c")
-        #     os.system(f"spike pk {test} > exec.log")
-        #     os.chdir(f"{getpathcurrent}")
-        #     os.chdir(f"{p}")
-        #     os.system(f"{yy}")
-        #     status = call(f"{yourproject}/{b}/{logfile}/{test}.log", f"{yourproject}/{b}/{testcase}/{test}/exec.log")
-        #     tests_status.append(status)
-
-
-            
-        #     #command skipe
-            
-            
-
-
-        #     #command for whisper
-            
-            
-        # basename=os.path.basename(f"{p}")
-        # os.chdir(f"{yourproject}")
-        # report_str = ""
-        # report_str += f"Core:{basename}\n"
-        # report_str += "Iss:Spike\n"
-        # for i,t in enumerate(tests1):
-        #     report_str += f"{t}:{tests_status[i]}\n"
-        # file = open("test_results.report", "w+")
-        # file.write(report_str[:-1])
+        os.chdir(project_dir)
+        # file=open("main.c","w")
+        # file.write(code)
         # file.close()
-        # os.chdir(currentRootDir)
-        # file = open("web/pathfile", "w")
-        # file.write(f"{yourproject}/{b}")
-        # file.close()
-        # file = open("web/pathfilev", "w")
-        # file.write("uploadcore_verification")
-        # file.close()
-        # file = open("records", "w+")
-        # file.write(f"{yourproject}/{b},upload_verification\n")
-        # file.close()
-        # eel.goToMain()
 
-
-    # if iss=="whisper":
-        #os.system("export PATH=/opt/riscv/bin:$PATH")
-        #os.system("export PATH=/opt/riscv/riscv64-unknown-elf/bin:$PATH")
-
-#make -f $RV_ROOT/tools/Makefile TEST=BubbleSort
-        if swerv=="swervbased":
-            os.system("export RISCV=/opt/riscv64")
-
-            os.system(f"export whisper='{currentRootDir}/web/Verification/SweRV-ISS/build-Linux/./whisper'")
-
-            os.system(f"export RV_ROOT='{currentRootDir}/web/swerv'")
-            os.system("export PATH=/opt/riscv64/bin:$PATH")
-            for test in tests1:
-                ic(test)
-                #yy=getcommand.replace("testname",test)
-                #listcommands.append(yy)
-                #ic(yy)
-                p=listuploadcore[-1]
-                basename=os.path.basename(f"{p}")
-                ic(basename)
-                ic(yourproject)
-                ic(b)
-            
-            
-                os.system(f"cp -a web/testcases/Self-Checking-Tests/Swerv_Tests/{test} {yourproject}/{b}/{testcase}")
-                os.chdir(f"{yourproject}/{b}/{basename}")
-                #command skipe
-                os.system(f"mkdir {test}")
-                os.chdir(f"{test}")
-                os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
-
-                os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
-            
-
-            
-                status = call(f"{test}.log", "exec.log")
-                tests_status.append(status)
-            basename=os.path.basename(f"{p}")
-            os.chdir(f"{yourproject}/{b}")
-            report_str = ""
-            report_str += f"Core:{basename}\n"
-            report_str += "Iss:Whisper\n"
-            for i,t in enumerate(tests1):
-                report_str += f"{t}:{tests_status[i]}\n"
-            file = open("test_results.report", "w+")
-            file.write(report_str[:-1])
-            file.close()
-            os.chdir(currentRootDir)
-            file = open("web/pathfile", "w")
-            file.write(f"{yourproject}/{b}")
-            file.close()
-            file = open("web/pathfilev", "w")
-            file.write("uploadcore_verification")
-            file.close()
-            file = open("records", "w+")
-            file.write(f"{yourproject}/{b},upload_verification\n")
-            file.close()
-            eel.goToMain()
+        proc = sp.Popen("riscv64-unknown-elf-gcc -mabi=ilp32 -march=rv32imc -nostdlib -g -o main main.c".split(), stdout=sp.PIPE, stderr=sp.PIPE)
+        outs, errs = proc.communicate()
+        ic(outs)
+        ic(errs)
+        if "error" in str(errs):
+            eel.showAlert(f"Error: {errs}")
         else:
-            #os.system("export PATH=/opt/riscv/bin:$PATH")
-            #os.system("export PATH=/opt/riscv/riscv64-unknown-elf/bin:$PATH")
-
-
-            for test in tests1:
-                ic(test)
-                yy=getcommand.replace("testname",test)
-                listcommands.append(yy)
-                ic(yy)
-                p=listuploadcore[-1]
-                basename=os.path.basename(f"{p}")
-                ic(testtype)
-            
-               
-                os.system(f"cp -a web/testcases/Self-Checking-Tests/{testtype}/{test} {yourproject}/{b}/{testcase}")
-               
-                
-                os.system(f"riscv64-unknown-elf-gcc -o {test} {test}.c")
-               # os.system(f"spike pk {test} > exec.log")
-                os.chdir(f"{currentRootDir}")
-                os.chdir(f"{p}")
-                os.system(f"{yy}")
-                os.chdir(f"{yourproject}/{b}/{testcase}/{test}")
-                
-                for file in glob.glob("*.log"):
-                    ic(file)
-                
-                status = call(f"{yourproject}/{b}/{testcase}/{test}/{file}",f"{yourproject}/{b}/{basename}/exec.log" )
-                tests_status.append(status)
-
-
-                
-                #command skipe
-                
-                
-
-
-                #command for whisper
-                
-            basename=os.path.basename(f"{p}")
-            os.chdir(f"{yourproject}/{b}")
-            report_str = ""
-            report_str += f"Core:{basename}\n"
-            report_str += "Iss:Spike\n"
-            for i,t in enumerate(tests1):
-                report_str += f"{t}:{tests_status[i]}\n"
-            file = open("test_results.report", "w+")
-            file.write(report_str[:-1])
-            file.close()
-            os.chdir(currentRootDir)
-            file = open("web/pathfile", "w")
-            file.write(f"{yourproject}/{b}")
-            file.close()
-            file = open("web/pathfilev", "w")
-            file.write("uploadcore_verification")
-            file.close()
-            file = open("records", "w+")
-            file.write(f"{yourproject}/{b},upload_verification\n")
-            file.close()
-            eel.goToMain()
-
-
-
-
-            
-
-
-        #place testcase in test case folder
-        #make folder with testcase name
-        #run command
-        #got to log file path
-        # run iss command 
-
-    
-
-        
-
-        
+            os.system("riscv64-unknown-elf-objdump -d main >> main.elf")
+            # read main.elf and separate machine code and assembly and save in separate files
+            elfFile = open("main.elf","r")
+            contents = elfFile.readlines()
+            elfFile.close()
+            machineCodeFile = open("main.mach","w+")
+            assemblyFile = open("main.asm","w+")
+            machineCode = []
+            assembly = []
+            for line in contents[1:]:
+                splittedList = line.split("\t")
+                if len(splittedList)>1:
+                    machineCode.append(splittedList[1])
+                    assembly.append(" ".join(splittedList[2:]))
+            machineCodeFile.write("\n".join(machineCode))
+            assemblyFile.write("".join(assembly))
+            machineCodeFile.close()
+            assemblyFile.close()  
+            eel.cleanTheFileTree()
+            getTheFileStrucuture()
+            eel.showAlert("Code Compiled Successfully")
+            os.chdir(f"/home/mano/Downloads/Burq-Suite")
     
 
 
+    
 
 
-    reverter()
-    start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
+    start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8007)
+
 
