@@ -1,2 +1,2 @@
-python3 main2.py
+python3 main.py
 exit 1
