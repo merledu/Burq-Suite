@@ -76,8 +76,8 @@ if __name__ == '__main__':
         ic(projName, projPath)
         ic(core, iss, tests)
         root_path = os.getcwd()
-        ibex_test_path="web/testcases/Self-Checking-Tests/Riscv-tests"
-        swerv_test__path="web/swerv/"
+        ibex_test_path="testcases/Riscv_tests"
+        swerv_test__path="cores/swerv/"
         tests_status = []
         perOccurProgress = (100//len(tests))//2
         currentProgress = 0
@@ -91,12 +91,12 @@ if __name__ == '__main__':
                     # create test directory
                     os.mkdir(test)
                 os.chdir(test)
-                os.system("export RISCV=/opt/riscv64")
+                os.system("export RISCV=/opt/riscv32")
 
-                os.system(f"export whisper={currentRootDir}/web/Verification/SweRV-ISS/build-Linux/./whisper")
+                os.system(f"export whisper={currentRootDir}/Verification/SweRV-ISS/build-Linux/./whisper")
 
-                os.system(f"export RV_ROOT={currentRootDir}/web/swerv")
-                os.system("export PATH=/opt/riscv64/bin:$PATH")
+                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
+                os.system("export PATH=/opt/riscv32/bin:$PATH")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                 currentProgress += perOccurProgress
                 eel.changeProgressBar(currentProgress)
@@ -175,7 +175,7 @@ if __name__ == '__main__':
     @eel.expose
     def stop_everything():
         replacer() 
-        os.system("./openMain.sh")
+        os.system("./scripts/openMain.sh")
         # start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8005)
 
 #b
@@ -324,8 +324,8 @@ if __name__ == '__main__':
     def getlistswerv():
 
         namelist=[]
-        root="web/swerv/testbench/tests/"
-        root1="web/testcases/Self-Checking-Tests/users-tests/"
+        root="cores/swerv/testbench/tests/"
+        root1="testcases/User_Defined_Tests/"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -343,9 +343,9 @@ if __name__ == '__main__':
     @eel.expose
     def getlistibex():
         namelist=[]
-        root="web/testcases/Self-Checking-Tests/Riscv-tests"
-        root1="web/testcases/Self-Checking-Tests/Riscv-tests"
-        root2="web/testcases/Self-Checking-Tests/users-tests"              
+        root="testcases/Riscv_tests"
+        root1="testcases/Riscv_tests"
+        root2="testcases/User_Defined_Tests"              
         filepaths = [os.path.join(root,i) for i in os.listdir(root)]
         filepaths1 = [os.path.join(root1,i) for i in os.listdir(root1)]
         filepaths2 = [os.path.join(root1,i) for i in os.listdir(root2)]
@@ -383,7 +383,7 @@ if __name__ == '__main__':
 
         namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/Floating_point_tests_for_azadi"
+        root="testcases/Floating_point_tests_for_azadi"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -397,7 +397,7 @@ if __name__ == '__main__':
     def merlvectortest():
         namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/MERL_vector_Tests"
+        root="testcases/MERL_vector_Tests"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -411,7 +411,7 @@ if __name__ == '__main__':
     def riscvtest():
         namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/Riscv-tests"
+        root="testcases/Riscv_tests"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -425,7 +425,7 @@ if __name__ == '__main__':
     def selfcheckingvectortest():
         namelist=[]
             #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/Self-Checking-vector-tests"
+        root="testcases/Self-Checking-vector-tests"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -439,7 +439,7 @@ if __name__ == '__main__':
     def usertest():
         namelist=[]
             #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/users-tests"
+        root="testcases/User_Defined_Tests"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -453,7 +453,7 @@ if __name__ == '__main__':
     def swervtest():
         namelist=[]
             #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/Swerv_Tests"
+        root="testcases/Swerv_Tests"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -470,7 +470,7 @@ if __name__ == '__main__':
         namelist=[]
        
             #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="web/testcases/Self-Checking-Tests/BURQ_Generated_Tests"
+        root="testcases/BURQ_Generated_Tests"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -577,9 +577,9 @@ if __name__ == '__main__':
         if swerv=="swervbased":
             os.system("export RISCV=/opt/riscv64")
 
-            os.system(f"export whisper='{currentRootDir}/web/Verification/SweRV-ISS/build-Linux/./whisper'")
+            os.system(f"export whisper='{currentRootDir}/Verification/SweRV-ISS/build-Linux/./whisper'")
 
-            os.system(f"export RV_ROOT='{currentRootDir}/web/swerv'")
+            os.system(f"export RV_ROOT='{currentRootDir}/cores/swerv'")
             os.system("export PATH=/opt/riscv64/bin:$PATH")
             for test in tests1:
                 ic(test)
@@ -593,7 +593,7 @@ if __name__ == '__main__':
                 ic(b)
             
             
-                os.system(f"cp -a web/testcases/Self-Checking-Tests/Swerv_Tests/{test} {yourproject}/{b}/{testcase}")
+                os.system(f"cp -a testcases/Swerv_Tests/{test} {yourproject}/{b}/{testcase}")
                 os.chdir(f"{yourproject}/{b}/{basename}")
                 #command skipe
                 os.system(f"mkdir {test}")
@@ -642,7 +642,7 @@ if __name__ == '__main__':
                 ic(testtype)
             
                
-                os.system(f"cp -a web/testcases/Self-Checking-Tests/{testtype}/{test} {yourproject}/{b}/{testcase}")
+                os.system(f"cp -a testcases/{testtype}/{test} {yourproject}/{b}/{testcase}")
                
                 
                 os.system(f"riscv64-unknown-elf-gcc -o {test} {test}.c")

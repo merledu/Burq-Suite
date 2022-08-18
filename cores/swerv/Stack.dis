@@ -1,0 +1,237 @@
+
+Stack.exe:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+80000000 <_start>:
+80000000:	595552b7          	lui	t0,0x59555
+80000004:	55528293          	addi	t0,t0,1365 # 59555555 <_start-0x26aaaaab>
+80000008:	7c029073          	csrw	0x7c0,t0
+8000000c:	70041117          	auipc	sp,0x70041
+80000010:	02410113          	addi	sp,sp,36 # f0041030 <STACK>
+80000014:	138000ef          	jal	ra,8000014c <main>
+
+80000018 <_finish>:
+80000018:	50580297          	auipc	t0,0x50580
+8000001c:	fe828293          	addi	t0,t0,-24 # d0580000 <tohost>
+80000020:	0ff00313          	li	t1,255
+80000024:	00628023          	sb	t1,0(t0)
+80000028:	4305                	li	t1,1
+8000002a:	0062a023          	sw	t1,0(t0)
+8000002e:	fe0005e3          	beqz	zero,80000018 <_finish>
+80000032:	0001                	nop
+80000034:	0001                	nop
+80000036:	0001                	nop
+80000038:	0001                	nop
+8000003a:	0001                	nop
+8000003c:	0001                	nop
+8000003e:	0001                	nop
+80000040:	0001                	nop
+80000042:	0001                	nop
+80000044:	0001                	nop
+
+Disassembly of section .text:
+
+80000046 <isempty>:
+
+int MAXSIZE = 8;       
+int stack[8];     
+int top = -1;            
+
+int isempty() {
+80000046:	1141                	addi	sp,sp,-16
+80000048:	c622                	sw	s0,12(sp)
+8000004a:	0800                	addi	s0,sp,16
+
+   if(top == -1)
+8000004c:	f00407b7          	lui	a5,0xf0040
+80000050:	0047a703          	lw	a4,4(a5) # f0040004 <STACK+0xffffefd4>
+80000054:	57fd                	li	a5,-1
+80000056:	00f71463          	bne	a4,a5,8000005e <isempty+0x18>
+      return 1;
+8000005a:	4785                	li	a5,1
+8000005c:	a011                	j	80000060 <isempty+0x1a>
+   else
+      return 0;
+8000005e:	4781                	li	a5,0
+}
+80000060:	853e                	mv	a0,a5
+80000062:	4432                	lw	s0,12(sp)
+80000064:	0141                	addi	sp,sp,16
+80000066:	8082                	ret
+
+80000068 <isfull>:
+   
+int isfull() {
+80000068:	1141                	addi	sp,sp,-16
+8000006a:	c622                	sw	s0,12(sp)
+8000006c:	0800                	addi	s0,sp,16
+
+   if(top == MAXSIZE)
+8000006e:	f00407b7          	lui	a5,0xf0040
+80000072:	0047a703          	lw	a4,4(a5) # f0040004 <STACK+0xffffefd4>
+80000076:	f00407b7          	lui	a5,0xf0040
+8000007a:	0007a783          	lw	a5,0(a5) # f0040000 <STACK+0xffffefd0>
+8000007e:	00f71463          	bne	a4,a5,80000086 <isfull+0x1e>
+      return 1;
+80000082:	4785                	li	a5,1
+80000084:	a011                	j	80000088 <isfull+0x20>
+   else
+      return 0;
+80000086:	4781                	li	a5,0
+}
+80000088:	853e                	mv	a0,a5
+8000008a:	4432                	lw	s0,12(sp)
+8000008c:	0141                	addi	sp,sp,16
+8000008e:	8082                	ret
+
+80000090 <peek>:
+
+int peek() {
+80000090:	1141                	addi	sp,sp,-16
+80000092:	c622                	sw	s0,12(sp)
+80000094:	0800                	addi	s0,sp,16
+   return stack[top];
+80000096:	f00407b7          	lui	a5,0xf0040
+8000009a:	0047a783          	lw	a5,4(a5) # f0040004 <STACK+0xffffefd4>
+8000009e:	f0040737          	lui	a4,0xf0040
+800000a2:	00870713          	addi	a4,a4,8 # f0040008 <STACK+0xffffefd8>
+800000a6:	078a                	slli	a5,a5,0x2
+800000a8:	97ba                	add	a5,a5,a4
+800000aa:	439c                	lw	a5,0(a5)
+}
+800000ac:	853e                	mv	a0,a5
+800000ae:	4432                	lw	s0,12(sp)
+800000b0:	0141                	addi	sp,sp,16
+800000b2:	8082                	ret
+
+800000b4 <pop>:
+
+int pop() {
+800000b4:	1101                	addi	sp,sp,-32
+800000b6:	ce06                	sw	ra,28(sp)
+800000b8:	cc22                	sw	s0,24(sp)
+800000ba:	1000                	addi	s0,sp,32
+   int data;
+	
+   if(!isempty()) {
+800000bc:	3769                	jal	80000046 <isempty>
+800000be:	87aa                	mv	a5,a0
+800000c0:	eb9d                	bnez	a5,800000f6 <pop+0x42>
+      data = stack[top];
+800000c2:	f00407b7          	lui	a5,0xf0040
+800000c6:	0047a783          	lw	a5,4(a5) # f0040004 <STACK+0xffffefd4>
+800000ca:	f0040737          	lui	a4,0xf0040
+800000ce:	00870713          	addi	a4,a4,8 # f0040008 <STACK+0xffffefd8>
+800000d2:	078a                	slli	a5,a5,0x2
+800000d4:	97ba                	add	a5,a5,a4
+800000d6:	439c                	lw	a5,0(a5)
+800000d8:	fef42623          	sw	a5,-20(s0)
+      top = top - 1;   
+800000dc:	f00407b7          	lui	a5,0xf0040
+800000e0:	0047a783          	lw	a5,4(a5) # f0040004 <STACK+0xffffefd4>
+800000e4:	fff78713          	addi	a4,a5,-1
+800000e8:	f00407b7          	lui	a5,0xf0040
+800000ec:	00e7a223          	sw	a4,4(a5) # f0040004 <STACK+0xffffefd4>
+      return data;
+800000f0:	fec42783          	lw	a5,-20(s0)
+800000f4:	a009                	j	800000f6 <pop+0x42>
+   } 
+}
+800000f6:	853e                	mv	a0,a5
+800000f8:	40f2                	lw	ra,28(sp)
+800000fa:	4462                	lw	s0,24(sp)
+800000fc:	6105                	addi	sp,sp,32
+800000fe:	8082                	ret
+
+80000100 <push>:
+
+int push(int data) {
+80000100:	1101                	addi	sp,sp,-32
+80000102:	ce06                	sw	ra,28(sp)
+80000104:	cc22                	sw	s0,24(sp)
+80000106:	1000                	addi	s0,sp,32
+80000108:	fea42623          	sw	a0,-20(s0)
+
+   if(!isfull()) {
+8000010c:	3fb1                	jal	80000068 <isfull>
+8000010e:	87aa                	mv	a5,a0
+80000110:	eb85                	bnez	a5,80000140 <push+0x40>
+      top = top + 1;   
+80000112:	f00407b7          	lui	a5,0xf0040
+80000116:	0047a783          	lw	a5,4(a5) # f0040004 <STACK+0xffffefd4>
+8000011a:	00178713          	addi	a4,a5,1
+8000011e:	f00407b7          	lui	a5,0xf0040
+80000122:	00e7a223          	sw	a4,4(a5) # f0040004 <STACK+0xffffefd4>
+      stack[top] = data;
+80000126:	f00407b7          	lui	a5,0xf0040
+8000012a:	0047a783          	lw	a5,4(a5) # f0040004 <STACK+0xffffefd4>
+8000012e:	f0040737          	lui	a4,0xf0040
+80000132:	00870713          	addi	a4,a4,8 # f0040008 <STACK+0xffffefd8>
+80000136:	078a                	slli	a5,a5,0x2
+80000138:	97ba                	add	a5,a5,a4
+8000013a:	fec42703          	lw	a4,-20(s0)
+8000013e:	c398                	sw	a4,0(a5)
+   } 
+}
+80000140:	0001                	nop
+80000142:	853e                	mv	a0,a5
+80000144:	40f2                	lw	ra,28(sp)
+80000146:	4462                	lw	s0,24(sp)
+80000148:	6105                	addi	sp,sp,32
+8000014a:	8082                	ret
+
+8000014c <main>:
+
+void main() {
+8000014c:	1101                	addi	sp,sp,-32
+8000014e:	ce06                	sw	ra,28(sp)
+80000150:	cc22                	sw	s0,24(sp)
+80000152:	1000                	addi	s0,sp,32
+   // push items on to the stack 
+   push(3);
+80000154:	450d                	li	a0,3
+80000156:	376d                	jal	80000100 <push>
+   push(5);
+80000158:	4515                	li	a0,5
+8000015a:	375d                	jal	80000100 <push>
+   push(9);
+8000015c:	4525                	li	a0,9
+8000015e:	374d                	jal	80000100 <push>
+   push(1);
+80000160:	4505                	li	a0,1
+80000162:	3f79                	jal	80000100 <push>
+   push(12);
+80000164:	4531                	li	a0,12
+80000166:	3f69                	jal	80000100 <push>
+   push(15);
+80000168:	453d                	li	a0,15
+8000016a:	3f59                	jal	80000100 <push>
+
+  // printf("Element at top of the stack: %d\n" ,peek());
+   //printf("Elements: \n");
+
+   // print stack data 
+   while(!isempty()) {
+8000016c:	a021                	j	80000174 <main+0x28>
+      int data = pop();
+8000016e:	3799                	jal	800000b4 <pop>
+80000170:	fea42623          	sw	a0,-20(s0)
+   while(!isempty()) {
+80000174:	3dc9                	jal	80000046 <isempty>
+80000176:	87aa                	mv	a5,a0
+80000178:	dbfd                	beqz	a5,8000016e <main+0x22>
+      //printf("%d\n",data);
+   }
+
+   isfull();
+8000017a:	35fd                	jal	80000068 <isfull>
+   isempty();
+8000017c:	35e9                	jal	80000046 <isempty>
+   
+8000017e:	0001                	nop
+80000180:	40f2                	lw	ra,28(sp)
+80000182:	4462                	lw	s0,24(sp)
+80000184:	6105                	addi	sp,sp,32
+80000186:	8082                	ret

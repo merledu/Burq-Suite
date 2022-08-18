@@ -37,6 +37,15 @@
         #ibexform{
             display: none;
         }
+        #formatSelect{
+            display: none;
+        }
+        #testcase_asm{
+            display: none;
+        }
+        #logselect{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -50,19 +59,19 @@
                         <p>Don't know where to start?</p>
                         <p>Start with one of our templates.</p>
                         <div class="d-flex justify-content-between">
-                            <button class="btn temp-btn">
+                            <button onclick="openNewProject(); document.getElementById('cust_test_btn').click()" class="btn temp-btn">
                                 <span>Create</span>
                                 <br>
                               
                                 Custom Test 
-                                <br>(C)
+                                <br>(C-lang)
                             </button>
-                            <button class="btn temp-btn">
+                            <button onclick="openNewProject(); document.getElementById('cust_core_btn').click()" class="btn temp-btn">
                                 <span>Custom</span>
                                 <br>
                                 Core Verification
                             </button>
-                            <button class="btn temp-btn">
+                            <button onclick="openNewProject(); document.getElementById('pre_core_btn').click()" class="btn temp-btn">
                                 <span>Prebuilt</span>
                                 <br>
                                 Core Verification 
@@ -104,19 +113,24 @@
             <div class="row">
                 <div class="col-4 sec">
                     <div class="container">
+                        <div style="margin-top: 20px;" id="back-btn-div">
+                            <button onclick="closeNewProject()" class="btn back-btn">
+                                <img src="assets/icons/back2.png" />
+                            </button>
+                        </div>
                         <div id="config-btns">
                             <h4>- Project Selection -</h4>
-                            <button onclick="changeProject2(event,'custom_test')" class="btn config-btn" value="soc">
+                            <button id="cust_test_btn" onclick="changeProject2(event,'custom_test')" class="btn config-btn" value="soc">
                                Write Custom Test
                             </button>
     
                          
     
-                            <button onclick="changeProject2(event,'upload_core')" class="btn config-btn">
+                            <button id="cust_core_btn" onclick="changeProject2(event,'upload_core')" class="btn config-btn">
                                     Upload Custom Core                 
                             </button>
     
-                            <button onclick="changeProject2(event,'prebuilt_core')" class="btn config-btn">
+                            <button id="pre_core_btn" onclick="changeProject2(event,'prebuilt_core')" class="btn config-btn">
                                 Prebuilt Core Verification
                             </button>
     
@@ -362,22 +376,131 @@
                                 </div>
                                 <div style="text-align: right;">
                                         
-                                    <button onclick="changecoree('command')" class="btn ctrl-btn">
+                                    <button onclick="changecoree('extensionselect')" class="btn ctrl-btn">
                                         <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
                                     </button>
                                 </div>
                                 </div>
                           
 
+
+                        <!-- -----------------------------------upload core --extensions -------->
+                        <div id="extensionselection">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config active">
+                                        <p>Upload Core </p>
+                                    </div>
+                                   
+                                    <div class="name-config active">
+                                        <p>Extensions</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"  style="margin-left: 70px;">
+    
+                                <div  >
+                                    <h6 style="font-weight: lighter;">Select Your Core Extensions</h6>
+                                    <form>
+                                        <input type="checkbox" name="ext" value="i" disabled checked />
+                                        <label> Integer (I) </label>
+                                        <br />
+                                        <input type="checkbox" value="m" name="ext" />
+                                        <label> Multiplier (M) </label>
+                                        <br />
+                                        <input type="checkbox" value="a" name="ext" />
+                                        <label> Atomic (A) </label>
+                                        <br />
+                                        <input type="checkbox" value="f" name="ext" />
+                                        <label> Floating Point (F) </label>
+                                        <br />
+                                        <input type="checkbox" value="c" name="ext" />
+                                        <label> Compressed (C) </label>
+                                    </form>
+                                  
+                                </div>
+                                <div  style="margin-top:5px;" >
+                                    
+                                    
+                                    
+                            
+                            </div>
+                                
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div style="text-align: right;" style="margin-top: -36px;">
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/back.png" onclick="changecoree('uploadcore')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
+                                </button>    
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/next.png" onclick="changecoree('formatselect')" style="width: 100%;margin-top: -100px;" />
+                                </button>
+                            </div>
+                                </div>
+                        </div>
+
+
+                        <!-- -----------------------------------upload core --format -------->
+                        <div id="formatSelect">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config active">
+                                        <p>Upload Core </p>
+                                    </div>
+                                   
+                                    <div class="name-config active">
+                                        <p>Extensions</p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>Test Format</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"  style="margin-left: 70px;">
+    
+                                <div  >
+                                    <h6 style="font-weight: lighter;">Choose the test format for your core.</h6>
+                                    <form>
+                                        <input type="radio" name="testformat" value="asm" checked />
+                                        <label> Assembly & Machine Code (hex) </label>
+                                        <br />
+                                        <input type="radio" value="c" name="testformat" />
+                                        <label> C language </label>
+                                        
+                                    </form>
+                                  
+                                </div>
+                                <div  style="margin-top:5px;" >
+                                    
+                                    
+                                    
+                            
+                            </div>
+                                
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div style="text-align: right;" style="margin-top: -36px;">
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/back.png" onclick="changecoree('extensionselect')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
+                                </button>    
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/next.png" onclick="changecoree('uptestcase')" style="width: 100%;margin-top: -100px;" />
+                                </button>
+                            </div>
+                                </div>
+                        </div>
+
+
                         <!-- -----------------------------------upload core --command -------->
                         <div id="core-command">
                         <div class="row main-config">
                             <div class="col-md-3">
                                 <div class="name-config active">
-                                    <p>Upload Core </p>
+                                    <p>Test Format</p>
                                 </div>
                                 <div class="name-config active">
-                                    <p>Enter commands </p>
+                                    <p>Test Case File/Dir  </p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Enter Command </p>
                                 </div>
                             </div>
                             <div class="col-md-1"></div>
@@ -391,33 +514,102 @@
                             </div>
                             
                             <div style="    margin-left: 245px;
-                            margin-top: -43px;"><p style="color:rgba(240, 248, 255, 0.342)">e.g:  {testcommand} Test={testname}
+                            margin-top: -75px;"><p style="color:rgba(240, 248, 255, 0.342)">For C Test, type make command:  {testcommand} Test={testname}
+        
+                            </p><br><p style="color:rgba(240, 248, 255, 0.342)">For Hex Test, type log gen script:  ./{logGenerator.sh}
         
                             </p></div>
+                            
                             
                             <div class="col-md-2"></div>
                         </div>
                         <div style="text-align: right;">
-                            <button onclick="changecoree('uploadcore')" class="btn ctrl-btn">
+                            <button onclick="changecoree('uptestcase')" class="btn ctrl-btn">
                                 <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
                             </button>    
-                            <button onclick="changecoree('uptestcase')" class="btn ctrl-btn">
+                            <button onclick="changecoree('logselect')" class="btn ctrl-btn">
                                 <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
                             </button>
                         </div>
                     </div>
-                    <!-- --------------------------TESTCASE------------------------->
+
+
+                    <!-- --------------------------LOG DIRR------------------------>
+                    <div id="logselect">
+                        <div class="row main-config">
+                            <div class="col-md-3">
+                                <div class="name-config active">
+                                    <p>Test Case File/Dir  </p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Enter Command </p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Log File </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6"  style="margin-left: 70px;">
+
+                            <div  >
+                                 <div  style="margin-top:5px;" >
+                                <h6 style="font-weight: lighter;">Select Your Core log file </h6>
+                                
+                                <div id="project-browse" style="width: 415px;" >
+                                  
+                                    <div class="col-md-3"  >
+                                        
+                                                                            
+                                        <input id="getlogfolder" placeholder="swerv-El2/exec.log" style="background-color: black;color: white;width: 386px;">
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div> 
+
+                            <h6 style="font-weight: lighter;">Choose the format for your core log.</h6>
+                                    <form>
+                                        <input type="radio" name="testformat" value="asm" checked />
+                                        <label> RISC-V Trace Log (.log) </label>
+                                        <br />
+                                        <input type="radio" value="c" name="testformat" />
+                                        <label> RISC-V Trace CSV (.csv) </label>
+                                        
+                                    </form>
+                            
+                                </div>
+                            </div>
+                           
+                        
+                        </div>
+                            
+                            <div class="col-md-2"></div>
+                    
+                        <div style="text-align: right;" >
+                            <button  class="btn ctrl-btn">
+                                <img src="assets/icons/back.png" onclick="changecoree('command')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
+                            </button>    
+                            <button  class="btn ctrl-btn">
+                                <img src="assets/icons/next.png" onclick="changecoree('Stestcasetype')" style="width: 100%;margin-top: -100px;" />
+                            </button>
+                        </div>
+                            </div>
+
+
+
+
+
+                    <!-- --------------------------TESTCASE folder for C------------------------->
                     <div id="testcase">
                         <div class="row main-config">
                             <div class="col-md-3">
                                 <div class="name-config active">
-                                    <p>Upload Core </p>
+                                    <p>Extensions</p>
                                 </div>
                                 <div class="name-config active">
-                                    <p>Enter commands </p>
+                                    <p>Test Format</p>
                                 </div>
                                 <div class="name-config active">
-                                    <p>Select test cases </p>
+                                    <p>Test Case File/Dir </p>
                                 </div>
                             </div>
                             <div class="col-md-6"  style="margin-left: 70px;">
@@ -433,7 +625,7 @@
                                     
                                 </div>
                             </div>
-                            <div  style="margin-top:5px;" >
+                            <!-- <div  style="margin-top:5px;" >
                                 <h6 style="font-weight: lighter;">Select Your Core log file folder </h6>
                                 
                                 <div id="project-browse" style="width: 415px;" >
@@ -447,6 +639,65 @@
                                     </div>
                                     
                                 </div>
+                            </div> -->
+                        
+                        </div>
+                            
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div style="text-align: right;" >
+                            <button  class="btn ctrl-btn">
+                                <img src="assets/icons/back.png" onclick="changecoree('formatselect')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
+                            </button>    
+                            <button  class="btn ctrl-btn">
+                                <img src="assets/icons/next.png" onclick="changecoree('command')" style="width: 100%;margin-top: -100px;" />
+                            </button>
+                        </div>
+                            </div>
+
+
+
+                            <!-- --------------------------TESTCASE folder for ASM------------------------->
+                    <div id="testcase_asm">
+                        <div class="row main-config">
+                            <div class="col-md-3">
+                                <div class="name-config active">
+                                    <p>Extensions</p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Test Format</p>
+                                </div>
+                                <div class="name-config active">
+                                    <p>Test Case File/Dir  </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6"  style="margin-left: 70px;">
+
+                            <div  >
+                                <h6 style="font-weight: lighter;">Write the file's location to save the machine code (hex)</h6>
+                                
+            <div class="col-md-3"  >
+                                    
+                                    
+                                  
+                                    <input id="gettestfolder" placeholder="simulation/machine.hex" style="background-color: black;color: white;width: 386px;">
+                                    
+                                </div>
+                            </div>
+                            <div  style="margin-top:20px;" >
+                                <h6 style="font-weight: lighter;"> <b>(Optional)</b> Write the file's location to save the assembly instructions </h6>
+                                
+                                <div id="project-browse" style="width: 415px;" >
+                                  
+                                    <div class="col-md-3"  >
+                                        
+                                        
+                                      
+                                        <input id="getlogfolder" placeholder="simulation/assembly.S" style="background-color: black;color: white;width: 386px;">
+                                        
+                                    </div>
+                                    
+                                </div>
                             </div>
                         
                         </div>
@@ -455,15 +706,15 @@
                         </div>
                         <div style="text-align: right;" >
                             <button  class="btn ctrl-btn">
-                                <img src="assets/icons/back.png" onclick="changecoree('command')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
+                                <img src="assets/icons/back.png" onclick="changecoree('formatselect')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
                             </button>    
                             <button  class="btn ctrl-btn">
-                                <img src="assets/icons/next.png" onclick="changecoree('extensionselect')" style="width: 100%;margin-top: -100px;" />
+                                <img src="assets/icons/next.png" onclick="changecoree('command')" style="width: 100%;margin-top: -100px;" />
                             </button>
                         </div>
                             </div>
                             <!-- ---------------------------extension selection------------------------------->
-                            <div id="extensionselection">
+                            <!-- <div id="extensionselection">
                                 <div class="row main-config">
                                     <div class="col-md-3">
                                         <div class="name-config active">
@@ -501,7 +752,7 @@
                                     </button>
                                 </div>
                                     </div>
-                            </div>
+                            </div> -->
                                        
                                
 
@@ -509,14 +760,16 @@
                             <div id="testcasetype">
                                 <div class="row main-config">
                                     <div class="col-md-3">
+                                        
                                         <div class="name-config active">
-                                            <p>Upload Core </p>
+                                            <p>Enter Command </p>
                                         </div>
                                         <div class="name-config active">
-                                            <p>Enter commands </p>
+                                            <p>Log File </p>
                                         </div>
+                                        
                                         <div class="name-config active">
-                                            <p>Select test cases</p>
+                                            <p>Test Type</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6"  style="margin-left: 70px;">
@@ -554,7 +807,7 @@
                                 </div>
                                 <div style="text-align: right;" style="margin-top: -36px;">
                                     <button  class="btn ctrl-btn">
-                                        <img src="assets/icons/back.png" onclick="changecoree('uptestcase')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
+                                        <img src="assets/icons/back.png" onclick="changecoree('logselect')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
                                     </button>    
                                     <button  class="btn ctrl-btn">
                                         <img src="assets/icons/next.png" onclick="changecoree('showtests')" style="width: 100%;margin-top: -100px;" />
@@ -566,11 +819,12 @@
                             <div id="showtest">
                                 <div class="row main-config">
                                     <div class="col-md-3">
-                                        <div class="name-config">
-                                            <p>Core</p>
+                                        <div class="name-config active">
+                                            <p>Log File </p>
                                         </div>
-                                        <div class="name-config">
-                                            <p>ISS</p>
+                                        
+                                        <div class="name-config active">
+                                            <p>Test Type</p>
                                         </div>
                                         <div class="name-config active">
                                             <p>Test Cases</p>
@@ -801,7 +1055,7 @@ function opneRecentProject(id){
 
            eel.expose(changeProgressBar);
            function changeProgressBar(width){
-               document.getElementsByClassName("progress-bar")[0].style.width = width + "%";
+               document.getElementsByClassName("progress-bar")[1].style.width = width + "%";
            }
            eel.expose(changeProgressBar1);
            function changeProgressBar1(width){
@@ -895,18 +1149,21 @@ function opneRecentProject(id){
                         document.getElementById("testcasetype").style.display = "none";
                         document.getElementById("showtest").style.display = "none";
                         document.getElementById("extensionselection").style.display = "none";
+                        document.getElementById("formatSelect").style.display = "none";
+                        document.getElementById("logselect").style.display = "none";
+                        document.getElementById("testcase_asm").style.display = "none";
                 } else if(comp == "command"){
-                    var isSwerv = document.getElementsByName("checkswervtest")[0];
-                    if(isSwerv.checked){
-                        changecoree("Stestcasetype");
-                    } else{
+                    
                         document.getElementById("core-command").style.display = "block";
                         document.getElementById("uploadcore").style.display = "none";
                         document.getElementById("testcase").style.display = "none";
                         document.getElementById("testcasetype").style.display = "none";
                         document.getElementById("showtest").style.display = "none";
                         document.getElementById("extensionselection").style.display = "none";
-                    }
+                        document.getElementById("formatSelect").style.display = "none";
+                        document.getElementById("testcase_asm").style.display = "none";
+                        document.getElementById("logselect").style.display = "none";
+                
                     
                    
                 }
@@ -917,15 +1174,27 @@ function opneRecentProject(id){
                     document.getElementById("testcasetype").style.display = "none";
                     document.getElementById("showtest").style.display = "none";
                     document.getElementById("extensionselection").style.display = "none";
+                    document.getElementById("formatSelect").style.display = "none";
+                    document.getElementById("testcase_asm").style.display = "none";
+                    document.getElementById("logselect").style.display = "none";
                    
                 }
                 if(comp == "uptestcase"){
+                    var testFormat = document.querySelector('input[name="testformat"]:checked').value;
                     document.getElementById("core-command").style.display = "none";
                     document.getElementById("uploadcore").style.display = "none";
-                    document.getElementById("testcase").style.display = "block";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcase_asm").style.display = "none";
                     document.getElementById("testcasetype").style.display = "none";
                     document.getElementById("showtest").style.display = "none";
                     document.getElementById("extensionselection").style.display = "none";
+                    document.getElementById("formatSelect").style.display = "none";
+                    document.getElementById("logselect").style.display = "none";
+                    if(testFormat === "asm"){
+                        document.getElementById("testcase_asm").style.display = "block";
+                    } else if(testFormat === "c"){
+                        document.getElementById("testcase").style.display = "block";
+                    }
                    
                 }
                 if(comp == "uploadcore"){
@@ -935,16 +1204,36 @@ function opneRecentProject(id){
                     document.getElementById("testcasetype").style.display = "none";
                     document.getElementById("showtest").style.display = "none";
                     document.getElementById("extensionselection").style.display = "none";
+                    document.getElementById("formatSelect").style.display = "none";
+                    document.getElementById("logselect").style.display = "none";
                    
                 }
                 if(comp == "extensionselect"){
+                    var isSwerv = document.getElementsByName("checkswervtest")[0];
+                    if(isSwerv.checked){
+                        changecoree("Stestcasetype");
+                    } else{
+                        document.getElementById("core-command").style.display = "none";
+                        document.getElementById("uploadcore").style.display = "none";
+                        document.getElementById("testcase").style.display = "none";
+                        document.getElementById("testcasetype").style.display = "none";
+                        document.getElementById("showtest").style.display = "none";
+                        document.getElementById("extensionselection").style.display = "block";
+                        document.getElementById("formatSelect").style.display = "none";
+                        document.getElementById("testcase_asm").style.display = "none";
+                        document.getElementById("logselect").style.display = "none";
+                    }
+                }
+                if(comp == "formatselect"){
+                    document.getElementById("formatSelect").style.display = "block";
                     document.getElementById("core-command").style.display = "none";
                     document.getElementById("uploadcore").style.display = "none";
                     document.getElementById("testcase").style.display = "none";
                     document.getElementById("testcasetype").style.display = "none";
                     document.getElementById("showtest").style.display = "none";
-                    document.getElementById("extensionselection").style.display = "block";
-                   
+                    document.getElementById("extensionselection").style.display = "none";
+                    document.getElementById("testcase_asm").style.display = "none";
+                    document.getElementById("logselect").style.display = "none";
                 }
                 if(comp == "showtests"){
                     var selectedtesttype;
@@ -983,7 +1272,26 @@ function opneRecentProject(id){
                     document.getElementById("testcasetype").style.display = "none";
                     document.getElementById("showtest").style.display = "block";
                     document.getElementById("extensionselection").style.display = "none";
+                    document.getElementById("formatSelect").style.display = "none";
+                    document.getElementById("testcase_asm").style.display = "none";
+                    document.getElementById("logselect").style.display = "none";
                    
+                }
+
+                if(comp == "logselect"){
+                    var isSwerv = document.getElementsByName("checkswervtest")[0];
+                    if(isSwerv.checked){
+                        changecoree("uploadcore");
+                    } else{
+                        document.getElementById("logselect").style.display = "block";
+                        document.getElementById("core-command").style.display = "none";
+                        document.getElementById("uploadcore").style.display = "none";
+                        document.getElementById("testcase").style.display = "none";
+                        document.getElementById("testcasetype").style.display = "none";
+                        document.getElementById("extensionselection").style.display = "none";
+                        document.getElementById("formatSelect").style.display = "none";
+                        document.getElementById("testcase_asm").style.display = "none";
+                    }
                 }
               
                 if(comp == "Stestcasetype"){
@@ -992,6 +1300,9 @@ function opneRecentProject(id){
                     document.getElementById("testcase").style.display = "none";
                     document.getElementById("testcasetype").style.display = "block";
                     document.getElementById("extensionselection").style.display = "none";
+                    document.getElementById("formatSelect").style.display = "none";
+                    document.getElementById("testcase_asm").style.display = "none";
+                    document.getElementById("logselect").style.display = "none";
                    
                 }
                  if(comp == "endcore"){
@@ -1173,7 +1484,7 @@ function select_js(a){
 eel.expose(select_js1)
 function select_js1(a){
     var showpath = document.getElementById("pathcore");
-    showpath.innerHTML+=a;
+    showpath.value=a;
 
 }
 //donebutton

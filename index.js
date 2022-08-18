@@ -2,7 +2,7 @@ const { app, BrowserWindow } = require('electron');
 
 
 const createMainWindow = () => {
-  const win = new BrowserWindow({show: false,frame:false,icon: __dirname + '/web/assets/icons/flash.png', webPreferences: {
+  const win = new BrowserWindow({show: false,frame:false,icon: __dirname + '/web/assets/icons/flash96.png', webPreferences: {
     nodeIntegration: true
    } });
    win.maximize();
@@ -14,7 +14,7 @@ const createMainWindow = () => {
   }
 
 const createSplashWindow = () => {
-    const win = new BrowserWindow({height:600, width:1200 , icon: __dirname + '/web/assets/icons/flash.png',frame:false,webPreferences: {
+    const win = new BrowserWindow({height:600, width:1200 , icon: __dirname + '/web/assets/icons/flash96.png',frame:false,webPreferences: {
         nodeIntegration: true
       } });
  
@@ -22,7 +22,6 @@ const createSplashWindow = () => {
     // win.loadFile("splash.html")
     win.loadURL('http://localhost:8012/splash.html');
 }
-
 app.whenReady().then(() => {
     createSplashWindow()
 });

@@ -120,6 +120,13 @@ function openNewProject(){
     newProj.style.display = "block";
 }
 
+function closeNewProject(){
+    var main = document.getElementById("main");
+    var newProj = document.getElementById("new");
+    main.style.display = "block";
+    newProj.style.display = "none";
+}
+
 function changeSoC(comp){
     var core = document.getElementById("core");
     var dev = document.getElementById("devices");
