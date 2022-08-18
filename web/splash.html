@@ -1307,6 +1307,8 @@ function opneRecentProject(id){
                 }
                  if(comp == "endcore"){
 
+                    console.log("CLICKKKKK");
+
                     var projName = document.getElementById("projectname").value;
                     var projDir = document.getElementById("path").innerHTML;
                     var command=document.getElementById("getcommands").value;
@@ -1336,20 +1338,15 @@ function opneRecentProject(id){
                         alert("Please select a directory");
                     } else if (uploadcore == " "){
                         alert("Please Upload Core");
-                    } else if (checkswervv == ""){
-                        if (command == ""){
+                    } else if (command == "" && checkswervv == ""){
                             alert("Please Enter command");
-                        } else if (testcase == "" && testFormat == "c"){
+                        } else if (testcase == "" && testFormat == "c" && checkswervv == ""){
                             alert("Please select testcase folder");
-                        } else if (hexDir == "" && testFormat == "asm"){
+                        } else if (hexDir == "" && testFormat == "asm" && checkswervv == ""){
                             alert("Please select hex directory");
-                        } else if (logfile == ""){
+                        } else if (logfile == "" && checkswervv == ""){
                             alert("Please select location where log file will generate");
-                        }
-                    }
-                     
-                    
-                     else{
+                        } else{
 
                         
                         var progressbar=document.getElementById("prebuilt-end1").style.display="block";
@@ -1387,6 +1384,8 @@ function opneRecentProject(id){
                             "logFile": logfile,
                             "swerv":checkswervv
                         }
+
+                        console.log("DOUBLE CLIUCKKK")
                         
 
                         eel.enduploadcore(config,tests1,selectedtype);
