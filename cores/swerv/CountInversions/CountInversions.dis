@@ -1,0 +1,133 @@
+
+CountInversions.exe:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+80000000 <_start>:
+80000000:	595552b7          	lui	t0,0x59555
+80000004:	55528293          	addi	t0,t0,1365 # 59555555 <_start-0x26aaaaab>
+80000008:	7c029073          	csrw	0x7c0,t0
+8000000c:	70041117          	auipc	sp,0x70041
+80000010:	01410113          	addi	sp,sp,20 # f0041020 <STACK>
+80000014:	0ba000ef          	jal	ra,800000ce <main>
+
+80000018 <_finish>:
+80000018:	50580297          	auipc	t0,0x50580
+8000001c:	fe828293          	addi	t0,t0,-24 # d0580000 <tohost>
+80000020:	0ff00313          	li	t1,255
+80000024:	00628023          	sb	t1,0(t0)
+80000028:	4305                	li	t1,1
+8000002a:	0062a023          	sw	t1,0(t0)
+8000002e:	fe0005e3          	beqz	zero,80000018 <_finish>
+80000032:	0001                	nop
+80000034:	0001                	nop
+80000036:	0001                	nop
+80000038:	0001                	nop
+8000003a:	0001                	nop
+8000003c:	0001                	nop
+8000003e:	0001                	nop
+80000040:	0001                	nop
+80000042:	0001                	nop
+80000044:	0001                	nop
+
+Disassembly of section .text:
+
+80000046 <getInvCount>:
+// C program to Count
+// Inversions in an array
+#include <stdio.h>
+#include <stdlib.h>
+int getInvCount(int arr[], int n)
+{
+80000046:	7179                	addi	sp,sp,-48
+80000048:	d622                	sw	s0,44(sp)
+8000004a:	1800                	addi	s0,sp,48
+8000004c:	fca42e23          	sw	a0,-36(s0)
+80000050:	fcb42c23          	sw	a1,-40(s0)
+	int inv_count = 0;
+80000054:	fe042623          	sw	zero,-20(s0)
+	for (int i = 0; i < n - 1; i++)
+80000058:	fe042423          	sw	zero,-24(s0)
+8000005c:	a8a1                	j	800000b4 <getInvCount+0x6e>
+		for (int j = i + 1; j < n; j++)
+8000005e:	fe842783          	lw	a5,-24(s0)
+80000062:	0785                	addi	a5,a5,1
+80000064:	fef42223          	sw	a5,-28(s0)
+80000068:	a81d                	j	8000009e <getInvCount+0x58>
+			if (arr[i] > arr[j])
+8000006a:	fe842783          	lw	a5,-24(s0)
+8000006e:	078a                	slli	a5,a5,0x2
+80000070:	fdc42703          	lw	a4,-36(s0)
+80000074:	97ba                	add	a5,a5,a4
+80000076:	4398                	lw	a4,0(a5)
+80000078:	fe442783          	lw	a5,-28(s0)
+8000007c:	078a                	slli	a5,a5,0x2
+8000007e:	fdc42683          	lw	a3,-36(s0)
+80000082:	97b6                	add	a5,a5,a3
+80000084:	439c                	lw	a5,0(a5)
+80000086:	00e7d763          	bge	a5,a4,80000094 <getInvCount+0x4e>
+				inv_count++;
+8000008a:	fec42783          	lw	a5,-20(s0)
+8000008e:	0785                	addi	a5,a5,1
+80000090:	fef42623          	sw	a5,-20(s0)
+		for (int j = i + 1; j < n; j++)
+80000094:	fe442783          	lw	a5,-28(s0)
+80000098:	0785                	addi	a5,a5,1
+8000009a:	fef42223          	sw	a5,-28(s0)
+8000009e:	fe442703          	lw	a4,-28(s0)
+800000a2:	fd842783          	lw	a5,-40(s0)
+800000a6:	fcf742e3          	blt	a4,a5,8000006a <getInvCount+0x24>
+	for (int i = 0; i < n - 1; i++)
+800000aa:	fe842783          	lw	a5,-24(s0)
+800000ae:	0785                	addi	a5,a5,1
+800000b0:	fef42423          	sw	a5,-24(s0)
+800000b4:	fd842783          	lw	a5,-40(s0)
+800000b8:	17fd                	addi	a5,a5,-1
+800000ba:	fe842703          	lw	a4,-24(s0)
+800000be:	faf740e3          	blt	a4,a5,8000005e <getInvCount+0x18>
+
+	return inv_count;
+800000c2:	fec42783          	lw	a5,-20(s0)
+}
+800000c6:	853e                	mv	a0,a5
+800000c8:	5432                	lw	s0,44(sp)
+800000ca:	6145                	addi	sp,sp,48
+800000cc:	8082                	ret
+
+800000ce <main>:
+
+/* Driver program to test above functions */
+void main()
+{
+800000ce:	7179                	addi	sp,sp,-48
+800000d0:	d606                	sw	ra,44(sp)
+800000d2:	d422                	sw	s0,40(sp)
+800000d4:	1800                	addi	s0,sp,48
+	int arr[] = { 1, 20, 6, 4, 5 };
+800000d6:	f00407b7          	lui	a5,0xf0040
+800000da:	00078793          	mv	a5,a5
+800000de:	438c                	lw	a1,0(a5)
+800000e0:	43d0                	lw	a2,4(a5)
+800000e2:	4794                	lw	a3,8(a5)
+800000e4:	47d8                	lw	a4,12(a5)
+800000e6:	4b9c                	lw	a5,16(a5)
+800000e8:	fcb42c23          	sw	a1,-40(s0)
+800000ec:	fcc42e23          	sw	a2,-36(s0)
+800000f0:	fed42023          	sw	a3,-32(s0)
+800000f4:	fee42223          	sw	a4,-28(s0)
+800000f8:	fef42423          	sw	a5,-24(s0)
+	int n = 5;
+800000fc:	4795                	li	a5,5
+800000fe:	fef42623          	sw	a5,-20(s0)
+		getInvCount(arr, n);
+80000102:	fd840793          	addi	a5,s0,-40
+80000106:	fec42583          	lw	a1,-20(s0)
+8000010a:	853e                	mv	a0,a5
+8000010c:	3f2d                	jal	80000046 <getInvCount>
+}
+8000010e:	0001                	nop
+80000110:	50b2                	lw	ra,44(sp)
+80000112:	5422                	lw	s0,40(sp)
+80000114:	6145                	addi	sp,sp,48
+80000116:	8082                	ret

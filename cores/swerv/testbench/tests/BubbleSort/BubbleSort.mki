@@ -1,0 +1,2 @@
+OFILES = BubbleSort.o crt0.o
+TEST_CFLAGS = -mabi=lp64 -march=rv64imc -nostdlib -g

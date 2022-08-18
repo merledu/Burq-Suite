@@ -1,0 +1,2 @@
+OFILES = PostmanSort.o crt0.o
+TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g
