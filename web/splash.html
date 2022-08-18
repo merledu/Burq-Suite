@@ -568,10 +568,10 @@
 
                             <h6 style="font-weight: lighter;">Choose the format for your core log.</h6>
                                     <form>
-                                        <input type="radio" name="testformat" value="asm" checked />
+                                        <input type="radio" name="logformat" value="asm" checked />
                                         <label> RISC-V Trace Log (.log) </label>
                                         <br />
-                                        <input type="radio" value="c" name="testformat" />
+                                        <input type="radio" value="c" name="logformat" />
                                         <label> RISC-V Trace CSV (.csv) </label>
                                         
                                     </form>
@@ -680,7 +680,7 @@
                                     
                                     
                                   
-                                    <input id="gettestfolder" placeholder="simulation/machine.hex" style="background-color: black;color: white;width: 386px;">
+                                    <input id="hexDir" placeholder="simulation/machine.hex" style="background-color: black;color: white;width: 386px;">
                                     
                                 </div>
                             </div>
@@ -693,7 +693,7 @@
                                         
                                         
                                       
-                                        <input id="getlogfolder" placeholder="simulation/assembly.S" style="background-color: black;color: white;width: 386px;">
+                                        <input id="asmDir" placeholder="simulation/assembly.S" style="background-color: black;color: white;width: 386px;">
                                         
                                     </div>
                                     
@@ -1313,8 +1313,22 @@ function opneRecentProject(id){
                     var uploadcore = document.getElementById("pathcore").innerHTML;
                     var testcase = document.getElementById("gettestfolder").value;
                     var logfile = document.getElementById("getlogfolder").value;
+                    var hexDir = document.getElementById("hexDir").value;
+                    var asmDir = document.getElementById("asmDir").value;
                     var testtype=document.getElementsByName("upCore");
+                    var testFormat = document.querySelector('input[name="testformat"]:checked').value;
+                    var extensions = document.querySelector('input[name="ext"]').checked;
+                    var logFormat = document.querySelector('input[name="logformat"]:checked').value;
+
+                    var swerv = document.getElementsByName("checkswervtest");
+                    var checkswervv = "";
+                        for (var j =0; j<swerv.length; j++){
+                            if(swerv[j].checked){
                     
+                            checkswervv=swerv[j].value;
+                            
+                            }
+                        }
                             
                     if (projName == ""){
                         alert("Please enter a project name");
@@ -1322,13 +1336,20 @@ function opneRecentProject(id){
                         alert("Please select a directory");
                     } else if (uploadcore == " "){
                         alert("Please Upload Core");
-                    } else if (command == ""){
-                        alert("Please Enter command");
-                    } else if (testcase == ""){
-                        alert("Please select testcase folder");
-                    } else if (logfile == " "){
-                        alert("Please  location where log file will generate");
-                    } else{
+                    } else if (checkswervv == ""){
+                        if (command == ""){
+                            alert("Please Enter command");
+                        } else if (testcase == "" && testFormat == "c"){
+                            alert("Please select testcase folder");
+                        } else if (hexDir == "" && testFormat == "asm"){
+                            alert("Please select hex directory");
+                        } else if (logfile == ""){
+                            alert("Please select location where log file will generate");
+                        }
+                    }
+                     
+                    
+                     else{
 
                         
                         var progressbar=document.getElementById("prebuilt-end1").style.display="block";
@@ -1341,14 +1362,7 @@ function opneRecentProject(id){
                         
                     
                     
-                        var checkswerv = document.getElementsByName("checkswervtest");
-                        for (var j =0; j<checkswerv.length; j++){
-                            if(checkswerv[j].checked){
-                    
-                            var checkswervv=checkswerv[j].value;
-                            
-                            }
-                        }
+                        
 
                         var getcommand=document.getElementById("getcommands").value;
                         var gettestcasefoldername=document.getElementById("gettestfolder").value;
@@ -1362,7 +1376,20 @@ function opneRecentProject(id){
                                     }
                                 }
 
-                        eel.enduploadcore(getcommand,tests1,gettestcasefoldername,getlogfoldername,checkswervv,selectedtype);
+                        var config = {
+                            "extensions":extensions,
+                            "testFormat": testFormat,
+                            "testDir": testcase,
+                            "asmDir":asmDir,
+                            "hexDir":hexDir,
+                            "command":command,
+                            "logFormat":logFormat,
+                            "logFile": logfile,
+                            "swerv":checkswervv
+                        }
+                        
+
+                        eel.enduploadcore(config,tests1,selectedtype);
                     }
             
             }}

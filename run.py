@@ -1,5 +1,6 @@
 import eel
 from eel import init, start
+from soupsieve import icomments
 from scripts.replacer import replacer
 from scripts.reverter import reverter
 import os,glob
@@ -482,9 +483,24 @@ if __name__ == '__main__':
         eel.showburqTests(namelist)
 
 
+    @eel.expose
+    def enduploadcore(config, tests, types):
+        ic(config)
+        ic(tests)
+        ic(types)
+        yourproject=list1[-1]
+        ic(yourproject)
+        b=list2[-1]
+        ic(b)
+        # file1=open("web/pathfile","w")
+        # file1.write(f"{yourproject}/{b}")
+        # file1.close()
+        uploadedcore=listuploadcore[-1]
+        ic(uploadedcore)
+
 
     @eel.expose
-    def enduploadcore(getcommand,tests1,testcase,logfile,swerv,testtype):
+    def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
         ic(swerv)
         tests_status=[]
         listcommands=[]
