@@ -8,18 +8,14 @@ if __name__ == '__main__':
 
 #type of project select
     currentRootDir = os.getcwd()
-    ic(currentRootDir)
 
     f = open("web/pathfile","r")
     c = f.readlines()
-    ic(c)
     f.close()
     vf = open("web/pathfilev","r")
     vc = vf.readlines()
     vf.close()
     project_dir = c[-1]
-    ic(project_dir) 
-    print(vc,"uu")
     
     
     init('web')
@@ -30,30 +26,23 @@ if __name__ == '__main__':
     @eel.expose
     def stop_index():
         reverter() 
-        os.system("./openMain2.sh")   
+        os.system("./scripts/openSplash.sh")   
 
     @eel.expose
     def getTheFileStrucuture():
         structure = getFileStructure(project_dir)
         parsedHTML = ""
-        ic(structure)
         parsedHTML = parseFileStructure(structure[""])
-        # print(parsedHTML)
         eel.pakrKayLaoFiles(parsedHTML)
         if vc[0]=='custom_test':
             gen = pleaseGeneratorFileUthaKLayAao()
             filepath = gen[0]
             actualFilePath = os.path.join(project_dir,filepath[1:])
             fileToRead = open(actualFilePath,"r")
-            ic(fileToRead)
             contentOfFile = fileToRead.read()
-            ic(contentOfFile)
             fileToRead.close()
-            ic(filepath.split("/")[-1])
-            ic( filepath[1:])
-            ic(gen[1])
             eel.displayTheFile(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
-        elif vc[0]=='prebuilt_verification':
+        elif vc[0]=='prebuilt_verification' or vc[0] == "custom_verification":
             gen = pleaseReportFileUthaKLayAao()
             filepath = gen[0]
             actualFilePath = os.path.join(project_dir,filepath[1:])
@@ -63,14 +52,15 @@ if __name__ == '__main__':
             parseReport(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
 
     def parseReport(content, p1,p2,p3):
-        content_list = content.split("\n")
-        core = content_list[0].split(":")[1]
-        iss = content_list[1].split(":")[1]
+        content_list = content.split("\n")[:-1]
+        core = content_list[0].split(",")[1]
+        iss = content_list[1].split(",")[1]
         tests = []
         status = []
-        for i in range(2,len(content_list)):
-            tests.append(content_list[i].split(":")[0])
-            status.append(content_list[i].split(":")[1:])
+        ic(content_list)
+        for i in range(4,len(content_list)):
+            tests.append(content_list[i].split(",")[0])
+            status.append(",".join(content_list[i].split(",")[1:]))
         eel.displayTheReport(core,iss,tests,status,p1,p2,p3)
 
 
@@ -84,7 +74,7 @@ if __name__ == '__main__':
             fileToRead = open(actualFilePath, "r")
             contentOfFile = fileToRead.read()
             fileToRead.close()
-            if ".report" in actualFilePath:
+            if ".csv" in actualFilePath:
                 parseReport(contentOfFile,file,filePath[1:], filePath.split("/")[-1])
             else:
                 eel.displayTheFile(contentOfFile,file,filePath[1:], filePath.split("/")[-1])
@@ -96,7 +86,6 @@ if __name__ == '__main__':
         file=open("web/pathfile","r")
         contents= file.readlines()
         file.close()
-        ic(contents[0])
 
         
         os.chdir(f"{contents[0]}")
@@ -123,17 +112,10 @@ if __name__ == '__main__':
         filepath = gen[0]
         actualFilePath = os.path.join(project_dir,filepath[1:])
         fileToRead = open(actualFilePath,"r")
-        ic(fileToRead)
-
-
-        print(code)
-
+        
     @eel.expose
     def savefile(content, file):
         os.chdir(project_dir)
-        # ic(os.path.exists(file))
-        # ic(file)
-        # ic(os.listdir("."))
         file = open(file,"w")
         file.write(content)
         file.close()
@@ -154,8 +136,6 @@ if __name__ == '__main__':
 
         proc = sp.Popen("riscv64-unknown-elf-gcc -mabi=ilp32 -march=rv32imc -nostdlib -g -o main main.c".split(), stdout=sp.PIPE, stderr=sp.PIPE)
         outs, errs = proc.communicate()
-        ic(outs)
-        ic(errs)
         if "error" in str(errs):
             eel.showAlert(f"Error: {errs}")
         else:

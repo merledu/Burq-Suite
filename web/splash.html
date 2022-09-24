@@ -411,7 +411,10 @@
                                         <label> Atomic (A) </label>
                                         <br />
                                         <input type="checkbox" value="f" name="ext" />
-                                        <label> Floating Point (F) </label>
+                                        <label> Single Precision Floating Point (F) </label>
+                                        <br />
+                                        <input type="checkbox" value="d" name="ext" />
+                                        <label> Double Precision Floating Point (D) </label>
                                         <br />
                                         <input type="checkbox" value="c" name="ext" />
                                         <label> Compressed (C) </label>
@@ -509,7 +512,7 @@
                                 <h6 style="font-weight: lighter;width: 500px;">Enter commands to Run test case </h6>
                                 
                               
-                                <input id="getcommands" placeholder="make -f Makefile TEST={testname}" style="background-color: black;color: white;width: 412px;">
+                                <input id="getcommands" placeholder="make -f Makefile TEST={testname} OR ./logGenerator.sh" style="background-color: black;color: white;width: 412px;">
                                 
                             </div>
                             
@@ -568,10 +571,10 @@
 
                             <h6 style="font-weight: lighter;">Choose the format for your core log.</h6>
                                     <form>
-                                        <input type="radio" name="logformat" value="asm" checked />
+                                        <input type="radio" name="logformat" value="log" checked />
                                         <label> RISC-V Trace Log (.log) </label>
                                         <br />
-                                        <input type="radio" value="c" name="logformat" />
+                                        <input type="radio" value="csv" name="logformat" />
                                         <label> RISC-V Trace CSV (.csv) </label>
                                         
                                     </form>
@@ -798,7 +801,9 @@
                                             <input type="radio" id="gencoretest" name="upCore" value="Swerv_Tests" />
                                             <label>Swerv_Tests </label><br>
                                             <input type="radio" id="gencoretest" name="upCore" value="users-Tests" />
-                                            <label>User-Tests </label>
+                                            <label>User-Tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="RISCV_DV_Tests" />
+                                            <label>RISCV_DV_Tests </label>
                                         </form> 
                                 
                                 </div>
@@ -1265,6 +1270,9 @@ function opneRecentProject(id){
                     else if(selectedtesttype=="users-Tests"){
                         eel.usertest()
                     }
+                    else if(selectedtesttype=="RISCV_DV_Tests"){
+                        dvtest()
+                    }
                    
                     document.getElementById("core-command").style.display = "none";
                     document.getElementById("uploadcore").style.display = "none";
@@ -1293,6 +1301,7 @@ function opneRecentProject(id){
                         document.getElementById("testcase_asm").style.display = "none";
                     }
                 }
+                //
               
                 if(comp == "Stestcasetype"){
                     document.getElementById("core-command").style.display = "none";
@@ -1303,7 +1312,7 @@ function opneRecentProject(id){
                     document.getElementById("formatSelect").style.display = "none";
                     document.getElementById("testcase_asm").style.display = "none";
                     document.getElementById("logselect").style.display = "none";
-                   
+        //           
                 }
                  if(comp == "endcore"){
 
@@ -1319,8 +1328,24 @@ function opneRecentProject(id){
                     var asmDir = document.getElementById("asmDir").value;
                     var testtype=document.getElementsByName("upCore");
                     var testFormat = document.querySelector('input[name="testformat"]:checked').value;
-                    var extensions = document.querySelector('input[name="ext"]').checked;
+                    var extensionsEl = document.getElementsByName("ext") ;
                     var logFormat = document.querySelector('input[name="logformat"]:checked').value;
+                    var selectdv = document.querySelector('input[name="dvtest"]');
+                    var dvList = []
+                    for(let i=0;i<selectdv.length;i++ ){
+                        if(selectdv[i].checked){
+                            dvList.push(selectdv[i].value)
+                        }
+                    }
+                    eel.selectdvtest(dvList);
+
+
+                    var extensions = [];
+                    for(var k=0;k<extensionsEl.length;k++){
+                        if(extensionsEl[k].checked){
+                            extensions.push(extensionsEl[k].value);
+                        }
+                    }
 
                     var swerv = document.getElementsByName("checkswervtest");
                     var checkswervv = "";
@@ -1374,6 +1399,8 @@ function opneRecentProject(id){
                                 }
 
                         var config = {
+                            "name":projName,
+                            "path":projDir,
                             "extensions":extensions,
                             "testFormat": testFormat,
                             "testDir": testcase,
@@ -1648,6 +1675,47 @@ function usersTests(listt){
 
 
 }
+function dvtest(){
+    var form=document.getElementById('uploadcoretestcaseform');
+    form.innerHTML+=`<div class="col-md-12"><form><br>
+                                           <input type="checkbox" value=" riscv_arithmetic_basic_test" name="dvtest"  />
+                                            <label> riscv_arithmetic_basic_test</label>
+                                            <br />
+                                            <input type="checkbox" value="riscv_jump_stress_test"name="dvtest" />
+                                            <label> riscv_jump_stress_test</label>
+                                            <br />
+                                            <input type="checkbox" value="riscv_loop_test"name="dvtest" />
+                                            <label>riscv_loop_test </label>
+                                            <br />
+                                            <input type="checkbox" value="riscv_rand_jump_test"name="dvtest" />
+                                            <label>riscv_rand_jump_test</label><br/>
+                                            <input type="checkbox" value="riscv_mmu_stress_test"name="dvtest" />
+                                            <label>riscv_mmu_stress_test</label><br/>
+                                            <input type="checkbox" value="riscv_no_fence_test"name="dvtest" />
+                                            <label>riscv_no_fence_test</label><br/>
+                                            <input type="checkbox" value="riscv_illegal_instr_test"name="dvtest" />
+                                            <label>riscv_illegal_instr_test</label><br/>
+                                            <input type="checkbox" value="riscv_ebreak_test"name="dvtest" />
+                                            <label>riscv_ebreak_test</label><br/>
+                                            <input type="checkbox" value="riscv_ebreak_debug_mode_test" name="dvtest"/>
+                                            <label>riscv_ebreak_debug_mode_test</label><br/>
+                                            <input type="checkbox" value="riscv_full_interrupt_test"name="dvtest" />
+                                            <label>riscv_full_interrupt_test</label><br/>
+                                            <input type="checkbox" value="riscv_csr_test" name="dvtest"/>
+                                            <label>riscv_csr_test</label><br/>
+                                            <input type="checkbox" value="riscv_unaligned_load_store_test" name="dvtest"/>
+                                            <label>riscv_unaligned_load_store_test</label><br/>
+                                           
+
+                                             
+                                        </form>
+                                    </div>`
+                                    form.style.display = "block";}
+//function riscvdv test select
+
+
+
+
             //brow    
 </script>
 </body>

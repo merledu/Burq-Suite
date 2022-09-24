@@ -13,9 +13,11 @@ import json
 from icecream import ic
 from distutils.dir_util import copy_tree
 from scripts.comparison import call
-
-
-
+from scripts.cleanlify import cleanELF
+import psutil
+from distutils.dir_util import copy_tree
+import socket
+from contextlib import closing
 if __name__ == '__main__':
 
     
@@ -77,7 +79,7 @@ if __name__ == '__main__':
         ic(projName, projPath)
         ic(core, iss, tests)
         root_path = os.getcwd()
-        ibex_test_path="testcases/Riscv_tests"
+        ibex_test_path="testcases/Riscv-tests"
         swerv_test__path="cores/swerv/"
         tests_status = []
         perOccurProgress = (100//len(tests))//2
@@ -116,11 +118,13 @@ if __name__ == '__main__':
             os.mkdir(projName)
             os.chdir(projName)
             report_str = ""
-            report_str += f"Core:{core}\n"
-            report_str += f"Iss:{iss}\n"
+            report_str += f"Core,{core}\n"
+            report_str += f"Iss,{iss}\n"
+            report_str += "\n"
+            report_str += "Test, Test Status\n"
             for i,t in enumerate(tests):
                 report_str += f"{t}:{tests_status[i]}\n"
-            file = open("test_results.report", "w+")
+            file = open("test_results.csv", "w+")
             file.write(report_str[:-1])
             file.close()
             os.chdir(currentRootDir)
@@ -344,8 +348,8 @@ if __name__ == '__main__':
     @eel.expose
     def getlistibex():
         namelist=[]
-        root="testcases/Riscv_tests"
-        root1="testcases/Riscv_tests"
+        root="testcases/Riscv-tests"
+        root1="testcases/Riscv-tests"
         root2="testcases/User_Defined_Tests"              
         filepaths = [os.path.join(root,i) for i in os.listdir(root)]
         filepaths1 = [os.path.join(root1,i) for i in os.listdir(root1)]
@@ -412,7 +416,7 @@ if __name__ == '__main__':
     def riscvtest():
         namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="testcases/Riscv_tests"
+        root="testcases/Riscv-tests"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -485,18 +489,126 @@ if __name__ == '__main__':
 
     @eel.expose
     def enduploadcore(config, tests, types):
-        ic(config)
-        ic(tests)
-        ic(types)
-        yourproject=list1[-1]
-        ic(yourproject)
-        b=list2[-1]
-        ic(b)
-        # file1=open("web/pathfile","w")
-        # file1.write(f"{yourproject}/{b}")
-        # file1.close()
+       
+        file1=open("web/pathfile","w")
+        file1.write(f"{config['path']}/{config['name']}")
+        file1.close()
+        file2=open("web/pathfilev","w")
+        file2.write("custom_verification")
+        file2.close()
         uploadedcore=listuploadcore[-1]
         ic(uploadedcore)
+        os.system(f"mkdir {config['path']}/{config['name']}")
+        os.system(f"mkdir {config['path']}/{config['name']}/core")
+        # os.system(f"cp -r {uploadedcore} {config['path']}/{config['name']}/core/")
+        copy_tree(uploadedcore, f"{config['path']}/{config['name']}/core/")
+        f = open(f"{config['path']}/{config['name']}/config.json", "w+")
+        json.dump(config, f)
+        f.close()
+        testStatuses = []
+
+        if config["swerv"] == "": # NOT SWERV
+            extension_flags = "rv32" + "".join(config["extensions"])
+            os.system(f"mkdir {config['path']}/{config['name']}/tmp")
+            os.chdir(f"{config['path']}/{config['name']}")
+            proj_dir = os.getcwd()
+            os.system("mkdir failed_logs")
+
+            for i,test in enumerate(tests):
+                # ISS Sim
+                try:
+                    os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
+                    os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --c_test=tmp/{test}/{test}.c")
+                    processes = psutil.pids()
+                    anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name()=="spike" ,processes))
+                    if len(anyStillRunningSpikeProcess)!= 0:
+                        for spikeProcessID in anyStillRunningSpikeProcess:
+                            psutil.Process(spikeProcessID).kill()
+                    os.system(f"python3 {currentRootDir}/dv/scripts/spike_log_to_trace_csv.py --log {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log --csv {config['path']}/{config['name']}/tmp/{test}.csv")
+                    # CORE Sim
+                    if config["testFormat"] == "asm":
+                        os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o >> {config['path']}/{config['name']}/{test}.elf")
+                        hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
+                        hexFW = open(f"{config['path']}/{config['name']}/core/{config['hexDir']}", "w+")
+                        hexFW.write("\n".join(hexCode))
+                        hexFW.close()
+                        if config["asmDir"] != "":
+                            asmFW = open(f"{config['path']}/{config['name']}/core/{config['asmDir']}", "w+")
+                            asmFW.write("".join(asmCode))
+                            asmFW.close()
+                        os.system(f"rm {config['path']}/{config['name']}/{test}.elf")
+                        os.chdir(f"{config['path']}/{config['name']}/core")
+                        os.system(config["command"])
+                    else:
+                        os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
+                        os.chdir(f"{config['path']}/{config['name']}/core")
+                        os.system(config["command"].replace("{testname}", test))
+
+                    os.chdir(f"{proj_dir}")
+                    ic(config["logFormat"])
+                    if config["logFormat"] == "csv":
+                        os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
+                        logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
+                        logFWContent = logFW.readlines()
+                        logFW.close()
+                        os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
+                        if "[PASSED]" in logFWContent[-2]:
+                            testStatuses.append("[PASSED]")
+                        else:
+                            testStatuses.append(logFWContent[-2])
+                            os.system(f"mkdir {config['path']}/{config['name']}/failed_logs/{test}")
+                            os.system(f"cp  {config['path']}/{config['name']}/tmp/{test}.csv {config['path']}/{config['name']}/failed_logs/{test}")
+                            os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/failed_logs/{test}")
+                    else:
+                        pass # CONVERT TO CSV AND COMPARE
+                except:
+                    testStatuses.append("[Incompatble with your Core Configuration]")
+                    
+
+                
+            
+            os.chdir(f"{proj_dir}")
+            os.system("rm -rf tmp")
+            if len(list(filter(lambda x:x=="[PASSED]" or x=="[Incompatble with your Core Configuration]", testStatuses))) == len(testStatuses):
+                os.system("rm -rf failed_logs")
+            
+            report_str = ""
+            report_str += f"Core,{config['name']}\n"
+            report_str += f"Iss,Spike\n"
+            report_str += "\n"
+            report_str += "Test, Test Status\n"
+            ic(tests)
+            ic(testStatuses)
+            for i,t in enumerate(tests):
+                report_str += f"{t},{testStatuses[i]}\n"
+            file = open(f"{config['path']}/{config['name']}/test_results.csv", "w+")
+            file.write(report_str[:-1])
+            file.close()
+
+            file = open(f"{currentRootDir}/records", "w+")
+            file.write(f"{config['path']}/{config['name']},custom_core_verification\n")
+            file.close()
+            
+            os.chdir(currentRootDir)
+            eel.goToMain()
+
+
+
+
+
+
+
+
+
+
+#dv test select
+    @eel.expose
+    def selectdvtest(dvtestlist):
+        print(dvtestlist)
+
+
+
+
 
 
     @eel.expose
@@ -728,5 +840,12 @@ if __name__ == '__main__':
 
 
     reverter()
+
+
+    # def find_free_port():
+    #     with closing(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as s:
+    #         s.bind(('', 0))
+    #         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    #         return s.getsockname()[1]
     start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
 
