@@ -291,6 +291,9 @@ class LogComparator:
                 print('\n')
             limit += 1
             if limit == 5: return
+        
+    def __del__(self):
+        pass
 
     #def tempDebug(self, other):
     #    print(self.rvfiDict['rd_wdata'][7])
