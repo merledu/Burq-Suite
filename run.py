@@ -585,7 +585,7 @@ if __name__ == '__main__':
                         else:
                             testStatuses.append("[FAILED]")
                         os.system(f"mkdir {config['path']}/{config['name']}/logs/{test}")
-                        os.system(f"cp {config['path']}/{config['name']}/tmp/{test}.csv {config['path']}/{config['name']}/logs/{test}")
+                        os.system(f"cp {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log {config['path']}/{config['name']}/logs/{test}")
                         os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/logs/{test}")
                     else:
                         pass # CONVERT TO CSV AND COMPARE
@@ -876,5 +876,5 @@ if __name__ == '__main__':
     #         s.bind(('', 0))
     #         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     #         return s.getsockname()[1]
-    start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
+    start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/Electron.app/Contents/MacOS/Electron', '.'], port=8012)
 
