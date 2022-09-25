@@ -1271,7 +1271,7 @@ function opneRecentProject(id){
                         eel.usertest()
                     }
                     else if(selectedtesttype=="RISCV_DV_Tests"){
-                        dvtest()
+                        eel.dvtest()
                     }
                    
                     document.getElementById("core-command").style.display = "none";
@@ -1314,7 +1314,7 @@ function opneRecentProject(id){
                     document.getElementById("logselect").style.display = "none";
         //           
                 }
-                 if(comp == "endcore"){
+                if(comp == "endcore"){
 
                     console.log("CLICKKKKK");
 
@@ -1330,14 +1330,14 @@ function opneRecentProject(id){
                     var testFormat = document.querySelector('input[name="testformat"]:checked').value;
                     var extensionsEl = document.getElementsByName("ext") ;
                     var logFormat = document.querySelector('input[name="logformat"]:checked').value;
-                    var selectdv = document.querySelector('input[name="dvtest"]');
-                    var dvList = []
-                    for(let i=0;i<selectdv.length;i++ ){
-                        if(selectdv[i].checked){
-                            dvList.push(selectdv[i].value)
-                        }
-                    }
-                    eel.selectdvtest(dvList);
+                    // var selectdv = document.querySelector('input[name="dvtest"]');
+                    // var dvList = []
+                    // for(let i=0;i<selectdv.length;i++ ){
+                    //     if(selectdv[i].checked){
+                    //         dvList.push(selectdv[i].value)
+                    //     }
+                    // }
+                    // eel.selectdvtest(dvList);
 
 
                     var extensions = [];
@@ -1417,8 +1417,9 @@ function opneRecentProject(id){
 
                         eel.enduploadcore(config,tests1,selectedtype);
                     }
+                }
             
-            }}
+            }
             function changeCustom(comp){
                 var core = document.getElementById("custom-core");
                 var iss = document.getElementById("custom-iss");
@@ -1582,8 +1583,24 @@ function seldonesoc(){
                 }
                 form.style.display = "block";
             } 
+            // alert("HELLOO");
 eel.expose(showMerlTests)
 function showMerlTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showdvTests)
+function showdvTests(listt){
     var form=document.getElementById('uploadcoretestcaseform');
     form.innerHTML="";
                 for (var i = 0; i < listt.length; i++) {
@@ -1675,43 +1692,6 @@ function usersTests(listt){
 
 
 }
-function dvtest(){
-    var form=document.getElementById('uploadcoretestcaseform');
-    form.innerHTML+=`<div class="col-md-12"><form><br>
-                                           <input type="checkbox" value=" riscv_arithmetic_basic_test" name="dvtest"  />
-                                            <label> riscv_arithmetic_basic_test</label>
-                                            <br />
-                                            <input type="checkbox" value="riscv_jump_stress_test"name="dvtest" />
-                                            <label> riscv_jump_stress_test</label>
-                                            <br />
-                                            <input type="checkbox" value="riscv_loop_test"name="dvtest" />
-                                            <label>riscv_loop_test </label>
-                                            <br />
-                                            <input type="checkbox" value="riscv_rand_jump_test"name="dvtest" />
-                                            <label>riscv_rand_jump_test</label><br/>
-                                            <input type="checkbox" value="riscv_mmu_stress_test"name="dvtest" />
-                                            <label>riscv_mmu_stress_test</label><br/>
-                                            <input type="checkbox" value="riscv_no_fence_test"name="dvtest" />
-                                            <label>riscv_no_fence_test</label><br/>
-                                            <input type="checkbox" value="riscv_illegal_instr_test"name="dvtest" />
-                                            <label>riscv_illegal_instr_test</label><br/>
-                                            <input type="checkbox" value="riscv_ebreak_test"name="dvtest" />
-                                            <label>riscv_ebreak_test</label><br/>
-                                            <input type="checkbox" value="riscv_ebreak_debug_mode_test" name="dvtest"/>
-                                            <label>riscv_ebreak_debug_mode_test</label><br/>
-                                            <input type="checkbox" value="riscv_full_interrupt_test"name="dvtest" />
-                                            <label>riscv_full_interrupt_test</label><br/>
-                                            <input type="checkbox" value="riscv_csr_test" name="dvtest"/>
-                                            <label>riscv_csr_test</label><br/>
-                                            <input type="checkbox" value="riscv_unaligned_load_store_test" name="dvtest"/>
-                                            <label>riscv_unaligned_load_store_test</label><br/>
-                                           
-
-                                             
-                                        </form>
-                                    </div>`
-                                    form.style.display = "block";}
-//function riscvdv test select
 
 
 
