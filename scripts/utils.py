@@ -25,7 +25,7 @@ def getFileStructure(rootdir):
             ic(fullFile)
             if "main.c" in fullFile:
                 GeneratorFileID.append(id)
-            if ".report" in fullFile:
+            if "test_results.csv" in fullFile:
                 ReportFileID.append(id)
             if len(list(allFolders)) == 1:
                 if "." not in strct.keys():
