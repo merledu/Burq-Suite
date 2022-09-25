@@ -876,5 +876,5 @@ if __name__ == '__main__':
     #         s.bind(('', 0))
     #         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     #         return s.getsockname()[1]
-    start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/Electron.app/Contents/MacOS/Electron', '.'], port=8012)
+    start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
 
