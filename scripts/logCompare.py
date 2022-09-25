@@ -240,8 +240,9 @@ class LogComparator:
 
     def match(self, other, debug = False):
         # Check to see if the program length is the same
-        assert len(self.rvfiDict['insn']) == len(other.rvfiDict['insn']),\
-            "Core output did not match"
+        if len(self.rvfiDict['insn']) == len(other.rvfiDict['insn']):
+
+            return True
 
         # Iterate through each RVFI parameter
         for _ in self.rvfiDict:
