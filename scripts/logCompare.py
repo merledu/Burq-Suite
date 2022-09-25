@@ -13,6 +13,7 @@ class LogComparator:
     type9  = ('ret', 'jr', 'jalr')
     type0  = ('csrw', 'csrr')
     type10 = ('mv')
+    type11 = ('nop')
 
     rvfiParams = ('insn', 'mode', 'rs1_addr', 'rs2_addr', 'rd_addr', 'rd_wdata', 'mem_addr', 'mem_rdata', 'mem_wdata')
 
@@ -197,6 +198,16 @@ class LogComparator:
                 self.rvfiDict['mem_rdata'].append('00000000')
                 self.rvfiDict['mem_wdata'].append('00000000')
 
+            elif entry[2] in LogComparator.type11:
+                self.rvfiDict['rs1_addr'].append('zero')
+                self.rvfiDict['rs2_addr'].append('zero')
+
+                self.rvfiDict['rd_addr'].append('zero')
+
+                self.rvfiDict['mem_addr'].append('00000000')
+                self.rvfiDict['mem_rdata'].append('00000000')
+                self.rvfiDict['mem_wdata'].append('00000000')
+
         #print(self.rvfiDict)
         if debug == True:
             with open('./spikeTest.txt', 'w', encoding='UTF-8') as f:
@@ -217,7 +228,7 @@ class LogComparator:
 
         # Refining the log
         self.logList = [split(',', sub('\n', '', _)) for _ in logList]
-        #for _ in self.logList:print(_)
+        for _ in self.logList:print(_)
 
         # Extracting values
         for i in range(1, len(self.logList)):
@@ -236,7 +247,10 @@ class LogComparator:
             self.rvfiDict['mem_rdata'].append(entry[-2])
             self.rvfiDict['mem_wdata'].append(entry[-1])
 
-        #print(self.rvfiDict)
+        #for k in self.rvfiDict:
+        #    print(f'{k}:')
+        #    for _ in self.rvfiDict[k]: print(_)
+        #    print('')
 
     def match(self, other, debug = False):
         # Check to see if the program length is the same
@@ -261,7 +275,7 @@ class LogComparator:
         else:
             return True
 
-    def debug(self, other, enable = True):
+    def debug(self, other, enable=True):
         if enable != True:
             return
 
@@ -300,16 +314,16 @@ if __name__ == '__main__':
     spike = LogComparator()
     core  = LogComparator()
 
-    spike.spikeLogExtract('./fibonacci.log')
+    #spike.spikeLogExtract('./Test.log')
     core.coreLogExtract('./trace.csv')
 
     #print(spike.rvfiDict['insn'])
     #print(core.rvfiDict['insn'])
-    #spike.debug(core)
 
+    #spike.debug(core)
     #spike.debug2(core)
 
-    if spike.match(core, debug = True):
-         print('\nCore output matched successfully')
-    else:
-         print('\nCore output match failed')
+    #if spike.match(core, debug=True):
+    #     print('\nCore output matched successfully')
+    #else:
+    #     print('\nCore output match failed')
