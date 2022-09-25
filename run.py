@@ -13,6 +13,7 @@ from icecream import ic
 from distutils.dir_util import copy_tree
 import psutil
 from scripts.comparison import call
+from scripts.logCompare import LogComparator
 from scripts.cleanlify import cleanELF
 from distutils.dir_util import copy_tree
 import socket
@@ -569,15 +570,20 @@ if __name__ == '__main__':
                     os.chdir(f"{proj_dir}")
                     ic(config["logFormat"])
                     if config["logFormat"] == "csv":
-                        os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
-                        logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
-                        logFWContent = logFW.readlines()
-                        logFW.close()
-                        os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
-                        if "[PASSED]" in logFWContent[-2]:
+                        # os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
+                        # logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
+                        # logFWContent = logFW.readlines()
+                        # logFW.close()
+                        # os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
+                        spikeObj = LogComparator()
+                        coreObj  = LogComparator()
+
+                        spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
+                        coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
+                        if spikeObj.match(coreObj):
                             testStatuses.append("[PASSED]")
                         else:
-                            testStatuses.append(logFWContent[-2])
+                            testStatuses.append("[FAILED]")
                         os.system(f"mkdir {config['path']}/{config['name']}/logs/{test}")
                         os.system(f"cp {config['path']}/{config['name']}/tmp/{test}.csv {config['path']}/{config['name']}/logs/{test}")
                         os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/logs/{test}")
