@@ -9,5 +9,5 @@ Run installer.sh file
 
 then finally run the app
 ```bash
-python3 main.py
+python3 run.py
 ```
