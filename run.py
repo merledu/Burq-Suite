@@ -1,6 +1,5 @@
 import eel
 from eel import init, start
-from soupsieve import icomments
 from scripts.replacer import replacer
 from scripts.reverter import reverter
 import os,glob
@@ -12,9 +11,10 @@ import tkinter.filedialog as filedialog
 import json
 from icecream import ic
 from distutils.dir_util import copy_tree
-from scripts.comparison import call
-from scripts.cleanlify import cleanELF
 import psutil
+from scripts.comparison import call
+from scripts.logCompare import LogComparator
+from scripts.cleanlify import cleanELF
 from distutils.dir_util import copy_tree
 import socket
 from contextlib import closing
@@ -486,9 +486,29 @@ if __name__ == '__main__':
         print(namelist)
         eel.showburqTests(namelist)
 
+    @eel.expose
+    def dvtest():
+        tests = [
+            "riscv_arithmetic_basic_test",
+            "riscv_rand_instr_test",
+            "riscv_jump_stress_test",
+            "riscv_loop_test",
+            "riscv_rand_jump_test",
+            "riscv_mmu_stress_test",
+            "riscv_no_fence_test",
+            "riscv_illegal_instr_test",
+            "riscv_ebreak_test",
+            "riscv_ebreak_debug_mode_test",
+            "riscv_full_interrupt_test",
+            "riscv_csr_test",
+            "riscv_unaligned_load_store_test"
+        ]
+        eel.showdvTests(tests)
+
 
     @eel.expose
     def enduploadcore(config, tests, types):
+        ic(config, tests, types)
        
         file1=open("web/pathfile","w")
         file1.write(f"{config['path']}/{config['name']}")
@@ -512,19 +532,22 @@ if __name__ == '__main__':
             os.system(f"mkdir {config['path']}/{config['name']}/tmp")
             os.chdir(f"{config['path']}/{config['name']}")
             proj_dir = os.getcwd()
-            os.system("mkdir failed_logs")
+            os.system("mkdir logs")
 
             for i,test in enumerate(tests):
                 # ISS Sim
                 try:
-                    os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
-                    os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --c_test=tmp/{test}/{test}.c")
+                    if types == "RISCV_DV_Tests":
+                        os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --test={test}")
+                    else:
+                        os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
+                        os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --c_test=tmp/{test}/{test}.c")
                     processes = psutil.pids()
                     anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name()=="spike" ,processes))
                     if len(anyStillRunningSpikeProcess)!= 0:
                         for spikeProcessID in anyStillRunningSpikeProcess:
                             psutil.Process(spikeProcessID).kill()
-                    os.system(f"python3 {currentRootDir}/dv/scripts/spike_log_to_trace_csv.py --log {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log --csv {config['path']}/{config['name']}/tmp/{test}.csv")
+                    # os.system(f"python3 {currentRootDir}/dv/scripts/spike_log_to_trace_csv.py --log {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log --csv {config['path']}/{config['name']}/tmp/{test}.csv")
                     # CORE Sim
                     if config["testFormat"] == "asm":
                         os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o >> {config['path']}/{config['name']}/{test}.elf")
@@ -547,30 +570,36 @@ if __name__ == '__main__':
                     os.chdir(f"{proj_dir}")
                     ic(config["logFormat"])
                     if config["logFormat"] == "csv":
-                        os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
-                        logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
-                        logFWContent = logFW.readlines()
-                        logFW.close()
-                        os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
-                        if "[PASSED]" in logFWContent[-2]:
+                        # os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
+                        # logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
+                        # logFWContent = logFW.readlines()
+                        # logFW.close()
+                        # os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
+                        spikeObj = LogComparator()
+                        coreObj  = LogComparator()
+
+                        spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
+                        coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
+                        if spikeObj.match(coreObj):
                             testStatuses.append("[PASSED]")
                         else:
-                            testStatuses.append(logFWContent[-2])
-                            os.system(f"mkdir {config['path']}/{config['name']}/failed_logs/{test}")
-                            os.system(f"cp  {config['path']}/{config['name']}/tmp/{test}.csv {config['path']}/{config['name']}/failed_logs/{test}")
-                            os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/failed_logs/{test}")
+                            testStatuses.append("[FAILED]")
+                        os.system(f"mkdir {config['path']}/{config['name']}/logs/{test}")
+                        os.system(f"cp {config['path']}/{config['name']}/tmp/{test}.csv {config['path']}/{config['name']}/logs/{test}")
+                        os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/logs/{test}")
                     else:
                         pass # CONVERT TO CSV AND COMPARE
                 except:
                     testStatuses.append("[Incompatble with your Core Configuration]")
+        
                     
 
                 
             
             os.chdir(f"{proj_dir}")
             os.system("rm -rf tmp")
-            if len(list(filter(lambda x:x=="[PASSED]" or x=="[Incompatble with your Core Configuration]", testStatuses))) == len(testStatuses):
-                os.system("rm -rf failed_logs")
+            # if len(list(filter(lambda x:x=="[PASSED]" or x=="[Incompatble with your Core Configuration]", testStatuses))) == len(testStatuses):
+            #     os.system("rm -rf failed_logs")
             
             report_str = ""
             report_str += f"Core,{config['name']}\n"
@@ -847,5 +876,5 @@ if __name__ == '__main__':
     #         s.bind(('', 0))
     #         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     #         return s.getsockname()[1]
-    start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
+    start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/Electron.app/Contents/MacOS/Electron', '.'], port=8012)
 
