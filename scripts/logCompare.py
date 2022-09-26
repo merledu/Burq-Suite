@@ -390,6 +390,9 @@ class LogComparator:
         #                    f.write(f'{" " * 15}{0}\n'.format(other.rvfiDict[k][i]))
         #            
         #            f.write('\n')
+        if len(self.rvfiDict['insn']) == len(other.rvfiDict['insn']):
+
+            return True
 
         # Iterate through each RVFI parameter
         for _ in self.rvfiDict:
