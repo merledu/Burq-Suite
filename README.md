@@ -2,8 +2,7 @@
 An All in one RISC-V Suite..
 
 ## Installations
-Install GCC
-Install Spike
+Install GCC and Spike
 
 
 
