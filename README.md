@@ -1,6 +1,7 @@
 # Burq Suite
 An All in one RISC-V Suite..
-##Installation
+
+## Installations
 Install GCC
 Install Spike
 
