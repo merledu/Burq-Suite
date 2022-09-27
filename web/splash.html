@@ -1005,7 +1005,7 @@
                             <!-- -------------------- PREBUILT END BOX -------------------- -->
                             <div id="prebuilt-end">
                                 <div class="progress">
-                                    <div class="progress-bar"></div>
+                                    <div id="progress-bar" class="progress-bar"></div>
                                   </div>
                             </div>
 
@@ -1024,6 +1024,13 @@
         <script type="text/javascript" src="/eel.js"></script>
 
         <script type="text/javascript">
+
+            eel.expose(updateProgressBar);
+            function updateProgressBar(progress, color){
+                var pBar = document.getElementById("progress-bar");
+                pBar.style.width = progress + "%";
+                pBar.style.backgroundColor = color;
+            }
 
 eel.getRecords();
 

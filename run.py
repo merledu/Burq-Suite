@@ -526,6 +526,8 @@ if __name__ == '__main__':
         json.dump(config, f)
         f.close()
         testStatuses = []
+        progress_step = (len(tests) / 100) / 3
+        progress = 0
 
         if config["swerv"] == "": # NOT SWERV
             extension_flags = "rv32" + "".join(config["extensions"])
@@ -536,61 +538,69 @@ if __name__ == '__main__':
 
             for i,test in enumerate(tests):
                 # ISS Sim
-                # try:
-                if types == "RISCV_DV_Tests":
-                    os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --test={test}")
-                else:
-                    os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
-                    os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --c_test=tmp/{test}/{test}.c")
-                processes = psutil.pids()
-                anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name()=="spike" ,processes))
-                if len(anyStillRunningSpikeProcess)!= 0:
-                    for spikeProcessID in anyStillRunningSpikeProcess:
-                        psutil.Process(spikeProcessID).kill()
-                os.system(f"python3 {currentRootDir}/dv/scripts/spike_log_to_trace_csv.py --log {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log --csv {config['path']}/{config['name']}/tmp/{test}.csv")
-                # CORE Sim
-                if config["testFormat"] == "asm":
-                    os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o >> {config['path']}/{config['name']}/{test}.elf")
-                    hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
-                    hexFW = open(f"{config['path']}/{config['name']}/core/{config['hexDir']}", "w+")
-                    hexFW.write("\n".join(hexCode))
-                    hexFW.close()
-                    if config["asmDir"] != "":
-                        asmFW = open(f"{config['path']}/{config['name']}/core/{config['asmDir']}", "w+")
-                        asmFW.write("".join(asmCode))
-                        asmFW.close()
-                    os.system(f"rm {config['path']}/{config['name']}/{test}.elf")
-                    os.chdir(f"{config['path']}/{config['name']}/core")
-                    os.system(config["command"])
-                else:
-                    os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
-                    os.chdir(f"{config['path']}/{config['name']}/core")
-                    os.system(config["command"].replace("{testname}", test))
-
-                os.chdir(f"{proj_dir}")
-                ic(config["logFormat"])
-                if config["logFormat"] == "csv":
-                    # os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
-                    # logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
-                    # logFWContent = logFW.readlines()
-                    # logFW.close()
-                    # os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
-                    spikeObj = LogComparator()
-                    coreObj  = LogComparator()
-
-                    spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
-                    coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
-                    if spikeObj.match(coreObj):
-                        testStatuses.append("[PASSED]")
+                try:
+                    if types == "RISCV_DV_Tests":
+                        os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --test={test}")
                     else:
-                        testStatuses.append("[FAILED]")
-                    os.system(f"mkdir {config['path']}/{config['name']}/logs/{test}")
-                    os.system(f"cp {config['path']}/{config['name']}/tmp/{test}.csv {config['path']}/{config['name']}/logs/{test}")
-                    os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/logs/{test}")
-                else:
-                    pass # CONVERT TO CSV AND COMPARE
-                # except:
-                #     testStatuses.append("[Incompatble with your Core Configuration]")
+                        os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
+                        os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --c_test=tmp/{test}/{test}.c")
+                    processes = psutil.pids()
+                    anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name()=="spike" ,processes))
+                    if len(anyStillRunningSpikeProcess)!= 0:
+                        for spikeProcessID in anyStillRunningSpikeProcess:
+                            psutil.Process(spikeProcessID).kill()
+                    # os.system(f"python3 {currentRootDir}/dv/scripts/spike_log_to_trace_csv.py --log {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log --csv {config['path']}/{config['name']}/tmp/{test}.csv")
+                    progress += progress_step
+                    progressTick(progress)
+                    # CORE Sim
+                    if config["testFormat"] == "asm":
+                        os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o >> {config['path']}/{config['name']}/{test}.elf")
+                        hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
+                        hexFW = open(f"{config['path']}/{config['name']}/core/{config['hexDir']}", "w+")
+                        hexFW.write("\n".join(hexCode))
+                        hexFW.close()
+                        if config["asmDir"] != "":
+                            asmFW = open(f"{config['path']}/{config['name']}/core/{config['asmDir']}", "w+")
+                            asmFW.write("".join(asmCode))
+                            asmFW.close()
+                        os.system(f"rm {config['path']}/{config['name']}/{test}.elf")
+                        os.chdir(f"{config['path']}/{config['name']}/core")
+                        os.system(config["command"])
+                    else:
+                        os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
+                        os.chdir(f"{config['path']}/{config['name']}/core")
+                        os.system(config["command"].replace("{testname}", test))
+                    progress += progress_step
+                    progressTick(progress)
+
+                    os.chdir(f"{proj_dir}")
+                    ic(config["logFormat"])
+                    if config["logFormat"] == "csv":
+                        # os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
+                        # logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
+                        # logFWContent = logFW.readlines()
+                        # logFW.close()
+                        # os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
+                        spikeObj = LogComparator()
+                        coreObj  = LogComparator()
+
+                        spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
+                        coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
+                        if spikeObj.match(coreObj):
+                            testStatuses.append("[PASSED]")
+                        else:
+                            testStatuses.append("[FAILED]")
+                        os.system(f"mkdir {config['path']}/{config['name']}/logs/{test}")
+                        os.system(f"cp {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log {config['path']}/{config['name']}/logs/{test}")
+                        os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/logs/{test}")
+                    else:
+                        pass # CONVERT TO CSV AND COMPARE
+                    progress += progress_step
+                    progressTick(progress)
+                except:
+                    testStatuses.append("[Incompatble with your Core Configuration]")
+                    progress += progress_step * 3
+                    progressTick(progress)
         
                     
 
@@ -628,6 +638,19 @@ if __name__ == '__main__':
 
 
 
+
+
+    def progressTick(progress):
+        if progress < 20:
+            eel.updateProgressBar(progress, "#f63a0f")
+        elif progress < 40:
+            eel.updateProgressBar(progress, "#f27011")
+        elif progress < 60:
+            eel.updateProgressBar(progress, "#f2b01e")
+        elif progress < 80:
+            eel.updateProgressBar(progress, "#f2d31b")
+        elif progress < 100:
+            eel.updateProgressBar(progress, "#86e01e")
 
 
 #dv test select
