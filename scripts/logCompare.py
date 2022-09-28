@@ -37,11 +37,11 @@ class LogComparator:
             #'rs1_rdata': [],  # rs1_rdata not shown in Spike log
             #'rs2_rdata': [],  # rs2_rdata not shown in Spike log
             'rd_addr'  : [],
-            #'rd_wdata' : [],
+            #'rd_wdata' : [],  # skipped due to mismatch on jump instructions
             #'pc_rdata' : [],  # pc_rdata excluded due to mismatch from Spike log
             #'pc_wdata' : [],  # pc_wdata excluded due to mismatch from Spike log
             'insn'     : [],
-            #'mode'     : [],
+            #'mode'     : [],  # mode not present in Ibex log
             'mem_addr' : [],
             'mem_rdata': [],
             'mem_wdata': []
@@ -255,25 +255,31 @@ class LogComparator:
                 print(entry[2])
 
         if debug:
-            self.getLog(interval=len(self.rvfiDict['insn']))
+            #self.getLog(interval=len(self.rvfiDict['insn']))
             self.getRVFI()
 
         return
 
-    def coreLogExtract(self, filename):
+    def coreLogExtract(self, filename, debug=False):
         # Reading from file
+        print('Reading from core log')
+
         with open(filename, 'r', encoding='UTF-8') as f:
             logList = f.readlines()
 
         # Refining the log
-        self.logList = [split(',', sub('\n', '', _)) for _ in logList]
+        self.logList = [
+            split(
+                ',', sub('\n', '', logList[i])
+            ) for i in range(1, len(logList))
+        ]
 
         self.noOfInst = len(self.logList)
-        #for _ in self.logList: print(_)
 
         # Extracting values
         print('Extracting core values...')
-        for i in range(1, len(self.logList)):
+
+        for i in range(len(self.logList)):
             entry = self.logList[i]
         
             self.rvfiDict['insn'].append(entry[-5])
@@ -288,6 +294,10 @@ class LogComparator:
             self.rvfiDict['mem_addr'].append(entry[-3])
             self.rvfiDict['mem_rdata'].append(entry[-2])
             self.rvfiDict['mem_wdata'].append(entry[-1])
+
+        if debug:
+            #self.getLog()
+            self.getRVFI()
 
         return
 
@@ -443,12 +453,12 @@ class LogComparator:
                 print('{0}: {1}'.format(entry[5], entry))
 
         if debug:
-            self.getLog(interval=len(self.rvfiDict['insn']))
+            #self.getLog(interval=len(self.rvfiDict['insn']))
             self.getRVFI()
 
         return
 
-    def match(self, other, debug=False, quickMatch=False):
+    def match(self, other, debug=False, quickMatch=False, dump=False):
         # Check to see if the instruction length is the same
         if quickMatch == True:
             assert len(self.rvfiDict['insn']) == len(other.rvfiDict['insn']),\
@@ -461,7 +471,7 @@ class LogComparator:
 
                 if self.rvfiDict[_][i] != other.rvfiDict[_][i]:
 
-                    if debug == True:
+                    if debug:
                         print(f'Mismatch on line {i}.\n')
 
                         for k in self.rvfiDict:
@@ -471,7 +481,18 @@ class LogComparator:
                                 f'In core log: {other.rvfiDict[k][i]}\n'
                             )
 
+                    if dump:
+                        with open('compareFail.log', 'w', encoding='UTF-8') as f:
+                            f.write('Mismatch on line {0}\n'.format(i))
+                            for k in self.rvfiDict:
+                                f.write(
+                                    f'{k}\n'
+                                    f'In Spike: {self.rvfiDict[k][i]}\n'
+                                    f'In core log: {other.rvfiDict[k][i]}\n\n'
+                                )
+
                     return False
+
         else:
             return True
 
@@ -542,7 +563,7 @@ class LogComparator:
 
         return
 
-    def getLog(self, interval=100):
+    def getLog(self, interval=10):
         print('logList:')
 
         for i in range(interval):
@@ -574,22 +595,24 @@ class LogComparator:
 
 if __name__ == '__main__':
     spike = LogComparator()
-    #core  = LogComparator()
+    xodus  = LogComparator()
     ibex  = LogComparator()
 
-    #spike.spikeLogExtract('./fibonacci.log', ibex=True)
-    #core.coreLogExtract('./trace.csv')
-    spike.spikeLogExtract('./logs/simple_system_cosim.log', debug=False, ibex=True)
-    ibex.ibexLogExtract('./logs/trace_core_00000000.log', debug=False)
+    core = xodus
+
+    spike.spikeLogExtract('./Test.log', ibex=False, debug=False)
+    core.coreLogExtract('./trace.csv', debug=False)
+    #spike.spikeLogExtract('./logs/simple_system_cosim.log', debug=False, ibex=True)
+    #core.ibexLogExtract('./logs/trace_core_00000000.log', debug=False)
 
     #spike.showSkipped()
-    #print(spike.locate(423))
-    #print(ibex.locate(423))
+    #print(spike.locate(5))
+    #print(core.locate(5))
 
-    if spike.match(ibex, debug=True):
-         print('\nIbex output matched successfully')
+    if spike.match(core, debug=False, dump=True):
+         print('\nCore output matched successfully')
 
     else:
-         print('\nIbex output match failed')
+         print('\nCore output match failed')
 
     #spike.debug(ibex)
