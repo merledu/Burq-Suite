@@ -1,3 +1,4 @@
+import time
 import eel
 from eel import init, start
 from scripts.replacer import replacer
@@ -505,9 +506,30 @@ if __name__ == '__main__':
         ]
         eel.showdvTests(tests)
 
-
     @eel.expose
     def enduploadcore(config, tests, types):
+        time.sleep(5)
+        progressTick(11.11)
+        time.sleep(5)
+        progressTick(22.22)
+        time.sleep(5)
+        progressTick(33.33)
+        time.sleep(5)
+        progressTick(44.44)
+        time.sleep(5)
+        progressTick(55.55)
+        time.sleep(5)
+        progressTick(66.66)
+        time.sleep(5)
+        progressTick(77.77)
+        time.sleep(5)
+        progressTick(88.88)
+        time.sleep(5)
+        progressTick(99.99)
+
+
+    @eel.expose
+    def enduploadcore69(config, tests, types):
         ic(config, tests, types)
        
         file1=open("web/pathfile","w")
@@ -657,6 +679,14 @@ if __name__ == '__main__':
     @eel.expose
     def selectdvtest(dvtestlist):
         print(dvtestlist)
+
+    @eel.expose
+    def pleaseLogin(email, password):
+        # email auth
+        if email == "admin" and password == "admin":
+            eel.loginSuccess()
+        else:
+            eel.loginFail()
 
 
 
