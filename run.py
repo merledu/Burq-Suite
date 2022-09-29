@@ -686,7 +686,10 @@ if __name__ == '__main__':
 
     @eel.expose
     def pleaseLogin(email, password):
-        # email auth
+        try:
+            r = requests.post(URL, json={"username": email, "password": password})
+        except:
+            eel.showConenctionError()
         r = requests.post(URL, json={"username": email, "password": password})
         if r.json()["status"] == "success":
             eel.loginSuccess()
