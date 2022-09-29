@@ -653,3 +653,25 @@ body, .row{
 #login_main #submit:active {
   color: #d0d0d2;
 }
+.login_close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.login_close:hover {
+  opacity: 0.5;
+}
+.login_close img{
+    width: 100%;
+    background-color: gray;
+    border-radius: 100px;
+}
+.pdz{
+    padding-top: 0px !important;; 
+}
+.pdz img{
+    background-color: #ffffff00;
+}

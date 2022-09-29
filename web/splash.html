@@ -55,6 +55,9 @@
 <div id="login_main">
     <div class="page">
         <div class="container">
+            <div class="login_close">
+                <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
+            </div>
           <div class="left">
             <div class="login">Login</div>
             <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
@@ -98,6 +101,9 @@
             <div class="row">
                 <div class="col-8 frs">
                     <div class="container">
+                        <div class="login_close pdz">
+                            <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
+                        </div>
 
                         <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
                         <p>Don't know where to start?</p>
@@ -157,6 +163,9 @@
             <div class="row">
                 <div class="col-4 sec">
                     <div class="container">
+                        <div class="login_close pdz">
+                            <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
+                        </div>
                         <div style="margin-top: 20px;" id="back-btn-div">
                             <button onclick="closeNewProject()" class="btn back-btn">
                                 <img src="assets/icons/back2.png" />
@@ -1071,6 +1080,11 @@
         <script type="text/javascript" src="/eel.js"></script>
 
         <script type="text/javascript">
+
+
+function closeEverythingPaleez(){
+    window.close();
+}
 
             eel.expose(loginFail);
             function loginFail() {
