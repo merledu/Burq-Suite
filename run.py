@@ -19,6 +19,10 @@ from scripts.cleanlify import cleanELF
 from distutils.dir_util import copy_tree
 import socket
 from contextlib import closing
+
+import requests
+from apiConfig import URL
+
 if __name__ == '__main__':
 
     
@@ -683,7 +687,8 @@ if __name__ == '__main__':
     @eel.expose
     def pleaseLogin(email, password):
         # email auth
-        if email == "admin" and password == "admin":
+        r = requests.post(URL, json={"username": email, "password": password})
+        if r.json()["status"] == "success":
             eel.loginSuccess()
         else:
             eel.loginFail()
