@@ -84,7 +84,7 @@ class LogComparator:
         self.logList = []
         self.skipped = []
 
-    def spikeLogExtract(self, filename, debug=False, ibex=False):
+    def spikeLogExtract(self, filename, debug=False):
         # Reading from file
         print('Reading Spike log...')
 
@@ -104,7 +104,7 @@ class LogComparator:
             ) for i in range(0, len(self.logList) - 1, 2)
         ]
         self.logList = [
-            inst for inst in self.logList if ('exception' not in inst) and ('0x00000000' not in inst)
+            inst for inst in self.logList if ('exception' not in inst)
         ]
         self.logList = [split('\s+', _) for _ in self.logList]
         
@@ -130,7 +130,7 @@ class LogComparator:
                 self.rvfiDict['rs1_addr'].append(type(self).zero_addr)
                 self.rvfiDict['rs2_addr'].append(type(self).zero_addr)
 
-                if entry[2] == 'j':
+                if (entry[2] == 'j') or (entry[2] == 'c.j'):
                     self.rvfiDict['rd_addr'].append(type(self).zero_addr)
                     self.rvfiDict['rd_wdata'].append(type(self).zeroHex)
 
@@ -193,13 +193,13 @@ class LogComparator:
 
             # type5
             elif entry[2] in type(self).type5:
-                rd_wdata = entry[-1][2:]
+                rd_wdata = entry[-3][2:]
 
                 self.rvfiDict['rs1_addr'].append(entry[4][entry[4].find('(') + 1: -1])
                 self.rvfiDict['rs2_addr'].append(type(self).zero_addr)
 
-                self.rvfiDict['mem_rdata'].append(entry[-3][2:].zfill(8))
-                self.rvfiDict['mem_addr'].append(rd_wdata)
+                self.rvfiDict['mem_rdata'].append(rd_wdata)
+                self.rvfiDict['mem_addr'].append(entry[-1][2:])
                 self.rvfiDict['mem_wdata'].append(type(self).zeroHex)
 
                 self.rvfiDict['rd_addr'].append(entry[3][: -1])
@@ -775,24 +775,25 @@ class LogComparator:
 
 if __name__ == '__main__':
     spike = LogComparator()
-    xodus  = LogComparator()
+    #xodus = LogComparator()
     ibex  = LogComparator()
 
     core = ibex
 
     #spike.spikeLogExtract('./Test.log', ibex=False, debug=True)
     #core.coreLogExtract('./trace.csv', debug=True)
-    spike.spikeLogExtract('./logs/hello.log', debug=True, ibex=True)
-    core.ibexLogExtract('./logs/trace_core_hello.log', debug=True)
+    spike.spikeLogExtract('./logs/towerspike.log', debug=False)
+    core.ibexLogExtract('./logs/trace_core_00000000.log', debug=False)
 
     #spike.showSkipped()
-    #print(spike.locate(62))
-    #print(core.locate(62))
+    
+    #print(spike.locate(187))
+    #print(core.locate(187))
 
-    #if spike.match(core, debug=True, dump=False):
-    #     print('\nCore output matched successfully')
+    if spike.match(core, debug=True, dump=False):
+         print('\nCore output matched successfully')
 
-    #else:
-    #     print('\nCore output match failed')
+    else:
+         print('\nCore output match failed')
 
     #spike.debug(ibex)
