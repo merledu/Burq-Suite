@@ -764,8 +764,11 @@ class LogComparator:
             print('No such parameter or index')
 
     def showSkipped(self):
+
         if self.skipped:
-            [print(item) for item in self.skipped]
+
+            for item in self.skipped:
+                print(item)
 
         else:
             print('None skipped')
@@ -782,13 +785,13 @@ if __name__ == '__main__':
 
     #spike.spikeLogExtract('./Test.log', ibex=False, debug=True)
     #core.coreLogExtract('./trace.csv', debug=True)
-    spike.spikeLogExtract('./logs/towerspike.log', debug=False)
-    core.ibexLogExtract('./logs/trace_core_00000000.log', debug=False)
+    spike.spikeLogExtract('./logs/cosimspike.log', debug=False)
+    core.ibexLogExtract('./logs/cosimibex.log', debug=False)
 
     #spike.showSkipped()
     
-    #print(spike.locate(187))
-    #print(core.locate(187))
+    #print(spike.locate(368))
+    #print(core.locate(368))
 
     if spike.match(core, debug=True, dump=False):
          print('\nCore output matched successfully')
