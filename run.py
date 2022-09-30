@@ -20,8 +20,13 @@ from distutils.dir_util import copy_tree
 import socket
 from contextlib import closing
 
+<<<<<<< HEAD
 # import requests
 # from apiConfig import URL
+=======
+import requests
+from apiConfig import URL
+>>>>>>> 0535e367f6acd2bfb8dd8f7df75a9072fc269d12
 
 if __name__ == '__main__':
 
@@ -151,6 +156,7 @@ if __name__ == '__main__':
                 eel.progressTick(currentProgress)
                 os.chdir(f"{testcasepath}/{test}")
                 os.system(f"spike --isa=rv32gc -m0x10000:0x30000,0x100000:0x100000 --log-commits -l {test}.elf 2> {test}.log")
+
                 spike_ibex = LogComparator()
                 core_ibex  = LogComparator()
                 core_ibex.ibexLogExtract("trace_core.log")
@@ -161,7 +167,7 @@ if __name__ == '__main__':
                     tests_status.append("FAILED")
                 currentProgress += perOccurProgress
                 eel.progressTick(currentProgress)
-                
+            
 
 
                 
@@ -738,6 +744,7 @@ if __name__ == '__main__':
 
     @eel.expose
     def pleaseLogin(email, password):
+<<<<<<< HEAD
         # try:
         #     r = requests.post(URL, json={"username": email, "password": password})
         # except:
@@ -748,6 +755,14 @@ if __name__ == '__main__':
         # else:
         #     eel.loginFail()
         if email == "admin" and password == "admin":
+=======
+        try:
+            r = requests.post(URL, json={"username": email, "password": password})
+        except:
+            eel.showConenctionError()
+        r = requests.post(URL, json={"username": email, "password": password})
+        if r.json()["status"] == "success":
+>>>>>>> 0535e367f6acd2bfb8dd8f7df75a9072fc269d12
             eel.loginSuccess()
         else:
             eel.loginFail()
