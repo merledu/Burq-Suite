@@ -19,6 +19,10 @@ from scripts.cleanlify import cleanELF
 from distutils.dir_util import copy_tree
 import socket
 from contextlib import closing
+
+# import requests
+# from apiConfig import URL
+
 if __name__ == '__main__':
 
     
@@ -80,12 +84,12 @@ if __name__ == '__main__':
         ic(projName, projPath)
         ic(core, iss, tests)
         root_path = os.getcwd()
-        ibex_test_path="testcases/Riscv-tests"
+        ibex_test_path="cores/ibex/"
         swerv_test__path="cores/swerv/"
         tests_status = []
         perOccurProgress = (100//len(tests))//2
         currentProgress = 0
-        if core == "swerv" and iss == "whisper":
+        if core == "swerv":
             os.chdir(swerv_test__path)
             ic(os.getcwd())
             for test in tests:
@@ -103,16 +107,68 @@ if __name__ == '__main__':
                 os.system("export PATH=/opt/riscv32/bin:$PATH")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                 currentProgress += perOccurProgress
-                eel.changeProgressBar(currentProgress)
+                eel.progressTick(currentProgress)
                 os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
                 currentProgress += perOccurProgress
-                eel.changeProgressBar(currentProgress)
+                eel.progressTick(currentProgress)
                 ic(os.getcwd())
                 #check is test.log and exec.log exists
                 ic(os.path.isfile(f"{test}.log"))
                 ic(os.path.isfile("exec.log"))
                 status = call(f"{test}.log", "exec.log")
                 tests_status.append(status)
+#ibex
+        elif core == "ibex":
+            os.chdir(ibex_test_path)
+            perOccurProgress = (100//len(tests))//2
+            currentProgress = 0
+            
+            makefile_str = """PROGRAM = testname
+                                PROGRAM_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+                                # Any extra source files to include in the build. Use the upper case .S
+                                # extension for assembly files
+                                EXTRA_SRCS :=
+
+                                include ${PROGRAM_DIR}/../common/common.mk"""
+            testroot="testcases/Riscv_tests"
+            for test in tests:
+                ic(test)
+                os.chdir("examples/sw/simple_system/")
+                if os.path.isdir(test) == False:
+                    # create test directory
+                    os.mkdir(test)
+                
+                copy_tree(f"{currentRootDir}/{testroot}/{test}", f"{test}")
+                os.chdir(test)
+                file = open("Makefile", "w+")
+                file.write(makefile_str.replace("testname", test))
+                file.close()
+                os.system("make")
+                os.chdir(f"{currentRootDir}/{ibex_test_path}")
+                os.system("fusesoc --cores-root=. run --target=sim --setup --build lowrisc:ibex:ibex_simple_system --RV32E=0 --RV32M=ibex_pkg::RV32MFast")
+                os.system(f"./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,{testroot}/{test}/{test}.elf")
+                currentProgress += perOccurProgress
+                eel.progressTick(currentProgress)
+                os.chdir(f"{testcasepath}/{test}")
+                os.system(f"spike --isa=rv32gc -m0x10000:0x30000,0x100000:0x100000 --log-commits -l {test}.elf 2> {test}.log")
+                spike_ibex = LogComparator()
+                core_ibex  = LogComparator()
+                core_ibex.ibexLogExtract("trace_core.log")
+                spike_ibex.spikeLogExtract(f"{test}.log")
+                if spike_ibex.match(core_ibex):
+                    tests_status.append("PASSED")
+                else:
+                    tests_status.append("FAILED")
+                currentProgress += perOccurProgress
+                eel.progressTick(currentProgress)
+                
+
+
+                
+                    
+                
+
+            
                 
             os.chdir(currentRootDir)
             os.chdir(projPath)
@@ -124,7 +180,7 @@ if __name__ == '__main__':
             report_str += "\n"
             report_str += "Test, Test Status\n"
             for i,t in enumerate(tests):
-                report_str += f"{t}:{tests_status[i]}\n"
+                report_str += f"{t},{tests_status[i]}\n"
             file = open("test_results.csv", "w+")
             file.write(report_str[:-1])
             file.close()
@@ -141,7 +197,7 @@ if __name__ == '__main__':
             
             eel.goToMain()
 
-            
+           
                 
 
             # for test in tests:
@@ -349,8 +405,8 @@ if __name__ == '__main__':
     @eel.expose
     def getlistibex():
         namelist=[]
-        root="testcases/Riscv-tests"
-        root1="testcases/Riscv-tests"
+        root="testcases/Riscv_tests"
+        root1="testcases/Riscv_tests"
         root2="testcases/User_Defined_Tests"              
         filepaths = [os.path.join(root,i) for i in os.listdir(root)]
         filepaths1 = [os.path.join(root1,i) for i in os.listdir(root1)]
@@ -417,7 +473,7 @@ if __name__ == '__main__':
     def riscvtest():
         namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-        root="testcases/Riscv-tests"
+        root="testcases/Riscv_tests"
         # get list of directory names from root
         for dirname in os.listdir(root):    
         # for path in filepaths:
@@ -506,30 +562,30 @@ if __name__ == '__main__':
         ]
         eel.showdvTests(tests)
 
+    # @eel.expose
+    # def enduploadcore(config, tests, types):
+    #     time.sleep(5)
+    #     progressTick(11.11)
+    #     time.sleep(5)
+    #     progressTick(22.22)
+    #     time.sleep(5)
+    #     progressTick(33.33)
+    #     time.sleep(5)
+    #     progressTick(44.44)
+    #     time.sleep(5)
+    #     progressTick(55.55)
+    #     time.sleep(5)
+    #     progressTick(66.66)
+    #     time.sleep(5)
+    #     progressTick(77.77)
+    #     time.sleep(5)
+    #     progressTick(88.88)
+    #     time.sleep(5)
+    #     progressTick(99.99)
+
+
     @eel.expose
     def enduploadcore(config, tests, types):
-        time.sleep(5)
-        progressTick(11.11)
-        time.sleep(5)
-        progressTick(22.22)
-        time.sleep(5)
-        progressTick(33.33)
-        time.sleep(5)
-        progressTick(44.44)
-        time.sleep(5)
-        progressTick(55.55)
-        time.sleep(5)
-        progressTick(66.66)
-        time.sleep(5)
-        progressTick(77.77)
-        time.sleep(5)
-        progressTick(88.88)
-        time.sleep(5)
-        progressTick(99.99)
-
-
-    @eel.expose
-    def enduploadcore69(config, tests, types):
         ic(config, tests, types)
        
         file1=open("web/pathfile","w")
@@ -682,7 +738,15 @@ if __name__ == '__main__':
 
     @eel.expose
     def pleaseLogin(email, password):
-        # email auth
+        # try:
+        #     r = requests.post(URL, json={"username": email, "password": password})
+        # except:
+        #     eel.showConenctionError()
+        # r = requests.post(URL, json={"username": email, "password": password})
+        # if r.json()["status"] == "success":
+        #     eel.loginSuccess()
+        # else:
+        #     eel.loginFail()
         if email == "admin" and password == "admin":
             eel.loginSuccess()
         else:
