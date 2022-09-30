@@ -20,13 +20,8 @@ from distutils.dir_util import copy_tree
 import socket
 from contextlib import closing
 
-<<<<<<< HEAD
 # import requests
 # from apiConfig import URL
-=======
-import requests
-from apiConfig import URL
->>>>>>> 0535e367f6acd2bfb8dd8f7df75a9072fc269d12
 
 if __name__ == '__main__':
 
@@ -744,7 +739,6 @@ if __name__ == '__main__':
 
     @eel.expose
     def pleaseLogin(email, password):
-<<<<<<< HEAD
         # try:
         #     r = requests.post(URL, json={"username": email, "password": password})
         # except:
@@ -755,14 +749,6 @@ if __name__ == '__main__':
         # else:
         #     eel.loginFail()
         if email == "admin" and password == "admin":
-=======
-        try:
-            r = requests.post(URL, json={"username": email, "password": password})
-        except:
-            eel.showConenctionError()
-        r = requests.post(URL, json={"username": email, "password": password})
-        if r.json()["status"] == "success":
->>>>>>> 0535e367f6acd2bfb8dd8f7df75a9072fc269d12
             eel.loginSuccess()
         else:
             eel.loginFail()
