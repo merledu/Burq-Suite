@@ -78,10 +78,10 @@ OUTPUT(InsertionSort.exe elf32-littleriscv)
  .debug_str     0x0000000000000000       0x94 InsertionSort.o
 
 .debug_line_str
-                0x0000000000000000       0xd8
+                0x0000000000000000       0xca
  .debug_line_str
-                0x0000000000000000       0xd8 InsertionSort.o
-                                        0x130 (size before relaxing)
+                0x0000000000000000       0xca InsertionSort.o
+                                        0x114 (size before relaxing)
 
 .comment        0x0000000000000000       0x10
  .comment       0x0000000000000000       0x10 InsertionSort.o

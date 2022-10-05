@@ -107,10 +107,10 @@ if __name__ == '__main__':
                 os.system("export PATH=/opt/riscv32/bin:$PATH")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                 currentProgress += perOccurProgress
-                eel.progressTick(currentProgress)
+                progressTick(currentProgress)
                 os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
                 currentProgress += perOccurProgress
-                eel.progressTick(currentProgress)
+                progressTick(currentProgress)
                 ic(os.getcwd())
                 #check is test.log and exec.log exists
                 ic(os.path.isfile(f"{test}.log"))
@@ -119,7 +119,7 @@ if __name__ == '__main__':
                 tests_status.append(status)
 #ibex
         elif core == "ibex":
-            os.chdir(ibex_test_path)
+            os.chdir(f"{currentRootDir}/{ibex_test_path}")
             perOccurProgress = (100//len(tests))//2
             currentProgress = 0
             
@@ -133,6 +133,7 @@ if __name__ == '__main__':
             testroot="testcases/Riscv_tests"
             for test in tests:
                 ic(test)
+                os.chdir(f"{currentRootDir}/{ibex_test_path}")
                 os.chdir("examples/sw/simple_system/")
                 if os.path.isdir(test) == False:
                     # create test directory
@@ -146,22 +147,22 @@ if __name__ == '__main__':
                 os.system("make")
                 os.chdir(f"{currentRootDir}/{ibex_test_path}")
                 os.system("fusesoc --cores-root=. run --target=sim --setup --build lowrisc:ibex:ibex_simple_system --RV32E=0 --RV32M=ibex_pkg::RV32MFast")
-                os.system(f"./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,{testroot}/{test}/{test}.elf")
+                os.system(f"./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,examples/sw/simple_system/{test}/{test}.elf")
                 currentProgress += perOccurProgress
-                eel.progressTick(currentProgress)
-                os.chdir(f"{testcasepath}/{test}")
+                progressTick(currentProgress)
+                os.chdir(f"{currentRootDir}/{testroot}/{test}")
                 os.system(f"spike --isa=rv32gc -m0x10000:0x30000,0x100000:0x100000 --log-commits -l {test}.elf 2> {test}.log")
-
+                #os.chdir(f"{currentRootDir}/")
                 spike_ibex = LogComparator()
                 core_ibex  = LogComparator()
-                core_ibex.ibexLogExtract("trace_core.log")
+                core_ibex.ibexLogExtract(f"{currentRootDir}/{ibex_test_path}/trace_core_00000000.log")#ibex core path
                 spike_ibex.spikeLogExtract(f"{test}.log")
                 if spike_ibex.match(core_ibex):
                     tests_status.append("PASSED")
                 else:
                     tests_status.append("FAILED")
                 currentProgress += perOccurProgress
-                eel.progressTick(currentProgress)
+                progressTick(currentProgress)
             
 
 
@@ -587,6 +588,7 @@ if __name__ == '__main__':
 
     @eel.expose
     def enduploadcore(config, tests, types):
+        
         ic(config, tests, types)
        
         file1=open("web/pathfile","w")
@@ -597,6 +599,7 @@ if __name__ == '__main__':
         file2.close()
         uploadedcore=listuploadcore[-1]
         ic(uploadedcore)
+        
         os.system(f"mkdir {config['path']}/{config['name']}")
         os.system(f"mkdir {config['path']}/{config['name']}/core")
         # os.system(f"cp -r {uploadedcore} {config['path']}/{config['name']}/core/")

@@ -23,7 +23,7 @@ const createSplashWindow = () => {
     win.loadURL('http://localhost:8012/splash.html');
 }
 app.whenReady().then(() => {
-    createSplashWindow()
+    createMainWindow()
 });
 
 function openTheMainWindow(){
