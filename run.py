@@ -117,7 +117,7 @@ if __name__ == '__main__':
                 ic(os.path.isfile("exec.log"))
                 status = call(f"{test}.log", "exec.log")
                 tests_status.append(status)
-#ibex
+        #ibex
         elif core == "ibex":
             os.chdir(f"{currentRootDir}/{ibex_test_path}")
             perOccurProgress = (100//len(tests))//2
@@ -135,34 +135,43 @@ if __name__ == '__main__':
                 ic(test)
                 os.chdir(f"{currentRootDir}/{ibex_test_path}")
                 os.chdir("examples/sw/simple_system/")
-                if os.path.isdir(test) == False:
-                    # create test directory
+                if os.path.isdir(test):
+                    # rm test directory
+                    os.system(f"rm -rf {test}")
+                    
+                try:    
                     os.mkdir(test)
-                
-                copy_tree(f"{currentRootDir}/{testroot}/{test}", f"{test}")
-                os.chdir(test)
-                file = open("Makefile", "w+")
-                file.write(makefile_str.replace("testname", test))
-                file.close()
-                os.system("make")
-                os.chdir(f"{currentRootDir}/{ibex_test_path}")
-                os.system("fusesoc --cores-root=. run --target=sim --setup --build lowrisc:ibex:ibex_simple_system --RV32E=0 --RV32M=ibex_pkg::RV32MFast")
-                os.system(f"./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,examples/sw/simple_system/{test}/{test}.elf")
-                currentProgress += perOccurProgress
-                progressTick(currentProgress)
-                os.chdir(f"{currentRootDir}/{testroot}/{test}")
-                os.system(f"spike --isa=rv32gc -m0x10000:0x30000,0x100000:0x100000 --log-commits -l {test}.elf 2> {test}.log")
-                #os.chdir(f"{currentRootDir}/")
-                spike_ibex = LogComparator()
-                core_ibex  = LogComparator()
-                core_ibex.ibexLogExtract(f"{currentRootDir}/{ibex_test_path}/trace_core_00000000.log")#ibex core path
-                spike_ibex.spikeLogExtract(f"{test}.log")
-                if spike_ibex.match(core_ibex):
-                    tests_status.append("PASSED")
-                else:
-                    tests_status.append("FAILED")
-                currentProgress += perOccurProgress
-                progressTick(currentProgress)
+                    copy_tree(f"{currentRootDir}/{testroot}/{test}", f"{test}")
+
+                    os.chdir(test)
+                    file = open("Makefile", "w+")
+                    file.write(makefile_str.replace("testname", test))
+                    file.close()
+                    os.system("make")
+                    os.chdir(f"{currentRootDir}/{ibex_test_path}")
+                    os.system("fusesoc --cores-root=. run --target=sim --setup --build lowrisc:ibex:ibex_simple_system --RV32E=0 --RV32M=ibex_pkg::RV32MFast")
+                    os.system(f"./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,examples/sw/simple_system/{test}/{test}.elf")
+                    currentProgress += perOccurProgress
+                    progressTick(currentProgress)
+                    os.chdir(f"{currentRootDir}/{testroot}/{test}")
+                    os.system(f"spike --isa=rv32gc -m0x10000:0x30000,0x100000:0x100000 --log-commits -l {test}.elf 2> {test}.log")
+                    #os.chdir(f"{currentRootDir}/")
+                    spike_ibex = LogComparator()
+                    core_ibex  = LogComparator()
+                    core_ibex.ibexLogExtract(f"{currentRootDir}/{ibex_test_path}/trace_core_00000000.log")#ibex core path
+                    spike_ibex.spikeLogExtract(f"{test}.log")
+                    if spike_ibex.match(core_ibex):
+                        tests_status.append("PASSED")
+                    else:
+                        tests_status.append("FAILED")
+                    currentProgress += perOccurProgress
+                    progressTick(currentProgress)
+                except:
+                    tests_status.append("COMPILATION ERROR")
+                    currentProgress += perOccurProgress
+                    progressTick(currentProgress)
+                    currentProgress += perOccurProgress
+                    progressTick(currentProgress)
             
 
 
@@ -184,7 +193,7 @@ if __name__ == '__main__':
             for i,t in enumerate(tests):
                 report_str += f"{t},{tests_status[i]}\n"
             file = open("test_results.csv", "w+")
-            file.write(report_str[:-1])
+            file.write(report_str)
             file.close()
             os.chdir(currentRootDir)
             file = open("web/pathfile", "w")
