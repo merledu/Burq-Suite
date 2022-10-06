@@ -155,7 +155,6 @@ if __name__ == '__main__':
                     progressTick(currentProgress)
                     os.chdir(f"{currentRootDir}/{testroot}/{test}")
                     os.system(f"spike --isa=rv32gc -m0x10000:0x30000,0x100000:0x100000 --log-commits -l {test}.elf 2> {test}.log")
-                    #os.chdir(f"{currentRootDir}/")
                     spike_ibex = LogComparator()
                     core_ibex  = LogComparator()
                     core_ibex.ibexLogExtract(f"{currentRootDir}/{ibex_test_path}/trace_core_00000000.log")#ibex core path
