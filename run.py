@@ -748,7 +748,7 @@ if __name__ == '__main__':
         for i,t in enumerate(tests):
             report_str += f"{t},{testStatuses[i]}\n"
         file = open(f"{config['path']}/{config['name']}/test_results.csv", "w+")
-        file.write(report_str[:-1])
+        file.write(report_str)
         file.close()
 
         file = open(f"{currentRootDir}/records", "w+")
