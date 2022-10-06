@@ -709,29 +709,54 @@ if __name__ == '__main__':
             report_str += f"Iss,Spike\n"
             report_str += "\n"
             report_str += "Test, Test Status\n"
-            ic(tests)
-            ic(testStatuses)
-            for i,t in enumerate(tests):
-                report_str += f"{t},{testStatuses[i]}\n"
-            file = open(f"{config['path']}/{config['name']}/test_results.csv", "w+")
-            file.write(report_str[:-1])
-            file.close()
-
-            file = open(f"{currentRootDir}/records", "w+")
-            file.write(f"{config['path']}/{config['name']},custom_core_verification\n")
-            file.close()
             
-            os.chdir(currentRootDir)
-            eel.goToMain()
 
         else: # if swerv based
             RV_ROOT = f"{config['path']}/{config['name']}/core/"
             WHISPER = f"{currentRootDir}/Verification/SweRV-ISS/build-Linux/./whisper"
             for test in tests:
-                os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
-                os.chdir(f"{config['path']}/{config['name']}/core")
-                os.system(f"mkdir {test}")
-                os.chdir(f"{test}")
+                if os.path.exists(f"{config['path']}/{config['name']}/core/testbench/tests/{test}"):
+                    # del the folder
+                    os.system(f"rm -rf {config['path']}/{config['name']}/core/{test}")
+                os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} {config['path']}/{config['name']}/core/testbench/tests/{test}")
+
+                if os.path.exists(f"{config['path']}/{config['name']}/core/{test}"):
+                    # del the folder
+                    os.system(f"rm -rf {config['path']}/{config['name']}/core/{test}")
+                os.mkdir(f"{config['path']}/{config['name']}/core/{test}")
+
+                os.chdir(f"{config['path']}/{config['name']}/core/{test}")
+                os.system(f"make -f {RV_ROOT}/tools/Makefile TEST={test}")
+                progress += progress_step
+                progressTick(progress)
+
+                os.system(f"{WHISPER} --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
+                progress += progress_step
+                progressTick(progress)
+                ic(os.path.isfile(f"{test}.log"))
+                ic(os.path.isfile("exec.log"))
+                status = call(f"{test}.log", "exec.log")
+                testStatuses.append(status)
+            report_str = ""
+            report_str += f"Core,{config['name']}\n"
+            report_str += f"Iss,Whisper\n"
+            report_str += "\n"
+            report_str += "Test, Test Status\n"
+        
+        ic(tests)
+        ic(testStatuses)
+        for i,t in enumerate(tests):
+            report_str += f"{t},{testStatuses[i]}\n"
+        file = open(f"{config['path']}/{config['name']}/test_results.csv", "w+")
+        file.write(report_str[:-1])
+        file.close()
+
+        file = open(f"{currentRootDir}/records", "w+")
+        file.write(f"{config['path']}/{config['name']},custom_core_verification\n")
+        file.close()
+        
+        os.chdir(currentRootDir)
+        eel.goToMain()
 
 
 
