@@ -1,0 +1,19 @@
+
+jhik:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010054 <main>:
+   10054:	1101                	addi	sp,sp,-32
+   10056:	ce22                	sw	s0,28(sp)
+   10058:	1000                	addi	s0,sp,32
+   1005a:	fec42703          	lw	a4,-20(s0)
+   1005e:	fe842783          	lw	a5,-24(s0)
+   10062:	97ba                	add	a5,a5,a4
+   10064:	fef42223          	sw	a5,-28(s0)
+   10068:	4781                	li	a5,0
+   1006a:	853e                	mv	a0,a5
+   1006c:	4472                	lw	s0,28(sp)
+   1006e:	6105                	addi	sp,sp,32
+   10070:	8082                	ret

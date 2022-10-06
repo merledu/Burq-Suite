@@ -16,7 +16,9 @@ if __name__ == '__main__':
     vc = vf.readlines()
     vf.close()
     project_dir = c[-1]
-    
+    ic(project_dir)
+    filecreate=os.path.basename(project_dir)
+
     
     init('web')
     if vc[0]=="verification":
@@ -103,7 +105,8 @@ if __name__ == '__main__':
         getTheFileStrucuture()
     @eel.expose
     def addtest():
-        os.system(f"cp -a {project_dir} {currentRootDir}/web/testcases/Self-Checking-Tests/users-tests ")
+        os.system(f"cp -a {project_dir} {currentRootDir}/testcases/User_Defined_Tests")
+        os.system(f"cp -a {project_dir} {currentRootDir}/testcases/Riscv_tests")
         eel.copytestdone()
 
     @eel.expose
@@ -134,18 +137,18 @@ if __name__ == '__main__':
         # file.write(code)
         # file.close()
 
-        proc = sp.Popen("riscv64-unknown-elf-gcc -mabi=ilp32 -march=rv32imc -nostdlib -g -o main main.c".split(), stdout=sp.PIPE, stderr=sp.PIPE)
+        proc = sp.Popen(f"riscv64-unknown-elf-gcc -mabi=ilp32 -march=rv32imc -nostdlib -g -o {filecreate} {filecreate}.c".split(), stdout=sp.PIPE, stderr=sp.PIPE)
         outs, errs = proc.communicate()
         if "error" in str(errs):
             eel.showAlert(f"Error: {errs}")
         else:
-            os.system("riscv64-unknown-elf-objdump -d main >> main.elf")
+            os.system(f"riscv64-unknown-elf-objdump -d {filecreate} >> {filecreate}.elf")
             # read main.elf and separate machine code and assembly and save in separate files
-            elfFile = open("main.elf","r")
+            elfFile = open(f"{filecreate}.elf","r")
             contents = elfFile.readlines()
             elfFile.close()
-            machineCodeFile = open("main.mach","w+")
-            assemblyFile = open("main.asm","w+")
+            machineCodeFile = open(f"{filecreate}.mach","w+")
+            assemblyFile = open(f"{filecreate}.asm","w+")
             machineCode = []
             assembly = []
             for line in contents[1:]:

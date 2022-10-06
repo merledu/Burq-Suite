@@ -1,0 +1,1 @@
+spike: ../fesvr/elfloader.cc:34: std::map<std::__cxx11::basic_string<char>, long unsigned int> load_elf(const char*, memif_t*, reg_t*): Assertion `IS_ELF32(*eh64) || IS_ELF64(*eh64)' failed.
