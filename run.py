@@ -101,7 +101,7 @@ if __name__ == '__main__':
                 os.chdir(test)
                 os.system("export RISCV=/opt/riscv32")
 
-                os.system(f"export whisper={currentRootDir}/Verification/SweRV-ISS/build-Linux/./whisper")
+                os.system(f"export whisper={currentRootDir}/SweRV-ISS/build-Linux/./whisper")
 
                 os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
                 os.system("export PATH=/opt/riscv32/bin:$PATH")
@@ -138,10 +138,12 @@ if __name__ == '__main__':
                 if os.path.isdir(test):
                     # rm test directory
                     os.system(f"rm -rf {test}")
+                
                     
                 try:    
                     os.mkdir(test)
                     copy_tree(f"{currentRootDir}/{testroot}/{test}", f"{test}")
+                    
 
                     os.chdir(test)
                     file = open("Makefile", "w+")
@@ -277,11 +279,11 @@ if __name__ == '__main__':
         
 
         
-        os.system("touch main.c")
+        os.system(f"touch {b}.c")
         # list the files in the directory
         os.system("ls")
 
-        f = open("main.c", "w")
+        f = open(f"{b}.c", "w")
         f.write("// write your code here \n")
         f.close()
 
@@ -449,6 +451,7 @@ if __name__ == '__main__':
     @eel.expose
     def genCore(isa,ext,bus):
         driverKey= f"corei{bus}"
+
         file = open("web/driver", "w")
         file.write(driverKey)
         file.close()
@@ -713,7 +716,7 @@ if __name__ == '__main__':
 
         else: # if swerv based
             RV_ROOT = f"{config['path']}/{config['name']}/core/"
-            WHISPER = f"{currentRootDir}/Verification/SweRV-ISS/build-Linux/./whisper"
+            WHISPER = f"{currentRootDir}/SweRV-ISS/build-Linux/./whisper"
             for test in tests:
                 if os.path.exists(f"{config['path']}/{config['name']}/core/testbench/tests/{test}"):
                     # del the folder
@@ -870,7 +873,8 @@ if __name__ == '__main__':
         #     #command for whisper
             
             
-        # basename=os.path.basename(f"{p}")
+        # 
+        # =os.path.basename(f"{p}")
         # os.chdir(f"{yourproject}")
         # report_str = ""
         # report_str += f"Core:{basename}\n"
@@ -915,6 +919,7 @@ if __name__ == '__main__':
                 ic(basename)
                 ic(yourproject)
                 ic(b)
+                os.system(f"cp -a testcases/User_Defined_Tests/{test} {yourproject}/{b}/{testcase}")
             
             
                 os.system(f"cp -a testcases/Swerv_Tests/{test} {yourproject}/{b}/{testcase}")

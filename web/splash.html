@@ -54,13 +54,14 @@
 <body>
 <div id="login_main">
     <div class="page">
+        
         <div class="container">
             <div class="login_close">
                 <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
             </div>
           <div class="left">
-            <div class="login">Login</div>
-            <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
+            <img  src="assets/icons/loginn.png"  />
+            <div class="eula" style="margin-top: -15px;">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
           </div>
           <div class="right">
             <svg viewBox="0 0 320 300">
@@ -74,11 +75,11 @@
                                 y2="193.49992"
                                 gradientUnits="userSpaceOnUse">
                   <stop
-                        style="stop-color:#ff00ff;"
+                        style="stop-color:#00c3ff;"
                         offset="0"
                         id="stop876" />
                   <stop
-                        style="stop-color:#ff0000;"
+                        style="stop-color:#2553a8;"
                         offset="1"
                         id="stop878" />
                 </linearGradient>
@@ -853,7 +854,7 @@
                                             <label> Self-Checking-vector-tests </label><br>
                                             <input type="radio" id="gencoretest" name="upCore" value="Swerv_Tests" />
                                             <label>Swerv_Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="users-Tests" />
+                                            <input type="radio" id="gencoretest" name="upCore" value="User_Defined_Tests" />
                                             <label>User-Tests </label><br>
                                             <input type="radio" id="gencoretest" name="upCore" value="RISCV_DV_Tests" />
                                             <label>RISCV_DV_Tests </label>
@@ -948,9 +949,7 @@
                                             <input type="radio" id="prebuiltCore" name="prebuiltCore" value="ibex" checked />
                                             <label> IBEX </label>
                                             <br>
-                                            <input type="radio" id="prebuiltCore" name="prebuiltCore" value="swerv" />
-                                            <label> SWERV-EH1 </label>
-                                            <br>
+                                            
                                             <input type="radio" id="prebuiltCore" name="prebuiltCore" value="swerv" />
                                             <label> SWERV-EL2 </label>
                                         </form>
@@ -990,9 +989,7 @@
                                             <input type="radio" id="prebuiltISS" name="prebuiltISS" value="whisper"/>
                                             <label> WHISPER </label>
                                             <br />
-                                            <input type="radio" id="prebuiltISS" name="prebuiltISS" value="ovpsim" />
-                                            <label> OVPSIM </label>
-                                            <br />
+                                           
                                             
                                         </form>
                                     </div>
@@ -1410,7 +1407,7 @@ function opneRecentProject(id){
                     else if(selectedtesttype== "BURQ_Generated_Tests"){
                         eel.burqgeneratedtest()
                     }
-                    else if(selectedtesttype=="users-Tests"){
+                    else if(selectedtesttype=="User_Defined_Tests"){
                         eel.usertest()
                     }
                     else if(selectedtesttype=="RISCV_DV_Tests"){
