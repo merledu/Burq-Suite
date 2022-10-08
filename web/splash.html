@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/icons/flash.png">
+    <link href="loginfont.css" rel="stylesheet">
 
+
+    <link href="login.css" rel="stylesheet"  crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title></title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/splash.css" rel="stylesheet" />
@@ -52,7 +56,45 @@
     </style>
 </head>
 <body>
-<div id="login_main">
+    <div id="login" class="box-form" >
+        <div class="login_close">
+            <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
+        </div>
+        <div class="left">
+            <div class="overlay">
+            <img src="assets/icons/flash.png" style="  height: 108px; width: 114px; margin-top: 80px;"><h2 style="    margin-top: -100px; margin-left: 106px; font-size: 59px;">The Burq Suite</h2>
+            <p style="    margin-top: 68px;">Burq Suite is the RISC-V Automated Core Verification Suite. Verify your Core by login your Account.</p>
+            <span >
+    <p style="    margin-top: 249px; color: #767676;"> Powered by Micro Electronics Research Lab (MERL) - UIT  </p>
+                
+            </span>
+            </div>
+        </div>
+        
+        
+            <div class="right">
+            <h5 style="margin-top: 30px;color: aliceblue;">Login</h5>
+            <p style="margin-top: 68px;">Don't have an account? <a href="#">Create Your Account</a> it takes less than a minute</p>
+            <div class="form">
+                <input type="email" id="email" placeholder="Username">
+                <br>
+                <input  type="password" id="password" placeholder="Password">
+            </div>
+                
+                <br><br>
+                
+            <div class="remember-me--forget-password">
+                    <!-- Angular -->
+       
+                <p href="#">Forget password?</p>
+            </div>
+                
+                <br>
+                <Button type="submit" onclick="emailSend()" id="submit" >Login</Button>
+        </div>
+       
+    </div>
+<!-- <div id="login_main">
     <div class="page">
         
         <div class="container">
@@ -96,7 +138,7 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>  -->
 
         <div id="main">
             <div class="row">
@@ -1095,7 +1137,7 @@ function closeEverythingPaleez(){
 
             eel.expose(loginSuccess);
             function loginSuccess(){
-                document.getElementById("login_main").style.display = "none";
+                document.getElementById("login").style.display = "none";
                 document.getElementById("main").style.display = "block";
             }
 

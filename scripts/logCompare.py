@@ -785,8 +785,10 @@ if __name__ == '__main__':
 
     #spike.spikeLogExtract('./Test.log', ibex=False, debug=True)
     #core.coreLogExtract('./trace.csv', debug=True)
-    spike.spikeLogExtract('./logs/cosimspike.log', debug=False)
-    core.ibexLogExtract('./logs/cosimibex.log', debug=False)
+    # spike.spikeLogExtract('./logs/cosimspike.log', debug=False)
+    # core.ibexLogExtract('./logs/cosimibex.log', debug=False)
+    # spike.spikeLogExtract('/home/mano/burq/cores/ibex/examples/sw/simple_system/towers/towers.log', debug=False)
+    # core.ibexLogExtract('/home/mano/burq/cores/ibex/trace_core_00000000.log', debug=False)
 
     #spike.showSkipped()
     

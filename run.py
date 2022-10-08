@@ -158,7 +158,7 @@ if __name__ == '__main__':
                     os.system(f"./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,examples/sw/simple_system/{test}/{test}.elf")
                     currentProgress += perOccurProgress
                     progressTick(currentProgress)
-                    os.chdir(f"{currentRootDir}/{testroot}/{test}")
+                    os.chdir(f"{currentRootDir}/{ibex_test_path}/examples/sw/simple_system/{test}")
                     os.system(f"spike --isa=rv32gc -m0x10000:0x30000,0x100000:0x100000 --log-commits -l {test}.elf 2> {test}.log")
                     spike_ibex = LogComparator()
                     core_ibex  = LogComparator()
@@ -625,7 +625,8 @@ if __name__ == '__main__':
         progress_step = (len(tests) / 100) / 3
         progress = 0
 
-        if config["swerv"] == "": # NOT SWERV
+        if config["swerv"] == "": 
+            print("coreeeeeeeeeeeeeeeeeeeeeeee")# NOT SWERV
             extension_flags = "rv32" + "".join(config["extensions"])
             os.system(f"mkdir {config['path']}/{config['name']}/tmp")
             os.chdir(f"{config['path']}/{config['name']}")
@@ -636,6 +637,7 @@ if __name__ == '__main__':
                 # ISS Sim
                 try:
                     if types == "RISCV_DV_Tests":
+                        print("testtttttttttttttttttttttttt")
                         os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --test={test}")
                     else:
                         os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
@@ -663,6 +665,7 @@ if __name__ == '__main__':
                         os.chdir(f"{config['path']}/{config['name']}/core")
                         os.system(config["command"])
                     else:
+                        print("coreepattt")
                         os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
                         os.chdir(f"{config['path']}/{config['name']}/core")
                         os.system(config["command"].replace("{testname}", test))
