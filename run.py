@@ -20,8 +20,9 @@ from distutils.dir_util import copy_tree
 import socket
 from contextlib import closing
 
-# import requests
-# from apiConfig import URL
+import requests
+import re
+from apiConfig import URL
 
 if __name__ == '__main__':
 
@@ -792,21 +793,28 @@ if __name__ == '__main__':
     def selectdvtest(dvtestlist):
         print(dvtestlist)
 
+    def validateUserCredentials(username, password):
+        return username.isalpha() and password != "" and len(password) >= 8 and len(username) >= 3
+
     @eel.expose
-    def pleaseLogin(email, password):
-        # try:
-        #     r = requests.post(URL, json={"username": email, "password": password})
-        # except:
-        #     eel.showConenctionError()
-        # r = requests.post(URL, json={"username": email, "password": password})
-        # if r.json()["status"] == "success":
+    def pleaseLogin(username, password):
+        if not validateUserCredentials(username, password):
+            eel.throwAlert("Invalid username and password. Please try again.")
+        else:
+            try:
+                r = requests.post(URL, json={"username": username.lower(), "password": password})
+            except:
+                eel.throwAlert("Connection Error!\nPlease check your internet connection and try again.")
+            if r.json()["status"] == "success":
+                eel.loginSuccess()
+            else:
+                eel.throwAlert("Username or Password is incorrect")
+
+
+        # if email == "admin" and password == "admin":
         #     eel.loginSuccess()
         # else:
         #     eel.loginFail()
-        if email == "admin" and password == "admin":
-            eel.loginSuccess()
-        else:
-            eel.loginFail()
 
 
 
