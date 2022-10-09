@@ -814,7 +814,7 @@ if __name__ == '__main__':
         # if email == "admin" and password == "admin":
         #     eel.loginSuccess()
         # else:
-        #     eel.loginFail()
+        #     eel.throwAlert("Username or Password is incorrect")
 
 
 
