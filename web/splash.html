@@ -74,7 +74,7 @@
         
             <div class="right">
             <h5 style="margin-top: 30px;color: aliceblue;">Login</h5>
-            <p style="margin-top: 68px;">Don't have an account? <a href="#">Create Your Account</a> it takes less than a minute</p>
+            <p style="margin-top: 68px;">Don't have an account? <a href="http://socnow.software">Create Your Account</a> it takes less than a minute</p>
             <div class="form">
                 <input type="email" id="email" placeholder="Username">
                 <br>
@@ -86,7 +86,7 @@
             <div class="remember-me--forget-password">
                     <!-- Angular -->
        
-                <p href="#">Forget password?</p>
+                <a href="http://socnow.software">Forget password?</a>
             </div>
                 
                 <br>
@@ -1125,14 +1125,9 @@ function closeEverythingPaleez(){
     window.close();
 }
 
-            eel.expose(loginFail);
-            function loginFail() {
-                alert("Username or Password is incorrect");
-            }
-
-            eel.expose(showConenctionError);
-            function showConenctionError() {
-                alert("Connection Error | Please check your internet connection");
+            eel.expose(throwAlert);
+            function throwAlert(e) {
+                alert(e);
             }
 
             eel.expose(loginSuccess);
