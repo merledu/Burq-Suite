@@ -657,8 +657,11 @@ if __name__ == '__main__':
                 # CORE Sim
                 if config["testFormat"] == "asm":
                     ic(config["testFormat"])
+                    if types=='User_Defined_Tests':
+                         os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o >> {config['path']}/{config['name']}/{test}.elf")
+                    else:
 
-                    os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/asm_test/{test}_0.o >> {config['path']}/{config['name']}/{test}.elf")
+                            os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/asm_test/{test}_0.o >> {config['path']}/{config['name']}/{test}.elf")
                     print("cimpileeeeeeeeeee")
                     hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
 
@@ -691,8 +694,12 @@ if __name__ == '__main__':
                     # os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
                     spikeObj = LogComparator()
                     coreObj  = LogComparator()
+                    if types== 'User_Defined_Tests':
+                        spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
+                    else:
 
-                    spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.0.log")
+
+                        spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.0.log")
                     coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
                     if spikeObj.match(coreObj):
                         testStatuses.append("[PASSED]")
