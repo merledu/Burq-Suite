@@ -47,9 +47,7 @@ body, .row{
     box-shadow: #00000078 10px 10px 10px;
 }
 
-#main .frs .container div{
-    padding-top: 50px;
-}
+
 .temp-btn span{
     font-size: x-large;
     font-weight: bold;
@@ -359,13 +357,16 @@ body, .row{
     display: none;
 }
 .dropbtn {
-    background-color: #3498DB;
+ 
     color: white;
-    height: 24px;
+    height: 48px;
     font-size: 16px;
     border: none;
     cursor: pointer;
-  }
+    /* padding: 10px; */
+    border-radius: 100px;
+}
+  
   
   .dropbtn:hover, .dropbtn:focus {
     background-color: #2980B9;
@@ -380,11 +381,13 @@ body, .row{
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
+    min-width: 126px;
     overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
     z-index: 1;
-  }
+    border-radius: 20px;
+}
+  
   
   .dropdown-content a {
     color: black;

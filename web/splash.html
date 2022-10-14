@@ -144,8 +144,33 @@
             <div class="row">
                 <div class="col-8 frs">
                     <div class="container">
+
+
+  
+	
+  
+
+
+                       
+                            
                         <div class="login_close pdz">
-                            <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
+                            <div class="dropdown" style="float:right;    margin-top: -41px;background-color: #0a0808;">
+                                <button class="dropbtn" style="margin-top: 13px;background-color: #15191a;
+                            "><img style="position: absolute;
+                                    margin-left: -10p;
+                                    margin-left: -30px;
+                                    margin-top: -10px;
+                                    height: 33px;
+                                    background-color: #15191a;
+
+                                    width: 61px;" src="assets/icons/userlog.png"></button>
+                                <div class="dropdown-content">
+                                   <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
+                                <a href="" style="height:43px" >Logout</a>
+                               
+                                </div>
+                              </div>
+                            
                         </div>
 
                         <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
@@ -206,14 +231,26 @@
             <div class="row">
                 <div class="col-4 sec">
                     <div class="container">
+                        
                         <div class="login_close pdz">
-                            <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
+                            <div class="dropdown" style="float:right;    margin-top: -41px;background-color: #24272e;">
+                                <button class="dropbtn" style="margin-top: 13px;background-color: #24272e;"><img style="position: absolute;
+                                    margin-left: -10p;
+                                    margin-left: -30px;
+                                    margin-top: -10px;
+                                    height: 33px;
+                                    background-color: #24272e;
+                                    width: 61px;" src="assets/icons/userlog.png"></button>
+                                <div class="dropdown-content">
+                                   <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
+                                <a href="" style="height:43px" >Logout</a>
+                               
+                                </div>
+                              </div>
+                            
                         </div>
-                        <div style="margin-top: 20px;" id="back-btn-div">
-                            <button onclick="closeNewProject()" class="btn back-btn">
-                                <img src="assets/icons/back2.png" />
-                            </button>
-                        </div>
+	
+                       
                         <div id="config-btns">
                             <h4>- Project Selection -</h4>
                             <button id="cust_test_btn" onclick="changeProject2(event,'custom_test')" class="btn config-btn" value="soc">
@@ -231,6 +268,11 @@
                             </button>
     
                            
+                        </div>
+                        <div style="margin-top: 20px;" id="back-btn-div">
+                            <button onclick="closeNewProject()" class="btn back-btn">
+                                <img src="assets/icons/back2.png" />
+                            </button>
                         </div>
                         
 
@@ -890,7 +932,7 @@
                                             <br>
                                             <input type="radio" id="gencoretest" name="upCore" value="MERL_vector_Tests" />
                                             <label> MERL_vector_Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="Riscv-tests" />
+                                            <input type="radio" id="gencoretest" name="upCore" value="Riscv_tests" />
                                             <label> Riscv-tests </label><br>
                                             <input type="radio" id="gencoretest" name="upCore" value="Self-Checking-vector-tests" />
                                             <label> Self-Checking-vector-tests </label><br>
@@ -1335,6 +1377,11 @@ function opneRecentProject(id){
                         document.getElementById("logselect").style.display = "none";
                         document.getElementById("testcase_asm").style.display = "none";
                 } else if(comp == "command"){
+                    var hexDir = document.getElementById("hexDir").value;
+                    if (hexDir===""){
+                        alert("Enter hex path")
+                    }
+                    else{
                     
                         document.getElementById("core-command").style.display = "block";
                         document.getElementById("uploadcore").style.display = "none";
@@ -1349,6 +1396,7 @@ function opneRecentProject(id){
                     
                    
                 }
+            }
                 if(comp == "upcore"){
                     document.getElementById("core-command").style.display = "none";
                     document.getElementById("uploadcore").style.display = "block";
@@ -1391,6 +1439,31 @@ function opneRecentProject(id){
                    
                 }
                 if(comp == "extensionselect"){
+                    var swerv = document.getElementsByName("checkswervtest");
+                    var checkswervv = "";
+                        for (var j =0; j<swerv.length; j++){
+                            if(swerv[j].checked){
+                    
+                            checkswervv=swerv[j].value;
+                            
+                            }
+                        }
+                          
+                    
+                    var projDir = document.getElementById("path").innerHTML;
+                    
+                    var uploadcore = document.getElementById("pathcore").value;
+                    var projName = document.getElementById("projectname").value;
+                    if (projName == ""){
+                        alert("Please enter a project name");}
+                         else if (uploadcore == "" ){
+                            alert("Please Upload core");}
+                    else if (projDir  == " "){
+                        alert("Please select a directory");}
+                    
+                   
+
+                   if( uploadcore != "" && projDir != " "  && projName != ""){
                     var isSwerv = document.getElementsByName("checkswervtest")[0];
                     if(isSwerv.checked){
                         changecoree("Stestcasetype");
@@ -1406,6 +1479,7 @@ function opneRecentProject(id){
                         document.getElementById("logselect").style.display = "none";
                     }
                 }
+            }
                 if(comp == "formatselect"){
                     document.getElementById("formatSelect").style.display = "block";
                     document.getElementById("core-command").style.display = "none";
@@ -1432,7 +1506,7 @@ function opneRecentProject(id){
                     } else if(selectedtesttype== "MERL_vector_Tests"){
                         eel.merlvectortest()
                     }
-                    else if(selectedtesttype== "Riscv-tests"){
+                    else if(selectedtesttype== "Riscv_tests"){
                         eel.riscvtest()
                     }
                     else if(selectedtesttype== "Self-Checking-vector-tests"){
@@ -1464,6 +1538,11 @@ function opneRecentProject(id){
                 }
 
                 if(comp == "logselect"){
+                    var command=document.getElementById("getcommands").value;
+                    if (command===""){
+                        alert("Enter test command")
+                    }
+                    else{
                     var isSwerv = document.getElementsByName("checkswervtest")[0];
                     if(isSwerv.checked){
                         changecoree("uploadcore");
@@ -1478,10 +1557,17 @@ function opneRecentProject(id){
                         document.getElementById("testcase_asm").style.display = "none";
                     }
                 }
+            }
                 //
               
                 if(comp == "Stestcasetype"){
+                    var logfile = document.getElementById("getlogfolder").value; 
+                    if (logfile===""){
+                        alert("please enter log file path");
+                    }
+                    else{
                     document.getElementById("core-command").style.display = "none";
+
                     document.getElementById("uploadcore").style.display = "none";
                     document.getElementById("testcase").style.display = "none";
                     document.getElementById("testcasetype").style.display = "block";
@@ -1491,9 +1577,11 @@ function opneRecentProject(id){
                     document.getElementById("logselect").style.display = "none";
         //           
                 }
+                }
                 if(comp == "endcore"){
 
                     console.log("CLICKKKKK");
+                    
 
                     var projName = document.getElementById("projectname").value;
                     var projDir = document.getElementById("path").innerHTML;
@@ -1515,7 +1603,19 @@ function opneRecentProject(id){
                     //     }
                     // }
                     // eel.selectdvtest(dvList);
-
+                    var getcommand=document.getElementById("getcommands").value;
+                        var gettestcasefoldername=document.getElementById("gettestfolder").value;
+                        var getlogfoldername=document.getElementById("getlogfolder").value;
+                        
+                        var tests1 = [];
+                                var testCheckboxes1 = document.getElementsByName("coreTest");
+                                for (var i = 0; i < testCheckboxes1.length; i++) {
+                                    if (testCheckboxes1[i].checked) {
+                                        tests1.push(testCheckboxes1[i].value);
+                                    }
+                                }
+                                
+                        
 
                     var extensions = [];
                     for(var k=0;k<extensionsEl.length;k++){
@@ -1548,7 +1648,12 @@ function opneRecentProject(id){
                             alert("Please select hex directory");
                         } else if (logfile == "" && checkswervv == ""){
                             alert("Please select location where log file will generate");
-                        } else{
+                        } else if (tests1.length===0){
+                                    alert("Select atleast 1 test")
+                            
+                        }
+                        
+                        else{
 
                         
                         var progressbar=document.getElementById("prebuilt-end1").style.display="block";
@@ -1563,17 +1668,7 @@ function opneRecentProject(id){
                     
                         
 
-                        var getcommand=document.getElementById("getcommands").value;
-                        var gettestcasefoldername=document.getElementById("gettestfolder").value;
-                        var getlogfoldername=document.getElementById("getlogfolder").value;
-                        
-                        var tests1 = [];
-                                var testCheckboxes1 = document.getElementsByName("coreTest");
-                                for (var i = 0; i < testCheckboxes1.length; i++) {
-                                    if (testCheckboxes1[i].checked) {
-                                        tests1.push(testCheckboxes1[i].value);
-                                    }
-                                }
+                       
 
                         var config = {
                             "name":projName,
@@ -1595,8 +1690,8 @@ function opneRecentProject(id){
                         eel.enduploadcore(config,tests1,selectedtype);
                     }
                 }
-            
             }
+            
             function changeCustom(comp){
                 var core = document.getElementById("custom-core");
                 var iss = document.getElementById("custom-iss");
@@ -1655,7 +1750,7 @@ function opneRecentProject(id){
             function select(){
                 var projectnamee = document.getElementById("projectname").value;
                 var showpath = document.getElementById("path");
-    showpath.value ="";
+    showpath.value = "";
     console.log(showpath);
 
         eel.selectFolder(projectnamee);
