@@ -636,86 +636,86 @@ if __name__ == '__main__':
 
             for i,test in enumerate(tests):
                 # ISS Sim
-                #try:
-                if types == "RISCV_DV_Tests":
-                    print("testtttttttttttttttttttttttt")
-                    os.chdir(f"{currentRootDir}/dv")
-                    ic(os.system("pwd"))
-                    os.system(f"python3 run.py --iss=spike --simulator=pyflow --target={extension_flags} --output={config['path']}/{config['name']}/tmp/{test}_out --iterations=1  --test={test}")
-                    os.chdir(f"{config['path']}/{config['name']}")
-                else:
-                    os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
-                    os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --c_test=tmp/{test}/{test}.c")
-                processes = psutil.pids()
-                anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name()=="spike" ,processes))
-                if len(anyStillRunningSpikeProcess)!= 0:
-                    for spikeProcessID in anyStillRunningSpikeProcess:
-                        psutil.Process(spikeProcessID).kill()
-                # os.system(f"python3 {currentRootDir}/dv/scripts/spike_log_to_trace_csv.py --log {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log --csv {config['path']}/{config['name']}/tmp/{test}.csv")
-                progress += progress_step
-                progressTick(progress)
-                # CORE Sim
-                if config["testFormat"] == "asm":
-                    ic(config["testFormat"])
-                    if types=='User_Defined_Tests':
-                         os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o >> {config['path']}/{config['name']}/{test}.elf")
+                try:
+                    if types == "RISCV_DV_Tests":
+                        print("testtttttttttttttttttttttttt")
+                        os.chdir(f"{currentRootDir}/dv")
+                        ic(os.system("pwd"))
+                        os.system(f"python3 run.py --iss=spike --simulator=pyflow --target={extension_flags} --output={config['path']}/{config['name']}/tmp/{test}_out --iterations=1  --test={test}")
+                        os.chdir(f"{config['path']}/{config['name']}")
                     else:
+                        os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
+                        os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --c_test=tmp/{test}/{test}.c")
+                    processes = psutil.pids()
+                    anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name()=="spike" ,processes))
+                    if len(anyStillRunningSpikeProcess)!= 0:
+                        for spikeProcessID in anyStillRunningSpikeProcess:
+                            psutil.Process(spikeProcessID).kill()
+                    # os.system(f"python3 {currentRootDir}/dv/scripts/spike_log_to_trace_csv.py --log {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log --csv {config['path']}/{config['name']}/tmp/{test}.csv")
+                    progress += progress_step
+                    progressTick(progress)
+                    # CORE Sim
+                    if config["testFormat"] == "asm":
+                        ic(config["testFormat"])
+                        if types!="RISCV_DV_Tests":
+                            os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o >> {config['path']}/{config['name']}/{test}.elf")
+                        else:
 
-                            os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/asm_test/{test}_0.o >> {config['path']}/{config['name']}/{test}.elf")
-                    print("cimpileeeeeeeeeee")
-                    hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
+                                os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/asm_test/{test}_0.o >> {config['path']}/{config['name']}/{test}.elf")
+                        print("cimpileeeeeeeeeee")
+                        hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
 
-                    hexFW = open(f"{config['path']}/{config['name']}/core/{config['hexDir']}", "w+")
-                    hexFW.write("\n".join(hexCode))
-                    hexFW.close()
-                    if config["asmDir"] != "":
-                        asmFW = open(f"{config['path']}/{config['name']}/core/{config['asmDir']}", "w+")
-                        asmFW.write("".join(asmCode))
-                        asmFW.close()
-                    os.system(f"rm {config['path']}/{config['name']}/{test}.elf")
-                    os.chdir(f"{config['path']}/{config['name']}/core")
-                    print("comamdmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
-                    os.system(config["command"])
-                else:
-                    print("coreepattt")
-                    os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
-                    os.chdir(f"{config['path']}/{config['name']}/core")
-                    os.system(config["command"].replace("{testname}", test))
-                progress += progress_step
-                progressTick(progress)
-
-                os.chdir(f"{proj_dir}")
-                ic(config["logFormat"])
-                if config["logFormat"] == "csv":
-                    # os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
-                    # logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
-                    # logFWContent = logFW.readlines()
-                    # logFW.close()
-                    # os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
-                    spikeObj = LogComparator()
-                    coreObj  = LogComparator()
-                    if types== 'User_Defined_Tests':
-                        spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
+                        hexFW = open(f"{config['path']}/{config['name']}/core/{config['hexDir']}", "w+")
+                        hexFW.write("\n".join(hexCode))
+                        hexFW.close()
+                        if config["asmDir"] != "":
+                            asmFW = open(f"{config['path']}/{config['name']}/core/{config['asmDir']}", "w+")
+                            asmFW.write("".join(asmCode))
+                            asmFW.close()
+                        os.system(f"rm {config['path']}/{config['name']}/{test}.elf")
+                        os.chdir(f"{config['path']}/{config['name']}/core")
+                        print("comamdmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+                        os.system(config["command"])
                     else:
+                        print("coreepattt")
+                        os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
+                        os.chdir(f"{config['path']}/{config['name']}/core")
+                        os.system(config["command"].replace("{testname}", test))
+                    progress += progress_step
+                    progressTick(progress)
+
+                    os.chdir(f"{proj_dir}")
+                    ic(config["logFormat"])
+                    if config["logFormat"] == "csv":
+                        # os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
+                        # logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
+                        # logFWContent = logFW.readlines()
+                        # logFW.close()
+                        # os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
+                        spikeObj = LogComparator()
+                        coreObj  = LogComparator()
+                        if types!= "RISCV_DV_Tests":
+                            spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
+                        else:
 
 
-                        spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.0.log")
-                    coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
-                    if spikeObj.match(coreObj):
-                        testStatuses.append("[PASSED]")
+                            spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.0.log")
+                        coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
+                        if spikeObj.match(coreObj):
+                            testStatuses.append("[PASSED]")
+                        else:
+                            testStatuses.append("[FAILED]")
+                        os.system(f"mkdir {config['path']}/{config['name']}/logs/{test}")
+                        os.system(f"cp {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log {config['path']}/{config['name']}/logs/{test}")
+                        os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/logs/{test}")
                     else:
-                        testStatuses.append("[FAILED]")
-                    os.system(f"mkdir {config['path']}/{config['name']}/logs/{test}")
-                    os.system(f"cp {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log {config['path']}/{config['name']}/logs/{test}")
-                    os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/logs/{test}")
-                else:
-                    pass # CONVERT TO CSV AND COMPARE
-                progress += progress_step
-                progressTick(progress)
-                # except:
-                #     testStatuses.append("[Incompatble with your Core Configuration]")
-                #     progress += progress_step * 3
-                #     progressTick(progress)
+                        pass # CONVERT TO CSV AND COMPARE
+                    progress += progress_step
+                    progressTick(progress)
+                except:
+                    testStatuses.append("[Incompatble with your Core Configuration]")
+                    progress += progress_step * 3
+                    progressTick(progress)
         
                     
 
@@ -813,23 +813,23 @@ if __name__ == '__main__':
 
     @eel.expose
     def pleaseLogin(username, password):
-        # if not validateUserCredentials(username, password):
-        #     eel.throwAlert("Invalid username and password. Please try again.")
-        # else:
-        #     try:
-        #         r = requests.post(URL, json={"username": username.lower(), "password": password})
-        #     except:
-        #         eel.throwAlert("Connection Error!\nPlease check your internet connection and try again.")
-        #     if r.json()["status"] == "success":
-        #         eel.loginSuccess()
-        #     else:
-        #         eel.throwAlert("Username or Password is incorrect")
-
-
-        if username == "admin" and password == "admin":
-            eel.loginSuccess()
+        if not validateUserCredentials(username, password):
+            eel.throwAlert("Invalid username or password. Please try again.")
         else:
-            eel.throwAlert("Username or Password is incorrect")
+            try:
+                r = requests.post(URL, json={"username": username.lower(), "password": password})
+            except:
+                eel.throwAlert("Connection Error!\nPlease check your internet connection and try again.")
+            if r.json()["status"] == "success":
+                eel.loginSuccess()
+            else:
+                eel.throwAlert("Username or Password is incorrect")
+
+
+        # if username == "admin" and password == "admin":
+        #     eel.loginSuccess()
+        # else:
+        #     eel.throwAlert("Username or Password is incorrect")
 
 
 
