@@ -4,14 +4,16 @@ from scripts.utils import getFileStructure, parseFileStructure, pleaseParseTheFi
 from icecream import ic
 import subprocess as sp
 from scripts.reverter import reverter
+
 if __name__ == '__main__':
 
-#type of project select
+    #type of project select
     currentRootDir = os.getcwd()
 
     f = open("web/pathfile","r")
     c = f.readlines()
     f.close()
+
     vf = open("web/pathfilev","r")
     vc = vf.readlines()
     vf.close()

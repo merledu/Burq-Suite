@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/merledu/Burq-Suite#readme",
   "devDependencies": {
-    "electron": "^17.0.1"
+    "electron": "^6.1.12"
   }
 }
