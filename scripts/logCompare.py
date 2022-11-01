@@ -92,7 +92,7 @@ class LogComparator:
             logList = f.readlines()
 
         # Refining the log
-        startIndex = 11
+        startIndex = 12
 
         self.logList = [
                 logList[i] for i in range(startIndex, len(logList)) if '>>>>' not in logList[i]
@@ -125,14 +125,30 @@ class LogComparator:
             else:
                 self.skipped.append(i)
 
+            # type 0
+            if entry[2] in type(self).type0 or entry[2] in type(self).type12:
+                self.skipped.append(i)
+
+            # type1
+            elif entry[2] in type(self).type1:
+                self.rvfiDict['rs1_addr'].append(entry[4][: -1])
+                self.rvfiDict['rs2_addr'].append(type(self).zero_addr)
+
+                self.rvfiDict['rd_addr'].append(entry[3][: -1])
+                self.rvfiDict['rd_wdata'].append(entry[-1][2:])
+
+                self.rvfiDict['mem_addr'].append(type(self).zeroHex)
+                self.rvfiDict['mem_rdata'].append(type(self).zeroHex)
+                self.rvfiDict['mem_wdata'].append(type(self).zeroHex)
+
             # type2
-            if entry[2] in type(self).type2:
+            elif entry[2] in type(self).type2:
                 self.rvfiDict['rs1_addr'].append(type(self).zero_addr)
                 self.rvfiDict['rs2_addr'].append(type(self).zero_addr)
 
                 if (entry[2] == 'j') or (entry[2] == 'c.j'):
                     self.rvfiDict['rd_addr'].append(type(self).zero_addr)
-                    self.rvfiDict['rd_wdata'].append(type(self).zeroHex)
+                    self.rvfiDict['rd_wdata'].append(hex(int(pc, 16) + 4)[2:].zfill(8))
 
                 elif entry[2] == 'c.jal':
                     self.rvfiDict['rd_addr'].append(type(self).ra_addr)
@@ -149,18 +165,6 @@ class LogComparator:
             # type3
             elif entry[2] in type(self).type3:
                 self.rvfiDict['rs1_addr'].append(type(self).zero_addr)
-                self.rvfiDict['rs2_addr'].append(type(self).zero_addr)
-
-                self.rvfiDict['rd_addr'].append(entry[3][: -1])
-                self.rvfiDict['rd_wdata'].append(entry[-1][2:])
-
-                self.rvfiDict['mem_addr'].append(type(self).zeroHex)
-                self.rvfiDict['mem_rdata'].append(type(self).zeroHex)
-                self.rvfiDict['mem_wdata'].append(type(self).zeroHex)
-
-            # type1
-            elif entry[2] in type(self).type1:
-                self.rvfiDict['rs1_addr'].append(entry[4][: -1])
                 self.rvfiDict['rs2_addr'].append(type(self).zero_addr)
 
                 self.rvfiDict['rd_addr'].append(entry[3][: -1])
@@ -254,20 +258,15 @@ class LogComparator:
 
                 if entry[2] == 'jalr':
                     self.rvfiDict['rd_addr'].append(type(self).ra_addr)
-                    self.rvfiDict['rd_wdata'].append(hex(int(pc, 16) + 4)[2:].zfill(8))
 
                 else:
                     self.rvfiDict['rd_addr'].append(type(self).zero_addr)
-                    self.rvfiDict['rd_wdata'].append(type(self).zeroHex)
 
+                self.rvfiDict['rd_wdata'].append(hex(int(pc, 16) + 4)[2:].zfill(8))
 
                 self.rvfiDict['mem_addr'].append(type(self).zeroHex)
                 self.rvfiDict['mem_rdata'].append(type(self).zeroHex)
                 self.rvfiDict['mem_wdata'].append(type(self).zeroHex)
-
-            # type 0
-            elif entry[2] in type(self).type0 or entry[2] in type(self).type12:
-                self.skipped.append(i)
 
             # type 10
             elif entry[2] in type(self).type10:
@@ -645,7 +644,7 @@ class LogComparator:
                 if self.rvfiDict[_][i] != other.rvfiDict[_][i]:
 
                     if debug:
-                        print(f'Mismatch on line {i}.\n')
+                        print(f'Mismatch on line {i + 1}.\n')
 
                         for k in self.rvfiDict:
                             print(
@@ -656,7 +655,7 @@ class LogComparator:
 
                     if dump:
                         with open('compareFail.log', 'w', encoding='UTF-8') as f:
-                            f.write('Mismatch on line {0}\n'.format(i))
+                            f.write('Mismatch on line {0}\n'.format(i + 1))
                             for k in self.rvfiDict:
                                 f.write(
                                     f'{k}\n'
@@ -779,12 +778,13 @@ class LogComparator:
 if __name__ == '__main__':
     spike = LogComparator()
     #xodus = LogComparator()
-    ibex  = LogComparator()
+    #ibex  = LogComparator()
+    nucleusrv = LogComparator()
 
-    core = ibex
+    core = nucleusrv
 
-    #spike.spikeLogExtract('./Test.log', ibex=False, debug=True)
-    #core.coreLogExtract('./trace.csv', debug=True)
+    spike.spikeLogExtract('./Test.log', debug=True)
+    core.coreLogExtract('./trace.csv', debug=True)
     # spike.spikeLogExtract('./logs/cosimspike.log', debug=False)
     # core.ibexLogExtract('./logs/cosimibex.log', debug=False)
     # spike.spikeLogExtract('/home/mano/burq/cores/ibex/examples/sw/simple_system/towers/towers.log', debug=False)
@@ -792,7 +792,7 @@ if __name__ == '__main__':
 
     #spike.showSkipped()
     
-    #print(spike.locate(368))
+    #print(spike.locate(7))
     #print(core.locate(368))
 
     if spike.match(core, debug=True, dump=False):

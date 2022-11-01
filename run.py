@@ -12,6 +12,7 @@ from apiConfig import URL
 
 @eel.expose
 def closeRecentRecord(id):
+    print('closeRecentRecord')
 
     with open("records") as f:
         records = f.read().split("\n")
@@ -26,6 +27,7 @@ def closeRecentRecord(id):
 
 @eel.expose
 def openRecentProject(id):
+    print('openRecentProject')
 
     with open("records") as f:
         records = f.read().split("\n")
@@ -43,7 +45,10 @@ def openRecentProject(id):
     eel.goToMain()
 
 @eel.expose
-def getRecords():
+def getRecords(debug=True):
+
+    if debug:
+        ic('getRecords')
 
     with open("records") as f:
         records = f.read()
@@ -60,6 +65,7 @@ def getRecords():
 
 @eel.expose
 def runTests(core, iss, tests, projName, projPath, debug=False):
+    print('runTests')
 
     if debug:
         ic(projName, projPath)
@@ -73,6 +79,7 @@ def runTests(core, iss, tests, projName, projPath, debug=False):
     currentProgress = 0
 
     if core == "swerv":
+        print('swerv')
         os.chdir(swerv_test__path)
 
         if debug:
@@ -105,6 +112,7 @@ def runTests(core, iss, tests, projName, projPath, debug=False):
             tests_status.append(status)
 
     elif core == "ibex":
+        print('ibex')
         os.chdir(f"{currentRootDir}/{ibex_test_path}")
         perOccurProgress = (100 // len(tests)) // 2
         currentProgress = 0
@@ -236,6 +244,7 @@ def runTests(core, iss, tests, projName, projPath, debug=False):
 
 @eel.expose
 def stop_everything():
+    print('stop_everything')
     replacer() 
     os.system("./scripts/openMain.sh")
     # eel.start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8005)
@@ -246,6 +255,7 @@ def say_hello_py(x):
 
 @eel.expose
 def socdetail():
+    print('socdetail')
     yourproject = list1[-1]
     b = list2[-1]
 
@@ -275,6 +285,7 @@ def socdetail():
 
 @eel.expose
 def pyverification():
+    print('pyverification')
     yourproject=list1[-1]
     
     aa = os.system(f"cd {yourproject}")
@@ -287,9 +298,10 @@ def pyverification():
     eel.goToMain()
 
 @eel.expose
-def selectFolder(projectnamee, debug=False):
+def selectFolder(projectnamee, debug=True):
+
     if debug:
-        print("Here")
+        ic('selectFolder')
 
     root = tkinter.Tk()
     root.attributes("-topmost", True)
@@ -297,12 +309,12 @@ def selectFolder(projectnamee, debug=False):
     directory_path = filedialog.askdirectory()
 
     if debug:
-        print(directory_path)
+        ic(directory_path)
 
     list1.clear()
 
     if debug:
-        print(list1)
+        ic(list1)
 
     list1.append(directory_path)
 
@@ -311,26 +323,41 @@ def selectFolder(projectnamee, debug=False):
         ic(projectnamee)
 
     list2.append(projectnamee)
+
+    if debug:
+        ic(list2)
     
     eel.select_js(list1[-1])
 
 @eel.expose
-def selectFolder1():
-    print("Here")
+def selectFolder1(debug=True):
+
+    if debug:
+        ic('selectFolder1')
+
     root = tkinter.Tk()
     root.attributes("-topmost", True)
     root.withdraw()
     directory_path = filedialog.askdirectory()
-    print(directory_path)
+
+    if debug:
+        ic(directory_path)
+
     listuploadcore.clear()
-    print( listuploadcore)
+    
+    if debug:
+        ic(listuploadcore)
+
     listuploadcore.append(directory_path)
-    ic(listuploadcore)
+
+    if debug:
+        ic(listuploadcore)
    
     eel.select_js1(listuploadcore[-1])
+
 @eel.expose
 def selecttest():
-    print("Here")
+    print("selecttest")
     root = tkinter.Tk()
     root.attributes("-topmost", True)
     root.withdraw()
@@ -345,7 +372,7 @@ def selecttest():
 
 @eel.expose
 def selectlogfile():
-    print("Here")
+    print("selectlogfile")
     root = tkinter.Tk()
     root.attributes("-topmost", True)
     root.withdraw()
@@ -363,7 +390,7 @@ def selectlogfile():
     
 #copy corefiles in ser seleted path
 def copycorefiles():
-    
+    print('copycorefiles')
     
     yourproject=list1[-1]
     
@@ -376,6 +403,7 @@ def copycorefiles():
 
 @eel.expose
 def verCoreTest(listver):
+    print('verCoreTest')
     i=listver[-1]
     if i=="SWERV-EH1":
         eel.testswerv()
@@ -386,7 +414,7 @@ def verCoreTest(listver):
 
 @eel.expose
 def getlistswerv():
-
+    print('getlistswerv')
     namelist=[]
     root="cores/swerv/testbench/tests/"
     root1="testcases/User_Defined_Tests/"
@@ -407,6 +435,7 @@ def getlistswerv():
 
 @eel.expose
 def getlistibex():
+    print('getlistibex')
     namelist=[]
     root="testcases/Riscv_tests"
     root1="testcases/Riscv_tests"
@@ -431,14 +460,20 @@ def getlistibex():
     eel.showIbexTests(namelist)
 
 @eel.expose
-def datasend(listt):
-    filev=open("web/pathfilev","w")
-    filev.write(listt[0])
-    filev.close()
-    print(listt)
+def datasend(listt, debug=True):
+
+    if debug:
+        ic('datasend')
+
+    with open("web/pathfilev", "w") as f:
+        f.write(listt[0])
+
+    if debug:
+        ic(listt)
 
 @eel.expose
 def genCore(isa,ext,bus):
+    print('genCore')
     driverKey= f"corei{bus}"
 
     file = open("web/driver", "w")
@@ -447,6 +482,7 @@ def genCore(isa,ext,bus):
 
 @eel.expose
 def floatingpointtest():
+    print('floatingpointtest')
     namelist=[]
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
     root="testcases/Floating_point_tests_for_azadi"
@@ -462,6 +498,7 @@ def floatingpointtest():
 
 @eel.expose
 def merlvectortest():
+    print('merlvectortest')
     namelist=[]
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
     root="testcases/MERL_vector_Tests"
@@ -477,6 +514,7 @@ def merlvectortest():
 
 @eel.expose
 def riscvtest():
+    print('riscvtest')
     namelist=[]
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
     root="testcases/Riscv_tests"
@@ -492,6 +530,7 @@ def riscvtest():
 
 @eel.expose
 def selfcheckingvectortest():
+    print('selfcheckingvectortest')
     namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
     root="testcases/Self-Checking-vector-tests"
@@ -506,22 +545,28 @@ def selfcheckingvectortest():
     eel.showselfcheckingvectorTests(namelist)
 
 @eel.expose
-def usertest():
-    namelist=[]
-        #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
-    root="testcases/User_Defined_Tests"
-    # get list of directory names from root
+def usertest(debug=True):
+    namelist = []
+    #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
+    root = "./testcases/User_Defined_Tests"
+
+    # Get list of directory names from root
     for dirname in os.listdir(root):    
     # for path in filepaths:
         # a=path.split("/")
-        ic(dirname)
+        if debug:
+            ic(dirname)
+
         namelist.append(dirname)
         
-    print(namelist)
+    if debug:
+        ic(namelist)
+
     eel.usersTests(namelist)
 
 @eel.expose
 def swervtest():
+    print('swervtest')
     namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
     root="testcases/Swerv_Tests"
@@ -537,6 +582,7 @@ def swervtest():
 
 @eel.expose
 def burqgeneratedtest():
+    print('burqgeneratedtest')
     os.system(f"{currentRootDir}")
 
     namelist=[]
@@ -554,7 +600,11 @@ def burqgeneratedtest():
     eel.showburqTests(namelist)
 
 @eel.expose
-def dvtest():
+def dvtest(debug=True):
+    
+    if debug:
+        ic('dvtest')
+
     tests = [
         "riscv_arithmetic_basic_test",
         "riscv_rand_instr_test",
@@ -570,6 +620,7 @@ def dvtest():
         "riscv_csr_test",
         "riscv_unaligned_load_store_test"
     ]
+
     eel.showdvTests(tests)
 
 # @eel.expose
@@ -596,8 +647,8 @@ def dvtest():
 
 @eel.expose
 def enduploadcore(config, tests, types, debug=False):
-    if debug:
-        ic(config, tests, types)
+    ic('enduploadcore')
+    ic(config, tests, types)
    
     with open("web/pathfile", "w") as f:
         f.write(f"{config['path']}/{config['name']}")
@@ -605,14 +656,13 @@ def enduploadcore(config, tests, types, debug=False):
     with open("web/pathfilev", "w") as f:
         f.write("custom_verification")
 
-    uploadedcore=listuploadcore[-1]
+    uploadedcore = listuploadcore[-1]
 
     if debug:
         ic(uploadedcore)
     
-    os.system(f"mkdir {config['path']}/{config['name']}")
-    os.system(f"mkdir {config['path']}/{config['name']}/core")
-    # os.system(f"cp -r {uploadedcore} {config['path']}/{config['name']}/core/")
+    os.makedirs(f"{config['path']}/{config['name']}")
+    os.makedirs(f"{config['path']}/{config['name']}/core")
     copy_tree(uploadedcore, f"{config['path']}/{config['name']}/core/")
 
     with open(f"{config['path']}/{config['name']}/config.json", "w+") as f:
@@ -623,136 +673,71 @@ def enduploadcore(config, tests, types, debug=False):
     progress = 0
 
     if config["swerv"] == "": 
-        print("Custom core selected")
+
+        if debug:
+            ic("Custom core selected")
+
         extension_flags = "rv32" + "".join(config["extensions"])
-        os.system(f"mkdir {config['path']}/{config['name']}/tmp")
+        os.makedirs(f"{config['path']}/{config['name']}/tmp")
+        os.path.exists(f"{config['path']}/{config['name']}/tmp")
         os.chdir(f"{config['path']}/{config['name']}")
         proj_dir = os.getcwd()
-        os.system("mkdir logs")
 
-        for i,test in enumerate(tests):
+        if debug:
+            ic(proj_dir)
+
+        os.makedirs("logs")
+
+
+        for i, test in enumerate(tests):
+
             # ISS Sim
-            if debug:
-                try:
-                    if types == "RISCV_DV_Tests":
-                        print("testtttttttttttttttttttttttt")
-                        os.chdir(f"{currentRootDir}/dv")
-                        ic(os.system("pwd"))
-                        os.system(f"python3 run.py --iss=spike --simulator=pyflow --target={extension_flags} --output={config['path']}/{config['name']}/tmp/{test}_out --iterations=1  --test={test}")
-                        os.chdir(f"{config['path']}/{config['name']}")
-                    else:
-                        os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
-                        os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --c_test=tmp/{test}/{test}.c")
-                    processes = psutil.pids()
-                    anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name()=="spike" ,processes))
-                    if len(anyStillRunningSpikeProcess)!= 0:
-                        for spikeProcessID in anyStillRunningSpikeProcess:
-                            psutil.Process(spikeProcessID).kill()
-                    # os.system(f"python3 {currentRootDir}/dv/scripts/spike_log_to_trace_csv.py --log {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log --csv {config['path']}/{config['name']}/tmp/{test}.csv")
-                    progress += progress_step
-                    progressTick(progress)
-                    # CORE Sim
-                    if config["testFormat"] == "asm":
-                        ic(config["testFormat"])
-                        if types!="RISCV_DV_Tests":
-                            os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o >> {config['path']}/{config['name']}/{test}.elf")
-                        else:
+            try:
 
-                                os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/asm_test/{test}_0.o >> {config['path']}/{config['name']}/{test}.elf")
-                        print("cimpileeeeeeeeeee")
-                        hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
-
-                        hexFW = open(f"{config['path']}/{config['name']}/core/{config['hexDir']}", "w+")
-                        hexFW.write("\n".join(hexCode))
-                        hexFW.close()
-                        if config["asmDir"] != "":
-                            asmFW = open(f"{config['path']}/{config['name']}/core/{config['asmDir']}", "w+")
-                            asmFW.write("".join(asmCode))
-                            asmFW.close()
-                        os.system(f"rm {config['path']}/{config['name']}/{test}.elf")
-                        os.chdir(f"{config['path']}/{config['name']}/core")
-                        print("comamdmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
-                        os.system(config["command"])
-                    else:
-                        print("coreepattt")
-                        os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
-                        os.chdir(f"{config['path']}/{config['name']}/core")
-                        os.system(config["command"].replace("{testname}", test))
-                    progress += progress_step
-                    progressTick(progress)
-
-                    os.chdir(f"{proj_dir}")
-                    ic(config["logFormat"])
-                    if config["logFormat"] == "csv":
-                        # os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
-                        # logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
-                        # logFWContent = logFW.readlines()
-                        # logFW.close()
-                        # os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
-                        spikeObj = LogComparator()
-                        coreObj  = LogComparator()
-                        if types!= "RISCV_DV_Tests":
-                            spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
-                        else:
-
-
-                            spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.0.log")
-                        coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
-                        if spikeObj.match(coreObj):
-                            testStatuses.append("[PASSED]")
-                        else:
-                            testStatuses.append("[FAILED]")
-                        os.system(f"mkdir {config['path']}/{config['name']}/logs/{test}")
-                        os.system(f"cp {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log {config['path']}/{config['name']}/logs/{test}")
-                        os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/logs/{test}")
-                    else:
-                        pass # CONVERT TO CSV AND COMPARE
-                    progress += progress_step
-                    progressTick(progress)
-                except:
-                    testStatuses.append("[Incompatble with your Core Configuration]")
-                    progress += progress_step * 3
-                    progressTick(progress)
-            
-            else:
                 if types == "RISCV_DV_Tests":
-                    print("testtttttttttttttttttttttttt")
+                    ic("RISCV_DV_Tests")
                     os.chdir(f"{currentRootDir}/dv")
-                    ic(os.system("pwd"))
-                    os.system(f"python3 run.py --iss=spike --simulator=pyflow --target={extension_flags} --output={config['path']}/{config['name']}/tmp/{test}_out --iterations=1  --test={test}")
+                    os.system(f"python3 run.py --iss spike --simulator pyflow --target {extension_flags} -o {config['path']}/{config['name']}/tmp/{test}_out -i 1  --test {test}")
                     os.chdir(f"{config['path']}/{config['name']}")
+
                 else:
                     os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
-                    os.system(f"python3 {currentRootDir}/dv/run.py --iss=spike --simulator=pyflow --target={extension_flags} --output=tmp/{test}_out --c_test=tmp/{test}/{test}.c")
+                    os.system(f"python3 {currentRootDir}/dv/run.py --iss spike --simulator pyflow --target {extension_flags} --output tmp/{test}_out --c_test tmp/{test}/{test}.c")
                 processes = psutil.pids()
-                anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name()=="spike" ,processes))
-                if len(anyStillRunningSpikeProcess)!= 0:
+                anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name() == "spike", processes))
+
+                if len(anyStillRunningSpikeProcess) != 0:
+
                     for spikeProcessID in anyStillRunningSpikeProcess:
                         psutil.Process(spikeProcessID).kill()
-                # os.system(f"python3 {currentRootDir}/dv/scripts/spike_log_to_trace_csv.py --log {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log --csv {config['path']}/{config['name']}/tmp/{test}.csv")
+
                 progress += progress_step
                 progressTick(progress)
+
                 # CORE Sim
                 if config["testFormat"] == "asm":
-                    ic(config["testFormat"])
-                    if types!="RISCV_DV_Tests":
-                        os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o >> {config['path']}/{config['name']}/{test}.elf")
+
+                    if types != "RISCV_DV_Tests":
+                        os.system(f"riscv64-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o > {config['path']}/{config['name']}/core/{config['hexDir']}/test.elf")
+
                     else:
+                        ic(os.getcwd())
+                        os.system(f"riscv64-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/asm_test/{test}_0.o > {config['path']}/{config['name']}/core/{config['hexDir']}/test.elf")
 
-                            os.system(f"riscv32-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/asm_test/{test}_0.o >> {config['path']}/{config['name']}/{test}.elf")
-                    print("cimpileeeeeeeeeee")
-                    hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
+                    #print("cimpileeeeeeeeeee")
+                    #hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
 
-                    hexFW = open(f"{config['path']}/{config['name']}/core/{config['hexDir']}", "w+")
-                    hexFW.write("\n".join(hexCode))
-                    hexFW.close()
-                    if config["asmDir"] != "":
-                        asmFW = open(f"{config['path']}/{config['name']}/core/{config['asmDir']}", "w+")
-                        asmFW.write("".join(asmCode))
-                        asmFW.close()
-                    os.system(f"rm {config['path']}/{config['name']}/{test}.elf")
+
+                    #hexFW = open(f"{config['path']}/{config['name']}/core/{config['hexDir']}", "w+")
+                    #hexFW.write("\n".join(hexCode))
+                    #hexFW.close()
+                    #if config["asmDir"] != "":
+                    #    asmFW = open(f"{config['path']}/{config['name']}/core/{config['asmDir']}", "w+")
+                    #    asmFW.write("".join(asmCode))
+                    #    asmFW.close()
+                    #os.system(f"rm {config['path']}/{config['name']}/{test}.elf")
                     os.chdir(f"{config['path']}/{config['name']}/core")
-                    print("comamdmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+                    #print("comamdmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
                     os.system(config["command"])
                 else:
                     print("coreepattt")
@@ -775,9 +760,7 @@ def enduploadcore(config, tests, types, debug=False):
                     if types!= "RISCV_DV_Tests":
                         spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
                     else:
-
-
-                        spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.0.log")
+                        spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/test.0.log")
                     coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
                     if spikeObj.match(coreObj):
                         testStatuses.append("[PASSED]")
@@ -790,13 +773,15 @@ def enduploadcore(config, tests, types, debug=False):
                     pass # CONVERT TO CSV AND COMPARE
                 progress += progress_step
                 progressTick(progress)
-    
-                
-
+            except:
+                testStatuses.append("[Incompatble with your Core Configuration]")
+                progress += progress_step * 3
+                progressTick(progress)
+            
             
         
         os.chdir(f"{proj_dir}")
-        os.system("rm -rf tmp")
+        #os.system("rm -rf tmp")
         # if len(list(filter(lambda x:x=="[PASSED]" or x=="[Incompatble with your Core Configuration]", testStatuses))) == len(testStatuses):
         #     os.system("rm -rf failed_logs")
         
@@ -865,6 +850,7 @@ def enduploadcore(config, tests, types, debug=False):
 
 
 def progressTick(progress):
+    print('progressTick')
     if progress < 20:
         eel.updateProgressBar(progress, "#f63a0f")
     elif progress < 40:
@@ -880,37 +866,45 @@ def progressTick(progress):
 #dv test select
 @eel.expose
 def selectdvtest(dvtestlist):
+    print('selectdvtest')
     print(dvtestlist)
 
 def validateUserCredentials(username, password):
     return username.isalpha() and password != "" and len(password) >= 8 and len(username) >= 3
 
 @eel.expose
-def pleaseLogin(username, password):
-    #if not validateUserCredentials(username, password):
-    #    eel.throwAlert("Invalid username or password. Please try again.")
-    #else:
-    #    try:
-    #        r = requests.post(URL, json={"username": username.lower(), "password": password})
-    #    except:
-    #        eel.throwAlert("Connection Error!\nPlease check your internet connection and try again.")
-    #    if r.json()["status"] == "success":
-    #        eel.loginSuccess()
-    #    else:
-    #        eel.throwAlert("Username or Password is incorrect")
+def pleaseLogin(username, password, debug=True):
+    
+    if debug:
 
-    if username == "admin" and password == "admin":
-        eel.loginSuccess()
+        if username == "admin" and password == "admin":
+            eel.loginSuccess()
+
+        else:
+            eel.throwAlert("Username or Password is incorrect")
+
     else:
-        eel.throwAlert("Username or Password is incorrect")
 
+        if not validateUserCredentials(username, password):
+            eel.throwAlert("Invalid username or password. Please try again.")
 
+        else:
 
+            try:
+                r = requests.post(URL, json={"username": username.lower(), "password": password})
 
+            except:
+                eel.throwAlert("Connection Error!\nPlease check your internet connection and try again.")
 
+            if r.json()["status"] == "success":
+                eel.loginSuccess()
+
+            else:
+                eel.throwAlert("Username or Password is incorrect")
 
 @eel.expose
 def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
+    print('enduploadcore__')
     ic(swerv)
     tests_status=[]
     listcommands=[]
