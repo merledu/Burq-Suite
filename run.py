@@ -85,7 +85,7 @@ def getRecords(debug=True):
 
 
 @eel.expose
-def runTests(core, iss, tests, projName, projPath, debug=True):
+def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
     if debug:
         ic(sys._get_frame().f_code.co_name)
 
@@ -99,37 +99,121 @@ def runTests(core, iss, tests, projName, projPath, debug=True):
     if core == "swerv":
         if debug:
             ic(core)
+        
+        if selectedtest == 'Swerv_Tests':
+            os.chdir(swerv_test__path)
 
-        os.chdir(swerv_test__path)
+            if debug:
+                ic(os.getcwd())
 
-        if debug:
+            for test in tests:
+                # check if test directory exists
+                if os.path.isdir(test) == False:
+                    # create test directory
+                    os.mkdir(test)
+
+                os.chdir(test)
+                os.system("export RISCV=/opt/riscv32")
+                os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
+                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
+                os.system("export PATH=/opt/riscv32/bin:$PATH")
+                os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
+                currentProgress += perOccurProgress
+                progressTick(currentProgress)
+                os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
+                currentProgress += perOccurProgress
+                progressTick(currentProgress)
+                # Check is test.log and exec.log exists
+                if debug:
+                    ic(os.getcwd())
+                    ic(os.path.isfile(f"{test}.log"))
+                    ic(os.path.isfile("exec.log"))
+                status = call(f"{test}.log", "exec.log")
+                tests_status.append(status)
+        
+        if selectedtest=="RISCV_DV_Tests":
+            os.chdir(swerv_test__path)
+            if debug:
+                ic(os.getcwd())
+            for test in tests:
+                # check is test directory exists
+                if os.path.isdir(test) == False:
+                    os.mkdir(test)
+                os.chdir(test)
+                os.chdir(f"{currentRootDir}/dv")
+                os.system(f"python3 run.py --iss whsiper --simulator pyflow --test={test} --output_dir {test}")
+                os.chdir(f"{test}")
+                # Enter in dv root
+                # Run command
+                # Go into test directory
+                # Extract assembly
+                # Go into swev directory
+                # Place it in test bench
+                # Create test directory
+                # Run make  and whisper same as we previuosly do
+                # DV command
+                os.system(f"python3 run.py --iss whisper --test {test} --simulator pyflow --target rv32imc --output_dir {test}")
+                # os.system("export RISCV=/opt/riscv32")
+
+                os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
+
+                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
+                os.system("export PATH=/opt/riscv32/bin:$PATH")
+                os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
+                currentProgress += perOccurProgress
+                progressTick(currentProgress)
+                os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
+                currentProgress += perOccurProgress
+                progressTick(currentProgress)
+                ic(os.getcwd())
+                #check is test.log and exec.log exists
+                ic(os.path.isfile(f"{test}.log"))
+                ic(os.path.isfile("exec.log"))
+                status = call(f"{test}.log", "exec.log")
+                tests_status.append(status)
+        if selectedtest=="User_Defined_Tests":
+            os.chdir(swerv_test__path)
+            ic(swerv_test__path)
+            
             ic(os.getcwd())
+            for test in tests:
+#                 os.chdir(f"{currentRootDir}/testcases/User_Defined_Tests/{test}")
+#                 os.system(f"cp -a {currentRootDir}/testcases/User_Defined_Tests/crt0.s {currentRootDir}/testcases/User_Defined_Tests/{test}")
+#                 mki_str="""OFILES = test.o crt0.o
+# TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
 
-        for test in tests:
-            # check if test directory exists
-            if os.path.isdir(test) == False:
-                # create test directory
-                os.mkdir(test)
+#                 mkifile=open(f"{test}.mki","w+")
+#                 #write mki_str in file
+#                 mkifile.write(mki_str.replace("test", test))
+#                 mkifile.close()
+                os.system(f"cp -a {currentRootDir}/testcases/User_Defined_Tests/{test} {currentRootDir}/cores/swerv/testbench/tests/")
+                os.chdir(f"{currentRootDir}/cores/swerv/")
+                # check is test directory exists
+                if os.path.isdir(test) == False:
+                    # create test directory
+                    os.mkdir(test)
+                os.chdir(test)
+                
+                os.system("export RISCV=/opt/riscv32")
 
-            os.chdir(test)
-            os.system("export RISCV=/opt/riscv32")
+                os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
 
-            os.system(f"export whisper={currentRootDir}/SweRV-ISS/build-Linux/./whisper")
-
-            os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
-            os.system("export PATH=/opt/riscv32/bin:$PATH")
-            os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
-            currentProgress += perOccurProgress
-            progressTick(currentProgress)
-            os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
-            currentProgress += perOccurProgress
-            progressTick(currentProgress)
-            ic(os.getcwd())
-            #check is test.log and exec.log exists
-            ic(os.path.isfile(f"{test}.log"))
-            ic(os.path.isfile("exec.log"))
-            status = call(f"{test}.log", "exec.log")
-            tests_status.append(status)
+                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
+                os.system("export PATH=/opt/riscv32/bin:$PATH")
+                os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
+                #srem=removezero("exec.log")
+                currentProgress += perOccurProgress
+                progressTick(currentProgress)
+                os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
+               # wrem=removew(f"{test}.log")
+                currentProgress += perOccurProgress
+                progressTick(currentProgress)
+                ic(os.getcwd())
+                #check is test.log and exec.log exists
+                ic(os.path.isfile(f"{test}.log"))
+                ic(os.path.isfile("exec.log"))
+                status = call(f"{test}.log", "exec.log")
+                tests_status.append(status)
 
     elif core == "ibex":
         print('ibex')
@@ -417,21 +501,57 @@ def getlistswerv():
     print('getlistswerv')
     namelist=[]
     root="cores/swerv/testbench/tests/"
-    root1="testcases/User_Defined_Tests/"
+    #root1="testcases/User_Defined_Tests/"
     # get list of directory names from root
     for dirname in os.listdir(root):    
     # for path in filepaths:
         # a=path.split("/")
         ic(dirname)
         namelist.append(dirname)
-    for dirname in os.listdir(root1):    
+    #for dirname in os.listdir(root1):    
+    ## for path in filepaths:
+    #    # a=path.split("/")
+    #    ic(dirname)
+    #    namelist.append(dirname)
+        
+    print(namelist)
+    eel.showSwervTests(namelist)
+
+@eel.expose
+def getlistuser():
+    namelist=[]
+        #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
+    root="testcases/User_Defined_Tests"
+    # get list of directory names from root
+    for dirname in os.listdir(root):    
     # for path in filepaths:
         # a=path.split("/")
         ic(dirname)
         namelist.append(dirname)
         
     print(namelist)
-    eel.showSwervTests(namelist)
+    eel.showIbexTests(namelist)
+
+
+@eel.expose
+def getlistdv():
+    tests = [
+        "riscv_arithmetic_basic_test",
+        "riscv_rand_instr_test",
+        "riscv_jump_stress_test",
+        "riscv_loop_test",
+        "riscv_rand_jump_test",
+        "riscv_mmu_stress_test",
+        "riscv_no_fence_test",
+        "riscv_illegal_instr_test",
+        "riscv_ebreak_test",
+        "riscv_ebreak_debug_mode_test",
+        "riscv_full_interrupt_test",
+        "riscv_csr_test",
+        "riscv_unaligned_load_store_test"
+    ]
+    eel.showIbexTests(tests)
+
 
 @eel.expose
 def getlistibex():
@@ -807,7 +927,7 @@ def enduploadcore(config, tests, types, debug=True):
 
     else: # if swerv based
         RV_ROOT = f"{config['path']}/{config['name']}/core/"
-        WHISPER = f"{currentRootDir}/SweRV-ISS/build-Linux/./whisper"
+        WHISPER = f"{currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper"
         for test in tests:
             if os.path.exists(f"{config['path']}/{config['name']}/core/testbench/tests/{test}"):
                 # del the folder
@@ -1004,7 +1124,7 @@ def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
     if swerv=="swervbased":
         os.system("export RISCV=/opt/riscv64")
 
-        os.system(f"export whisper='{currentRootDir}/Verification/SweRV-ISS/build-Linux/./whisper'")
+        os.system(f"export whisper='{currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper'")
 
         os.system(f"export RV_ROOT='{currentRootDir}/cores/swerv'")
         os.system("export PATH=/opt/riscv64/bin:$PATH")

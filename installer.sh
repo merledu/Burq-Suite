@@ -1,12 +1,12 @@
-#!/bin/bash
-apt install nodejs npm
-
+# Install node modules
 npm install
 
+# Create virtual environment and install dependencies
 python3 -m venv venv
 source ./venv/bin/activate
 pip install -r ./requirements.txt
 
+# Install riscv-dv dependencies
 cd ./dv
 pip install -r ./requirements.txt
 cd ../
