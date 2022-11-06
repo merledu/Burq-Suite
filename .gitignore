@@ -1,3 +1,10 @@
+# Node specific files
 node_modules
+
+# Python specific files
 __pycache__
+venv
+
+# Editor specific files
 .vscode
+.idea

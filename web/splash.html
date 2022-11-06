@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/icons/flash.png">
+    <link href="loginfont.css" rel="stylesheet">
 
+
+    <link href="login.css" rel="stylesheet"  crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title></title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/splash.css" rel="stylesheet" />
@@ -46,14 +50,128 @@
         #logselect{
             display: none;
         }
+        #main{
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <div id="login" class="box-form" >
+        <div class="login_close">
+            <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
+        </div>
+        <div class="left">
+            <div class="overlay">
+            <img src="assets/icons/flash.png" style="  height: 108px; width: 114px; margin-top: 80px;"><h2 style="    margin-top: -100px; margin-left: 106px; font-size: 59px;">The Burq Suite</h2>
+            <p style="    margin-top: 68px;">Burq Suite is the RISC-V Automated Core Verification Suite. Verify your Core by login your Account.</p>
+            <span >
+    <p style="    margin-top: 249px; color: #767676;"> Powered by Micro Electronics Research Lab (MERL) - UIT  </p>
+                
+            </span>
+            </div>
+        </div>
+        
+        
+            <div class="right">
+            <h5 style="margin-top: 30px;color: aliceblue;">Login</h5>
+            <p style="margin-top: 68px;">Don't have an account? <a href="http://socnow.software">Create Your Account</a> it takes less than a minute</p>
+            <div class="form">
+                <input type="email" id="email" placeholder="Username">
+                <br>
+                <input  type="password" id="password" placeholder="Password">
+            </div>
+                
+                <br><br>
+                
+            <div class="remember-me--forget-password">
+                    <!-- Angular -->
+       
+                <a href="http://socnow.software">Forget password?</a>
+            </div>
+                
+                <br>
+                <Button type="submit" onclick="emailSend()" id="submit" >Login</Button>
+        </div>
+       
+    </div>
+<!-- <div id="login_main">
+    <div class="page">
+        
+        <div class="container">
+            <div class="login_close">
+                <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
+            </div>
+          <div class="left">
+            <img  src="assets/icons/loginn.png"  />
+            <div class="eula" style="margin-top: -15px;">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
+          </div>
+          <div class="right">
+            <svg viewBox="0 0 320 300">
+              <defs>
+                <linearGradient
+                                inkscape:collect="always"
+                                id="linearGradient"
+                                x1="13"
+                                y1="193.49992"
+                                x2="307"
+                                y2="193.49992"
+                                gradientUnits="userSpaceOnUse">
+                  <stop
+                        style="stop-color:#00c3ff;"
+                        offset="0"
+                        id="stop876" />
+                  <stop
+                        style="stop-color:#2553a8;"
+                        offset="1"
+                        id="stop878" />
+                </linearGradient>
+              </defs>
+              <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
+            </svg>
+            <div class="form">
+              <label for="email">Username</label>
+              <input type="email" id="email">
+              <label for="password">Password</label>
+              <input type="password" id="password">
+              <input type="submit" onclick="emailSend()" id="submit" value="Submit">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  -->
 
         <div id="main">
             <div class="row">
                 <div class="col-8 frs">
                     <div class="container">
+
+
+  
+	
+  
+
+
+                       
+                            
+                        <div class="login_close pdz">
+                            <div class="dropdown" style="float:right;    margin-top: -41px;background-color: #0a0808;">
+                                <button class="dropbtn" style="margin-top: 13px;background-color: #15191a;
+                            "><img style="position: absolute;
+                                    margin-left: -10p;
+                                    margin-left: -30px;
+                                    margin-top: -10px;
+                                    height: 33px;
+                                    background-color: #15191a;
+
+                                    width: 61px;" src="assets/icons/userlog.png"></button>
+                                <div class="dropdown-content">
+                                   <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
+                                <a href="" style="height:43px" >Logout</a>
+                               
+                                </div>
+                              </div>
+                            
+                        </div>
 
                         <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
                         <p>Don't know where to start?</p>
@@ -113,11 +231,31 @@
             <div class="row">
                 <div class="col-4 sec">
                     <div class="container">
+                        
+                        <div class="login_close pdz">
+                            <div class="dropdown" style="float:right;    margin-top: -41px;background-color: #24272e;">
+                                <button class="dropbtn" style="margin-top: 13px;background-color: #24272e;"><img style="position: absolute;
+                                    margin-left: -10p;
+                                    margin-left: -30px;
+                                    margin-top: -10px;
+                                    height: 33px;
+                                    background-color: #24272e;
+                                    width: 61px;" src="assets/icons/userlog.png"></button>
+                                <div class="dropdown-content">
+                                   <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
+                                <a href="" style="height:43px" >Logout</a>
+                               
+                                </div>
+                              </div>
+                            
+                        </div>
                         <div style="margin-top: 20px;" id="back-btn-div">
                             <button onclick="closeNewProject()" class="btn back-btn">
                                 <img src="assets/icons/back2.png" />
                             </button>
                         </div>
+	
+                       
                         <div id="config-btns">
                             <h4>- Project Selection -</h4>
                             <button id="cust_test_btn" onclick="changeProject2(event,'custom_test')" class="btn config-btn" value="soc">
@@ -136,6 +274,7 @@
     
                            
                         </div>
+                        
                         
 
                     </div>
@@ -411,7 +550,10 @@
                                         <label> Atomic (A) </label>
                                         <br />
                                         <input type="checkbox" value="f" name="ext" />
-                                        <label> Floating Point (F) </label>
+                                        <label> Single Precision Floating Point (F) </label>
+                                        <br />
+                                        <input type="checkbox" value="d" name="ext" />
+                                        <label> Double Precision Floating Point (D) </label>
                                         <br />
                                         <input type="checkbox" value="c" name="ext" />
                                         <label> Compressed (C) </label>
@@ -509,7 +651,7 @@
                                 <h6 style="font-weight: lighter;width: 500px;">Enter commands to Run test case </h6>
                                 
                               
-                                <input id="getcommands" placeholder="make -f Makefile TEST={testname}" style="background-color: black;color: white;width: 412px;">
+                                <input id="getcommands" placeholder="make -f Makefile TEST={testname} OR ./logGenerator.sh" style="background-color: black;color: white;width: 412px;">
                                 
                             </div>
                             
@@ -568,10 +710,10 @@
 
                             <h6 style="font-weight: lighter;">Choose the format for your core log.</h6>
                                     <form>
-                                        <input type="radio" name="logformat" value="asm" checked />
+                                        <input type="radio" name="logformat" value="log" checked />
                                         <label> RISC-V Trace Log (.log) </label>
                                         <br />
-                                        <input type="radio" value="c" name="logformat" />
+                                        <input type="radio" value="csv" name="logformat" />
                                         <label> RISC-V Trace CSV (.csv) </label>
                                         
                                     </form>
@@ -791,14 +933,16 @@
                                             <br>
                                             <input type="radio" id="gencoretest" name="upCore" value="MERL_vector_Tests" />
                                             <label> MERL_vector_Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="Riscv-tests" />
+                                            <input type="radio" id="gencoretest" name="upCore" value="Riscv_tests" />
                                             <label> Riscv-tests </label><br>
                                             <input type="radio" id="gencoretest" name="upCore" value="Self-Checking-vector-tests" />
                                             <label> Self-Checking-vector-tests </label><br>
                                             <input type="radio" id="gencoretest" name="upCore" value="Swerv_Tests" />
                                             <label>Swerv_Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="users-Tests" />
-                                            <label>User-Tests </label>
+                                            <input type="radio" id="gencoretest" name="upCore" value="User_Defined_Tests" />
+                                            <label>User-Tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="RISCV_DV_Tests" />
+                                            <label>RISCV_DV_Tests </label>
                                         </form> 
                                 
                                 </div>
@@ -857,6 +1001,7 @@
                             <div id="prebuilt-end1">
                                 <div class="progress">
                                     <div class="progress-bar"></div>
+                                    <p id="progress-indicator">0%</p>
                                   </div>
                             </div>
                            
@@ -889,9 +1034,7 @@
                                             <input type="radio" id="prebuiltCore" name="prebuiltCore" value="ibex" checked />
                                             <label> IBEX </label>
                                             <br>
-                                            <input type="radio" id="prebuiltCore" name="prebuiltCore" value="swerv" />
-                                            <label> SWERV-EH1 </label>
-                                            <br>
+                                            
                                             <input type="radio" id="prebuiltCore" name="prebuiltCore" value="swerv" />
                                             <label> SWERV-EL2 </label>
                                         </form>
@@ -931,9 +1074,7 @@
                                             <input type="radio" id="prebuiltISS" name="prebuiltISS" value="whisper"/>
                                             <label> WHISPER </label>
                                             <br />
-                                            <input type="radio" id="prebuiltISS" name="prebuiltISS" value="ovpsim" />
-                                            <label> OVPSIM </label>
-                                            <br />
+                                           
                                             
                                         </form>
                                     </div>
@@ -1001,7 +1142,8 @@
                             <div id="prebuilt-end">
                                 <div class="progress">
                                     <div class="progress-bar"></div>
-                                  </div>
+                                    <p id="progress-indicator">0%</p>
+                                </div>
                             </div>
 
                         </div>
@@ -1015,10 +1157,93 @@
 
         <script src="bootstrap/js/bootstrap.min.js" ></script>
         <script src="jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
         <script src="script.js"></script>
         <script type="text/javascript" src="/eel.js"></script>
 
         <script type="text/javascript">
+
+
+function closeEverythingPaleez(){
+    window.close();
+}
+
+            eel.expose(throwAlert);
+            function throwAlert(e) {
+                alert(e);
+            }
+
+            eel.expose(loginSuccess);
+            function loginSuccess(){
+                document.getElementById("login").style.display = "none";
+                document.getElementById("main").style.display = "block";
+            }
+
+            function emailSend(){
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                eel.pleaseLogin(email,password);
+            }
+
+var current = null;
+document.querySelector('#email').addEventListener('focus', function(e) {
+  if (current) current.pause();
+  current = anime({
+    targets: 'path',
+    strokeDashoffset: {
+      value: 0,
+      duration: 700,
+      easing: 'easeOutQuart'
+    },
+    strokeDasharray: {
+      value: '240 1386',
+      duration: 700,
+      easing: 'easeOutQuart'
+    }
+  });
+});
+document.querySelector('#password').addEventListener('focus', function(e) {
+  if (current) current.pause();
+  current = anime({
+    targets: 'path',
+    strokeDashoffset: {
+      value: -336,
+      duration: 700,
+      easing: 'easeOutQuart'
+    },
+    strokeDasharray: {
+      value: '240 1386',
+      duration: 700,
+      easing: 'easeOutQuart'
+    }
+  });
+});
+document.querySelector('#submit').addEventListener('focus', function(e) {
+  if (current) current.pause();
+  current = anime({
+    targets: 'path',
+    strokeDashoffset: {
+      value: -730,
+      duration: 700,
+      easing: 'easeOutQuart'
+    },
+    strokeDasharray: {
+      value: '530 1386',
+      duration: 700,
+      easing: 'easeOutQuart'
+    }
+  });
+});
+
+            eel.expose(updateProgressBar);
+            function updateProgressBar(progress, color){
+                // alert(progress);
+                var pBar = document.getElementsByClassName("progress-bar")[0];
+                pBar.style.width = progress + "%";
+                pBar.style.backgroundColor = color;
+                var pInd = document.getElementById("progress-indicator");
+                pInd.innerHTML = progress + "%";
+            }
 
 eel.getRecords();
 
@@ -1153,6 +1378,11 @@ function opneRecentProject(id){
                         document.getElementById("logselect").style.display = "none";
                         document.getElementById("testcase_asm").style.display = "none";
                 } else if(comp == "command"){
+                    var hexDir = document.getElementById("hexDir").value;
+                    if (hexDir===""){
+                        alert("Enter hex path")
+                    }
+                    else{
                     
                         document.getElementById("core-command").style.display = "block";
                         document.getElementById("uploadcore").style.display = "none";
@@ -1167,6 +1397,7 @@ function opneRecentProject(id){
                     
                    
                 }
+            }
                 if(comp == "upcore"){
                     document.getElementById("core-command").style.display = "none";
                     document.getElementById("uploadcore").style.display = "block";
@@ -1209,6 +1440,31 @@ function opneRecentProject(id){
                    
                 }
                 if(comp == "extensionselect"){
+                    var swerv = document.getElementsByName("checkswervtest");
+                    var checkswervv = "";
+                        for (var j =0; j<swerv.length; j++){
+                            if(swerv[j].checked){
+                    
+                            checkswervv=swerv[j].value;
+                            
+                            }
+                        }
+                          
+                    
+                    var projDir = document.getElementById("path").innerHTML;
+                    
+                    var uploadcore = document.getElementById("pathcore").value;
+                    var projName = document.getElementById("projectname").value;
+                    if (projName == ""){
+                        alert("Please enter a project name");}
+                         else if (uploadcore == "" ){
+                            alert("Please Upload core");}
+                    else if (projDir  == " "){
+                        alert("Please select a directory");}
+                    
+                   
+
+                   if( uploadcore != "" && projDir != " "  && projName != ""){
                     var isSwerv = document.getElementsByName("checkswervtest")[0];
                     if(isSwerv.checked){
                         changecoree("Stestcasetype");
@@ -1224,6 +1480,7 @@ function opneRecentProject(id){
                         document.getElementById("logselect").style.display = "none";
                     }
                 }
+            }
                 if(comp == "formatselect"){
                     document.getElementById("formatSelect").style.display = "block";
                     document.getElementById("core-command").style.display = "none";
@@ -1250,7 +1507,7 @@ function opneRecentProject(id){
                     } else if(selectedtesttype== "MERL_vector_Tests"){
                         eel.merlvectortest()
                     }
-                    else if(selectedtesttype== "Riscv-tests"){
+                    else if(selectedtesttype== "Riscv_tests"){
                         eel.riscvtest()
                     }
                     else if(selectedtesttype== "Self-Checking-vector-tests"){
@@ -1262,8 +1519,11 @@ function opneRecentProject(id){
                     else if(selectedtesttype== "BURQ_Generated_Tests"){
                         eel.burqgeneratedtest()
                     }
-                    else if(selectedtesttype=="users-Tests"){
+                    else if(selectedtesttype=="User_Defined_Tests"){
                         eel.usertest()
+                    }
+                    else if(selectedtesttype=="RISCV_DV_Tests"){
+                        eel.dvtest()
                     }
                    
                     document.getElementById("core-command").style.display = "none";
@@ -1279,6 +1539,11 @@ function opneRecentProject(id){
                 }
 
                 if(comp == "logselect"){
+                    var command=document.getElementById("getcommands").value;
+                    if (command===""){
+                        alert("Enter test command")
+                    }
+                    else{
                     var isSwerv = document.getElementsByName("checkswervtest")[0];
                     if(isSwerv.checked){
                         changecoree("uploadcore");
@@ -1293,9 +1558,17 @@ function opneRecentProject(id){
                         document.getElementById("testcase_asm").style.display = "none";
                     }
                 }
+            }
+                //
               
                 if(comp == "Stestcasetype"){
+                    var logfile = document.getElementById("getlogfolder").value; 
+                    if (logfile===""){
+                        alert("please enter log file path");
+                    }
+                    else{
                     document.getElementById("core-command").style.display = "none";
+
                     document.getElementById("uploadcore").style.display = "none";
                     document.getElementById("testcase").style.display = "none";
                     document.getElementById("testcasetype").style.display = "block";
@@ -1303,11 +1576,13 @@ function opneRecentProject(id){
                     document.getElementById("formatSelect").style.display = "none";
                     document.getElementById("testcase_asm").style.display = "none";
                     document.getElementById("logselect").style.display = "none";
-                   
+        //           
                 }
-                 if(comp == "endcore"){
+                }
+                if(comp == "endcore"){
 
                     console.log("CLICKKKKK");
+                    
 
                     var projName = document.getElementById("projectname").value;
                     var projDir = document.getElementById("path").innerHTML;
@@ -1319,8 +1594,36 @@ function opneRecentProject(id){
                     var asmDir = document.getElementById("asmDir").value;
                     var testtype=document.getElementsByName("upCore");
                     var testFormat = document.querySelector('input[name="testformat"]:checked').value;
-                    var extensions = document.querySelector('input[name="ext"]').checked;
+                    var extensionsEl = document.getElementsByName("ext") ;
                     var logFormat = document.querySelector('input[name="logformat"]:checked').value;
+                    // var selectdv = document.querySelector('input[name="dvtest"]');
+                    // var dvList = []
+                    // for(let i=0;i<selectdv.length;i++ ){
+                    //     if(selectdv[i].checked){
+                    //         dvList.push(selectdv[i].value)
+                    //     }
+                    // }
+                    // eel.selectdvtest(dvList);
+                    var getcommand=document.getElementById("getcommands").value;
+                        var gettestcasefoldername=document.getElementById("gettestfolder").value;
+                        var getlogfoldername=document.getElementById("getlogfolder").value;
+                        
+                        var tests1 = [];
+                                var testCheckboxes1 = document.getElementsByName("coreTest");
+                                for (var i = 0; i < testCheckboxes1.length; i++) {
+                                    if (testCheckboxes1[i].checked) {
+                                        tests1.push(testCheckboxes1[i].value);
+                                    }
+                                }
+                                
+                        
+
+                    var extensions = [];
+                    for(var k=0;k<extensionsEl.length;k++){
+                        if(extensionsEl[k].checked){
+                            extensions.push(extensionsEl[k].value);
+                        }
+                    }
 
                     var swerv = document.getElementsByName("checkswervtest");
                     var checkswervv = "";
@@ -1346,7 +1649,12 @@ function opneRecentProject(id){
                             alert("Please select hex directory");
                         } else if (logfile == "" && checkswervv == ""){
                             alert("Please select location where log file will generate");
-                        } else{
+                        } else if (tests1.length===0){
+                                    alert("Select atleast 1 test")
+                            
+                        }
+                        
+                        else{
 
                         
                         var progressbar=document.getElementById("prebuilt-end1").style.display="block";
@@ -1361,19 +1669,11 @@ function opneRecentProject(id){
                     
                         
 
-                        var getcommand=document.getElementById("getcommands").value;
-                        var gettestcasefoldername=document.getElementById("gettestfolder").value;
-                        var getlogfoldername=document.getElementById("getlogfolder").value;
-                        
-                        var tests1 = [];
-                                var testCheckboxes1 = document.getElementsByName("coreTest");
-                                for (var i = 0; i < testCheckboxes1.length; i++) {
-                                    if (testCheckboxes1[i].checked) {
-                                        tests1.push(testCheckboxes1[i].value);
-                                    }
-                                }
+                       
 
                         var config = {
+                            "name":projName,
+                            "path":projDir,
                             "extensions":extensions,
                             "testFormat": testFormat,
                             "testDir": testcase,
@@ -1390,8 +1690,9 @@ function opneRecentProject(id){
 
                         eel.enduploadcore(config,tests1,selectedtype);
                     }
+                }
+            }
             
-            }}
             function changeCustom(comp){
                 var core = document.getElementById("custom-core");
                 var iss = document.getElementById("custom-iss");
@@ -1450,7 +1751,7 @@ function opneRecentProject(id){
             function select(){
                 var projectnamee = document.getElementById("projectname").value;
                 var showpath = document.getElementById("path");
-    showpath.value ="";
+    showpath.value = "";
     console.log(showpath);
 
         eel.selectFolder(projectnamee);
@@ -1555,8 +1856,24 @@ function seldonesoc(){
                 }
                 form.style.display = "block";
             } 
+            // alert("HELLOO");
 eel.expose(showMerlTests)
 function showMerlTests(listt){
+    var form=document.getElementById('uploadcoretestcaseform');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showdvTests)
+function showdvTests(listt){
     var form=document.getElementById('uploadcoretestcaseform');
     form.innerHTML="";
                 for (var i = 0; i < listt.length; i++) {
@@ -1648,6 +1965,10 @@ function usersTests(listt){
 
 
 }
+
+
+
+
             //brow    
 </script>
 </body>

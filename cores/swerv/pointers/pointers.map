@@ -1,0 +1,99 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/11.1.0/libgcc.a
+LOAD Test_Pointers.o
+LOAD crt0.o
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/11.1.0/libgcc.a
+START GROUP
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/11.1.0/../../../../riscv32-unknown-elf/lib/libc.a
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/11.1.0/../../../../riscv32-unknown-elf/lib/libgloss.a
+END GROUP
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/11.1.0/libgcc.a
+                0x0000000080000000                . = 0x80000000
+
+.text.init      0x0000000080000000       0x44
+ *(.text.init)
+ .text.init     0x0000000080000000       0x44 crt0.o
+                0x0000000080000000                _start
+                0x0000000080000016                _finish
+
+.text           0x0000000080000044       0x1e
+ *(.text)
+ .text          0x0000000080000044       0x1e Test_Pointers.o
+                0x0000000080000044                main
+ .text          0x0000000080000062        0x0 crt0.o
+                0x0000000080000062                _end = .
+                0x00000000d0580000                . = 0xd0580000
+
+.data.io        0x00000000d0580000        0x4
+ *(.data.io)
+ .data.io       0x00000000d0580000        0x4 crt0.o
+                0x00000000d0580000                tohost
+                0x00000000f0040000                . = 0xf0040000
+
+.data           0x00000000f0040000        0x0
+ *(.*data)
+ .data          0x00000000f0040000        0x0 Test_Pointers.o
+ .data          0x00000000f0040000        0x0 crt0.o
+ *(.rodata*)
+
+.bss            0x00000000f0040000        0x0
+                0x00000000f0040000                BSS_START = .
+ *(.*bss)
+ .bss           0x00000000f0040000        0x0 Test_Pointers.o
+ .bss           0x00000000f0040000        0x0 crt0.o
+                0x00000000f0040000                BSS_END = .
+                0x00000000f0041000                STACK = (ALIGN (0x10) + 0x1000)
+                0x00000000fffffff8                . = 0xfffffff8
+
+.data.ctl       0x00000000fffffff8        0x8
+                0x00000000fffffff8        0x4 LONG 0xf0040000
+                0x00000000fffffffc        0x4 LONG 0xf0041000 STACK
+OUTPUT(pointers.exe elf32-littleriscv)
+
+.rela.dyn       0x0000000100000000        0x0
+ .rela.text.init
+                0x0000000100000000        0x0 crt0.o
+
+.debug_info     0x0000000000000000       0xb7
+ .debug_info    0x0000000000000000       0xb7 Test_Pointers.o
+
+.debug_abbrev   0x0000000000000000       0x60
+ .debug_abbrev  0x0000000000000000       0x60 Test_Pointers.o
+
+.debug_aranges  0x0000000000000000       0x20
+ .debug_aranges
+                0x0000000000000000       0x20 Test_Pointers.o
+
+.debug_line     0x0000000000000000       0x6a
+ .debug_line    0x0000000000000000       0x6a Test_Pointers.o
+
+.debug_str      0x0000000000000000       0xd7
+ .debug_str     0x0000000000000000       0xd7 Test_Pointers.o
+                                        0x110 (size before relaxing)
+
+.debug_line_str
+                0x0000000000000000       0xbb
+ .debug_line_str
+                0x0000000000000000       0xbb Test_Pointers.o
+                                        0x100 (size before relaxing)
+
+.comment        0x0000000000000000       0x10
+ .comment       0x0000000000000000       0x10 Test_Pointers.o
+                                         0x11 (size before relaxing)
+
+.riscv.attributes
+                0x0000000000000000       0x2f
+ .riscv.attributes
+                0x0000000000000000       0x2b Test_Pointers.o
+ .riscv.attributes
+                0x000000000000002b       0x2d crt0.o
+
+.debug_frame    0x0000000000000000       0x34
+ .debug_frame   0x0000000000000000       0x34 Test_Pointers.o
