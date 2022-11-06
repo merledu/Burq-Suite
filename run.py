@@ -132,45 +132,59 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 tests_status.append(status)
         
         if selectedtest=="RISCV_DV_Tests":
-            os.chdir(swerv_test__path)
-            if debug:
-                ic(os.getcwd())
-            for test in tests:
-                # check is test directory exists
-                if os.path.isdir(test) == False:
-                    os.mkdir(test)
-                os.chdir(test)
-                os.chdir(f"{currentRootDir}/dv")
-                os.system(f"python3 run.py --iss whsiper --simulator pyflow --test={test} --output_dir {test}")
-                os.chdir(f"{test}")
-                # Enter in dv root
-                # Run command
-                # Go into test directory
-                # Extract assembly
-                # Go into swev directory
-                # Place it in test bench
-                # Create test directory
-                # Run make  and whisper same as we previuosly do
-                # DV command
-                os.system(f"python3 run.py --iss whisper --test {test} --simulator pyflow --target rv32imc --output_dir {test}")
-                # os.system("export RISCV=/opt/riscv32")
 
-                os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
-
-                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
-                os.system("export PATH=/opt/riscv32/bin:$PATH")
-                os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
-                currentProgress += perOccurProgress
-                progressTick(currentProgress)
-                os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
-                currentProgress += perOccurProgress
-                progressTick(currentProgress)
+                os.chdir(swerv_test__path)
                 ic(os.getcwd())
-                #check is test.log and exec.log exists
-                ic(os.path.isfile(f"{test}.log"))
-                ic(os.path.isfile("exec.log"))
-                status = call(f"{test}.log", "exec.log")
-                tests_status.append(status)
+                for test in tests:
+                    print(test)
+                
+                    # check is test directory exists
+                    if os.path.isdir(test) == False:
+                        os.mkdir(f"{test}_0")
+                    
+                    os.chdir(f"{currentRootDir}/dv")
+                    os.system(f"python3 run.py --iss whisper --simulator pyflow --iteration 1 --test={test} --output {test}")
+                    os.chdir(f"{currentRootDir}/cores/swerv/testbench/tests")
+                    #os.mkdir(f"{test}_0")
+                    os.chdir(f"{currentRootDir}/dv/{test}/asm_test")
+
+
+                    os.rename(f"{test}_0.S", "{test}_0.s")
+                    
+
+
+                    os.system(f"cp -a {currentRootDir}/dv/{test}/asm_test/{test}_0.s {currentRootDir}/cores/swerv/testbench/tests/{tests}_0 ")
+                    
+
+                        #enter in dv root
+                        #run command
+                        #go into test directory
+                        #extract assembly
+                        #go into swev directory
+                        #place it in test bench
+                        #create test directory
+                        #run make  and whisper same as we previuosly do
+                    #dv command
+                    
+                   # os.system("export RISCV=/opt/riscv32")
+                    os.chdir(f"{currentRootDir}/cores/swerv")
+
+                    os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
+
+                    os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
+                    os.system("export PATH=/opt/riscv32/bin:$PATH")
+                    os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}_0")
+                    currentProgress += perOccurProgress
+                    progressTick(currentProgress)
+                    os.system(f"$whisper --logfile {test}_0.log {test}_0.exe --configfile ./snapshots/default/whisper.json")
+                    currentProgress += perOccurProgress
+                    progressTick(currentProgress)
+                    ic(os.getcwd())
+                    #check is test.log and exec.log exists
+                    ic(os.path.isfile(f"{test}_0.log"))
+                    ic(os.path.isfile("exec.log"))
+                    status = call(f"{test}_0.log", "exec.log")
+                    tests_status.append(status)
         if selectedtest=="User_Defined_Tests":
             os.chdir(swerv_test__path)
             ic(swerv_test__path)

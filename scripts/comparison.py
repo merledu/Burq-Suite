@@ -155,256 +155,260 @@ def execfiledata(inputfile2):
   f.close()
 
 def comparison():
-    file1 = open("new1.txt")
-    file2 = open("execnew.txt")
+  try:
+      file1 = open("new1.txt")
+      file2 = open("execnew.txt")
+      
+      line_count = 0
+      file2n=file2.readlines()
+      line_count=len(file2n)
     
-    line_count = 0
-    file2n=file2.readlines()
-    line_count=len(file2n)
+      fail=[]
+      u=0
+      v=0
+      a=[]
+      b=[]
+      qq=[]
+      qq1=[]
+      nfflist=[]
+      a1=[]
+      a2=[]
+      a3=[]
+      a4=[]
+      exec1 = [[0]*5 for i in range(line_count)]
   
-    fail=[]
-    u=0
-    v=0
-    a=[]
-    b=[]
-    qq=[]
-    qq1=[]
-    nfflist=[]
-    a1=[]
-    a2=[]
-    a3=[]
-    a4=[]
-    exec1 = [[0]*5 for i in range(line_count)]
- 
-    ex=[]
- 
-   
-    ff3=open('execnew.txt','r')
+      ex=[]
+  
     
-    for nff in ff3:
+      ff3=open('execnew.txt','r')
+      
+      for nff in ff3:
 
+        
+        np3=re.compile(r'[=][a-zA-Z0-9_]+|[\s][;]')
+        
+        nnp3=np3.search(nff)[0]
+        nnp3=nnp3.replace("=","")
+        nnp3=nnp3.replace(";","")
+        ex.append(nnp3)
       
-      np3=re.compile(r'[=][a-zA-Z0-9_]+|[\s][;]')
+        nff=re.sub("=","",nff)
+        nff=re.sub(";","",nff)
+        nfflist.append(nff)
+      for i in range(0,len(ex)): 
+          exec1[i][2]=ex[i]
+    
+      ff4=open("execnew.txt","w")
+      for inff in nfflist:
+        ff4.write(inff)
+      ff4.close()
       
-      nnp3=np3.search(nff)[0]
-      nnp3=nnp3.replace("=","")
-      nnp3=nnp3.replace(";","")
-      ex.append(nnp3)
-     
-      nff=re.sub("=","",nff)
-      nff=re.sub(";","",nff)
-      nfflist.append(nff)
-    for i in range(0,len(ex)): 
-        exec1[i][2]=ex[i]
-  
-    ff4=open("execnew.txt","w")
-    for inff in nfflist:
-      ff4.write(inff)
-    ff4.close()
-    
-    
-    ff=open("execnew.txt","r")
-    for fff in ff:
-      hexe=re.compile(r'([8][a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)')
-      hexee=hexe.search(fff)[2]
       
-      xxx=hexee
-      aaa=int(xxx,16)
-      hexee=str(hexee)
-      aaa=str(aaa)
-      repp=fff.replace(" "+hexee+" "," "+aaa+" ")
-      qqq=qq.append(repp)
-    
+      ff=open("execnew.txt","r")
+      for fff in ff:
+        hexe=re.compile(r'([8][a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)')
+        hexee=hexe.search(fff)[2]
+        
+        xxx=hexee
+        aaa=int(xxx,16)
+        hexee=str(hexee)
+        aaa=str(aaa)
+        repp=fff.replace(" "+hexee+" "," "+aaa+" ")
+        qqq=qq.append(repp)
       
-    ff=open('execnew.txt','w')
-    
-    ff.writelines(qq)
-    ff.close()
-    ff6=open("new1.txt","r")
-    for fff6 in ff6:
-      hexe6=re.compile(r'([8][a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)')
-      hexee6=hexe6.search(fff6)[2]
+        
+      ff=open('execnew.txt','w')
       
-      xxx6=hexee6
-      aaa6=int(xxx6,16)
-      hexee6=str(hexee6)
-      aaa6=str(aaa6)
-      repp1=fff6.replace(" "+hexee6+" "," "+aaa6+" ")
-     
-      qq1.append(repp1)
-     
-    ff6=open('new1.txt','w')
+      ff.writelines(qq)
+      ff.close()
+      ff6=open("new1.txt","r")
+      for fff6 in ff6:
+        hexe6=re.compile(r'([8][a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)')
+        hexee6=hexe6.search(fff6)[2]
+        
+        xxx6=hexee6
+        aaa6=int(xxx6,16)
+        hexee6=str(hexee6)
+        aaa6=str(aaa6)
+        repp1=fff6.replace(" "+hexee6+" "," "+aaa6+" ")
+      
+        qq1.append(repp1)
+      
+      ff6=open('new1.txt','w')
+      
+      ff6.writelines(qq1)
+      ff6.close()
     
-    ff6.writelines(qq1)
-    ff6.close()
-   
-    ff4=open('new1.txt','r')
-    for nff4 in ff4:
-      np4=re.compile(r'([8][a-zA-Z0-9_]+)[\s]+([0-9]+)[\s]+([a-zA-Z0-9_]+)[\s]+([c][.][addi16sp]+)+([\s])|([8][a-zA-Z0-9_]+)[\s]+([0-9]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_.]+)[\s]+[.][\s]+([-])|([8][a-zA-Z0-9_]+)[\s]+([0-9]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_.]+)[\s]+([a-zA-Z0-9_]+)|([8][a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_.]+)[\s]+[.][\s]+([+])|([8][a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_.]+)[\s]+([-][0])|([8][a-zA-Z0-9_]+)[\s]+([1])[\s]+([0]+)[\s]+([c.nop]+)')
-      nnp4=np4.finditer(nff4)
-      for iuo in nnp4:
-        iuo=iuo.group(0)
-        a=iuo.split()
-        #print(a)
-        a1.append(a)
-    #print(a1)
-    for y in a1:
-      for t in y:
-        if t=="-0":
-          a=y.index(t)
-          y[a]=" "
-        else:
-          pass
-        if t=="+":
-          a=y.index(t)
-          y[a]=" "
-        else:
-          pass
-        if t=="0x4":
-          a=y.index(t)
-          y[a]=" "
-        else:
-          pass
-        if t=="-":
-          a=y.index(t)
-          y[a]=" "
-        else:
-          pass
-        if t=="0x2":
-          a=y.index(t)
-          y[a]=" "
-        else:
-          pass
+      ff4=open('new1.txt','r')
+      for nff4 in ff4:
+        np4=re.compile(r'([8][a-zA-Z0-9_]+)[\s]+([0-9]+)[\s]+([a-zA-Z0-9_]+)[\s]+([c][.][addi16sp]+)+([\s])|([8][a-zA-Z0-9_]+)[\s]+([0-9]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_.]+)[\s]+[.][\s]+([-])|([8][a-zA-Z0-9_]+)[\s]+([0-9]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_.]+)[\s]+([a-zA-Z0-9_]+)|([8][a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_.]+)[\s]+[.][\s]+([+])|([8][a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_]+)[\s]+([a-zA-Z0-9_.]+)[\s]+([-][0])|([8][a-zA-Z0-9_]+)[\s]+([1])[\s]+([0]+)[\s]+([c.nop]+)')
+        nnp4=np4.finditer(nff4)
+        for iuo in nnp4:
+          iuo=iuo.group(0)
+          a=iuo.split()
+          #print(a)
+          a1.append(a)
+      #print(a1)
+      for y in a1:
+        for t in y:
+          if t=="-0":
+            a=y.index(t)
+            y[a]=" "
+          else:
+            pass
+          if t=="+":
+            a=y.index(t)
+            y[a]=" "
+          else:
+            pass
+          if t=="0x4":
+            a=y.index(t)
+            y[a]=" "
+          else:
+            pass
+          if t=="-":
+            a=y.index(t)
+            y[a]=" "
+          else:
+            pass
+          if t=="0x2":
+            a=y.index(t)
+            y[a]=" "
+          else:
+            pass
+              
+      ff5=open("execnew.txt","r")
+      for f in ff5:
+        aq=re.compile(r'([8][a-zA-Z0-9_]+)[\s]+([0-9]+)')
+        aq1=re.compile(r'[a-zA-Z0-9_.]+[\s]+[a-zA-Z0-9_]+[,][\s]+[-]|[c][.][addi16sp]+[\s]|[a-zA-Z0-9_.]+[\s]+[a-zA-Z0-9_]+[,]|[a-zA-Z0-9_.]+[\s]+[r][a]+|[c][.][nop]+|[a-zA-Z0-9_.]+[\s]+[-]|[a-zA-Z0-9_.]+[\s]+[0][x]|[c][.][a-zA-Z0-9_.]+[\s]+[6][4]')
+        aaq=aq.search(f)[1]
+        aaq1=aq.search(f)[2]
+        
+        a2.append(aaq)
+        a3.append(aaq1)
+        aq2=aq1.finditer(f)
+        for b in aq2:
+          b=b.group()
+          b=re.sub(",","",b)
+        
+          ao=b.split()
+          a4.append(ao)
+      
+      h=0
+      c=0
+      for i in range(0,len(a2)):
+          exec1[i][0]=a2[i]
+      for j in range(0,len(a3)):
+          exec1[j][1]=a3[j]
+      
+      for y in a4:
+        for t in y:
+          if t=="0x":
+            a=y.index(t)
+            y[a]=" "
+          else:
+            pass
+          if t=="64":
+            a=y.index(t)
+            y[a]=" "
+          else:
+            pass
+          if t=="-":
+            a=y.index(t)
+            y[a]=" "
+          else:
+            pass
+          t=t.replace(",","")
+      
+      
+      for r in a4:
+      
+        exec1[h][3]=r[0]
+        h+=1
+        try:
+          exec1[c][4]=r[1]
+          
+          c+=1
+          
+      
+        except IndexError:
+          
+          
+          c+=1
+          
+      vv=0
+      uu=0
+      e=0
+      tot=0
+      tp=0
+      tf=0
+      for fil, fil2 in zip(a1,exec1):
+        passed=True
+        e+=1
+        for f,f1 in zip(fil,fil2):
+          if f==f1 or f==" " or f1== " ":
             
-    ff5=open("execnew.txt","r")
-    for f in ff5:
-      aq=re.compile(r'([8][a-zA-Z0-9_]+)[\s]+([0-9]+)')
-      aq1=re.compile(r'[a-zA-Z0-9_.]+[\s]+[a-zA-Z0-9_]+[,][\s]+[-]|[c][.][addi16sp]+[\s]|[a-zA-Z0-9_.]+[\s]+[a-zA-Z0-9_]+[,]|[a-zA-Z0-9_.]+[\s]+[r][a]+|[c][.][nop]+|[a-zA-Z0-9_.]+[\s]+[-]|[a-zA-Z0-9_.]+[\s]+[0][x]|[c][.][a-zA-Z0-9_.]+[\s]+[6][4]')
-      aaq=aq.search(f)[1]
-      aaq1=aq.search(f)[2]
-      
-      a2.append(aaq)
-      a3.append(aaq1)
-      aq2=aq1.finditer(f)
-      for b in aq2:
-        b=b.group()
-        b=re.sub(",","",b)
-      
-        ao=b.split()
-        a4.append(ao)
-     
-    h=0
-    c=0
-    for i in range(0,len(a2)):
-        exec1[i][0]=a2[i]
-    for j in range(0,len(a3)):
-        exec1[j][1]=a3[j]
-    
-    for y in a4:
-      for t in y:
-        if t=="0x":
-          a=y.index(t)
-          y[a]=" "
-        else:
-          pass
-        if t=="64":
-          a=y.index(t)
-          y[a]=" "
-        else:
-          pass
-        if t=="-":
-          a=y.index(t)
-          y[a]=" "
-        else:
-          pass
-        t=t.replace(",","")
-    
-    
-    for r in a4:
-    
-      exec1[h][3]=r[0]
-      h+=1
-      try:
-        exec1[c][4]=r[1]
-        
-        c+=1
-        
-    
-      except IndexError:
-        
-        
-        c+=1
-        
-    vv=0
-    uu=0
-    e=0
-    tot=0
-    tp=0
-    tf=0
-    for fil, fil2 in zip(a1,exec1):
-      passed=True
-      e+=1
-      for f,f1 in zip(fil,fil2):
-        if f==f1 or f==" " or f1== " ":
+            a=True
+            vv+=1
           
-          a=True
-          vv+=1
-        
-        
           
-        
-        
-        else:
-          passed=False
+            
           
-      if passed==False:
-        
-        
-        f= ("EXEC FILE line no: {} exec file : {}").format(e,fil2)
-        f=f.replace("[","")
-        f=f.replace("]","")
-        
-        f1=("WHISPER FILE line no: {} whisper file : {}").format(e,fil)
-        f1=f1.replace("[","")
-        f1=f1.replace("]","")
+          
+          else:
+            passed=False
+            
+        if passed==False:
+          
+          
+          f= ("EXEC FILE line no: {} exec file : {}").format(e,fil2)
+          f=f.replace("[","")
+          f=f.replace("]","")
+          
+          f1=("WHISPER FILE line no: {} whisper file : {}").format(e,fil)
+          f1=f1.replace("[","")
+          f1=f1.replace("]","")
 
-        fail.append(f)
-        fail.append(f1)
+          fail.append(f)
+          fail.append(f1)
+          
+          tf+=1
+        else:
+          tp+=1
+        tot+=1
+
+      print("\n  ------------------------")
+      print(" | Total Cycle | ",tot," |")
+      print(" |-----------------------|")
+      print(" | Total Pass  | ",tp, " |")
+      print(" |-----------------------|")
+      print(" | Total Fail  | ",tf, "     |")
+      print("  ------------------------")
+      
+      
+  
+
+      # if len(fail) > 0:
+      #   with open('ERRORFILE.txt','w') as ff:
+      #     for fy in fail:
         
-        tf+=1
+      #       ff.write(fy+"\n")
+      # if len(fail)<=0:
+      #   with open('ERRORFILE.txt','w') as ff:
+      #     for fy in fail:
+        
+      #       ff.write(fy+"\n")
+
+      if tp==tot:
+
+        return "Passed"
       else:
-        tp+=1
-      tot+=1
+        return " ".join(fail)
+  except:
+    return fail
 
-    print("\n  ------------------------")
-    print(" | Total Cycle | ",tot," |")
-    print(" |-----------------------|")
-    print(" | Total Pass  | ",tp, " |")
-    print(" |-----------------------|")
-    print(" | Total Fail  | ",tf, "     |")
-    print("  ------------------------")
-    
-    
- 
 
-    # if len(fail) > 0:
-    #   with open('ERRORFILE.txt','w') as ff:
-    #     for fy in fail:
       
-    #       ff.write(fy+"\n")
-    # if len(fail)<=0:
-    #   with open('ERRORFILE.txt','w') as ff:
-    #     for fy in fail:
-      
-    #       ff.write(fy+"\n")
-
-    if tp==tot:
-
-      return "Passed"
-    else:
-      return " ".join(fail)
-
-    
 def call(inputfile1,inputfile2):              
   print("****processing*****")
   add5data(inputfile1)
@@ -422,7 +426,7 @@ def call(inputfile1,inputfile2):
   return(a)
 
 
-#call("/home/mano/Verification/Cores-SweRV-EL2/BubbleSort/BubbleSort.log","/home/mano/Verification/Cores-SweRV-EL2/BubbleSort/exec.log")
+#call("/home/mahnoor/Burq-Suite/cores/swerv/n/n.log","/home/mahnoor/Burq-Suite/cores/swerv/n/exec.log")
 
 # if os.stat("ERRORFILE.txt").st_size == 0:
 #   print("complete")
