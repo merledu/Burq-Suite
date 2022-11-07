@@ -1,0 +1,43 @@
+
+operations:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010054 <main>:
+   10054:	7139                	addi	sp,sp,-64
+   10056:	de22                	sw	s0,60(sp)
+   10058:	0080                	addi	s0,sp,64
+   1005a:	4795                	li	a5,5
+   1005c:	fef42623          	sw	a5,-20(s0)
+   10060:	4799                	li	a5,6
+   10062:	fef42423          	sw	a5,-24(s0)
+   10066:	478d                	li	a5,3
+   10068:	fef42223          	sw	a5,-28(s0)
+   1006c:	4799                	li	a5,6
+   1006e:	fef42023          	sw	a5,-32(s0)
+   10072:	479d                	li	a5,7
+   10074:	fcf42e23          	sw	a5,-36(s0)
+   10078:	47a1                	li	a5,8
+   1007a:	fcf42c23          	sw	a5,-40(s0)
+   1007e:	fec42703          	lw	a4,-20(s0)
+   10082:	fe842783          	lw	a5,-24(s0)
+   10086:	40f707b3          	sub	a5,a4,a5
+   1008a:	fcf42a23          	sw	a5,-44(s0)
+   1008e:	fe442703          	lw	a4,-28(s0)
+   10092:	fe042783          	lw	a5,-32(s0)
+   10096:	97ba                	add	a5,a5,a4
+   10098:	fcf42823          	sw	a5,-48(s0)
+   1009c:	fd842703          	lw	a4,-40(s0)
+   100a0:	fe042783          	lw	a5,-32(s0)
+   100a4:	02f747b3          	div	a5,a4,a5
+   100a8:	fcf42623          	sw	a5,-52(s0)
+   100ac:	fd842703          	lw	a4,-40(s0)
+   100b0:	fec42783          	lw	a5,-20(s0)
+   100b4:	40f707b3          	sub	a5,a4,a5
+   100b8:	fcf42423          	sw	a5,-56(s0)
+   100bc:	4781                	li	a5,0
+   100be:	853e                	mv	a0,a5
+   100c0:	5472                	lw	s0,60(sp)
+   100c2:	6121                	addi	sp,sp,64
+   100c4:	8082                	ret

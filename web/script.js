@@ -201,11 +201,13 @@ function changeProject2(evt,proj){
     var custom_core = document.getElementById("custom_core");
     var prebuilt_core = document.getElementById("prebuilt_core");
     var upload_core = document.getElementById("upload_core");
+    var soc_core = document.getElementById("soc_core");
 
 
     custom_test.style.display = "none";
     custom_core.style.display = "none";
     prebuilt_core.style.display = "none";
+    soc_core.style.display = "none";
 
     upload_core.style.display = "none";
 
@@ -225,6 +227,10 @@ function changeProject2(evt,proj){
         upload_core.style.display = "block";
         changecoree('initial');
         listt.push("upload_core");
+    }
+    else if(proj === "soc_core"){
+        soc_core.style.display = "block";
+        listt.push("soc_core");
     }
 
     eel.datasend(listt)

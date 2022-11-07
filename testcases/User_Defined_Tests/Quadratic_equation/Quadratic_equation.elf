@@ -1,0 +1,39 @@
+
+Quadratic_equation:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010054 <main>:
+   10054:	7179                	addi	sp,sp,-48
+   10056:	d622                	sw	s0,44(sp)
+   10058:	1800                	addi	s0,sp,48
+   1005a:	fe042023          	sw	zero,-32(s0)
+   1005e:	4785                	li	a5,1
+   10060:	fef42423          	sw	a5,-24(s0)
+   10064:	fe042703          	lw	a4,-32(s0)
+   10068:	fe842783          	lw	a5,-24(s0)
+   1006c:	97ba                	add	a5,a5,a4
+   1006e:	fef42223          	sw	a5,-28(s0)
+   10072:	478d                	li	a5,3
+   10074:	fef42623          	sw	a5,-20(s0)
+   10078:	a02d                	j	100a2 <main+0x4e>
+   1007a:	fe842783          	lw	a5,-24(s0)
+   1007e:	fef42023          	sw	a5,-32(s0)
+   10082:	fe442783          	lw	a5,-28(s0)
+   10086:	fef42423          	sw	a5,-24(s0)
+   1008a:	fe042703          	lw	a4,-32(s0)
+   1008e:	fe842783          	lw	a5,-24(s0)
+   10092:	97ba                	add	a5,a5,a4
+   10094:	fef42223          	sw	a5,-28(s0)
+   10098:	fec42783          	lw	a5,-20(s0)
+   1009c:	0785                	addi	a5,a5,1
+   1009e:	fef42623          	sw	a5,-20(s0)
+   100a2:	fec42703          	lw	a4,-20(s0)
+   100a6:	fdc42783          	lw	a5,-36(s0)
+   100aa:	fce7d8e3          	bge	a5,a4,1007a <main+0x26>
+   100ae:	4781                	li	a5,0
+   100b0:	853e                	mv	a0,a5
+   100b2:	5432                	lw	s0,44(sp)
+   100b4:	6145                	addi	sp,sp,48
+   100b6:	8082                	ret
