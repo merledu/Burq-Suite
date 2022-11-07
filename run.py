@@ -109,7 +109,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
             for test in tests:
                 # check if test directory exists
                 if os.path.isdir(test) == False:
-                    # create test directory
+                    # create test direeel.ctory
                     os.mkdir(test)
 
                 os.chdir(test)
@@ -644,7 +644,7 @@ def genCore(isa,ext,bus):
 
 
 @eel.expose
-def floatingpointtest():
+def floatingpointtest(source):
     print('floatingpointtest')
     namelist=[]
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -657,11 +657,14 @@ def floatingpointtest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showfloatingTests(namelist)
+    if source=="socnow":
+        eel.showsocnowfloting(namelist)
+    if source=="custom":
+        eel.showfloatingTests(namelist)
 
 
 @eel.expose
-def merlvectortest():
+def merlvectortest(source):
     print('merlvectortest')
     namelist=[]
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -674,11 +677,14 @@ def merlvectortest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showMerlTests(namelist)
+    if source=="socnow":
+        eel.showsocnowmerlvector(namelist)
+    if source=="custom":
+        eel.showMerlTests(namelist)
 
 
 @eel.expose
-def riscvtest():
+def riscvtest(source):
     print('riscvtest')
     namelist=[]
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -691,11 +697,14 @@ def riscvtest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showriscvTests(namelist)
+    if source=="socnow":
+        eel.showsocnowriscvtest(namelist)
+    if source=="custom":
+        eel.showriscvTests(namelist)
 
 
 @eel.expose
-def selfcheckingvectortest():
+def selfcheckingvectortest(source):
     print('selfcheckingvectortest')
     namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -708,10 +717,13 @@ def selfcheckingvectortest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showselfcheckingvectorTests(namelist)
+    if source=="socnow":
+        eel.showsocnowselfcheckingvect(namelist)
+    if source=="custom":
+        eel.showselfcheckingvectorTests(namelist)
 
 @eel.expose
-def usertest(debug=True):
+def usertest(source,debug=True):
     namelist = []
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
     root = "./testcases/User_Defined_Tests"
@@ -727,11 +739,14 @@ def usertest(debug=True):
         
     if debug:
         ic(namelist)
+    if source=="socnow":
+        eel.showsocnowusertest(namelist)
+    if source=="custom":
 
-    eel.usersTests(namelist)
+        eel.usersTests(namelist)
 
 @eel.expose
-def swervtest():
+def swervtest(source):
     print('swervtest')
     namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -744,10 +759,13 @@ def swervtest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showswervTests(namelist)
+    if source=="socnow":
+        eel.showsocnowswerv(namelist)
+    if source=="custom":
+        eel.showswervTests(namelist)
 
 @eel.expose
-def burqgeneratedtest():
+def burqgeneratedtest(source):
     print('burqgeneratedtest')
     os.system(f"{currentRootDir}")
 
@@ -763,10 +781,13 @@ def burqgeneratedtest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showburqTests(namelist)
+    if source=="socnow":
+        eel.showsocnowburqgen(namelist)
+    if source=="custom":
+        eel.showburqTests(namelist)
 
 @eel.expose
-def dvtest(debug=True):
+def dvtest(source,debug=True):
     if debug:
         ic(sys._getframe().f_code.co_name)
 
@@ -785,8 +806,11 @@ def dvtest(debug=True):
         "riscv_csr_test",
         "riscv_unaligned_load_store_test"
     ]
+    if source=="socnow":
+        eel.showsocnowdvtest(tests)
+    if source=="custom":
 
-    eel.showdvTests(tests)
+        eel.showdvTests(tests)
 
 # @eel.expose
 # def enduploadcore(config, tests, types):
