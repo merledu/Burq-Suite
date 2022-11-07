@@ -1,0 +1,32 @@
+
+table_mul:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010054 <main>:
+   10054:	1101                	addi	sp,sp,-32
+   10056:	ce22                	sw	s0,28(sp)
+   10058:	1000                	addi	s0,sp,32
+   1005a:	478d                	li	a5,3
+   1005c:	fef42223          	sw	a5,-28(s0)
+   10060:	4785                	li	a5,1
+   10062:	fef42623          	sw	a5,-20(s0)
+   10066:	4785                	li	a5,1
+   10068:	fef42623          	sw	a5,-20(s0)
+   1006c:	a831                	j	10088 <main+0x34>
+   1006e:	fe842703          	lw	a4,-24(s0)
+   10072:	fec42783          	lw	a5,-20(s0)
+   10076:	02f707b3          	mul	a5,a4,a5
+   1007a:	fef42423          	sw	a5,-24(s0)
+   1007e:	fec42783          	lw	a5,-20(s0)
+   10082:	0785                	addi	a5,a5,1
+   10084:	fef42623          	sw	a5,-20(s0)
+   10088:	fec42703          	lw	a4,-20(s0)
+   1008c:	47a9                	li	a5,10
+   1008e:	fee7d0e3          	bge	a5,a4,1006e <main+0x1a>
+   10092:	4781                	li	a5,0
+   10094:	853e                	mv	a0,a5
+   10096:	4472                	lw	s0,28(sp)
+   10098:	6105                	addi	sp,sp,32
+   1009a:	8082                	ret

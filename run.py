@@ -86,8 +86,8 @@ def getRecords(debug=True):
 
 @eel.expose
 def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
-    if debug:
-        ic(sys._get_frame().f_code.co_name)
+    # if debug:
+    #     ic(sys._get_frame().f_code.co_name)
 
     root_path = os.getcwd()
     ibex_test_path = "cores/ibex/"
@@ -139,21 +139,32 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                     print(test)
                 
                     # check is test directory exists
-                    if os.path.isdir(test) == False:
+                    if os.path.isdir(f"{test}_0") == False:
                         os.mkdir(f"{test}_0")
+                    currentProgress += 10
+                    progressTick(currentProgress)
                     
                     os.chdir(f"{currentRootDir}/dv")
                     os.system(f"python3 run.py --iss whisper --simulator pyflow --iteration 1 --test={test} --output {test}")
+                    currentProgress += 30
+                    progressTick(currentProgress)
                     os.chdir(f"{currentRootDir}/cores/swerv/testbench/tests")
                     #os.mkdir(f"{test}_0")
                     os.chdir(f"{currentRootDir}/dv/{test}/asm_test")
 
 
-                    os.rename(f"{test}_0.S", "{test}_0.s")
+                    os.rename(f"{test}_0.S", f"{test}_0.s")
+                    currentProgress += 10
+                    progressTick(currentProgress)
+                    os.chdir(f"{currentRootDir}/cores/swerv/testbench/tests")
+                    if os.path.isdir(f"{test}_0") == False:
+
+                        os.mkdir(f"{test}_0")
+                   
                     
 
 
-                    os.system(f"cp -a {currentRootDir}/dv/{test}/asm_test/{test}_0.s {currentRootDir}/cores/swerv/testbench/tests/{tests}_0 ")
+                    os.system(f"cp -r {currentRootDir}/dv/{test}/asm_test/{test}_0.s {currentRootDir}/cores/swerv/testbench/tests/{test}_0")
                     
 
                         #enter in dv root
@@ -167,16 +178,32 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                     #dv command
                     
                    # os.system("export RISCV=/opt/riscv32")
-                    os.chdir(f"{currentRootDir}/cores/swerv")
+                    
 
+                    os.chdir(f"{test}_0")
+                    #{test}_0 file open and remove first line .include "user_define.h" only from file and save it
+                    with open(f"{test}_0.s", "r") as f:
+                        lines = f.readlines()
+                    with open(f"{test}_0.s", "w") as f:
+                        for line in lines:
+                            if line.strip("\n") != '.include "user_define.h"' or line.strip("\n") !='.include "user_init.s"':
+                                f.write(line)
                     os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
 
                     os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
                     os.system("export PATH=/opt/riscv32/bin:$PATH")
+
+                
+                    
+            
+                   
+                    os.chdir(f"{currentRootDir}/cores/swerv/{test}_0")
                     os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}_0")
-                    currentProgress += perOccurProgress
+                    currentProgress += 20
                     progressTick(currentProgress)
                     os.system(f"$whisper --logfile {test}_0.log {test}_0.exe --configfile ./snapshots/default/whisper.json")
+                    currentProgress += 20
+                    progressTick(currentProgress)
                     currentProgress += perOccurProgress
                     progressTick(currentProgress)
                     ic(os.getcwd())
@@ -191,15 +218,15 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
             
             ic(os.getcwd())
             for test in tests:
-#                 os.chdir(f"{currentRootDir}/testcases/User_Defined_Tests/{test}")
-#                 os.system(f"cp -a {currentRootDir}/testcases/User_Defined_Tests/crt0.s {currentRootDir}/testcases/User_Defined_Tests/{test}")
-#                 mki_str="""OFILES = test.o crt0.o
-# TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
+                os.chdir(f"{currentRootDir}/testcases/User_Defined_Tests/{test}")
+                os.system(f"cp -a {currentRootDir}/testcases/User_Defined_Tests/crt0.s {currentRootDir}/testcases/User_Defined_Tests/{test}")
+                mki_str="""OFILES = test.o crt0.o
+TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
 
-#                 mkifile=open(f"{test}.mki","w+")
-#                 #write mki_str in file
-#                 mkifile.write(mki_str.replace("test", test))
-#                 mkifile.close()
+                mkifile=open(f"{test}.mki","w+")
+                #write mki_str in file
+                mkifile.write(mki_str.replace("test", test))
+                mkifile.close()
                 os.system(f"cp -a {currentRootDir}/testcases/User_Defined_Tests/{test} {currentRootDir}/cores/swerv/testbench/tests/")
                 os.chdir(f"{currentRootDir}/cores/swerv/")
                 # check is test directory exists
@@ -216,17 +243,19 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 os.system("export PATH=/opt/riscv32/bin:$PATH")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                 #srem=removezero("exec.log")
-                currentProgress += perOccurProgress
+                currentProgress += 30
                 progressTick(currentProgress)
                 os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
                # wrem=removew(f"{test}.log")
-                currentProgress += perOccurProgress
+                currentProgress += 40
                 progressTick(currentProgress)
                 ic(os.getcwd())
                 #check is test.log and exec.log exists
                 ic(os.path.isfile(f"{test}.log"))
                 ic(os.path.isfile("exec.log"))
                 status = call(f"{test}.log", "exec.log")
+                currentProgress += 30
+                progressTick(currentProgress)
                 tests_status.append(status)
 
     elif core == "ibex":
@@ -269,7 +298,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 os.chdir(f"{currentRootDir}/{ibex_test_path}")
                 os.system("fusesoc --cores-root=. run --target=sim --setup --build lowrisc:ibex:ibex_simple_system --RV32E=0 --RV32M=ibex_pkg::RV32MFast")
                 os.system(f"./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,examples/sw/simple_system/{test}/{test}.elf")
-                currentProgress += perOccurProgress
+                currentProgress += 70
                 progressTick(currentProgress)
                 os.chdir(f"{currentRootDir}/{ibex_test_path}/examples/sw/simple_system/{test}")
                 os.system(f"spike --isa=rv32gc -m0x10000:0x30000,0x100000:0x100000 --log-commits -l {test}.elf 2> {test}.log")
@@ -298,34 +327,34 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
 
         
             
-        os.chdir(currentRootDir)
-        os.chdir(projPath)
-        os.mkdir(projName)
-        os.chdir(projName)
-        report_str = ""
-        report_str += f"Core,{core}\n"
-        report_str += f"Iss,{iss}\n"
-        report_str += "\n"
-        report_str += "Test, Test Status\n"
-        for i,t in enumerate(tests):
-            report_str += f"{t},{tests_status[i]}\n"
-        file = open("test_results.csv", "w+")
-        file.write(report_str)
-        file.close()
-        os.chdir(currentRootDir)
-        file = open("web/pathfile", "w")
-        file.write(f"{projPath}/{projName}")
-        file.close()
-        file = open("web/pathfilev", "w")
-        file.write("prebuilt_verification")
-        file.close()
-        file = open("records", "w+")
-        file.write(f"{projPath}/{projName},prebuilt_verification\n")
-        file.close()
-        
-        eel.goToMain()
+    os.chdir(currentRootDir)
+    os.chdir(projPath)
+    os.mkdir(projName)
+    os.chdir(projName)
+    report_str = ""
+    report_str += f"Core,{core}\n"
+    report_str += f"Iss,{iss}\n"
+    report_str += "\n"
+    report_str += "Test, Test Status\n"
+    for i,t in enumerate(tests):
+        report_str += f"{t},{tests_status[i]}\n"
+    file = open("test_results.csv", "w+")
+    file.write(report_str)
+    file.close()
+    os.chdir(currentRootDir)
+    file = open("web/pathfile", "w")
+    file.write(f"{projPath}/{projName}")
+    file.close()
+    file = open("web/pathfilev", "w")
+    file.write("prebuilt_verification")
+    file.close()
+    file = open("records", "w+")
+    file.write(f"{projPath}/{projName},prebuilt_verification\n")
+    file.close()
+    
+    eel.goToMain()
 
-       
+    
             
 
         # for test in tests:
