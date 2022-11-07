@@ -350,8 +350,8 @@
                                 <div class="col-md-6"  style="margin-left: 70px;">
     
                                 <div  >
-                                    <h6 style="font-weight: lighter;">Select Your Core Extensions</h6>
-                                    <form>
+                                    <h6 style="font-weight: lighter;">Select Your Core test type</h6>
+                                    <form >
                                         <input type="radio" id="gencoretest" name="upSoc" value="BURQ_Generated_Tests" checked />
                                         <label> BURQ_Generated_Tests </label>
                                         <br>
@@ -385,7 +385,7 @@
                             <div style="text-align: right;" style="margin-top: -36px;">
                                    
                                 <button  class="btn ctrl-btn">
-                                    <img src="assets/icons/next.png" onclick="socnowcore('testlist')" style="width: 100%;margin-top: -100px;" />
+                                    <img src="assets/icons/next.png" onclick="socnowcore('testtypesoc')" style="width: 100%;margin-top: -100px;" />
                                 </button>
                             </div>
                                 </div>
@@ -407,7 +407,10 @@
                                 <div class="col-md-6"  style="margin-left: 70px;">
     
                                     <div class="col-md-7" >
-                                        <form id="testsoc" style="overflow-y:auto;height:200px">
+                                        <form id="testsoc" style="    width: 465px;
+                                        overflow-y: auto;
+                                        height: 244px;
+                                        display: block;">
                                             
                                         </form>
                                          
@@ -425,8 +428,8 @@
                             </div>
                             
                             <div style="text-align: right;" style="margin-top: -36px;">
-                                <button  onclick="socnowcore('testtypesoc')" class="btn ctrl-btn">
-                                    <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
+                                <button  onclick="socnowcore('testlist')" class="btn ctrl-btn">
+                                    <img src="assets/icons/back.png" style="width: 100%;margin-top:-106px;margin-left:-1200px;" />
                                 </button>
                                 
                                 <button  class="btn ctrl-btn">
@@ -1790,27 +1793,27 @@ function opneRecentProject(id){
                     }
                     
                     if(selectedtesttype == "Floating_point_tests_for_azadi"){
-                        eel.floatingpointtest()
+                        eel.floatingpointtest("custom")
                     } else if(selectedtesttype== "MERL_vector_Tests"){
-                        eel.merlvectortest()
+                        eel.merlvectortest("custom")
                     }
                     else if(selectedtesttype== "Riscv_tests"){
-                        eel.riscvtest()
+                        eel.riscvtest("custom")
                     }
                     else if(selectedtesttype== "Self-Checking-vector-tests"){
-                        eel.selfcheckingvectortest()
+                        eel.selfcheckingvectortest("custom")
                     }
                     else if(selectedtesttype== "Swerv_Tests"){
-                        eel.swervtest()
+                        eel.swervtest("custom")
                     }
                     else if(selectedtesttype== "BURQ_Generated_Tests"){
-                        eel.burqgeneratedtest()
+                        eel.burqgeneratedtest("custom")
                     }
                     else if(selectedtesttype=="User_Defined_Tests"){
-                        eel.usertest()
+                        eel.usertest("custom")
                     }
                     else if(selectedtesttype=="RISCV_DV_Tests"){
-                        eel.dvtest()
+                        eel.dvtest("custom")
                     }
                    
                     document.getElementById("core-command").style.display = "none";
@@ -1945,7 +1948,7 @@ function opneRecentProject(id){
 
                         
                         var progressbar=document.getElementById("prebuilt-end1").style.display="block";
-                        var hidetest=document.getElementById("showtest").style.display="none";
+                        var hidetestenduploadcore=document.getElementById("showtest").style.display="none";
                         for (var j =0; j<testtype.length; j++){
                             if(testtype[j].checked){
                                 selectedtype = testtype[j].value;
@@ -1981,49 +1984,88 @@ function opneRecentProject(id){
             }
             function socnowcore(comp){
             if (comp=="testlist"){
-                var testlist1 = document.getElementById("soc_test").style.display = "block";
-                var testtype1 = document.getElementById("soc_core").style.display = "none";
+                var testlist1 = document.getElementById("soc_test").style.display = "none";
+                var testtype1 = document.getElementById("soc_core").style.display = "block";
+                
+                           
+                        }
+                    
 
-            }
+            
+
             if(comp=="testtypesoc"){
                 var selectedtesttype;
-                    var cores = document.getElementsByName("upsoc");
+                    var cores = document.getElementsByName("upSoc");
                     for (var j =0; j<cores.length; j++){
                         if(cores[j].checked){
                             selectedtesttype = cores[j].value;
+                            alert(selectedtesttype);
                            
                         }
                     }
                     
                     if(selectedtesttype == "Floating_point_tests_for_azadi"){
-                        eel.floatingpointtest()
+                        alert(selectedtesttype);
+                        eel.floatingpointtest("socnow")
                     } else if(selectedtesttype== "MERL_vector_Tests"){
-                        eel.merlvectortest()
+                        eel.merlvectortest("socnow")
                     }
                     else if(selectedtesttype== "Riscv_tests"){
-                        eel.riscvtest()
+                        eel.riscvtest("socnow")
                     }
                     else if(selectedtesttype== "Self-Checking-vector-tests"){
-                        eel.selfcheckingvectortest()
+                        eel.selfcheckingvectortest("socnow")
                     }
                     else if(selectedtesttype== "Swerv_Tests"){
-                        eel.swervtest()
+                        eel.swervtest("socnow")
                     }
                     else if(selectedtesttype== "BURQ_Generated_Tests"){
-                        eel.burqgeneratedtest()
+                        eel.burqgeneratedtest("socnow")
                     }
                     else if(selectedtesttype=="User_Defined_Tests"){
-                        eel.usertest()
+                        eel.usertest("socnow")
                     }
                     else if(selectedtesttype=="RISCV_DV_Tests"){
-                        eel.dvtest()
+                        eel.dvtest("socnow")
                     }
                    
-                var testtype = document.getElementById("soc_core").style.display = "block";
-                var testlist = document.getElementById("soc_test").style.display = "none";
+                var testtype = document.getElementById("soc_core").style.display = "none";
+                var testlist = document.getElementById("soc_test").style.display = "block";
                 
             }
-           }
+            if (comp=="runtestsoc"){
+               
+                        var projName = document.getElementById("projectname").value;
+                        var projDir = document.getElementById("path").innerHTML;
+                        console.log(projDir);
+                        var selectedCore, selectedIss;
+                        
+                        var tests = [];
+                        var testCheckboxes = document.getElementsByName("soccoreTest");
+                        for (var i = 0; i < testCheckboxes.length; i++) {
+                            if (testCheckboxes[i].checked) {
+                                tests.push(testCheckboxes[i].value);
+                                
+                            }
+                        }
+                        alert(tests);
+                        if (projName == ""){
+                            alert("Please enter a project name");
+                        } else if (projDir == " "){
+                            alert("Please select a directory");
+                        } else if (tests.length == 0){
+                            alert("Please select at least one test case");
+                        } else {
+                           
+
+                         <!--shayan --> 
+                            eel.runTestsSoc();
+                        }
+                        
+                    }
+                      
+            }
+           
 
             function changeCustom(comp){
                 var core = document.getElementById("custom-core");
@@ -2205,22 +2247,146 @@ function showMerlTests(listt){
                 }
                 form.style.display = "block";
 
+        
 }
-eel.expose(showdvTests)
-function showdvTests(listt){
-    var form=document.getElementById('uploadcoretestcaseform');
+eel.expose(showsocnowfloting)
+function showsocnowfloting(listt){
+    var form=document.getElementById('testsoc');
     form.innerHTML="";
                 for (var i = 0; i < listt.length; i++) {
                                 var a = listt[i];
                 
                                form.innerHTML += 
-                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                               `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
                                             
                   
                 }
                 form.style.display = "block";
 
 }
+eel.expose(showdvTests)
+function showdvTests(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+
+eel.expose(showsocnowmerlvector)
+function showsocnowmerlvector(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowriscvtest)
+function showsocnowriscvtest(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowselfcheckingvect)
+function showsocnowselfcheckingvect(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowusertest)
+function showsocnowusertest(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowswerv)
+function showsocnowswerv(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowburqgen)
+function showsocnowburqgen(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowdvtest)
+function showsocnowdvtest(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+
+
 eel.expose(showriscvTests)
 function showriscvTests(listt){
     var form=document.getElementById('uploadcoretestcaseform');

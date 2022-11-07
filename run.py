@@ -109,7 +109,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
             for test in tests:
                 # check if test directory exists
                 if os.path.isdir(test) == False:
-                    # create test directory
+                    # create test direeel.ctory
                     os.mkdir(test)
 
                 os.chdir(test)
@@ -132,6 +132,88 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 tests_status.append(status)
         
         if selectedtest=="RISCV_DV_Tests":
+
+            os.chdir(swerv_test__path)
+            ic(os.getcwd())
+            for test in tests:
+                print(test)
+            
+                # check is test directory exists
+                if os.path.isdir(f"{test}_0") == False:
+                    os.mkdir(f"{test}_0")
+                currentProgress += 10
+                progressTick(currentProgress)
+                
+                os.chdir(f"{currentRootDir}/dv")
+                os.system(f"python3 run.py --iss whisper --simulator pyflow --iteration 1 --test={test} --output {test}")
+                currentProgress += 30
+                progressTick(currentProgress)
+                os.chdir(f"{currentRootDir}/cores/swerv/testbench/tests")
+                #os.mkdir(f"{test}_0")
+                os.chdir(f"{currentRootDir}/dv/{test}/asm_test")
+
+
+                os.rename(f"{test}_0.S", f"{test}_0.s")
+                currentProgress += 10
+                progressTick(currentProgress)
+                os.chdir(f"{currentRootDir}/cores/swerv/testbench/tests")
+                if os.path.isdir(f"{test}_0") == False:
+
+                    os.mkdir(f"{test}_0")
+               
+                
+
+
+                os.system(f"cp -r {currentRootDir}/dv/{test}/asm_test/{test}_0.s {currentRootDir}/cores/swerv/testbench/tests/{test}_0")
+                
+
+                    #enter in dv root
+                    #run command
+                    #go into test directory
+                    #extract assembly
+                    #go into swev directory
+                    #place it in test bench
+                    #create test directory
+                    #run make  and whisper same as we previuosly do
+                #dv command
+                
+               # os.system("export RISCV=/opt/riscv32")
+                
+
+                os.chdir(f"{test}_0")
+                #{test}_0 file open and remove first line .include "user_define.h" only from file and save it
+                with open(f"{test}_0.s", "r") as f:
+                    lines = f.readlines()
+                with open(f"{test}_0.s", "w") as f:
+                    for line in lines:
+                        if line.strip("\n") != '.include "user_define.h"' :
+                            if line.strip("\n") !='                  .include "user_init.s"':
+                                f.write(line)
+                os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
+
+                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
+                os.system("export PATH=/opt/riscv32/bin:$PATH")
+
+            
+                
+            
+               
+                os.chdir(f"{currentRootDir}/cores/swerv/{test}_0")
+                os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}_0")
+                currentProgress += 20
+                progressTick(currentProgress)
+                os.system(f"$whisper --logfile {test}_0.log {test}_0.exe --configfile ./snapshots/default/whisper.json")
+                currentProgress += 20
+                progressTick(currentProgress)
+                currentProgress += perOccurProgress
+                progressTick(currentProgress)
+                ic(os.getcwd())
+                #check is test.log and exec.log exists
+                ic(os.path.isfile(f"{test}_0.log"))
+                ic(os.path.isfile("exec.log"))
+                status = call(f"{test}_0.log", "exec.log")
+                tests_status.append(status)
+                ================
             os.chdir(swerv_test__path)
             if debug:
                 ic(os.getcwd())
@@ -157,20 +239,6 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
 
                 os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
 
-                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
-                os.system("export PATH=/opt/riscv32/bin:$PATH")
-                os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
-                currentProgress += perOccurProgress
-                progressTick(currentProgress)
-                os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
-                currentProgress += perOccurProgress
-                progressTick(currentProgress)
-                ic(os.getcwd())
-                #check is test.log and exec.log exists
-                ic(os.path.isfile(f"{test}.log"))
-                ic(os.path.isfile("exec.log"))
-                status = call(f"{test}.log", "exec.log")
-                tests_status.append(status)
         if selectedtest=="User_Defined_Tests":
             os.chdir(swerv_test__path)
             ic(swerv_test__path)
@@ -600,7 +668,7 @@ def genCore(isa,ext,bus):
 
 
 @eel.expose
-def floatingpointtest():
+def floatingpointtest(source):
     print('floatingpointtest')
     namelist=[]
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -613,11 +681,14 @@ def floatingpointtest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showfloatingTests(namelist)
+    if source=="socnow":
+        eel.showsocnowfloting(namelist)
+    if source=="custom":
+        eel.showfloatingTests(namelist)
 
 
 @eel.expose
-def merlvectortest():
+def merlvectortest(source):
     print('merlvectortest')
     namelist=[]
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -630,11 +701,14 @@ def merlvectortest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showMerlTests(namelist)
+    if source=="socnow":
+        eel.showsocnowmerlvector(namelist)
+    if source=="custom":
+        eel.showMerlTests(namelist)
 
 
 @eel.expose
-def riscvtest():
+def riscvtest(source):
     print('riscvtest')
     namelist=[]
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -647,11 +721,14 @@ def riscvtest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showriscvTests(namelist)
+    if source=="socnow":
+        eel.showsocnowriscvtest(namelist)
+    if source=="custom":
+        eel.showriscvTests(namelist)
 
 
 @eel.expose
-def selfcheckingvectortest():
+def selfcheckingvectortest(source):
     print('selfcheckingvectortest')
     namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -664,10 +741,13 @@ def selfcheckingvectortest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showselfcheckingvectorTests(namelist)
+    if source=="socnow":
+        eel.showsocnowselfcheckingvect(namelist)
+    if source=="custom":
+        eel.showselfcheckingvectorTests(namelist)
 
 @eel.expose
-def usertest(debug=True):
+def usertest(source,debug=True):
     namelist = []
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
     root = "./testcases/User_Defined_Tests"
@@ -683,11 +763,14 @@ def usertest(debug=True):
         
     if debug:
         ic(namelist)
+    if source=="socnow":
+        eel.showsocnowusertest(namelist)
+    if source=="custom":
 
-    eel.usersTests(namelist)
+        eel.usersTests(namelist)
 
 @eel.expose
-def swervtest():
+def swervtest(source):
     print('swervtest')
     namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
@@ -700,10 +783,13 @@ def swervtest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showswervTests(namelist)
+    if source=="socnow":
+        eel.showsocnowswerv(namelist)
+    if source=="custom":
+        eel.showswervTests(namelist)
 
 @eel.expose
-def burqgeneratedtest():
+def burqgeneratedtest(source):
     print('burqgeneratedtest')
     os.system(f"{currentRootDir}")
 
@@ -719,10 +805,13 @@ def burqgeneratedtest():
         namelist.append(dirname)
         
     print(namelist)
-    eel.showburqTests(namelist)
+    if source=="socnow":
+        eel.showsocnowburqgen(namelist)
+    if source=="custom":
+        eel.showburqTests(namelist)
 
 @eel.expose
-def dvtest(debug=True):
+def dvtest(source,debug=True):
     if debug:
         ic(sys._getframe().f_code.co_name)
 
@@ -741,8 +830,11 @@ def dvtest(debug=True):
         "riscv_csr_test",
         "riscv_unaligned_load_store_test"
     ]
+    if source=="socnow":
+        eel.showsocnowdvtest(tests)
+    if source=="custom":
 
-    eel.showdvTests(tests)
+        eel.showdvTests(tests)
 
 # @eel.expose
 # def enduploadcore(config, tests, types):
