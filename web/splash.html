@@ -2058,7 +2058,7 @@ function opneRecentProject(id){
                         } else {
                            
 
-                         <!--shayan --> 
+                        
                             eel.runTestsSoc();
                         }
                         
@@ -2266,13 +2266,13 @@ function showsocnowfloting(listt){
 }
 eel.expose(showdvTests)
 function showdvTests(listt){
-    var form=document.getElementById('testsoc');
-    form.innerHTML="";
+    var form=document.getElementById('uploadcoretestcaseform');
+                form.innerHTML="";
                 for (var i = 0; i < listt.length; i++) {
                                 var a = listt[i];
                 
                                form.innerHTML += 
-                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
                                             
                   
                 }

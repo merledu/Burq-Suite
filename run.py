@@ -19,14 +19,16 @@ sys.path.insert(0, BURQ_SCRIPTS)
 sys.path.insert(0, DV_ROOT)
 sys.path.insert(0, PYGEN_PATH)
 
-from run_tests import run_dv_test_on_spike, run_dv_test_on_core
-from instr_trace_compare import compare_trace_csv
+from scripts.run_tests import run_dv_test_on_spike, run_dv_test_on_core
+from dv.scripts.instr_trace_compare import compare_trace_csv
 
 
 def generate_core_log(cmd):
     os.system(cmd)
 
-
+@eel.expose
+def runTestsSoc():
+    pass
 @eel.expose
 def closeRecentRecord(id, debug=True):
     if debug:
