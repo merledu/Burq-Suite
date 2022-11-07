@@ -186,8 +186,9 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                         lines = f.readlines()
                     with open(f"{test}_0.s", "w") as f:
                         for line in lines:
-                            if line.strip("\n") != '.include "user_define.h"' or line.strip("\n") !='.include "user_init.s"':
-                                f.write(line)
+                            if line.strip("\n") != '.include "user_define.h"' :
+                                if line.strip("\n") !='                  .include "user_init.s"':
+                                    f.write(line)
                     os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
 
                     os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
