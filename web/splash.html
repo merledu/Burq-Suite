@@ -2033,7 +2033,39 @@ function opneRecentProject(id){
                 var testlist = document.getElementById("soc_test").style.display = "block";
                 
             }
-           }
+            if (comp=="runtestsoc"){
+               
+                        var projName = document.getElementById("projectname").value;
+                        var projDir = document.getElementById("path").innerHTML;
+                        console.log(projDir);
+                        var selectedCore, selectedIss;
+                        
+                        var tests = [];
+                        var testCheckboxes = document.getElementsByName("soccoreTest");
+                        for (var i = 0; i < testCheckboxes.length; i++) {
+                            if (testCheckboxes[i].checked) {
+                                tests.push(testCheckboxes[i].value);
+                                
+                            }
+                        }
+                        alert(tests);
+                        if (projName == ""){
+                            alert("Please enter a project name");
+                        } else if (projDir == " "){
+                            alert("Please select a directory");
+                        } else if (tests.length == 0){
+                            alert("Please select at least one test case");
+                        } else {
+                           
+
+                         <!--shayan --> 
+                            eel.runTestsSoc();
+                        }
+                        
+                    }
+                      
+            }
+           
 
             function changeCustom(comp){
                 var core = document.getElementById("custom-core");
