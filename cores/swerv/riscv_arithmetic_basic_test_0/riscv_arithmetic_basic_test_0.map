@@ -19,11 +19,11 @@ LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/libgcc.a
 .text.init
  *(.text.init)
 
-.text           0x0000000080000000     0x2776
+.text           0x0000000080000000     0x1cf6
  *(.text)
- .text          0x0000000080000000     0x2776 riscv_arithmetic_basic_test_0.o
+ .text          0x0000000080000000     0x1cf6 riscv_arithmetic_basic_test_0.o
                 0x0000000080000000                _start
-                0x0000000080002776                _end = .
+                0x0000000080001cf6                _end = .
                 0x00000000d0580000                . = 0xd0580000
 
 .data.io

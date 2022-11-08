@@ -405,7 +405,7 @@ def comparison():
       else:
         return " ".join(fail)
   except:
-    return False
+    return "Failed"
 
 
       
