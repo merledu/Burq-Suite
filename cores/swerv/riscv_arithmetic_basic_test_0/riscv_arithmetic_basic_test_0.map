@@ -1,0 +1,62 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/libgcc.a
+LOAD riscv_arithmetic_basic_test_0.o
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/libgcc.a
+START GROUP
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/../../../../riscv32-unknown-elf/lib/libc.a
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/../../../../riscv32-unknown-elf/lib/libgloss.a
+END GROUP
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/libgcc.a
+                0x0000000080000000                . = 0x80000000
+
+.text.init
+ *(.text.init)
+
+.text           0x0000000080000000     0x2776
+ *(.text)
+ .text          0x0000000080000000     0x2776 riscv_arithmetic_basic_test_0.o
+                0x0000000080000000                _start
+                0x0000000080002776                _end = .
+                0x00000000d0580000                . = 0xd0580000
+
+.data.io
+ *(.data.io)
+                0x00000000f0040000                . = 0xf0040000
+
+.data           0x00000000f0040000       0x48
+ *(.*data)
+ .data          0x00000000f0040000       0x48 riscv_arithmetic_basic_test_0.o
+                0x00000000f0040000                tohost
+                0x00000000f0040040                fromhost
+ *(.rodata*)
+
+.user_stack     0x00000000f0040048     0x4e20
+ .user_stack    0x00000000f0040048     0x4e20 riscv_arithmetic_basic_test_0.o
+
+.kernel_stack   0x00000000f0044e68     0x4e20
+ .kernel_stack  0x00000000f0044e68     0x4e20 riscv_arithmetic_basic_test_0.o
+
+.bss            0x00000000f0049c88        0x0
+                0x00000000f0049c88                BSS_START = .
+ *(.*bss)
+ .bss           0x00000000f0049c88        0x0 riscv_arithmetic_basic_test_0.o
+                0x00000000f0049c88                BSS_END = .
+                0x00000000f004ac90                STACK = (ALIGN (0x10) + 0x1000)
+                0x00000000fffffff8                . = 0xfffffff8
+
+.data.ctl       0x00000000fffffff8        0x8
+                0x00000000fffffff8        0x4 LONG 0xf0040000
+                0x00000000fffffffc        0x4 LONG 0xf004ac90 STACK
+OUTPUT(riscv_arithmetic_basic_test_0.exe elf32-littleriscv)
+
+.riscv.attributes
+                0x0000000000000000       0x2d
+ .riscv.attributes
+                0x0000000000000000       0x2d riscv_arithmetic_basic_test_0.o

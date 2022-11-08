@@ -1,0 +1,92 @@
+
+operations.exe:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+80000000 <_start>:
+80000000:	595552b7          	lui	t0,0x59555
+80000004:	55528293          	addi	t0,t0,1365 # 59555555 <_start-0x26aaaaab>
+80000008:	7c029073          	csrw	0x7c0,t0
+8000000c:	70041117          	auipc	sp,0x70041
+80000010:	ff410113          	addi	sp,sp,-12 # f0041000 <STACK>
+80000014:	2805                	jal	80000044 <main>
+
+80000016 <_finish>:
+80000016:	50580297          	auipc	t0,0x50580
+8000001a:	fea28293          	addi	t0,t0,-22 # d0580000 <tohost>
+8000001e:	0ff00313          	li	t1,255
+80000022:	00628023          	sb	t1,0(t0)
+80000026:	4305                	li	t1,1
+80000028:	0062a023          	sw	t1,0(t0)
+8000002c:	fe0005e3          	beqz	zero,80000016 <_finish>
+80000030:	0001                	nop
+80000032:	0001                	nop
+80000034:	0001                	nop
+80000036:	0001                	nop
+80000038:	0001                	nop
+8000003a:	0001                	nop
+8000003c:	0001                	nop
+8000003e:	0001                	nop
+80000040:	0001                	nop
+80000042:	0001                	nop
+
+Disassembly of section .text:
+
+80000044 <main>:
+// write your code here 
+int main(void) {
+80000044:	7139                	addi	sp,sp,-64
+80000046:	de22                	sw	s0,60(sp)
+80000048:	0080                	addi	s0,sp,64
+   int a = 5;
+8000004a:	4795                	li	a5,5
+8000004c:	fef42623          	sw	a5,-20(s0)
+   int b = 6;   
+80000050:	4799                	li	a5,6
+80000052:	fef42423          	sw	a5,-24(s0)
+  int c=3;
+80000056:	478d                	li	a5,3
+80000058:	fef42223          	sw	a5,-28(s0)
+  int d=6;
+8000005c:	4799                	li	a5,6
+8000005e:	fef42023          	sw	a5,-32(s0)
+  int e=7;
+80000062:	479d                	li	a5,7
+80000064:	fcf42e23          	sw	a5,-36(s0)
+  int f= 8;
+80000068:	47a1                	li	a5,8
+8000006a:	fcf42c23          	sw	a5,-40(s0)
+ 
+    // Calculating product
+    int product = a - b;
+8000006e:	fec42703          	lw	a4,-20(s0)
+80000072:	fe842783          	lw	a5,-24(s0)
+80000076:	40f707b3          	sub	a5,a4,a5
+8000007a:	fcf42a23          	sw	a5,-44(s0)
+  int add = c + d;
+8000007e:	fe442703          	lw	a4,-28(s0)
+80000082:	fe042783          	lw	a5,-32(s0)
+80000086:	97ba                	add	a5,a5,a4
+80000088:	fcf42823          	sw	a5,-48(s0)
+  int div = f/d;
+8000008c:	fd842703          	lw	a4,-40(s0)
+80000090:	fe042783          	lw	a5,-32(s0)
+80000094:	02f747b3          	div	a5,a4,a5
+80000098:	fcf42623          	sw	a5,-52(s0)
+  int sub= f-a;
+8000009c:	fd842703          	lw	a4,-40(s0)
+800000a0:	fec42783          	lw	a5,-20(s0)
+800000a4:	40f707b3          	sub	a5,a4,a5
+800000a8:	fcf42423          	sw	a5,-56(s0)
+    
+
+    // %.2lf displays number up to 2 decimal point
+   
+    
+    return 0;
+800000ac:	4781                	li	a5,0
+800000ae:	853e                	mv	a0,a5
+800000b0:	5472                	lw	s0,60(sp)
+800000b2:	6121                	addi	sp,sp,64
+800000b4:	8082                	ret

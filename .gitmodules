@@ -3,4 +3,4 @@
 	url = https://github.com/merledu/SoC-Now-Generator
 [submodule "dv"]
 	path = dv
-	url = https://github.com/google/riscv-dv.git
+	url = https://github.com/merledu/riscv-dv.git

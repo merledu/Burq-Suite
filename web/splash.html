@@ -26,6 +26,12 @@
                #prebuilt-test{
             display: none;
         }
+        #prebuilt-test-list{
+            display: none;
+        }
+        #prebuilt-test-list-ibex{
+            display: none;
+        }
         #prebuilt-iss{
             display: none;
         }
@@ -53,6 +59,28 @@
         #main{
             display: none;
         }
+        .progress11 {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+            margin-top: 30px;
+            margin-left: 300px;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -74,7 +102,7 @@
         
             <div class="right">
             <h5 style="margin-top: 30px;color: aliceblue;">Login</h5>
-            <p style="margin-top: 68px;">Don't have an account? <a href="http://socnow.software">Create Your Account</a> it takes less than a minute</p>
+            <p style="margin-top: 64px;">Don't have an account? <a href="http://socnow.software">Create Your Account</a> it takes less than a minute</p>
             <div class="form">
                 <input type="email" id="email" placeholder="Username">
                 <br>
@@ -194,10 +222,10 @@
                                 <br>
                                 Core Verification 
                             </button>
-                            <button class="btn temp-btn">
-                                <span><img src="assets/icons/logo.png" style="width: 120px;"></span>
+                            <button class="btn temp-btn" onclick="openNewProject(); document.getElementById('soc_core_btn').click()" >
+                                <span><img src="assets/icons/socnow.png" style="width: 120px;"></span>
                                 <br>
-                                About Us  
+                                SoC-Now Cores
                             </button>
                         </div>
 
@@ -271,6 +299,9 @@
                             <button id="pre_core_btn" onclick="changeProject2(event,'prebuilt_core')" class="btn config-btn">
                                 Prebuilt Core Verification
                             </button>
+                            <button id="soc_core_btn" onclick="changeProject2(event,'soc_core')" class="btn config-btn">
+                                Soc now cores
+                            </button>
     
                            
                         </div>
@@ -305,6 +336,107 @@
 
                             border-top-color: #1a1d22;" onfocus="value=''"  > </div>
                             <button class="btn browse-btn" onclick="select()" style="width: 70px;">...</button>
+                        </div>
+                        <!-----------------------SOC-NOW CORESSSSS---------------------------------------------->
+                        <div id="soc_core" style="display:none;">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config active">
+                                        <p>Test case type</p>
+                                    </div>
+                                   
+                                    
+                                </div>
+                                <div class="col-md-6"  style="margin-left: 70px;">
+    
+                                <div  >
+                                    <h6 style="font-weight: lighter;">Select Your Core test type</h6>
+                                    <form >
+                                        <input type="radio" id="gencoretest" name="upSoc" value="BURQ_Generated_Tests" checked />
+                                        <label> BURQ_Generated_Tests </label>
+                                        <br>
+                                        <input  type="radio" id="gencoretest" name="upSoc" value="Floating_point_tests_for_azadi" />
+                                        <label>Floating_point_tests_for_azadi </label>
+                                        <br>
+                                        <input type="radio" id="gencoretest" name="upSoc"" value="MERL_vector_Tests" />
+                                        <label> MERL_vector_Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upSoc" value="Riscv_tests" />
+                                        <label> Riscv-tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upSoc" value="Self-Checking-vector-tests" />
+                                        <label> Self-Checking-vector-tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upSoc" value="Swerv_Tests" />
+                                        <label>Swerv_Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upSoc" value="User_Defined_Tests" />
+                                        <label>User-Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upSoc" value="RISCV_DV_Tests" />
+                                        <label>RISCV_DV_Tests </label>
+                                    </form> 
+                                  
+                                </div>
+                                <div  style="margin-top:5px;" >
+                                    
+                                    
+                                    
+                            
+                            </div>
+                                
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div style="text-align: right;" style="margin-top: -36px;">
+                                   
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/next.png" onclick="socnowcore('testtypesoc')" style="width: 100%;margin-top: -100px;" />
+                                </button>
+                            </div>
+                                </div>
+                        </div>
+                        
+                        <!------------------------------------------- Soc-now testlist------------------------>
+
+                        <div id="soc_test" style="display:none;">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config ">
+                                        <p>Test case type</p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>Tests</p>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-6"  style="margin-left: 70px;">
+    
+                                    <div class="col-md-7" >
+                                        <form id="testsoc" style="    width: 465px;
+                                        overflow-y: auto;
+                                        height: 244px;
+                                        display: block;">
+                                            
+                                        </form>
+                                         
+                                        
+                                       
+                                     </div>
+                                <div  style="margin-top:5px;" >
+                                    
+                                    
+                                    
+                            
+                            </div>
+                                
+                                <div class="col-md-2"></div>
+                            </div>
+                            
+                            <div style="text-align: right;" style="margin-top: -36px;">
+                                <button  onclick="socnowcore('testlist')" class="btn ctrl-btn">
+                                    <img src="assets/icons/back.png" style="width: 100%;margin-top:-106px;margin-left:-1200px;" />
+                                </button>
+                                
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/next.png" onclick="socnowcore('runtestsoc')" style="width: 100%;margin-top: -100px;" />
+                                </button>
+                            </div>
+                                </div>
                         </div>
 
                         <!-- ------------------------- CUSTOM TESTTTTT --------------------- -->
@@ -999,10 +1131,7 @@
                                 </div>
                             </div>
                             <div id="prebuilt-end1">
-                                <div class="progress">
-                                    <div class="progress-bar"></div>
-                                    <p id="progress-indicator">0%</p>
-                                  </div>
+                                <div class="progress11"></div>
                             </div>
                            
                             </div>
@@ -1088,12 +1217,107 @@
                                     <button onclick="changePrebuilt('core')" class="btn ctrl-btn">
                                         <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
                                     </button>
-                                    <button onclick="changePrebuilt('test')" class="btn ctrl-btn">
+                                    <button onclick="changePrebuilt('testtype')" class="btn ctrl-btn">
                                         <img src="assets/icons/next.png" style="width: 100%;margin-top:-50px;" />
                                     </button>
                                 </div>
                             </div>
+                            <!-- prebuit test type slection------------------------------------------------->
 
+                            <div id="prebuilt-test-list"style="margin-top:-60px;">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config">
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config">
+                                            <p>ISS</p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Test Type</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-7" >
+                                        <h6 style="font-weight: lighter;">Select Test Case Type</h6>
+                                        <form id="fromswerv">
+                                
+                                            <input type="radio" id="pretest" name="preCore" value="Swerv_Tests" />
+                                            <label>Swerv_Tests </label><br>
+                                            <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
+                                            <label>User-Tests </label><br>
+                                            <input type="radio" id="pretest" name="preCore" value="RISCV_DV_Tests" />
+                                            <label>RISCV_DV_Tests </label>
+                                        </form> 
+                                       
+                                     </div>
+                                     <div style="margin-top: -40px;">
+                                       
+                                        <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
+                                            <img src="assets/icons/back.png" style="width: 100%;" />
+                                        </button>
+                                        <button onclick="changePrebuilt('testcase')" class="btn ctrl-btn">
+                                            <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
+                                        </button>
+    
+                                        
+                                     </div>
+                                     
+                                </div>
+
+                                <!-- <div class="d-flex justify-content-between align-items-center">
+                                    
+                                </div> -->
+
+                                </div>
+                                <!--prebuilt test case tye ibex -->
+
+                            <div id="prebuilt-test-list-ibex"style="margin-top:-60px;">
+                                <div class="row main-config">
+                                    <div class="col-md-3">
+                                        <div class="name-config">
+                                            <p>Core</p>
+                                        </div>
+                                        <div class="name-config">
+                                            <p>ISS</p>
+                                        </div>
+                                        <div class="name-config active">
+                                            <p>Test Type</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-7" >
+                                        <h6 style="font-weight: lighter;">Select Test Case Type</h6>
+                                        <form >
+                                
+                                            <input type="radio" id="pretest" name="preCore" value="Ibex_Tests" />
+                                            <label>Ibex_Tests </label><br>
+                                            <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
+                                            <label>User-Tests </label><br>
+                                            <input type="radio" id="pretest" name="preCore" value="RISCV_DV_Tests" />
+                                            <label>RISCV_DV_Tests </label>
+                                        </form> 
+                                       
+                                     </div>
+                                     <div style="margin-top: -40px;">
+                                       
+                                        <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
+                                            <img src="assets/icons/back.png" style="width: 100%;" />
+                                        </button>
+                                        <button onclick="changePrebuilt('testcase')" class="btn ctrl-btn">
+                                            <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
+                                        </button>
+    
+                                        
+                                     </div>
+                                     
+                                </div>
+
+                                <!-- <div class="d-flex justify-content-between align-items-center">
+                                    
+                                </div> -->
+
+                                </div>
                             <!-- -------------------- PREBUILT TEST CASES BOX -------------------- -->
                             <div id="prebuilt-test"style="margin-top:-60px;">
                                 <div class="row main-config">
@@ -1104,23 +1328,24 @@
                                         <div class="name-config">
                                             <p>ISS</p>
                                         </div>
+                                        <div class="name-config">
+                                            <p>Test Type</p>
+                                        </div>
                                         <div class="name-config active">
                                             <p>Test Cases</p>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-7" >
-                                        <form id="swervform" style="overflow-y:auto;height:180px">
+                                        <form id="swerv&ibexform" style="overflow-y:auto;height:180px">
                                             
                                         </form> 
-                                        <form id="ibexform" style="overflow-y:auto;height:180px">
-                                            
-                                        </form>
+                                       
                                        
                                      </div>
                                      <div style="margin-top: -40px;">
                                        
-                                        <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
+                                        <button onclick="changePrebuilt('testtype')" class="btn ctrl-btn">
                                             <img src="assets/icons/back.png" style="width: 100%;" />
                                         </button>
                                         <button onclick="changePrebuilt('end')" class="btn ctrl-btn">
@@ -1292,14 +1517,19 @@ function opneRecentProject(id){
                     document.getElementById("prebuilt-core").style.display = "block";
                     document.getElementById("prebuilt-iss").style.display = "none";
                     document.getElementById("prebuilt-test").style.display = "none";
+                    document.getElementById("prebuilt-test-list").style.display="none";
+                    document.getElementById("prebuilt-test-list-ibex").style.display="none";
                 }
                 else if(comp == "iss"){
                     document.getElementById("prebuilt-core").style.display = "none";
                     document.getElementById("prebuilt-iss").style.display = "block";
                     document.getElementById("prebuilt-test").style.display = "none";
+                    document.getElementById("prebuilt-test-list").style.display="none";
+                    document.getElementById("prebuilt-test-list-ibex").style.display="none";
                 }
-                else if(comp == "test"){
+                else if (comp=="testtype"){
                     var selectedCore;
+                    var checktype=document.getElementById("")
                     var cores = document.getElementsByName("prebuiltCore");
                     for (var j =0; j<cores.length; j++){
                         if(cores[j].checked){
@@ -1308,63 +1538,123 @@ function opneRecentProject(id){
                     }
                     
                     if(selectedCore == "swerv"){
-                        eel.getlistswerv()
+                        document.getElementById("prebuilt-core").style.display = "none";
+                    document.getElementById("prebuilt-iss").style.display = "none";
+                    document.getElementById("prebuilt-test").style.display = "none";
+                    document.getElementById("prebuilt-test-list").style.display="block";
+                    document.getElementById("prebuilt-test-list-ibex").style.display="none";
+
                     } else if(selectedCore == "ibex"){
-                        eel.getlistibex()
+                    document.getElementById("prebuilt-core").style.display = "none";
+                    document.getElementById("prebuilt-iss").style.display = "none";
+                    document.getElementById("prebuilt-test").style.display = "none";
+                    document.getElementById("prebuilt-test-list").style.display="none";
+                    document.getElementById("prebuilt-test-list-ibex").style.display="block";
+                        
                     }
+                    
+                }
+                    
+                
+                else if(comp=="testcase"){
+                    
+                    var selectedtest=" ";
+                    var cores = document.getElementsByName("preCore");
+                    for (var j =0; j<cores.length; j++){
+                        if(cores[j].checked){
+                            
+                            selectedtest= cores[j].value;
+                            alert(selectedtest);
+                            
+                    
+                        }
+                    }
+                    if (selectedtest== 0){
+                        alert("Please select test case type");
+                    }
+                    else{
+                    
+                    
+                    if(selectedtest == "Swerv_Tests"){
+                        eel.getlistswerv()}
+                    else if(selectedtest == "RISCV_DV_Tests"){
+                        eel.getlistdv()}
+                    else if(selectedtest == "User_Defined_Tests"){
+                        eel.getlistuser()}
+                    else if(selectedtest == "Ibex_Tests"){
+                        eel.getlistibex()}
                     document.getElementById("prebuilt-core").style.display = "none";
                     document.getElementById("prebuilt-iss").style.display = "none";
                     document.getElementById("prebuilt-test").style.display = "block";
-                }
-                else if(comp == "end"){
-                    var projName = document.getElementById("projectname").value;
-                    var projDir = document.getElementById("path").innerHTML;
-                    console.log(projDir);
-                    var selectedCore, selectedIss;
-                    var cores = document.getElementsByName("prebuiltCore");
-                    var iss = document.getElementsByName("prebuiltISS");
-                    for (var j =0; j<cores.length; j++){
-                        if(cores[j].checked){
-                            selectedCore = cores[j].value;
-                        }
-                    }
-                    for (var k=0; k<iss.length; k++){
-                        if(iss[k].checked){
-                            selectedIss = iss[k].value;
-                        }
-                    }
-                    var tests = [];
-                    var testCheckboxes = document.getElementsByName("prebuiltTest");
-                    for (var i = 0; i < testCheckboxes.length; i++) {
-                        if (testCheckboxes[i].checked) {
-                            tests.push(testCheckboxes[i].value);
-                        }
-                    }
-                    if (projName == ""){
-                        alert("Please enter a project name");
-                    } else if (projDir == " "){
-                        alert("Please select a directory");
-                    } else if (tests.length == 0){
-                        alert("Please select at least one test case");
-                    } else {
-                        document.getElementById("prebuilt-core").style.display = "none";
-                        document.getElementById("prebuilt-iss").style.display = "none";
-                        document.getElementById("prebuilt-test").style.display = "none";
-                        document.getElementById("prebuilt-end").style.display = "block";
-                        // var selectedCore = document.getElementById("prebuiltCore").value;
-                        // var selectedIss = document.getElementById("prebuiltISS").value;
-                        // get prebuiltTest checkbox values
-
+                    document.getElementById("prebuilt-test-list").style.display="none";
+                    document.getElementById("prebuilt-test-list-ibex").style.display="none";
                         
-                        eel.runTests(selectedCore, selectedIss,  tests, projName, projDir);
-                    }
-                    
-                    
-                    
-
+                   
+                   
                     
                 }
             }
+                else if(comp == "end"){
+                    var selectedtest=" ";
+                    var cores = document.getElementsByName("preCore");
+                    for (var j =0; j<cores.length; j++){
+                        if(cores[j].checked){
+                            
+                            selectedtest= cores[j].value;
+                            
+                            
+                    
+                        }
+                    }
+                        var projName = document.getElementById("projectname").value;
+                        var projDir = document.getElementById("path").innerHTML;
+                        console.log(projDir);
+                        var selectedCore, selectedIss;
+                        var cores = document.getElementsByName("prebuiltCore");
+                        var iss = document.getElementsByName("prebuiltISS");
+                        for (var j =0; j<cores.length; j++){
+                            if(cores[j].checked){
+                                selectedCore = cores[j].value;
+                            }
+                        }
+                        for (var k=0; k<iss.length; k++){
+                            if(iss[k].checked){
+                                selectedIss = iss[k].value;
+                            }
+                        }
+                        var tests = [];
+                        var testCheckboxes = document.getElementsByName("prebuiltTest");
+                        for (var i = 0; i < testCheckboxes.length; i++) {
+                            if (testCheckboxes[i].checked) {
+                                tests.push(testCheckboxes[i].value);
+                            }
+                        }
+                        if (projName == ""){
+                            alert("Please enter a project name");
+                        } else if (projDir == " "){
+                            alert("Please select a directory");
+                        } else if (tests.length == 0){
+                            alert("Please select at least one test case");
+                        } else {
+                            document.getElementById("prebuilt-core").style.display = "none";
+                            document.getElementById("prebuilt-iss").style.display = "none";
+                            document.getElementById("prebuilt-test").style.display = "none";
+                            document.getElementById("prebuilt-end").style.display = "block";
+                            // var selectedCore = document.getElementById("prebuiltCore").value;
+                            // var selectedIss = document.getElementById("prebuiltISS").value;
+                            // get prebuiltTest checkbox values
+
+                            
+                            eel.runTests(selectedCore, selectedIss,  tests, projName, projDir,selectedtest);
+                        }
+                        
+                    }
+                        
+
+                        
+                    }
+                
+                
 //Coree
             function changecoree(comp){
                 if(comp == "initial"){
@@ -1503,27 +1793,27 @@ function opneRecentProject(id){
                     }
                     
                     if(selectedtesttype == "Floating_point_tests_for_azadi"){
-                        eel.floatingpointtest()
+                        eel.floatingpointtest("custom")
                     } else if(selectedtesttype== "MERL_vector_Tests"){
-                        eel.merlvectortest()
+                        eel.merlvectortest("custom")
                     }
                     else if(selectedtesttype== "Riscv_tests"){
-                        eel.riscvtest()
+                        eel.riscvtest("custom")
                     }
                     else if(selectedtesttype== "Self-Checking-vector-tests"){
-                        eel.selfcheckingvectortest()
+                        eel.selfcheckingvectortest("custom")
                     }
                     else if(selectedtesttype== "Swerv_Tests"){
-                        eel.swervtest()
+                        eel.swervtest("custom")
                     }
                     else if(selectedtesttype== "BURQ_Generated_Tests"){
-                        eel.burqgeneratedtest()
+                        eel.burqgeneratedtest("custom")
                     }
                     else if(selectedtesttype=="User_Defined_Tests"){
-                        eel.usertest()
+                        eel.usertest("custom")
                     }
                     else if(selectedtesttype=="RISCV_DV_Tests"){
-                        eel.dvtest()
+                        eel.dvtest("custom")
                     }
                    
                     document.getElementById("core-command").style.display = "none";
@@ -1658,7 +1948,7 @@ function opneRecentProject(id){
 
                         
                         var progressbar=document.getElementById("prebuilt-end1").style.display="block";
-                        var hidetest=document.getElementById("showtest").style.display="none";
+                        var hidetestenduploadcore=document.getElementById("showtest").style.display="none";
                         for (var j =0; j<testtype.length; j++){
                             if(testtype[j].checked){
                                 selectedtype = testtype[j].value;
@@ -1692,7 +1982,91 @@ function opneRecentProject(id){
                     }
                 }
             }
+            function socnowcore(comp){
+            if (comp=="testlist"){
+                var testlist1 = document.getElementById("soc_test").style.display = "none";
+                var testtype1 = document.getElementById("soc_core").style.display = "block";
+                
+                           
+                        }
+                    
+
             
+
+            if(comp=="testtypesoc"){
+                var selectedtesttype;
+                    var cores = document.getElementsByName("upSoc");
+                    for (var j =0; j<cores.length; j++){
+                        if(cores[j].checked){
+                            selectedtesttype = cores[j].value;
+                            alert(selectedtesttype);
+                           
+                        }
+                    }
+                    
+                    if(selectedtesttype == "Floating_point_tests_for_azadi"){
+                        alert(selectedtesttype);
+                        eel.floatingpointtest("socnow")
+                    } else if(selectedtesttype== "MERL_vector_Tests"){
+                        eel.merlvectortest("socnow")
+                    }
+                    else if(selectedtesttype== "Riscv_tests"){
+                        eel.riscvtest("socnow")
+                    }
+                    else if(selectedtesttype== "Self-Checking-vector-tests"){
+                        eel.selfcheckingvectortest("socnow")
+                    }
+                    else if(selectedtesttype== "Swerv_Tests"){
+                        eel.swervtest("socnow")
+                    }
+                    else if(selectedtesttype== "BURQ_Generated_Tests"){
+                        eel.burqgeneratedtest("socnow")
+                    }
+                    else if(selectedtesttype=="User_Defined_Tests"){
+                        eel.usertest("socnow")
+                    }
+                    else if(selectedtesttype=="RISCV_DV_Tests"){
+                        eel.dvtest("socnow")
+                    }
+                   
+                var testtype = document.getElementById("soc_core").style.display = "none";
+                var testlist = document.getElementById("soc_test").style.display = "block";
+                
+            }
+            if (comp=="runtestsoc"){
+               
+                        var projName = document.getElementById("projectname").value;
+                        var projDir = document.getElementById("path").innerHTML;
+                        console.log(projDir);
+                        var selectedCore, selectedIss;
+                        
+                        var tests = [];
+                        var testCheckboxes = document.getElementsByName("soccoreTest");
+                        for (var i = 0; i < testCheckboxes.length; i++) {
+                            if (testCheckboxes[i].checked) {
+                                tests.push(testCheckboxes[i].value);
+                                
+                            }
+                        }
+                        alert(tests);
+                        if (projName == ""){
+                            alert("Please enter a project name");
+                        } else if (projDir == " "){
+                            alert("Please select a directory");
+                        } else if (tests.length == 0){
+                            alert("Please select at least one test case");
+                        } else {
+                           
+
+                        
+                            eel.runTestsSoc();
+                        }
+                        
+                    }
+                      
+            }
+           
+
             function changeCustom(comp){
                 var core = document.getElementById("custom-core");
                 var iss = document.getElementById("custom-iss");
@@ -1721,7 +2095,8 @@ function opneRecentProject(id){
             eel.expose(showIbexTests)
             function showIbexTests(listt){
                 
-                var form=document.getElementById('ibexform');
+                var form=document.getElementById('swerv&ibexform');
+                form.innerHTML = " ";
                 for (var i = 0; i < listt.length; i++) {
                                 var a = listt[i];
                 
@@ -1733,20 +2108,21 @@ function opneRecentProject(id){
                 form.style.display = "block";
             }
 
-            eel.expose(showSwervTests)
-            function showSwervTests(listt){
+            // eel.expose(showSwervTests)
+            // function showSwervTests(listt){
                 
-                var form=document.getElementById('swervform');
-                for (var i = 0; i < listt.length; i++) {
-                                var a = listt[i];
+            //     var form=document.getElementById('swerv&ibexform');
+            //     form.innerHTML += " "
+            //     for (var i = 0; i < listt.length; i++) {
+            //                     var a = listt[i];
                 
-                               form.innerHTML += 
-                                            `<input type='checkbox' name='prebuiltTest' value='${a}' ><label> ${a} </label><br>`;
+            //                    form.innerHTML += 
+            //                                 `<input type='checkbox' name='prebuiltTest' value='${a}' ><label> ${a} </label><br>`;
                                             
                   
-                }
-                form.style.display = "block";
-            } 
+            //     }
+            //     form.style.display = "block";
+            // } 
             //browsefile
             function select(){
                 var projectnamee = document.getElementById("projectname").value;
@@ -1871,11 +2247,27 @@ function showMerlTests(listt){
                 }
                 form.style.display = "block";
 
+        
+}
+eel.expose(showsocnowfloting)
+function showsocnowfloting(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                               `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
 }
 eel.expose(showdvTests)
 function showdvTests(listt){
     var form=document.getElementById('uploadcoretestcaseform');
-    form.innerHTML="";
+                form.innerHTML="";
                 for (var i = 0; i < listt.length; i++) {
                                 var a = listt[i];
                 
@@ -1887,6 +2279,114 @@ function showdvTests(listt){
                 form.style.display = "block";
 
 }
+
+eel.expose(showsocnowmerlvector)
+function showsocnowmerlvector(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowriscvtest)
+function showsocnowriscvtest(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowselfcheckingvect)
+function showsocnowselfcheckingvect(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowusertest)
+function showsocnowusertest(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowswerv)
+function showsocnowswerv(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowburqgen)
+function showsocnowburqgen(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+eel.expose(showsocnowdvtest)
+function showsocnowdvtest(listt){
+    var form=document.getElementById('testsoc');
+    form.innerHTML="";
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
+                
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            
+                  
+                }
+                form.style.display = "block";
+
+}
+
+
 eel.expose(showriscvTests)
 function showriscvTests(listt){
     var form=document.getElementById('uploadcoretestcaseform');
