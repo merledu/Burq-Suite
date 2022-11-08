@@ -299,8 +299,8 @@
                             <button id="pre_core_btn" onclick="changeProject2(event,'prebuilt_core')" class="btn config-btn">
                                 Prebuilt Core Verification
                             </button>
-                            <button id="soc_core_btn" onclick="changeProject2(event,'soc_core')" class="btn config-btn">
-                                Soc now cores
+                            <button id="soc_core_btn" onclick="changeProject2(event,'soc_core'); eel.getCoresFromSoCNow()" class="btn config-btn">
+                                SoC-Now Cores
                             </button>
     
                            
@@ -337,6 +337,52 @@
                             border-top-color: #1a1d22;" onfocus="value=''"  > </div>
                             <button class="btn browse-btn" onclick="select()" style="width: 70px;">...</button>
                         </div>
+
+                        <!-----------------------SOC-NOW CORESSSSS LISTTT---------------------------------------------->
+
+                        <div id="soc_list" style="display:none;">
+                            <div id="soc_load">
+                                <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                                 </svg>
+                                 <h6 style="font-weight: 100;margin-top:25px;"> Retrieving data from SoC-Now </h6>
+                            </div>
+                            <div id="soc_actual" style="display: none;" class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config active">
+                                        <p>Select Core</p>
+                                    </div>
+                                   
+                                    
+                                </div>
+                                <div class="col-md-6"  style="margin-left: 70px;">
+    
+                                <div>
+                                    <h6 style="font-weight: lighter;">Select the Core you want to verify</h6>
+                                    <form id="soc_list_form">
+                                        
+                                    </form> 
+                                  
+                                </div>
+                                <div  style="margin-top:5px;" >
+                                    
+                                    
+                                    
+                            
+                            </div>
+                                
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div style="text-align: right;" style="margin-top: -36px;">
+                                   
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/next.png" onclick="socnowcore('selectcore')" style="width: 100%;margin-top: -100px;" />
+                                </button>
+                            </div>
+                                </div>
+                        </div>
+
+
                         <!-----------------------SOC-NOW CORESSSSS---------------------------------------------->
                         <div id="soc_core" style="display:none;">
                             <div class="row main-config">
@@ -1390,6 +1436,22 @@
 
         <script type="text/javascript">
 
+eel.expose(showCoresFromSoCNow)
+function showCoresFromSoCNow(cleanList){
+    var form = document.getElementById("soc_list_form");
+    str = "";
+    for(let i=0;i<cleanList.length;i++){
+        str += `<input type="radio" id="gencoretest" name="SoCCore" value="${cleanList[i][0]}" checked />
+                                        <label> ${cleanList[i][1]} </label>
+                                        <br>`;
+    }
+    form.innerHTML = str;
+    var actual = document.getElementById("soc_actual");
+    var loading = document.getElementById("soc_load");
+    loading.style.display = "none";
+    actual.style.display = "block";
+}
+
 
 function closeEverythingPaleez(){
     window.close();
@@ -1985,6 +2047,10 @@ function opneRecentProject(id){
                 }
             }
             function socnowcore(comp){
+                if(comp=="selectcore"){
+                    var e1 = document.getElementById("soc_list").style.display = "none";
+                    var e2 = document.getElementById("soc_core").style.display = "block";
+                }
             if (comp=="testlist"){
                 var testlist1 = document.getElementById("soc_test").style.display = "none";
                 var testtype1 = document.getElementById("soc_core").style.display = "block";
@@ -2058,10 +2124,9 @@ function opneRecentProject(id){
                         } else if (tests.length == 0){
                             alert("Please select at least one test case");
                         } else {
-                           
-
+                            var coreSelected = document.querySelector("input[name='SoCCore']:checked");
                         
-                            eel.runTestsSoc();
+                            eel.runTestsSoc(coreSelected.value);
                         }
                         
                     }

@@ -11,6 +11,8 @@ from scripts.cleanlify import cleanELF
 from contextlib import closing
 from apiConfig import URL
 
+from scripts.API import getListOfCores, getCoreRTL
+
 from scripts.utils import getEmptyPort
 
 BURQ_ROOT = os.getcwd()
@@ -29,7 +31,11 @@ def generate_core_log(cmd):
     os.system(cmd)
 
 @eel.expose
-def runTestsSoc():
+def runTestsSoc(coreSelected):
+    # bring the RTL
+    getCoreRTL(coreSelected)
+    
+    # process the RTL
     pass
 @eel.expose
 def closeRecentRecord(id, debug=True):
@@ -1110,6 +1116,13 @@ def pleaseLogin(username, password, debug=True):
                 eel.throwAlert("Username or Password is incorrect")
 
 @eel.expose
+def getCoresFromSoCNow():
+    lst = getListOfCores("shahzaibk23") # dynamize the username
+    cleanList = [(item["id"], item["name"]) for item in lst]
+    eel.showCoresFromSoCNow(cleanList)
+
+
+@eel.expose
 def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
     print('enduploadcore__')
     ic(swerv)
@@ -1345,4 +1358,4 @@ if __name__ == '__main__':
     testcasepath=[]
     logfilepath=[]
 
-    eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
+    eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/Electron.app/Contents/MacOS/Electron', '.'], port=port)

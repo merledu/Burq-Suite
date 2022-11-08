@@ -201,7 +201,7 @@ function changeProject2(evt,proj){
     var custom_core = document.getElementById("custom_core");
     var prebuilt_core = document.getElementById("prebuilt_core");
     var upload_core = document.getElementById("upload_core");
-    var soc_core = document.getElementById("soc_core");
+    var soc_core = document.getElementById("soc_list");
 
 
     custom_test.style.display = "none";
