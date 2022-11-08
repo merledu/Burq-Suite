@@ -290,7 +290,7 @@
                                Write Custom Test
                             </button>
     
-                         
+                            SoC-
     
                             <button id="cust_core_btn" onclick="changeProject2(event,'upload_core')" class="btn config-btn">
                                     Upload Custom Core                 
@@ -352,10 +352,13 @@
                                     <div class="name-config active">
                                         <p>Select Core</p>
                                     </div>
+                                    
                                    
                                     
                                 </div>
-                                <div class="col-md-6"  style="margin-left: 70px;">
+                                <div class="col-md-6"  style="    margin-left: 237px;
+                                margin-top: -10;
+                                margin-top: -50px;">
     
                                 <div>
                                     <h6 style="font-weight: lighter;">Select the Core you want to verify</h6>
@@ -373,10 +376,11 @@
                                 
                                 <div class="col-md-2"></div>
                             </div>
-                            <div style="text-align: right;" style="margin-top: -36px;">
+                            <div style="text-align: right; margin-top: 127px;">
+    
                                    
                                 <button  class="btn ctrl-btn">
-                                    <img src="assets/icons/next.png" onclick="socnowcore('selectcore')" style="width: 100%;margin-top: -100px;" />
+                                    <img src="assets/icons/next.png" onclick="socnowcore('selectcore')" style="width: 100%;" />
                                 </button>
                             </div>
                                 </div>
@@ -429,7 +433,9 @@
                                 <div class="col-md-2"></div>
                             </div>
                             <div style="text-align: right;" style="margin-top: -36px;">
-                                   
+                                <button  onclick="socnowcore('soc_list')" class="btn ctrl-btn">
+                                    <img src="assets/icons/back.png" style="width: 100%;margin-top:-106px;margin-left:-1200px;" />
+                                </button>    
                                 <button  class="btn ctrl-btn">
                                     <img src="assets/icons/next.png" onclick="socnowcore('testtypesoc')" style="width: 100%;margin-top: -100px;" />
                                 </button>
@@ -2050,17 +2056,23 @@ function opneRecentProject(id){
                 if(comp=="selectcore"){
                     var e1 = document.getElementById("soc_list").style.display = "none";
                     var e2 = document.getElementById("soc_core").style.display = "block";
+                    var e1 = document.getElementById("soc_list").style.display = "none";
                 }
             if (comp=="testlist"){
                 var testlist1 = document.getElementById("soc_test").style.display = "none";
                 var testtype1 = document.getElementById("soc_core").style.display = "block";
+                var e1 = document.getElementById("soc_list").style.display = "none";
                 
                            
                         }
                     
 
-            
+            if(comp=="soc_list"){
+                var e1 = document.getElementById("soc_list").style.display = "block";
+                var e2 = document.getElementById("soc_core").style.display = "none";
+                var testlist1 = document.getElementById("soc_test").style.display = "none";
 
+            }
             if(comp=="testtypesoc"){
                 var selectedtesttype;
                     var cores = document.getElementsByName("upSoc");
@@ -2099,6 +2111,7 @@ function opneRecentProject(id){
                    
                 var testtype = document.getElementById("soc_core").style.display = "none";
                 var testlist = document.getElementById("soc_test").style.display = "block";
+                var e1 = document.getElementById("soc_list").style.display = "none";
                 
             }
             if (comp=="runtestsoc"){

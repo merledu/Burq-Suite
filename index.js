@@ -20,7 +20,7 @@ const createSplashWindow = () => {
  
 
     // win.loadFile("splash.html")
-win.loadURL('http://localhost:55138/splash.html');
+win.loadURL('http://localhost:41841/splash.html');
 }
 app.whenReady().then(() => {
     createSplashWindow()
