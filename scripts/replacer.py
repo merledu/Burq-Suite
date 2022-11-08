@@ -10,7 +10,7 @@ def replacer(port):
     print(content[25])
 
     line = content[12]
-    content[12] = f"win.loadURL('http://localhost:{port}/index.html');"
+    content[12] = f"win.loadURL('http://localhost:{port}/index.html');\n"
 
     file = open("index.js", "w")
     file.write("".join(content))

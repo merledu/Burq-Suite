@@ -10,7 +10,7 @@ def reverter(port):
     print(content[25])
 
     line = content[22]
-    content[22] = f"win.loadURL('http://localhost:{port}/splash.html');"
+    content[22] = f"win.loadURL('http://localhost:{port}/splash.html');\n"
 
     file = open("index.js", "w")
     file.write("".join(content))
