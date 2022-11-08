@@ -11,6 +11,8 @@ from scripts.cleanlify import cleanELF
 from contextlib import closing
 from apiConfig import URL
 
+from scripts.utils import getEmptyPort
+
 BURQ_ROOT = os.getcwd()
 BURQ_SCRIPTS = os.path.join(BURQ_ROOT, 'scripts')
 DV_ROOT = os.path.join(BURQ_ROOT, 'dv')
@@ -406,7 +408,7 @@ def stop_everything(debug=True):
     if debug:
         ic(sys._getframe().f_code.co_name)
 
-    replacer() 
+    # replacer() 
     os.system("./scripts/openMain.sh")
     # eel.start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8005)
 
@@ -1328,14 +1330,11 @@ def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
     #got to log file path
     # run iss command 
 
-reverter()
 
-# def find_free_port():
-#     with closing(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as s:
-#         s.bind(('', 0))
-#         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-#         return s.getsockname()[1]
+
 if __name__ == '__main__':
+    port = getEmptyPort()
+    reverter(port)
     eel.init('web')
 
     list1 = ["a"]
@@ -1346,4 +1345,4 @@ if __name__ == '__main__':
     testcasepath=[]
     logfilepath=[]
 
-    eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8012)
+    eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)

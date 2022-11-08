@@ -1,6 +1,6 @@
 import eel, os, shutil
 from eel import init, start
-from scripts.utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath,pleaseGeneratorFileUthaKLayAao, pleaseReportFileUthaKLayAao, DRIVERS, RTL_FILES     # file structure utility
+from scripts.utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath,pleaseGeneratorFileUthaKLayAao, pleaseReportFileUthaKLayAao, DRIVERS, RTL_FILES, getEmptyPort    # file structure utility
 from icecream import ic
 import subprocess as sp
 from scripts.reverter import reverter
@@ -8,6 +8,7 @@ from scripts.reverter import reverter
 if __name__ == '__main__':
 
     #type of project select
+
     currentRootDir = os.getcwd()
 
     f = open("web/pathfile","r")
@@ -171,7 +172,9 @@ if __name__ == '__main__':
 
     
 
-
-    start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8007)
+    from scripts.replacer import replacer
+    port = getEmptyPort()
+    replacer(port)
+    start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
 
 
