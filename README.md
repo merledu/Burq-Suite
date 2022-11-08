@@ -15,6 +15,22 @@ git clone https://github.com/merledu/Burq-Suite.git
 ./installer.sh
 ```
 3. Run the app
+=======
+## Installations
+Install GCC and Spike
+
+
+
+## How to Run
+
+Firstly  go into the cloned directory
+
+
+Run installer.sh file
+
+
+then finally run the app
+
 ```bash
 python3 run.py
 ```
