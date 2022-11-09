@@ -256,6 +256,8 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
                     # create test directory
                     os.mkdir(test)
                 os.chdir(test)
+                currentProgress += 10
+                progressTick(currentProgress)
                 
                 os.system("export RISCV=/opt/riscv32")
 
@@ -265,12 +267,23 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
                 os.system("export PATH=/opt/riscv32/bin:$PATH")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                 #srem=removezero("exec.log")
-                currentProgress += perOccurProgress
+                currentProgress += 50
                 progressTick(currentProgress)
                 os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
                # wrem=removew(f"{test}.log")
-                currentProgress += perOccurProgress
+                currentProgress += 30
                 progressTick(currentProgress)
+                os.chdir(projPath)
+                os.mkdir(projName)
+                os.chdir(projName)
+                os.mkdir(f"{test}_logs")
+                
+                
+
+            
+                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/{test}.log {projPath}/{projName}/{test}_logs")
+                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/exec.log {projPath}/{projName}/{test}_logs")
+                os.chdir(f"{currentRootDir}/cores/swerv/{test}")
                 ic(os.getcwd())
                 #check is test.log and exec.log exists
                 ic(os.path.isfile(f"{test}.log"))
@@ -350,7 +363,7 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
             
     os.chdir(currentRootDir)
     os.chdir(projPath)
-    os.mkdir(projName)
+    
     os.chdir(projName)
     report_str = ""
     report_str += f"Core,{core}\n"
@@ -1118,7 +1131,7 @@ def pleaseLogin(username, password, debug=True):
 
 @eel.expose
 def getCoresFromSoCNow():
-    lst = getListOfCores("shahzaibk23") # dynamize the username
+    lst = getListOfCores("mahnoor") # dynamize the username
     cleanList = [(item["id"], item["name"]) for item in lst]
     eel.showCoresFromSoCNow(cleanList)
 

@@ -1,0 +1,93 @@
+
+Quadratic_equation.exe:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+80000000 <_start>:
+80000000:	595552b7          	lui	t0,0x59555
+80000004:	55528293          	addi	t0,t0,1365 # 59555555 <_start-0x26aaaaab>
+80000008:	7c029073          	csrw	0x7c0,t0
+8000000c:	70041117          	auipc	sp,0x70041
+80000010:	ff410113          	addi	sp,sp,-12 # f0041000 <STACK>
+80000014:	2805                	jal	80000044 <main>
+
+80000016 <_finish>:
+80000016:	50580297          	auipc	t0,0x50580
+8000001a:	fea28293          	addi	t0,t0,-22 # d0580000 <tohost>
+8000001e:	0ff00313          	li	t1,255
+80000022:	00628023          	sb	t1,0(t0)
+80000026:	4305                	li	t1,1
+80000028:	0062a023          	sw	t1,0(t0)
+8000002c:	fe0005e3          	beqz	zero,80000016 <_finish>
+80000030:	0001                	nop
+80000032:	0001                	nop
+80000034:	0001                	nop
+80000036:	0001                	nop
+80000038:	0001                	nop
+8000003a:	0001                	nop
+8000003c:	0001                	nop
+8000003e:	0001                	nop
+80000040:	0001                	nop
+80000042:	0001                	nop
+
+Disassembly of section .text:
+
+80000044 <main>:
+
+int main() {
+80000044:	7179                	addi	sp,sp,-48
+80000046:	d622                	sw	s0,44(sp)
+80000048:	1800                	addi	s0,sp,48
+
+  int i, n;
+
+  // initialize first and second terms
+  int t1 = 0, t2 = 1;
+8000004a:	fe042023          	sw	zero,-32(s0)
+8000004e:	4785                	li	a5,1
+80000050:	fef42423          	sw	a5,-24(s0)
+
+  // initialize the next term (3rd term)
+  int nextTerm = t1 + t2;
+80000054:	fe042703          	lw	a4,-32(s0)
+80000058:	fe842783          	lw	a5,-24(s0)
+8000005c:	97ba                	add	a5,a5,a4
+8000005e:	fef42223          	sw	a5,-28(s0)
+
+  // print the first two terms t1 and t2
+  
+
+  // print 3rd to nth terms
+  for (i = 3; i <= n; ++i) {
+80000062:	478d                	li	a5,3
+80000064:	fef42623          	sw	a5,-20(s0)
+80000068:	a02d                	j	80000092 <main+0x4e>
+    
+    t1 = t2;
+8000006a:	fe842783          	lw	a5,-24(s0)
+8000006e:	fef42023          	sw	a5,-32(s0)
+    t2 = nextTerm;
+80000072:	fe442783          	lw	a5,-28(s0)
+80000076:	fef42423          	sw	a5,-24(s0)
+    nextTerm = t1 + t2;
+8000007a:	fe042703          	lw	a4,-32(s0)
+8000007e:	fe842783          	lw	a5,-24(s0)
+80000082:	97ba                	add	a5,a5,a4
+80000084:	fef42223          	sw	a5,-28(s0)
+  for (i = 3; i <= n; ++i) {
+80000088:	fec42783          	lw	a5,-20(s0)
+8000008c:	0785                	addi	a5,a5,1
+8000008e:	fef42623          	sw	a5,-20(s0)
+80000092:	fec42703          	lw	a4,-20(s0)
+80000096:	fdc42783          	lw	a5,-36(s0)
+8000009a:	fce7d8e3          	bge	a5,a4,8000006a <main+0x26>
+  }
+
+  return 0;
+8000009e:	4781                	li	a5,0
+}
+800000a0:	853e                	mv	a0,a5
+800000a2:	5432                	lw	s0,44(sp)
+800000a4:	6145                	addi	sp,sp,48
+800000a6:	8082                	ret
