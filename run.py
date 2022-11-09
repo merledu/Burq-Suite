@@ -136,10 +136,21 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 currentProgress += 30
                 progressTick(currentProgress)
                 # Check is test.log and exec.log exists
-                if debug:
-                    ic(os.getcwd())
-                    ic(os.path.isfile(f"{test}.log"))
-                    ic(os.path.isfile("exec.log"))
+                # if debug:
+                #     ic(os.getcwd())
+                #     ic(os.path.isfile(f"{test}.log"))
+                #     ic(os.path.isfile("exec.log"))
+                os.chdir(projPath)
+                os.mkdir(projName)
+                os.chdir(projName)
+                os.mkdir(f"{test}_logs")
+                
+                
+
+            
+                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/{test}.log {projPath}/{projName}/{test}_logs")
+                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/exec.log {projPath}/{projName}/{test}_logs")
+                os.chdir(f"{currentRootDir}/cores/swerv/{test}")
                 currentProgress += 20
                 progressTick(currentProgress)
                 status = call(f"{test}.log", "exec.log")
@@ -222,6 +233,17 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 progressTick(currentProgress)
                 currentProgress += 10
                 progressTick(currentProgress)
+                os.chdir(projPath)
+                os.mkdir(projName)
+                os.chdir(projName)
+                os.mkdir(f"{test}_logs")
+                
+                
+
+            
+                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/{test}.log {projPath}/{projName}/{test}_logs")
+                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/exec.log {projPath}/{projName}/{test}_logs")
+                os.chdir(f"{currentRootDir}/cores/swerv/{test}")
                 ic(os.getcwd())
                 #check is test.log and exec.log exists
                 ic(os.path.isfile(f"{test}_0.log"))
