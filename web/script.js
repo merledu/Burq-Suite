@@ -208,6 +208,8 @@ function changeProject2(evt,proj){
     custom_core.style.display = "none";
     prebuilt_core.style.display = "none";
     soc_core.style.display = "none";
+    document.getElementById("soc_core").style.display = "none";
+    document.getElementById("soc_test").style.display = "none";
 
     upload_core.style.display = "none";
 
