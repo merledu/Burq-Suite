@@ -1153,7 +1153,7 @@ def pleaseLogin(username, password, debug=True):
 
 @eel.expose
 def getCoresFromSoCNow():
-    lst = getListOfCores("mahnoor") # dynamize the username
+    lst = getListOfCores("shahzaibk23") # dynamize the username
     cleanList = [(item["id"], item["name"]) for item in lst]
     eel.showCoresFromSoCNow(cleanList)
 
@@ -1394,4 +1394,4 @@ if __name__ == '__main__':
     testcasepath=[]
     logfilepath=[]
 
-    eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
+    eel.start('splash.html', mode='chrome', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)

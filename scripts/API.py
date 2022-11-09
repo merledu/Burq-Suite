@@ -1,12 +1,23 @@
-import ast
+import json, \
+    requests as req
+
+from icecream import ic
+
 
 def getListOfCores(username):
-    # implement the API req -> core/all
-    dummy_resp = "[{'id': 2,'name': 'mycore2','isa': 32,'rtl': '/RTL.v','user': 'mahnoor'}]"
+    coreListRoute = 'http://127.0.0.1:8000/core/all/'
+    userDict = {'username': username}
 
-    return ast.literal_eval(dummy_resp)
+    coreList = json.loads(req.get(coreListRoute, data=userDict).text)
+
+    return coreList
+
 
 def getCoreRTL(coreID):
-    pass
+    rtlRoute = 'http://127.0.0.1:8000/core/rtl/'
+    idDict = {'id': int(coreID)}
 
-print(getListOfCores("bn"))
+    rtlFile = json.loads(req.get(rtlRoute, data=idDict).text)
+    with open(f'{filePath}/rtl/{coreName}.v', 'w', encoding='UTF-8') as f:
+        for line in rtlFile:
+            f.write(line)
