@@ -2146,7 +2146,7 @@ function opneRecentProject(id){
                         } else {
                             var coreSelected = document.querySelector("input[name='SoCCore']:checked");
                         
-                            eel.runTestsSoc(coreSelected.value);
+                            eel.runTestsSoc(coreSelected.value,selectedtesttype, tests, projName, projDir);
                         }
                         
                     }

@@ -31,9 +31,9 @@ def generate_core_log(cmd):
     os.system(cmd)
 
 @eel.expose
-def runTestsSoc(coreSelected):
+def runTestsSoc(coreSelectedID,testType, testsList, projectName, projectDir):
     # bring the RTL
-    getCoreRTL(coreSelected)
+    getCoreRTL(coreSelectedID)
     
     # process the RTL
     pass
