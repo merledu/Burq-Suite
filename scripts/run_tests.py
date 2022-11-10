@@ -1,12 +1,7 @@
 import os, sys
+
 from icecream import ic
 from core_log_to_trace_csv import process_core_log
-
-BURQ_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '../'))
-DV_ROOT = os.path.join(BURQ_ROOT, 'dv')
-DV_SCRIPTS = os.path.join(BURQ_ROOT, f'{DV_ROOT}/scripts')
-sys.path.insert(0, DV_SCRIPTS)
-
 from spike_log_to_trace_csv import process_spike_sim_log
 
 

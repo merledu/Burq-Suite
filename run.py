@@ -1,36 +1,34 @@
 import time, eel, os, glob, sys, \
-    tkinter, json, psutil, socket, requests, \
-    re, subprocess as sp, tkinter.filedialog as filedialog
+    tkinter, json, socket, requests, re, \
+    subprocess as sp, tkinter.filedialog as filedialog
 
-from scripts.replacer import replacer
-from scripts.reverter import reverter
 from icecream import ic
 from distutils.dir_util import copy_tree
-from scripts.comparison import call
-from scripts.cleanlify import cleanELF
 from contextlib import closing
 from apiConfig import URL
-
-from scripts.API import getListOfCores, getCoreRTL
-
-from scripts.utils import getEmptyPort
 
 BURQ_ROOT = os.getcwd()
 BURQ_SCRIPTS = os.path.join(BURQ_ROOT, 'scripts')
 DV_ROOT = os.path.join(BURQ_ROOT, 'dv')
-PYGEN_PATH = os.path.join(DV_ROOT, 'pygen')
+DV_SCRIPTS = os.path.join(DV_ROOT, 'scripts')
 sys.path.insert(0, BURQ_SCRIPTS)
 sys.path.insert(0, DV_ROOT)
-sys.path.insert(0, PYGEN_PATH)
+sys.path.insert(0, DV_SCRIPTS)
 
-from scripts.run_tests import run_dv_test_on_spike, run_dv_test_on_core
-from dv.scripts.instr_trace_compare import compare_trace_csv
+from run_tests import run_dv_test_on_spike, run_dv_test_on_core
+from instr_trace_compare import compare_trace_csv
+from API import getListOfCores, getCoreRTL
+from utils import getEmptyPort, killSpike
+from replacer import replacer
+from reverter import reverter
+from comparison import call
+from cleanlify import cleanELF
 
 
 @eel.expose
 def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
     # Bring the RTL
-    getCoreRTL(coreSelectedID, testType, testsList, projectName, projectDir)
+    getCoreRTL(coreSelectedID, projectName, projectDir)
     
     # Process the RTL
     pass
@@ -935,9 +933,6 @@ def enduploadcore(config, tests, types, debug=True):
             #try:
             if types == "RISCV_DV_Tests":
                 ic(types)
-                #os.chdir(f"{BURQ_ROOT}/dv")
-                #os.system(f"python3 run.py --iss spike --simulator pyflow --target {extension_flags} -o {config['path']}/{config['name']}/tmp/{test}_out -i 1  --test {test}")
-                #os.chdir(f"{config['path']}/{config['name']}")
                 os.chdir(BURQ_ROOT + '/dv')
                 run_dv_test_on_spike(
                     extension_flags, test, 1, f"{config['path']}/{config['name']}/tmp/{test}_out",
@@ -947,12 +942,8 @@ def enduploadcore(config, tests, types, debug=True):
             else:
                 os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
                 os.system(f"python3 {currentRootDir}/dv/run.py --iss spike --simulator pyflow --target {extension_flags} --output tmp/{test}_out --c_test tmp/{test}/{test}.c")
-            processes = psutil.pids()
-            anyStillRunningSpikeProcess = list(filter(lambda x:psutil.Process(x).name() == "spike", processes))
-
-            if len(anyStillRunningSpikeProcess) != 0:
-                for spikeProcessID in anyStillRunningSpikeProcess:
-                    psutil.Process(spikeProcessID).kill()
+            
+            killSpike()
 
             progress += progress_step
             progressTick(progress)
@@ -969,21 +960,6 @@ def enduploadcore(config, tests, types, debug=True):
                         config['command'], f"{config['path']}/{config['name']}/core/{config['logFile']}",
                         f"{config['path']}/{config['name']}/logs/core_trace.csv"
                     )
-
-                #print("cimpileeeeeeeeeee")
-                #hexCode, asmCode =  cleanELF(f"{config['path']}/{config['name']}/{test}.elf")
-
-
-                #hexFW = open(f"{config['path']}/{config['name']}/core/{config['hexDir']}", "w+")
-                #hexFW.write("\n".join(hexCode))
-                #hexFW.close()
-                #if config["asmDir"] != "":
-                #    asmFW = open(f"{config['path']}/{config['name']}/core/{config['asmDir']}", "w+")
-                #    asmFW.write("".join(asmCode))
-                #    asmFW.close()
-                #os.system(f"rm {config['path']}/{config['name']}/{test}.elf")
-                #print("comamdmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
-                #os.system(config["command"])
             else:
                 print("coreepattt")
                 os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
@@ -995,25 +971,6 @@ def enduploadcore(config, tests, types, debug=True):
             os.chdir(f"{proj_dir}")
             ic(config["logFormat"])
             if config["logFormat"] == "csv": pass
-                # os.system(f"python3 {currentRootDir}/dv/scripts/instr_trace_compare.py --csv_file_1 {config['path']}/{config['name']}/tmp/{test}.csv --csv_file_2 {config['path']}/{config['name']}/core/{config['logFile']} --log {config['path']}/{config['name']}/{test}_compare_out.log")
-                # logFW = open(f"{config['path']}/{config['name']}/{test}_compare_out.log")
-                # logFWContent = logFW.readlines()
-                # logFW.close()
-                # os.system(f"rm {config['path']}/{config['name']}/{test}_compare_out.log")
-                #spikeObj = LogComparator()
-                #coreObj  = LogComparator()
-                #if types!= "RISCV_DV_Tests":
-                #    spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log")
-                #else:
-                #    spikeObj.spikeLogExtract(f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/test.0.log")
-                #coreObj.coreLogExtract(f"{config['path']}/{config['name']}/core/{config['logFile']}")
-                #if spikeObj.match(coreObj):
-                #    testStatuses.append("[PASSED]")
-                #else:
-                #    testStatuses.append("[FAILED]")
-                #os.system(f"mkdir {config['path']}/{config['name']}/logs/{test}")
-                #os.system(f"cp {config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.log {config['path']}/{config['name']}/logs/{test}")
-                #os.system(f"cp {config['path']}/{config['name']}/core/{config['logFile']} {config['path']}/{config['name']}/logs/{test}")
             else:
                 compare_trace_csv(
                     f"{config['path']}/{config['name']}/logs/core_trace.csv",
@@ -1032,13 +989,12 @@ def enduploadcore(config, tests, types, debug=True):
                 #testStatuses.append("[Incompatble with your Core Configuration]")
                 #progress += progress_step * 3
                 #progressTick(progress)
-            
-            
         
         os.chdir(f"{proj_dir}")
-        #os.system("rm -rf tmp")
-        # if len(list(filter(lambda x:x=="[PASSED]" or x=="[Incompatble with your Core Configuration]", testStatuses))) == len(testStatuses):
-        #     os.system("rm -rf failed_logs")
+        if not debug:
+            os.system("rm -rf tmp")
+            if len(list(filter(lambda x:x=="[PASSED]" or x=="[Incompatble with your Core Configuration]", testStatuses))) == len(testStatuses):
+                os.system("rm -rf failed_logs")
         
         report_str = ""
         report_str += f"Core,{config['name']}\n"
