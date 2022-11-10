@@ -27,16 +27,15 @@ from scripts.run_tests import run_dv_test_on_spike, run_dv_test_on_core
 from dv.scripts.instr_trace_compare import compare_trace_csv
 
 
-def generate_core_log(cmd):
-    os.system(cmd)
-
 @eel.expose
-def runTestsSoc(coreSelectedID,testType, testsList, projectName, projectDir):
-    # bring the RTL
-    getCoreRTL(coreSelectedID)
+def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
+    # Bring the RTL
+    getCoreRTL(coreSelectedID, testType, testsList, projectName, projectDir)
     
-    # process the RTL
+    # Process the RTL
     pass
+
+
 @eel.expose
 def closeRecentRecord(id, debug=True):
     if debug:
@@ -1134,7 +1133,7 @@ def validateUserCredentials(username, password):
 def pleaseLogin(username, password, debug=True):
     if debug:
         ic(sys._getframe().f_code.co_name)
-        if username == "admin" and password == "admin":
+        if username == "shahzaibk23" and password == "admin":
             eel.loginSuccess()
         else:
             eel.throwAlert("Username or Password is incorrect")
@@ -1143,7 +1142,7 @@ def pleaseLogin(username, password, debug=True):
             eel.throwAlert("Invalid username or password. Please try again.")
         else:
             try:
-                r = requests.post(URL, json={"username": username.lower(), "password": password})
+                r = requests.post(URL, data={"username": "shahzaibk23", "password": "helloMERL", "token": "cdbb7f168d0340fba46e601dc61e1de2"})
             except:
                 eel.throwAlert("Connection Error!\nPlease check your internet connection and try again.")
             if r.json()["status"] == "success":
@@ -1394,4 +1393,4 @@ if __name__ == '__main__':
     testcasepath=[]
     logfilepath=[]
 
-    eel.start('splash.html', mode='chrome', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
+    eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
