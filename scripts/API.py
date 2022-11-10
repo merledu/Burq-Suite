@@ -18,7 +18,7 @@ def getCoreRTL(coreID, testType, testList, projName, projDir):
     idDict = {'id': int(coreID)}
     ic(testType, testList, projName, projDir)
 
-    rtlFile = json.loads(req.get(rtlRoute, data=idDict).text)
-    with open(f'{filePath}/rtl/{coreName}.v', 'w', encoding='UTF-8') as f:
-        for line in rtlFile:
-            f.write(line)
+    #rtlFile = json.loads(req.get(rtlRoute, data=idDict).text)
+    #with open(f'{filePath}/rtl/{coreName}.v', 'w', encoding='UTF-8') as f:
+    #    for line in rtlFile:
+    #        f.write(line)

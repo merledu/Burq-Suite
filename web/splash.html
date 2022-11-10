@@ -2124,7 +2124,15 @@ function opneRecentProject(id){
                 
             }
             if (comp=="runtestsoc"){
-               
+                        var selectedtesttype;
+                        var cores = document.getElementsByName("upSoc");
+                        for (var j =0; j<cores.length; j++){
+                            if(cores[j].checked){
+                                selectedtesttype = cores[j].value;
+                                alert(selectedtesttype);
+                               
+                            }
+                        }
                         var projName = document.getElementById("projectname").value;
                         var projDir = document.getElementById("path").innerHTML;
                         console.log(projDir);
