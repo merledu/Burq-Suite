@@ -1,11 +1,11 @@
-import json, os, \
+import json, os, re, \
     requests as req
 
 from icecream import ic
 
 
 routes = {
-    'coreList': 'http://127.0.0.1:8000/core/all/',
+    'cores': 'http://127.0.0.1:8000/core/all/',
     'rtl'     : 'http://127.0.0.1:8000/core/rtl/'
 }
 
@@ -13,7 +13,7 @@ routes = {
 def getListOfCores(username):
     userDict = {'username': username}
     coreList = json.loads(
-        req.get(routes['coreList'], data=userDict).text
+        req.get(routes['cores'], data=userDict).text
     )
 
     return coreList
@@ -30,8 +30,17 @@ def getCoreRTL(coreID, projName, projDir):
     os.mkdir(f'{projPath}/logs')
     with open(f'{projDir}/{projName}/rtl/Top.v', 'w', encoding='UTF-8') as f:
         for line in rtlFile:
-            f.write(line)
+            if re.search('\s+sram_top #\(.IFILE_IN\("/home/.*/assembly.hex"\)\).*', line):
+                f.write(
+                    re.sub(
+                        '/home/.*/assembly.hex',
+                        f'{projPath}/dv_out/asm_test/asm.hex',
+                        line
+                    )
+                )
+            else:
+                f.write(line)
 
 
 if __name__ == '__main__':
-    getCoreRTL(2, 'rtlTest', '/home/cybergai/Temporary/')
+    getCoreRTL(2, 'rtlTest', '/home/cybergai/Temporary')

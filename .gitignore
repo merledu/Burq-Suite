@@ -12,3 +12,7 @@ venv
 # Burq specific files
 web/pathfile
 web/pathfilev
+
+simulate_rtl/*
+!simulate_rtl/simulate.sh
+!simulate_rtl/Top.cpp

@@ -1,6 +1,6 @@
 import time, eel, os, glob, sys, \
     tkinter, json, socket, requests, re, \
-    subprocess as sp, tkinter.filedialog as filedialog
+    copy, subprocess as sp, tkinter.filedialog as filedialog
 
 from icecream import ic
 from distutils.dir_util import copy_tree
@@ -23,6 +23,10 @@ from replacer import replacer
 from reverter import reverter
 from comparison import call
 from cleanlify import cleanELF
+from socnow import SoCNowCores
+
+
+userSoCNowCores = SoCNowCores()
 
 
 @eel.expose
@@ -31,7 +35,11 @@ def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
     getCoreRTL(coreSelectedID, projectName, projectDir)
     
     # Process the RTL
-    pass
+    testsStatuses = userSoCNowCores.run_dv_test(
+        coreSelectedID, testType, testsList, projectName, projectDir,
+        DV_ROOT, BURQ_ROOT
+    )
+    ic(testsStatuses)
 
 
 @eel.expose
@@ -1035,7 +1043,6 @@ def enduploadcore(config, tests, types, debug=True):
         report_str += "\n"
         report_str += "Test, Test Status\n"
     
-    ic(tests)
     ic(testStatuses)
     for i,t in enumerate(tests):
         report_str += f"{t},{testStatuses[i]}\n"
@@ -1106,9 +1113,12 @@ def pleaseLogin(username, password, debug=True):
             else:
                 eel.throwAlert("Username or Password is incorrect")
 
+
 @eel.expose
 def getCoresFromSoCNow():
-    lst = getListOfCores("shahzaibk23") # dynamize the username
+    user = "shahzaibk23"
+    lst = getListOfCores(user) # dynamize the username
+    userSoCNowCores.setCores(copy.deepcopy(lst))
     cleanList = [(item["id"], item["name"]) for item in lst]
     eel.showCoresFromSoCNow(cleanList)
 
