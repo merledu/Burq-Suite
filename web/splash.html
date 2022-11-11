@@ -59,27 +59,8 @@
         #main{
             display: none;
         }
-        .progress11 {
-            border: 16px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
-            -webkit-animation: spin 2s linear infinite; /* Safari */
-            animation: spin 2s linear infinite;
-            margin-top: 30px;
-            margin-left: 300px;
-        }
-
-        /* Safari */
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        #socnow-loading{
+            display: none;
         }
     </style>
 </head>
@@ -192,7 +173,7 @@
                                     background-color: #15191a;
 
                                     width: 61px;" src="assets/icons/userlog.png"></button>
-                                <div class="dropdown-content" style="margin-top: -5px;">
+                                <div class="dropdown-content" style="margin-top: -10px;">
                                    <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
                                 <a href="" style="height:43px" >Logout</a>
                                
@@ -496,6 +477,12 @@
                                 </button>
                             </div>
                                 </div>
+                        </div>
+                        <div id="socnow-loading">
+                            <div class="progress">
+                                    <div class="progress-bar"></div>
+                                    <p id="progress-indicator">0%</p>
+                            </div>
                         </div>
 
                         <!-- ------------------------- CUSTOM TESTTTTT --------------------- -->
@@ -1190,7 +1177,10 @@
                                 </div>
                             </div>
                             <div id="prebuilt-end1">
-                                <div class="progress11"></div>
+                                <div class="progress">
+                                    <div class="progress-bar"></div>
+                                    <p id="progress-indicator">0%</p>
+                                </div>
                             </div>
                            
                             </div>
@@ -1641,7 +1631,6 @@ function opneRecentProject(id){
                         if(cores[j].checked){
                             
                             selectedtest= cores[j].value;
-                            alert(selectedtest);
                             
                     
                         }
@@ -2064,12 +2053,14 @@ function opneRecentProject(id){
                     var e1 = document.getElementById("soc_list").style.display = "none";
                     var e2 = document.getElementById("soc_core").style.display = "block";
                     var e1 = document.getElementById("soc_list").style.display = "none";
+                    var loadingBar = document.getElementById("socnow-loading").style.display = "none";
                     
                     let projDir = document.getElementById("path").innerHTML;
                 }
             if (comp=="testlist"){
                 var testlist1 = document.getElementById("soc_test").style.display = "none";
                 var testtype1 = document.getElementById("soc_core").style.display = "block";
+                var loadingBar = document.getElementById("socnow-loading").style.display = "none";
                 var e1 = document.getElementById("soc_list").style.display = "none";
                 
                            
@@ -2079,6 +2070,7 @@ function opneRecentProject(id){
             if(comp=="soc_list"){
                 var e1 = document.getElementById("soc_list").style.display = "block";
                 var e2 = document.getElementById("soc_core").style.display = "none";
+                var loadingBar = document.getElementById("socnow-loading").style.display = "none";
                 var testlist1 = document.getElementById("soc_test").style.display = "none";
 
             }
@@ -2088,13 +2080,11 @@ function opneRecentProject(id){
                     for (var j =0; j<cores.length; j++){
                         if(cores[j].checked){
                             selectedtesttype = cores[j].value;
-                            alert(selectedtesttype);
                            
                         }
                     }
                     
                     if(selectedtesttype == "Floating_point_tests_for_azadi"){
-                        alert(selectedtesttype);
                         eel.floatingpointtest("socnow")
                     } else if(selectedtesttype== "MERL_vector_Tests"){
                         eel.merlvectortest("socnow")
@@ -2120,6 +2110,7 @@ function opneRecentProject(id){
                    
                 var testtype = document.getElementById("soc_core").style.display = "none";
                 var testlist = document.getElementById("soc_test").style.display = "block";
+                var loadingBar = document.getElementById("socnow-loading").style.display = "none";
                 var e1 = document.getElementById("soc_list").style.display = "none";
                 
             }
@@ -2129,7 +2120,6 @@ function opneRecentProject(id){
                         for (var j =0; j<cores.length; j++){
                             if(cores[j].checked){
                                 selectedtesttype = cores[j].value;
-                                alert(selectedtesttype);
                                
                             }
                         }
@@ -2146,7 +2136,6 @@ function opneRecentProject(id){
                                 
                             }
                         }
-                        alert(tests);
                         if (projName == ""){
                             alert("Please enter a project name");
                         } else if (projDir == " "){
@@ -2156,7 +2145,11 @@ function opneRecentProject(id){
                         } else {
                             var coreSelected = document.querySelector("input[name='SoCCore']:checked");
                         
-                            eel.runTestsSoc(coreSelected.value,selectedtesttype, tests, projName, projDir);
+                        var testtype = document.getElementById("soc_core").style.display = "none";
+                        var testlist = document.getElementById("soc_test").style.display = "none";
+                        var loadingBar = document.getElementById("socnow-loading").style.display = "block";
+                        var e1 = document.getElementById("soc_list").style.display = "none";
+                        eel.runTestsSoc(coreSelected.value,selectedtesttype, tests, projName, projDir);
                         }
                         
                     }

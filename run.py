@@ -31,14 +31,25 @@ userSoCNowCores = SoCNowCores()
 
 @eel.expose
 def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
+    currentProgress = 0
+    progressTick(currentProgress)
+
     # Bring the RTL
+    currentProgress += 10
+    progressTick(currentProgress)
     getCoreRTL(coreSelectedID, projectName, projectDir)
+    currentProgress += 40
+    progressTick(currentProgress)
     
     # Process the RTL
+    currentProgress += 30
+    progressTick(currentProgress)
     testsStatuses = userSoCNowCores.run_dv_test(
         coreSelectedID, testType, testsList, projectName, projectDir,
         DV_ROOT, BURQ_ROOT
     )
+    currentProgress += 20
+    progressTick(currentProgress)
 
     # Display result
     os.chdir(f'{projectDir}/{projectName}')
