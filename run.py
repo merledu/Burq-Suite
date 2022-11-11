@@ -39,7 +39,29 @@ def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
         coreSelectedID, testType, testsList, projectName, projectDir,
         DV_ROOT, BURQ_ROOT
     )
-    ic(testsStatuses)
+
+    # Display result
+    os.chdir(f'{projectDir}/{projectName}')
+    report_str = ""
+    report_str += f"Core,{projectName}\n"
+    report_str += f"Iss,Spike\n"
+    report_str += "\n"
+    report_str += "Test, Test Status\n"
+
+    for i, t in enumerate(testsList):
+        report_str += f"{t},{testsStatuses[i]}\n"
+    with open("test_results.csv", "w+") as f:
+        f.write(report_str)
+
+    os.chdir(BURQ_ROOT)
+    with open("web/pathfile", "w") as f:
+        f.write(f"{projectDir}/{projectName}")
+    with open("web/pathfilev", "w") as f:
+        f.write("SoCNow")
+    with open("records", "w+") as f:
+        f.write(f"{projectDir}/{projectName},SoCNow\n")
+
+    eel.goToMain()
 
 
 @eel.expose
@@ -131,8 +153,8 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
 
                 os.chdir(test)
                 os.system("export RISCV=/opt/riscv32")
-                os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
-                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
+                os.system(f"export whisper={BURQ_ROOT}/iss/SweRV-ISS/build-Linux/./whisper")
+                os.system(f"export RV_ROOT={BURQ_ROOT}/cores/swerv")
                 os.system("export PATH=/opt/riscv32/bin:$PATH")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                 currentProgress += 30
@@ -153,9 +175,9 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 
 
             
-                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/{test}.log {projPath}/{projName}/{test}_logs")
-                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/exec.log {projPath}/{projName}/{test}_logs")
-                os.chdir(f"{currentRootDir}/cores/swerv/{test}")
+                os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}/{test}.log {projPath}/{projName}/{test}_logs")
+                os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}/exec.log {projPath}/{projName}/{test}_logs")
+                os.chdir(f"{BURQ_ROOT}/cores/swerv/{test}")
                 currentProgress += 20
                 progressTick(currentProgress)
                 status = call(f"{test}.log", "exec.log")
@@ -175,19 +197,19 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 currentProgress += 10
                 progressTick(currentProgress)
                 
-                os.chdir(f"{currentRootDir}/dv")
+                os.chdir(f"{BURQ_ROOT}/dv")
                 os.system(f"python3 run.py --iss whisper --simulator pyflow --target rv32imc --iteration 1 --test={test} --output {test}")
                 currentProgress += 30
                 progressTick(currentProgress)
-                os.chdir(f"{currentRootDir}/cores/swerv/testbench/tests")
+                os.chdir(f"{BURQ_ROOT}/cores/swerv/testbench/tests")
                 #os.mkdir(f"{test}_0")
-                os.chdir(f"{currentRootDir}/dv/{test}/asm_test")
+                os.chdir(f"{BURQ_ROOT}/dv/{test}/asm_test")
 
 
                 os.rename(f"{test}_0.S", f"{test}_0.s")
                 currentProgress += 10
                 progressTick(currentProgress)
-                os.chdir(f"{currentRootDir}/cores/swerv/testbench/tests")
+                os.chdir(f"{BURQ_ROOT}/cores/swerv/testbench/tests")
                 if os.path.isdir(f"{test}_0") == False:
 
                     os.mkdir(f"{test}_0")
@@ -195,7 +217,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 
 
 
-                os.system(f"cp -r {currentRootDir}/dv/{test}/asm_test/{test}_0.s {currentRootDir}/cores/swerv/testbench/tests/{test}_0")
+                os.system(f"cp -r {BURQ_ROOT}/dv/{test}/asm_test/{test}_0.s {BURQ_ROOT}/cores/swerv/testbench/tests/{test}_0")
                 
 
                     #enter in dv root
@@ -220,16 +242,16 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                         if line.strip("\n") != '.include "user_define.h"' :
                             if line.strip("\n") !='                  .include "user_init.s"':
                                 f.write(line)
-                os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
+                os.system(f"export whisper={BURQ_ROOT}/iss/SweRV-ISS/build-Linux/./whisper")
 
-                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
+                os.system(f"export RV_ROOT={BURQ_ROOT}/cores/swerv")
                 os.system("export PATH=/opt/riscv32/bin:$PATH")
 
             
                 
             
                
-                os.chdir(f"{currentRootDir}/cores/swerv/{test}_0")
+                os.chdir(f"{BURQ_ROOT}/cores/swerv/{test}_0")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}_0")
                 currentProgress += 20
                 progressTick(currentProgress)
@@ -246,9 +268,9 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 
 
             
-                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/{test}.log {projPath}/{projName}/{test}_logs")
-                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/exec.log {projPath}/{projName}/{test}_logs")
-                os.chdir(f"{currentRootDir}/cores/swerv/{test}")
+                os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}/{test}.log {projPath}/{projName}/{test}_logs")
+                os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}/exec.log {projPath}/{projName}/{test}_logs")
+                os.chdir(f"{BURQ_ROOT}/cores/swerv/{test}")
                 ic(os.getcwd())
                 #check is test.log and exec.log exists
                 ic(os.path.isfile(f"{test}_0.log"))
@@ -267,8 +289,8 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
             
             ic(os.getcwd())
             for test in tests:
-                os.chdir(f"{currentRootDir}/testcases/User_Defined_Tests/{test}")
-                os.system(f"cp -a {currentRootDir}/testcases/User_Defined_Tests/crt0.s {currentRootDir}/testcases/User_Defined_Tests/{test}")
+                os.chdir(f"{BURQ_ROOT}/testcases/User_Defined_Tests/{test}")
+                os.system(f"cp -a {BURQ_ROOT}/testcases/User_Defined_Tests/crt0.s {BURQ_ROOT}/testcases/User_Defined_Tests/{test}")
                 mki_str="""OFILES = test.o crt0.o
 TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
 
@@ -276,8 +298,8 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
                 #write mki_str in file
                 mkifile.write(mki_str.replace("test", test))
                 mkifile.close()
-                os.system(f"cp -a {currentRootDir}/testcases/User_Defined_Tests/{test} {currentRootDir}/cores/swerv/testbench/tests/")
-                os.chdir(f"{currentRootDir}/cores/swerv/")
+                os.system(f"cp -a {BURQ_ROOT}/testcases/User_Defined_Tests/{test} {BURQ_ROOT}/cores/swerv/testbench/tests/")
+                os.chdir(f"{BURQ_ROOT}/cores/swerv/")
                 # check is test directory exists
                 if os.path.isdir(test) == False:
                     # create test directory
@@ -288,9 +310,9 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
                 
                 os.system("export RISCV=/opt/riscv32")
 
-                os.system(f"export whisper={currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper")
+                os.system(f"export whisper={BURQ_ROOT}/iss/SweRV-ISS/build-Linux/./whisper")
 
-                os.system(f"export RV_ROOT={currentRootDir}/cores/swerv")
+                os.system(f"export RV_ROOT={BURQ_ROOT}/cores/swerv")
                 os.system("export PATH=/opt/riscv32/bin:$PATH")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                 #srem=removezero("exec.log")
@@ -308,9 +330,9 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
                 
 
             
-                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/{test}.log {projPath}/{projName}/{test}_logs")
-                os.system(f"cp  -r {currentRootDir}/cores/swerv/{test}/exec.log {projPath}/{projName}/{test}_logs")
-                os.chdir(f"{currentRootDir}/cores/swerv/{test}")
+                os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}/{test}.log {projPath}/{projName}/{test}_logs")
+                os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}/exec.log {projPath}/{projName}/{test}_logs")
+                os.chdir(f"{BURQ_ROOT}/cores/swerv/{test}")
                 ic(os.getcwd())
                 #check is test.log and exec.log exists
                 ic(os.path.isfile(f"{test}.log"))
@@ -321,7 +343,7 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
 
     elif core == "ibex":
         print('ibex')
-        os.chdir(f"{currentRootDir}/{ibex_test_path}")
+        os.chdir(f"{BURQ_ROOT}/{ibex_test_path}")
         perOccurProgress = (100 // len(tests)) // 2
         currentProgress = 0
         
@@ -336,7 +358,7 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
         testroot="testcases/Riscv_tests"
         for test in tests:
             ic(test)
-            os.chdir(f"{currentRootDir}/{ibex_test_path}")
+            os.chdir(f"{BURQ_ROOT}/{ibex_test_path}")
             os.chdir("examples/sw/simple_system/")
             if os.path.isdir(test):
                 # rm test directory
@@ -345,7 +367,7 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
                 
             try:    
                 os.mkdir(test)
-                copy_tree(f"{currentRootDir}/{testroot}/{test}", f"{test}")
+                copy_tree(f"{BURQ_ROOT}/{testroot}/{test}", f"{test}")
                 
 
                 os.chdir(test)
@@ -356,16 +378,16 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
                 # check test.elf exists
                 ic(os.path.isfile(f"{test}.elf"))
                 ic(os.system("ls"))
-                os.chdir(f"{currentRootDir}/{ibex_test_path}")
+                os.chdir(f"{BURQ_ROOT}/{ibex_test_path}")
                 os.system("fusesoc --cores-root=. run --target=sim --setup --build lowrisc:ibex:ibex_simple_system --RV32E=0 --RV32M=ibex_pkg::RV32MFast")
                 os.system(f"./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,examples/sw/simple_system/{test}/{test}.elf")
                 currentProgress += perOccurProgress
                 progressTick(currentProgress)
-                os.chdir(f"{currentRootDir}/{ibex_test_path}/examples/sw/simple_system/{test}")
+                os.chdir(f"{BURQ_ROOT}/{ibex_test_path}/examples/sw/simple_system/{test}")
                 os.system(f"spike --isa=rv32gc -m0x10000:0x30000,0x100000:0x100000 --log-commits -l {test}.elf 2> {test}.log")
                 spike_ibex = None
                 core_ibex  = None
-                core_ibex.ibexLogExtract(f"{currentRootDir}/{ibex_test_path}/trace_core_00000000.log")#ibex core path
+                core_ibex.ibexLogExtract(f"{BURQ_ROOT}/{ibex_test_path}/trace_core_00000000.log")#ibex core path
                 spike_ibex.spikeLogExtract(f"{test}.log")
                 if spike_ibex.match(core_ibex):
                     tests_status.append("PASSED")
@@ -388,7 +410,7 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
 
         
             
-    os.chdir(currentRootDir)
+    os.chdir(BURQ_ROOT)
     os.chdir(projPath)
     
     os.chdir(projName)
@@ -402,7 +424,7 @@ TEST_CFLAGS = -mabi=ilp32 -march=rv32imc -nostdlib -g"""
     file = open("test_results.csv", "w+")
     file.write(report_str)
     file.close()
-    os.chdir(currentRootDir)
+    os.chdir(BURQ_ROOT)
     file = open("web/pathfile", "w")
     file.write(f"{projPath}/{projName}")
     file.close()
@@ -487,12 +509,12 @@ def socdetail(debug=True):
     with open(f"{b}.c", "w") as f:
         f.write("// write your code here \n")
 
-    os.chdir(currentRootDir)
+    os.chdir(BURQ_ROOT)
     
     with open("records", "w+") as f:
         f.write(f"{yourproject}/{b},custom_test\n")
 
-    os.chdir(f"{currentRootDir}")
+    os.chdir(f"{BURQ_ROOT}")
     eel.goToMain()
 
 @eel.expose
@@ -827,7 +849,7 @@ def swervtest(source):
 @eel.expose
 def burqgeneratedtest(source):
     print('burqgeneratedtest')
-    os.system(f"{currentRootDir}")
+    os.system(f"{BURQ_ROOT}")
 
     namelist=[]
    
@@ -948,8 +970,8 @@ def enduploadcore(config, tests, types, debug=True):
                     f"{config['path']}/{config['name']}/logs/spike_trace.csv"
                 )
             else:
-                os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} tmp/{test}")
-                os.system(f"python3 {currentRootDir}/dv/run.py --iss spike --simulator pyflow --target {extension_flags} --output tmp/{test}_out --c_test tmp/{test}/{test}.c")
+                os.system(f"cp -r {BURQ_ROOT}/testcases/{types}/{test} tmp/{test}")
+                os.system(f"python3 {BURQ_ROOT}/dv/run.py --iss spike --simulator pyflow --target {extension_flags} --output tmp/{test}_out --c_test tmp/{test}/{test}.c")
             
             killSpike()
 
@@ -1013,12 +1035,12 @@ def enduploadcore(config, tests, types, debug=True):
 
     else: # if swerv based
         RV_ROOT = f"{config['path']}/{config['name']}/core/"
-        WHISPER = f"{currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper"
+        WHISPER = f"{BURQ_ROOT}/iss/SweRV-ISS/build-Linux/./whisper"
         for test in tests:
             if os.path.exists(f"{config['path']}/{config['name']}/core/testbench/tests/{test}"):
                 # del the folder
                 os.system(f"rm -rf {config['path']}/{config['name']}/core/{test}")
-            os.system(f"cp -r {currentRootDir}/testcases/{types}/{test} {config['path']}/{config['name']}/core/testbench/tests/{test}")
+            os.system(f"cp -r {BURQ_ROOT}/testcases/{types}/{test} {config['path']}/{config['name']}/core/testbench/tests/{test}")
 
             if os.path.exists(f"{config['path']}/{config['name']}/core/{test}"):
                 # del the folder
@@ -1046,15 +1068,13 @@ def enduploadcore(config, tests, types, debug=True):
     ic(testStatuses)
     for i,t in enumerate(tests):
         report_str += f"{t},{testStatuses[i]}\n"
-    file = open(f"{config['path']}/{config['name']}/test_results.csv", "w+")
-    file.write(report_str)
-    file.close()
+    with open(f"{config['path']}/{config['name']}/test_results.csv", "w+") as f:
+        f.write(report_str)
 
-    file = open(f"{currentRootDir}/records", "w+")
-    file.write(f"{config['path']}/{config['name']},custom_core_verification\n")
-    file.close()
+    with open(f"{BURQ_ROOT}/records", "w+") as f:
+        f.write(f"{config['path']}/{config['name']},custom_core_verification\n")
     
-    os.chdir(currentRootDir)
+    os.chdir(BURQ_ROOT)
     eel.goToMain()
 
 
@@ -1152,7 +1172,7 @@ def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
    
     os.chdir(b)
     os.system(f"cp -a {uploadedcore}  {yourproject}/{b}")
-    os.chdir(f"{currentRootDir}")
+    os.chdir(f"{BURQ_ROOT}")
     
    # if iss=="spike":
     # os.system("export PATH=/opt/riscv/bin:$PATH")
@@ -1198,7 +1218,7 @@ def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
     # file = open("test_results.report", "w+")
     # file.write(report_str[:-1])
     # file.close()
-    # os.chdir(currentRootDir)
+    # os.chdir(BURQ_ROOT)
     # file = open("web/pathfile", "w")
     # file.write(f"{yourproject}/{b}")
     # file.close()
@@ -1219,9 +1239,9 @@ def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
     if swerv=="swervbased":
         os.system("export RISCV=/opt/riscv64")
 
-        os.system(f"export whisper='{currentRootDir}/iss/SweRV-ISS/build-Linux/./whisper'")
+        os.system(f"export whisper='{BURQ_ROOT}/iss/SweRV-ISS/build-Linux/./whisper'")
 
-        os.system(f"export RV_ROOT='{currentRootDir}/cores/swerv'")
+        os.system(f"export RV_ROOT='{BURQ_ROOT}/cores/swerv'")
         os.system("export PATH=/opt/riscv64/bin:$PATH")
         for test in tests1:
             ic(test)
@@ -1259,7 +1279,7 @@ def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
         file = open("test_results.report", "w+")
         file.write(report_str[:-1])
         file.close()
-        os.chdir(currentRootDir)
+        os.chdir(BURQ_ROOT)
         file = open("web/pathfile", "w")
         file.write(f"{yourproject}/{b}")
         file.close()
@@ -1290,7 +1310,7 @@ def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
             
             os.system(f"riscv64-unknown-elf-gcc -o {test} {test}.c")
            # os.system(f"spike pk {test} > exec.log")
-            os.chdir(f"{currentRootDir}")
+            os.chdir(f"{BURQ_ROOT}")
             os.chdir(f"{p}")
             os.system(f"{yy}")
             os.chdir(f"{yourproject}/{b}/{testcase}/{test}")
@@ -1320,7 +1340,7 @@ def enduploadcore__(getcommand,tests1,testcase,logfile,swerv,testtype):
         file = open("test_results.report", "w+")
         file.write(report_str[:-1])
         file.close()
-        os.chdir(currentRootDir)
+        os.chdir(BURQ_ROOT)
         file = open("web/pathfile", "w")
         file.write(f"{yourproject}/{b}")
         file.close()
@@ -1355,8 +1375,7 @@ if __name__ == '__main__':
     list2 = []
     listuploadcore = []
 
-    currentRootDir = os.getcwd()
     testcasepath=[]
     logfilepath=[]
 
-    eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
+    eel.start('splash.html', mode='chrome', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)

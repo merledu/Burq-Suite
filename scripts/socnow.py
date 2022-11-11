@@ -80,6 +80,7 @@ class SoCNowCores:
                     )
                     with open(f'{projPath}/logs/compare_result.log', 'r', encoding='UTF-8') as f:
                         result = f.readlines()
+                    ic(result)
                     testsStatuses.append(result[-2][: -1])
 
         return testsStatuses
