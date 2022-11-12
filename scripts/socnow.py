@@ -37,8 +37,8 @@ class SoCNowCores:
 
 
     def run_dv_test(
-        self, coreID, testType, testsList, projName,
-        projDir, dvDir, burqDir
+        self,    coreID, testType, testsList, projName,
+        projDir, dvDir,  burqDir
     ):
         testsStatuses = []
         for core in self.cores:

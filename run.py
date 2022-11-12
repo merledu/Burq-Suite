@@ -1389,4 +1389,4 @@ if __name__ == '__main__':
     testcasepath=[]
     logfilepath=[]
 
-    eel.start('splash.html', mode='chrome', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
+    eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
