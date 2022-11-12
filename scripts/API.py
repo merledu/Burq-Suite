@@ -19,11 +19,13 @@ def getListOfCores(username):
     return coreList
 
 
-def getCoreRTL(coreID, projName, projDir):
+def getCoreRTL(coreID, projName, projDir, currProg, progTick):
     idDict = {'id': int(coreID)}
     rtlFile = json.loads(
         req.get(routes['rtl'], data=idDict).text
     )
+    currProg += 10
+    progTick(currProg)
 
     projPath = f'{projDir}/{projName}'
     os.makedirs(f'{projPath}/rtl')
@@ -34,12 +36,14 @@ def getCoreRTL(coreID, projName, projDir):
                 f.write(
                     re.sub(
                         '/home/.*/assembly.hex',
-                        f'{projPath}/dv_out/asm_test/asm.hex',
+                        f'{projPath}/asm.hex',
                         line
                     )
                 )
             else:
                 f.write(line)
+    currProg += 10
+    progTick(currProg)
 
 
 if __name__ == '__main__':

@@ -35,20 +35,16 @@ def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
     progressTick(currentProgress)
 
     # Bring the RTL
-    currentProgress += 10
-    progressTick(currentProgress)
-    getCoreRTL(coreSelectedID, projectName, projectDir)
-    currentProgress += 40
-    progressTick(currentProgress)
+    getCoreRTL(coreSelectedID, projectName, projectDir, currentProgress, progressTick)
     
     # Process the RTL
-    currentProgress += 30
+    currentProgress += 10
     progressTick(currentProgress)
     testsStatuses = userSoCNowCores.run_dv_test(
-        coreSelectedID, testType, testsList, projectName, projectDir,
-        DV_ROOT, BURQ_ROOT
+        coreSelectedID, testType,  testsList,       projectName, projectDir,
+        DV_ROOT,        BURQ_ROOT, currentProgress, progressTick
     )
-    currentProgress += 20
+    currentProgress += 10
     progressTick(currentProgress)
 
     # Display result
@@ -674,18 +670,7 @@ def getlistuser():
 def getlistdv():
     tests = [
         "riscv_arithmetic_basic_test",
-        "riscv_rand_instr_test",
-        "riscv_jump_stress_test",
-        "riscv_loop_test",
-        "riscv_rand_jump_test",
-        "riscv_mmu_stress_test",
-        "riscv_no_fence_test",
-        "riscv_illegal_instr_test",
-        "riscv_ebreak_test",
-        "riscv_ebreak_debug_mode_test",
-        "riscv_full_interrupt_test",
-        "riscv_csr_test",
-        "riscv_unaligned_load_store_test"
+        "riscv_jump_stress_test"
     ]
     eel.showIbexTests(tests)
 
@@ -886,18 +871,7 @@ def dvtest(source,debug=True):
 
     tests = [
         "riscv_arithmetic_basic_test",
-        "riscv_rand_instr_test",
         "riscv_jump_stress_test",
-        "riscv_loop_test",
-        "riscv_rand_jump_test",
-        "riscv_mmu_stress_test",
-        "riscv_no_fence_test",
-        "riscv_illegal_instr_test",
-        "riscv_ebreak_test",
-        "riscv_ebreak_debug_mode_test",
-        "riscv_full_interrupt_test",
-        "riscv_csr_test",
-        "riscv_unaligned_load_store_test"
     ]
     if source=="socnow":
         eel.showsocnowdvtest(tests)
@@ -992,7 +966,11 @@ def enduploadcore(config, tests, types, debug=True):
             # CORE Sim
             if config["testFormat"] == "asm":
                 if types != "RISCV_DV_Tests":
-                    os.system(f"riscv64-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o > {config['path']}/{config['name']}/core/{config['hexDir']}/test.elf")
+                    os.system(f"riscv64-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o > {config['path']}/{config['name']}/core/{config['hexDir']}/test.s")
+                    run_dv_test_on_core(
+                        config['command'], f"{config['path']}/{config['name']}/core/{config['logFile']}",
+                        f"{config['path']}/{config['name']}/logs/core_trace.csv"
+                    )
                 else:
                     ic(os.getcwd())
                     os.chdir(f"{config['path']}/{config['name']}/core")
