@@ -15,7 +15,7 @@ sys.path.insert(0, BURQ_SCRIPTS)
 sys.path.insert(0, DV_ROOT)
 sys.path.insert(0, DV_SCRIPTS)
 
-from run_tests import run_dv_test_on_spike, run_dv_test_on_core
+from run_tests import run_dv_test_on_spike, run_dv_test_on_core, run_c_test_on_spike
 from instr_trace_compare import compare_trace_csv
 from API import getListOfCores, getCoreRTL
 from utils import getEmptyPort, killSpike
@@ -31,21 +31,27 @@ userSoCNowCores = SoCNowCores()
 
 @eel.expose
 def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
+    ic(sys._getframe().f_code.co_name)
     currentProgress = 0
     progressTick(currentProgress)
 
-    # Bring the RTL
-    getCoreRTL(coreSelectedID, projectName, projectDir, currentProgress, progressTick)
-    
-    # Process the RTL
-    currentProgress += 10
-    progressTick(currentProgress)
-    testsStatuses = userSoCNowCores.run_dv_test(
-        coreSelectedID, testType,  testsList,       projectName, projectDir,
-        DV_ROOT,        BURQ_ROOT, currentProgress, progressTick
-    )
-    currentProgress += 10
-    progressTick(currentProgress)
+    try:
+        # Bring the RTL
+        getCoreRTL(coreSelectedID, projectName, projectDir, currentProgress, progressTick)
+        
+        # Process the RTL
+        currentProgress += 10
+        progressTick(currentProgress)
+        testsStatuses = userSoCNowCores.run_dv_test(
+            coreSelectedID, testType,  testsList,       projectName, projectDir,
+            DV_ROOT,        BURQ_ROOT, currentProgress, progressTick
+        )
+        currentProgress += 10
+        progressTick(currentProgress)
+    except:
+        testStatuses.append("[Incompatble with your Core Configuration]")
+        progress += 100
+        progressTick(progress)
 
     # Display result
     os.chdir(f'{projectDir}/{projectName}')
@@ -879,112 +885,96 @@ def dvtest(source,debug=True):
 
         eel.showdvTests(tests)
 
-# @eel.expose
-# def enduploadcore(config, tests, types):
-#     time.sleep(5)
-#     progressTick(11.11)
-#     time.sleep(5)
-#     progressTick(22.22)
-#     time.sleep(5)
-#     progressTick(33.33)
-#     time.sleep(5)
-#     progressTick(44.44)
-#     time.sleep(5)
-#     progressTick(55.55)
-#     time.sleep(5)
-#     progressTick(66.66)
-#     time.sleep(5)
-#     progressTick(77.77)
-#     time.sleep(5)
-#     progressTick(88.88)
-#     time.sleep(5)
-#     progressTick(99.99)
-
 
 @eel.expose
-def enduploadcore(config, tests, types, debug=True):
-    if debug:
-        ic(sys._getframe().f_code.co_name)
-        ic(config, tests, types)
-   
+def enduploadcore(config, tests, types):
+    ic(sys._getframe().f_code.co_name)
+    proj_dir = os.path.join(config['path'], config['name'])
+    core_path = os.path.join(proj_dir, 'core')
+    progress = 0
+    progressTick(progress)
+
     with open("web/pathfile", "w") as f:
-        f.write(f"{config['path']}/{config['name']}")
+        f.write(proj_dir)
 
     with open("web/pathfilev", "w") as f:
         f.write("custom_verification")
 
     uploadedcore = listuploadcore[-1]
 
-    if debug:
-        ic(uploadedcore)
+    os.makedirs(proj_dir)
+    os.makedirs(core_path)
+    copy_tree(uploadedcore, core_path)
 
-    os.makedirs(f"{config['path']}/{config['name']}")
-    os.makedirs(f"{config['path']}/{config['name']}/core")
-    copy_tree(uploadedcore, f"{config['path']}/{config['name']}/core/")
-
-    with open(f"{config['path']}/{config['name']}/config.json", "w+") as f:
+    with open(f"{proj_dir}/config.json", "w+") as f:
         json.dump(config, f)
 
     testStatuses = []
-    progress_step = (len(tests) / 100) / 3
-    progress = 0
+    progress += 30
+    progressTick(progress)
 
     if config["swerv"] == "": 
-        if debug:
-            ic("Custom core selected")
+        ic("Custom core selected")
 
         extension_flags = "rv32" + "".join(config["extensions"])
-        os.makedirs(f"{config['path']}/{config['name']}/tmp")
-        os.chdir(f"{config['path']}/{config['name']}")
-        proj_dir = os.getcwd()
-
-        if debug:
-            ic(proj_dir)
-
+        os.chdir(proj_dir)
         os.makedirs("logs")
 
         for i, test in enumerate(tests):
             # ISS Sim
             #try:
+            os.chdir(DV_ROOT)
             if types == "RISCV_DV_Tests":
-                ic(types)
-                os.chdir(BURQ_ROOT + '/dv')
                 run_dv_test_on_spike(
-                    extension_flags, test, 1, f"{config['path']}/{config['name']}/tmp/{test}_out",
-                    f"{config['path']}/{config['name']}/tmp/{test}_out/spike_sim/{test}.0.log",
-                    f"{config['path']}/{config['name']}/logs/spike_trace.csv"
+                    extension_flags, test, 1,
+                    os.path.join(proj_dir, 'dv_out'),
+                    os.path.join(proj_dir, 'dv_out/spike_sim', f'{test}.0.log'),
+                    os.path.join(proj_dir, 'logs/spike_trace.csv')
                 )
             else:
-                os.system(f"cp -r {BURQ_ROOT}/testcases/{types}/{test} tmp/{test}")
-                os.system(f"python3 {BURQ_ROOT}/dv/run.py --iss spike --simulator pyflow --target {extension_flags} --output tmp/{test}_out --c_test tmp/{test}/{test}.c")
-            
-            killSpike()
-
-            progress += progress_step
+                ic(os.path.join(BURQ_ROOT, 'testcases', types, test, f'{test}.c'))
+                ic(os.path.join(proj_dir, 'dv_out'))
+                ic(os.path.join(proj_dir, 'dv_out/spike_sim', f'{test}.log'))
+                run_c_test_on_spike(
+                    extension_flags,
+                    os.path.join(BURQ_ROOT, 'testcases', types, test, f'{test}.c'),
+                    os.path.join(proj_dir, 'dv_out'),
+                    os.path.join(proj_dir, 'dv_out/spike_sim', f'{test}.log'),
+                    os.path.join(proj_dir, 'logs/spike_trace.csv')
+                )
+            progress += 20
             progressTick(progress)
 
             # CORE Sim
             if config["testFormat"] == "asm":
                 if types != "RISCV_DV_Tests":
-                    os.system(f"riscv64-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/directed_c_test/{test}.o > {config['path']}/{config['name']}/core/{config['hexDir']}/test.s")
+                    os.system(
+                        f'riscv64-unknown-elf-objdump -d {proj_dir}/dv_out/directed_c_test/{test}.o'
+                        f' > {core_path}/{config["hexDir"]}/test.s')
                     run_dv_test_on_core(
-                        config['command'], f"{config['path']}/{config['name']}/core/{config['logFile']}",
-                        f"{config['path']}/{config['name']}/logs/core_trace.csv"
+                        config['command'],
+                        os.path.join(core_path, config['logFile']),
+                        os.path.join(proj_dir, 'logs/core_trace.csv')
                     )
                 else:
-                    ic(os.getcwd())
-                    os.chdir(f"{config['path']}/{config['name']}/core")
-                    os.system(f"riscv64-unknown-elf-objdump -d {config['path']}/{config['name']}/tmp/{test}_out/asm_test/{test}_0.o > {config['path']}/{config['name']}/core/{config['hexDir']}/test.s")
-                    run_dv_test_on_core(
-                        config['command'], f"{config['path']}/{config['name']}/core/{config['logFile']}",
-                        f"{config['path']}/{config['name']}/logs/core_trace.csv"
+                    os.chdir(core_path)
+                    os.system(
+                        f'riscv64-unknown-elf-objdump -d {proj_dir}/dv_out/asm_test/{test}_0.o'
+                        f' > {core_path}/{config["hexDir"]}/test.s'
                     )
+                    run_dv_test_on_core(
+                        config['command'],
+                        os.path.join(core_path, config['logFile']),
+                        os.path.join(proj_dir, 'logs/core_trace.csv')
+                    )
+                progress += 20
+                progressTick(progress)
             else:
                 print("coreepattt")
                 os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
                 os.chdir(f"{config['path']}/{config['name']}/core")
                 os.system(config["command"].replace("{testname}", test))
-            progress += progress_step
+            progress += 20
             progressTick(progress)
 
             os.chdir(f"{proj_dir}")
@@ -992,8 +982,8 @@ def enduploadcore(config, tests, types, debug=True):
             if config["logFormat"] == "csv": pass
             else:
                 compare_trace_csv(
-                    f"{config['path']}/{config['name']}/logs/core_trace.csv",
-                    f"{config['path']}/{config['name']}/logs/spike_trace.csv",
+                    f"{proj_dir}/logs/core_trace.csv",
+                    f"{proj_dir}/logs/spike_trace.csv",
                     'core', 'spike', f'{config["path"]}/{config["name"]}/logs/compare_result.log',
                     mismatch_print_limit=50
                 )
@@ -1002,18 +992,16 @@ def enduploadcore(config, tests, types, debug=True):
                     result = f.readlines()
                 testStatuses.append(result[-2][: -1])
 
-            progress += progress_step
+            progress += 10
             progressTick(progress)
             #except:
-                #testStatuses.append("[Incompatble with your Core Configuration]")
-                #progress += progress_step * 3
-                #progressTick(progress)
+            #    testStatuses.append("[Incompatble with your Core Configuration]")
+            #    progress += 70
+            #    progressTick(progress)
         
         os.chdir(f"{proj_dir}")
-        if not debug:
-            os.system("rm -rf tmp")
-            if len(list(filter(lambda x:x=="[PASSED]" or x=="[Incompatble with your Core Configuration]", testStatuses))) == len(testStatuses):
-                os.system("rm -rf failed_logs")
+        if len(list(filter(lambda x:x=="[PASSED]" or x=="[Incompatble with your Core Configuration]", testStatuses))) == len(testStatuses):
+            os.system("rm -rf failed_logs")
         
         report_str = ""
         report_str += f"Core,{config['name']}\n"
@@ -1067,17 +1055,7 @@ def enduploadcore(config, tests, types, debug=True):
     eel.goToMain()
 
 
-
-
-
-
-
-
-
-
-
 def progressTick(progress):
-    print('progressTick')
     if progress < 20:
         eel.updateProgressBar(progress, "#f63a0f")
     elif progress < 40:

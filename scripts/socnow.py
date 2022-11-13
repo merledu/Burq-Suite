@@ -81,7 +81,7 @@ class SoCNowCores:
                 self.run_dv_test_on_rtl(projPath, burqDir, f'{dvTests}/asm_test/test.s')
                 currProg += 20
                 progTick(currProg)
-            case 'User_Defined_Tests':
+            case _:
                 run_c_test_on_spike(
                     ext, f'{userDefinedTestsPath}/{testsList[0]}/{testsList[0]}.c', dvTests,
                     f'{dvTests}/spike_sim/{testsList[0]}.log',
