@@ -386,13 +386,9 @@
                                 <div  >
                                     <h6 style="font-weight: lighter;">Select Your Core test type</h6>
                                     <form >
-                                        <input type="radio" id="gencoretest" name="upSoc" value="BURQ_Generated_Tests" checked />
-                                        <label> BURQ_Generated_Tests </label>
-                                        <br>
-                                        <input  type="radio" id="gencoretest" name="upSoc" value="Floating_point_tests_for_azadi" />
-                                        <label>Floating_point_tests_for_azadi </label>
-                                        <br>
-                                        <input type="radio" id="gencoretest" name="upSoc"" value="MERL_vector_Tests" />
+                                        
+                                        
+                                        <input type="radio" id="gencoretest" name="upSoc" value="MERL_vector_Tests" />
                                         <label> MERL_vector_Tests </label><br>
                                         <input type="radio" id="gencoretest" name="upSoc" value="Riscv_tests" />
                                         <label> Riscv-tests </label><br>
@@ -481,7 +477,7 @@
                         <div id="socnow-loading" style="width: 100%;">
                             <div id="test-name-Socnow"></div>
 
-                            <div class="progress">
+                            <div class="progress" style="margin-top: -10px;">
                                     <div id= "progress-Custom" class="progress-bar"></div>
                                     <p id="progress-indicator-custom">0%</p>
                                     <div id='socnowtext'></div>
@@ -1180,10 +1176,10 @@
                                      
                                 </div>
                             </div>
-                            <div id="prebuilt-end1" style="width: 100%;">
+                            <div id="prebuilt-end1" >
                                
                                 <div id="testname-custom"></div>
-                                <div class="progress">
+                                <div class="progress" style="margin-top: -10px;">
                                     <div class="progress-bar" id="progress-bar-cus"></div>
                                     <p id="progress-indicator-cus">0%</p>
                                 </div>
@@ -1419,10 +1415,10 @@
                                 </div>
 
                             <!-- -------------------- PREBUILT END BOX -------------------- -->
-                            <div id="prebuilt-end" style="width: 100%;">
+                            <div id="prebuilt-end" >
                                 <div id="testname-pre" ></div>
-                                <div class="progress" >
-                                    <div class="progress-bar" id="progress-bar-pre" style="margin-top:-30px;"></div>
+                                <div class="progress" style="margin-top: -10px;">
+                                    <div class="progress-bar" id="progress-bar-pre" ></div>
                                     <p id="progress-indicator-pre">0%</p>
                                     
 
@@ -1545,9 +1541,9 @@ document.querySelector('#submit').addEventListener('focus', function(e) {
                 var pInd = document.getElementById("progress-indicator");
                 pInd.innerHTML = progress + "%";
                 var pText = document.getElementById("socnowtext");
-                pText.innerHTML = text;
+                pText.innerHTML = `<p style="margin-left:250px;font:8px;color:grey;"> ${text}</p>`;
                 var pTest = document.getElementById("test-name-Socnow");
-                pTest.innerHTML = testname;
+                pTest.innerHTML = `<p style="margin-left:250px"> ${testname}</p>`;
 
             }
             eel.expose(updateProgressBarCus);
@@ -1559,9 +1555,9 @@ document.querySelector('#submit').addEventListener('focus', function(e) {
                 var pInd = document.getElementById("progress-indicator-cus");
                 pInd.innerHTML = progress + "%";
                 var pText = document.getElementById("customtext");
-                pText.innerHTML = text;
+                pText.innerHTML = `<p style="margin-left:250px;font:8px;color:grey;"> ${text}</p>`;
                 var pTest = document.getElementById("testname-custom");
-                pTest.innerHTML = testname;
+                pTest.innerHTML = `<p style="margin-left:250px"> ${testname}</p>`;
             }
             eel.expose(updateProgressBarPre);
             function updateProgressBarPre(progress, color,text,testname){
@@ -1572,9 +1568,9 @@ document.querySelector('#submit').addEventListener('focus', function(e) {
                 var pInd = document.getElementById("progress-indicator-pre");
                 pInd.innerHTML = progress + "%";
                 var pText = document.getElementById("PreText");
-                pText.innerHTML = text;
+                pText.innerHTML = `<p style="margin-left:250px;font:8px;color:grey;"> ${text}</p>`;
                 var pTest = document.getElementById("testname-pre");
-                pTest.innerHTML = testname;
+                pTest.innerHTML = `<p style="margin-left:250px"> ${testname}</p>`;
             }
 
 eel.getRecords();
@@ -2124,9 +2120,7 @@ function opneRecentProject(id){
                         }
                     }
                     
-                    if(selectedtesttype == "Floating_point_tests_for_azadi"){
-                        eel.floatingpointtest("socnow")
-                    } else if(selectedtesttype== "MERL_vector_Tests"){
+                    if(selectedtesttype== "MERL_vector_Tests"){
                         eel.merlvectortest("socnow")
                     }
                     else if(selectedtesttype== "Riscv_tests"){
@@ -2138,9 +2132,7 @@ function opneRecentProject(id){
                     else if(selectedtesttype== "Swerv_Tests"){
                         eel.swervtest("socnow")
                     }
-                    else if(selectedtesttype== "BURQ_Generated_Tests"){
-                        eel.burqgeneratedtest("socnow")
-                    }
+                    
                     else if(selectedtesttype=="User_Defined_Tests"){
                         eel.usertest("socnow")
                     }
@@ -2231,7 +2223,7 @@ function opneRecentProject(id){
                                 var a = listt[i];
                 
                                form.innerHTML += 
-                                        `<input type='checkbox' name='prebuiltTest' value='${a}' ><label> ${a} </label><br>`;
+                                        `<input type='radio' name='prebuiltTest' value='${a}' ><label> ${a} </label><br>`;
                                             
                   
                 }
@@ -2391,7 +2383,7 @@ function showsocnowfloting(listt){
                                 var a = listt[i];
                 
                                form.innerHTML += 
-                               `<input type='checkbox' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
+                               `<input type='radio' name='soccoreTest' value='${a}' ><label> ${a} </label><br>`;
                                             
                   
                 }
@@ -2412,7 +2404,7 @@ function showdvTests(listt){
                                 var a = listt[i];
                 
                                form.innerHTML += 
-                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+                                            `<input type='radio' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
                                             
                   
                 }

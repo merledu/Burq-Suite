@@ -712,7 +712,12 @@ def getlistuser():
 def getlistdv():
     tests = [
         "riscv_arithmetic_basic_test",
-        "riscv_jump_stress_test"
+        "riscv_jump_stress_test",
+        "riscv_rand_instr_test",
+        "riscv_rand_jump_test",
+        "riscv_mmu_stress_test",
+        "riscv_unaligned_load_store_test"
+        
     ]
     eel.showIbexTests(tests)
 
@@ -914,6 +919,10 @@ def dvtest(source,debug=True):
     tests = [
         "riscv_arithmetic_basic_test",
         "riscv_jump_stress_test",
+        "riscv_rand_instr_test",
+        "riscv_rand_jump_test",
+        "riscv_mmu_stress_test",
+        "riscv_unaligned_load_store_test"
     ]
     if source=="socnow":
         eel.showsocnowdvtest(tests)
