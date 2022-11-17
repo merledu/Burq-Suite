@@ -8,5 +8,6 @@ pip install -r ./requirements.txt
 
 # Install riscv-dv dependencies
 cd ./dv
+git checkout master
 pip install -r ./requirements.txt
 cd ../

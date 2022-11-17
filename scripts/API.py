@@ -19,13 +19,13 @@ def getListOfCores(username):
     return coreList
 
 
-def getCoreRTL(coreID, projName, projDir, currProg, progTick):
+def getCoreRTL(coreID, projName, projDir, currProg, progTick, testName):
     idDict = {'id': int(coreID)}
     rtlFile = json.loads(
         req.get(routes['rtl'], data=idDict).text
     )
     currProg += 10
-    progTick(currProg)
+    progTick(currProg, 'Fetching RTL', testName)
 
     projPath = f'{projDir}/{projName}'
     os.makedirs(f'{projPath}/rtl')
@@ -43,7 +43,7 @@ def getCoreRTL(coreID, projName, projDir, currProg, progTick):
             else:
                 f.write(line)
     currProg += 10
-    progTick(currProg)
+    progTick(currProg, 'Fetching RTL', testName)
 
 
 if __name__ == '__main__':

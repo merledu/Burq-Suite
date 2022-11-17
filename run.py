@@ -35,25 +35,25 @@ userSoCNowCores = SoCNowCores()
 def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
     ic(sys._getframe().f_code.co_name)
     currentProgress = 0
-    progressTick(currentProgress)
+    progressTick(currentProgress, 'Fetching RTL', testsList[-1])
 
     try:
         # Bring the RTL
-        getCoreRTL(coreSelectedID, projectName, projectDir, currentProgress, progressTick)
+        getCoreRTL(coreSelectedID, projectName, projectDir, currentProgress, progressTick, testsList[-1])
         
         # Process the RTL
         currentProgress += 10
-        progressTick(currentProgress)
+        progressTick(currentProgress, 'Running test on Spike', testsList[-1])
         testsStatuses = userSoCNowCores.run_dv_test(
             coreSelectedID, testType,  testsList,       projectName, projectDir,
             DV_ROOT,        BURQ_ROOT, currentProgress, progressTick
         )
         currentProgress += 10
-        progressTick(currentProgress)
+        progressTick(currentProgress, 'Almost done', testsList[-1])
     except:
         testStatuses.append("[Incompatble with your Core Configuration]")
         progress += 100
-        progressTick(progress)
+        progressTick(progress, 'Oops something went wrong', testsList[-1])
 
     # Display result
     os.chdir(f'{projectDir}/{projectName}')
@@ -937,7 +937,7 @@ def enduploadcore(config, tests, types):
     proj_dir = os.path.join(config['path'], config['name'])
     core_path = os.path.join(proj_dir, 'core')
     progress = 0
-    progressTick(progress)
+    progressTickCus(progress, 'Setting up test environment', tests[-1])
 
     with open("web/pathfile", "w") as f:
         f.write(proj_dir)
@@ -956,7 +956,7 @@ def enduploadcore(config, tests, types):
 
     testStatuses = []
     progress += 30
-    progressTick(progress)
+    progressTickCus(progress, 'Running test on Spike', tests[-1])
 
     if config["swerv"] == "": 
         ic("Custom core selected")
@@ -988,7 +988,7 @@ def enduploadcore(config, tests, types):
                     os.path.join(proj_dir, 'logs/spike_trace.csv')
                 )
             progress += 20
-            progressTick(progress)
+            progressTick(progress, 'Running test on Core', tests[-1])
 
             # CORE Sim
             if config["testFormat"] == "asm":
@@ -1013,14 +1013,14 @@ def enduploadcore(config, tests, types):
                         os.path.join(proj_dir, 'logs/core_trace.csv')
                     )
                 progress += 20
-                progressTick(progress)
+                progressTick(progress, 'Comparing results', tests[-1])
             else:
                 print("coreepattt")
                 os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
                 os.chdir(f"{config['path']}/{config['name']}/core")
                 os.system(config["command"].replace("{testname}", test))
             progress += 20
-            progressTick(progress)
+            progressTick(progress, 'Almost done', tests[-1])
 
             os.chdir(f"{proj_dir}")
             ic(config["logFormat"])
@@ -1038,7 +1038,7 @@ def enduploadcore(config, tests, types):
                 testStatuses.append(result[-2][: -1])
 
             progress += 10
-            progressTick(progress)
+            progressTick(progress, 'Done', tests[-1])
             #except:
             #    testStatuses.append("[Incompatble with your Core Configuration]")
             #    progress += 70

@@ -58,17 +58,17 @@ class SoCNowCores:
         asmParser = AssemblyParser()
         os.chdir(dvDir)
         currProg += 10
-        progTick(currProg)
+        progTick(currProg, 'Running test on Spike', testsList[-1])
 
         match testType:
             case 'RISCV_DV_Tests':
                 run_dv_test_on_spike(
-                    ext, testsList[0], 1, dvTests,
+                    ext, testsList[-1], 1, dvTests,
                     f'{dvTests}/spike_sim/{testsList[0]}.0.log',
                     f'{projPath}/logs/spike_trace.csv'
                 )
                 currProg += 20
-                progTick(currProg)
+                progTick(currProg, 'Running test on RTL', testsList[-1])
 
                 os.system(
                     f'riscv64-unknown-elf-objdump -d {dvTests}/asm_test/{testsList[0]}_0.o'
@@ -80,7 +80,7 @@ class SoCNowCores:
 
                 self.run_dv_test_on_rtl(projPath, burqDir, f'{dvTests}/asm_test/test.s')
                 currProg += 20
-                progTick(currProg)
+                progTick(currProg, 'Comparing results', testsList[-1])
             case _:
                 run_c_test_on_spike(
                     ext, f'{userDefinedTestsPath}/{testsList[0]}/{testsList[0]}.c', dvTests,
@@ -88,7 +88,7 @@ class SoCNowCores:
                     f'{projPath}/logs/spike_trace.csv'
                 )
                 currProg += 20
-                progTick(currProg)
+                progTick(currProg, 'Running test on RTL', testsList[-1])
 
                 os.system(
                     f'riscv64-unknown-elf-objdump -d {dvTests}/directed_c_test/{testsList[0]}.o'
@@ -100,7 +100,7 @@ class SoCNowCores:
 
                 self.run_dv_test_on_rtl(projPath, burqDir, f'{dvTests}/directed_c_test/test.s')
                 currProg += 20
-                progTick(currProg)
+                progTick(currProg, 'Comparing results', testsList[-1])
 
         process_core_log(f'{burqDir}/simulate_rtl/Top.log', f'{projPath}/logs/Top_trace.csv')
 
@@ -112,6 +112,6 @@ class SoCNowCores:
             result = f.readlines()
         testsStatuses.append(result[-2][: -1])
         currProg += 10
-        progTick(currProg)
+        progTick(currProg, 'Wrapping things up', testsList[-1])
 
         return testsStatuses
