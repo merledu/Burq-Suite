@@ -71,7 +71,8 @@
     background-color: #0a0e14;
     /* border-color: #464748; */
     border: none;
-    color: white;"/><button style="    border-radius: 100%;
+    color: white;"/>
+    <button style="    border-radius: 100%;
     display: flex;
     margin-top: -31px;
     border-color: white;
@@ -251,10 +252,10 @@ function closeEverythingPaleez(){
     window.close();
 }    
 
-// function closeTab(linkName, tabName){
-//     document.getElementById(linkName).style.display = "none";
-//     document.getElementById(tabName).style.display = "none";
-// }
+function closeTab(linkName, tabName){
+    document.getElementById(linkName).remove();
+    document.getElementById(tabName).remove();
+}
 
         eel.expose(pakrKayLaoFiles)
         function pakrKayLaoFiles(strct){
@@ -280,7 +281,7 @@ function closeEverythingPaleez(){
         eel.expose(displayTheReport)
         function displayTheReport(core, iss,tests, status, idOfFile, nameOfFile, onlyNameOfFile){
           var tabRecords = document.getElementById("tab_records");
-          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile} <span onclick="closeTab('btn-${idOfFile}', '${idOfFile}')">x</span> </button>`
+          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile} </button>`;
 
           var editorRecords = document.getElementById("main_editor");
           var hello = ""
@@ -320,7 +321,7 @@ function closeEverythingPaleez(){
         eel.expose(displayTheFile)
         function displayTheFile(file, idOfFile, nameOfFile, onlyNameOfFile){
           var tabRecords = document.getElementById("tab_records");
-          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile}<span onclick="closeTab(event,'${idOfFile}', '${nameOfFile}')">x</span></button>`
+          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile}</button>`
 
           var editorRecords = document.getElementById("main_editor");
           editorRecords.innerHTML += ` <div id="${idOfFile}" class="tabcontent">

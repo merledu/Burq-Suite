@@ -1,8 +1,0 @@
-EXEC FILE line no: 86 exec file : '80000122', '1076714003', '15037016', 'srli', 's4'
-WHISPER FILE line no: 86 whisper file : '80000122', '1076714003', '15037016', 'srai', 's4'
-EXEC FILE line no: 161 exec file : '8000020c', '32528275', '00000000', 'srai', 'a5'
-WHISPER FILE line no: 161 whisper file : '8000020c', '32528275', '00000000', 'srli', 'a5'
-EXEC FILE line no: 170 exec file : '8000023c', '873340531', '00000000', 'csrrw', 't3'
-WHISPER FILE line no: 170 whisper file : '8000023c', '873340531', 'f0044e64', 'csrrw', 't3'
-EXEC FILE line no: 206 exec file : '800002cc', '33250067', '00000000', 'srai', 's6'
-WHISPER FILE line no: 206 whisper file : '800002cc', '33250067', '00000000', 'srli', 's6'
