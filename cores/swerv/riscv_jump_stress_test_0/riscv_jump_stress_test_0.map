@@ -19,11 +19,11 @@ LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/libgcc.a
 .text.init
  *(.text.init)
 
-.text           0x0000000080000000      0xe88
+.text           0x0000000080000000      0xef4
  *(.text)
- .text          0x0000000080000000      0xe88 riscv_jump_stress_test_0.o
+ .text          0x0000000080000000      0xef4 riscv_jump_stress_test_0.o
                 0x0000000080000000                _start
-                0x0000000080000e88                _end = .
+                0x0000000080000ef4                _end = .
                 0x00000000d0580000                . = 0xd0580000
 
 .data.io
@@ -37,35 +37,23 @@ LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/libgcc.a
                 0x00000000f0040040                fromhost
  *(.rodata*)
 
-.region_0       0x00000000f0040048     0x1000
- .region_0      0x00000000f0040048     0x1000 riscv_jump_stress_test_0.o
+.user_stack     0x00000000f0040048     0x4e20
+ .user_stack    0x00000000f0040048     0x4e20 riscv_jump_stress_test_0.o
 
-.region_1       0x00000000f0041048     0x1000
- .region_1      0x00000000f0041048     0x1000 riscv_jump_stress_test_0.o
+.kernel_stack   0x00000000f0044e68     0x4e20
+ .kernel_stack  0x00000000f0044e68     0x4e20 riscv_jump_stress_test_0.o
 
-.user_stack     0x00000000f0042048     0x4e20
- .user_stack    0x00000000f0042048     0x4e20 riscv_jump_stress_test_0.o
-
-.s_region_0     0x00000000f0046e68     0x1000
- .s_region_0    0x00000000f0046e68     0x1000 riscv_jump_stress_test_0.o
-
-.s_region_1     0x00000000f0047e68     0x1000
- .s_region_1    0x00000000f0047e68     0x1000 riscv_jump_stress_test_0.o
-
-.kernel_stack   0x00000000f0048e68     0x4e20
- .kernel_stack  0x00000000f0048e68     0x4e20 riscv_jump_stress_test_0.o
-
-.bss            0x00000000f004dc88        0x0
-                0x00000000f004dc88                BSS_START = .
+.bss            0x00000000f0049c88        0x0
+                0x00000000f0049c88                BSS_START = .
  *(.*bss)
- .bss           0x00000000f004dc88        0x0 riscv_jump_stress_test_0.o
-                0x00000000f004dc88                BSS_END = .
-                0x00000000f004ec90                STACK = (ALIGN (0x10) + 0x1000)
+ .bss           0x00000000f0049c88        0x0 riscv_jump_stress_test_0.o
+                0x00000000f0049c88                BSS_END = .
+                0x00000000f004ac90                STACK = (ALIGN (0x10) + 0x1000)
                 0x00000000fffffff8                . = 0xfffffff8
 
 .data.ctl       0x00000000fffffff8        0x8
                 0x00000000fffffff8        0x4 LONG 0xf0040000
-                0x00000000fffffffc        0x4 LONG 0xf004ec90 STACK
+                0x00000000fffffffc        0x4 LONG 0xf004ac90 STACK
 OUTPUT(riscv_jump_stress_test_0.exe elf32-littleriscv)
 
 .riscv.attributes

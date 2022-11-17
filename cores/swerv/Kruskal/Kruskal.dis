@@ -1,0 +1,471 @@
+
+Kruskal.exe:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+80000000 <_start>:
+80000000:	595552b7          	lui	t0,0x59555
+80000004:	55528293          	addi	t0,t0,1365 # 59555555 <_start-0x26aaaaab>
+80000008:	7c029073          	csrw	0x7c0,t0
+8000000c:	70041117          	auipc	sp,0x70041
+80000010:	0e410113          	addi	sp,sp,228 # f00410f0 <STACK>
+80000014:	032000ef          	jal	ra,80000046 <main>
+
+80000018 <_finish>:
+80000018:	50580297          	auipc	t0,0x50580
+8000001c:	fe828293          	addi	t0,t0,-24 # d0580000 <tohost>
+80000020:	0ff00313          	li	t1,255
+80000024:	00628023          	sb	t1,0(t0)
+80000028:	4305                	li	t1,1
+8000002a:	0062a023          	sw	t1,0(t0)
+8000002e:	fe0005e3          	beqz	zero,80000018 <_finish>
+80000032:	0001                	nop
+80000034:	0001                	nop
+80000036:	0001                	nop
+80000038:	0001                	nop
+8000003a:	0001                	nop
+8000003c:	0001                	nop
+8000003e:	0001                	nop
+80000040:	0001                	nop
+80000042:	0001                	nop
+80000044:	0001                	nop
+
+Disassembly of section .text:
+
+80000046 <main>:
+void union1(int belongs[],int c1,int c2);
+void sort();
+void print();
+ 
+void main()
+{
+80000046:	1141                	addi	sp,sp,-16
+80000048:	c606                	sw	ra,12(sp)
+8000004a:	c422                	sw	s0,8(sp)
+8000004c:	0800                	addi	s0,sp,16
+kruskal();
+8000004e:	2031                	jal	8000005a <kruskal>
+}
+80000050:	0001                	nop
+80000052:	40b2                	lw	ra,12(sp)
+80000054:	4422                	lw	s0,8(sp)
+80000056:	0141                	addi	sp,sp,16
+80000058:	8082                	ret
+
+8000005a <kruskal>:
+ 
+void kruskal()
+{
+8000005a:	7139                	addi	sp,sp,-64
+8000005c:	de06                	sw	ra,60(sp)
+8000005e:	dc22                	sw	s0,56(sp)
+80000060:	0080                	addi	s0,sp,64
+int belongs[MAX],i,j,cno1,cno2;
+elist.n=0;
+80000062:	f00407b7          	lui	a5,0xf0040
+80000066:	06878793          	addi	a5,a5,104 # f0040068 <STACK+0xffffef78>
+8000006a:	0207ae23          	sw	zero,60(a5)
+ 
+for(i=1;i<n;i++)
+8000006e:	4785                	li	a5,1
+80000070:	fef42623          	sw	a5,-20(s0)
+80000074:	a0c5                	j	80000154 <kruskal+0xfa>
+for(j=0;j<i;j++)
+80000076:	fe042423          	sw	zero,-24(s0)
+8000007a:	a0d1                	j	8000013e <kruskal+0xe4>
+{
+if(G[i][j]!=0)
+8000007c:	f00407b7          	lui	a5,0xf0040
+80000080:	00078693          	mv	a3,a5
+80000084:	fec42703          	lw	a4,-20(s0)
+80000088:	87ba                	mv	a5,a4
+8000008a:	078a                	slli	a5,a5,0x2
+8000008c:	97ba                	add	a5,a5,a4
+8000008e:	fe842703          	lw	a4,-24(s0)
+80000092:	97ba                	add	a5,a5,a4
+80000094:	078a                	slli	a5,a5,0x2
+80000096:	97b6                	add	a5,a5,a3
+80000098:	439c                	lw	a5,0(a5)
+8000009a:	cfc9                	beqz	a5,80000134 <kruskal+0xda>
+{
+elist.data[elist.n].u=i;
+8000009c:	f00407b7          	lui	a5,0xf0040
+800000a0:	06878793          	addi	a5,a5,104 # f0040068 <STACK+0xffffef78>
+800000a4:	5fd8                	lw	a4,60(a5)
+800000a6:	f00407b7          	lui	a5,0xf0040
+800000aa:	06878693          	addi	a3,a5,104 # f0040068 <STACK+0xffffef78>
+800000ae:	87ba                	mv	a5,a4
+800000b0:	0786                	slli	a5,a5,0x1
+800000b2:	97ba                	add	a5,a5,a4
+800000b4:	078a                	slli	a5,a5,0x2
+800000b6:	97b6                	add	a5,a5,a3
+800000b8:	fec42703          	lw	a4,-20(s0)
+800000bc:	c398                	sw	a4,0(a5)
+elist.data[elist.n].v=j;
+800000be:	f00407b7          	lui	a5,0xf0040
+800000c2:	06878793          	addi	a5,a5,104 # f0040068 <STACK+0xffffef78>
+800000c6:	5fd8                	lw	a4,60(a5)
+800000c8:	f00407b7          	lui	a5,0xf0040
+800000cc:	06878693          	addi	a3,a5,104 # f0040068 <STACK+0xffffef78>
+800000d0:	87ba                	mv	a5,a4
+800000d2:	0786                	slli	a5,a5,0x1
+800000d4:	97ba                	add	a5,a5,a4
+800000d6:	078a                	slli	a5,a5,0x2
+800000d8:	97b6                	add	a5,a5,a3
+800000da:	fe842703          	lw	a4,-24(s0)
+800000de:	c3d8                	sw	a4,4(a5)
+elist.data[elist.n].w=G[i][j];
+800000e0:	f00407b7          	lui	a5,0xf0040
+800000e4:	06878793          	addi	a5,a5,104 # f0040068 <STACK+0xffffef78>
+800000e8:	5fd8                	lw	a4,60(a5)
+800000ea:	f00407b7          	lui	a5,0xf0040
+800000ee:	00078613          	mv	a2,a5
+800000f2:	fec42683          	lw	a3,-20(s0)
+800000f6:	87b6                	mv	a5,a3
+800000f8:	078a                	slli	a5,a5,0x2
+800000fa:	97b6                	add	a5,a5,a3
+800000fc:	fe842683          	lw	a3,-24(s0)
+80000100:	97b6                	add	a5,a5,a3
+80000102:	078a                	slli	a5,a5,0x2
+80000104:	97b2                	add	a5,a5,a2
+80000106:	4394                	lw	a3,0(a5)
+80000108:	f00407b7          	lui	a5,0xf0040
+8000010c:	06878613          	addi	a2,a5,104 # f0040068 <STACK+0xffffef78>
+80000110:	87ba                	mv	a5,a4
+80000112:	0786                	slli	a5,a5,0x1
+80000114:	97ba                	add	a5,a5,a4
+80000116:	078a                	slli	a5,a5,0x2
+80000118:	97b2                	add	a5,a5,a2
+8000011a:	c794                	sw	a3,8(a5)
+elist.n++;
+8000011c:	f00407b7          	lui	a5,0xf0040
+80000120:	06878793          	addi	a5,a5,104 # f0040068 <STACK+0xffffef78>
+80000124:	5fdc                	lw	a5,60(a5)
+80000126:	00178713          	addi	a4,a5,1
+8000012a:	f00407b7          	lui	a5,0xf0040
+8000012e:	06878793          	addi	a5,a5,104 # f0040068 <STACK+0xffffef78>
+80000132:	dfd8                	sw	a4,60(a5)
+for(j=0;j<i;j++)
+80000134:	fe842783          	lw	a5,-24(s0)
+80000138:	0785                	addi	a5,a5,1
+8000013a:	fef42423          	sw	a5,-24(s0)
+8000013e:	fe842703          	lw	a4,-24(s0)
+80000142:	fec42783          	lw	a5,-20(s0)
+80000146:	f2f74be3          	blt	a4,a5,8000007c <kruskal+0x22>
+for(i=1;i<n;i++)
+8000014a:	fec42783          	lw	a5,-20(s0)
+8000014e:	0785                	addi	a5,a5,1
+80000150:	fef42623          	sw	a5,-20(s0)
+80000154:	f00407b7          	lui	a5,0xf0040
+80000158:	0647a783          	lw	a5,100(a5) # f0040064 <STACK+0xffffef74>
+8000015c:	fec42703          	lw	a4,-20(s0)
+80000160:	f0f74be3          	blt	a4,a5,80000076 <kruskal+0x1c>
+}
+}
+ 
+sort();
+80000164:	2a5d                	jal	8000031a <sort>
+for(i=0;i<n;i++)
+80000166:	fe042623          	sw	zero,-20(s0)
+8000016a:	a839                	j	80000188 <kruskal+0x12e>
+belongs[i]=i;
+8000016c:	fec42783          	lw	a5,-20(s0)
+80000170:	078a                	slli	a5,a5,0x2
+80000172:	17c1                	addi	a5,a5,-16
+80000174:	97a2                	add	a5,a5,s0
+80000176:	fec42703          	lw	a4,-20(s0)
+8000017a:	fce7ae23          	sw	a4,-36(a5)
+for(i=0;i<n;i++)
+8000017e:	fec42783          	lw	a5,-20(s0)
+80000182:	0785                	addi	a5,a5,1
+80000184:	fef42623          	sw	a5,-20(s0)
+80000188:	f00407b7          	lui	a5,0xf0040
+8000018c:	0647a783          	lw	a5,100(a5) # f0040064 <STACK+0xffffef74>
+80000190:	fec42703          	lw	a4,-20(s0)
+80000194:	fcf74ce3          	blt	a4,a5,8000016c <kruskal+0x112>
+spanlist.n=0;
+80000198:	f00407b7          	lui	a5,0xf0040
+8000019c:	0a878793          	addi	a5,a5,168 # f00400a8 <STACK+0xffffefb8>
+800001a0:	0207ae23          	sw	zero,60(a5)
+for(i=0;i<elist.n;i++)
+800001a4:	fe042623          	sw	zero,-20(s0)
+800001a8:	a0f1                	j	80000274 <kruskal+0x21a>
+{
+cno1=find(belongs,elist.data[i].u);
+800001aa:	f00407b7          	lui	a5,0xf0040
+800001ae:	06878693          	addi	a3,a5,104 # f0040068 <STACK+0xffffef78>
+800001b2:	fec42703          	lw	a4,-20(s0)
+800001b6:	87ba                	mv	a5,a4
+800001b8:	0786                	slli	a5,a5,0x1
+800001ba:	97ba                	add	a5,a5,a4
+800001bc:	078a                	slli	a5,a5,0x2
+800001be:	97b6                	add	a5,a5,a3
+800001c0:	4398                	lw	a4,0(a5)
+800001c2:	fcc40793          	addi	a5,s0,-52
+800001c6:	85ba                	mv	a1,a4
+800001c8:	853e                	mv	a0,a5
+800001ca:	20e1                	jal	80000292 <find>
+800001cc:	fea42223          	sw	a0,-28(s0)
+cno2=find(belongs,elist.data[i].v);
+800001d0:	f00407b7          	lui	a5,0xf0040
+800001d4:	06878693          	addi	a3,a5,104 # f0040068 <STACK+0xffffef78>
+800001d8:	fec42703          	lw	a4,-20(s0)
+800001dc:	87ba                	mv	a5,a4
+800001de:	0786                	slli	a5,a5,0x1
+800001e0:	97ba                	add	a5,a5,a4
+800001e2:	078a                	slli	a5,a5,0x2
+800001e4:	97b6                	add	a5,a5,a3
+800001e6:	43d8                	lw	a4,4(a5)
+800001e8:	fcc40793          	addi	a5,s0,-52
+800001ec:	85ba                	mv	a1,a4
+800001ee:	853e                	mv	a0,a5
+800001f0:	204d                	jal	80000292 <find>
+800001f2:	fea42023          	sw	a0,-32(s0)
+if(cno1!=cno2)
+800001f6:	fe442703          	lw	a4,-28(s0)
+800001fa:	fe042783          	lw	a5,-32(s0)
+800001fe:	06f70663          	beq	a4,a5,8000026a <kruskal+0x210>
+{
+spanlist.data[spanlist.n]=elist.data[i];
+80000202:	f00407b7          	lui	a5,0xf0040
+80000206:	0a878793          	addi	a5,a5,168 # f00400a8 <STACK+0xffffefb8>
+8000020a:	5fd8                	lw	a4,60(a5)
+8000020c:	f00407b7          	lui	a5,0xf0040
+80000210:	0a878693          	addi	a3,a5,168 # f00400a8 <STACK+0xffffefb8>
+80000214:	87ba                	mv	a5,a4
+80000216:	0786                	slli	a5,a5,0x1
+80000218:	97ba                	add	a5,a5,a4
+8000021a:	078a                	slli	a5,a5,0x2
+8000021c:	00f68733          	add	a4,a3,a5
+80000220:	f00407b7          	lui	a5,0xf0040
+80000224:	06878613          	addi	a2,a5,104 # f0040068 <STACK+0xffffef78>
+80000228:	fec42683          	lw	a3,-20(s0)
+8000022c:	87b6                	mv	a5,a3
+8000022e:	0786                	slli	a5,a5,0x1
+80000230:	97b6                	add	a5,a5,a3
+80000232:	078a                	slli	a5,a5,0x2
+80000234:	97b2                	add	a5,a5,a2
+80000236:	4394                	lw	a3,0(a5)
+80000238:	c314                	sw	a3,0(a4)
+8000023a:	43d4                	lw	a3,4(a5)
+8000023c:	c354                	sw	a3,4(a4)
+8000023e:	479c                	lw	a5,8(a5)
+80000240:	c71c                	sw	a5,8(a4)
+spanlist.n=spanlist.n+1;
+80000242:	f00407b7          	lui	a5,0xf0040
+80000246:	0a878793          	addi	a5,a5,168 # f00400a8 <STACK+0xffffefb8>
+8000024a:	5fdc                	lw	a5,60(a5)
+8000024c:	00178713          	addi	a4,a5,1
+80000250:	f00407b7          	lui	a5,0xf0040
+80000254:	0a878793          	addi	a5,a5,168 # f00400a8 <STACK+0xffffefb8>
+80000258:	dfd8                	sw	a4,60(a5)
+union1(belongs,cno1,cno2);
+8000025a:	fcc40793          	addi	a5,s0,-52
+8000025e:	fe042603          	lw	a2,-32(s0)
+80000262:	fe442583          	lw	a1,-28(s0)
+80000266:	853e                	mv	a0,a5
+80000268:	20b9                	jal	800002b6 <union1>
+for(i=0;i<elist.n;i++)
+8000026a:	fec42783          	lw	a5,-20(s0)
+8000026e:	0785                	addi	a5,a5,1
+80000270:	fef42623          	sw	a5,-20(s0)
+80000274:	f00407b7          	lui	a5,0xf0040
+80000278:	06878793          	addi	a5,a5,104 # f0040068 <STACK+0xffffef78>
+8000027c:	5fdc                	lw	a5,60(a5)
+8000027e:	fec42703          	lw	a4,-20(s0)
+80000282:	f2f744e3          	blt	a4,a5,800001aa <kruskal+0x150>
+}
+}
+}
+80000286:	0001                	nop
+80000288:	0001                	nop
+8000028a:	50f2                	lw	ra,60(sp)
+8000028c:	5462                	lw	s0,56(sp)
+8000028e:	6121                	addi	sp,sp,64
+80000290:	8082                	ret
+
+80000292 <find>:
+ 
+int find(int belongs[],int vertexno)
+{
+80000292:	1101                	addi	sp,sp,-32
+80000294:	ce22                	sw	s0,28(sp)
+80000296:	1000                	addi	s0,sp,32
+80000298:	fea42623          	sw	a0,-20(s0)
+8000029c:	feb42423          	sw	a1,-24(s0)
+return(belongs[vertexno]);
+800002a0:	fe842783          	lw	a5,-24(s0)
+800002a4:	078a                	slli	a5,a5,0x2
+800002a6:	fec42703          	lw	a4,-20(s0)
+800002aa:	97ba                	add	a5,a5,a4
+800002ac:	439c                	lw	a5,0(a5)
+}
+800002ae:	853e                	mv	a0,a5
+800002b0:	4472                	lw	s0,28(sp)
+800002b2:	6105                	addi	sp,sp,32
+800002b4:	8082                	ret
+
+800002b6 <union1>:
+ 
+void union1(int belongs[],int c1,int c2)
+{
+800002b6:	7179                	addi	sp,sp,-48
+800002b8:	d622                	sw	s0,44(sp)
+800002ba:	1800                	addi	s0,sp,48
+800002bc:	fca42e23          	sw	a0,-36(s0)
+800002c0:	fcb42c23          	sw	a1,-40(s0)
+800002c4:	fcc42a23          	sw	a2,-44(s0)
+int i;
+for(i=0;i<n;i++)
+800002c8:	fe042623          	sw	zero,-20(s0)
+800002cc:	a815                	j	80000300 <union1+0x4a>
+if(belongs[i]==c2)
+800002ce:	fec42783          	lw	a5,-20(s0)
+800002d2:	078a                	slli	a5,a5,0x2
+800002d4:	fdc42703          	lw	a4,-36(s0)
+800002d8:	97ba                	add	a5,a5,a4
+800002da:	439c                	lw	a5,0(a5)
+800002dc:	fd442703          	lw	a4,-44(s0)
+800002e0:	00f71b63          	bne	a4,a5,800002f6 <union1+0x40>
+belongs[i]=c1;
+800002e4:	fec42783          	lw	a5,-20(s0)
+800002e8:	078a                	slli	a5,a5,0x2
+800002ea:	fdc42703          	lw	a4,-36(s0)
+800002ee:	97ba                	add	a5,a5,a4
+800002f0:	fd842703          	lw	a4,-40(s0)
+800002f4:	c398                	sw	a4,0(a5)
+for(i=0;i<n;i++)
+800002f6:	fec42783          	lw	a5,-20(s0)
+800002fa:	0785                	addi	a5,a5,1
+800002fc:	fef42623          	sw	a5,-20(s0)
+80000300:	f00407b7          	lui	a5,0xf0040
+80000304:	0647a783          	lw	a5,100(a5) # f0040064 <STACK+0xffffef74>
+80000308:	fec42703          	lw	a4,-20(s0)
+8000030c:	fcf741e3          	blt	a4,a5,800002ce <union1+0x18>
+}
+80000310:	0001                	nop
+80000312:	0001                	nop
+80000314:	5432                	lw	s0,44(sp)
+80000316:	6145                	addi	sp,sp,48
+80000318:	8082                	ret
+
+8000031a <sort>:
+ 
+void sort()
+{
+8000031a:	7179                	addi	sp,sp,-48
+8000031c:	d622                	sw	s0,44(sp)
+8000031e:	1800                	addi	s0,sp,48
+int i,j;
+edge temp;
+for(i=1;i<elist.n;i++)
+80000320:	4785                	li	a5,1
+80000322:	fef42623          	sw	a5,-20(s0)
+80000326:	a8ed                	j	80000420 <sort+0x106>
+for(j=0;j<elist.n-1;j++)
+80000328:	fe042423          	sw	zero,-24(s0)
+8000032c:	a8d9                	j	80000402 <sort+0xe8>
+if(elist.data[j].w>elist.data[j+1].w)
+8000032e:	f00407b7          	lui	a5,0xf0040
+80000332:	06878693          	addi	a3,a5,104 # f0040068 <STACK+0xffffef78>
+80000336:	fe842703          	lw	a4,-24(s0)
+8000033a:	87ba                	mv	a5,a4
+8000033c:	0786                	slli	a5,a5,0x1
+8000033e:	97ba                	add	a5,a5,a4
+80000340:	078a                	slli	a5,a5,0x2
+80000342:	97b6                	add	a5,a5,a3
+80000344:	4794                	lw	a3,8(a5)
+80000346:	fe842783          	lw	a5,-24(s0)
+8000034a:	00178713          	addi	a4,a5,1
+8000034e:	f00407b7          	lui	a5,0xf0040
+80000352:	06878613          	addi	a2,a5,104 # f0040068 <STACK+0xffffef78>
+80000356:	87ba                	mv	a5,a4
+80000358:	0786                	slli	a5,a5,0x1
+8000035a:	97ba                	add	a5,a5,a4
+8000035c:	078a                	slli	a5,a5,0x2
+8000035e:	97b2                	add	a5,a5,a2
+80000360:	479c                	lw	a5,8(a5)
+80000362:	08d7db63          	bge	a5,a3,800003f8 <sort+0xde>
+{
+temp=elist.data[j];
+80000366:	f00407b7          	lui	a5,0xf0040
+8000036a:	06878693          	addi	a3,a5,104 # f0040068 <STACK+0xffffef78>
+8000036e:	fe842703          	lw	a4,-24(s0)
+80000372:	87ba                	mv	a5,a4
+80000374:	0786                	slli	a5,a5,0x1
+80000376:	97ba                	add	a5,a5,a4
+80000378:	078a                	slli	a5,a5,0x2
+8000037a:	97b6                	add	a5,a5,a3
+8000037c:	4398                	lw	a4,0(a5)
+8000037e:	fce42e23          	sw	a4,-36(s0)
+80000382:	43d8                	lw	a4,4(a5)
+80000384:	fee42023          	sw	a4,-32(s0)
+80000388:	479c                	lw	a5,8(a5)
+8000038a:	fef42223          	sw	a5,-28(s0)
+elist.data[j]=elist.data[j+1];
+8000038e:	fe842783          	lw	a5,-24(s0)
+80000392:	00178693          	addi	a3,a5,1
+80000396:	f00407b7          	lui	a5,0xf0040
+8000039a:	06878613          	addi	a2,a5,104 # f0040068 <STACK+0xffffef78>
+8000039e:	fe842703          	lw	a4,-24(s0)
+800003a2:	87ba                	mv	a5,a4
+800003a4:	0786                	slli	a5,a5,0x1
+800003a6:	97ba                	add	a5,a5,a4
+800003a8:	078a                	slli	a5,a5,0x2
+800003aa:	00f60733          	add	a4,a2,a5
+800003ae:	f00407b7          	lui	a5,0xf0040
+800003b2:	06878613          	addi	a2,a5,104 # f0040068 <STACK+0xffffef78>
+800003b6:	87b6                	mv	a5,a3
+800003b8:	0786                	slli	a5,a5,0x1
+800003ba:	97b6                	add	a5,a5,a3
+800003bc:	078a                	slli	a5,a5,0x2
+800003be:	97b2                	add	a5,a5,a2
+800003c0:	4394                	lw	a3,0(a5)
+800003c2:	c314                	sw	a3,0(a4)
+800003c4:	43d4                	lw	a3,4(a5)
+800003c6:	c354                	sw	a3,4(a4)
+800003c8:	479c                	lw	a5,8(a5)
+800003ca:	c71c                	sw	a5,8(a4)
+elist.data[j+1]=temp;
+800003cc:	fe842783          	lw	a5,-24(s0)
+800003d0:	00178713          	addi	a4,a5,1
+800003d4:	f00407b7          	lui	a5,0xf0040
+800003d8:	06878693          	addi	a3,a5,104 # f0040068 <STACK+0xffffef78>
+800003dc:	87ba                	mv	a5,a4
+800003de:	0786                	slli	a5,a5,0x1
+800003e0:	97ba                	add	a5,a5,a4
+800003e2:	078a                	slli	a5,a5,0x2
+800003e4:	97b6                	add	a5,a5,a3
+800003e6:	fdc42703          	lw	a4,-36(s0)
+800003ea:	c398                	sw	a4,0(a5)
+800003ec:	fe042703          	lw	a4,-32(s0)
+800003f0:	c3d8                	sw	a4,4(a5)
+800003f2:	fe442703          	lw	a4,-28(s0)
+800003f6:	c798                	sw	a4,8(a5)
+for(j=0;j<elist.n-1;j++)
+800003f8:	fe842783          	lw	a5,-24(s0)
+800003fc:	0785                	addi	a5,a5,1
+800003fe:	fef42423          	sw	a5,-24(s0)
+80000402:	f00407b7          	lui	a5,0xf0040
+80000406:	06878793          	addi	a5,a5,104 # f0040068 <STACK+0xffffef78>
+8000040a:	5fdc                	lw	a5,60(a5)
+8000040c:	17fd                	addi	a5,a5,-1
+8000040e:	fe842703          	lw	a4,-24(s0)
+80000412:	f0f74ee3          	blt	a4,a5,8000032e <sort+0x14>
+for(i=1;i<elist.n;i++)
+80000416:	fec42783          	lw	a5,-20(s0)
+8000041a:	0785                	addi	a5,a5,1
+8000041c:	fef42623          	sw	a5,-20(s0)
+80000420:	f00407b7          	lui	a5,0xf0040
+80000424:	06878793          	addi	a5,a5,104 # f0040068 <STACK+0xffffef78>
+80000428:	5fdc                	lw	a5,60(a5)
+8000042a:	fec42703          	lw	a4,-20(s0)
+8000042e:	eef74de3          	blt	a4,a5,80000328 <sort+0xe>
+}
+}
+80000432:	0001                	nop
+80000434:	0001                	nop
+80000436:	5432                	lw	s0,44(sp)
+80000438:	6145                	addi	sp,sp,48
+8000043a:	8082                	ret

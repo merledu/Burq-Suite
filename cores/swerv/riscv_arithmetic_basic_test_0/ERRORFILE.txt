@@ -1,0 +1,8 @@
+EXEC FILE line no: 68 exec file : '800000e6', '27742227', ' ', 'srai', 'zero'
+WHISPER FILE line no: 68 whisper file : '800000e6', '27742227', '00000000', 'srli', 'zero'
+EXEC FILE line no: 70 exec file : '800000ee', '15947667', '00000000', 'srai', 'a5'
+WHISPER FILE line no: 70 whisper file : '800000ee', '15947667', '00000000', 'srli', 'a5'
+EXEC FILE line no: 133 exec file : '800001c8', '873406323', '00000000', 'csrrw', 't5'
+WHISPER FILE line no: 133 whisper file : '800001c8', '873406323', 'f0044e64', 'csrrw', 't5'
+EXEC FILE line no: 169 exec file : '80000258', '33480339', '00000000', 'srai', 't4'
+WHISPER FILE line no: 169 whisper file : '80000258', '33480339', '00000000', 'srli', 't4'

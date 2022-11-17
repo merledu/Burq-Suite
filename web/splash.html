@@ -173,9 +173,9 @@
                                     background-color: #15191a;
 
                                     width: 61px;" src="assets/icons/userlog.png"></button>
-                                <div class="dropdown-content" style="margin-top: -10px;">
+                                <div class="dropdown-content" style="margin-top: -4px;">
                                    <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
-                                <a href="" style="height:43px" >Logout</a>
+                                <a href="" onclick="clearfile()" style="height:43px" >Logout</a>
                                
                                 </div>
                               </div>
@@ -250,7 +250,7 @@
                                     height: 33px;
                                     background-color: #24272e;
                                     width: 61px;" src="assets/icons/userlog.png"></button>
-                                <div class="dropdown-content">
+                                <div class="dropdown-content" style="    margin-top: -3px;">
                                    <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
                                 <a href="" style="height:43px" >Logout</a>
                                
@@ -479,9 +479,13 @@
                                 </div>
                         </div>
                         <div id="socnow-loading">
+                            <div id="test-name-Socnow"></div>
+
                             <div class="progress">
-                                    <div class="progress-bar"></div>
-                                    <p id="progress-indicator">0%</p>
+                                    <div id= "progress-Custom" class="progress-bar"></div>
+                                    <p id="progress-indicator-custom">0%</p>
+                                    <div id='socnowtext'></div>
+                                    
                             </div>
                         </div>
 
@@ -1177,10 +1181,13 @@
                                 </div>
                             </div>
                             <div id="prebuilt-end1">
+                               
+                                <div id="testname-custom"></div>
                                 <div class="progress">
-                                    <div class="progress-bar"></div>
-                                    <p id="progress-indicator">0%</p>
+                                    <div class="progress-bar" id="progress-bar-cus"></div>
+                                    <p id="progress-indicator-cus">0%</p>
                                 </div>
+                                <div id="customtext"></div>
                             </div>
                            
                             </div>
@@ -1339,8 +1346,7 @@
                                         <h6 style="font-weight: lighter;">Select Test Case Type</h6>
                                         <form >
                                 
-                                            <input type="radio" id="pretest" name="preCore" value="Ibex_Tests" />
-                                            <label>Ibex_Tests </label><br>
+                                            
                                             <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
                                             <label>User-Tests </label><br>
                                             <input type="radio" id="pretest" name="preCore" value="RISCV_DV_Tests" />
@@ -1414,12 +1420,15 @@
 
                             <!-- -------------------- PREBUILT END BOX -------------------- -->
                             <div id="prebuilt-end">
-                                <div class="progress">
-                                    <div class="progress-bar"></div>
-                                    <p id="progress-indicator">0%</p>
+                                <div id="testname-pre" ></div>
+                                <div class="progress" >
+                                    <div class="progress-bar" id="progress-bar-pre" style="margin-top:-30px;"></div>
+                                    <p id="progress-indicator-pre">0%</p>
+                                    
 
                                 </div>
-                                <div id="teskrunning"> <h6></h></div>
+                                <div id="PreText"></div>
+                                
                             </div>
 
                         </div>
@@ -1528,13 +1537,44 @@ document.querySelector('#submit').addEventListener('focus', function(e) {
 });
 
             eel.expose(updateProgressBar);
-            function updateProgressBar(progress, color){
+            function updateProgressBar(progress, color,text,testname){
                 // alert(progress);
                 var pBar = document.getElementsByClassName("progress-bar")[0];
                 pBar.style.width = progress + "%";
                 pBar.style.backgroundColor = color;
                 var pInd = document.getElementById("progress-indicator");
                 pInd.innerHTML = progress + "%";
+                var pText = document.getElementById("socnowtext");
+                pText.innerHTML = text;
+                var pTest = document.getElementById("test-name-Socnow");
+                pTest.innerHTML = testname;
+
+            }
+            eel.expose(updateProgressBarCus);
+            function updateProgressBarCus(progress, color,text,testname){
+                // alert(progress);
+                var pBar = document.getElementById("progress-bar");
+                pBar.style.width = progress + "%";
+                pBar.style.backgroundColor = color;
+                var pInd = document.getElementById("progress-indicator-cus");
+                pInd.innerHTML = progress + "%";
+                var pText = document.getElementById("customtext");
+                pText.innerHTML = text;
+                var pTest = document.getElementById("testname-custom");
+                pTest.innerHTML = testname;
+            }
+            eel.expose(updateProgressBarPre);
+            function updateProgressBarPre(progress, color,text,testname){
+                // alert(progress);
+                var pBar = document.getElementById("progress-bar-pre");
+                pBar.style.width = progress + "%";
+                pBar.style.backgroundColor = color;
+                var pInd = document.getElementById("progress-indicator-pre");
+                pInd.innerHTML = progress + "%";
+                var pText = document.getElementById("PreText");
+                pText.innerHTML = text;
+                var pTest = document.getElementById("testname-pre");
+                pTest.innerHTML = testname;
             }
 
 eel.getRecords();
@@ -2198,21 +2238,21 @@ function opneRecentProject(id){
                 form.style.display = "block";
             }
 
-            // eel.expose(showSwervTests)
-            // function showSwervTests(listt){
+            eel.expose(showSwervTests)
+            function showSwervTests(listt){
                 
-            //     var form=document.getElementById('swerv&ibexform');
-            //     form.innerHTML += " "
-            //     for (var i = 0; i < listt.length; i++) {
-            //                     var a = listt[i];
+                var form=document.getElementById('swerv&ibexform');
+                form.innerHTML += " "
+                for (var i = 0; i < listt.length; i++) {
+                                var a = listt[i];
                 
-            //                    form.innerHTML += 
-            //                                 `<input type='checkbox' name='prebuiltTest' value='${a}' ><label> ${a} </label><br>`;
+                               form.innerHTML += 
+                                            `<input type='checkbox' name='prebuiltTest' value='${a}' ><label> ${a} </label><br>`;
                                             
                   
-            //     }
-            //     form.style.display = "block";
-            // } 
+                }
+                form.style.display = "block";
+            } 
             //browsefile
             function select(){
                 var projectnamee = document.getElementById("projectname").value;
@@ -2222,6 +2262,10 @@ function opneRecentProject(id){
 
         eel.selectFolder(projectnamee);
 
+
+}
+function clearfile(){
+    eel.clearfile();
 
 }
 function select1(){
@@ -2354,6 +2398,12 @@ function showsocnowfloting(listt){
                 form.style.display = "block";
 
 }
+eel.expose(checklogin)
+function checklogin(){
+    document.getElementById("login").style.display = "none";
+                document.getElementById("main").style.display = "block";
+}
+ 
 eel.expose(showdvTests)
 function showdvTests(listt){
     var form=document.getElementById('uploadcoretestcaseform');
@@ -2493,21 +2543,21 @@ function showriscvTests(listt){
 
 
 }
-eel.expose(showswervTests)
-function showswervTests(listt){
-    var form=document.getElementById('uploadcoretestcaseform');
-    form.innerHTML="";
-                for (var i = 0; i < listt.length; i++) {
-                                var a = listt[i];
+// eel.expose(showSwervTests)
+// function showSwervTests(listt){
+//     var form=document.getElementById('uploadcoretestcaseform');
+//     form.innerHTML="";
+//                 for (var i = 0; i < listt.length; i++) {
+//                                 var a = listt[i];
                 
-                               form.innerHTML += 
-                                            `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
+//                                form.innerHTML += 
+//                                             `<input type='checkbox' name='coreTest' value='${a}' ><label> ${a} </label><br>`;
                                             
                   
-                }
-                form.style.display = "block";
+//                 }
+//                 form.style.display = "block";
 
-}
+// }
 eel.expose(showburqTests)
 function showburqTests(listt){
     var form=document.getElementById('uploadcoretestcaseform');

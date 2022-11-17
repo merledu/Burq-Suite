@@ -4,6 +4,7 @@ from scripts.utils import getFileStructure, parseFileStructure, pleaseParseTheFi
 from icecream import ic
 import subprocess as sp
 from scripts.reverter import reverter
+from scripts.utils import getEmptyPort, killSpike
 
 if __name__ == '__main__':
 
@@ -29,9 +30,26 @@ if __name__ == '__main__':
 
     
     @eel.expose
+    #generalize this flow
     def stop_index():
-        reverter() 
-        os.system("./scripts/openSplash.sh")   
+        
+
+        port = getEmptyPort()
+        reverter(port,f"{currentRootDir}/index.js")
+        os.chdir(f"{currentRootDir}")
+        os.system(f"{currentRootDir}/scripts/openSplash.sh") 
+    @eel.expose
+    #generalize this flow
+    def stop_indexlog():
+        #open user file and clear it
+        f = open("user.txt","w")
+        f.write(" ")
+        f.close()
+
+        port = getEmptyPort()
+        reverter(port,f"{currentRootDir}/index.js")
+        os.chdir(f"{currentRootDir}")
+        os.system(f"{currentRootDir}/scripts/openSplash.sh")   
 
     @eel.expose
     def getTheFileStrucuture():

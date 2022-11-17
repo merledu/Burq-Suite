@@ -1,5 +1,5 @@
-def reverter(port):
-    file = open("index.js")
+def reverter(port, file):
+    file = open(file)
     content = file.readlines()
     file.close()
 

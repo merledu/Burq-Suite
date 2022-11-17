@@ -1,0 +1,101 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/libgcc.a
+LOAD MatrixChain.o
+LOAD crt0.o
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/libgcc.a
+START GROUP
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/../../../../riscv32-unknown-elf/lib/libc.a
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/../../../../riscv32-unknown-elf/lib/libgloss.a
+END GROUP
+LOAD /opt/riscv32/lib/gcc/riscv32-unknown-elf/12.2.0/libgcc.a
+                0x0000000080000000                . = 0x80000000
+
+.text.init      0x0000000080000000       0x46
+ *(.text.init)
+ .text.init     0x0000000080000000       0x46 crt0.o
+                0x0000000080000000                _start
+                0x0000000080000018                _finish
+
+.text           0x0000000080000046      0x12c
+ *(.text)
+ .text          0x0000000080000046      0x12c MatrixChain.o
+                0x0000000080000046                MatrixChainOrder
+                0x0000000080000120                main
+ .text          0x0000000080000172        0x0 crt0.o
+                0x0000000080000172                _end = .
+                0x00000000d0580000                . = 0xd0580000
+
+.data.io        0x00000000d0580000        0x4
+ *(.data.io)
+ .data.io       0x00000000d0580000        0x4 crt0.o
+                0x00000000d0580000                tohost
+                0x00000000f0040000                . = 0xf0040000
+
+.data           0x00000000f0040000       0x14
+ *(.*data)
+ .data          0x00000000f0040000        0x0 MatrixChain.o
+ .rodata        0x00000000f0040000       0x14 MatrixChain.o
+ .data          0x00000000f0040014        0x0 crt0.o
+ *(.rodata*)
+
+.bss            0x00000000f0040014        0x0
+                0x00000000f0040014                BSS_START = .
+ *(.*bss)
+ .bss           0x00000000f0040014        0x0 MatrixChain.o
+ .bss           0x00000000f0040014        0x0 crt0.o
+                0x00000000f0040014                BSS_END = .
+                0x00000000f0041020                STACK = (ALIGN (0x10) + 0x1000)
+                0x00000000fffffff8                . = 0xfffffff8
+
+.data.ctl       0x00000000fffffff8        0x8
+                0x00000000fffffff8        0x4 LONG 0xf0040000
+                0x00000000fffffffc        0x4 LONG 0xf0041020 STACK
+OUTPUT(MatrixChain.exe elf32-littleriscv)
+
+.rela.dyn       0x0000000100000000        0x0
+ .rela.text.init
+                0x0000000100000000        0x0 MatrixChain.o
+
+.debug_info     0x0000000000000000      0x123
+ .debug_info    0x0000000000000000      0x123 MatrixChain.o
+
+.debug_abbrev   0x0000000000000000       0xb2
+ .debug_abbrev  0x0000000000000000       0xb2 MatrixChain.o
+
+.debug_aranges  0x0000000000000000       0x20
+ .debug_aranges
+                0x0000000000000000       0x20 MatrixChain.o
+
+.debug_line     0x0000000000000000      0x10e
+ .debug_line    0x0000000000000000      0x10e MatrixChain.o
+
+.debug_str      0x0000000000000000       0xc3
+ .debug_str     0x0000000000000000       0xc3 MatrixChain.o
+                                         0xfc (size before relaxing)
+
+.debug_line_str
+                0x0000000000000000       0xc0
+ .debug_line_str
+                0x0000000000000000       0xc0 MatrixChain.o
+                                        0x112 (size before relaxing)
+
+.comment        0x0000000000000000       0x1b
+ .comment       0x0000000000000000       0x1b MatrixChain.o
+                                         0x1c (size before relaxing)
+
+.riscv.attributes
+                0x0000000000000000       0x2f
+ .riscv.attributes
+                0x0000000000000000       0x2b MatrixChain.o
+ .riscv.attributes
+                0x000000000000002b       0x2d crt0.o
+
+.debug_frame    0x0000000000000000       0x64
+ .debug_frame   0x0000000000000000       0x64 MatrixChain.o
