@@ -152,3 +152,9 @@ def killSpike():
     if len(anyStillRunningSpikeProcess) != 0:
         for spikeProcessID in anyStillRunningSpikeProcess:
             psutil.Process(spikeProcessID).kill()
+
+
+def getFileID(file):
+    for i,v in theDictOfFilePaths.items():
+        if v == file:
+            return i

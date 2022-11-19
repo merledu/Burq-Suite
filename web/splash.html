@@ -184,7 +184,7 @@
 
                         <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
                         <p>Don't know where to start?</p>
-                        <p>Start with one of our templates.</p>
+                        <p style="margin-bottom: 20px;">Start with one of our templates.</p>
                         <div class="d-flex justify-content-between">
                             <button onclick="openNewProject(); document.getElementById('cust_test_btn').click()" class="btn temp-btn">
                                 <span>Create</span>
@@ -314,7 +314,6 @@
                             background-color: #1a1d22;
                             border-style: solid;
                             margin-left: 73px;
-
                             border-top-color: #1a1d22;" onfocus="value=''"  > </div>
                             <button class="btn browse-btn" onclick="select()" style="width: 70px;">...</button>
                         </div>
@@ -333,34 +332,24 @@
                                     <div class="name-config active">
                                         <p>Select Core</p>
                                     </div>
-                                    
-                                   
-                                    
-                                </div>
-                                <div class="col-md-6"  style="    margin-left: 237px;
-                                margin-top: -10;
-                                margin-top: -50px;">
-    
-                                <div>
-                                    <h6 style="font-weight: lighter;">Select the Core you want to verify</h6>
-                                    <form id="soc_list_form">
                                         
+                                </div>
+                                <div style="margin-top: -40px; margin-left: 237px">
+                                    <h6 style="font-weight: lighter;">Select the Core you want to verify</h6>
+                                </div>
+                                <div class="col-md-6">
+                                <div>
+                                    <form id="soc_list_form" style=" margin-left: 237px; margin-top: 10px; height: 150px; overflow-y: auto;">
                                     </form> 
-                                  
                                 </div>
                                 <div  style="margin-top:5px;" >
-                                    
-                                    
-                                    
-                            
                             </div>
-                                
                                 <div class="col-md-2"></div>
                             </div>
                             <div style="text-align: right; margin-top: 127px;">
     
                                    
-                                <button  class="btn ctrl-btn">
+                                <button  class="btn ctrl-btn" style="margin-top: -200px">
                                     <img src="assets/icons/next.png" onclick="socnowcore('selectcore')" style="width: 100%;" />
                                 </button>
                             </div>
@@ -383,23 +372,19 @@
                                 </div>
                                 <div class="col-md-6"  style="margin-left: 70px;">
     
-                                <div  >
-                                    <h6 style="font-weight: lighter;">Select Your Core test type</h6>
+                                <div>
+                                    <h6 style="font-weight: lighter;">Select your core test type</h6>
                                     <form >
-                                        
-                                        
-                                        <input type="radio" id="gencoretest" name="upSoc" value="MERL_vector_Tests" />
-                                        <label> MERL_vector_Tests </label><br>
-                                        <input type="radio" id="gencoretest" name="upSoc" value="Riscv_tests" />
-                                        <label> Riscv-tests </label><br>
-                                        <input type="radio" id="gencoretest" name="upSoc" value="Self-Checking-vector-tests" />
-                                        <label> Self-Checking-vector-tests </label><br>
-                                        <input type="radio" id="gencoretest" name="upSoc" value="Swerv_Tests" />
-                                        <label>Swerv_Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upSoc" value="RISCV_DV_Tests" checked/>
+                                        <label>RISCV DV Tests </label><br>
                                         <input type="radio" id="gencoretest" name="upSoc" value="User_Defined_Tests" />
-                                        <label>User-Tests </label><br>
-                                        <input type="radio" id="gencoretest" name="upSoc" value="RISCV_DV_Tests" />
-                                        <label>RISCV_DV_Tests </label>
+                                        <label>User Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upSoc" value="Riscv_tests" />
+                                        <label> RISCV Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upSoc" value="Self-Checking-vector-tests" />
+                                        <label> Self Checking Vector Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upSoc" value="Swerv_Tests" />
+                                        <label>Swerv Tests </label>
                                     </form> 
                                   
                                 </div>
@@ -475,6 +460,15 @@
                                 </div>
                         </div>
                         <div id="socnow-loading" style="width: 100%;">
+                            <!--<div id="test-name-Socnow"></div>-->
+
+                            <div class="progress">
+                                    <div id= "progress-bar-Socnow" class="progress-bar"></div>
+                                    <p id="progress-indicator-socnow">0%</p>
+                            </div>
+                            <div id='socnowtext'></div>
+                        </div>
+                        <!---<div id="socnow-loading" style="width: 100%;">
                             <div id="test-name-Socnow"></div>
 
                             <div class="progress" style="margin-top: -10px;">
@@ -483,7 +477,7 @@
                                     <div id='socnowtext'></div>
                                     
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- ------------------------- CUSTOM TESTTTTT --------------------- -->
                         <div class="config-box" id="custom_test">
@@ -780,10 +774,10 @@
                                     <h6 style="font-weight: lighter;">Choose the test format for your core.</h6>
                                     <form>
                                         <input type="radio" name="testformat" value="asm" checked />
-                                        <label> Assembly & Machine Code (hex) </label>
+                                        <label> Assembly & Machine Code </label>
                                         <br />
-                                        <input type="radio" value="c" name="testformat" />
-                                        <label> C language </label>
+                                        <!--<input type="radio" value="c" name="testformat" />
+                                        <label> C language </label>-->
                                         
                                     </form>
                                   
@@ -826,19 +820,19 @@
                             <div class="col-md-1"></div>
 
                             <div class="col-md-3"  >
-                                <h6 style="font-weight: lighter;width: 500px;">Enter commands to Run test case </h6>
+                                <h6 style="font-weight: lighter;width: 500px;">Enter commands to run test case </h6>
                                 
                               
                                 <input id="getcommands" placeholder="make -f Makefile TEST={testname} OR ./logGenerator.sh" style="background-color: black;color: white;width: 412px;">
                                 
                             </div>
                             
-                            <div style="    margin-left: 245px;
+                            <!--<div style="    margin-left: 245px;
                             margin-top: -75px;"><p style="color:rgba(240, 248, 255, 0.342)">For C Test, type make command:  {testcommand} Test={testname}
         
                             </p><br><p style="color:rgba(240, 248, 255, 0.342)">For Hex Test, type log gen script:  ./{logGenerator.sh}
         
-                            </p></div>
+                            </p></div>-->
                             
                             
                             <div class="col-md-2"></div>
@@ -872,7 +866,7 @@
 
                             <div  >
                                  <div  style="margin-top:5px;" >
-                                <h6 style="font-weight: lighter;">Select Your Core log file </h6>
+                                <h6 style="font-weight: lighter;">Select your core log file </h6>
                                 
                                 <div id="project-browse" style="width: 415px;" >
                                   
@@ -886,15 +880,12 @@
                                 </div>
                             </div> 
 
-                            <h6 style="font-weight: lighter;">Choose the format for your core log.</h6>
+                            <!--<h6 style="font-weight: lighter;">Choose the format for your core log.</h6>
                                     <form>
                                         <input type="radio" name="logformat" value="log" checked />
                                         <label> RISC-V Trace Log (.log) </label>
                                         <br />
-                                        <input type="radio" value="csv" name="logformat" />
-                                        <label> RISC-V Trace CSV (.csv) </label>
-                                        
-                                    </form>
+                                    </form>-->
                             
                                 </div>
                             </div>
@@ -935,7 +926,7 @@
                             <div class="col-md-6"  style="margin-left: 70px;">
 
                             <div  >
-                                <h6 style="font-weight: lighter;">Select Your TestCase folder </h6>
+                                <h6 style="font-weight: lighter;">Select your test case folder </h6>
                                 
             <div class="col-md-3"  >
                                     
@@ -994,32 +985,24 @@
                             <div class="col-md-6"  style="margin-left: 70px;">
 
                             <div  >
-                                <h6 style="font-weight: lighter;">Write the file's location to save the machine code (hex)</h6>
+                                <h6 style="font-weight: lighter;">Write the location to save objdump of testcase relative to your core's root path (file name: test.s)</h6>
                                 
             <div class="col-md-3"  >
                                     
                                     
                                   
-                                    <input id="hexDir" placeholder="simulation/machine.hex" style="background-color: black;color: white;width: 386px;">
+                                    <input id="hexDir" placeholder="path/to/dumping/objdump_dir" style="background-color: black;color: white;width: 386px;">
                                     
                                 </div>
                             </div>
-                            <div  style="margin-top:20px;" >
+                            <!--<div  style="margin-top:20px;" >
                                 <h6 style="font-weight: lighter;"> <b>(Optional)</b> Write the file's location to save the assembly instructions </h6>
-                                
                                 <div id="project-browse" style="width: 415px;" >
-                                  
                                     <div class="col-md-3"  >
-                                        
-                                        
-                                      
                                         <input id="asmDir" placeholder="simulation/assembly.S" style="background-color: black;color: white;width: 386px;">
-                                        
                                     </div>
-                                    
                                 </div>
-                            </div>
-                        
+                            </div>-->
                         </div>
                             
                             <div class="col-md-2"></div>
@@ -1095,7 +1078,7 @@
                                     <div class="col-md-6"  style="margin-left: 70px;">
         
                                     <div  >
-                                        <h6 style="font-weight: lighter;">Select Your TestCase type</h6>
+                                        <h6 style="font-weight: lighter;">Select your test case type</h6>
                                         
                                       
                                     </div>
@@ -1103,24 +1086,16 @@
                                         
                                         
                                         <form>
-                                            <input type="radio" id="gencoretest" name="upCore" value="BURQ_Generated_Tests" checked />
-                                            <label> BURQ_Generated_Tests </label>
-                                            <br>
-                                            <input  type="radio" id="gencoretest" name="upCore" value="Floating_point_tests_for_azadi" />
-                                            <label>Floating_point_tests_for_azadi </label>
-                                            <br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="MERL_vector_Tests" />
-                                            <label> MERL_vector_Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="Riscv_tests" />
-                                            <label> Riscv-tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="Self-Checking-vector-tests" />
-                                            <label> Self-Checking-vector-tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="Swerv_Tests" />
-                                            <label>Swerv_Tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="RISCV_DV_Tests" checked/>
+                                            <label>RISCV DV Tests </label><br>
                                             <input type="radio" id="gencoretest" name="upCore" value="User_Defined_Tests" />
-                                            <label>User-Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="RISCV_DV_Tests" />
-                                            <label>RISCV_DV_Tests </label>
+                                            <label>User Tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="Riscv_tests" />
+                                            <label> RISCV Tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="Self-Checking-vector-tests" />
+                                            <label> Self Checking Vector Tests </label><br>
+                                            <input type="radio" id="gencoretest" name="upCore" value="Swerv_Tests" />
+                                            <label>Swerv Tests </label>
                                         </form> 
                                 
                                 </div>
@@ -1179,7 +1154,7 @@
                             <div id="prebuilt-end1" >
                                
                                 <div id="testname-custom"></div>
-                                <div class="progress" style="margin-top: -10px;">
+                                <div class="progress" style="margin-top: 30px;">
                                     <div class="progress-bar" id="progress-bar-cus"></div>
                                     <p id="progress-indicator-cus">0%</p>
                                 </div>
@@ -1291,15 +1266,14 @@
                                     </div>
                                     
                                     <div class="col-md-7" >
-                                        <h6 style="font-weight: lighter;">Select Test Case Type</h6>
+                                        <h6 style="font-weight: lighter;">Select test case type</h6>
                                         <form id="fromswerv">
-                                
-                                            <input type="radio" id="pretest" name="preCore" value="Swerv_Tests" />
-                                            <label>Swerv_Tests </label><br>
-                                            <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
-                                            <label>User-Tests </label><br>
                                             <input type="radio" id="pretest" name="preCore" value="RISCV_DV_Tests" />
-                                            <label>RISCV_DV_Tests </label>
+                                            <label>RISCV DV Tests </label><br>
+                                            <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
+                                            <label>User Tests </label><br>
+                                            <input type="radio" id="pretest" name="preCore" value="Swerv_Tests" />
+                                            <label>Swerv Tests </label>
                                         </form> 
                                        
                                      </div>
@@ -1339,14 +1313,12 @@
                                     </div>
                                     
                                     <div class="col-md-7" >
-                                        <h6 style="font-weight: lighter;">Select Test Case Type</h6>
+                                        <h6 style="font-weight: lighter;">Select test case type</h6>
                                         <form >
-                                
-                                            
-                                            <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
-                                            <label>User-Tests </label><br>
                                             <input type="radio" id="pretest" name="preCore" value="RISCV_DV_Tests" />
-                                            <label>RISCV_DV_Tests </label>
+                                            <label>RISCV DV Tests </label><br>
+                                            <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
+                                            <label>User Tests </label>
                                         </form> 
                                        
                                      </div>
@@ -1535,21 +1507,35 @@ document.querySelector('#submit').addEventListener('focus', function(e) {
             eel.expose(updateProgressBar);
             function updateProgressBar(progress, color,text,testname){
                 // alert(progress);
-                var pBar = document.getElementsByClassName("progress-bar")[0];
+                var pBar = document.getElementById("progress-bar-Socnow");
                 pBar.style.width = progress + "%";
                 pBar.style.backgroundColor = color;
-                var pInd = document.getElementById("progress-indicator");
+                var pInd = document.getElementById("progress-indicator-socnow");
                 pInd.innerHTML = progress + "%";
                 var pText = document.getElementById("socnowtext");
-                pText.innerHTML = `<p style="margin-left:250px;font:8px;color:grey;"> ${text}</p>`;
-                var pTest = document.getElementById("test-name-Socnow");
-                pTest.innerHTML = `<p style="margin-left:250px"> ${testname}</p>`;
+                pText.innerHTML = `<p style="font:8px;color:grey;margin-left: 250px"> ${text}</p>`;
+                //var pTest = document.getElementById("test-name-Socnow");
+                //pTest.innerHTML = `<p style="margin-left: 250px; margin-top: 20px"> ${testname}</p>`;
 
             }
+            //eel.expose(updateProgressBar);
+            //function updateProgressBar(progress, color,text,testname){
+            //    // alert(progress);
+            //    var pBar = document.getElementsByClassName("progress-bar")[0];
+            //    pBar.style.width = progress + "%";
+            //    pBar.style.backgroundColor = color;
+            //    var pInd = document.getElementById("progress-indicator");
+            //    pInd.innerHTML = progress + "%";
+            //    var pText = document.getElementById("socnowtext");
+            //    pText.innerHTML = `<p style="margin-left:250px;font:8px;color:grey;"> ${text}</p>`;
+            //    var pTest = document.getElementById("test-name-Socnow");
+            //    pTest.innerHTML = `<p style="margin-left:250px"> ${testname}</p>`;
+
+            //}
             eel.expose(updateProgressBarCus);
             function updateProgressBarCus(progress, color,text,testname){
                 // alert(progress);
-                var pBar = document.getElementById("progress-bar");
+                var pBar = document.getElementById("progress-bar-cus");
                 pBar.style.width = progress + "%";
                 pBar.style.backgroundColor = color;
                 var pInd = document.getElementById("progress-indicator-cus");
@@ -1557,7 +1543,7 @@ document.querySelector('#submit').addEventListener('focus', function(e) {
                 var pText = document.getElementById("customtext");
                 pText.innerHTML = `<p style="margin-left:250px;font:8px;color:grey;"> ${text}</p>`;
                 var pTest = document.getElementById("testname-custom");
-                pTest.innerHTML = `<p style="margin-left:250px"> ${testname}</p>`;
+                pTest.innerHTML = `<p style="margin-left:250px; margin-top: 20px"> ${testname}</p>`;
             }
             eel.expose(updateProgressBarPre);
             function updateProgressBarPre(progress, color,text,testname){
@@ -1736,7 +1722,7 @@ function opneRecentProject(id){
                         } else if (projDir == " "){
                             alert("Please select a directory");
                         } else if (tests.length == 0){
-                            alert("Please select at least one test case");
+                            alert("Please select a test case");
                         } else {
                             document.getElementById("prebuilt-core").style.display = "none";
                             document.getElementById("prebuilt-iss").style.display = "none";
@@ -1772,7 +1758,7 @@ function opneRecentProject(id){
                 } else if(comp == "command"){
                     var hexDir = document.getElementById("hexDir").value;
                     if (hexDir===""){
-                        alert("Enter hex path")
+                        alert("Enter objdump path")
                     }
                     else{
                     
@@ -1847,16 +1833,29 @@ function opneRecentProject(id){
                     
                     var uploadcore = document.getElementById("pathcore").value;
                     var projName = document.getElementById("projectname").value;
-                    if (projName == ""){
-                        alert("Please enter a project name");}
-                         else if (uploadcore == "" ){
-                            alert("Please Upload core");}
-                    else if (projDir  == " "){
-                        alert("Please select a directory");}
+
+                    if (projName != "") {
+                        if (uploadcore != "") {
+                            if (projDir == " " || projDir == "") {
+                                alert("Please select a directory");
+                            }
+                        } else {
+                            alert("Please Upload core");
+                        }
+                    } else {
+                        alert("Please enter a project name");
+                    }
+                    //if (projName == ""){
+                    //    alert("Please enter a project name");
+                    //}
+                    //     else if (uploadcore == "" ){
+                    //        alert("Please Upload core");}
+                    //else if (projDir  == " "){
+                    //    alert("Please select a directory");}
                     
                    
 
-                   if( uploadcore != "" && projDir != " "  && projName != ""){
+                   if( uploadcore != "" && projDir != " " && projDir != ""  && projName != ""){
                     var isSwerv = document.getElementsByName("checkswervtest")[0];
                     if(isSwerv.checked){
                         changecoree("Stestcasetype");
@@ -1916,6 +1915,9 @@ function opneRecentProject(id){
                     }
                     else if(selectedtesttype=="RISCV_DV_Tests"){
                         eel.dvtest("custom")
+                    } else {
+                        console.log(selectedtesttype)
+                        alert("Select a test type");
                     }
                    
                     document.getElementById("core-command").style.display = "none";
@@ -1983,11 +1985,11 @@ function opneRecentProject(id){
                     var testcase = document.getElementById("gettestfolder").value;
                     var logfile = document.getElementById("getlogfolder").value;
                     var hexDir = document.getElementById("hexDir").value;
-                    var asmDir = document.getElementById("asmDir").value;
+                    //var asmDir = document.getElementById("asmDir").value;
                     var testtype=document.getElementsByName("upCore");
                     var testFormat = document.querySelector('input[name="testformat"]:checked').value;
                     var extensionsEl = document.getElementsByName("ext") ;
-                    var logFormat = document.querySelector('input[name="logformat"]:checked').value;
+                    //var logFormat = document.querySelector('input[name="logformat"]:checked').value;
                     // var selectdv = document.querySelector('input[name="dvtest"]');
                     // var dvList = []
                     // for(let i=0;i<selectdv.length;i++ ){
@@ -2042,7 +2044,7 @@ function opneRecentProject(id){
                         } else if (logfile == "" && checkswervv == ""){
                             alert("Please select location where log file will generate");
                         } else if (tests1.length===0){
-                                    alert("Select atleast 1 test")
+                                    alert("Select a test")
                             
                         }
                         
@@ -2069,10 +2071,10 @@ function opneRecentProject(id){
                             "extensions":extensions,
                             "testFormat": testFormat,
                             "testDir": testcase,
-                            "asmDir":asmDir,
+                            //"asmDir":"",
                             "hexDir":hexDir,
                             "command":command,
-                            "logFormat":logFormat,
+                            "logFormat":"log",
                             "logFile": logfile,
                             "swerv":checkswervv
                         }
@@ -2168,21 +2170,39 @@ function opneRecentProject(id){
                                 
                             }
                         }
-                        if (projName == ""){
-                            alert("Please enter a project name");
-                        } else if (projDir == " "){
-                            alert("Please select a directory");
-                        } else if (tests.length == 0){
-                            alert("Please select at least one test case");
+                        if (projName != "") {
+                            if (projDir != " " && projDir != "") {
+                                if (tests.length != 0) {
+                                    var coreSelected = document.querySelector("input[name='SoCCore']:checked");
+                                    var testtype = document.getElementById("soc_core").style.display = "none";
+                                    var testlist = document.getElementById("soc_test").style.display = "none";
+                                    var loadingBar = document.getElementById("socnow-loading").style.display = "block";
+                                    var e1 = document.getElementById("soc_list").style.display = "none";
+                                    eel.runTestsSoc(coreSelected.value,selectedtesttype, tests, projName, projDir);
+                                } else {
+                                    alert("Please select a test case");
+                                }
+                            } else {
+                                alert("Please select a directory");
+                            }
                         } else {
-                            var coreSelected = document.querySelector("input[name='SoCCore']:checked");
-                        
-                        var testtype = document.getElementById("soc_core").style.display = "none";
-                        var testlist = document.getElementById("soc_test").style.display = "none";
-                        var loadingBar = document.getElementById("socnow-loading").style.display = "block";
-                        var e1 = document.getElementById("soc_list").style.display = "none";
-                        eel.runTestsSoc(coreSelected.value,selectedtesttype, tests, projName, projDir);
+                            alert("Please enter a project name");
                         }
+                        //if (projName == ""){
+                        //    alert("Please enter a project name");
+                        //} else if (projDir == " "){
+                        //    alert("Please select a directory");
+                        //} else if (tests.length == 0){
+                        //    alert("Please select a test case");
+                        //} else {
+                        //    var coreSelected = document.querySelector("input[name='SoCCore']:checked");
+                        //
+                        //var testtype = document.getElementById("soc_core").style.display = "none";
+                        //var testlist = document.getElementById("soc_test").style.display = "none";
+                        //var loadingBar = document.getElementById("socnow-loading").style.display = "block";
+                        //var e1 = document.getElementById("soc_list").style.display = "none";
+                        //eel.runTestsSoc(coreSelected.value,selectedtesttype, tests, projName, projDir);
+                        //}
                         
                     }
                       
@@ -2320,14 +2340,23 @@ function select_js1(a){
 function seldonesoc(){
 
     var projName = document.getElementById("projectname").value;
-    var projDir = document.getElementById("path").value;
-    if (projName == ""){
-        alert("Please enter a project name");
-    } else if (projDir == " "){
-        alert("Please select a directory");
+    var projDir = document.getElementById("path").innerHTML;
+    if (projName != "") {
+        if (projDir != " " && projDir != "") {
+            eel.socdetail();
+        } else {
+            alert("Please select a directory");
+        }
     } else {
-        eel.socdetail();
+        alert("Please enter a project name");
     }
+    //if (projName == ""){
+    //    alert("Please enter a project name");
+    //} else if (projDir == " "){
+    //    alert("Please select a directory");
+    //} else {
+    //    eel.socdetail();
+    //}
         
         
     }

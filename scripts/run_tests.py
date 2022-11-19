@@ -22,6 +22,8 @@ def run_dv_test_on_spike(
     spike_csv, csr_enable=False
 ):
     # Run DV test and generate Spike log
+    ic(extension, testName, iterations, outDir, spike_log,
+       spike_csv)
     os.system(
         f'python3 run.py'
         f' --target {extension}'

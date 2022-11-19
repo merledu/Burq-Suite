@@ -10,7 +10,7 @@ const createMainWindow = () => {
     win.show();
   
     // win.loadFile("index.html")
-win.loadURL('http://localhost:40333/index.html');
+win.loadURL('http://localhost:59761/index.html');
   }
 
 const createSplashWindow = () => {
@@ -20,7 +20,7 @@ const createSplashWindow = () => {
  
 
     // win.loadFile("splash.html")
-win.loadURL('http://localhost:38475/splash.html');
+win.loadURL('http://localhost:45561/splash.html');
 }
 app.whenReady().then(() => {
     createMainWindow()

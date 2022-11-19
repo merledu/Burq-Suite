@@ -34,8 +34,10 @@ userSoCNowCores = SoCNowCores()
 @eel.expose
 def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
     ic(sys._getframe().f_code.co_name)
+    ic(coreSelectedID, testType, testsList, projectName, projectDir)
     currentProgress = 0
     progressTick(currentProgress, 'Fetching RTL', testsList[-1])
+    testStatuses = []
 
     try:
         # Bring the RTL
@@ -44,7 +46,7 @@ def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
         # Process the RTL
         currentProgress += 10
         progressTick(currentProgress, 'Running test on Spike', testsList[-1])
-        testsStatuses = userSoCNowCores.run_dv_test(
+        testStatuses = userSoCNowCores.run_dv_test(
             coreSelectedID, testType,  testsList,       projectName, projectDir,
             DV_ROOT,        BURQ_ROOT, currentProgress, progressTick
         )
@@ -52,8 +54,8 @@ def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
         progressTick(currentProgress, 'Almost done', testsList[-1])
     except:
         testStatuses.append("[Incompatble with your Core Configuration]")
-        progress += 100
-        progressTick(progress, 'Oops something went wrong', testsList[-1])
+        currentProgress += 100
+        progressTick(currentProgress, 'Oops something went wrong', testsList[-1])
 
     # Display result
     os.chdir(f'{projectDir}/{projectName}')
@@ -64,7 +66,7 @@ def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
     report_str += "Test, Test Status\n"
 
     for i, t in enumerate(testsList):
-        report_str += f"{t},{testsStatuses[i]}\n"
+        report_str += f"{t},{testStatuses[i]}\n"
     with open("test_results.csv", "w+") as f:
         f.write(report_str)
 
@@ -138,8 +140,8 @@ def getRecords(debug=True):
 
 @eel.expose
 def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
-    # if debug:
-    #     ic(sys._get_frame().f_code.co_name)
+    if debug:
+        ic(sys._get_frame().f_code.co_name)
 
     root_path = os.getcwd()
     ibex_test_path = "cores/ibex/"
@@ -535,11 +537,11 @@ def say_hello_py(x):
     print('Hello from %s' % x)
 
 @eel.expose
-def socdetail(debug=True):
-    if debug:
-        ic(sys._getframe().f_code.co_name)
+def socdetail():
+    ic(sys._getframe().f_code.co_name)
 
     yourproject = list1[-1]
+    ic(list1, list2)
     b = list2[-1]
 
     with open("web/pathfile", "w") as f:
@@ -581,9 +583,8 @@ def pyverification():
     eel.goToMain()
 
 @eel.expose
-def selectFolder(projectnamee, debug=True):
-    if debug:
-        ic(sys._getframe().f_code.co_name)
+def selectFolder(projectnamee):
+    ic(sys._getframe().f_code.co_name)
 
     root = tkinter.Tk()
     root.attributes("-topmost", True)
@@ -694,6 +695,7 @@ def getlistswerv():
 
 @eel.expose
 def getlistuser():
+    print('getlistuser()')
     namelist=[]
         #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
     root="testcases/User_Defined_Tests"
@@ -710,6 +712,7 @@ def getlistuser():
 
 @eel.expose
 def getlistdv():
+    print('getlistdv()')
     tests = [
         "riscv_arithmetic_basic_test",
         "riscv_jump_stress_test",
@@ -849,6 +852,7 @@ def selfcheckingvectortest(source):
 
 @eel.expose
 def usertest(source,debug=True):
+    print('usertest()')
     namelist = []
     #root="web/swerv/testbench/tests/Floating_point_tests_for_azadi"
     root = "./testcases/User_Defined_Tests"
@@ -934,6 +938,9 @@ def dvtest(source,debug=True):
 @eel.expose
 def enduploadcore(config, tests, types):
     ic(sys._getframe().f_code.co_name)
+    ic(config)
+    ic(tests)
+    ic(types)
     proj_dir = os.path.join(config['path'], config['name'])
     core_path = os.path.join(proj_dir, 'core')
     progress = 0
@@ -956,7 +963,7 @@ def enduploadcore(config, tests, types):
 
     testStatuses = []
     progress += 30
-    progressTickCus(progress, 'Running test on Spike', tests[-1])
+    progressTickCus(progress, 'Running test on ISS', tests[-1])
 
     if config["swerv"] == "": 
         ic("Custom core selected")
@@ -967,82 +974,82 @@ def enduploadcore(config, tests, types):
 
         for i, test in enumerate(tests):
             # ISS Sim
-            #try:
-            os.chdir(DV_ROOT)
-            if types == "RISCV_DV_Tests":
-                run_dv_test_on_spike(
-                    extension_flags, test, 1,
-                    os.path.join(proj_dir, 'dv_out'),
-                    os.path.join(proj_dir, 'dv_out/spike_sim', f'{test}.0.log'),
-                    os.path.join(proj_dir, 'logs/spike_trace.csv')
-                )
-            else:
-                ic(os.path.join(BURQ_ROOT, 'testcases', types, test, f'{test}.c'))
-                ic(os.path.join(proj_dir, 'dv_out'))
-                ic(os.path.join(proj_dir, 'dv_out/spike_sim', f'{test}.log'))
-                run_c_test_on_spike(
-                    extension_flags,
-                    os.path.join(BURQ_ROOT, 'testcases', types, test, f'{test}.c'),
-                    os.path.join(proj_dir, 'dv_out'),
-                    os.path.join(proj_dir, 'dv_out/spike_sim', f'{test}.log'),
-                    os.path.join(proj_dir, 'logs/spike_trace.csv')
-                )
-            progress += 20
-            progressTick(progress, 'Running test on Core', tests[-1])
-
-            # CORE Sim
-            if config["testFormat"] == "asm":
-                if types != "RISCV_DV_Tests":
-                    os.system(
-                        f'riscv64-unknown-elf-objdump -d {proj_dir}/dv_out/directed_c_test/{test}.o'
-                        f' > {core_path}/{config["hexDir"]}/test.s')
-                    run_dv_test_on_core(
-                        config['command'],
-                        os.path.join(core_path, config['logFile']),
-                        os.path.join(proj_dir, 'logs/core_trace.csv')
+            try:
+                os.chdir(DV_ROOT)
+                if types == "RISCV_DV_Tests":
+                    run_dv_test_on_spike(
+                        extension_flags, test, 1,
+                        os.path.join(proj_dir, 'dv_out'),
+                        os.path.join(proj_dir, 'dv_out/spike_sim', f'{test}.0.log'),
+                        os.path.join(proj_dir, 'logs/spike_trace.csv')
                     )
                 else:
-                    os.chdir(core_path)
-                    os.system(
-                        f'riscv64-unknown-elf-objdump -d {proj_dir}/dv_out/asm_test/{test}_0.o'
-                        f' > {core_path}/{config["hexDir"]}/test.s'
-                    )
-                    run_dv_test_on_core(
-                        config['command'],
-                        os.path.join(core_path, config['logFile']),
-                        os.path.join(proj_dir, 'logs/core_trace.csv')
+                    ic(os.path.join(BURQ_ROOT, 'testcases', types, test, f'{test}.c'))
+                    ic(os.path.join(proj_dir, 'dv_out'))
+                    ic(os.path.join(proj_dir, 'dv_out/spike_sim', f'{test}.log'))
+                    run_c_test_on_spike(
+                        extension_flags,
+                        os.path.join(BURQ_ROOT, 'testcases', types, test, f'{test}.c'),
+                        os.path.join(proj_dir, 'dv_out'),
+                        os.path.join(proj_dir, 'dv_out/spike_sim', f'{test}.log'),
+                        os.path.join(proj_dir, 'logs/spike_trace.csv')
                     )
                 progress += 20
-                progressTick(progress, 'Comparing results', tests[-1])
-            else:
-                print("coreepattt")
-                os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
-                os.chdir(f"{config['path']}/{config['name']}/core")
-                os.system(config["command"].replace("{testname}", test))
-            progress += 20
-            progressTick(progress, 'Almost done', tests[-1])
+                progressTickCus(progress, 'Running test on Core', tests[-1])
 
-            os.chdir(f"{proj_dir}")
-            ic(config["logFormat"])
-            if config["logFormat"] == "csv": pass
-            else:
-                compare_trace_csv(
-                    f"{proj_dir}/logs/core_trace.csv",
-                    f"{proj_dir}/logs/spike_trace.csv",
-                    'core', 'spike', f'{config["path"]}/{config["name"]}/logs/compare_result.log',
-                    mismatch_print_limit=50
-                )
+                # CORE Sim
+                if config["testFormat"] == "asm":
+                    if types != "RISCV_DV_Tests":
+                        os.system(
+                            f'riscv64-unknown-elf-objdump -d {proj_dir}/dv_out/directed_c_test/{test}.o'
+                            f' > {core_path}/{config["hexDir"]}/test.s')
+                        run_dv_test_on_core(
+                            config['command'],
+                            os.path.join(core_path, config['logFile']),
+                            os.path.join(proj_dir, 'logs/core_trace.csv')
+                        )
+                    else:
+                        os.chdir(core_path)
+                        os.system(
+                            f'riscv64-unknown-elf-objdump -d {proj_dir}/dv_out/asm_test/{test}_0.o'
+                            f' > {core_path}/{config["hexDir"]}/test.s'
+                        )
+                        run_dv_test_on_core(
+                            config['command'],
+                            os.path.join(core_path, config['logFile']),
+                            os.path.join(proj_dir, 'logs/core_trace.csv')
+                        )
+                    progress += 20
+                    progressTickCus(progress, 'Comparing results', tests[-1])
+                else:
+                    print("coreepattt")
+                    os.system(f"cp -r {config['path']}/{config['name']}/tmp/{test} {config['path']}/{config['name']}/core/{config['testDir']}")
+                    os.chdir(f"{config['path']}/{config['name']}/core")
+                    os.system(config["command"].replace("{testname}", test))
+                progress += 20
+                progressTickCus(progress, 'Almost done', tests[-1])
 
-                with open(f"{config['path']}/{config['name']}/logs/compare_result.log", 'r', encoding='UTF-8') as f:
-                    result = f.readlines()
-                testStatuses.append(result[-2][: -1])
+                os.chdir(f"{proj_dir}")
+                ic(config["logFormat"])
+                if config["logFormat"] == "csv": pass
+                else:
+                    compare_trace_csv(
+                        f"{proj_dir}/logs/core_trace.csv",
+                        f"{proj_dir}/logs/spike_trace.csv",
+                        'core', 'spike', f'{config["path"]}/{config["name"]}/logs/compare_result.log',
+                        mismatch_print_limit=50
+                    )
 
-            progress += 10
-            progressTick(progress, 'Done', tests[-1])
-            #except:
-            #    testStatuses.append("[Incompatble with your Core Configuration]")
-            #    progress += 70
-            #    progressTick(progress)
+                    with open(f"{config['path']}/{config['name']}/logs/compare_result.log", 'r', encoding='UTF-8') as f:
+                        result = f.readlines()
+                    testStatuses.append(result[-2][: -1])
+
+                progress += 10
+                progressTickCus(progress, 'Done', tests[-1])
+            except:
+                testStatuses.append("[Incompatble with your Core Configuration]")
+                progress += 70
+                progressTickCus(progress, 'Oops, something went wrong', tests[-1])
         
         os.chdir(f"{proj_dir}")
         if len(list(filter(lambda x:x=="[PASSED]" or x=="[Incompatble with your Core Configuration]", testStatuses))) == len(testStatuses):
@@ -1445,6 +1452,7 @@ if __name__ == '__main__':
 
 
     eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
+    #eel.start('splash.html', mode='chrome', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port, size=(1200, 600))
     
     #here call java function
     

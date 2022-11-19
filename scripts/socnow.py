@@ -29,9 +29,12 @@ class SoCNowCores:
 
         sbtToLog('./raw.log', objDump, './Top.log')
 
-        os.remove('./waveform.vcd')
-        os.remove('./raw.log')
-        shutil.rmtree('./obj_dir')
+        if os.path.exists('./waveform.vcd'):
+            os.remove('./waveform.vcd')
+        if os.path.exists('./raw.log'):
+            os.remove('./raw.log')
+        if os.path.exists('./obj_dir'):
+            shutil.rmtree('./obj_dir')
 
         return
 
@@ -44,6 +47,9 @@ class SoCNowCores:
         projPath = os.path.join(projDir, projName)
         dvTests = os.path.join(projPath, 'dv_out')
         userDefinedTestsPath = os.path.join(burqDir, 'testcases/User_Defined_Tests')
+        riscv_tests_path = os.path.join(burqDir, 'testcases/Riscv_tests')
+        self_checking_vector_tests_path = os.path.join(burqDir, 'testcases/Self-Checking-vector-tests')
+        swerv_tests_path = os.path.join(burqDir, 'testcases/Swerv_Tests')
 
         for core in self.cores:
             if int(coreID) == core['id']:
@@ -64,7 +70,7 @@ class SoCNowCores:
             case 'RISCV_DV_Tests':
                 run_dv_test_on_spike(
                     ext, testsList[-1], 1, dvTests,
-                    f'{dvTests}/spike_sim/{testsList[0]}.0.log',
+                    f'{dvTests}/spike_sim/{testsList[-1]}.0.log',
                     f'{projPath}/logs/spike_trace.csv'
                 )
                 currProg += 20
@@ -81,9 +87,72 @@ class SoCNowCores:
                 self.run_dv_test_on_rtl(projPath, burqDir, f'{dvTests}/asm_test/test.s')
                 currProg += 20
                 progTick(currProg, 'Comparing results', testsList[-1])
+            case 'Riscv_tests':
+                run_c_test_on_spike(
+                    ext, os.path.join(riscv_tests_path, testsList[-1], f'{testsList[-1]}_main.c'),
+                    dvTests,
+                    os.path.join(dvTests, f'spike_sim/{testsList[-1]}.log'),
+                    os.path.join(projPath, 'logs/spike_trace.csv')
+                )
+                currProg += 20
+                progTick(currProg, 'Running test on RTL', testsList[-1])
+
+                os.system(
+                    f'riscv64-unknown-elf-objdump -d {dvTests}/directed_c_test/{testsList[0]}.o'
+                    f' > {dvTests}/directed_c_test/test.s'
+                )
+
+                asmParser.readAsm(f'{dvTests}/directed_c_test/test.s')
+                asmParser.dumpHex(f'{projPath}/asm.hex')
+
+                self.run_dv_test_on_rtl(projPath, burqDir, f'{dvTests}/directed_c_test/test.s')
+                currProg += 20
+                progTick(currProg, 'Comparing results', testsList[-1])
+            case 'Self-Checking-vector-tests':
+                run_c_test_on_spike(
+                    ext, os.path.join(self_checking_vector_tests_path, testsList[-1], 'main.c'),
+                    dvTests,
+                    os.path.join(dvTests, 'spike_sim/main.log'),
+                    os.path.join(projPath, 'logs/spike_trace.csv')
+                )
+                currProg += 20
+                progTick(currProg, 'Running test on RTL', testsList[-1])
+
+                os.system(
+                    f'riscv64-unknown-elf-objdump -d {dvTests}/directed_c_test/main.o'
+                    f' > {dvTests}/directed_c_test/test.s'
+                )
+
+                asmParser.readAsm(f'{dvTests}/directed_c_test/test.s')
+                asmParser.dumpHex(f'{projPath}/asm.hex')
+
+                self.run_dv_test_on_rtl(projPath, burqDir, f'{dvTests}/directed_c_test/test.s')
+                currProg += 20
+                progTick(currProg, 'Comparing results', testsList[-1])
+            case 'Swerv_Tests':
+                run_c_test_on_spike(
+                    ext, os.path.join(swerv_tests_path, testsList[-1], f'{testsList[-1]}.c'),
+                    dvTests,
+                    os.path.join(dvTests, f'spike_sim/{testsList[-1]}.log'),
+                    os.path.join(projPath, 'logs/spike_trace.csv')
+                )
+                currProg += 20
+                progTick(currProg, 'Running test on RTL', testsList[-1])
+
+                os.system(
+                    f'riscv64-unknown-elf-objdump -d {dvTests}/directed_c_test/{testsList[0]}.o'
+                    f' > {dvTests}/directed_c_test/test.s'
+                )
+
+                asmParser.readAsm(f'{dvTests}/directed_c_test/test.s')
+                asmParser.dumpHex(f'{projPath}/asm.hex')
+
+                self.run_dv_test_on_rtl(projPath, burqDir, f'{dvTests}/directed_c_test/test.s')
+                currProg += 20
+                progTick(currProg, 'Comparing results', testsList[-1])
             case _:
                 run_c_test_on_spike(
-                    ext, f'{userDefinedTestsPath}/{testsList[0]}/{testsList[0]}.c', dvTests,
+                    ext, f'{userDefinedTestsPath}/{testsList[-1]}/{testsList[0]}.c', dvTests,
                     f'{dvTests}/spike_sim/{testsList[0]}.log',
                     f'{projPath}/logs/spike_trace.csv'
                 )
