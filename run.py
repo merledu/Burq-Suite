@@ -45,7 +45,7 @@ def runTestsSoc(coreSelectedID, testType, testsList, projectName, projectDir):
         
         # Process the RTL
         currentProgress += 10
-        progressTick(currentProgress, 'Running test on Spike', testsList[-1])
+        progressTick(currentProgress, 'Running test on ISS', testsList[-1])
         testStatuses = userSoCNowCores.run_dv_test(
             coreSelectedID, testType,  testsList,       projectName, projectDir,
             DV_ROOT,        BURQ_ROOT, currentProgress, progressTick

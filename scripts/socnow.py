@@ -64,16 +64,16 @@ class SoCNowCores:
         asmParser = AssemblyParser()
         os.chdir(dvDir)
         currProg += 10
-        progTick(currProg, 'Running test on Spike', testsList[-1])
+        progTick(currProg, 'Running test on ISS', testsList[-1])
 
         match testType:
             case 'RISCV_DV_Tests':
                 run_dv_test_on_spike(
                     ext, testsList[-1], 1, dvTests,
                     f'{dvTests}/spike_sim/{testsList[-1]}.0.log',
-                    f'{projPath}/logs/spike_trace.csv'
+                    f'{projPath}/logs/iss_trace.csv'
                 )
-                currProg += 20
+                currProg += 60
                 progTick(currProg, 'Running test on RTL', testsList[-1])
 
                 os.system(
@@ -92,9 +92,9 @@ class SoCNowCores:
                     ext, os.path.join(riscv_tests_path, testsList[-1], f'{testsList[-1]}_main.c'),
                     dvTests,
                     os.path.join(dvTests, f'spike_sim/{testsList[-1]}.log'),
-                    os.path.join(projPath, 'logs/spike_trace.csv')
+                    os.path.join(projPath, 'logs/iss_trace.csv')
                 )
-                currProg += 20
+                currProg += 60
                 progTick(currProg, 'Running test on RTL', testsList[-1])
 
                 os.system(
@@ -113,9 +113,9 @@ class SoCNowCores:
                     ext, os.path.join(self_checking_vector_tests_path, testsList[-1], 'main.c'),
                     dvTests,
                     os.path.join(dvTests, 'spike_sim/main.log'),
-                    os.path.join(projPath, 'logs/spike_trace.csv')
+                    os.path.join(projPath, 'logs/iss_trace.csv')
                 )
-                currProg += 20
+                currProg += 60
                 progTick(currProg, 'Running test on RTL', testsList[-1])
 
                 os.system(
@@ -134,9 +134,9 @@ class SoCNowCores:
                     ext, os.path.join(swerv_tests_path, testsList[-1], f'{testsList[-1]}.c'),
                     dvTests,
                     os.path.join(dvTests, f'spike_sim/{testsList[-1]}.log'),
-                    os.path.join(projPath, 'logs/spike_trace.csv')
+                    os.path.join(projPath, 'logs/iss_trace.csv')
                 )
-                currProg += 20
+                currProg += 60
                 progTick(currProg, 'Running test on RTL', testsList[-1])
 
                 os.system(
@@ -154,9 +154,9 @@ class SoCNowCores:
                 run_c_test_on_spike(
                     ext, f'{userDefinedTestsPath}/{testsList[-1]}/{testsList[0]}.c', dvTests,
                     f'{dvTests}/spike_sim/{testsList[0]}.log',
-                    f'{projPath}/logs/spike_trace.csv'
+                    f'{projPath}/logs/iss_trace.csv'
                 )
-                currProg += 20
+                currProg += 60
                 progTick(currProg, 'Running test on RTL', testsList[-1])
 
                 os.system(
@@ -174,8 +174,8 @@ class SoCNowCores:
         process_core_log(f'{burqDir}/simulate_rtl/Top.log', f'{projPath}/logs/Top_trace.csv')
 
         compare_trace_csv(
-            f'{projPath}/logs/Top_trace.csv', f'{projPath}/logs/spike_trace.csv',
-            f'{projName}', 'Spike', f'{projPath}/logs/compare_result.log', mismatch_print_limit=50
+            f'{projPath}/logs/Top_trace.csv', f'{projPath}/logs/iss_trace.csv',
+            f'{projName}', 'ISS', f'{projPath}/logs/compare_result.log', mismatch_print_limit=50
         )
         with open(f'{projPath}/logs/compare_result.log', 'r', encoding='UTF-8') as f:
             result = f.readlines()
