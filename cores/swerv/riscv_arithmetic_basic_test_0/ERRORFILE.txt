@@ -1,0 +1,4 @@
+EXEC FILE line no: 136 exec file : '800001d8', '873307635', '00000000', 'csrrw', 's11'
+WHISPER FILE line no: 136 whisper file : '800001d8', '873307635', 'f0044e64', 'csrrw', 's11'
+EXEC FILE line no: 172 exec file : '80000268', '33184275', '00000000', 'srai', 's4'
+WHISPER FILE line no: 172 whisper file : '80000268', '33184275', '00000000', 'srli', 's4'

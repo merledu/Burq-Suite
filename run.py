@@ -140,8 +140,8 @@ def getRecords(debug=True):
 
 @eel.expose
 def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
-    if debug:
-        ic(sys._get_frame().f_code.co_name)
+    # if debug:
+    #     ic(sys._get_frame().f_code.co_name)
 
     root_path = os.getcwd()
     ibex_test_path = "cores/ibex/"
@@ -168,7 +168,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                     # create test direeel.ctory
                     os.mkdir(test)
                 currentProgress += 10
-                progressTickPre(currentProgress,"Creating test directory",test)
+                progressTickPre(currentProgress,"Creating test directory",f"Test: {test}")
                 try:
 
                     os.chdir(test)
@@ -178,13 +178,13 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                     os.system("export PATH=/opt/riscv32/bin:$PATH")
                     
                     currentProgress += 10
-                    progressTickPre(currentProgress,"Running test on SweRV",test)
+                    progressTickPre(currentProgress,"Running test on Core",f"Test: {test}")
                     os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                     currentProgress += 30
-                    progressTickPre(currentProgress,"Running test on Whisper",test)
+                    progressTickPre(currentProgress,"Running test on ISS",f"Test: {test}")
                     os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
                     currentProgress += 30
-                    progressTickPre(currentProgress,"Comparing results",test)
+                    progressTickPre(currentProgress,"Comparing results",f"Test: {test}")
                     # Check is test.log and exec.log exists
                     # if debug:
                     #     ic(os.getcwd())
@@ -196,6 +196,12 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                         os.mkdir(projName)
                     os.chdir(projName)
                     os.mkdir(f"{test}_logs")
+                    os.chdir(f"{BURQ_ROOT}/cores/swerv/{test}")
+                    if os.path.isdir('ERRORFILE.txt') == True:
+
+                        os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}/ERRORFILE.txt {projPath}/{projName}/{test}_logs")
+                    os.chdir(projPath)
+                    os.chdir(projName)
                     
                     
 
@@ -205,7 +211,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                     os.chdir(f"{BURQ_ROOT}/cores/swerv/{test}")
                     
                     currentProgress += 20
-                    progressTickPre(currentProgress,"Comparing logs",test)
+                    progressTickPre(currentProgress,"Comparing logs",f"Test: {test}")
                     status = call(f"{test}.log", "exec.log")
                     
                     tests_status.append(status)
@@ -227,7 +233,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 if os.path.isdir(f"{test}_0") == False:
                     os.mkdir(f"{test}_0")
                 currentProgress += 5
-                progressTickPre(currentProgress,"Creating test directory",test)
+                progressTickPre(currentProgress,"Creating test directory",f"Test: {test}")
                 
                 
                 os.chdir(f"{BURQ_ROOT}/dv")
@@ -235,14 +241,14 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
 
                     os.mkdir("temporarydv")
                 currentProgress += 5
-                progressTickPre(currentProgress,"Generating instruction from DV",test)
-                os.system(f"python3 run.py --iss whisper --simulator pyflow --target rv32imc --iteration 1 --test={test} --output temporarydv/{test}")
+                progressTickPre(currentProgress,"Generating instruction ",f"Test: {test}")
+                os.system(f"python3 run.py --iss whisper --simulator pyflow  --iteration 1 --test={test} --output temporarydv/{test}")
                 
                 os.chdir(f"{BURQ_ROOT}/cores/swerv/testbench/tests")
                 #os.mkdir(f"{test}_0")
                 os.chdir(f"{BURQ_ROOT}/dv/temporarydv/{test}/asm_test")
                 currentProgress += 5
-                progressTickPre(currentProgress,"Extracting assembly file",test)
+                progressTickPre(currentProgress,"Extracting assembly file",f"Test: {test}")
                 os.rename(f"{test}_0.S", f"{test}_0.s")
                 
                 os.chdir(f"{BURQ_ROOT}/cores/swerv/testbench/tests")
@@ -287,11 +293,11 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 
             
                 currentProgress += 10
-                progressTickPre(currentProgress,"Running test on SWeRV",test)
+                progressTickPre(currentProgress,"Running test on Core",f"Test: {test}")
                 os.chdir(f"{BURQ_ROOT}/cores/swerv/{test}_0")
                 os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}_0")
                 currentProgress += 40
-                progressTickPre(currentProgress,"Running test on Whisper",test)
+                progressTickPre(currentProgress,"Running test on ISS",f"Test: {test}")
                 os.system(f"$whisper --logfile {test}_0.log {test}_0.exe --configfile ./snapshots/default/whisper.json")
                 
                 
@@ -303,7 +309,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 
                 
 
-                os.system(f"cp  -r {BURQ_ROOT}/scripts/ERRORFILE.txt {projPath}/{projName}/{test}_logs")
+                os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}_0/ERRORFILE.txt {projPath}/{projName}/{test}_logs")
                 os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}_0/{test}_0.log {projPath}/{projName}/{test}_logs")
                 os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}_0/exec.log {projPath}/{projName}/{test}_logs")
                 os.chdir(f"{BURQ_ROOT}/cores/swerv/{test}_0")
@@ -312,14 +318,16 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 ic(os.path.isfile(f"{test}_0.log"))
                 ic(os.path.isfile("exec.log"))
                 currentProgress += 20
-                progressTickPre(currentProgress,"extracting logs",test)
+                progressTickPre(currentProgress,"extracting logs",f"Test: {test}")
                 rem=remove(f"exec.log",f"{test}_0.log")
                 currentProgress += 10
-                progressTickPre(currentProgress,"Comparing logs",test)
+                progressTickPre(currentProgress,"Comparing logs",f"Test: {test}")
                 status = callSwerv(f"{test}_0.log", "exec.log")
                 tests_status.append(status)
                 currentProgress += 5
-                progressTickPre(currentProgress,"Generating report",test)
+                progressTickPre(currentProgress,"Generating report",f"Test: {test}")
+                os.chdir(f"{BURQ_ROOT}/cores/swerv")
+                # shutil.rmtree(f"{test}_0")
                 
                 
                 
@@ -336,7 +344,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                 try:
                     currentProgress = 0
                     currentProgress += 10
-                    progressTickPre(currentProgress,"Creating files",test)
+                    progressTickPre(currentProgress,"Creating files",f"Test: {test}")
                     os.chdir(f"{BURQ_ROOT}/testcases/User_Defined_Tests/{test}")
                     os.system(f"cp -a {BURQ_ROOT}/testcases/User_Defined_Tests/crt0.s {BURQ_ROOT}/testcases/User_Defined_Tests/{test}")
                     mki_str="""OFILES = test.o crt0.o
@@ -354,7 +362,7 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                         os.mkdir(test)
                     os.chdir(test)
                     currentProgress += 10
-                    progressTickPre(currentProgress,"Running test on SWeRV",test)
+                    progressTickPre(currentProgress,"Running test on Core",f"Test: {test}")
                     
                     os.system("export RISCV=/opt/riscv32")
 
@@ -365,16 +373,21 @@ def runTests(core, iss, tests, projName, projPath, selectedtest, debug=True):
                     os.system(f"make -f $RV_ROOT/tools/Makefile TEST={test}")
                     #srem=removezero("exec.log")
                     currentProgress += 50
-                    progressTickPre(currentProgress,"Running test on whisper",test)
+                    progressTickPre(currentProgress,"Running test on ISS",f"Test: {test}")
                     os.system(f"$whisper --logfile {test}.log {test}.exe --configfile ./snapshots/default/whisper.json")
                 # wrem=removew(f"{test}.log")
                     currentProgress += 30
-                    progressTickPre(currentProgress,"Comparing logs",test)
+                    progressTickPre(currentProgress,"Comparing logs",f"Test: {test}")
                     os.chdir(projPath)
                     os.mkdir(projName)
                     os.chdir(projName)
                     os.mkdir(f"{test}_logs")
-                    os.system(f"cp  -r {BURQ_ROOT}/scripts/ERRORFILE.txt {projPath}/{projName}/{test}_logs")
+                    os.chdir(f"{BURQ_ROOT}/cores/swerv/{test}")
+                    if os.path.isdir('ERRORFILE.txt') == True:
+
+                        os.system(f"cp  -r {BURQ_ROOT}/cores/swerv/{test}/ERRORFILE.txt {projPath}/{projName}/{test}_logs")
+                    os.chdir(projPath)
+                    os.chdir(projName)
                     
 
                 

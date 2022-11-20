@@ -506,7 +506,7 @@ def comparison():
       if passed==False:
         
         
-        f= ("EXEC FILE line no: {} exec file : {}").format(e,fil2)
+        f= ("Core FILE line no: {} Core file : {}").format(e,fil2)
         f=f.replace("[","")
         f=f.replace("]","")
         
@@ -534,12 +534,13 @@ def comparison():
  
 
     if len(fail) > 0:
-      with open('ERRORFILE.txt','w') as ff:
+      print("heloooo")
+      with open('ERRORFILE.txt','w+') as ff:
         for fy in fail:
       
           ff.write(fy+"\n")
     if len(fail)<=0:
-      with open('ERRORFILE.txt','w') as ff:
+      with open('ERRORFILE.txt','w+') as ff:
         for fy in fail:
       
           ff.write(fy+"\n")
