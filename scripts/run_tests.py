@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, re
 
 from icecream import ic
 from core_log_to_trace_csv import process_core_log
@@ -72,3 +72,21 @@ def run_c_test_on_spike(
     # Remove csr instructions if not supported
     if not csr_enable:
         remove_csrs_from_spike_csv(spike_csv, spike_csv)
+
+
+def set_test_count(test_name, count):
+    with open('./dv/yaml/base_testlist.yaml', 'r', encoding='UTF-8') as f:
+        yaml_content = f.readlines()
+    
+    for i in range(len(yaml_content)):
+        if not re.search('-\s+test:.*', yaml_content[i]):
+            continue
+        if test_name in yaml_content[i]:
+            while not re.search('^\n$', yaml_content[i]):
+                if '+instr_cnt=' in yaml_content[i]:
+                    yaml_content[i] = yaml_content[i].replace('+instr_cnt=100', f'+instr_cnt={count}')
+                i += 1
+            break
+    
+    with open('./testlist.yaml', 'w', encoding='UTF-8') as f:
+        f.writelines(yaml_content)

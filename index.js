@@ -1,31 +1,35 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const PORT = require('./port.json');
 
 
 const createMainWindow = () => {
   const win = new BrowserWindow({show: false,frame:false,icon: __dirname + '/web/assets/icons/flash96.png', webPreferences: {
-    nodeIntegration: true
+    nodeIntegration: true, contextIsolation: false, enableRemoteModule: true
    } });
    win.maximize();
     
-    win.show();
+    win.once('ready-to-show', () => {win.show();});
   
-    // win.loadFile("index.html")
-win.loadURL('http://localhost:34783/index.html');
+win.loadURL('http://localhost:53911/index.html');
+win.loadURL(`http://localhost:${PORT.port}/index.html`);
   }
 
 const createSplashWindow = () => {
     const win = new BrowserWindow({height:600, width:1200 , icon: __dirname + '/web/assets/icons/flash96.png',frame:false,webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true, contextIsolation: false
       } });
  
 
     // win.loadFile("splash.html")
-win.loadURL('http://localhost:39609/splash.html');
+win.loadURL(`http://localhost:${PORT.port}/splash.html`);
 }
 app.whenReady().then(() => {
-    createMainWindow()
+    createSplashWindow()
 });
 
+ipcMain.on('openChildWindow', (event, arg) => {
+    createMainWindow();
+});
 function openTheMainWindow(){
   createMainWindow()
 }

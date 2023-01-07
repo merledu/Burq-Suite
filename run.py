@@ -26,6 +26,7 @@ from cleanlify import cleanELF
 from socnow import SoCNowCores
 from scripts.DV_Swerv_comparison import callSwerv
 from scripts.removelines import remove
+from port_manip import throw_port_json
 
 
 userSoCNowCores = SoCNowCores()
@@ -1447,7 +1448,8 @@ if __name__ == '__main__':
 
         
     port = getEmptyPort()
-    reverter(port,"index.js")
+    #reverter(port,"index.js")
+    throw_port_json(port)
     eel.init('web')
     if checked==1:
         print("lll")
@@ -1461,11 +1463,10 @@ if __name__ == '__main__':
     logfilepath=[]
     
     
-    time.sleep(2)
 
 
-    eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
-    #eel.start('splash.html', mode='chrome', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port, size=(1200, 600))
+    #eel.start('splash.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
+    eel.start('splash.html', mode='chrome', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port, size=(1200, 600))
     
     #here call java function
     

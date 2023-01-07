@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/icons/flash.png">
     <link href="loginfont.css" rel="stylesheet">
-
-
     <link href="login.css" rel="stylesheet"  crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title></title>
@@ -66,296 +64,222 @@
 </head>
 <body>
     <div id="login" class="box-form" >
-        <div class="login_close">
+        <div class="login_close" >
             <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
         </div>
-        <div class="left">
-            <div class="overlay">
-            <img src="assets/icons/flash.png" style="  height: 108px; width: 114px; margin-top: 80px;"><h2 style="    margin-top: -100px; margin-left: 106px; font-size: 59px;">The Burq Suite</h2>
-            <p style="    margin-top: 68px;">Burq Suite is the RISC-V Automated Core Verification Suite. Verify your Core by login your Account.</p>
-            <span >
-    <p style="    margin-top: 249px; color: #767676;"> Powered by Micro Electronics Research Lab (MERL) - UIT  </p>
-                
-            </span>
+        <div class="left" >
+            <div class="overlay" >
+                <img src="assets/icons/flash.png" style=" height: 108px;
+                                                          width: 114px;
+                                                          margin-top: 80px;" >
+                <h2 style="margin-top: -100px;
+                           margin-left: 106px;
+                           font-size: 59px;" >The Burq Suite</h2>
+                <p style="margin-top: 68px;" >Burq Suite is the RISC-V Automated Core Verification Suite. Verify your Core by login your Account.</p>
+                <span>
+                    <p style="margin-top: 249px;
+                              color: #767676;" > Powered by Micro Electronics Research Lab (MERL) - UIT </p>
+                </span>
             </div>
         </div>
-        
-        
-            <div class="right">
-            <h5 style="margin-top: 30px;color: aliceblue;">Login</h5>
-            <p style="margin-top: 64px;">Don't have an account? <a href="http://socnow.software">Create Your Account</a> it takes less than a minute</p>
+        <div class="right" >
+            <h5 style="margin-top: 30px;
+                       color: aliceblue;" >Login</h5>
+            <p style="margin-top: 64px;" >Don't have an account? <a href="http://socnow.software" >Create Your Account</a>. It takes less than a minute</p>
             <div class="form">
-                <input type="email" id="email" placeholder="Username">
+                <input type="email" id="email" placeholder="Username" >
                 <br>
-                <input  type="password" id="password" placeholder="Password">
+                <input type="password" id="password" placeholder="Password" >
             </div>
-                
-                <br><br>
-                
+            <br><br>
             <div class="remember-me--forget-password">
-                    <!-- Angular -->
-       
-                <a href="http://socnow.software">Forget password?</a>
+                <!-- Angular -->
+                <a href="http://socnow.software" >Forget password?</a>
             </div>
-                
-                <br>
-                <Button type="submit" onclick="emailSend()" id="submit" >Login</Button>
+            <br>
+            <Button type="submit" onclick="emailSend();" id="submit" >Login</Button>
         </div>
-       
     </div>
-<!-- <div id="login_main">
-    <div class="page">
-        
-        <div class="container">
-            <div class="login_close">
-                <img onclick="closeEverythingPaleez()" src="assets/icons/cross.png" alt="close" />
-            </div>
-          <div class="left">
-            <img  src="assets/icons/loginn.png"  />
-            <div class="eula" style="margin-top: -15px;">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
-          </div>
-          <div class="right">
-            <svg viewBox="0 0 320 300">
-              <defs>
-                <linearGradient
-                                inkscape:collect="always"
-                                id="linearGradient"
-                                x1="13"
-                                y1="193.49992"
-                                x2="307"
-                                y2="193.49992"
-                                gradientUnits="userSpaceOnUse">
-                  <stop
-                        style="stop-color:#00c3ff;"
-                        offset="0"
-                        id="stop876" />
-                  <stop
-                        style="stop-color:#2553a8;"
-                        offset="1"
-                        id="stop878" />
-                </linearGradient>
-              </defs>
-              <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
-            </svg>
-            <div class="form">
-              <label for="email">Username</label>
-              <input type="email" id="email">
-              <label for="password">Password</label>
-              <input type="password" id="password">
-              <input type="submit" onclick="emailSend()" id="submit" value="Submit">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>  -->
-
-        <div id="main">
-            <div class="row">
-                <div class="col-8 frs">
-                    <div class="container">
-
-
-  
-	
-  
-
-
-                       
-                            
-                        <div class="login_close pdz">
-                            <div class="dropdown" style="float:right;    margin-top: -41px;background-color: #0a0808;">
-                                <button class="dropbtn" style="margin-top: 13px;background-color: #15191a;
-                            "><img style="position: absolute;
-                                    margin-left: -10p;
-                                    margin-left: -30px;
-                                    margin-top: -10px;
-                                    height: 33px;
-                                    background-color: #15191a;
-
-                                    width: 61px;" src="assets/icons/userlog.png"></button>
-                                <div class="dropdown-content" style="margin-top: -4px;">
-                                   <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
-                                <a href="" onclick="clearfile()" style="height:43px" >Logout</a>
-                               
-                                </div>
-                              </div>
-                            
+    <div id="main" >
+        <div class="row" >
+            <div class="col-8 frs" >
+                <div class="container" >
+                    <div class="login_close pdz" >
+                        <div class="dropdown" style="float:right;
+                                                     margin-top: -41px;
+                                                     background-color: #0a0808;" >
+                            <button class="dropbtn" style="margin-top: 13px;
+                                                           background-color: #15191a;" >
+                            <img style="position: absolute;
+                                        margin-left: -10p;
+                                        margin-left: -30px;
+                                        margin-top: -10px;
+                                        height: 33px;
+                                        background-color: #15191a;
+                                        width: 61px;" src="assets/icons/userlog.png" ></button>
+                            <div class="dropdown-content" style="margin-top: -4px;">
+                                <a onclick="closeEverythingPaleez();" style="height:43px;
+                                                                             color: #0a0808;" alt="close" />Exit</a>
+                                <a href="" onclick="clearfile();" style="height:43px" >Logout</a>
+                            </div>
                         </div>
-
-                        <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
-                        <p>Don't know where to start?</p>
-                        <p style="margin-bottom: 20px;">Start with one of our templates.</p>
-                        <div class="d-flex justify-content-between">
-                            <button onclick="openNewProject(); document.getElementById('cust_test_btn').click()" class="btn temp-btn">
-                                <span>Create</span>
-                                <br>
-                              
-                                Custom Test 
-                                <br>(C-lang)
-                            </button>
-                            <button onclick="openNewProject(); document.getElementById('cust_core_btn').click()" class="btn temp-btn">
-                                <span>Custom</span>
-                                <br>
-                                Core Verification
-                            </button>
-                            <button onclick="openNewProject(); document.getElementById('pre_core_btn').click()" class="btn temp-btn">
-                                <span>Prebuilt</span>
-                                <br>
-                                Core Verification 
-                            </button>
-                            <button class="btn temp-btn" onclick="openNewProject(); document.getElementById('soc_core_btn').click()" >
-                                <span><img src="assets/icons/socnow.png" style="width: 120px;"></span>
-                                <br>
-                                SoC-Now Cores
-                            </button>
-                        </div>
-
-                        <p id="footer"> Powered by Micro Electronics Research Lab (MERL) - UIT  </p>
+                    </div>
+                    <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
+                    <p>Don't know where to start?</p>
+                    <p style="margin-bottom: 20px;" >Start with one of our templates.</p>
+                    <div class="d-flex justify-content-between">
+                        <button onclick="openNewProject(); document.getElementById('cust_test_btn').click();" class="btn temp-btn" >
+                            <span>Create</span>
+                            <br>
+                            Custom Test 
+                            <br>
+                            (C-lang)
+                        </button>
+                        <button onclick="openNewProject(); document.getElementById('cust_core_btn').click();" class="btn temp-btn" >
+                            <span>Custom</span>
+                            <br>
+                            Core Verification
+                        </button>
+                        <button onclick="openNewProject(); document.getElementById('pre_core_btn').click();" class="btn temp-btn" >
+                            <span>Prebuilt</span>
+                            <br>
+                            Core Verification 
+                        </button>
+                        <button class="btn temp-btn" onclick="openNewProject(); document.getElementById('soc_core_btn').click();" >
+                            <span><img src="assets/icons/socnow.png" style="width: 120px;" ></span>
+                            <br>
+                            SoC-Now Cores
+                        </button>
+                    </div>
+                    <p id="footer" > Powered by Micro Electronics Research Lab (MERL) - UIT </p>
+                </div>
+            </div>
+            <div class="col-4 sec">
+                <div id="sec1">
+                    <h4>Recent Projects</h4>
+                    <br>
+                    <div id="recents">
                     </div>
                 </div>
-                <div class="col-4 sec">
-                    <div id="sec1">
-                        <h4>Recent Projects</h4>
-                        <br>
-                        <div id="recents">
-                            
-
-                            
-                        </div>
-                    </div>
-                    <div id="sec2">
-                        <button onclick="openNewProject()" id="new-btn" class="btn new-btn">
-                            New Project
-                        </button>
-                        <br><br>
-                        <button class="btn open-btn">
-                            Open Project
-                        </button>
-                    </div>
+                <div id="sec2">
+                    <button onclick="openNewProject();" id="new-btn" class="btn new-btn" >
+                        New Project
+                    </button>
+                    <br><br>
+                    <button class="btn open-btn">
+                        Open Project
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="new">
-            <div class="row">
-                <div class="col-4 sec">
-                    <div class="container">
-                        
-                        <div class="login_close pdz">
-                            <div class="dropdown" style="float:right;    margin-top: -41px;background-color: #24272e;">
-                                <button class="dropbtn" style="margin-top: 13px;background-color: #24272e;"><img style="position: absolute;
-                                    margin-left: -10p;
-                                    margin-left: -30px;
-                                    margin-top: -10px;
-                                    height: 33px;
-                                    background-color: #24272e;
-                                    width: 61px;" src="assets/icons/userlog.png"></button>
-                                <div class="dropdown-content" style="    margin-top: -3px;">
-                                   <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
+    <div id="new">
+        <div class="row">
+            <div class="col-4 sec">
+                <div class="container">
+                    <div class="login_close pdz">
+                        <div class="dropdown" style="float:right;
+                                                     margin-top: -41px;
+                                                     background-color: #24272e;">
+                            <button class="dropbtn" style="margin-top: 13px;
+                                                           background-color: #24272e;">
+                            <img style="position: absolute;
+                                        margin-left: -10p;
+                                        margin-left: -30px;
+                                        margin-top: -10px;
+                                        height: 33px;
+                                        background-color: #24272e;
+                                        width: 61px;" src="assets/icons/userlog.png"></button>
+                            <div class="dropdown-content" style="margin-top: -3px;">
+                                <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
                                 <a href="" style="height:43px" >Logout</a>
-                               
-                                </div>
-                              </div>
-                            
+                            </div>
                         </div>
-                        <div style="margin-top: 20px;" id="back-btn-div">
-                            <button onclick="closeNewProject()" class="btn back-btn">
-                                <img src="assets/icons/back2.png" />
-                            </button>
-                        </div>
-	
-                       
-                        <div id="config-btns">
-                            <h4>- Project Selection -</h4>
-                            <button id="cust_test_btn" onclick="changeProject2(event,'custom_test')" class="btn config-btn" value="soc">
-                               Write Custom Test
-                            </button>
-    
-                            
-    
-                            <button id="cust_core_btn" onclick="changeProject2(event,'upload_core')" class="btn config-btn">
-                                    Upload Custom Core                 
-                            </button>
-    
-                            <button id="pre_core_btn" onclick="changeProject2(event,'prebuilt_core')" class="btn config-btn">
-                                Prebuilt Core Verification
-                            </button>
-                            <button id="soc_core_btn" onclick="changeProject2(event,'soc_core'); eel.getCoresFromSoCNow()" class="btn config-btn">
-                                SoC-Now Cores
-                            </button>
-    
-                           
-                        </div>
-                        
-                        
-
+                    </div>
+                    <div style="margin-top: 20px;" id="back-btn-div">
+                        <button onclick="closeNewProject()" class="btn back-btn">
+                            <img src="assets/icons/back2.png" />
+                        </button>
+                    </div>
+                    <div id="config-btns">
+                        <h4>- Project Selection -</h4>
+                        <button id="cust_test_btn" onclick="changeProject2(event,'custom_test')" class="btn config-btn" value="soc">
+                           Write Custom Test
+                        </button>
+                        <button id="cust_core_btn" onclick="changeProject2(event,'upload_core')" class="btn config-btn">
+                                Upload Custom Core                 
+                        </button>
+                        <button id="pre_core_btn" onclick="changeProject2(event,'prebuilt_core')" class="btn config-btn">
+                            Prebuilt Core Verification
+                        </button>
+                        <button id="soc_core_btn" onclick="changeProject2(event,'soc_core'); eel.getCoresFromSoCNow()" class="btn config-btn">
+                            SoC-Now Cores
+                        </button>
                     </div>
                 </div>
-
-
-                <div class="col-8 frs">
-                    <div class="container">
-                        <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
-                        
-                        <div id="project-name">
-                            <h5> Project Name: </h5>
-                            <input type="text" placeholder="Untitled " id="projectname" style="margin-top: -10px;
-                            margin-left: 19px;">
-                        </div>
-                        <div id="project-browse">
-                            <h5> Project Location </h5>
-                            <div type="text" id="path" style="color: white;
-                            border-right-color: #767676;
-                            width: 630px;
-                            padding: 5px;
-                            height: 34px;
-                            border-bottom-color: #767676;
-                            border-left-color: #1a1d22;
-                            background-color: #1a1d22;
-                            border-style: solid;
-                            margin-left: 73px;
-                            border-top-color: #1a1d22;" onfocus="value=''"  > </div>
+            </div>
+            <div class="col-8 frs">
+                <div class="container">
+                    <h1> <img src="assets/icons/flash.png" /> The Burq Suite <span>v0.0.1</span> </h1>
+                    <div id="project-name">
+                        <h5> Project Name: </h5>
+                        <input type="text" placeholder="Untitled " id="projectname" style="margin-top: -10px;
+                                                                                           margin-left: 19px;">
+                    </div>
+                    <div id="project-browse">
+                        <h5> Project Location </h5>
+                        <div type="text" id="path" style="color: white;
+                                                          border-right-color: #767676;
+                                                          width: 630px;
+                                                          padding: 5px;
+                                                          height: 34px;
+                                                          border-bottom-color: #767676;
+                                                          border-left-color: #1a1d22;
+                                                          background-color: #1a1d22;
+                                                          border-style: solid;
+                                                          margin-left: 73px;
+                                                          border-top-color: #1a1d22;" onfocus="value=''"></div>
                             <button class="btn browse-btn" onclick="select()" style="width: 70px;">...</button>
                         </div>
-
                         <!-----------------------SOC-NOW CORESSSSS LISTTT---------------------------------------------->
-
                         <div id="soc_list" style="display:none;">
                             <div id="soc_load">
                                 <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                                     <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-                                 </svg>
-                                 <h6 style="font-weight: 100;margin-top:25px;"> Retrieving data from SoC-Now </h6>
+                                </svg>
+                                <h6 style="font-weight: 100;margin-top:25px;"> Retrieving data from SoC-Now </h6>
                             </div>
                             <div id="soc_actual" style="display: none;" class="row main-config">
                                 <div class="col-md-3">
                                     <div class="name-config active">
                                         <p>Select Core</p>
                                     </div>
-                                        
                                 </div>
-                                <div style="margin-top: -40px; margin-left: 237px">
+                                <div style="margin-top: -40px;
+                                            margin-left: 237px">
                                     <h6 style="font-weight: lighter;">Select the Core you want to verify</h6>
                                 </div>
                                 <div class="col-md-6">
-                                <div>
-                                    <form id="soc_list_form" style=" margin-left: 237px; margin-top: 10px; height: 150px; overflow-y: auto;">
-                                    </form> 
+                                    <div>
+                                        <form id="soc_list_form" style="margin-left: 237px;
+                                                                        margin-top: 10px;
+                                                                        height: 150px;
+                                                                        overflow-y: auto;">
+                                        </form>
+                                    </div>
+                                    <div style="margin-top:5px;">
+                                    </div>
+                                    <div class="col-md-2"></div>
                                 </div>
-                                <div  style="margin-top:5px;" >
-                            </div>
-                                <div class="col-md-2"></div>
-                            </div>
-                            <div style="text-align: right; margin-top: 127px;">
-    
-                                   
-                                <button  class="btn ctrl-btn" style="margin-top: -200px">
-                                    <img src="assets/icons/next.png" onclick="socnowcore('selectcore')" style="width: 100%;" />
-                                </button>
-                            </div>
+                                <div style="text-align: right;
+                                            margin-top: 127px;">
+                                    <button class="btn ctrl-btn" style="margin-top: -200px">
+                                        <img src="assets/icons/next.png" onclick="socnowcore('selectcore')" style="width: 100%;" />
+                                    </button>
                                 </div>
+                            </div>
                         </div>
-
 
                         <!-----------------------SOC-NOW CORESSSSS---------------------------------------------->
                         <div id="soc_core" style="display:none;">
@@ -367,34 +291,29 @@
                                     <div class="name-config active">
                                         <p>Test case type</p>
                                     </div>
-                                   
-                                    
                                 </div>
-                                <div class="col-md-6"  style="margin-left: 70px;">
-    
-                                <div>
-                                    <h6 style="font-weight: lighter;">Select your core test type</h6>
-                                    <form >
-                                        <input type="radio" id="gencoretest" name="upSoc" value="RISCV_DV_Tests" checked/>
-                                        <label>RISCV DV Tests </label><br>
-                                        <input type="radio" id="gencoretest" name="upSoc" value="User_Defined_Tests" />
-                                        <label>User Tests </label><br>
-                                        <input type="radio" id="gencoretest" name="upSoc" value="Riscv_tests" />
-                                        <label> RISCV Tests </label><br>
-                                        <input type="radio" id="gencoretest" name="upSoc" value="Self-Checking-vector-tests" />
-                                        <label> Self Checking Vector Tests </label><br>
-                                        <input type="radio" id="gencoretest" name="upSoc" value="Swerv_Tests" />
-                                        <label>Swerv Tests </label>
-                                    </form> 
-                                  
+                                <div class="col-md-6" style="margin-left: 70px;">
+                                    <div>
+                                        <h6 style="font-weight: lighter;">Select your core test type</h6>
+                                        <form >
+                                            <input type="radio" id="gencoretest" name="upSoc" value="RISCV_DV_Tests" checked/>
+                                            <label>RISCV DV Tests </label>
+                                            <br>
+                                            <input type="radio" id="gencoretest" name="upSoc" value="User_Defined_Tests" />
+                                            <label>User Tests </label>
+                                            <br>
+                                            <input type="radio" id="gencoretest" name="upSoc" value="Riscv_tests" />
+                                            <label> RISCV Tests </label>
+                                            <br>
+                                            <input type="radio" id="gencoretest" name="upSoc" value="Self-Checking-vector-tests" />
+                                            <label> Self Checking Vector Tests </label>
+                                            <br>
+                                            <input type="radio" id="gencoretest" name="upSoc" value="Swerv_Tests" />
+                                            <label>Swerv Tests </label>
+                                        </form> 
+                                    </div>
+                                    <div  style="margin-top:5px;" >
                                 </div>
-                                <div  style="margin-top:5px;" >
-                                    
-                                    
-                                    
-                            
-                            </div>
-                                
                                 <div class="col-md-2"></div>
                             </div>
                             <div style="text-align: right;" style="margin-top: -36px;">
@@ -402,1019 +321,1027 @@
                                     <img src="assets/icons/back.png" style="width: 100%;margin-top:-106px;margin-left:-1200px;" />
                                 </button>    
                                 <button  class="btn ctrl-btn">
-                                    <img src="assets/icons/next.png" onclick="socnowcore('testtypesoc')" style="width: 100%;margin-top: -100px;" />
+                                    <img src="assets/icons/next.png" onclick="socnowcore('testtypesoc')" style="width: 100%;
+                                                                                                                margin-top: -100px;" />
                                 </button>
                             </div>
-                                </div>
-                        </div>
-                        
-                        <!------------------------------------------- Soc-now testlist------------------------>
-
-                        <div id="soc_test" style="display:none;">
-                            <div class="row main-config">
-                                <div class="col-md-3">
-                                    <div class="name-config">
-                                        <p>Select Core</p>
-                                    </div>
-                                    
-                                    <div class="name-config ">
-                                        <p>Test case type</p>
-                                    </div>
-                                    <div class="name-config active">
-                                        <p>Tests</p>
-                                    </div>
-                                    
-                                </div>
-                                <div class="col-md-6"  style="margin-left: 70px;">
-    
-                                    <div class="col-md-7" >
-                                        <form id="testsoc" style="    width: 465px;
-                                        overflow-y: auto;
-                                        height: 244px;
-                                        display: block;">
-                                            
-                                        </form>
-                                         
-                                        
-                                       
-                                     </div>
-                                <div  style="margin-top:5px;" >
-                                    
-                                    
-                                    
-                            
-                            </div>
-                                
-                                <div class="col-md-2"></div>
-                            </div>
-                            
-                            <div style="text-align: right;" style="margin-top: -36px;">
-                                <button  onclick="socnowcore('testlist')" class="btn ctrl-btn">
-                                    <img src="assets/icons/back.png" style="width: 100%;margin-top:-106px;margin-left:-1200px;" />
-                                </button>
-                                
-                                <button  class="btn ctrl-btn">
-                                    <img src="assets/icons/next.png" onclick="socnowcore('runtestsoc')" style="width: 100%;margin-top: -100px;" />
-                                </button>
-                            </div>
-                                </div>
-                        </div>
-                        <div id="socnow-loading" style="width: 100%;">
-                            <!--<div id="test-name-Socnow"></div>-->
-
-                            <div class="progress">
-                                    <div id= "progress-bar-Socnow" class="progress-bar"></div>
-                                    <p id="progress-indicator-socnow">0%</p>
-                            </div>
-                            <div id='socnowtext'></div>
-                        </div>
-                        <!---<div id="socnow-loading" style="width: 100%;">
-                            <div id="test-name-Socnow"></div>
-
-                            <div class="progress" style="margin-top: -10px;">
-                                    <div id= "progress-Custom" class="progress-bar"></div>
-                                    <p id="progress-indicator-custom">0%</p>
-                                    <div id='socnowtext'></div>
-                                    
-                            </div>
-                        </div> -->
-
-                        <!-- ------------------------- CUSTOM TESTTTTT --------------------- -->
-                        <div class="config-box" id="custom_test">
-
-                            <span class="line">
-                                <h2><span>Write Custom Test</span></h2>
-                            </span>
-                            <br><br>
-                            <button class="btn temp-btn" style="width: 300px;" onclick="seldonesoc()">
-                                <span>Write your own test</span>                              
-                
-                            </button>
-
-                        </div>
-
-                        
-
-                        <!-- ------------------------------------------------------------ -->
-
-
-                        <!-- ------------------------- CUSTOM CONFIG --------------------- -->
-                        <div class="config-box" id="custom_core">
-                            <span class="line">
-                                <h2><span>Custom Config Core Verification</span></h2>
-                            </span>
-
-                            <!-- -------------------- CUSTOM CORE BOX -------------------- -->
-                            <div id="custom-core">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config active">
-                                            <p>Core</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
-    
-                                    <div class="col-md-3" style="border-right: 1px solid white; height: 25%;" >
-                                        <h6 style="font-weight: lighter;">ISA</h6>
-                                        <form>
-                                            <input type="radio" name="c-isa" value="32 Bit" checked />
-                                            <label> 32 Bit </label>
-                                            <br>
-                                            <input type="radio" name="c-isa" value="64 Bit" />
-                                            <label> 64 Bit </label>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-3">
-                                        <h6 style="font-weight: lighter;">Extensions</h6>
-                                        <form>
-                                            <input type="checkbox" name="c-ext" disabled checked />
-                                            <label> Integer (I) </label>
-                                            <br />
-                                            <input type="checkbox" name="c-ext" />
-                                            <label> Multiplier (M) </label>
-                                            <br />
-                                            <input type="checkbox" name="c-ext" />
-                                            <label> Floating Point (F) </label>
-                                            <br />
-                                            <input type="checkbox" name="c-ext" />
-                                            <label> Compressed (C) </label> 
-                                        </form>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div style="text-align: right;">
-                                        
-                                    <button onclick="changeCustom('iss')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- -------------------- CUSTOM ISS BOX -------------------- -->
-                            <div id="custom-iss">
-                                <div class="row main-config">
-                                    
-                                    <div class="col-md-2">
-                                        <div class="name-config">
-                                            <p>Core</p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>ISS</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
-    
-                                    
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-3">
-                                        <h6 style="font-weight: lighter;">ISS</h6>
-                                        <form>
-                                            <input checked type="radio" id="customISS" name="customISS" value="spike"   />
-                                            <label> SPIKE </label>
-                                            <br />
-                                            <input type="radio" id="customISS" name="customISS" value="m"/>
-                                            <label> WHISPER </label>
-                                            <br />
-                                            <input type="radio" id="customISS" name="customISS" value="f" />
-                                            <label> OVPSIM </label>
-                                            <br />
-                                            
-                                        </form>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                            
-
-                                
-                                    
-                                <div style="text-align: right;">
-                                    <button onclick="changeCustom('core')" class="btn ctrl-btn">
-                                        <img src="assets/icons/back.png" style="width: 100%;" />
-                                    </button>
-                                    <button onclick="changeCustom('test')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" onclick="coreget()" style="width: 100%;" />
-                                    </button>
-                                </div>
-                            
-                            </div>
-
-                            <!-- -------------------- CUSTOM TEST CASES BOX -------------------- -->
-                            <div id="cutom-test">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config">
-                                            <p>Core</p>
-                                        </div>
-                                        <div class="name-config">
-                                            <p>ISS</p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>Test Cases</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-8" id="swerv" >
-                                        <!-- <form id="swervform" style="overflow-y:auto;height:180px">
-                                            
-                                        </form>  -->
-                                       
-                                     </div>
-                                     <!-- <div class="col-md-8" id="ibex" >
-                                         <form id="ibexform" style="overflow-y:auto;height:180px">
-                                            
-                                         </form>
-                                         
-                                     </div> -->
-                                </div>
-
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <button onclick="changeCustom('iss')" class="btn ctrl-btn">
-                                        <img src="assets/icons/back.png" style="width: 100%;" />
-                                    </button>
-
-                                    <button onclick="changeCustom('end')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;" />
-                                    </button>
-                                </div>
-                            </div>
-                            
-
-
-                        </div>
-
-                        <!-- -------------------- ------------ -------------------- -->
-                        <!-- ---------------Upload Custom Core--- ---------------------->
-                         <!-- ------------------------- CUSTOM CONFIG --------------------- -->
-                         <div class="config-box" id="upload_core"  style="display: none;">
-                            <span class="line">
-                                <h2><span>Upload Custom Core</span></h2>
-                            </span>
-                            
-                            <!-- -----------------browse folder------------------>
-                            <div id="uploadcore">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config active">
-                                            <p>Upload Core </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
-    
-                                    <div class="col-md-3"  >
-                                        <h6 style="font-weight: lighter;">Upload core </h6>
-                                        
-                                        <div id="project-browse" style="width: 483px" >
-                                          
-                                            <input type="text" id="pathcore" style="color: white;
-                                            border-right-color: #767676;
-                                            width: 550px;
-                                            padding: 5px;
-                                            height: 34px;
-                                            border-bottom-color: #767676;
-                                            border-left-color: #1a1d22;
-                                            background-color: #1a1d22;
-                                            border-style: solid;
-                                           
-                
-                                            border-top-color: #1a1d22;" disabled value=''  />
-                                            <button class="btn browse-btn" onclick="select1()" style="width:80px;">...</button>
-                                        </div>
-                                        <input type='checkbox' name='checkswervtest' value='swervbased' ><label> Swerv Based Core </label> 
-                                    </div>
-                                    
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div style="text-align: right;">
-                                        
-                                    <button onclick="changecoree('extensionselect')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
-                                    </button>
-                                </div>
-                                </div>
-                          
-
-
-                        <!-- -----------------------------------upload core --extensions -------->
-                        <div id="extensionselection">
-                            <div class="row main-config">
-                                <div class="col-md-3">
-                                    <div class="name-config active">
-                                        <p>Upload Core </p>
-                                    </div>
-                                   
-                                    <div class="name-config active">
-                                        <p>Extensions</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6"  style="margin-left: 70px;">
-    
-                                <div  >
-                                    <h6 style="font-weight: lighter;">Select Your Core Extensions</h6>
-                                    <form>
-                                        <input type="checkbox" name="ext" value="i" disabled checked />
-                                        <label> Integer (I) </label>
-                                        <br />
-                                        <input type="checkbox" value="m" name="ext" />
-                                        <label> Multiplier (M) </label>
-                                        <br />
-                                        <input type="checkbox" value="a" name="ext" />
-                                        <label> Atomic (A) </label>
-                                        <br />
-                                        <input type="checkbox" value="f" name="ext" />
-                                        <label> Single Precision Floating Point (F) </label>
-                                        <br />
-                                        <input type="checkbox" value="d" name="ext" />
-                                        <label> Double Precision Floating Point (D) </label>
-                                        <br />
-                                        <input type="checkbox" value="c" name="ext" />
-                                        <label> Compressed (C) </label>
-                                    </form>
-                                  
-                                </div>
-                                <div  style="margin-top:5px;" >
-                                    
-                                    
-                                    
-                            
-                            </div>
-                                
-                                <div class="col-md-2"></div>
-                            </div>
-                            <div style="text-align: right;" style="margin-top: -36px;">
-                                <button  class="btn ctrl-btn">
-                                    <img src="assets/icons/back.png" onclick="changecoree('uploadcore')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
-                                </button>    
-                                <button  class="btn ctrl-btn">
-                                    <img src="assets/icons/next.png" onclick="changecoree('formatselect')" style="width: 100%;margin-top: -100px;" />
-                                </button>
-                            </div>
-                                </div>
-                        </div>
-
-
-                        <!-- -----------------------------------upload core --format -------->
-                        <div id="formatSelect">
-                            <div class="row main-config">
-                                <div class="col-md-3">
-                                    <div class="name-config active">
-                                        <p>Upload Core </p>
-                                    </div>
-                                   
-                                    <div class="name-config active">
-                                        <p>Extensions</p>
-                                    </div>
-                                    <div class="name-config active">
-                                        <p>Test Format</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6"  style="margin-left: 70px;">
-    
-                                <div  >
-                                    <h6 style="font-weight: lighter;">Choose the test format for your core.</h6>
-                                    <form>
-                                        <input type="radio" name="testformat" value="asm" checked />
-                                        <label> Assembly & Machine Code </label>
-                                        <br />
-                                        <!--<input type="radio" value="c" name="testformat" />
-                                        <label> C language </label>-->
-                                        
-                                    </form>
-                                  
-                                </div>
-                                <div  style="margin-top:5px;" >
-                                    
-                                    
-                                    
-                            
-                            </div>
-                                
-                                <div class="col-md-2"></div>
-                            </div>
-                            <div style="text-align: right;" style="margin-top: -36px;">
-                                <button  class="btn ctrl-btn">
-                                    <img src="assets/icons/back.png" onclick="changecoree('extensionselect')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
-                                </button>    
-                                <button  class="btn ctrl-btn">
-                                    <img src="assets/icons/next.png" onclick="changecoree('uptestcase')" style="width: 100%;margin-top: -100px;" />
-                                </button>
-                            </div>
-                                </div>
-                        </div>
-
-
-                        <!-- -----------------------------------upload core --command -------->
-                        <div id="core-command">
-                        <div class="row main-config">
-                            <div class="col-md-3">
-                                <div class="name-config active">
-                                    <p>Test Format</p>
-                                </div>
-                                <div class="name-config active">
-                                    <p>Test Case File/Dir  </p>
-                                </div>
-                                <div class="name-config active">
-                                    <p>Enter Command </p>
-                                </div>
-                            </div>
-                            <div class="col-md-1"></div>
-
-                            <div class="col-md-3"  >
-                                <h6 style="font-weight: lighter;width: 500px;">Enter commands to run test case </h6>
-                                
-                              
-                                <input id="getcommands" placeholder="make -f Makefile TEST={testname} OR ./logGenerator.sh" style="background-color: black;color: white;width: 412px;">
-                                
-                            </div>
-                            
-                            <!--<div style="    margin-left: 245px;
-                            margin-top: -75px;"><p style="color:rgba(240, 248, 255, 0.342)">For C Test, type make command:  {testcommand} Test={testname}
-        
-                            </p><br><p style="color:rgba(240, 248, 255, 0.342)">For Hex Test, type log gen script:  ./{logGenerator.sh}
-        
-                            </p></div>-->
-                            
-                            
-                            <div class="col-md-2"></div>
-                        </div>
-                        <div style="text-align: right;">
-                            <button onclick="changecoree('uptestcase')" class="btn ctrl-btn">
-                                <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
-                            </button>    
-                            <button onclick="changecoree('logselect')" class="btn ctrl-btn">
-                                <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
-                            </button>
                         </div>
                     </div>
-
-
-                    <!-- --------------------------LOG DIRR------------------------>
-                    <div id="logselect">
+                    <!------------------------------------------- Soc-now testlist------------------------>
+                    <div id="soc_test" style="display:none;">
                         <div class="row main-config">
                             <div class="col-md-3">
-                                <div class="name-config active">
-                                    <p>Test Case File/Dir  </p>
+                                <div class="name-config">
+                                    <p>Select Core</p>
+                                </div>
+                                <div class="name-config ">
+                                    <p>Test case type</p>
                                 </div>
                                 <div class="name-config active">
-                                    <p>Enter Command </p>
-                                </div>
-                                <div class="name-config active">
-                                    <p>Log File </p>
+                                    <p>Tests</p>
                                 </div>
                             </div>
-                            <div class="col-md-6"  style="margin-left: 70px;">
-
-                            <div  >
-                                 <div  style="margin-top:5px;" >
-                                <h6 style="font-weight: lighter;">Select your core log file </h6>
-                                
-                                <div id="project-browse" style="width: 415px;" >
-                                  
-                                    <div class="col-md-3"  >
-                                        
-                                                                            
-                                        <input id="getlogfolder" placeholder="swerv-El2/exec.log" style="background-color: black;color: white;width: 386px;">
-                                        
-                                    </div>
-                                    
+                            <div class="col-md-6" style="margin-left: 70px;">
+                                <div class="col-md-7" >
+                                    <form id="testsoc" style="width: 465px;
+                                                              overflow-y: auto;
+                                                              height: 244px;
+                                                              display: block;">
+                                    </form>
                                 </div>
-                            </div> 
-
-                            <!--<h6 style="font-weight: lighter;">Choose the format for your core log.</h6>
-                                    <form>
-                                        <input type="radio" name="logformat" value="log" checked />
-                                        <label> RISC-V Trace Log (.log) </label>
-                                        <br />
-                                    </form>-->
-                            
-                                </div>
-                            </div>
-                           
-                        
+                            <div style="margin-top:5px;" >
                         </div>
-                            
-                            <div class="col-md-2"></div>
-                    
-                        <div style="text-align: right;" >
-                            <button  class="btn ctrl-btn">
-                                <img src="assets/icons/back.png" onclick="changecoree('command')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
-                            </button>    
-                            <button  class="btn ctrl-btn">
-                                <img src="assets/icons/next.png" onclick="changecoree('Stestcasetype')" style="width: 100%;margin-top: -100px;" />
-                            </button>
-                        </div>
-                            </div>
-
-
-
-
-
-                    <!-- --------------------------TESTCASE folder for C------------------------->
-                    <div id="testcase">
-                        <div class="row main-config">
-                            <div class="col-md-3">
-                                <div class="name-config active">
-                                    <p>Extensions</p>
-                                </div>
-                                <div class="name-config active">
-                                    <p>Test Format</p>
-                                </div>
-                                <div class="name-config active">
-                                    <p>Test Case File/Dir </p>
-                                </div>
-                            </div>
-                            <div class="col-md-6"  style="margin-left: 70px;">
-
-                            <div  >
-                                <h6 style="font-weight: lighter;">Select your test case folder </h6>
-                                
-            <div class="col-md-3"  >
-                                    
-                                    
-                                  
-                                    <input id="gettestfolder" placeholder="swer-El2/tools/testbench/testfolder" style="background-color: black;color: white;width: 386px;">
-                                    
-                                </div>
-                            </div>
-                            <!-- <div  style="margin-top:5px;" >
-                                <h6 style="font-weight: lighter;">Select Your Core log file folder </h6>
-                                
-                                <div id="project-browse" style="width: 415px;" >
-                                  
-                                    <div class="col-md-3"  >
-                                        
-                                        
-                                      
-                                        <input id="getlogfolder" placeholder="swerv-El2/exec.log" style="background-color: black;color: white;width: 386px;">
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div> -->
-                        
-                        </div>
-                            
-                            <div class="col-md-2"></div>
-                        </div>
-                        <div style="text-align: right;" >
-                            <button  class="btn ctrl-btn">
-                                <img src="assets/icons/back.png" onclick="changecoree('formatselect')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
-                            </button>    
-                            <button  class="btn ctrl-btn">
-                                <img src="assets/icons/next.png" onclick="changecoree('command')" style="width: 100%;margin-top: -100px;" />
-                            </button>
-                        </div>
-                            </div>
-
-
-
-                            <!-- --------------------------TESTCASE folder for ASM------------------------->
-                    <div id="testcase_asm">
-                        <div class="row main-config">
-                            <div class="col-md-3">
-                                <div class="name-config active">
-                                    <p>Extensions</p>
-                                </div>
-                                <div class="name-config active">
-                                    <p>Test Format</p>
-                                </div>
-                                <div class="name-config active">
-                                    <p>Test Case File/Dir  </p>
-                                </div>
-                            </div>
-                            <div class="col-md-6"  style="margin-left: 70px;">
-
-                            <div  >
-                                <h6 style="font-weight: lighter;">Write the location to save objdump of testcase relative to your core's root path (file name: test.s)</h6>
-                                
-            <div class="col-md-3"  >
-                                    
-                                    
-                                  
-                                    <input id="hexDir" placeholder="path/to/dumping/objdump_dir" style="background-color: black;color: white;width: 386px;">
-                                    
-                                </div>
-                            </div>
-                            <!--<div  style="margin-top:20px;" >
-                                <h6 style="font-weight: lighter;"> <b>(Optional)</b> Write the file's location to save the assembly instructions </h6>
-                                <div id="project-browse" style="width: 415px;" >
-                                    <div class="col-md-3"  >
-                                        <input id="asmDir" placeholder="simulation/assembly.S" style="background-color: black;color: white;width: 386px;">
-                                    </div>
-                                </div>
-                            </div>-->
-                        </div>
-                            
-                            <div class="col-md-2"></div>
-                        </div>
-                        <div style="text-align: right;" >
-                            <button  class="btn ctrl-btn">
-                                <img src="assets/icons/back.png" onclick="changecoree('formatselect')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
-                            </button>    
-                            <button  class="btn ctrl-btn">
-                                <img src="assets/icons/next.png" onclick="changecoree('command')" style="width: 100%;margin-top: -100px;" />
-                            </button>
-                        </div>
-                            </div>
-                            <!-- ---------------------------extension selection------------------------------->
-                            <!-- <div id="extensionselection">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config active">
-                                            <p>Upload Core </p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>Enter commands </p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>extension</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6"  style="margin-left: 70px;">
-        
-                                    <div  >
-                                        <h6 style="font-weight: lighter;">Select Your TestCase Extension</h6>
-                                        
-                                      
-                                    </div>
-                                    <div  style="margin-top:5px;" >
-                                        
-                                        
-                                        
-                                
-                                </div>
-                                    
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div style="text-align: right;" style="margin-top: -36px;">
-                                    <button  class="btn ctrl-btn">
-                                        <img src="assets/icons/back.png" onclick="changecoree('uptestcase')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
-                                    </button>    
-                                    <button  class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" onclick="changecoree('Stestcasetype')" style="width: 100%;margin-top: -100px;" />
-                                    </button>
-                                </div>
-                                    </div>
-                            </div> -->
-                                       
-                               
-
-                            <!--  ------------------------- testcase selection type --------- ------------>
-                            <div id="testcasetype">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        
-                                        <div class="name-config active">
-                                            <p>Enter Command </p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>Log File </p>
-                                        </div>
-                                        
-                                        <div class="name-config active">
-                                            <p>Test Type</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6"  style="margin-left: 70px;">
-        
-                                    <div  >
-                                        <h6 style="font-weight: lighter;">Select your test case type</h6>
-                                        
-                                      
-                                    </div>
-                                    <div  style="margin-top:5px;" >
-                                        
-                                        
-                                        <form>
-                                            <input type="radio" id="gencoretest" name="upCore" value="RISCV_DV_Tests" checked/>
-                                            <label>RISCV DV Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="User_Defined_Tests" />
-                                            <label>User Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="Riscv_tests" />
-                                            <label> RISCV Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="Self-Checking-vector-tests" />
-                                            <label> Self Checking Vector Tests </label><br>
-                                            <input type="radio" id="gencoretest" name="upCore" value="Swerv_Tests" />
-                                            <label>Swerv Tests </label>
-                                        </form> 
-                                
-                                </div>
-                                    
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div style="text-align: right;" style="margin-top: -36px;">
-                                    <button  class="btn ctrl-btn">
-                                        <img src="assets/icons/back.png" onclick="changecoree('logselect')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;"" />
-                                    </button>    
-                                    <button  class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" onclick="changecoree('showtests')" style="width: 100%;margin-top: -100px;" />
-                                    </button>
-                                </div>
-                                    </div>
-                            </div>
-                            <!-------------------------------SHOW TEST CASES-------------->
-                            <div id="showtest">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config active">
-                                            <p>Log File </p>
-                                        </div>
-                                        
-                                        <div class="name-config active">
-                                            <p>Test Type</p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>Test Cases</p>
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="col-md-7" >
-                                        <form id="uploadcoretestcaseform" style="overflow-y:auto;height:200px">
-                                            
-                                        </form>
-                                         
-                                        
-                                       
-                                     </div>
-                                     
-                                     <div style="margin-top: -40px;">
-                                       
-                                        <button onclick="changecoree('Stestcasetype')" class="btn ctrl-btn">
-                                            <img src="assets/icons/back.png" style="width: 100%;" />
-                                        </button>
-                                        <button onclick="changecoree('endcore')" class="btn ctrl-btn">
-                                            <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
-                                        </button>
-    
-                                        
-                                     </div>
-                                     
-                                </div>
-                            </div>
-                            <div id="prebuilt-end1" >
-                               
-                                <div id="testname-custom"></div>
-                                <div class="progress" style="margin-top: 30px;">
-                                    <div class="progress-bar" id="progress-bar-cus"></div>
-                                    <p id="progress-indicator-cus">0%</p>
-                                </div>
-                                <div id="customtext"></div>
-                            </div>
-                           
-                            </div>
-
-                        <!-- ----------------------- PREBUILT CORE ------------------ -->
-                        <div class="config-box" id="prebuilt_core">
-                            <span class="line">
-                                <h2><span>Prebuilt Core Verification</span></h2>
-                            </span>
-                            <br><br>
-
-                            <!-- -------------------- PREBUILT CORE BOX -------------------- -->
-                            <div id="prebuilt-core"style="margin-top:-60px;">
-                                <div class="row main-config">
-
-
-
-
-                                    <div class="col-md-3">
-                                        <div class="name-config active">
-                                            <p>Core</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
-    
-                                    <div class="col-md-5">
-                                        <h6 style="font-weight: lighter;">ISA</h6>
-                                        <form>
-                                            <input type="radio" id="prebuiltCore" name="prebuiltCore" value="ibex" checked />
-                                            <label> IBEX </label>
-                                            <br>
-                                            
-                                            <input type="radio" id="prebuiltCore" name="prebuiltCore" value="swerv" />
-                                            <label> SWERV-EL2 </label>
-                                        </form>
-                                    </div>
-                                    
-                                </div>
-                                <div style="text-align: right;">
-                                        
-                                    <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;margin-top:-20px;" />
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- -------------------- PREBUILT ISS BOX -------------------- -->
-                            <div id="prebuilt-iss"style="margin-top:-60px;">
-                                <div class="row main-config">
-                                    
-                                    <div class="col-md-2">
-                                        <div class="name-config">
-                                            <p>Core</p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>ISS</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
-    
-                                    
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-3">
-                                        <h6 style="font-weight: lighter;">ISS</h6>
-                                        <form>
-                                            <input checked type="radio" id="prebuiltISS" name="prebuiltISS" value="spike"   />
-                                            <label> SPIKE </label>
-                                            <br />
-                                            <input type="radio" id="prebuiltISS" name="prebuiltISS" value="whisper"/>
-                                            <label> WHISPER </label>
-                                            <br />
-                                           
-                                            
-                                        </form>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                            
-
-                                
-                                    
-                                <div style="text-align: right;">
-                                    <button onclick="changePrebuilt('core')" class="btn ctrl-btn">
-                                        <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
-                                    </button>
-                                    <button onclick="changePrebuilt('testtype')" class="btn ctrl-btn">
-                                        <img src="assets/icons/next.png" style="width: 100%;margin-top:-50px;" />
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- prebuit test type slection------------------------------------------------->
-
-                            <div id="prebuilt-test-list"style="margin-top:-60px;">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config">
-                                            <p>Core</p>
-                                        </div>
-                                        <div class="name-config">
-                                            <p>ISS</p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>Test Type</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-7" >
-                                        <h6 style="font-weight: lighter;">Select test case type</h6>
-                                        <form id="fromswerv">
-                                            <input type="radio" id="pretest" name="preCore" value="RISCV_DV_Tests" />
-                                            <label>RISCV DV Tests </label><br>
-                                            <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
-                                            <label>User Tests </label><br>
-                                            <input type="radio" id="pretest" name="preCore" value="Swerv_Tests" />
-                                            <label>Swerv Tests </label>
-                                        </form> 
-                                       
-                                     </div>
-                                     <div style="margin-top: -40px;">
-                                       
-                                        <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
-                                            <img src="assets/icons/back.png" style="width: 100%;" />
-                                        </button>
-                                        <button onclick="changePrebuilt('testcase')" class="btn ctrl-btn">
-                                            <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
-                                        </button>
-    
-                                        
-                                     </div>
-                                     
-                                </div>
-
-                                <!-- <div class="d-flex justify-content-between align-items-center">
-                                    
-                                </div> -->
-
-                                </div>
-                                <!--prebuilt test case tye ibex -->
-
-                            <div id="prebuilt-test-list-ibex"style="margin-top:-60px;">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config">
-                                            <p>Core</p>
-                                        </div>
-                                        <div class="name-config">
-                                            <p>ISS</p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>Test Type</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-7" >
-                                        <h6 style="font-weight: lighter;">Select test case type</h6>
-                                        <form >
-                                            <input type="radio" id="pretest" name="preCore" value="RISCV_DV_Tests" />
-                                            <label>RISCV DV Tests </label><br>
-                                            <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
-                                            <label>User Tests </label>
-                                        </form> 
-                                       
-                                     </div>
-                                     <div style="margin-top: -40px;">
-                                       
-                                        <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
-                                            <img src="assets/icons/back.png" style="width: 100%;" />
-                                        </button>
-                                        <button onclick="changePrebuilt('testcase')" class="btn ctrl-btn">
-                                            <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
-                                        </button>
-    
-                                        
-                                     </div>
-                                     
-                                </div>
-
-                                <!-- <div class="d-flex justify-content-between align-items-center">
-                                    
-                                </div> -->
-
-                                </div>
-                            <!-- -------------------- PREBUILT TEST CASES BOX -------------------- -->
-                            <div id="prebuilt-test"style="margin-top:-60px;">
-                                <div class="row main-config">
-                                    <div class="col-md-3">
-                                        <div class="name-config">
-                                            <p>Core</p>
-                                        </div>
-                                        <div class="name-config">
-                                            <p>ISS</p>
-                                        </div>
-                                        <div class="name-config">
-                                            <p>Test Type</p>
-                                        </div>
-                                        <div class="name-config active">
-                                            <p>Test Cases</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-7" >
-                                        <form id="swerv&ibexform" style="overflow-y:auto;height:180px">
-                                            
-                                        </form> 
-                                       
-                                       
-                                     </div>
-                                     <div style="margin-top: -40px;">
-                                       
-                                        <button onclick="changePrebuilt('testtype')" class="btn ctrl-btn">
-                                            <img src="assets/icons/back.png" style="width: 100%;" />
-                                        </button>
-                                        <button onclick="changePrebuilt('end')" class="btn ctrl-btn">
-                                            <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
-                                        </button>
-    
-                                        
-                                     </div>
-                                     
-                                </div>
-
-                                <!-- <div class="d-flex justify-content-between align-items-center">
-                                    
-                                </div> -->
-
-                                </div>
-
-                            <!-- -------------------- PREBUILT END BOX -------------------- -->
-                            <div id="prebuilt-end" >
-                                <div id="testname-pre" ></div>
-                                <div class="progress" style="margin-top: -10px;">
-                                    <div class="progress-bar" id="progress-bar-pre" ></div>
-                                    <p id="progress-indicator-pre">0%</p>
-                                    
-
-                                </div>
-                                <div id="PreText"></div>
-                                
-                            </div>
-
-                        </div>
-
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div style="text-align: right;" style="margin-top: -36px;">
+                        <button onclick="socnowcore('testlist')" class="btn ctrl-btn">
+                            <img src="assets/icons/back.png" style="width: 100%;margin-top:-106px;margin-left:-1200px;" />
+                        </button>
+                        <button  class="btn ctrl-btn">
+                            <img src="assets/icons/next.png" onclick="socnowcore('runtestsoc')" style="width: 100%;margin-top: -100px;" />
+                        </button>
                     </div>
                 </div>
             </div>
+            <div id="socnow-loading" style="width: 100%;">
+                <div class="progress">
+                    <div id= "progress-bar-Socnow" class="progress-bar"></div>
+                    <p id="progress-indicator-socnow">0%</p>
+                </div>
+                <div id='socnowtext'></div>
+            </div>
+
+            <!---------------------------- CUSTOM TESTTTTT ------------------------>
+            <div class="config-box" id="custom_test">
+                <span class="line">
+                    <h2><span>Write Custom Test</span></h2>
+                </span>
+                <br><br>
+                <button class="btn temp-btn" style="width: 300px;" onclick="seldonesoc()">
+                    <span>Write your own test</span>                              
+                </button>
+            </div>
+
+            <!-- ------------------------- CUSTOM CONFIG --------------------- -->
+            <div class="config-box" id="custom_core">
+                <span class="line">
+                    <h2><span>Custom Config Core Verification</span></h2>
+                </span>
+
+                <!-- -------------------- CUSTOM CORE BOX -------------------- -->
+                <div id="custom-core">
+                    <div class="row main-config">
+                        <div class="col-md-3">
+                            <div class="name-config active">
+                                <p>Core</p>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3" style="border-right: 1px solid white;
+                                                     height: 25%;" >
+                            <h6 style="font-weight: lighter;">ISA</h6>
+                            <form>
+                                <input id="32c" type="radio" name="c-isa" value="32 Bit" checked />
+                                <label for="32c"> 32 Bit </label>
+                                <br>
+                                <input id="64c" type="radio" name="c-isa" value="64 Bit" />
+                                <label for="64c"> 64 Bit </label>
+                            </form>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <h6 style="font-weight: lighter;">Extensions</h6>
+                            <form>
+                                <input id="i" type="checkbox" name="c-ext" disabled checked />
+                                <label for="i"> Integer (I) </label>
+                                <br />
+                                <input id="m" type="checkbox" name="c-ext" />
+                                <label for="m"> Multiplier (M) </label>
+                                <br />
+                                <input id="f" type="checkbox" name="c-ext" />
+                                <label for="f"> Floating Point (F) </label>
+                                <br />
+                                <input id="c" type="checkbox" name="c-ext" />
+                                <label for="c"> Compressed (C) </label> 
+                            </form>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div style="text-align: right;">
+                            
+                        <button onclick="changeCustom('iss')" class="btn ctrl-btn">
+                            <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
+                        </button>
+                    </div>
+                </div>
+
+                <!-- -------------------- CUSTOM ISS BOX -------------------- -->
+                <div id="custom-iss">
+                    <div class="row main-config">
+                        
+                        <div class="col-md-2">
+                            <div class="name-config">
+                                <p>Core</p>
+                            </div>
+                            <div class="name-config active">
+                                <p>ISS</p>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+    
+                        
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <h6 style="font-weight: lighter;">ISS</h6>
+                            <form>
+                                <input checked type="radio" id="customISS" name="customISS" value="spike"   />
+                                <label> SPIKE </label>
+                                <br />
+                                <input type="radio" id="customISS" name="customISS" value="m"/>
+                                <label> WHISPER </label>
+                                <br />
+                                <input type="radio" id="customISS" name="customISS" value="f" />
+                                <label> OVPSIM </label>
+                                <br />
+                                
+                            </form>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                
+
+                    
+                        
+                    <div style="text-align: right;">
+                        <button onclick="changeCustom('core')" class="btn ctrl-btn">
+                            <img src="assets/icons/back.png" style="width: 100%;" />
+                        </button>
+                        <button onclick="changeCustom('test')" class="btn ctrl-btn">
+                            <img src="assets/icons/next.png" onclick="coreget()" style="width: 100%;" />
+                        </button>
+                    </div>
+                
+                </div>
+
+                <!-- -------------------- CUSTOM TEST CASES BOX -------------------- -->
+                <div id="cutom-test">
+                    <div class="row main-config">
+                        <div class="col-md-3">
+                            <div class="name-config">
+                                <p>Core</p>
+                            </div>
+                            <div class="name-config">
+                                <p>ISS</p>
+                            </div>
+                            <div class="name-config active">
+                                <p>Test Cases</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-8" id="swerv" >
+                            <!-- <form id="swervform" style="overflow-y:auto;height:180px">
+                                
+                            </form>  -->
+                           
+                         </div>
+                         <!-- <div class="col-md-8" id="ibex" >
+                             <form id="ibexform" style="overflow-y:auto;height:180px">
+                                
+                             </form>
+                             
+                         </div> -->
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button onclick="changeCustom('iss')" class="btn ctrl-btn">
+                            <img src="assets/icons/back.png" style="width: 100%;" />
+                        </button>
+
+                        <button onclick="changeCustom('end')" class="btn ctrl-btn">
+                            <img src="assets/icons/next.png" style="width: 100%;" />
+                        </button>
+                    </div>
+                </div>
+                
+
+
+            </div>
+
+            <!-- -------------------- ------------ -------------------- -->
+            <!-- ---------------Upload Custom Core--- ---------------------->
+             <!-- ------------------------- CUSTOM CONFIG --------------------- -->
+             <div class="config-box" id="upload_core"  style="display: none;">
+                <span class="line">
+                    <h2><span>Upload Custom Core</span></h2>
+                </span>
+                
+                <!-- -----------------browse folder------------------>
+                <div id="uploadcore">
+                    <div class="row main-config">
+                        <div class="col-md-3">
+                            <div class="name-config active">
+                                <p>Upload Core </p>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+    
+                        <div class="col-md-3"  >
+                            <h6 style="font-weight: lighter;">Upload core </h6>
+                            
+                            <div id="project-browse" style="width: 483px" >
+                              
+                                <input type="text" id="pathcore" style="color: white;
+                                border-right-color: #767676;
+                                width: 550px;
+                                padding: 5px;
+                                height: 34px;
+                                border-bottom-color: #767676;
+                                border-left-color: #1a1d22;
+                                background-color: #1a1d22;
+                                border-style: solid;
+                               
+            
+                                border-top-color: #1a1d22;" disabled value=''  />
+                                <button class="btn browse-btn" onclick="select1()" style="width:80px;">...</button>
+                            </div>
+                            <input id="swervCheck" type='checkbox' name='checkswervtest' value='swervbased' >
+                            <label for="swervCheck"> Swerv Based Core </label> 
+                        </div>
+                        
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div style="text-align: right;">
+                            
+                        <button onclick="changecoree('extensionselect')" class="btn ctrl-btn">
+                            <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
+                        </button>
+                    </div>
+                    </div>
+              
+
+
+            <!-- -----------------------------------upload core --extensions -------->
+            <div id="extensionselection">
+                <div class="row main-config">
+                    <div class="col-md-3">
+                        <div class="name-config active">
+                            <p>Upload Core </p>
+                        </div>
+                       
+                        <div class="name-config active">
+                            <p>Extensions</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6"  style="margin-left: 70px;">
+    
+                    <div  >
+                        <h6 style="font-weight: lighter;">Select Your Core Extensions</h6>
+                        <form>
+                            <input id="i_isa" type="checkbox" name="ext" value="i" disabled checked />
+                            <label for="i_isa"> Integer (I) </label>
+                            <br />
+                            <input id="m_isa" type="checkbox" value="m" name="ext" />
+                            <label for="m_isa"> Multiplier (M) </label>
+                            <br />
+                            <input id="a_isa" type="checkbox" value="a" name="ext" />
+                            <label for="a_isa"> Atomic (A) </label>
+                            <br />
+                            <input id="f_isa" type="checkbox" value="f" name="ext" />
+                            <label for="f_isa"> Single Precision Floating Point (F) </label>
+                            <br />
+                            <input id="d_isa" type="checkbox" value="d" name="ext" />
+                            <label for="d_isa"> Double Precision Floating Point (D) </label>
+                            <br />
+                            <input id="c_isa" type="checkbox" value="c" name="ext" />
+                            <label for="c_isa"> Compressed (C) </label>
+                        </form>
+                      
+                    </div>
+                    <div  style="margin-top:5px;" >
+                        
+                        
+                        
+                
+                </div>
+                    
+                    <div class="col-md-2"></div>
+                </div>
+                <div style="text-align: right;" style="margin-top: -36px;">
+                    <button  class="btn ctrl-btn">
+                        <img src="assets/icons/back.png" onclick="changecoree('uploadcore')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;" />
+                    </button>    
+                    <button  class="btn ctrl-btn">
+                        <img src="assets/icons/next.png" onclick="changecoree('formatselect')" style="width: 100%;margin-top: -100px;" />
+                    </button>
+                </div>
+                    </div>
+            </div>
+
+
+            <!-- -----------------------------------upload core --format -------->
+            <div id="formatSelect">
+                <div class="row main-config">
+                    <div class="col-md-3">
+                        <div class="name-config active">
+                            <p>Upload Core </p>
+                        </div>
+                       
+                        <div class="name-config active">
+                            <p>Extensions</p>
+                        </div>
+                        <div class="name-config active">
+                            <p>Test Format</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6"  style="margin-left: 70px;">
+    
+                    <div  >
+                        <h6 style="font-weight: lighter;">Choose the test format for your core.</h6>
+                        <form>
+                            <input type="radio" name="testformat" value="asm" checked />
+                            <label> Assembly & Machine Code </label>
+                            <br />
+                            <!--<input type="radio" value="c" name="testformat" />
+                            <label> C language </label>-->
+                            
+                        </form>
+                      
+                    </div>
+                    <div  style="margin-top:5px;" >
+                        
+                        
+                        
+                
+                </div>
+                    
+                    <div class="col-md-2"></div>
+                </div>
+                <div style="text-align: right;" style="margin-top: -36px;">
+                    <button  class="btn ctrl-btn">
+                        <img src="assets/icons/back.png" onclick="changecoree('extensionselect')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;" />
+                    </button>    
+                    <button  class="btn ctrl-btn">
+                        <img src="assets/icons/next.png" onclick="changecoree('uptestcase')" style="width: 100%;margin-top: -100px;" />
+                    </button>
+                </div>
+                    </div>
+            </div>
+
+
+            <!-- -----------------------------------upload core --command -------->
+            <div id="core-command">
+            <div class="row main-config">
+                <div class="col-md-3">
+                    <div class="name-config active">
+                        <p>Test Format</p>
+                    </div>
+                    <div class="name-config active">
+                        <p>Test Case File/Dir  </p>
+                    </div>
+                    <div class="name-config active">
+                        <p>Enter Command </p>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+
+                <div class="col-md-3"  >
+                    <h6 style="font-weight: lighter;width: 500px;">Enter commands to run test case </h6>
+                    
+                  
+                    <input id="getcommands" placeholder="make -f Makefile TEST={testname} OR ./logGenerator.sh" style="background-color: black;color: white;width: 412px;">
+                    
+                </div>
+                
+                <!--<div style="    margin-left: 245px;
+                margin-top: -75px;"><p style="color:rgba(240, 248, 255, 0.342)">For C Test, type make command:  {testcommand} Test={testname}
+    
+                </p><br><p style="color:rgba(240, 248, 255, 0.342)">For Hex Test, type log gen script:  ./{logGenerator.sh}
+    
+                </p></div>-->
+                
+                
+                <div class="col-md-2"></div>
+            </div>
+            <div style="text-align: right;">
+                <button onclick="changecoree('uptestcase')" class="btn ctrl-btn">
+                    <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
+                </button>    
+                <button onclick="changecoree('logselect')" class="btn ctrl-btn">
+                    <img src="assets/icons/next.png" style="width: 100%;margin-top: -60px;" />
+                </button>
+            </div>
+                </div>
+
+
+                <!-- --------------------------LOG DIRR------------------------>
+                <div id="logselect">
+                    <div class="row main-config">
+                        <div class="col-md-3">
+                            <div class="name-config active">
+                                <p>Test Case File/Dir  </p>
+                            </div>
+                            <div class="name-config active">
+                                <p>Enter Command </p>
+                            </div>
+                            <div class="name-config active">
+                                <p>Log File </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6"  style="margin-left: 70px;">
+
+                        <div  >
+                             <div  style="margin-top:5px;" >
+                            <h6 style="font-weight: lighter;">Select your core log file </h6>
+                            
+                            <div id="project-browse" style="width: 415px;" >
+                              
+                                <div class="col-md-3"  >
+                                    
+                                                                        
+                                    <input id="getlogfolder" placeholder="swerv-El2/exec.log" style="background-color: black;color: white;width: 386px;">
+                                    
+                                </div>
+                                
+                            </div>
+                        </div> 
+
+                        <!--<h6 style="font-weight: lighter;">Choose the format for your core log.</h6>
+                                <form>
+                                    <input type="radio" name="logformat" value="log" checked />
+                                    <label> RISC-V Trace Log (.log) </label>
+                                    <br />
+                                </form>-->
+                        
+                            </div>
+                        </div>
+                       
+                    
+                    </div>
+                        
+                        <div class="col-md-2"></div>
+                
+                    <div style="text-align: right;" >
+                        <button  class="btn ctrl-btn">
+                            <img src="assets/icons/back.png" onclick="changecoree('command')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
+                        </button>    
+                        <button  class="btn ctrl-btn">
+                            <img src="assets/icons/next.png" onclick="changecoree('Stestcasetype')" style="width: 100%;margin-top: -100px;" />
+                        </button>
+                    </div>
+                        </div>
+
+
+
+
+
+                <!-- --------------------------TESTCASE folder for C------------------------->
+                <div id="testcase">
+                    <div class="row main-config">
+                        <div class="col-md-3">
+                            <div class="name-config active">
+                                <p>Extensions</p>
+                            </div>
+                            <div class="name-config active">
+                                <p>Test Format</p>
+                            </div>
+                            <div class="name-config active">
+                                <p>Test Case File/Dir </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6"  style="margin-left: 70px;">
+
+                        <div  >
+                            <h6 style="font-weight: lighter;">Select your test case folder </h6>
+                            
+        <div class="col-md-3"  >
+                                
+                                
+                              
+                                <input id="gettestfolder" placeholder="swer-El2/tools/testbench/testfolder" style="background-color: black;color: white;width: 386px;">
+                                
+                            </div>
+                        </div>
+                        <!-- <div  style="margin-top:5px;" >
+                            <h6 style="font-weight: lighter;">Select Your Core log file folder </h6>
+                            
+                            <div id="project-browse" style="width: 415px;" >
+                              
+                                <div class="col-md-3"  >
+                                    
+                                    
+                                  
+                                    <input id="getlogfolder" placeholder="swerv-El2/exec.log" style="background-color: black;color: white;width: 386px;">
+                                    
+                                </div>
+                                
+                            </div>
+                        </div> -->
+                    
+                    </div>
+                        
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div style="text-align: right;" >
+                        <button  class="btn ctrl-btn">
+                            <img src="assets/icons/back.png" onclick="changecoree('formatselect')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
+                        </button>    
+                        <button  class="btn ctrl-btn">
+                            <img src="assets/icons/next.png" onclick="changecoree('command')" style="width: 100%;margin-top: -100px;" />
+                        </button>
+                    </div>
+                        </div>
+
+
+
+                        <!-- --------------------------TESTCASE folder for ASM------------------------->
+                <div id="testcase_asm">
+                    <div class="row main-config">
+                        <div class="col-md-3">
+                            <div class="name-config active">
+                                <p>Extensions</p>
+                            </div>
+                            <div class="name-config active">
+                                <p>Test Format</p>
+                            </div>
+                            <div class="name-config active">
+                                <p>Test Case File/Dir  </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6"  style="margin-left: 70px;">
+
+                        <div  >
+                            <h6 style="font-weight: lighter;">Write the location to save objdump of testcase relative to your core's root path (file name: test.s)</h6>
+                            
+        <div class="col-md-3"  >
+                                
+                                
+                              
+                                <input id="hexDir" placeholder="path/to/dumping/objdump_dir" style="background-color: black;color: white;width: 386px;">
+                                
+                            </div>
+                        </div>
+                        <!--<div  style="margin-top:20px;" >
+                            <h6 style="font-weight: lighter;"> <b>(Optional)</b> Write the file's location to save the assembly instructions </h6>
+                            <div id="project-browse" style="width: 415px;" >
+                                <div class="col-md-3"  >
+                                    <input id="asmDir" placeholder="simulation/assembly.S" style="background-color: black;color: white;width: 386px;">
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                        
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div style="text-align: right;" >
+                        <button  class="btn ctrl-btn">
+                            <img src="assets/icons/back.png" onclick="changecoree('formatselect')" style="width: 100%;margin-left:-1200px;margin-top: -100px;" />
+                        </button>    
+                        <button  class="btn ctrl-btn">
+                            <img src="assets/icons/next.png" onclick="changecoree('command')" style="width: 100%;margin-top: -100px;" />
+                        </button>
+                    </div>
+                        </div>
+                        <!-- ---------------------------extension selection------------------------------->
+                        <!-- <div id="extensionselection">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config active">
+                                        <p>Upload Core </p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>Enter commands </p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>extension</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"  style="margin-left: 70px;">
+    
+                                <div  >
+                                    <h6 style="font-weight: lighter;">Select Your TestCase Extension</h6>
+                                    
+                                  
+                                </div>
+                                <div  style="margin-top:5px;" >
+                                    
+                                    
+                                    
+                            
+                            </div>
+                                
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div style="text-align: right;" style="margin-top: -36px;">
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/back.png" onclick="changecoree('uptestcase')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;" />
+                                </button>    
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/next.png" onclick="changecoree('Stestcasetype')" style="width: 100%;margin-top: -100px;" />
+                                </button>
+                            </div>
+                                </div>
+                        </div> -->
+                                   
+                           
+
+                        <!--  ------------------------- testcase selection type --------- ------------>
+                        <div id="testcasetype">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    
+                                    <div class="name-config active">
+                                        <p>Enter Command </p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>Log File </p>
+                                    </div>
+                                    
+                                    <div class="name-config active">
+                                        <p>Test Type</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"  style="margin-left: 70px;">
+    
+                                <div  >
+                                    <h6 style="font-weight: lighter;">Select your test case type</h6>
+                                    
+                                  
+                                </div>
+                                <div  style="margin-top:5px;" >
+                                    
+                                    
+                                    <form>
+                                        <input type="radio" id="gencoretest" name="upCore" value="RISCV_DV_Tests" checked/>
+                                        <label> RISCV DV Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upCore" value="User_Defined_Tests" />
+                                        <label> User Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upCore" value="Riscv_tests" />
+                                        <label> RISCV Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upCore" value="Self-Checking-vector-tests" />
+                                        <label> Self Checking Vector Tests </label><br>
+                                        <input type="radio" id="gencoretest" name="upCore" value="Swerv_Tests" />
+                                        <label> Swerv Tests </label>
+                                    </form> 
+                            
+                            </div>
+                                
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div style="text-align: right;" style="margin-top: -36px;">
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/back.png" onclick="changecoree('logselect')" style="width: 100%;;margin-left:-1200px;margin-top: -100px;" />
+                                </button>    
+                                <button  class="btn ctrl-btn">
+                                    <img src="assets/icons/next.png" onclick="changecoree('showtests')" style="width: 100%;margin-top: -100px;" />
+                                </button>
+                            </div>
+                                </div>
+                        </div>
+                        <!-------------------------------SHOW TEST CASES-------------->
+                        <div id="showtest">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config active">
+                                        <p>Log File </p>
+                                    </div>
+                                    
+                                    <div class="name-config active">
+                                        <p>Test Type</p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>Test Cases</p>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-7" >
+                                    <form id="uploadcoretestcaseform" style="overflow-y:auto;height:200px">
+                                        
+                                    </form>
+                                     
+                                    
+                                   
+                                 </div>
+                                 
+                                 <div style="margin-top: -40px;">
+                                   
+                                    <button onclick="changecoree('Stestcasetype')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;" />
+                                    </button>
+                                    <button onclick="changecoree('endcore')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
+                                    </button>
+    
+                                    
+                                 </div>
+                                 
+                            </div>
+                        </div>
+            
+            <!-- Instruction Count Specification -->
+            <div id="instr_count" style="display: none;">
+                <div class="row main-config">
+                    <div class="col-md-3">
+                        <div class="name-config active">
+                            <p>Extensions</p>
+                        </div>
+                        <div class="name-config active">
+                            <p>Test Format</p>
+                        </div>
+                        <div class="name-config active">
+                            <p>Test Case File/Dir</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-left: 70px;">
+                        <div>
+                            <h6 style="font-weight: lighter;">Specify number of instructions (Default: 100)</h6>
+                            <div class="col-md-3">
+                                <input id="inst_cnt" placeholder="100" style="background-color: black;
+                                                                              color: white;
+                                                                              width: 386px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div style="text-align: right;">
+                    <button class="btn ctrl-btn">
+                        <img src="assets/icons/back.png" onclick="" style="width: 100%;
+                                                                           margin-left: -1200px;
+                                                                           margin-top: -100px;"/>
+                    </button>
+                    <button class="btn ctrl-btn">
+                        <img src="assets/icons/next.png" onclick="changecoree('command')" style="width: 100%;
+                                                                                                 margin-top: -100px;" />
+                    </button>
+                </div>
+            </div>
+
+
+
+                        <div id="prebuilt-end1" >
+                           
+                            <div id="testname-custom"></div>
+                            <div class="progress" style="margin-top: 30px;">
+                                <div class="progress-bar" id="progress-bar-cus"></div>
+                                <p id="progress-indicator-cus">0%</p>
+                            </div>
+                            <div id="customtext"></div>
+                        </div>
+                       
+                        </div>
+
+                    <!-- ----------------------- PREBUILT CORE ------------------ -->
+                    <div class="config-box" id="prebuilt_core">
+                        <span class="line">
+                            <h2><span>Prebuilt Core Verification</span></h2>
+                        </span>
+                        <br><br>
+
+                        <!-- -------------------- PREBUILT CORE BOX -------------------- -->
+                        <div id="prebuilt-core"style="margin-top:-60px;">
+                            <div class="row main-config">
+
+
+
+
+                                <div class="col-md-3">
+                                    <div class="name-config active">
+                                        <p>Core</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+    
+                                <div class="col-md-5">
+                                    <h6 style="font-weight: lighter;">ISA</h6>
+                                    <form>
+                                        <input type="radio" id="prebuiltCore" name="prebuiltCore" value="ibex" checked />
+                                        <label> IBEX </label>
+                                        <br>
+                                        
+                                        <input type="radio" id="prebuiltCore" name="prebuiltCore" value="swerv" />
+                                        <label> SWERV-EL2 </label>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                            <div style="text-align: right;">
+                                    
+                                <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
+                                    <img src="assets/icons/next.png" style="width: 100%;margin-top:-20px;" />
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- -------------------- PREBUILT ISS BOX -------------------- -->
+                        <div id="prebuilt-iss"style="margin-top:-60px;">
+                            <div class="row main-config">
+                                
+                                <div class="col-md-2">
+                                    <div class="name-config">
+                                        <p>Core</p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>ISS</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+    
+                                
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <h6 style="font-weight: lighter;">ISS</h6>
+                                    <form>
+                                        <input checked type="radio" id="prebuiltISS" name="prebuiltISS" value="spike"   />
+                                        <label> SPIKE </label>
+                                        <br />
+                                        <input type="radio" id="prebuiltISS" name="prebuiltISS" value="whisper"/>
+                                        <label> WHISPER </label>
+                                        <br />
+                                       
+                                        
+                                    </form>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        
+
+                            
+                                
+                            <div style="text-align: right;">
+                                <button onclick="changePrebuilt('core')" class="btn ctrl-btn">
+                                    <img src="assets/icons/back.png" style="width: 100%;margin-top:-50px;margin-left:-1200px;" />
+                                </button>
+                                <button onclick="changePrebuilt('testtype')" class="btn ctrl-btn">
+                                    <img src="assets/icons/next.png" style="width: 100%;margin-top:-50px;" />
+                                </button>
+                            </div>
+                        </div>
+                        <!-- prebuit test type slection------------------------------------------------->
+
+                        <div id="prebuilt-test-list"style="margin-top:-60px;">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config">
+                                        <p>Core</p>
+                                    </div>
+                                    <div class="name-config">
+                                        <p>ISS</p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>Test Type</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-7" >
+                                    <h6 style="font-weight: lighter;">Select test case type</h6>
+                                    <form id="fromswerv">
+                                        <input type="radio" id="pretest" name="preCore" value="RISCV_DV_Tests" />
+                                        <label>RISCV DV Tests </label><br>
+                                        <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
+                                        <label>User Tests </label><br>
+                                        <input type="radio" id="pretest" name="preCore" value="Swerv_Tests" />
+                                        <label>Swerv Tests </label>
+                                    </form> 
+                                   
+                                 </div>
+                                 <div style="margin-top: -40px;">
+                                   
+                                    <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;" />
+                                    </button>
+                                    <button onclick="changePrebuilt('testcase')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
+                                    </button>
+    
+                                    
+                                 </div>
+                                 
+                            </div>
+
+                            <!-- <div class="d-flex justify-content-between align-items-center">
+                                
+                            </div> -->
+
+                            </div>
+                            <!--prebuilt test case tye ibex -->
+
+                        <div id="prebuilt-test-list-ibex"style="margin-top:-60px;">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config">
+                                        <p>Core</p>
+                                    </div>
+                                    <div class="name-config">
+                                        <p>ISS</p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>Test Type</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-7" >
+                                    <h6 style="font-weight: lighter;">Select test case type</h6>
+                                    <form >
+                                        <input type="radio" id="pretest" name="preCore" value="RISCV_DV_Tests" />
+                                        <label>RISCV DV Tests </label><br>
+                                        <input type="radio" id="pretest" name="preCore" value="User_Defined_Tests" />
+                                        <label>User Tests </label>
+                                    </form> 
+                                   
+                                 </div>
+                                 <div style="margin-top: -40px;">
+                                   
+                                    <button onclick="changePrebuilt('iss')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;" />
+                                    </button>
+                                    <button onclick="changePrebuilt('testcase')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
+                                    </button>
+    
+                                    
+                                 </div>
+                                 
+                            </div>
+
+                            <!-- <div class="d-flex justify-content-between align-items-center">
+                                
+                            </div> -->
+
+                            </div>
+                        <!-- -------------------- PREBUILT TEST CASES BOX -------------------- -->
+                        <div id="prebuilt-test"style="margin-top:-60px;">
+                            <div class="row main-config">
+                                <div class="col-md-3">
+                                    <div class="name-config">
+                                        <p>Core</p>
+                                    </div>
+                                    <div class="name-config">
+                                        <p>ISS</p>
+                                    </div>
+                                    <div class="name-config">
+                                        <p>Test Type</p>
+                                    </div>
+                                    <div class="name-config active">
+                                        <p>Test Cases</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-7" >
+                                    <form id="swerv&ibexform" style="overflow-y:auto;height:180px">
+                                        
+                                    </form> 
+                                   
+                                   
+                                 </div>
+                                 <div style="margin-top: -40px;">
+                                   
+                                    <button onclick="changePrebuilt('testtype')" class="btn ctrl-btn">
+                                        <img src="assets/icons/back.png" style="width: 100%;" />
+                                    </button>
+                                    <button onclick="changePrebuilt('end')" class="btn ctrl-btn">
+                                        <img src="assets/icons/next.png" style="width: 100%;margin-left: 540px;" />
+                                    </button>
+    
+                                    
+                                 </div>
+                                 
+                            </div>
+
+                            <!-- <div class="d-flex justify-content-between align-items-center">
+                                
+                            </div> -->
+
+                            </div>
+
+                        <!-- -------------------- PREBUILT END BOX -------------------- -->
+                        <div id="prebuilt-end" >
+                            <div id="testname-pre" ></div>
+                            <div class="progress" style="margin-top: -10px;">
+                                <div class="progress-bar" id="progress-bar-pre" ></div>
+                                <p id="progress-indicator-pre">0%</p>
+                                
+
+                            </div>
+                            <div id="PreText"></div>
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
+    </div>
 
 
 
-        <script src="bootstrap/js/bootstrap.min.js" ></script>
-        <script src="jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
-        <script src="script.js"></script>
-        <script type="text/javascript" src="/eel.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js" ></script>
+    <script src="jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+    <script src="script.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
 
 eel.expose(showCoresFromSoCNow)
 function showCoresFromSoCNow(cleanList){
@@ -1973,116 +1900,211 @@ function opneRecentProject(id){
         //           
                 }
                 }
-                if(comp == "endcore"){
+                if (comp == "endcore") {
+                    document.getElementById("core-command").style.display = "none";
+                    document.getElementById("uploadcore").style.display = "none";
+                    document.getElementById("testcase").style.display = "none";
+                    document.getElementById("testcasetype").style.display = "none";
+                    document.getElementById("showtest").style.display = "none";
+                    document.getElementById("extensionselection").style.display = "none";
+                    document.getElementById("formatSelect").style.display = "none";
+                    document.getElementById("testcase_asm").style.display = "none";
+                    document.getElementById("logselect").style.display = "none";
+                    document.getElementById("instr_count").style.display = "block";
 
                     console.log("CLICKKKKK");
                     
 
-                    var projName = document.getElementById("projectname").value;
-                    var projDir = document.getElementById("path").innerHTML;
-                    var command=document.getElementById("getcommands").value;
-                    var uploadcore = document.getElementById("pathcore").innerHTML;
-                    var testcase = document.getElementById("gettestfolder").value;
-                    var logfile = document.getElementById("getlogfolder").value;
-                    var hexDir = document.getElementById("hexDir").value;
-                    //var asmDir = document.getElementById("asmDir").value;
-                    var testtype=document.getElementsByName("upCore");
-                    var testFormat = document.querySelector('input[name="testformat"]:checked').value;
-                    var extensionsEl = document.getElementsByName("ext") ;
-                    //var logFormat = document.querySelector('input[name="logformat"]:checked').value;
-                    // var selectdv = document.querySelector('input[name="dvtest"]');
-                    // var dvList = []
-                    // for(let i=0;i<selectdv.length;i++ ){
-                    //     if(selectdv[i].checked){
-                    //         dvList.push(selectdv[i].value)
-                    //     }
-                    // }
-                    // eel.selectdvtest(dvList);
-                    var getcommand=document.getElementById("getcommands").value;
-                        var gettestcasefoldername=document.getElementById("gettestfolder").value;
-                        var getlogfoldername=document.getElementById("getlogfolder").value;
-                        
-                        var tests1 = [];
-                                var testCheckboxes1 = document.getElementsByName("coreTest");
-                                for (var i = 0; i < testCheckboxes1.length; i++) {
-                                    if (testCheckboxes1[i].checked) {
-                                        tests1.push(testCheckboxes1[i].value);
-                                    }
-                                }
-                                
-                        
+                    //var projName = document.getElementById("projectname").value;
+                    //var projDir = document.getElementById("path").innerHTML;
+                    //var command=document.getElementById("getcommands").value;
+                    //var uploadcore = document.getElementById("pathcore").innerHTML;
+                    //var testcase = document.getElementById("gettestfolder").value;
+                    //var logfile = document.getElementById("getlogfolder").value;
+                    //var hexDir = document.getElementById("hexDir").value;
+                    ////var asmDir = document.getElementById("asmDir").value;
+                    //var testtype=document.getElementsByName("upCore");
+                    //var testFormat = document.querySelector('input[name="testformat"]:checked').value;
+                    //var extensionsEl = document.getElementsByName("ext") ;
+                    ////var logFormat = document.querySelector('input[name="logformat"]:checked').value;
+                    //// var selectdv = document.querySelector('input[name="dvtest"]');
+                    //// var dvList = []
+                    //// for(let i=0;i<selectdv.length;i++ ){
+                    ////     if(selectdv[i].checked){
+                    ////         dvList.push(selectdv[i].value)
+                    ////     }
+                    //// }
+                    //// eel.selectdvtest(dvList);
+                    //var getcommand=document.getElementById("getcommands").value;
+                    //    var gettestcasefoldername=document.getElementById("gettestfolder").value;
+                    //    var getlogfoldername=document.getElementById("getlogfolder").value;
+                    //    
+                    //    var tests1 = [];
+                    //            var testCheckboxes1 = document.getElementsByName("coreTest");
+                    //            for (var i = 0; i < testCheckboxes1.length; i++) {
+                    //                if (testCheckboxes1[i].checked) {
+                    //                    tests1.push(testCheckboxes1[i].value);
+                    //                }
+                    //            }
+                    //            
+                    //    
+                    //
+                    //var extensions = [];
+                    //for(var k=0;k<extensionsEl.length;k++){
+                    //    if(extensionsEl[k].checked){
+                    //        extensions.push(extensionsEl[k].value);
+                    //    }
+                    //}
+                    //
+                    //var swerv = document.getElementsByName("checkswervtest");
+                    //var checkswervv = "";
+                    //    for (var j =0; j<swerv.length; j++){
+                    //        if(swerv[j].checked){
+                    //
+                    //        checkswervv=swerv[j].value;
+                    //        
+                    //        }
+                    //    }
+                    //        
+                    //if (projName == ""){
+                    //    alert("Please enter a project name");
+                    //} else if (projDir == ""){
+                    //    alert("Please select a directory");
+                    //} else if (uploadcore == " "){
+                    //    alert("Please Upload Core");
+                    //} else if (command == "" && checkswervv == ""){
+                    //        alert("Please Enter command");
+                    //    } else if (testcase == "" && testFormat == "c" && checkswervv == ""){
+                    //        alert("Please select testcase folder");
+                    //    } else if (hexDir == "" && testFormat == "asm" && checkswervv == ""){
+                    //        alert("Please select hex directory");
+                    //    } else if (logfile == "" && checkswervv == ""){
+                    //        alert("Please select location where log file will generate");
+                    //    } else if (tests1.length===0){
+                    //                alert("Select a test")
+                    //        
+                    //    }
+                    //    
+                    //    else{
+                    //
+                    //    
+                    //    var progressbar=document.getElementById("prebuilt-end1").style.display="block";
+                    //    var hidetestenduploadcore=document.getElementById("showtest").style.display="none";
+                    //    for (var j =0; j<testtype.length; j++){
+                    //        if(testtype[j].checked){
+                    //            selectedtype = testtype[j].value;
+                    //        }
+                    //    }
+                    //    
+                    //
+                    //
+                    //    
+                    //
+                    //   
+                    //
+                    //    var config = {
+                    //        "name":projName,
+                    //        "path":projDir,
+                    //        "extensions":extensions,
+                    //        "testFormat": testFormat,
+                    //        "testDir": testcase,
+                    //        //"asmDir":"",
+                    //        "hexDir":hexDir,
+                    //        "command":command,
+                    //        "logFormat":"log",
+                    //        "logFile": logfile,
+                    //        "swerv":checkswervv
+                    //    }
+                    //
+                    //    console.log("DOUBLE CLIUCKKK")
+                    //    
+                    //
+                    //    eel.enduploadcore(config,tests1,selectedtype);
+                    //}
+                }
 
-                    var extensions = [];
-                    for(var k=0;k<extensionsEl.length;k++){
-                        if(extensionsEl[k].checked){
-                            extensions.push(extensionsEl[k].value);
-                        }
-                    }
-
-                    var swerv = document.getElementsByName("checkswervtest");
-                    var checkswervv = "";
-                        for (var j =0; j<swerv.length; j++){
-                            if(swerv[j].checked){
-                    
-                            checkswervv=swerv[j].value;
-                            
+                if (comp == 'inst_count') {
+                    let count = parseInt(document.getElementById('inst_cnt').value);
+                    if (isNaN(count)) {
+                        alert('Instruction count should be a number');
+                    } else {
+                        let projName = document.getElementById("projectname").value;
+                        let projDir = document.getElementById("path").innerHTML;
+                        let command = document.getElementById("getcommands").value;
+                        let uploadcore = document.getElementById("pathcore").innerHTML;
+                        let testcase = document.getElementById("gettestfolder").value;
+                        let logfile = document.getElementById("getlogfolder").value;
+                        let hexDir = document.getElementById("hexDir").value;
+                        let testtype = document.getElementsByName("upCore");
+                        let testFormat = document.querySelector('input[name="testformat"]:checked').value;
+                        let extensionsEl = document.getElementsByName("ext");
+                        let getcommand = document.getElementById("getcommands").value;
+                        let gettestcasefoldername = document.getElementById("gettestfolder").value;
+                        let getlogfoldername = document.getElementById("getlogfolder").value;
+                        
+                        let tests1 = [];
+                        let testCheckboxes1 = document.getElementsByName("coreTest");
+                        for (let i = 0; i < testCheckboxes1.length; ++i) {
+                            if (testCheckboxes1[i].checked) {
+                                tests1.push(testCheckboxes1[i].value);
                             }
                         }
-                            
-                    if (projName == ""){
-                        alert("Please enter a project name");
-                    } else if (projDir == ""){
-                        alert("Please select a directory");
-                    } else if (uploadcore == " "){
-                        alert("Please Upload Core");
-                    } else if (command == "" && checkswervv == ""){
-                            alert("Please Enter command");
-                        } else if (testcase == "" && testFormat == "c" && checkswervv == ""){
+
+                        let extensions = [];
+                        for (let k = 0; k < extensionsEl.length; ++k) {
+                            if (extensionsEl[k].checked) {
+                                extensions.push(extensionsEl[k].value);
+                            }
+                        }
+
+                        let swerv = document.getElementsByName("checkswervtest");
+                        let checkswervv = "";
+                        for (let j = 0; j < swerv.length; ++j) {
+                            if (swerv[j].checked) {
+                                checkswervv = swerv[j].value;
+                            }
+                        }
+
+                        if (projName == "") {
+                            alert("Please enter a project name");
+                        } else if (projDir == "") {
+                            alert("Please select a directory");
+                        } else if (uploadcore == " ") {
+                            alert("Please Upload Core");
+                        } else if (command == "" && checkswervv == "") {
+                                alert("Please Enter command");
+                        } else if (testcase == "" && testFormat == "c" && checkswervv == "") {
                             alert("Please select testcase folder");
-                        } else if (hexDir == "" && testFormat == "asm" && checkswervv == ""){
+                        } else if (hexDir == "" && testFormat == "asm" && checkswervv == "") {
                             alert("Please select hex directory");
-                        } else if (logfile == "" && checkswervv == ""){
+                        } else if (logfile == "" && checkswervv == "") {
                             alert("Please select location where log file will generate");
-                        } else if (tests1.length===0){
-                                    alert("Select a test")
-                            
-                        }
-                        
-                        else{
-
-                        
-                        var progressbar=document.getElementById("prebuilt-end1").style.display="block";
-                        var hidetestenduploadcore=document.getElementById("showtest").style.display="none";
-                        for (var j =0; j<testtype.length; j++){
-                            if(testtype[j].checked){
-                                selectedtype = testtype[j].value;
+                        } else if (tests1.length === 0) {
+                            alert("Select a test");
+                        } else {
+                            let progressbar = document.getElementById("prebuilt-end1").style.display = "block";
+                            let hidetestenduploadcore = document.getElementById("showtest").style.display = "none";
+                            for (let j = 0; j < testtype.length; ++j) {
+                                if (testtype[j].checked) {
+                                    selectedtype = testtype[j].value;
+                                }
                             }
+
+                            let config = {
+                                "name": projName,
+                                "path": projDir,
+                                "extensions": extensions,
+                                "testFormat": testFormat,
+                                "testDir": testcase,
+                                "hexDir": hexDir,
+                                "command": command,
+                                "logFormat": "log",
+                                "logFile": logfile,
+                                "swerv": checkswervv
+                            }
+
+                            eel.enduploadcore(config, tests1, selectedtype);
                         }
-                        
-                    
-                    
-                        
-
-                       
-
-                        var config = {
-                            "name":projName,
-                            "path":projDir,
-                            "extensions":extensions,
-                            "testFormat": testFormat,
-                            "testDir": testcase,
-                            //"asmDir":"",
-                            "hexDir":hexDir,
-                            "command":command,
-                            "logFormat":"log",
-                            "logFile": logfile,
-                            "swerv":checkswervv
-                        }
-
-                        console.log("DOUBLE CLIUCKKK")
-                        
-
-                        eel.enduploadcore(config,tests1,selectedtype);
                     }
                 }
             }
