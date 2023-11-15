@@ -2,9 +2,13 @@
 python3 -m venv .venv
 source .venv/bin/activate
 
+# Install RISCOF (compliance)
+pip3 install wheel icecream
+pip3 install git+https://github.com/riscv/riscof.git
+mkdir compliance && cd compliance
+riscof --verbose info arch-test --clone
+cd ..
+
 # Install riscv-dv dependencies
-cd riscv-dv || {
-    echo "setup.sh must be executed from repo root"
-    exit 1
-}
+cd riscv-dv
 pip3 install -r requirements.txt

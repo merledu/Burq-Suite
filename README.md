@@ -1,5 +1,9 @@
 # Burq Suite (v2.0)
 
+## Prerequisites
+* [riscv-gnu-toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain) (newlib binaries built with `--enable-multilib`)
+* [spike](https://github.com/riscv-software-src/riscv-isa-sim) (built with `--enable-commitlog`)
+
 ## Setup
 Clone the repo.
 ```shell
@@ -13,4 +17,8 @@ Run setup.
 Source created virtual environment.
 ```shell
 source .venv/bin/activate
+```
+Setup compliance
+```shell
+python3 compliance_setup.py
 ```
