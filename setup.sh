@@ -5,10 +5,15 @@ source .venv/bin/activate
 # Install RISCOF (compliance)
 pip3 install wheel icecream
 pip3 install git+https://github.com/riscv/riscof.git
-mkdir compliance && cd compliance
+cd compliance
 riscof --verbose info arch-test --clone
+# shellcheck disable=SC2103
 cd ..
 
 # Install riscv-dv dependencies
 cd riscv-dv
 pip3 install -r requirements.txt
+cd ..
+
+# Creating core environment
+mkdir cores
