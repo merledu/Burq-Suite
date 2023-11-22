@@ -19,7 +19,7 @@
 
     <!-- TOP CONTROLS -->
     <div class="d-flex justify-content-between align-items-center" id="controls">
-      <img src="assets/icons/flash.png" onclick="gotosplash()"/>
+      <img src="assets/icons/flash.png" onclick="gotosplash()" style="    width: 58px;"/>
       <h5> The Burq Suite </h5>
       <div class="login_close pdz">
         <div class="dropdown" style="float:right;    margin-top: -41px; background-color: #16161e;">
@@ -34,7 +34,7 @@
 " src="assets/icons/userlog.png"></button>
             <div class="dropdown-content">
                <a onclick="closeEverythingPaleez()" style="height:43px;color: #0a0808;" alt="close" />Exit</a>
-            <a onclick="gotosplash()" style="height:43px" >Logout</a>
+            <a onclick="gotologin()" style="height:43px" >Logout</a>
            
             </div>
           </div>
@@ -60,7 +60,29 @@
         <!-- EXPLORER -->
         <div id="Explorer" class="side_menus tabcontent2 side_menu">
           <p>Explorer <img src="assets/icons/addfile.png" style="height:20px;margin-left: 60px;" onclick="createfile()"></p>
-          <div id="createfile"style="display:none;"><input id="myinput" type="text" placeholder="Untitled"/></div>
+          <div id="createfile"style="display:none;    background-color: rgb(10, 14, 20);"><input id="myinput" type="text" placeholder=" Create your file"style="
+                margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 164px;
+    margin-left: 9px;
+    border-radius: 8px;
+    background-color: #0a0e14;
+    /* border-color: #464748; */
+    border: none;
+    color: white;"/>
+    <button style="    border-radius: 100%;
+    display: flex;
+    margin-top: -31px;
+    border-color: white;
+    position: relative;
+    margin-left: 172px;
+    width: 49px;
+    height: 30px;
+    background-color: #ffffff00;
+    border: none;
+    color: white;" onclick="document.getElementById('myinput').value = ''">x</button></div>
           <div id="accord">
             <div id="filetree" class="accordion">
                 <!-- <div class="accordion-item">
@@ -259,7 +281,7 @@ function closeTab(linkName, tabName){
         eel.expose(displayTheReport)
         function displayTheReport(core, iss,tests, status, idOfFile, nameOfFile, onlyNameOfFile){
           var tabRecords = document.getElementById("tab_records");
-          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile} <span onclick="closeTab(btn-'${idOfFile}', '${idOfFile}')">x</span> </button>`
+          tabRecords.innerHTML += `<button id="btn-${idOfFile}" class="tablinks" onclick="openTab(event, '${idOfFile}', '${nameOfFile}')">${onlyNameOfFile} </button>`;
 
           var editorRecords = document.getElementById("main_editor");
           var hello = ""
@@ -403,17 +425,29 @@ function closeTab(linkName, tabName){
       eel.stop_index();
             window.close();
     }
+    function gotologin(){
+      eel.stop_indexlog();
+            window.close();
+    }
         
     function createfile(){
       var create=document.getElementById("createfile");
-      create.style.display="block";
+      //create.style.display="block";
+      if (create.style.display === "none") {
+    create.style.display = "block";
+  } else {
+    create.style.display = "none";
+  }
+
       var input1 = document.getElementById("myinput");
      
      
 input1.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
     var namefile = document.getElementById("myinput").value;
-    alert(namefile);
+    //clear input
+    document.getElementById("myinput").value = "";
+    
     eel.createuserfile(namefile);
   }
 })};

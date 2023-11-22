@@ -1,0 +1,44 @@
+
+socnow11:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010074 <main>:
+   10074:	1101                	addi	sp,sp,-32
+   10076:	ce22                	sw	s0,28(sp)
+   10078:	1000                	addi	s0,sp,32
+   1007a:	4799                	li	a5,6
+   1007c:	fef42623          	sw	a5,-20(s0)
+   10080:	4789                	li	a5,2
+   10082:	fef42423          	sw	a5,-24(s0)
+   10086:	fec42703          	lw	a4,-20(s0)
+   1008a:	fe842783          	lw	a5,-24(s0)
+   1008e:	97ba                	add	a5,a5,a4
+   10090:	fef42223          	sw	a5,-28(s0)
+   10094:	0001                	nop
+   10096:	4472                	lw	s0,28(sp)
+   10098:	6105                	addi	sp,sp,32
+   1009a:	8082                	ret
+
+socnow11:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010074 <main>:
+   10074:	1101                	addi	sp,sp,-32
+   10076:	ce22                	sw	s0,28(sp)
+   10078:	1000                	addi	s0,sp,32
+   1007a:	4799                	li	a5,6
+   1007c:	fef42623          	sw	a5,-20(s0)
+   10080:	4789                	li	a5,2
+   10082:	fef42423          	sw	a5,-24(s0)
+   10086:	fec42703          	lw	a4,-20(s0)
+   1008a:	fe842783          	lw	a5,-24(s0)
+   1008e:	97ba                	add	a5,a5,a4
+   10090:	fef42223          	sw	a5,-28(s0)
+   10094:	0001                	nop
+   10096:	4472                	lw	s0,28(sp)
+   10098:	6105                	addi	sp,sp,32
+   1009a:	8082                	ret

@@ -1,6 +1,7 @@
 import eel, os, shutil
 from eel import init, start
-from scripts.utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath,pleaseGeneratorFileUthaKLayAao, pleaseReportFileUthaKLayAao, DRIVERS, RTL_FILES     # file structure utility
+from scripts.utils import getFileStructure, parseFileStructure, pleaseParseTheFilePath,pleaseGeneratorFileUthaKLayAao, pleaseReportFileUthaKLayAao, DRIVERS, RTL_FILES, getEmptyPort    # file structure utility
+from scripts.utils import getEmptyPort, killSpike, getFileID
 from icecream import ic
 import subprocess as sp
 from scripts.reverter import reverter
@@ -8,6 +9,7 @@ from scripts.reverter import reverter
 if __name__ == '__main__':
 
     #type of project select
+
     currentRootDir = os.getcwd()
 
     f = open("web/pathfile","r")
@@ -28,24 +30,53 @@ if __name__ == '__main__':
 
     
     @eel.expose
+    #generalize this flow
     def stop_index():
-        reverter() 
-        os.system("./scripts/openSplash.sh")   
+        ic('stop_index()')
+
+        port = getEmptyPort()
+        reverter(port,f"{currentRootDir}/index.js")
+        os.chdir(f"{currentRootDir}")
+        os.system(f"{currentRootDir}/scripts/openSplash.sh") 
 
     @eel.expose
-    def getTheFileStrucuture():
+    #generalize this flow
+    def stop_indexlog():
+        ic('stop_indexlog()')
+        #open user file and clear it
+        f = open("user.txt","w")
+        f.write(" ")
+        f.close()
+
+        port = getEmptyPort()
+        reverter(port,f"{currentRootDir}/index.js")
+        os.chdir(f"{currentRootDir}")
+        os.system(f"{currentRootDir}/scripts/openSplash.sh")   
+
+    @eel.expose
+    def getTheFileStrucuture(filetoread=None, projectdir=None):
+        ic('getTheFileStrucuture()')
         structure = getFileStructure(project_dir)
         parsedHTML = ""
         parsedHTML = parseFileStructure(structure[""])
         eel.pakrKayLaoFiles(parsedHTML)
         if vc[0]=='custom_test':
-            gen = pleaseGeneratorFileUthaKLayAao()
-            filepath = gen[0]
-            actualFilePath = os.path.join(project_dir,filepath[1:])
-            fileToRead = open(actualFilePath,"r")
-            contentOfFile = fileToRead.read()
-            fileToRead.close()
-            eel.displayTheFile(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
+            if filetoread != None and projectdir != None:
+                os.chdir(projectdir)
+                f = open(f"{filetoread}.c","r")
+                c = f.read()
+                f.close()
+                os.chdir(f"{currentRootDir}")
+                eel.displayTheFile(c, getFileID(filetoread), f"{projectdir}/{filetoread}", filetoread)
+            else:
+                gen = pleaseGeneratorFileUthaKLayAao()
+                filepath = gen[0]
+                actualFilePath = os.path.join(project_dir,filepath[1:])
+                fileToRead = open(actualFilePath,"r")
+                contentOfFile = fileToRead.read()
+                fileToRead.close()
+                
+                eel.displayTheFile(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
         elif vc[0]=='prebuilt_verification' or vc[0] == "custom_verification":
             gen = pleaseReportFileUthaKLayAao()
             filepath = gen[0]
@@ -56,6 +87,7 @@ if __name__ == '__main__':
             parseReport(contentOfFile, gen[1], filepath[1:], filepath.split("/")[-1])
 
     def parseReport(content, p1,p2,p3):
+        ic('parseReport()')
         content_list = content.split("\n")[:-1]
         core = content_list[0].split(",")[1]
         iss = content_list[1].split(",")[1]
@@ -72,6 +104,7 @@ if __name__ == '__main__':
 
     @eel.expose
     def parseFilePathReq(file):
+        ic('parseFilePathReq()')
         try:
             filePath = pleaseParseTheFilePath(file)
             actualFilePath = os.path.join(project_dir,filePath[1:])
@@ -87,6 +120,7 @@ if __name__ == '__main__':
 
     @eel.expose
     def genrtlpy():
+        ic('genrtlpy()')
         file=open("web/pathfile","r")
         contents= file.readlines()
         file.close()
@@ -96,8 +130,10 @@ if __name__ == '__main__':
         os.system("./peripheralScript.py")
         
         os.system("sbt 'runMain GeneratorDriver'")
+
     @eel.expose
     def createuserfile(namefile):
+        ic('createuserfile()')
        
         os.chdir(project_dir)
         os.system(f"touch {namefile}")
@@ -105,14 +141,17 @@ if __name__ == '__main__':
         eel.cleanTheFileTree()
        
         getTheFileStrucuture()
+
     @eel.expose
     def addtest():
+        ic('addtest()')
         os.system(f"cp -a {project_dir} {currentRootDir}/testcases/User_Defined_Tests")
         os.system(f"cp -a {project_dir} {currentRootDir}/testcases/Riscv_tests")
         eel.copytestdone()
 
     @eel.expose
     def savecode(code):
+        ic('savecode()')
         gen = pleaseGeneratorFileUthaKLayAao()
         filepath = gen[0]
         actualFilePath = os.path.join(project_dir,filepath[1:])
@@ -120,6 +159,7 @@ if __name__ == '__main__':
         
     @eel.expose
     def savefile(content, file):
+        ic('savefile')
         os.chdir(project_dir)
         file = open(file,"w")
         file.write(content)
@@ -129,6 +169,7 @@ if __name__ == '__main__':
 
     @eel.expose
     def getcode():
+        ic('getcode()')
         #yahan path jahan user ne main.c save ki
         #wo open write then close
         #run riscv gcc test command 
@@ -163,15 +204,14 @@ if __name__ == '__main__':
             machineCodeFile.close()
             assemblyFile.close()  
             eel.cleanTheFileTree()
-            getTheFileStrucuture()
+            getTheFileStrucuture(filecreate,project_dir)
             eel.showAlert("Code Compiled Successfully")
-            os.chdir(f"/home/mano/Downloads/Burq-Suite")
+            os.chdir(f"{currentRootDir}")
     
 
-
-    
-
-
-    start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=8007)
+    from scripts.replacer import replacer
+    port = getEmptyPort()
+    replacer(port)
+    start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron', '.'], port=port)
 
 
