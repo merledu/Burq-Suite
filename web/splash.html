@@ -1070,7 +1070,7 @@
                                                                            margin-top: -100px;"/>
                     </button>
                     <button class="btn ctrl-btn">
-                        <img src="assets/icons/next.png" onclick="changecoree('command')" style="width: 100%;
+                        <img src="assets/icons/next.png" onclick="changecoree('inst_count')" style="width: 100%;
                                                                                                  margin-top: -100px;" />
                     </button>
                 </div>
@@ -2082,6 +2082,16 @@ function opneRecentProject(id){
                         } else if (tests1.length === 0) {
                             alert("Select a test");
                         } else {
+                            document.getElementById("core-command").style.display = "none";
+                            document.getElementById("uploadcore").style.display = "none";
+                            document.getElementById("testcase").style.display = "none";
+                            document.getElementById("testcasetype").style.display = "none";
+                            document.getElementById("showtest").style.display = "none";
+                            document.getElementById("extensionselection").style.display = "none";
+                            document.getElementById("formatSelect").style.display = "none";
+                            document.getElementById("testcase_asm").style.display = "none";
+                            document.getElementById("logselect").style.display = "none";
+                            document.getElementById("instr_count").style.display = "none";
                             let progressbar = document.getElementById("prebuilt-end1").style.display = "block";
                             let hidetestenduploadcore = document.getElementById("showtest").style.display = "none";
                             for (let j = 0; j < testtype.length; ++j) {
