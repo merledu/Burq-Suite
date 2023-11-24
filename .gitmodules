@@ -1,0 +1,3 @@
+[submodule "riscv_dv/riscv-dv"]
+	path = riscv_dv/riscv-dv
+	url = https://github.com/chipsalliance/riscv-dv.git

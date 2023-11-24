@@ -10,9 +10,9 @@ riscof --verbose info arch-test --clone
 cd ..
 
 # Install riscv-dv dependencies
-cd riscv-dv
+cd riscv_dv/riscv-dv
 pip3 install -r requirements.txt
-cd ..
+cd ../..
 
 # Creating core environment
 mkdir cores
