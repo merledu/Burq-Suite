@@ -7,7 +7,6 @@ pip3 install wheel icecream
 pip3 install git+https://github.com/riscv/riscof.git
 cd compliance
 riscof --verbose info arch-test --clone
-# shellcheck disable=SC2103
 cd ..
 
 # Install riscv-dv dependencies
