@@ -16,3 +16,6 @@ cd ../..
 
 # Creating core environment
 mkdir cores
+
+# Creating logging directory
+mkdir logs
