@@ -5,24 +5,18 @@ from paths import IMAGE_ASSETS
 
 
 class Title(CTkFrame):
-    def __init__(self, parent, logo: str, size: tuple[int, int]):
+    def __init__(self, parent, **kwargs):
         super().__init__(parent)
 
-        # self.fg_color: str = fg_color
+        self.img_logo = CTkImage(dark_image=Image.open(os.path.join(IMAGE_ASSETS, kwargs['logo'])), size=kwargs['size'])
+        self.lbl_logo = CTkLabel(self,
+                                 image=self.img_logo,
+                                 text='Burq Suite',
+                                 text_color='#FFFFFF',
+                                 width=kwargs['size'][0],
+                                 height=kwargs['size'][1],
+                                 corner_radius=0,
+                                 fg_color=kwargs['fg_color'],
+                                 compound='left')
 
-        # Properties
-        # self.configure(fg_color=self.fg_color)
-
-        # Elements
-        self.logo_img   : CTkImage = CTkImage(dark_image=Image.open(os.path.join(IMAGE_ASSETS, logo)),
-                                              size=size)
-        self.logo_label : CTkLabel = CTkLabel(self,
-                                              image=self.logo_img,
-                                              text='')
-        self.title_label: CTkLabel = CTkLabel(self,
-                                              text='Burq Suite',
-                                              text_color='#FFFFFF')
-
-        # Structure
-        self.logo_label.grid(row=0, column=0)
-        self.title_label.grid(row=0, column=1)
+        self.lbl_logo.grid(row=0, column=0, sticky='nsew')

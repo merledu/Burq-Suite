@@ -14,13 +14,12 @@ class DUTMenu(Page):
         self.title          = Title(self, 'flash.png', (64, 64))
         self.custom_dut_btn = CTkButton(self, text='Custom Core Verification',
                                         command=self.custom_dut_verification)
-        self.config_menu    = ConfigMenu(parent)
+        self.config_menu    = ConfigMenu(parent, self)
 
-        self.title.grid(row=0,
-                        column=0)
-        self.custom_dut_btn.grid(row=1,
-                                 column=0)
+        self.title.grid(row=0, column=0)
+        self.custom_dut_btn.grid(row=1, column=0)
 
     def custom_dut_verification(self):
-        logging.info('Verification selection: Custom DUT')
+        logging.info('DUT selection: Custom DUT')
+        self.config_menu.set_category(0)
         self.config_menu.show()
