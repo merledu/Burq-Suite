@@ -2,24 +2,24 @@ import os, logging, sys, re, random, \
     yaml
 
 from importlib import import_module
-from icecream import ic
 
-from main import RISCV_DV_ROOT
+from globals import RISCV_DV_ROOT, RISCV_DV_ENV
 
-riscv_dv_lib = import_module('riscv-dv.riscv-dv.scripts.lib')
-
-
-YAMLS          = os.path.join(RISCV_DV_ROOT, 'yaml')
-SIMULATOR_YAML = os.path.join(YAMLS, 'simulator.yaml')
-ISS_YAML       = os.path.join(YAMLS, 'iss.yaml')
-TESTLIST_YAML  = os.path.join(YAMLS, 'base_testlist.yaml')
-DEFAULTS       = {'SIMULATOR': 'pyflow',
-                  'MABI'     : 'ilp32',
-                  'TIMEOUT'  : 1200,
-                  'ISS'      : 'spike'}
+# riscv_dv_lib = import_module('riscv-dv.riscv-dv.scripts.lib')
+# riscv_dv_lib = import_module('riscv-dv.scripts.lib')
 
 
-def get_testlist():
+# YAMLS = os.path.join(RISCV_DV_ROOT, 'yaml')
+# SIMULATOR_YAML = os.path.join(YAMLS, 'simulator.yaml')
+# ISS_YAML = os.path.join(YAMLS, 'iss.yaml')
+TESTLIST_YAML = os.path.join(RISCV_DV_ENV, 'working_base_testlist.yaml')
+# DEFAULTS = {'SIMULATOR': 'pyflow',
+#             'MABI'     : 'ilp32',
+#             'TIMEOUT'  : 1200,
+#             'ISS'      : 'spike'}
+
+
+def get_working_base_testlist():
     testlist = riscv_dv_lib.read_yaml(TESTLIST_YAML)
     return [re.sub('_', ' ', test['test']) for test in testlist]
 
@@ -135,3 +135,6 @@ def get_testlist():
 #         yaml_data = riscv_dv_lib.read_yaml(ISS_YAML)
 #
 #         yaml_dir: str = os.path.dirname(ISS_YAML)
+
+if __name__ == '__main__':
+    print(f'{get_working_base_testlist() = }')

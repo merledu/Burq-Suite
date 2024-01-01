@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/global.css">
+    <link type="text/css" rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="container-fluid d-flex flex-row vh-100 pe-0">
+        <!-- Left Menu -->
+        <div class="container d-flex flex-column p-5">
+            <h1 class="text-white mb-auto">
+                <img src="images/flash64.png">Burq Suite
+            </h1>
+            <div class="d-flex flex-row justify-content-between mt-auto mb-auto">
+                <button class="border border-0" onclick="open_configs(this, 'custom')">
+                    <span>Custom</span>
+                    <br>
+                    DUT Verification
+                </button>
+                <button class="border border-0" onclick="open_configs(this, 'prebuilt')">
+                    <span>Prebuilt</span>
+                    <br>
+                    DUT Verification
+                </button>
+                <button class="border border-0" onclick="open_configs(this, 'soc-now')">
+                    <span><img src="images/soc-now.png" class="img-fluid"></span>
+                    <br>
+                    DUT Verification
+                </button>
+            </div>
+            <p id="credit" class="mt-auto mb-0">Powered by Micro Electronics Research Lab (MERL) - UIT</p>
+        </div>
+        <!-- Right Menu -->
+        <div class="container w-50 d-flex flex-column p-5" id="proj_menu">
+            <h2 class="mb-3 text-white">Project</h2>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="dir">Dir</label>
+                <input class="form-control text-black" id="dir" required>
+                <button class="btn btn-outline-secondary" onclick="open_folder_dialog()">...</button>
+            </div>
+            <h2 class="text-white mb-3">Recent</h2>
+            <!-- TODO: Add project tracking -->
+        </div>
+    </div>
+    <div class="modal fade" id="missing_proj_dir" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Missing Project Directory</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please choose project directory before continuing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

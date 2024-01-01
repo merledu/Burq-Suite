@@ -1,0 +1,41 @@
+body {
+    background-color: #24272E;
+}
+
+div#dut_types.container.d-flex.flex-column.p-5.w-50 {
+    background-color: #15191A;
+}
+
+div.container.rounded-pill.p-3.mb-4.d-flex.flex-row.justify-content-center {
+    background-color: #A851FF;
+    box-shadow: 10px 10px 10px #00000078;
+}
+
+div.container.p-3.mb-4.d-flex.flex-row.justify-content-center {
+    background-color: #1A1D22;
+    box-shadow: 10px 10px 10px #00000078;
+}
+
+/*
+div#dut_configs {
+    display: flex;
+    flex-direction: column;
+}
+*/
+
+div#testcase_configs {
+    display: none;
+    flex-direction: column;
+}
+
+button.btn.me-auto.text-white {
+    display: none;
+}
+
+i.bi-arrow-left-square-fill {
+    font-size: 2rem;
+}
+
+i.bi-arrow-right-square-fill {
+    font-size: 2rem;
+}
