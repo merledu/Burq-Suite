@@ -13,6 +13,7 @@ def expose(window):
         open_login,
         select_proj_folder,
         open_dut_configs,
+        get_dut_type,
         open_dut_menu,
         upload_dut,
         select_target,

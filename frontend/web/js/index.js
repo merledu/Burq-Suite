@@ -5,7 +5,7 @@ async function open_folder_dialog() {
 }
 
 
-function open_configs(btn_elem, dut_type) {
+function open_configs(dut_type) {
     const proj_dir = document.getElementById('dir');
     const missing_proj_dir_modal = new bootstrap.Modal('#missing_proj_dir');
 

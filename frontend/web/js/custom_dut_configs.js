@@ -5,6 +5,21 @@ const testcase_div = document.getElementById('testcase_div');
 testcase_div.style.display = 'none';
 
 
+async function highlight_dut_type() {
+    const dut_type = await pywebview.api.get_dut_type();
+    const dut_type_div = document.getElementById(dut_type);
+    dut_type_div.classList.add('rounded-pill');
+
+    if (dut_type === 'custom') {
+        dut_type_div.style.backgroundColor = '#A851FF';
+    } else if (dut_type === 'prebuilt') {
+        dut_type_div.style.backgroundColor = '#0CA17E';
+    } else if (dut_type === 'soc-now') {
+        dut_type_div.style.backgroundColor = '#436EEE';
+    }
+}
+
+
 async function upload_dut() {
     const dut_dir = await pywebview.api.upload_dut();
 

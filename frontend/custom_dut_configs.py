@@ -4,6 +4,10 @@ from frontend.frontend_functs import select_folder
 from globals import windows, configs
 
 
+def get_dut_type():
+    return configs['dut_type']
+
+
 def upload_dut():
     dir_paths = select_folder(windows['main'])
     dir_path = dir_paths[0] if dir_paths else dir_paths

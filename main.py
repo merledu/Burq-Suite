@@ -15,16 +15,15 @@ if __name__ == '__main__':
         level=logging.DEBUG
     )
 
-    main_window = webview.create_window(
+    windows['main'] = webview.create_window(
         title='Burq Suite',
         # url='frontend/web/splash.html',
-        # url='frontend/web/index.html',
-        url='frontend/web/custom_dut_configs.html',
+        url='frontend/web/index.html',
+        # url='frontend/web/custom_dut_configs.html',
         width=1200,
         height=600,
         resizable=False
     )
-    windows['main'] = main_window
 
     logging.info('Starting Burq Suite')
-    webview.start(expose, [main_window], debug=False)
+    webview.start(expose, [windows['main']], debug=True)

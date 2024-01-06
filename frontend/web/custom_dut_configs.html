@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="css/global.css">
     <link type="text/css" rel="stylesheet" href="css/custom_dut_configs.css">
 </head>
-<body>
+<body onload="highlight_dut_type()">
     <div class="container-fluid d-flex flex-row vh-100 ps-0">
         <!-- Left Pane -->
         <div class="container d-flex flex-column p-5 w-50" id="dut_types">
@@ -19,13 +19,16 @@
                 </button>
             </div>
             <h2 class="text-white align-self-center mt-5 mb-5">- DUT Type -</h2>
-            <div class="container rounded-pill p-3 mb-4 d-flex flex-row justify-content-center">
+            <!--
+            <div class="container p-3 mb-4 d-flex flex-row justify-content-center rounded-pill">
+            -->
+            <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="custom">
                 <p class="text-white mt-auto mb-auto">Custom DUT Verification</p>
             </div>
-            <div class="container p-3 mb-4 d-flex flex-row justify-content-center">
+            <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="prebuilt">
                 <p class="text-white mt-auto mb-auto">Prebuilt DUT Verification</p>
             </div>
-            <div class="container p-3 mb-4 d-flex flex-row justify-content-center">
+            <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="soc-now">
                 <p class="text-white mt-auto mb-auto">SoC-Now DUT Verification</p>
             </div>
         </div>
@@ -128,6 +131,19 @@
                 <button class="btn ms-auto text-white" onclick="open_testcase_configs()">
                     <i class="bi-arrow-right-square-fill"></i>
                 </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="empty_fields" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Empty Fields</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please make sure to fill all the fields before continuing.</p>
+                </div>
             </div>
         </div>
     </div>
