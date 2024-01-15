@@ -5,7 +5,7 @@ from importlib import import_module
 
 from globals import RISCV_DV_ROOT, RISCV_DV_ENV
 
-# riscv_dv_lib = import_module('riscv-dv.riscv-dv.scripts.lib')
+riscv_dv_lib = import_module('riscv-dv.riscv-dv.scripts.lib')
 # riscv_dv_lib = import_module('riscv-dv.scripts.lib')
 
 

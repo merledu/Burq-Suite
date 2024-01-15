@@ -2,10 +2,10 @@ from importlib import import_module
 
 from frontend.splash import *
 from frontend.index import *
-from frontend.custom_dut_configs import *
+from frontend.configs import *
 from frontend.config_menu import *
 
-# riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
+riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 
 
 def expose(window):
@@ -22,5 +22,5 @@ def expose(window):
         get_log_dir,
         get_log_file,
 
-        # riscv_dv_interface.get_working_base_testlist
+        riscv_dv_interface.get_working_base_testlist
     )

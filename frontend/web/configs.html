@@ -7,9 +7,9 @@
     <link type="text/css" rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="bootstrap-icons-1.11.2/font/bootstrap-icons.min.css">
     <link type="text/css" rel="stylesheet" href="css/global.css">
-    <link type="text/css" rel="stylesheet" href="css/custom_dut_configs.css">
+    <link type="text/css" rel="stylesheet" href="css/configs.css">
 </head>
-<body onload="highlight_dut_type()">
+<body>
     <div class="container-fluid d-flex flex-row vh-100 ps-0">
         <!-- Left Pane -->
         <div class="container d-flex flex-column p-5 w-50" id="dut_types">
@@ -19,9 +19,6 @@
                 </button>
             </div>
             <h2 class="text-white align-self-center mt-5 mb-5">- DUT Type -</h2>
-            <!--
-            <div class="container p-3 mb-4 d-flex flex-row justify-content-center rounded-pill">
-            -->
             <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="custom">
                 <p class="text-white mt-auto mb-auto">Custom DUT Verification</p>
             </div>
@@ -34,14 +31,16 @@
         </div>
         <!-- Right Menu -->
         <div class="container d-flex flex-column p-5">
-            <!-- DUT Configs -->
-            <div id="dut_configs">
+            <!-- Custom DUT Configs -->
+            <div id="custom_dut_configs">
+                <div class="d-flex flex-row pb-2 justify-content-center">
+                    <h4 class="text-white">DUT Configs</h4>
+                </div>
                 <!-- Upload DUT -->
-                <div class="input-group p-2 has-validation">
+                <div class="input-group p-2">
                     <label class="input-group-text text-black" for="dut">DUT</label>
-                    <input class="form-control text-black" id="dut" required>
+                    <input class="form-control text-black" id="dut">
                     <button class="btn btn-outline-secondary" onclick="upload_dut()">Upload</button>
-                    <div class="invalid-feedback">Do not forget to upload the DUT</div>
                 </div>
                 <!-- Select Extension(s) -->
                 <div class="d-flex flex-row p-2">
@@ -74,37 +73,37 @@
                     </div>
                 </div>
                 <!-- Disassembly Dump -->
-                <div class="input-group p-2 has-validation">
+                <div class="input-group p-2">
                     <label class="input-group-text" for="dut_disasm">
                         <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip" data-bs-title="A testcase disassembly will be copied to the specified folder from where the DUT will utilize to run the testcase. File name of the disassembly: test.S">
                             DUT Disassembly
                         </a>
                     </label>
-                    <input class="form-control text-black" readonly id="dut_disasm" required>
+                    <input class="form-control text-black" id="dut_disasm">
                     <button class="btn btn-outline-secondary" onclick="dut_disasm_path()">...</button>
-                    <div class="invalid-feedback">You forgot about the disassembly</div>
                 </div>
                 <!-- DUT compile and run testcase -->
-                <div class="input-group p-2 has-validation">
+                <div class="input-group p-2">
                     <label class="input-group-text text-black" for="dut_cmd">
                         <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip" data-bs-title="Enter the command(s) to compile the DUT and run testcase. The command will be executed from the root of the DUT folder">
                             CMD
                         </a>
                     </label>
-                    <input class="form-control text-black" id="dut_cmd" required>
-                    <div class="invalid-feedback">You missed the DUT commands</div>
+                    <input class="form-control text-black" id="dut_cmd">
                 </div>
                 <!-- DUT log path -->
-                <div class="input-group p-2 has-validation">
+                <div class="input-group p-2">
                     <span class="input-group-text text-black">DUT Log</span>
-                    <input class="form-control text-black" id="log_dir" readonly placeholder="path" required>
+                    <input class="form-control text-black" id="log_dir" placeholder="path">
                     <button class="btn btn-outline-secondary" onclick="get_log_dir()">/</button>
-                    <input class="form-control text-black" id="log_file" placeholder="filename" required>
-                    <div class="invalid-feedback">Log file specification is needed</div>
+                    <input class="form-control text-black" id="log_file" placeholder="filename">
                 </div>
             </div>
             <!-- Testcase Configs -->
-            <div id="testcase_configs">
+            <div id="testcase_configs" class="d-none">
+                <div class="d-flex flex-row pb-2 justify-content-center">
+                    <h4 class="text-white">Testcase Configs</h4>
+                </div>
                 <!-- Verification Framework -->
                 <div class="input-group p-2">
                     <label class="input-group-text text-black" for="verif_fw">Verification Framework</label>
@@ -116,7 +115,7 @@
                     </select>
                 </div>
                 <!-- Testcase Select -->
-                <div class="input-group p-2" id="testcase_div">
+                <div class="input-group p-2 d-none" id="testcase_div">
                     <label class="input-group-text text-black" for="testcases">Testcase</label>
                     <select class="form-select" id="testcases">
                         <option>Select...</option>
@@ -125,7 +124,7 @@
             </div>
             <!-- Navigation -->
             <div class="d-flex flex-row mt-auto">
-                <button class="btn me-auto text-white" onclick="open_dut_configs()">
+                <button class="btn me-auto text-white d-none" onclick="open_dut_configs()">
                     <i class="bi-arrow-left-square-fill"></i>
                 </button>
                 <button class="btn ms-auto text-white" onclick="open_testcase_configs()">
@@ -148,7 +147,6 @@
         </div>
     </div>
     <script src="js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js"></script>
-    <script src="js/dut_config.js"></script>
-    <script src="js/custom_dut_configs.js"></script>
+    <script src="js/configs.js"></script>
 </body>
 </html>

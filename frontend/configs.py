@@ -24,13 +24,11 @@ def select_target(target):
 
 
 def dump_dut_disasm():
-    if 'dut_path' in configs and configs['dut_path']:
-        dir_path = select_folder(windows['main'], configs['dut_path'][0])
-    else:
-        dir_path = select_folder(windows['main'])
+    dir_path = select_folder(windows['main'], configs['dut_path'])[0] if 'dut_path' in configs and configs['dut_path'] \
+               else select_folder(windows['main'])[0]
     logging.info(f'DUT disassembly dump directory: {dir_path}')
     configs['dut_disasm_path'] = dir_path
-    return
+    return {'dir_path': dir_path}
 
 
 def get_dut_cmd(cmd):
@@ -40,10 +38,8 @@ def get_dut_cmd(cmd):
 
 
 def get_log_dir():
-    if 'dut_path' in configs and configs['dut_path']:
-        dir_path = select_folder(windows['main'], configs['dut_path'])
-    else:
-        dir_path = select_folder(windows['main'])
+    dir_path = select_folder(windows['main'], configs['dut_path'])[0] if 'dut_path' in configs and configs['dut_path'] \
+               else select_folder(windows['main'])[0]
     return {'dir_path': dir_path}
 
 

@@ -16,10 +16,5 @@ def open_dut_configs(dut_type):
     logging.info(f'Selected DUT type: {dut_type.title()} DUT')
     configs['dut_type'] = dut_type
 
-    if dut_type == 'custom':
-        windows['main'].load_url('frontend/web/custom_dut_configs.html')
-    elif dut_type == 'prebuilt':
-        windows['main'].load_url('frontend/web/prebuilt_dut_configs.html')
-    elif dut_type == 'soc-now':
-        windows['main'].load_url('frontend/web/soc-now_dut_configs.html')
+    windows['main'].load_url('frontend/web/configs.html')
     return

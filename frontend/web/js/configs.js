@@ -1,8 +1,10 @@
 const tooltip_trigger_list = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltip_list = [...tooltip_trigger_list].map(tooltip_trigger_elem => new bootstrap.Tooltip(tooltip_trigger_elem));
 
-const testcase_div = document.getElementById('testcase_div');
-testcase_div.style.display = 'none';
+
+function open_dut_menu() {
+    pywebview.api.open_dut_menu();
+}
 
 
 async function highlight_dut_type() {
@@ -18,6 +20,11 @@ async function highlight_dut_type() {
         dut_type_div.style.backgroundColor = '#436EEE';
     }
 }
+
+
+window.addEventListener('pywebviewready', () => {
+    highlight_dut_type();
+});
 
 
 async function upload_dut() {
@@ -45,7 +52,7 @@ function select_target() {
 async function dut_disasm_path() {
     const dir = await pywebview.api.dump_dut_disasm();
 
-    document.getElementById('dut_disasm').value = dir['dir_path'][0];
+    document.getElementById('dut_disasm').value = dir['dir_path'];
 }
 
 
@@ -57,8 +64,7 @@ function get_dut_cmd() {
 async function get_log_dir() {
     const dir = await pywebview.api.get_log_dir();
 
-    console.log(dir);
-    document.getElementById('log_dir').value = dir['dir_path'][0];
+    document.getElementById('log_dir').value = dir['dir_path'];
 }
 
 
@@ -77,42 +83,37 @@ function open_testcase_configs() {
     const log_dir = document.getElementById('log_dir');
     const log_file = document.getElementById('log_file');
 
-    if (!upload_dut.value) {
-        upload_dut.classList.add('is-invalid');
-    }
-    if (!dut_disasm.value) {
-        dut_disasm.classList.add('is-invalid');
-    }
-    if (!dut_cmd.value) {
-        dut_cmd.classList.add('is-invalid');
-    }
-    // if (!(log_dir.value && log_file.value)) {
-    //     log_dir.classList.add('is-invalid');
-    //     log_file.classList.add('is-invalid');
-    // }
-    if (!log_dir.value) {
-        log_dir.classList.add('is-invalid');
-    }
-    if (!log_file.value) {
-        log_file.classList.add('is-invalid');
-    }
+    const empty_fields_modal = new bootstrap.Modal('#empty_fields');
 
-    // document.getElementById('dut_configs').style.display = 'none';
-    // document.querySelector('button.btn.ms-auto.text-white').style.display = 'none';
-    // document.getElementById('testcase_configs').style.display = 'flex';
-    // document.querySelector('button.btn.me-auto.text-white').style.display = 'block';
+    if (upload_dut.value && dut_disasm.value && dut_cmd.value && log_dir.value && log_file.value) {
+        document.getElementById('custom_dut_configs').classList.add('d-none');
+        document.querySelector('button.btn.ms-auto.text-white').classList.add('d-none');
+        document.getElementById('testcase_configs').classList.remove('d-none');
+        document.querySelector('button.btn.me-auto.text-white').classList.remove('d-none');
+        // document.getElementById('custom_dut_configs').style.display = 'none';
+        // document.querySelector('button.btn.ms-auto.text-white').style.display = 'none';
+        // document.getElementById('testcase_configs').style.display = 'flex';
+        // document.querySelector('button.btn.me-auto.text-white').style.display = 'block';
+    } else {
+        empty_fields_modal.toggle();
+    }
 }
 
 
 function open_dut_configs() {
-    document.getElementById('testcase_configs').style.display = 'none';
-    document.querySelector('button.btn.me-auto.text-white').style.display = 'none';
-    document.getElementById('dut_configs').style.display = 'flex';
-    document.querySelector('button.btn.ms-auto.text-white').style.display = 'block';
+    document.getElementById('testcase_configs').classList.add('d-none');
+    document.querySelector('button.btn.me-auto.text-white').classList.add('d-none');
+    document.getElementById('custom_dut_configs').classList.remove('d-none');
+    document.querySelector('button.btn.ms-auto.text-white').classList.remove('d-none');
+    // document.getElementById('testcase_configs').style.display = 'none';
+    // document.querySelector('button.btn.me-auto.text-white').style.display = 'none';
+    // document.getElementById('custom_dut_configs').style.display = 'flex';
+    // document.querySelector('button.btn.ms-auto.text-white').style.display = 'block';
 }
 
 
 async function show_testcases() {
+    const testcase_div = document.getElementById('testcase_div');
     const verif_fw = document.getElementById('verif_fw');
     const testcases = document.getElementById('testcases');
 
@@ -128,8 +129,6 @@ async function show_testcases() {
             testcase_opt.innerHTML = testcase;
             testcases.insertAdjacentElement('beforeend', testcase_opt);
         }
-        testcase_div.style.display = 'flex';
-    } else {
-        testcase_div.style.display = 'none';
+        testcase_div.classList.remove('d-none');
     }
 }
