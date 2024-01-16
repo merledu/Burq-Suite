@@ -22,5 +22,6 @@ def expose(window):
         get_log_dir,
         get_log_file,
 
-        riscv_dv_interface.get_working_base_testlist
+        riscv_dv_interface.get_working_base_testlist,
+        riscv_dv_interface.get_simulator_list
     )

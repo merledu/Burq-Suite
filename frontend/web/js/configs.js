@@ -90,10 +90,6 @@ function open_testcase_configs() {
         document.querySelector('button.btn.ms-auto.text-white').classList.add('d-none');
         document.getElementById('testcase_configs').classList.remove('d-none');
         document.querySelector('button.btn.me-auto.text-white').classList.remove('d-none');
-        // document.getElementById('custom_dut_configs').style.display = 'none';
-        // document.querySelector('button.btn.ms-auto.text-white').style.display = 'none';
-        // document.getElementById('testcase_configs').style.display = 'flex';
-        // document.querySelector('button.btn.me-auto.text-white').style.display = 'block';
     } else {
         empty_fields_modal.toggle();
     }
@@ -105,16 +101,11 @@ function open_dut_configs() {
     document.querySelector('button.btn.me-auto.text-white').classList.add('d-none');
     document.getElementById('custom_dut_configs').classList.remove('d-none');
     document.querySelector('button.btn.ms-auto.text-white').classList.remove('d-none');
-    // document.getElementById('testcase_configs').style.display = 'none';
-    // document.querySelector('button.btn.me-auto.text-white').style.display = 'none';
-    // document.getElementById('custom_dut_configs').style.display = 'flex';
-    // document.querySelector('button.btn.ms-auto.text-white').style.display = 'block';
 }
 
 
-async function show_testcases() {
+async function show_testcases(verif_fw) {
     const testcase_div = document.getElementById('testcase_div');
-    const verif_fw = document.getElementById('verif_fw');
     const testcases = document.getElementById('testcases');
 
     if (verif_fw.value) {
@@ -131,4 +122,26 @@ async function show_testcases() {
         }
         testcase_div.classList.remove('d-none');
     }
+}
+
+
+async function show_simulators() {
+    const simulator_select_div = document.getElementById('simulator_select_div');
+    const simulators = document.getElementById('simulator_select');
+
+    const simulator_list = await pywebview.api.get_simulator_list();
+    for (let simulator of simulator_list) {
+        let simulator_opt = document.createElement('option');
+        simulator_opt.value = simulator;
+        simulator_opt.innerHTML = simulator;
+        simulators.insertAdjacentElement('beforeend', simulator_opt);
+    }
+    simulator_select_div.classList.remove('d-none');
+}
+
+
+function show_testcase_configs() {
+    const verif_fw = document.getElementById('verif_fw');
+
+    show_testcases(verif_fw);
 }

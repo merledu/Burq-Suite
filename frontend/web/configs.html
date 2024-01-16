@@ -107,8 +107,8 @@
                 <!-- Verification Framework -->
                 <div class="input-group p-2">
                     <label class="input-group-text text-black" for="verif_fw">Verification Framework</label>
-                    <select class="form-select" id="verif_fw" onchange="show_testcases()">
-                        <option value="">Select...</option>
+                    <select class="form-select" id="verif_fw" onchange="show_testcase_configs()">
+                        <option disabled selected value="">--- Select a verification framework ---</option>
                         <option value="riscv-dv">RISCV-DV</option>
                         <option value="riscv-arch-test">RISCV Compliance</option>
                         <option value="self checking vector tests">Self Checking Vector Tests</option>
@@ -118,7 +118,14 @@
                 <div class="input-group p-2 d-none" id="testcase_div">
                     <label class="input-group-text text-black" for="testcases">Testcase</label>
                     <select class="form-select" id="testcases">
-                        <option>Select...</option>
+                        <option disabled selected value="">--- Select testcase ---</option>
+                    </select>
+                </div>
+                <!-- RISC-V DV: Simulator Select -->
+                <div class="input-group p-2 d-none" id="simulator_select_div">
+                    <label class="input-group-text text-black" for="simulator_select">Simulator</label>
+                    <select class="form-select" id="simulator_select">
+                        <option disabled selected value="">--- Select simulator ---</option>
                     </select>
                 </div>
             </div>

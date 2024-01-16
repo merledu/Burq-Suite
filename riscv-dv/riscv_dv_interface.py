@@ -2,6 +2,7 @@ import os, logging, sys, re, random, \
     yaml
 
 from importlib import import_module
+from pprint import pprint
 
 from globals import RISCV_DV_ROOT, RISCV_DV_ENV
 
@@ -9,8 +10,8 @@ riscv_dv_lib = import_module('riscv-dv.riscv-dv.scripts.lib')
 # riscv_dv_lib = import_module('riscv-dv.scripts.lib')
 
 
-# YAMLS = os.path.join(RISCV_DV_ROOT, 'yaml')
-# SIMULATOR_YAML = os.path.join(YAMLS, 'simulator.yaml')
+RISCV_DV_YAMLS = os.path.join(RISCV_DV_ROOT, 'yaml')
+SIMULATOR_YAML = os.path.join(RISCV_DV_YAMLS, 'simulator.yaml')
 # ISS_YAML = os.path.join(YAMLS, 'iss.yaml')
 TESTLIST_YAML = os.path.join(RISCV_DV_ENV, 'working_base_testlist.yaml')
 # DEFAULTS = {'SIMULATOR': 'pyflow',
@@ -22,6 +23,10 @@ TESTLIST_YAML = os.path.join(RISCV_DV_ENV, 'working_base_testlist.yaml')
 def get_working_base_testlist():
     testlist = riscv_dv_lib.read_yaml(TESTLIST_YAML)
     return [re.sub('_', ' ', test['test']) for test in testlist]
+
+
+def get_simulator_list():
+    return riscv_dv_lib.read_yaml(SIMULATOR_YAML)
 
 
 # def run_test(**configs):
@@ -136,5 +141,6 @@ def get_working_base_testlist():
 #
 #         yaml_dir: str = os.path.dirname(ISS_YAML)
 
+
 if __name__ == '__main__':
-    print(f'{get_working_base_testlist() = }')
+    pprint(get_simulator_list())
