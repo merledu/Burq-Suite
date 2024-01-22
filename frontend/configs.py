@@ -1,50 +1,28 @@
-import logging, os
-
-from frontend.frontend_functs import select_folder
-from globals import windows, configs
+from frontend.frontend_functs import *
+from globals import *
 
 
 def get_dut_type():
     return configs['dut_type']
 
 
-def upload_dut():
-    dir_paths = select_folder(windows['main'])
-    dir_path = dir_paths[0] if dir_paths else dir_paths
-    logging.info(f'Uploaded DUT: {dir_path}')
-    configs['dut_path'] = dir_path
-    return {'dir_path': dir_path}
+def get_dir(root_dir=''):
+    dir_path = select_folder(windows['main'], root_dir) if os.path.isdir(root_dir) else select_folder(windows['main'])
+    return dir_path[0] if dir_path else ''
 
 
 def select_target(target):
     target = 'rv32' + target
-    logging.info(f'Selected target: {target}')
     configs['target'] = target
-    return
+    logging.info(f'Selected target: {target}')
 
 
-def dump_dut_disasm():
-    dir_path = select_folder(windows['main'], configs['dut_path'])[0] if 'dut_path' in configs and configs['dut_path'] \
-               else select_folder(windows['main'])[0]
-    logging.info(f'DUT disassembly dump directory: {dir_path}')
-    configs['dut_disasm_path'] = dir_path
-    return {'dir_path': dir_path}
-
-
-def get_dut_cmd(cmd):
-    logging.info(f'DUT command: {cmd}')
-    configs['dut_cmd'] = cmd
-    return
-
-
-def get_log_dir():
-    dir_path = select_folder(windows['main'], configs['dut_path'])[0] if 'dut_path' in configs and configs['dut_path'] \
-               else select_folder(windows['main'])[0]
-    return {'dir_path': dir_path}
-
-
-def get_log_file(dir_path, filename):
+def set_log_file(dir_path, filename):
     file = os.path.join(dir_path, filename)
-    logging.info(f'DUT log file selected: {file}')
     configs['dut_log'] = file
-    return
+    logging.info(f'DUT log file selected: {file}')
+
+
+def set_config(key, value, log_info_msg):
+    configs[key] = value
+    logging.info(log_info_msg)

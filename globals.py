@@ -1,4 +1,4 @@
-import os
+import os, logging
 
 
 # Paths
@@ -12,10 +12,20 @@ IMAGE_ASSETS = os.path.join(BURQ_SUITE_ROOT, 'frontend', 'assets', 'images')
 RISCV_DV_ENV = os.path.join(BURQ_SUITE_ROOT, 'riscv-dv')
 RISCV_DV_ROOT = os.path.join(RISCV_DV_ENV, 'riscv-dv')
 
+TOOLS = os.path.join(BURQ_SUITE_ROOT, 'tools')
+RISCV_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv-gnu-toolchain', 'bin')
+SPIKE = os.path.join(TOOLS, 'spike', 'bin')
+
 
 # Environment Variables
+os.environ['RISCV_GCC'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-gcc')
+os.environ['RISCV_OBJCOPY'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-objcopy')
+os.environ['SPIKE_PATH'] = SPIKE
 
 
 # Utilities
+debug = False
+loglevel = logging.DEBUG if debug else logging.INFO
 windows = {}
 configs = {}
+stderr = {}

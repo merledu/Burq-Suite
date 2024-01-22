@@ -1,6 +1,4 @@
-import logging
-
-from globals import windows
+from globals import *
 
 
 def login(usr, passwd):
@@ -10,7 +8,6 @@ def login(usr, passwd):
         windows['login'].destroy()
         windows.pop('login')
         windows['main'].load_url('frontend/web/index.html')
-        return
     else:
         logging.info('Incorrect username or password')
-        return {'access': False}
+        return False

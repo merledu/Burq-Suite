@@ -16,24 +16,6 @@ div.container.p-3.mb-4.d-flex.flex-row.justify-content-center {
     box-shadow: 10px 10px 10px #00000078;
 }
 
-/*
-div#dut_configs {
-    display: flex;
-    flex-direction: column;
-}
-*/
-
-/*
-div#testcase_configs {
-    display: none;
-    flex-direction: column;
-}
-
-button.btn.me-auto.text-white {
-    display: none;
-}
-*/
-
 i.bi-arrow-left-square-fill {
     font-size: 2rem;
 }
@@ -41,3 +23,95 @@ i.bi-arrow-left-square-fill {
 i.bi-arrow-right-square-fill {
     font-size: 2rem;
 }
+
+
+/*lightning effect start*/
+.lightning-effect {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    font-weight: bold;
+    font-family: "Abril Fatface", cursive;
+}
+.lightning-effect:before {
+    content: "";
+    width: 50px;
+    position: absolute;
+    top: 0;
+    left: -50px;
+    bottom: 0;
+    z-index: 9;
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(rgba(255, 255, 255, 0.2)),
+        color-stop(50%, #fff),
+        to(rgba(255, 255, 255, 0.2))
+    );
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.2) 0%,
+        #fff 50%,
+        rgba(255, 255, 255, 0.2) 100%
+    );
+}
+/*Hover*/
+.lightning-effect:hover:before {
+    -webkit-animation: lightning-effect 2s infinite ease-in-out;
+    animation: lightning-effect 2s infinite ease-in-out;
+}
+/*Keyframes*/
+@-webkit-keyframes lightning-effect {
+    0% {
+        left: -50px;
+        background: -webkit-gradient(
+            linear,
+            left top,
+            right top,
+            from(rgba(255, 255, 255, 0.2)),
+            color-stop(50%, #fff),
+            to(rgba(255, 255, 255, 0.2))
+        );
+        background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.2) 0%,
+            #fff 50%,
+            rgba(255, 255, 255, 0.2) 100%
+        );
+    }
+    50% {
+        left: 100%;
+    }
+    to {
+        left: -50px;
+        background: 0 0;
+    }
+}
+@keyframes lightning-effect {
+    0% {
+        left: -50px;
+        background: -webkit-gradient(
+            linear,
+            left top,
+            right top,
+            from(rgba(255, 255, 255, 0.2)),
+            color-stop(50%, #fff),
+            to(rgba(255, 255, 255, 0.2))
+        );
+        background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.2) 0%,
+            #fff 50%,
+            rgba(255, 255, 255, 0.2) 100%
+        );
+    }
+    50% {
+        left: 100%;
+    }
+    to {
+        left: -50px;
+        background: 0 0;
+    }
+}
+/*lightning effect end*/

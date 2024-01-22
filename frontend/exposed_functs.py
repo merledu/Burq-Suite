@@ -15,13 +15,13 @@ def expose(window):
         open_dut_configs,
         get_dut_type,
         open_dut_menu,
-        upload_dut,
+        get_dir,
         select_target,
-        dump_dut_disasm,
-        get_dut_cmd,
-        get_log_dir,
-        get_log_file,
+        set_log_file,
+        set_config,
 
         riscv_dv_interface.get_working_base_testlist,
-        riscv_dv_interface.get_simulator_list
+        riscv_dv_interface.get_simulator_list,
+        riscv_dv_interface.get_iss_list,
+        riscv_dv_interface.run_riscv_dv_test
     )

@@ -1,7 +1,6 @@
-import logging, webview, time
+import webview, time
 
-from globals import windows
-from frontend.login import login
+from frontend.login import *
 
 
 def open_login():

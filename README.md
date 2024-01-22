@@ -24,3 +24,8 @@ Setup compliance
 cd compliance
 python3 compliance_setup.py
 ```
+
+## TODOs
+- [ ] Add support for commercial simulators compatible with riscv-dv
+- [ ] Add support for other iss compatible with riscv-dv
+- [ ] Add project tracking
