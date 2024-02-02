@@ -17,10 +17,10 @@ def select_target(target):
     logging.info(f'Selected target: {target}')
 
 
-def set_log_file(dir_path, filename):
+def set_csv_file(dir_path, filename):
     file = os.path.join(dir_path, filename)
-    configs['dut_log'] = file
-    logging.info(f'DUT log file selected: {file}')
+    configs['dut_csv'] = file
+    logging.info(f'DUT CSV file selected: {file}')
 
 
 def set_config(key, value, log_info_msg):

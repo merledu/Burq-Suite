@@ -7,8 +7,9 @@ def get_stderr():
     return stderr['stderr']
 
 
-def unsubscribe_stderr_from_main():
+def close_stderr():
     windows['main'].events.closed -= windows['stderr'].destroy
+    stderr.clear()
 
 
 def continue_exec():
@@ -26,5 +27,5 @@ def open_stderr_window():
     )
     windows['stderr'].expose(get_stderr)
     windows['main'].events.closed += windows['stderr'].destroy
-    windows['stderr'].events.closed += unsubscribe_stderr_from_main
+    windows['stderr'].events.closed += close_stderr
     windows['stderr'].events.closed += continue_exec

@@ -12,6 +12,8 @@ def run_cmd(cmd):
         open_stderr_window()
         while stderr['halt_exec']:
             time.sleep(0.1)
+    else:
+        return cmd_run
 
 
 def gen_disasm(obj_path, dump_path):

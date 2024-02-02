@@ -24,7 +24,7 @@ os.environ['SPIKE_PATH'] = SPIKE
 
 
 # Utilities
-debug = False
+debug = True
 loglevel = logging.DEBUG if debug else logging.INFO
 windows = {}
 configs = {}

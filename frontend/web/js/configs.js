@@ -47,16 +47,16 @@ function select_target() {
 }
 
 
-function set_log_file() {
-    pywebview.api.set_log_file(
-        document.getElementById('log_dir').value,
-        document.getElementById('log_file').value
+function set_csv_file() {
+    pywebview.api.set_csv_file(
+        document.getElementById('csv_dir').value,
+        document.getElementById('csv_file').value
     );
 }
 
 
 function validate_dut_fields() {
-    return ['dut', 'dut_disasm', 'dut_cmd', 'log_dir', 'log_file'].map(
+    return ['dut', 'dut_disasm', 'dut_cmd', 'csv_dir', 'csv_file'].map(
         id => document.getElementById(id).value
     ).reduce((a, b) => a && b)
 }
@@ -191,9 +191,9 @@ async function run_riscv_dv_test() {
             pywebview.api.set_config(config[0], input_value, config[2] + input_value);
         }
         select_target();
-        set_log_file();
+        set_csv_file();
         test_run_progress();
-        pywebview.api.run_riscv_dv_test();
+        pywebview.api.riscv_dv_run_test();
     } else {
         empty_fields_modal.toggle();
     }

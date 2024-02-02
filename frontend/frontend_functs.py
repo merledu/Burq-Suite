@@ -1,6 +1,6 @@
 import webview
 
-from globals import HOME
+from globals import *
 
 
 def select_folder(window, initial_dir=HOME):

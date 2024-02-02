@@ -3,177 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Custom DUT Configs</title>
+    <title>
+        Custom DUT Configs
+    </title>
     <link type="text/css" rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="bootstrap-icons-1.11.2/font/bootstrap-icons.min.css">
     <link type="text/css" rel="stylesheet" href="css/global.css">
     <link type="text/css" rel="stylesheet" href="css/configs.css">
 </head>
 <body>
-    <div class="container-fluid d-flex flex-row vh-100 ps-0">
-        <!-- Left Pane -->
-        <div class="container d-flex flex-column p-5 w-50" id="dut_types">
-            <div class="d-flex flex-row">
-                <button class="btn w-auto" onclick="open_dut_menu()">
-                    <img src="images/back.png" class="img-fluid">
+<div class="container-fluid d-flex flex-row vh-100 ps-0">
+    <!-- Left Pane -->
+    <div class="container d-flex flex-column p-5 w-50" id="dut_types">
+        <div class="d-flex flex-row">
+            <button class="btn w-auto" onclick="open_dut_menu()">
+                <img src="images/back.png" class="img-fluid">
+            </button>
+        </div>
+        <h2 class="text-white align-self-center mt-5 mb-5">
+            - DUT Type -
+        </h2>
+        <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="custom">
+            <p class="text-white mt-auto mb-auto">
+                Custom DUT Verification
+            </p>
+        </div>
+        <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="prebuilt">
+            <p class="text-white mt-auto mb-auto">
+                Prebuilt DUT Verification
+            </p>
+        </div>
+        <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="soc-now">
+            <p class="text-white mt-auto mb-auto">
+                SoC-Now DUT Verification
+            </p>
+        </div>
+    </div>
+    <!-- Right Menu -->
+    <div class="container d-flex flex-column p-5">
+        <!-- Custom DUT Configs -->
+        <div id="custom_dut_configs">
+            <div class="d-flex flex-row pb-2 justify-content-center">
+                <h4 class="text-white">
+                    DUT Configs
+                </h4>
+            </div>
+            <!-- Upload DUT -->
+            <div class="input-group p-2">
+                <label class="input-group-text text-black" for="dut">
+                    DUT
+                </label>
+                <input class="form-control text-black" id="dut" readonly>
+                <button class="btn btn-outline-secondary" onclick="get_dir('dut')">
+                    Upload
                 </button>
             </div>
-            <h2 class="text-white align-self-center mt-5 mb-5">- DUT Type -</h2>
-            <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="custom">
-                <p class="text-white mt-auto mb-auto">Custom DUT Verification</p>
-            </div>
-            <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="prebuilt">
-                <p class="text-white mt-auto mb-auto">Prebuilt DUT Verification</p>
-            </div>
-            <div class="container p-3 mb-4 d-flex flex-row justify-content-center" id="soc-now">
-                <p class="text-white mt-auto mb-auto">SoC-Now DUT Verification</p>
-            </div>
-        </div>
-        <!-- Right Menu -->
-        <div class="container d-flex flex-column p-5">
-            <!-- Custom DUT Configs -->
-            <div id="custom_dut_configs">
-                <div class="d-flex flex-row pb-2 justify-content-center">
-                    <h4 class="text-white">DUT Configs</h4>
-                </div>
-                <!-- Upload DUT -->
-                <div class="input-group p-2">
-                    <label class="input-group-text text-black" for="dut">DUT</label>
-                    <input class="form-control text-black" id="dut" readonly>
-                    <button class="btn btn-outline-secondary" onclick="get_dir('dut')">Upload</button>
-                </div>
-                <!-- Select Extension(s) -->
-                <div class="d-flex flex-row p-2">
-                    <h5 class="text-white pe-3">Extensions:</h5>
-                    <div class="d-flex flex-column">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="i" id="target1" checked disabled>
-                            <label for="target1" class="form-check-label text-white">I (Integer)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="m" id="target2">
-                            <label for="target2" class="form-check-label text-white">M (Multiplication)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="a" id="target3">
-                            <label for="target3" class="form-check-label text-white">A (Atomic)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="f" id="target4">
-                            <label for="target4" class="form-check-label text-white">F (Single Precision Floating Point)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="d" id="target5">
-                            <label for="target5" class="form-check-label text-white">D (Double Precision Floating Point)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="c" id="target6">
-                            <label for="target6" class="form-check-label text-white">C (Compressed)</label>
-                        </div>
+            <!-- Select Extension(s) -->
+            <div class="d-flex flex-row p-2">
+                <h5 class="text-white pe-3">
+                    Extensions:
+                </h5>
+                <div class="d-flex flex-column">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="i" id="target1" checked disabled>
+                        <label for="target1" class="form-check-label text-white">
+                            I (Integer)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="m" id="target2">
+                        <label for="target2" class="form-check-label text-white">
+                            M (Multiplication)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="a" id="target3">
+                        <label for="target3" class="form-check-label text-white">
+                            A (Atomic)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="f" id="target4">
+                        <label for="target4" class="form-check-label text-white">
+                            F (Single Precision Floating Point)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="d" id="target5">
+                        <label for="target5" class="form-check-label text-white">
+                            D (Double Precision Floating Point)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="c" id="target6">
+                        <label for="target6" class="form-check-label text-white">
+                            C (Compressed)
+                        </label>
                     </div>
                 </div>
-                <!-- Disassembly Dump -->
-                <div class="input-group p-2">
-                    <label class="input-group-text" for="dut_disasm">
-                        <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip" data-bs-title="A testcase disassembly will be dumped to the specified folder. The DUT should utilize this disassembly to run the testcase. File name of the disassembly: test.S">
-                            DUT Disassembly
-                        </a>
-                    </label>
-                    <input class="form-control text-black" id="dut_disasm" readonly>
-                    <button class="btn btn-outline-secondary" onclick="get_dir('dut_disasm', document.getElementById('dut').value)">...</button>
-                </div>
-                <!-- DUT compile and run testcase -->
-                <div class="input-group p-2">
-                    <label class="input-group-text text-black" for="dut_cmd">
-                        <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip" data-bs-title="Enter the command(s) to compile the DUT and run testcase. The command will be executed from the root of the DUT folder">
-                            CMD
-                        </a>
-                    </label>
-                    <input class="form-control text-black" id="dut_cmd">
-                </div>
-                <!-- DUT log path -->
-                <div class="input-group p-2">
-                    <span class="input-group-text text-black">DUT Log</span>
-                    <input class="form-control text-black" id="log_dir" placeholder="directory path" readonly>
-                    <button class="btn btn-outline-secondary" onclick="get_dir('log_dir', document.getElementById('dut').value)">/</button>
-                    <input class="form-control text-black" id="log_file" placeholder="filename">
-                </div>
             </div>
-            <!-- Testcase Configs -->
-            <div id="testcase_configs" class="d-none">
-                <div class="d-flex flex-row pb-2 justify-content-center">
-                    <h4 class="text-white">Testcase Configs</h4>
-                </div>
-                <!-- Verification Framework -->
-                <div class="input-group p-2">
-                    <label class="input-group-text text-black" for="verif_fw">Verification Framework</label>
-                    <select class="form-select" id="verif_fw" onchange="show_testcase_configs()">
-                        <option disabled selected value="">--- Select a verification framework ---</option>
-                        <option value="riscv-dv">RISCV-DV</option>
-                        <option value="riscv-arch-test">RISCV Compliance</option>
-                        <option value="self checking vector tests">Self Checking Vector Tests</option>
-                    </select>
-                </div>
-                <!-- Testcase Select -->
-                <div class="input-group p-2 d-none" id="testcase_div">
-                    <label class="input-group-text text-black" for="testcases">Testcase</label>
-                    <select class="form-select" id="testcases">
-                        <option disabled selected value="">--- Select testcase ---</option>
-                    </select>
-                </div>
-                <!-- RISC-V DV: Simulator Select -->
-                <div class="input-group p-2 d-none" id="simulator_select_div">
-                    <label class="input-group-text text-black" for="simulator_select">Simulator</label>
-                    <select class="form-select" id="simulator_select">
-                        <option disabled selected value="">--- Select simulator ---</option>
-                    </select>
-                </div>
-                <!-- RISC-V DV: ISS Select -->
-                <div class="input-group p-2 d-none" id="iss_select_div">
-                    <label class="input-group-text text-black" for="iss_select">ISS</label>
-                    <select class="form-select" id="iss_select">
-                        <option disabled selected value="">--- Select ISS ---</option>
-                    </select>
-                </div>
-                <!-- RISC-V DV: Iterations -->
-                <div class="d-flex flex-row p-2 d-none" id="iterations_div">
-                    <h5 class="pe-3 text-white">Iterations:</h5>
-                    <input id="iterations" type="range" class="form-range" min="1" max="100" value="1" step="1" oninput="this.nextElementSibling.innerHTML = this.value">
-                    <span class="ps-3 text-white">1</span>
-                </div>
-            </div>
-            <!-- Navigation -->
-            <div class="d-flex flex-row mt-auto" id="nav_btns">
-                <button class="btn me-auto text-white d-none" onclick="open_dut_configs()">
-                    <i class="bi-arrow-left-square-fill"></i>
-                </button>
-                <button class="btn ms-auto text-white" onclick="open_testcase_configs()">
-                    <i class="bi-arrow-right-square-fill"></i>
-                </button>
-                <button type="button" class="btn ms-auto btn-outline-warning lightning-effect btn-lg d-none" onclick="run_riscv_dv_test()">
-                    <i class="bi-lightning-fill"></i>
+            <!-- Disassembly Dump -->
+            <div class="input-group p-2">
+                <label class="input-group-text" for="dut_disasm">
+                    <!--
+                    <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip"
+                       data-bs-title="A testcase disassembly (produced with -d flag) will be dumped to the specified folder. The DUT should utilize this disassembly to run the testcase. File name of the disassembly: test.S"
+                    >
+                    -->
+                        DUT Disassembly
+                    <!--
+                    </a>
+                    -->
+                </label>
+                <input class="form-control text-black" id="dut_disasm" readonly>
+                <button class="btn btn-outline-secondary" onclick="get_dir('dut_disasm', document.getElementById('dut').value)">
+                    ...
                 </button>
             </div>
-            <!-- Test Run Progress -->
-            <div class="d-flex flex-column justify-content-center align-items-center d-none" id="test_run">
-                <div class="spinner-border text-success"></div>
+            <!-- DUT compile and run testcase -->
+            <div class="input-group p-2">
+                <label class="input-group-text text-black" for="dut_cmd">
+                    <!--
+                    <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip"
+                       data-bs-title="Enter the command(s) to compile the DUT and run testcase. The command will be executed from the root of the DUT folder"
+                    >
+                    -->
+                        CMD
+                    <!--
+                    </a>
+                    -->
+                </label>
+                <input class="form-control text-black" id="dut_cmd">
+            </div>
+            <!-- DUT CSV path -->
+            <div class="input-group p-2">
+                <span class="input-group-text">
+                    <!--
+                    <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip"
+                       data-bs-title="Select the directory where the DUT will dump its instruction trace CSV (RISCV-DV format) and enter the file name"
+                    >
+                    -->
+                        DUT CSV
+                    <!--
+                    </a>
+                    -->
+                </span>
+                <input class="form-control text-black" id="csv_dir" placeholder="directory path" readonly>
+                <button class="btn btn-outline-secondary" onclick="get_dir('csv_dir', document.getElementById('dut').value)">
+                    /
+                </button>
+                <input class="form-control text-black" id="csv_file" placeholder="filename">
+            </div>
+        </div>
+        <!-- Testcase Configs -->
+        <div id="testcase_configs" class="d-none">
+            <div class="d-flex flex-row pb-2 justify-content-center">
+                <h4 class="text-white">Testcase Configs</h4>
+            </div>
+            <!-- Verification Framework -->
+            <div class="input-group p-2">
+                <label class="input-group-text text-black" for="verif_fw">Verification Framework</label>
+                <select class="form-select" id="verif_fw" onchange="show_testcase_configs()">
+                    <option disabled selected value="">--- Select a verification framework ---</option>
+                    <option value="riscv-dv">RISCV-DV</option>
+                    <option value="riscv-arch-test">RISCV Compliance</option>
+                    <option value="self checking vector tests">Self Checking Vector Tests</option>
+                </select>
+            </div>
+            <!-- Testcase Select -->
+            <div class="input-group p-2 d-none" id="testcase_div">
+                <label class="input-group-text text-black" for="testcases">Testcase</label>
+                <select class="form-select" id="testcases">
+                    <option disabled selected value="">--- Select testcase ---</option>
+                </select>
+            </div>
+            <!-- RISC-V DV: Simulator Select -->
+            <div class="input-group p-2 d-none" id="simulator_select_div">
+                <label class="input-group-text text-black" for="simulator_select">Simulator</label>
+                <select class="form-select" id="simulator_select">
+                    <option disabled selected value="">--- Select simulator ---</option>
+                </select>
+            </div>
+            <!-- RISC-V DV: ISS Select -->
+            <div class="input-group p-2 d-none" id="iss_select_div">
+                <label class="input-group-text text-black" for="iss_select">ISS</label>
+                <select class="form-select" id="iss_select">
+                    <option disabled selected value="">--- Select ISS ---</option>
+                </select>
+            </div>
+            <!-- RISC-V DV: Iterations -->
+            <div class="d-flex flex-row p-2 d-none" id="iterations_div">
+                <h5 class="pe-3 text-white">Iterations:</h5>
+                <input id="iterations" type="range" class="form-range" min="1" max="100" value="1" step="1" oninput="this.nextElementSibling.innerHTML = this.value">
+                <span class="ps-3 text-white">1</span>
+            </div>
+        </div>
+        <!-- Navigation -->
+        <div class="d-flex flex-row mt-auto" id="nav_btns">
+            <button class="btn me-auto text-white d-none" onclick="open_dut_configs()">
+                <i class="bi-arrow-left-square-fill"></i>
+            </button>
+            <button class="btn ms-auto text-white" onclick="open_testcase_configs()">
+                <i class="bi-arrow-right-square-fill"></i>
+            </button>
+            <button type="button" class="btn ms-auto btn-outline-warning lightning-effect btn-lg d-none" onclick="run_riscv_dv_test()">
+                <i class="bi-lightning-fill"></i>
+            </button>
+        </div>
+        <!-- Test Run Progress -->
+        <div class="d-flex flex-column justify-content-center align-items-center d-none" id="test_run">
+            <div class="spinner-border text-success"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="empty_fields" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Empty Fields</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Please make sure to fill all the fields before continuing.</p>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="empty_fields" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Empty Fields</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Please make sure to fill all the fields before continuing.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js"></script>
-    <script src="js/configs.js"></script>
+</div>
+<script src="js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js"></script>
+<script src="js/configs.js"></script>
 </body>
 </html>

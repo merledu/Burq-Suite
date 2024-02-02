@@ -1,4 +1,3 @@
-from globals import *
 from frontend.exposed_functs import *
 
 
@@ -21,6 +20,5 @@ if __name__ == '__main__':
         resizable=False
     )
 
-    logging.debug('Starting Burq Suite...')
-    webview.start(expose, [windows['main']], debug=debug)
     logging.info('Burq Suite started')
+    webview.start(expose, [windows['main']], debug=debug)
