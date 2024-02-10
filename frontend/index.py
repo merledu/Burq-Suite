@@ -1,17 +1,30 @@
 import json
 
-from frontend.frontend_functs import *
+from frontend.new_proj import *
 
 
 def open_configs(dut_type):
     configs['dut_type'] = dut_type
     logging.info(f'Selected DUT type: {dut_type.title()} DUT')
-    windows['main'].load_url('frontend/web/configs.html')
+    windows['new_proj'] = webview.create_window(
+        title='New project',
+        url='frontend/web/new_proj.html',
+        resizable=False,
+        on_top=True,
+        width=400,
+        height=160,
+        frameless=True
+    )
+    windows['main'].events.closed += windows['new_proj'].destroy
+    windows['new_proj'].expose(
+        cancel_new_proj,
+        select_new_proj,
+        create_new_proj
+    )
 
 
 def select_proj_folder():
-    dir_paths = select_folder(windows['main'])
-    return dir_paths[0] if dir_paths else ''
+    return select_folder(windows['main'])
 
 
 def open_proj(folder):

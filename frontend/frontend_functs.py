@@ -4,4 +4,5 @@ from globals import *
 
 
 def select_folder(window, initial_dir=HOME):
-    return window.create_file_dialog(webview.FOLDER_DIALOG, initial_dir)
+    dir_paths = window.create_file_dialog(webview.FOLDER_DIALOG, initial_dir)
+    return dir_paths[0] if dir_paths else ''

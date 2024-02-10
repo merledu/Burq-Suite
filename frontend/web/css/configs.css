@@ -5,17 +5,14 @@ body {
 #dut_types {
     background-color: #15191A;
 }
-div.container.rounded-pill.p-3.mb-4.d-flex.flex-row.justify-content-center {
-    box-shadow: 10px 10px 10px #00000078;
-}
-div.container.p-3.mb-4.d-flex.flex-row.justify-content-center {
+.dut_type_div {
     background-color: #1A1D22;
     box-shadow: 10px 10px 10px #00000078;
 }
-i.bi-arrow-left-square-fill {
+.bi-arrow-left-square-fill {
     font-size: 2rem;
 }
-i.bi-arrow-right-square-fill {
+.bi-arrow-right-square-fill {
     font-size: 2rem;
 }
 #progress_bar {

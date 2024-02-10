@@ -12,7 +12,7 @@ def open_dut_menu():
 
 
 def get_dir(root_dir=''):
-    dir_path = select_folder(windows['main'], root_dir) if os.path.isdir(root_dir) else select_folder(windows['main'])
+    dir_path = select_folder(windows['main'], root_dir) if root_dir else select_folder(windows['main'])
     return dir_path[0] if dir_path else ''
 
 
