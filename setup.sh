@@ -3,7 +3,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # Install dependencies
-pip3 install wheel icecream pywebview pygobject
+pip3 install wheel pywebview pygobject
 
 # Install riscv-dv dependencies
 pip3 install -r riscv-dv/riscv-dv/requirements.txt

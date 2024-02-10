@@ -2,8 +2,8 @@ body {
     background-color: #17181A;
     font-family: ubuntu;
 }
-
-p#credit {
+#credit {
     color: #767676;
     font-weight: 900;
 }
+

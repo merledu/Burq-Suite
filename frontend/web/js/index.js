@@ -1,14 +1,25 @@
-async function open_folder_dialog() {
+function open_configs(dut_type) {
+    pywebview.api.open_configs(dut_type);
+}
+
+
+async function select_proj_folder() {
     document.getElementById('dir').value = await pywebview.api.select_proj_folder();
 }
 
 
-function open_configs(dut_type) {
-    const missing_proj_dir_modal = new bootstrap.Modal('#missing_proj_dir');
+async function open_proj() {
+    const proj_folder = document.getElementById('dir').value,
+          proj_select_modal = new bootstrap.Modal('#proj_select_modal');
 
-    if (document.getElementById('dir').value) {
-        pywebview.api.open_dut_configs(dut_type);
+    if (proj_folder) {
+        const project_selected = await pywebview.api.open_proj(proj_folder);
+
+        if (!project_selected) {
+            proj_select_modal.toggle();
+        }
     } else {
-        missing_proj_dir_modal.toggle();
+        proj_select_modal.toggle();
     }
 }
+

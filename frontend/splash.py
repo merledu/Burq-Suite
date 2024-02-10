@@ -4,7 +4,7 @@ from frontend.login import *
 
 
 def open_login():
-    logging.info('pywebview.api is ready')
+    logging.info('Opening login')
     time.sleep(3)
     windows['login'] = webview.create_window(
         title='Burq Suite Login',
@@ -16,5 +16,4 @@ def open_login():
         on_top=True
     )
     windows['main'].events.closed += windows['login'].destroy
-
     windows['login'].expose(login)

@@ -1,27 +1,25 @@
 body {
     background-color: #24272E;
+    font-family: ubuntu;
 }
-
-div#dut_types.container.d-flex.flex-column.p-5.w-50 {
+#dut_types {
     background-color: #15191A;
 }
-
 div.container.rounded-pill.p-3.mb-4.d-flex.flex-row.justify-content-center {
-    background-color: #A851FF;
     box-shadow: 10px 10px 10px #00000078;
 }
-
 div.container.p-3.mb-4.d-flex.flex-row.justify-content-center {
     background-color: #1A1D22;
     box-shadow: 10px 10px 10px #00000078;
 }
-
 i.bi-arrow-left-square-fill {
     font-size: 2rem;
 }
-
 i.bi-arrow-right-square-fill {
     font-size: 2rem;
+}
+#progress_bar {
+    width: 0%;
 }
 
 
@@ -115,3 +113,4 @@ i.bi-arrow-right-square-fill {
     }
 }
 /*lightning effect end*/
+

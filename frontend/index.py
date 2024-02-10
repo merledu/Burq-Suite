@@ -1,16 +1,32 @@
+import json
+
 from frontend.frontend_functs import *
+
+
+def open_configs(dut_type):
+    configs['dut_type'] = dut_type
+    logging.info(f'Selected DUT type: {dut_type.title()} DUT')
+    windows['main'].load_url('frontend/web/configs.html')
 
 
 def select_proj_folder():
     dir_paths = select_folder(windows['main'])
-    dir_path = dir_paths[0] if dir_paths else dir_paths
-    configs['proj_dir'] = dir_path
-    configs['proj_name'] = os.path.dirname(dir_path) if dir_path else dir_paths
-    logging.info(f'Selected project directory: {dir_path}')
-    return dir_path
+    return dir_paths[0] if dir_paths else ''
 
 
-def open_dut_configs(dut_type):
-    configs['dut_type'] = dut_type
-    logging.info(f'Selected DUT type: {dut_type.title()} DUT')
-    windows['main'].load_url('frontend/web/configs.html')
+def open_proj(folder):
+    try:
+        valid_root = False
+        with open(os.path.join(folder, 'test_configs.json'), 'r', encoding='UTF-8') as f:
+            for k, v in json.load(f):
+                if k == 'dut_type':
+                    valid_root = True
+                configs[k] = v
+        if not valid_root:
+            raise KeyError
+        logging.info(f'Opening project: {folder}')
+        windows['main'].load_url('frontend/web/configs.html')
+    except FileNotFoundError:
+        return False
+    except KeyError:
+        return False

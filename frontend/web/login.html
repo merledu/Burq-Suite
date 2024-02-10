@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
-    <div class="alert alert-danger" role="alert" id="failed_login_alert">
+    <div class="alert alert-danger d-none" role="alert" id="failed_login_alert">
         Incorrect username or password
     </div>
     <div class="m-3">
@@ -28,7 +28,7 @@
         <input type="password" class="form-control" id="passwd">
     </div>
     <div class="m-3">
-        <button class="btn text-white border border-0 rounded-pill shadow px-5 py-2 rounded-2" onclick="login()">
+        <button id="login_btn" class="btn text-white border border-0 rounded-pill shadow px-5 py-2 rounded-2" onclick="login()">
             Login
         </button>
     </div>

@@ -35,7 +35,7 @@
             </button>
             <button class="border border-0" onclick="open_configs('soc-now')">
                 <span>
-                    <img src="images/soc-now.png" class="img-fluid">
+                    <img src="images/soc-now.png" class="img-fluid" id="soc_now_logo">
                 </span>
                 <br>
                 DUT Verification
@@ -52,35 +52,39 @@
     <!-- Right Menu -->
     <div class="container w-50 d-flex flex-column p-5" id="proj_menu">
         <h2 class="mb-3 text-white">
-            Project
+            Existing Project
         </h2>
         <div class="input-group mb-3">
             <label class="input-group-text" for="dir">
                 Dir
             </label>
             <input class="form-control text-black" id="dir" readonly>
-            <button class="btn btn-outline-secondary" onclick="open_folder_dialog()">
+            <button class="btn btn-outline-secondary" onclick="select_proj_folder()">
                 ...
             </button>
         </div>
+        <!-- TODO: Add recent project tracking
         <h2 class="text-white mb-3">
             Recent
         </h2>
-        <!-- TODO: Add project tracking -->
+        -->
+        <button class="btn btn-primary w-100 mt-auto" onclick="open_proj()">
+            Open
+        </button>
     </div>
 </div>
-<div class="modal fade" id="missing_proj_dir" tabindex="-1">
+<div class="modal fade" tabindex="-1" id="proj_select_modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    Missing Project Directory
+                    Select an existing project to open
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
             </div>
             <div class="modal-body">
                 <p>
-                    Please choose project directory before continuing.
+                    Please select the directory with a valid "test_configs.json" file.
                 </p>
             </div>
         </div>

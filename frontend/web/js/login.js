@@ -3,8 +3,8 @@ async function login() {
         document.getElementById('usr').value,
         document.getElementById('passwd').value
     );
-
     if (!logged_in) {
-        document.getElementById('failed_login_alert').style.display = 'block';
+        document.getElementById('failed_login_alert').classList.remove('d-none');
     }
 }
+

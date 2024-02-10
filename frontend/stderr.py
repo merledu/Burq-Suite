@@ -4,7 +4,7 @@ from globals import *
 
 
 def get_stderr():
-    return stderr['stderr']
+    return stderr['error']
 
 
 def close_stderr():

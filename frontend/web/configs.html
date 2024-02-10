@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        Custom DUT Configs
+        Configs
     </title>
     <link type="text/css" rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="bootstrap-icons-1.11.2/font/bootstrap-icons.min.css">
@@ -177,25 +177,36 @@
                     <option disabled selected value="">--- Select testcase ---</option>
                 </select>
             </div>
-            <!-- RISC-V DV: Simulator Select -->
+            <!-- RISCV DV: Simulator Select -->
             <div class="input-group p-2 d-none" id="simulator_select_div">
                 <label class="input-group-text text-black" for="simulator_select">Simulator</label>
                 <select class="form-select" id="simulator_select">
                     <option disabled selected value="">--- Select simulator ---</option>
                 </select>
             </div>
-            <!-- RISC-V DV: ISS Select -->
+            <!-- RISCV DV: ISS Select -->
             <div class="input-group p-2 d-none" id="iss_select_div">
                 <label class="input-group-text text-black" for="iss_select">ISS</label>
                 <select class="form-select" id="iss_select">
                     <option disabled selected value="">--- Select ISS ---</option>
                 </select>
             </div>
-            <!-- RISC-V DV: Iterations -->
+            <!-- RISCV DV: Iterations -->
             <div class="d-flex flex-row p-2 d-none" id="iterations_div">
                 <h5 class="pe-3 text-white">Iterations:</h5>
                 <input id="iterations" type="range" class="form-range" min="1" max="100" value="1" step="1" oninput="this.nextElementSibling.innerHTML = this.value">
                 <span class="ps-3 text-white">1</span>
+            </div>
+            <!-- RISCV DV: Timeouts -->
+            <div class="d-flex flex-row p-2 d-none" id="timeout_div">
+                <label class="input-group-text text-black">
+                    Generator Timeout
+                </label>
+                <input class="form-control text-black">
+                <label class="input-group-text text-black">
+                    ISS Timeout
+                </label>
+                <input class="form-control text-black">
             </div>
         </div>
         <!-- Navigation -->
@@ -206,13 +217,21 @@
             <button class="btn ms-auto text-white" onclick="open_testcase_configs()">
                 <i class="bi-arrow-right-square-fill"></i>
             </button>
-            <button type="button" class="btn ms-auto btn-outline-warning lightning-effect btn-lg d-none" onclick="run_riscv_dv_test()">
+            <button type="button" class="btn ms-auto btn-outline-warning lightning-effect d-none" onclick="run_riscv_dv_test()">
                 <i class="bi-lightning-fill"></i>
             </button>
         </div>
         <!-- Test Run Progress -->
-        <div class="d-flex flex-column justify-content-center align-items-center d-none" id="test_run">
-            <div class="spinner-border text-success"></div>
+        <div class="d-flex flex-column justify-content-center align-items-center h-100 d-none" id="test_run">
+            <div class="progress w-100">
+                <div id="progress_bar" class="progress-bar progress-bar-striped bg-warning progress-bar-animated"></div>
+            </div>
+            <p class="text-white p-2" id="progress_label">
+                Executing testcase on ISS
+            </p>
+        </div>
+        <!-- Test Results -->
+        <div class="d-flex flex-column justify-content-center h-100 d-none">
         </div>
     </div>
 </div>

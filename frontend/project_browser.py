@@ -1,4 +1,4 @@
-from scripts.dut_utils import *
+from scripts.utils import *
 
 
 def get_proj_name():
@@ -23,6 +23,13 @@ def get_proj_tree():
         })
 
     return tree_map
+
+
+def show_file(file): pass
+
+
+def get_test_results():
+    return {}
 
 
 def open_proj_browser():

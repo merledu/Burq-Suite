@@ -21,6 +21,7 @@ SPIKE = os.path.join(TOOLS, 'spike', 'bin')
 os.environ['RISCV_GCC'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-gcc')
 os.environ['RISCV_OBJCOPY'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-objcopy')
 os.environ['SPIKE_PATH'] = SPIKE
+os.environ['PATH'] = RISCV_GNU_TOOLCHAIN + os.pathsep + os.environ['PATH']
 
 
 # Utilities

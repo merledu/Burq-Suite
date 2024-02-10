@@ -26,6 +26,7 @@ async function get_proj_tree() {
 
                 current_node = current_node.lastElementChild;
                 current_node.innerHTML = file;
+                current_node.addEventListener('click', () => {})
 
                 current_node = current_node.parentElement;
             }

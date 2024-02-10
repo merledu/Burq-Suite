@@ -9,7 +9,6 @@ if __name__ == '__main__':
         datefmt='%d %b %Y %H:%M:%S',
         level=loglevel
     )
-
     windows['main'] = webview.create_window(
         title='Burq Suite',
         # url='frontend/web/splash.html',
@@ -17,8 +16,7 @@ if __name__ == '__main__':
         # url='frontend/web/configs.html',
         width=1200,
         height=600,
-        resizable=False
+        resizable=False,
     )
-
     logging.info('Burq Suite started')
     webview.start(expose, [windows['main']], debug=debug)

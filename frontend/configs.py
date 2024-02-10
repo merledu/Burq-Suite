@@ -6,6 +6,11 @@ def get_dut_type():
     return configs['dut_type']
 
 
+def open_dut_menu():
+    windows['main'].load_url('frontend/web/index.html')
+    configs.clear()
+
+
 def get_dir(root_dir=''):
     dir_path = select_folder(windows['main'], root_dir) if os.path.isdir(root_dir) else select_folder(windows['main'])
     return dir_path[0] if dir_path else ''

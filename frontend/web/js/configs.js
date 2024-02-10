@@ -1,17 +1,8 @@
-const tooltip_trigger_list = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-const tooltip_list = [...tooltip_trigger_list].map(tooltip_trigger_elem => new bootstrap.Tooltip(tooltip_trigger_elem));
-
-
-function open_dut_menu() {
-    pywebview.api.open_dut_menu();
-}
-
-
 async function highlight_dut_type() {
-    const dut_type = await pywebview.api.get_dut_type();
-    const dut_type_div = document.getElementById(dut_type);
-    dut_type_div.classList.add('rounded-pill');
+    const dut_type = await pywebview.api.get_dut_type(),
+          dut_type_div = document.getElementById(dut_type);
 
+    dut_type_div.classList.add('rounded-pill');
     if (dut_type === 'custom') {
         dut_type_div.style.backgroundColor = '#A851FF';
     } else if (dut_type === 'prebuilt') {
@@ -27,6 +18,11 @@ window.addEventListener('pywebviewready', () => {
 });
 
 
+function open_dut_menu() {
+    pywebview.api.open_dut_menu();
+}
+
+
 async function get_dir(input_id, root='') {
     document.getElementById(input_id).value = await pywebview.api.get_dir(root);
 }
@@ -36,13 +32,12 @@ function select_target() {
     const targets = [];
     const target_num = 6;
 
-    for (let i = 1; i < target_num; ++i) {
+    for (let i = 1; i <= target_num; ++i) {
         let target = document.getElementById(`target${i}`);
         if (target.checked) {
             targets.push(target.value);
         }
     }
-
     pywebview.api.select_target(targets.join(''));
 }
 
@@ -56,16 +51,24 @@ function set_csv_file() {
 
 
 function validate_dut_fields() {
-    return ['dut', 'dut_disasm', 'dut_cmd', 'csv_dir', 'csv_file'].map(
+    return [
+        'dut',
+        'dut_disasm',
+        'dut_cmd',
+        'csv_dir',
+        'csv_file'
+    ].map(
         id => document.getElementById(id).value
-    ).reduce((a, b) => a && b)
+    ).reduce(
+        (a, b) => a && b
+    )
 }
 
 
 function open_testcase_configs() {
     const empty_fields_modal = new bootstrap.Modal('#empty_fields');
 
-    if (validate_dut_fields) {
+    if (validate_dut_fields()) {
         document.getElementById('custom_dut_configs').classList.add('d-none');
         document.querySelector('button.btn.ms-auto.text-white').classList.add('d-none');
         document.getElementById('testcase_configs').classList.remove('d-none');
@@ -142,6 +145,11 @@ function toggle_iterations() {
 }
 
 
+function toggle_timeout() {
+    document.getElementById('timeout_div').classList.remove('d-none')
+}
+
+
 function show_testcase_configs() {
     const verif_fw = document.getElementById('verif_fw');
 
@@ -153,9 +161,17 @@ function show_testcase_configs() {
 
 
 function validate_testcase_fields() {
-    return ['verif_fw', 'testcases', 'simulator_select', 'iss_select', 'iterations'].map(
+    return [
+        'verif_fw',
+        'testcases',
+        'simulator_select',
+        'iss_select',
+        'iterations'
+    ].map(
         id => document.getElementById(id).value
-    ).reduce((a, b) => a && b)
+    ).reduce(
+        (a, b) => a && b
+    )
 }
 
 
@@ -197,5 +213,11 @@ async function run_riscv_dv_test() {
     } else {
         empty_fields_modal.toggle();
     }
+}
+
+
+function update_progress(progress, msg) {
+    document.getElementById('progress_bar').style.width = `${progress}%`;
+    document.getElementById('progress_label').innerHTML = msg;
 }
 
