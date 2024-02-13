@@ -165,7 +165,9 @@
                 </button>
             </div>
             <!-- Test List View -->
-            <div id="testlist" class="overflow-y-auto border border-secondary m-2 flex-grow-1"></div>
+            <!--
+            <div id="testlist" class="overflow-y-auto border border-secondary m-2"></div>
+            -->
         </div>
         <!-- Zap Progress -->
         <div class="d-flex flex-column justify-content-center align-items-center h-100 d-none" id="test_zap">
@@ -181,10 +183,10 @@
         </div>
         <!-- Navigation -->
         <div class="d-flex flex-row mt-auto" id="nav_btns">
-            <button class="btn me-auto text-white d-none" id="left_btn" onclick="open_dut_configs()">
+            <button class="btn me-auto text-white border border-white d-none" id="left_btn" onclick="open_dut_configs()">
                 <i class="bi-arrow-left-square-fill"></i>
             </button>
-            <button class="btn ms-auto text-white" id="right_btn" onclick="open_test_configs()">
+            <button class="btn ms-auto text-white border border-white" id="right_btn" onclick="open_test_configs()">
                 <i class="bi-arrow-right-square-fill"></i>
             </button>
             <button type="button" id="zap_btn" class="btn ms-auto btn-outline-warning lightning-effect d-none" onclick="zap_testlist()">

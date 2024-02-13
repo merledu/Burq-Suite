@@ -9,12 +9,14 @@ body {
     background-color: #1A1D22;
     box-shadow: 10px 10px 10px #00000078;
 }
+/*
 .bi-arrow-left-square-fill {
     font-size: 2rem;
 }
 .bi-arrow-right-square-fill {
     font-size: 2rem;
 }
+*/
 #progress_bar {
     width: 0%;
 }
