@@ -13,7 +13,7 @@ if __name__ == '__main__':
         title='Burq Suite',
         # url='frontend/web/splash.html',
         url='frontend/web/index.html',
-        # url='frontend/web/configs.html',
+        # url='frontend/web/tests.html',
         width=1200,
         height=600,
         resizable=False,

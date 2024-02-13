@@ -1,3 +1,8 @@
+window.addEventListener('pywebviewready', () => {
+    document.getElementById('body').classList.remove('d-none');
+});
+
+
 async function select_new_proj() {
     const new_proj_path = document.getElementById('new_proj'),
           create_btn = document.getElementById('create_btn');
@@ -19,6 +24,6 @@ function cancel_new_proj() {
 
 
 function create_new_proj() {
-    pywebview.api.create_new_proj();
+    pywebview.api.create_new_proj(document.getElementById('new_proj').value);
 }
 

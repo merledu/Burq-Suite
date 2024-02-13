@@ -12,8 +12,19 @@ def open_dut_menu():
 
 
 def get_dir(root_dir=''):
-    dir_path = select_folder(windows['main'], root_dir) if root_dir else select_folder(windows['main'])
-    return dir_path[0] if dir_path else ''
+    return select_folder(windows['main'], root_dir) if root_dir else select_folder(windows['main'])
+
+
+def clear_testlist():
+    selected_tests.clear()
+
+
+def remove_test(test):
+    selected_tests.pop(test)
+
+
+def add_test(verif_fw, test):
+    selected_tests.append({verif_fw: test})
 
 
 def select_target(target):

@@ -2,7 +2,7 @@ from importlib import import_module
 
 from frontend.splash import *
 from frontend.index import *
-from frontend.configs import *
+from frontend.tests import *
 from frontend.test_results import *
 # from frontend.project_browser import *
 
@@ -15,14 +15,18 @@ def expose(window):
         open_login,
 
         # index.py
-        open_configs,
+        open_new_proj,
         select_proj_folder,
         open_proj,
 
-        # configs.py
+        # tests.py
         get_dut_type,
         open_dut_menu,
         get_dir,
+        clear_testlist,
+        remove_test,
+        add_test,
+
         select_target,
         set_csv_file,
         set_config,
@@ -30,7 +34,5 @@ def expose(window):
         get_iss,
 
         riscv_dv_interface.get_working_base_testlist,
-        riscv_dv_interface.get_simulator_list,
-        riscv_dv_interface.get_iss_list,
         riscv_dv_interface.riscv_dv_run_test
     )

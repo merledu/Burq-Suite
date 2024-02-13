@@ -26,7 +26,6 @@ body {
     overflow: hidden;
     display: inline-block;
     font-weight: bold;
-    font-family: "Abril Fatface", cursive;
 }
 .lightning-effect:before {
     content: "";

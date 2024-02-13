@@ -20,22 +20,6 @@ def get_working_base_testlist():
     return [test['test'] for test in testlist]
 
 
-# TODO: Add support for commercial simulators compatible with riscv-dv
-def get_simulator_list():
-    logging.info('Getting simulator list')
-    for sim in riscv_dv_lib.read_yaml(SIMULATOR_YAML):
-        if sim['tool'] == 'pyflow':
-            return [sim]
-
-
-# TODO: Add support for other iss compatible with riscv-dv
-def get_iss_list():
-    logging.info('Getting ISS list')
-    for iss in riscv_dv_lib.read_yaml(ISS_YAML):
-        if iss['iss'] == 'spike':
-            return [iss]
-
-
 def riscv_dv_run_test():
     dump_configs()
     os.chdir(RISCV_DV_ROOT)

@@ -3,7 +3,7 @@ import json
 from frontend.new_proj import *
 
 
-def open_configs(dut_type):
+def open_new_proj(dut_type):
     configs['dut_type'] = dut_type
     logging.info(f'Selected DUT type: {dut_type.title()} DUT')
     windows['new_proj'] = webview.create_window(
@@ -38,7 +38,7 @@ def open_proj(folder):
         if not valid_root:
             raise KeyError
         logging.info(f'Opening project: {folder}')
-        windows['main'].load_url('frontend/web/configs.html')
+        windows['main'].load_url('frontend/web/tests.html')
     except FileNotFoundError:
         return False
     except KeyError:

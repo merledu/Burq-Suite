@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="bootstrap-icons-1.11.2/font/bootstrap-icons.min.css">
     <link type="text/css" rel="stylesheet" href="css/global.css">
-    <link type="text/css" rel="stylesheet" href="css/configs.css">
+    <link type="text/css" rel="stylesheet" href="css/tests.css">
 </head>
 <body>
 <div class="container-fluid d-flex flex-row vh-100 ps-0">
@@ -40,12 +40,12 @@
         </div>
     </div>
     <!-- Right Menu -->
-    <div class="container d-flex flex-column p-5">
+    <div class="container d-flex flex-column p-4">
         <!-- Custom DUT Configs -->
-        <div id="custom_dut_configs" class="d-none">
+        <div id="custom_dut_configs" class="h-100 d-none">
             <div class="d-flex flex-row pb-2 justify-content-center">
                 <h4 class="text-white">
-                    DUT Configs
+                    Custom DUT Configs
                 </h4>
             </div>
             <!-- Upload DUT -->
@@ -105,15 +105,7 @@
             <!-- Disassembly Dump -->
             <div class="input-group p-2">
                 <label class="input-group-text" for="dut_disasm">
-                    <!--
-                    <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip"
-                       data-bs-title="A testcase disassembly (produced with -d flag) will be dumped to the specified folder. The DUT should utilize this disassembly to run the testcase. File name of the disassembly: test.S"
-                    >
-                    -->
-                        DUT Disassembly
-                    <!--
-                    </a>
-                    -->
+                    DUT Disassembly
                 </label>
                 <input class="form-control text-black" id="dut_disasm" readonly>
                 <button class="btn btn-outline-secondary" onclick="get_dir('dut_disasm', document.getElementById('dut').value)">
@@ -123,30 +115,14 @@
             <!-- DUT compile and run testcase -->
             <div class="input-group p-2">
                 <label class="input-group-text text-black" for="dut_cmd">
-                    <!--
-                    <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip"
-                       data-bs-title="Enter the command(s) to compile the DUT and run testcase. The command will be executed from the root of the DUT folder"
-                    >
-                    -->
-                        CMD
-                    <!--
-                    </a>
-                    -->
+                    CMD
                 </label>
                 <input class="form-control text-black" id="dut_cmd">
             </div>
             <!-- DUT CSV path -->
             <div class="input-group p-2">
                 <span class="input-group-text">
-                    <!--
-                    <a class="link-underline link-underline-opacity-0 text-black" href="#" data-bs-toggle="tooltip"
-                       data-bs-title="Select the directory where the DUT will dump its instruction trace CSV (RISCV-DV format) and enter the file name"
-                    >
-                    -->
-                        DUT CSV
-                    <!--
-                    </a>
-                    -->
+                    DUT CSV
                 </span>
                 <input class="form-control text-black" id="csv_dir" placeholder="directory path" readonly>
                 <button class="btn btn-outline-secondary" onclick="get_dir('csv_dir', document.getElementById('dut').value)">
@@ -155,15 +131,19 @@
                 <input class="form-control text-black" id="csv_file" placeholder="filename">
             </div>
         </div>
-        <!-- Testcase Configs -->
-        <div id="testcase_configs" class="d-none">
+        <!-- Test Configs -->
+        <div id="test_configs" class="d-flex flex-column flex-grow-1 d-none">
             <div class="d-flex flex-row pb-2 justify-content-center">
-                <h4 class="text-white">Testcase Configs</h4>
+                <h4 class="text-white">
+                    Test Configs
+                </h4>
             </div>
             <!-- Verification Framework -->
             <div class="input-group p-2">
-                <label class="input-group-text text-black" for="verif_fw">Verification Framework</label>
-                <select class="form-select" id="verif_fw" onchange="show_testcase_configs()">
+                <label class="input-group-text text-black" for="verif_fw">
+                    Verification Framework
+                </label>
+                <select class="form-select" id="verif_fw" onchange="toggle_testcases(this.value)">
                     <option disabled selected value="">--- Select a verification framework ---</option>
                     <option value="riscv-dv">RISCV-DV</option>
                     <option value="riscv-arch-test">RISCV Compliance</option>
@@ -171,58 +151,24 @@
                 </select>
             </div>
             <!-- Testcase Select -->
-            <div class="input-group p-2 d-none" id="testcase_div">
+            <div class="input-group p-2">
                 <label class="input-group-text text-black" for="testcases">Testcase</label>
-                <select class="form-select" id="testcases">
-                    <option disabled selected value="">--- Select testcase ---</option>
-                </select>
+                <select class="form-select" id="testcases"></select>
             </div>
-            <!-- RISCV DV: Simulator Select -->
-            <div class="input-group p-2 d-none" id="simulator_select_div">
-                <label class="input-group-text text-black" for="simulator_select">Simulator</label>
-                <select class="form-select" id="simulator_select">
-                    <option disabled selected value="">--- Select simulator ---</option>
-                </select>
+            <!-- Test List Manipulation Buttons -->
+            <div class="d-flex flex-row p-2">
+                <button class="btn btn-outline-danger" type="button" onclick="clear_testlist()">
+                    Clear
+                </button>
+                <button class="btn btn-primary ms-auto" type="button" onclick="add_test()">
+                    Add
+                </button>
             </div>
-            <!-- RISCV DV: ISS Select -->
-            <div class="input-group p-2 d-none" id="iss_select_div">
-                <label class="input-group-text text-black" for="iss_select">ISS</label>
-                <select class="form-select" id="iss_select">
-                    <option disabled selected value="">--- Select ISS ---</option>
-                </select>
-            </div>
-            <!-- RISCV DV: Iterations -->
-            <div class="d-flex flex-row p-2 d-none" id="iterations_div">
-                <h5 class="pe-3 text-white">Iterations:</h5>
-                <input id="iterations" type="range" class="form-range" min="1" max="100" value="1" step="1" oninput="this.nextElementSibling.innerHTML = this.value">
-                <span class="ps-3 text-white">1</span>
-            </div>
-            <!-- RISCV DV: Timeouts -->
-            <div class="d-flex flex-row p-2 d-none" id="timeout_div">
-                <label class="input-group-text text-black">
-                    Generator Timeout
-                </label>
-                <input class="form-control text-black">
-                <label class="input-group-text text-black">
-                    ISS Timeout
-                </label>
-                <input class="form-control text-black">
-            </div>
+            <!-- Test List View -->
+            <div id="testlist" class="overflow-y-auto border border-secondary m-2 flex-grow-1"></div>
         </div>
-        <!-- Navigation -->
-        <div class="d-flex flex-row mt-auto" id="nav_btns">
-            <button class="btn me-auto text-white d-none" onclick="open_dut_configs()">
-                <i class="bi-arrow-left-square-fill"></i>
-            </button>
-            <button class="btn ms-auto text-white" onclick="open_testcase_configs()">
-                <i class="bi-arrow-right-square-fill"></i>
-            </button>
-            <button type="button" class="btn ms-auto btn-outline-warning lightning-effect d-none" onclick="run_riscv_dv_test()">
-                <i class="bi-lightning-fill"></i>
-            </button>
-        </div>
-        <!-- Test Run Progress -->
-        <div class="d-flex flex-column justify-content-center align-items-center h-100 d-none" id="test_run">
+        <!-- Zap Progress -->
+        <div class="d-flex flex-column justify-content-center align-items-center h-100 d-none" id="test_zap">
             <div class="progress w-100">
                 <div id="progress_bar" class="progress-bar progress-bar-striped bg-warning progress-bar-animated"></div>
             </div>
@@ -232,6 +178,19 @@
         </div>
         <!-- Test Results -->
         <div class="d-flex flex-column justify-content-center h-100 d-none">
+        </div>
+        <!-- Navigation -->
+        <div class="d-flex flex-row mt-auto" id="nav_btns">
+            <button class="btn me-auto text-white d-none" id="left_btn" onclick="open_dut_configs()">
+                <i class="bi-arrow-left-square-fill"></i>
+            </button>
+            <button class="btn ms-auto text-white" id="right_btn" onclick="open_test_configs()">
+                <i class="bi-arrow-right-square-fill"></i>
+            </button>
+            <button type="button" id="zap_btn" class="btn ms-auto btn-outline-warning lightning-effect d-none" onclick="zap_testlist()">
+                <i class="bi-lightning-fill"></i>
+                Zap
+            </button>
         </div>
     </div>
 </div>
@@ -248,7 +207,20 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="empty_test" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Test List Empty</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Please make sure to select at least one test before continuing.</p>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js"></script>
-<script src="js/configs.js"></script>
+<script src="js/tests.js"></script>
 </body>
 </html>

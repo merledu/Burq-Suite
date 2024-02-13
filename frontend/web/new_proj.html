@@ -11,7 +11,7 @@
     <link type="text/css" rel="stylesheet" href="css/new_proj.css">
 </head>
 <body>
-<div class="d-flex flex-column">
+<div id="body" class="d-flex flex-column d-none">
     <div class="p-3">
         <h6 class="text-white text-center">
             New Project
@@ -21,7 +21,7 @@
         <label class="input-group-text text-black" for="new_proj">
             Path:
         </label>
-        <input class="form-control text-black" id="new_proj">
+        <input class="form-control text-black" id="new_proj" readonly>
         <button class="btn btn-outline-secondary" type="button" onclick="select_new_proj()">
             ...
         </button>

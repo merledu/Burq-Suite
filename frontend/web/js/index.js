@@ -1,5 +1,10 @@
-function open_configs(dut_type) {
-    pywebview.api.open_configs(dut_type);
+window.addEventListener('pywebviewready', () => {
+    document.getElementById('body').classList.remove('d-none');
+});
+
+
+function open_new_proj(dut_type) {
+    pywebview.api.open_new_proj(dut_type);
 }
 
 
