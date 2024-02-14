@@ -108,7 +108,7 @@ function add_test() {
               [item_div, [
                   'd-flex',
                   'flex-row',
-                  'p-3',
+                  'p-2',
                   'border-bottom',
                   'border-secondary'
               ]],
@@ -141,20 +141,6 @@ function add_test() {
     }
     pywebview.api.add_test(verif_fw, testcase.value);
     testlist.append(item_div);
-}
-
-
-function set_testlist_div() {
-    const test_config_div = document.getElementById('test_configs'),
-          testlist_parent = document.createElement('div'),
-          testlist_div = document.createElement('div');
-    let acc_height = 0;
-
-    for (let child of test_config_div.children) {
-        acc_height += child.offsetHeight;
-    }
-    const testlist_parent_height = test_config_div.offsetHeight - acc_height;
-
 }
 // TEST CONFIGS END
 
