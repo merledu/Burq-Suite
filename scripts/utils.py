@@ -4,6 +4,7 @@ from frontend.stderr import *
 
 
 def dump_configs():
+    configs['testlist'] = testlist
     os.chdir(configs['proj_dir'])
     config_file = os.path.join(configs['proj_dir'], 'configs.json')
     logging.info(f'Dumping configs: {config_file}')

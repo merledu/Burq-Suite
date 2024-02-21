@@ -1,5 +1,6 @@
 from frontend.frontend_functs import *
 from globals import *
+from scripts.utils import *
 
 
 def get_dut_type():
@@ -16,15 +17,15 @@ def get_dir(root_dir=''):
 
 
 def clear_testlist():
-    selected_tests.clear()
+    testlist.clear()
 
 
 def remove_test(test):
-    selected_tests.pop(test)
+    testlist.pop(test)
 
 
 def add_test(verif_fw, test):
-    selected_tests.append({verif_fw: test})
+    testlist.append([verif_fw, test])
 
 
 def select_target(target):
@@ -42,3 +43,12 @@ def set_csv_file(dir_path, filename):
 def set_config(key, value, log_info_msg):
     configs[key] = value
     logging.info(log_info_msg)
+
+
+def zap_testlist():
+    dump_configs()
+    for test in testlist:
+        if test[0] == 'riscv-dv':
+        elif test[0] == 'riscv-arch-test': pass
+        elif test[0] == 'self checking vector tests': pass
+

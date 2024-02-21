@@ -30,4 +30,5 @@ loglevel = logging.DEBUG if debug else logging.INFO
 windows = {}
 configs = {}
 stderr = {}
-selected_tests = []
+testlist = []
+

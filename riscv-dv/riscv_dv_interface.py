@@ -21,7 +21,6 @@ def get_working_base_testlist():
 
 
 def riscv_dv_run_test():
-    dump_configs()
     os.chdir(RISCV_DV_ROOT)
     run_cmd([
         'python3', 'run.py',

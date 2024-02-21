@@ -33,26 +33,28 @@ async function get_dir(input_id, root='') {
 }
 
 
-// function select_target() {
-//     const targets = [];
-//     const target_num = 6;
-// 
-//     for (let i = 1; i <= target_num; ++i) {
-//         let target = document.getElementById(`target${i}`);
-//         if (target.checked) {
-//             targets.push(target.value);
-//         }
-//     }
-//     pywebview.api.select_target(targets.join(''));
-// }
-// 
-// 
-// function set_csv_file() {
-//     pywebview.api.set_csv_file(
-//         document.getElementById('csv_dir').value,
-//         document.getElementById('csv_file').value
-//     );
-// }
+// CUSTOM DUT CONFIGS START
+function select_target() {
+    const targets = [];
+    const target_num = 6;
+
+    for (let i = 1; i <= target_num; ++i) {
+        let target = document.getElementById(`target${i}`);
+        if (target.checked) {
+            targets.push(target.value);
+        }
+    }
+    pywebview.api.select_target(targets.join(''));
+}
+ 
+ 
+ function set_csv_file() {
+     pywebview.api.set_csv_file(
+         document.getElementById('csv_dir').value,
+         document.getElementById('csv_file').value
+     );
+ }
+// CUSTOM DUT CONFIGS END
 
 
 // TEST CONFIGS START
@@ -145,6 +147,14 @@ function add_test() {
 // TEST CONFIGS END
 
 
+// ZAP PROGRESS START
+function update_progress(progress, msg) {
+    document.getElementById('progress_bar').style.width = `${progress}%`;
+    document.getElementById('progress_label').innerHTML = msg;
+}
+// ZAP PROGRESS END
+
+
 // NAVIGATION START
 async function validate_dut_fields() {
     switch (await pywebview.api.get_dut_type()) {
@@ -225,45 +235,24 @@ async function zap_testlist() {
         switch (await pywebview.api.get_dut_type()) {
             case 'custom':
                 const config_list = [
-                    []
+                    // [config_key, input_tag_id, log_info_msg]
+                    ['dut_path', 'dut', 'Uploaded DUT: '],
+                    ['dut_disasm_path', 'dut_disasm', 'DUT disassembly dump directory: '],
+                    ['dut_cmd', 'dut_cmd', 'DUT command: ']
                 ];
+                for (let config of config_list) {
+                    let input_value = document.getElementById(config[1]).value;
+                    pywebview.api.set_config(config[0], input_value, config[2] + input_value);
+                }
+                select_target();
+                set_csv_file();
+                break;
         }
+        zap_progress();
+        pywebview.api.zap_testlist();
     } else {
         empty_test_modal.toggle();
     }
 }
 // NAVIGATION END
-
-
-// async function run_riscv_dv_test() {
-//     const config_list = [
-//         // [config key, input tag id, log info msg]
-//         //
-//         // Custom DUT Configs
-//         ['dut_path', 'dut', 'Uploaded DUT: '],
-//         ['dut_disasm_path', 'dut_disasm', 'DUT disassembly dump directory: '],
-//         ['dut_cmd', 'dut_cmd', 'DUT command: '],
-//     ];
-// 
-//     const empty_fields_modal = new bootstrap.Modal('#empty_fields');
-// 
-//     if (validate_testcase_fields()) {
-//         for (let config of config_list) {
-//             let input_value = document.getElementById(config[1]).value;
-//             pywebview.api.set_config(config[0], input_value, config[2] + input_value);
-//         }
-//         select_target();
-//         set_csv_file();
-//         test_run_progress();
-//         pywebview.api.riscv_dv_run_test();
-//     } else {
-//         empty_fields_modal.toggle();
-//     }
-// }
-// 
-// 
-// function update_progress(progress, msg) {
-//     document.getElementById('progress_bar').style.width = `${progress}%`;
-//     document.getElementById('progress_label').innerHTML = msg;
-// }
 
