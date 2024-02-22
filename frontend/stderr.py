@@ -9,6 +9,7 @@ def get_stderr():
 
 def close_stderr():
     windows['main'].events.closed -= windows['stderr'].destroy
+    windows.pop('stderr')
     stderr.clear()
 
 

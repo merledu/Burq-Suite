@@ -1,5 +1,3 @@
-from importlib import import_module
-
 from frontend.splash import *
 from frontend.index import *
 from frontend.tests import *
@@ -26,10 +24,11 @@ def expose(window):
         clear_testlist,
         remove_test,
         add_test,
-
         select_target,
         set_csv_file,
         set_config,
+        zap_testlist,
+
         get_dut_name,
         get_iss,
 

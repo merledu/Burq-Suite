@@ -148,8 +148,12 @@ function add_test() {
 
 
 // ZAP PROGRESS START
-function update_progress(progress, msg) {
+function update_progress_bar(progress) {
     document.getElementById('progress_bar').style.width = `${progress}%`;
+}
+
+
+function update_progress_label(msg) {
     document.getElementById('progress_label').innerHTML = msg;
 }
 // ZAP PROGRESS END

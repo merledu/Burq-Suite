@@ -31,4 +31,3 @@ windows = {}
 configs = {}
 stderr = {}
 testlist = []
-
