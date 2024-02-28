@@ -83,4 +83,3 @@ def zap_testlist():
         window.update_progress_label("Tests executed successfully");
         '''
     )
-    print('END')
