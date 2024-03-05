@@ -18,14 +18,14 @@ SPIKE = os.path.join(TOOLS, 'spike', 'bin')
 
 
 # Environment Variables
-os.environ['RISCV_GCC'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-gcc')
-os.environ['RISCV_OBJCOPY'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-objcopy')
-os.environ['SPIKE_PATH'] = SPIKE
+os.environ['RISCV_GCC'] = "/home/hassan/Documents/riscv-gnu-toolchain/build/bin/riscv32-unknown-elf-gcc"
+os.environ['RISCV_OBJCOPY'] = "/home/hassan/Documents/riscv-gnu-toolchain/build/bin/riscv32-unknown-elf-objcopy"
+os.environ['SPIKE_PATH'] = "/home/hassan/riscv-isa-sim/build/bin/spike"
 os.environ['PATH'] = RISCV_GNU_TOOLCHAIN + os.pathsep + os.environ['PATH']
 
 
 # Utilities
-debug = True
+debug = False
 loglevel = logging.DEBUG if debug else logging.INFO
 windows = {}
 configs = {}
