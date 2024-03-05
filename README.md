@@ -8,8 +8,8 @@ The following should be available on your `$PATH`
 ## Setup
 Clone the repo.
 ```shell
-git clone --recurse-submodules <url>
-cd <repo>
+git clone --recurse-submodules https://github.com/merledu/Burq-Suite.git
+cd Burq-Suite
 ```
 Run setup.
 ```shell
