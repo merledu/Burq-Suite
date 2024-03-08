@@ -19,6 +19,21 @@ def get_working_base_testlist():
     return [test['test'] for test in working_testlist]
 
 
+def create_iss_log(test_dir, test):
+    os.chdir(RISCV_DV_ROOT)
+    run_cmd([
+        'python3', 'run.py',
+        f'--target', configs['target'],
+        f'--output', test_dir,
+        f'--testlist', TESTLIST_YAML,
+        f'--test', test,
+        f'--iterations', ITERATIONS,
+        f'--simulator', SIMULATOR,
+        f'--iss', ISS
+    ])
+    logging.info(f'{testlist[test_num][1]} generated')
+
+
 def create_iss_csv(iss, csv_path, log_path):
     os.chdir(RISCV_DV_SCRIPTS)
     run_cmd([
@@ -42,20 +57,9 @@ def compare_csv(iss_csv, compare_log_path, dut_name):
     ])
 
 
-def riscv_dv_run_test(test, test_num, **progress):
-    os.chdir(RISCV_DV_ROOT)
+def riscv_dv_run_test(test, test_num, progress):
     test_dir = os.path.join(configs['proj_path'], f'riscv_dv_out_{test_num}')
-    run_cmd([
-        'python3', 'run.py',
-        f'--target', configs['target'],
-        f'--output', test_dir,
-        f'--testlist', TESTLIST_YAML,
-        f'--test', test,
-        f'--iterations', ITERATIONS,
-        f'--simulator', SIMULATOR,
-        f'--iss', ISS
-    ])
-    logging.info(f'{testlist[test_num][1]} generated')
+    create_iss_log(test_dir, test)
     progress['progress'] += (4 / 10) * progress['progress_part']
     windows['main'].evaluate_js(
         f'''
