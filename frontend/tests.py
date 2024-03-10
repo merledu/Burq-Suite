@@ -4,6 +4,7 @@ from frontend.frontend_functs import *
 from scripts.utils import *
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
+riscv_compliance_interface = import_module('compliance.compliance_interface')
 
 
 def get_dut_type():
@@ -74,7 +75,7 @@ def zap_testlist():
                 progress=progress
             )
         elif testlist[i][0] == 'riscv-arch-test':
-            pass
+            riscv_compliance_interface.compliance_run_test(progress_part=progress_part, progress=progress)
         elif testlist[i][0] == 'self checking vector tests':
             pass
     windows['main'].evaluate_js(
@@ -83,3 +84,4 @@ def zap_testlist():
         window.update_progress_label("Tests executed successfully");
         '''
     )
+    print('END')
