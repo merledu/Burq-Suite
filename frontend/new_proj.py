@@ -1,4 +1,7 @@
-from frontend.frontend_functs import *
+import logging
+
+from globals import windows, configs
+from frontend.frontend_functs import select_folder
 
 
 def select_new_proj():
@@ -16,3 +19,4 @@ def create_new_proj(proj_path):
     configs['proj_path'] = proj_path
     cancel_new_proj()
     windows['main'].load_url('frontend/web/tests.html')
+

@@ -1,4 +1,7 @@
-from frontend.exposed_functs import *
+import logging, os, webview
+
+from globals import BURQ_SUITE_LOGS, loglevel, windows, debug
+from frontend.exposed_functs import expose
 
 
 if __name__ == '__main__':
@@ -20,3 +23,4 @@ if __name__ == '__main__':
     )
     logging.info('Burq Suite started')
     webview.start(expose, [windows['main']], debug=debug)
+

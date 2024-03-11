@@ -31,3 +31,4 @@ windows = {}
 configs = {}
 stderr = {}
 testlist = []
+
