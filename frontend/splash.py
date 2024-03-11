@@ -1,6 +1,7 @@
-import webview, time
+import webview, time, logging
 
-from frontend.login import *
+from globals import windows
+from frontend.login import login
 
 
 def open_login():
@@ -17,3 +18,4 @@ def open_login():
     )
     windows['main'].events.closed += windows['login'].destroy
     windows['login'].expose(login)
+

@@ -1,6 +1,8 @@
-import json
+import json, logging, webview, os
 
-from frontend.new_proj import *
+from globals import configs, windows
+from frontend.frontend_functs import select_folder
+from frontend.new_proj import cancel_new_proj, select_new_proj, create_new_proj
 
 
 def open_new_proj(dut_type):
@@ -16,11 +18,7 @@ def open_new_proj(dut_type):
         frameless=True
     )
     windows['main'].events.closed += windows['new_proj'].destroy
-    windows['new_proj'].expose(
-        cancel_new_proj,
-        select_new_proj,
-        create_new_proj
-    )
+    windows['new_proj'].expose(cancel_new_proj, select_new_proj, create_new_proj)
 
 
 def select_proj_folder():
@@ -43,3 +41,4 @@ def open_proj(folder):
         return False
     except KeyError:
         return False
+

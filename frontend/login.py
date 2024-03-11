@@ -1,4 +1,6 @@
-from globals import *
+import logging
+
+from globals import windows
 
 
 def login(usr, passwd):
@@ -11,3 +13,4 @@ def login(usr, passwd):
     else:
         logging.info('Incorrect username or password')
         return False
+
