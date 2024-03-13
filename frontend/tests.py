@@ -1,7 +1,10 @@
+import logging, os, time
+
 from importlib import import_module
 
-from frontend.frontend_functs import *
-from scripts.utils import *
+from globals import configs, windows, testlist
+from frontend.frontend_functs import select_folder
+from scripts.utils import dump_configs
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 riscv_compliance_interface = import_module('compliance.compliance_interface')
@@ -57,6 +60,9 @@ def zap_testlist():
         window.update_progress_label("Initializing tests");
         '''
     )
+    cmp_logs_dir = os.path.join(configs['proj_path'], 'compare_logs')
+    configs['cmp_dir'] = cmp_logs_dir
+    os.makedirs(cmp_logs_dir)
     dump_configs()
     progress_part = 99 / len(testlist)
     progress += 1
@@ -68,20 +74,35 @@ def zap_testlist():
             '''
         )
         if testlist[i][0] == 'riscv-dv':
-            progress = riscv_dv_interface.riscv_dv_run_test(
-                testlist[i][1],
-                i,
-                progress_part=progress_part,
-                progress=progress
-            )
+            progress = riscv_dv_interface.riscv_dv_run_test(testlist[i][1], i, progress_part, progress)
         elif testlist[i][0] == 'riscv-arch-test':
             riscv_compliance_interface.compliance_run_test(progress_part=progress_part, progress=progress)
         elif testlist[i][0] == 'self checking vector tests':
             pass
     windows['main'].evaluate_js(
-        f'''
+        '''
         window.update_progress_bar(100);
         window.update_progress_label("Tests executed successfully");
         '''
     )
-    print('END')
+    time.sleep(1)
+    windows['main'].evaluate_js(
+        '''
+        window.create_results();
+        window.open_results();
+        '''
+    )
+
+
+def get_test_status_list():
+    test_status_list = []
+    logfiles = os.listdir(configs['cmp_dir'])
+
+    for i in range(len(logfiles)):
+        current_file = os.path.join(configs['cmp_dir'], logfiles[i])
+        with open(current_file, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        test_status_list.append([testlist[i], lines[-2].replace('\n', '')])
+
+    return test_status_list
+

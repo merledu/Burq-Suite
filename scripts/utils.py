@@ -1,6 +1,8 @@
-import subprocess, time, json
+import subprocess, time, json, os, \
+       logging
 
-from frontend.stderr import *
+from globals import configs, testlist
+from frontend.stderr import stderr, open_stderr_window
 
 
 def dump_configs():
@@ -42,3 +44,4 @@ def dut_run_test(obj_path, disasm_dump_path):
     gen_disasm(obj_path, disasm_dump_path)
     os.chdir(configs['dut_path'])
     run_cmd(configs['dut_cmd'].split())
+

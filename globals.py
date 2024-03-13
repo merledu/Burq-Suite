@@ -25,7 +25,7 @@ os.environ['PATH'] = RISCV_GNU_TOOLCHAIN + os.pathsep + os.environ['PATH']
 
 
 # Utilities
-debug = False
+debug = True
 loglevel = logging.DEBUG if debug else logging.INFO
 windows = {}
 configs = {}

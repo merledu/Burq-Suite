@@ -15,6 +15,9 @@ body {
 #progress_bar {
     width: 0%;
 }
+#result_table {
+    height: 500px;
+}
 
 
 /*lightning effect start*/

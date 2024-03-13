@@ -1,4 +1,6 @@
-from scripts.utils import *
+import os, webview
+
+from globals import windows
 
 
 def get_proj_name():

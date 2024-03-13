@@ -159,6 +159,10 @@ function update_progress_label(msg) {
 // ZAP PROGRESS END
 
 
+// TEST RESULTS START
+async function create_results() {}
+// TEST RESULTS END
+
 // NAVIGATION START
 async function validate_dut_fields() {
     switch (await pywebview.api.get_dut_type()) {
@@ -257,6 +261,14 @@ async function zap_testlist() {
     } else {
         empty_test_modal.toggle();
     }
+}
+
+
+function open_results() {
+    const hide = ['test_zap'],
+          show = ['results'];
+
+    toggle_elements(hide, show);
 }
 // NAVIGATION END
 

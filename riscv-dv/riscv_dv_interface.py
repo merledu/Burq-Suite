@@ -1,6 +1,9 @@
+import os, logging
 from importlib import import_module
 
-from scripts.utils import *
+from globals import RISCV_DV_ROOT, RISCV_DV_ENV, configs, testlist, \
+                    windows
+from scripts.utils import run_cmd, dut_run_test
 
 riscv_dv_lib = import_module('riscv-dv.riscv-dv.scripts.lib')
 
@@ -19,17 +22,17 @@ def get_working_base_testlist():
     return [test['test'] for test in working_testlist]
 
 
-def create_iss_log(test_dir, test):
+def create_iss_log(test_dir, test, test_num):
     os.chdir(RISCV_DV_ROOT)
     run_cmd([
         'python3', 'run.py',
-        f'--target', configs['target'],
-        f'--output', test_dir,
-        f'--testlist', TESTLIST_YAML,
-        f'--test', test,
-        f'--iterations', ITERATIONS,
-        f'--simulator', SIMULATOR,
-        f'--iss', ISS
+        '--target', configs['target'],
+        '--output', test_dir,
+        '--testlist', TESTLIST_YAML,
+        '--test', test,
+        '--iterations', ITERATIONS,
+        '--simulator', SIMULATOR,
+        '--iss', ISS
     ])
     logging.info(f'{testlist[test_num][1]} generated')
 
@@ -57,50 +60,46 @@ def compare_csv(iss_csv, compare_log_path, dut_name):
     ])
 
 
-def riscv_dv_run_test(test, test_num, progress):
+def riscv_dv_run_test(test, test_num, progress_part, progress):
     test_dir = os.path.join(configs['proj_path'], f'riscv_dv_out_{test_num}')
-    create_iss_log(test_dir, test)
-    progress['progress'] += (4 / 10) * progress['progress_part']
+    create_iss_log(test_dir, test, test_num)
+    progress += (4 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         '''
     )
-    csv_dir = os.path.join(test_dir, 'csv')
-    compare_log_dir = os.path.join(test_dir, 'compare_log')
-    for folder in [csv_dir, compare_log_dir]:
-        os.mkdir(folder)
-    logging.info('CSV and comparison result directories created')
-    progress['progress'] += (1 / 10) * progress['progress_part']
+    progress += (1 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         '''
     )
     dut_run_test(
         os.path.join(test_dir, 'asm_test', f'{test}_0.o'),
         os.path.join(configs['dut_disasm_path'], 'test.S')
     )
-    progress['progress'] += (3 / 10) * progress['progress_part']
+    progress += (3 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         '''
     )
-    iss_csv_path = os.path.join(csv_dir, 'iss.csv')
+    iss_csv_path = os.path.join(test_dir, 'iss.csv')
     create_iss_csv(ISS, iss_csv_path, os.path.join(test_dir, 'spike_sim', f'{test}_0.log'))
-    progress['progress'] += (1 / 10) * progress['progress_part']
+    progress += (1 / 10) * progress_part
     windows['main'].evaluate_js(
         f"""
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         """
     )
-    compare_csv(iss_csv_path, os.path.join(compare_log_dir, 'compare.log'), os.path.dirname(configs['dut_path']))
+    compare_csv(iss_csv_path, os.path.join(configs['cmp_dir'], f'cmp_{test_num}.log'), os.path.basename(configs['dut_path']))
     logging.info('Comparison completed')
-    progress['progress'] += (1 / 10) * progress['progress_part']
+    progress += (1 / 10) * progress_part
     windows['main'].evaluate_js(
         f"""
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         """
     )
-    return progress['progress']
+    return progress
+

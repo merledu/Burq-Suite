@@ -19,7 +19,6 @@ async function open_proj() {
 
     if (proj_folder) {
         const project_selected = await pywebview.api.open_proj(proj_folder);
-
         if (!project_selected) {
             proj_select_modal.toggle();
         }
