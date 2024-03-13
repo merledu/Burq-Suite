@@ -175,7 +175,27 @@
             <p class="text-white p-2" id="progress_label"></p>
         </div>
         <!-- Test Results -->
-        <div class="d-flex flex-column justify-content-center h-100 d-none">
+        <div id="results" class="d-flex flex-column justify-content-center h-100 d-none">
+            <div class="d-flex flex-row pb-2 justify-content-center">
+                <h4 class="text-white">
+                    Test Results
+                </h4>
+            </div>
+            <div class="overflow-y-auto m-2" id="result_table">
+                <table class="table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                Test Name
+                            </th>
+                            <th scope="col">
+                                Test Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body"></tbody>
+                </table>
+            </div>
         </div>
         <!-- Navigation -->
         <div class="d-flex flex-row mt-auto p-2" id="nav_btns">
@@ -222,3 +242,4 @@
 <script src="js/tests.js"></script>
 </body>
 </html>
+
