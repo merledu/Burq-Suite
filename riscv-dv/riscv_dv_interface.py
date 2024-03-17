@@ -1,8 +1,13 @@
 import os, logging
 from importlib import import_module
 
-from globals import RISCV_DV_ROOT, RISCV_DV_ENV, configs, testlist, \
-                    windows
+from globals import (
+    RISCV_DV_ROOT,
+    RISCV_DV_ENV,
+    configs,
+    testlist,
+    windows
+)
 from scripts.utils import run_cmd, dut_run_test
 
 riscv_dv_lib = import_module('riscv-dv.riscv-dv.scripts.lib')

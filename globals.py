@@ -16,6 +16,8 @@ TOOLS = os.path.join(BURQ_SUITE_ROOT, 'tools')
 RISCV_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv-gnu-toolchain', 'bin')
 SPIKE = os.path.join(TOOLS, 'spike', 'bin')
 
+CORE_CFGS = os.path.join(BURQ_SUITE_ROOT, 'cores')
+
 
 # Environment Variables
 os.environ['RISCV_GCC'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-gcc')

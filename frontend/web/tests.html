@@ -181,24 +181,13 @@
                     Test Results
                 </h4>
             </div>
-            <div class="overflow-y-auto m-2" id="result_table">
-                <table class="table-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                Test Name
-                            </th>
-                            <th scope="col">
-                                Test Status
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="table_body"></tbody>
-                </table>
-            </div>
+            <div class="overflow-y-auto m-2" id="result_table"></div>
         </div>
         <!-- Navigation -->
         <div class="d-flex flex-row mt-auto p-2" id="nav_btns">
+            <button class="btn btn-primary me-2" id="core_cfg" onclick="open_core_cfg()">
+                Core Config
+            </button>
             <button class="btn me-auto text-white border border-white d-none" id="left_btn" onclick="open_dut_configs()">
                 <i class="bi-arrow-left-square-fill"></i>
             </button>
@@ -234,6 +223,35 @@
             </div>
             <div class="modal-body">
                 <p>Please make sure to select at least one test before continuing.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="cfg" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Save Core Config</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <label for="save_cfg" class="input-group-text">
+                        Config Name
+                    </label>
+                    <input class="form-control text-black" type="text" id="save_cfg">
+                    <button class="btn btn-primary" onclick="save_core_cfg()" data-bs-dismiss="modal">
+                        Save
+                    </button>
+                </div>
+                <div class="input-group mb-3">
+                    <select class="form-select" id="load_cfg_select">
+                        <option selected value="">--- None ---</option>
+                    </select>
+                    <button class="btn btn-success" onclick="load_core_cfg()" data-bs-dismiss="modal">
+                        Load
+                    </button>
+                </div>
             </div>
         </div>
     </div>

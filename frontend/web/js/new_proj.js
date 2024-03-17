@@ -5,15 +5,13 @@ window.addEventListener('pywebviewready', () => {
 
 async function select_new_proj() {
     const new_proj_path = document.getElementById('new_proj'),
-          create_btn = document.getElementById('create_btn');
+        create_btn = document.getElementById('create_btn');
 
     new_proj_path.value = await pywebview.api.select_new_proj();
     if (new_proj_path.value) {
         create_btn.disabled = false;
-    } else {
-        if (!create_btn.disabled) {
+    } else if (!create_btn.disabled) {
             create_btn.disabled = true;
-        }
     }
 }
 
