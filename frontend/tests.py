@@ -1,4 +1,3 @@
-from os.path import isfile
 import logging, os, time
 
 from importlib import import_module
