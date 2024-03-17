@@ -1,24 +1,28 @@
-import json, logging, webview, os
+import json, logging, os
 
 from globals import configs, windows
 from frontend.frontend_functs import select_folder
-from frontend.new_proj import cancel_new_proj, select_new_proj, create_new_proj
 
 
 def open_new_proj(dut_type):
     configs['dut_type'] = dut_type
     logging.info(f'Selected DUT type: {dut_type.title()} DUT')
-    windows['new_proj'] = webview.create_window(
-        title='New project',
-        url='frontend/web/new_proj.html',
-        resizable=False,
-        on_top=True,
-        width=400,
-        height=160,
-        frameless=True
+    windows['main'].evaluate_js(
+        '''
+        new_proj_modal.toggle();
+        '''
     )
-    windows['main'].events.closed += windows['new_proj'].destroy
-    windows['new_proj'].expose(cancel_new_proj, select_new_proj, create_new_proj)
+
+
+def create_new_proj(proj_path):
+    logging.info(f'Project path: {proj_path}')
+    configs['proj_path'] = proj_path
+    windows['main'].evaluate_js(
+        '''
+        new_proj_modal.toggle();
+        '''
+    )
+    windows['main'].load_url('frontend/web/tests.html')
 
 
 def select_proj_folder():

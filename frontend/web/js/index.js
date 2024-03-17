@@ -1,3 +1,5 @@
+const new_proj_modal = new bootstrap.Modal('#new_proj_modal');
+
 window.addEventListener('pywebviewready', () => {
     document.getElementById('body').classList.remove('d-none');
 });
@@ -8,8 +10,17 @@ function open_new_proj(dut_type) {
 }
 
 
-async function select_proj_folder() {
-    document.getElementById('dir').value = await pywebview.api.select_proj_folder();
+function create_new_proj() {
+    const new_proj_path = document.getElementById('new_proj').value;
+
+    if (new_proj_path) {
+        pywebview.api.create_new_proj(new_proj_path);
+    }
+}
+
+
+async function select_proj_folder(id) {
+    document.getElementById(id).value = await pywebview.api.select_proj_folder();
 }
 
 
