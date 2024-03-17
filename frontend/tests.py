@@ -1,3 +1,4 @@
+from os.path import isfile
 import logging, os, time
 
 from importlib import import_module
@@ -100,9 +101,10 @@ def get_test_status_list():
 
     for i in range(len(logfiles)):
         current_file = os.path.join(configs['cmp_dir'], logfiles[i])
-        with open(current_file, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-        test_status_list.append([testlist[i], lines[-2].replace('\n', '')])
+        if os.path.isfile(current_file):
+            with open(current_file, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+            test_status_list.append([testlist[i], lines[-2].replace('\n', '')])
 
     return test_status_list
 

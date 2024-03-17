@@ -15,7 +15,7 @@ async function select_proj_folder() {
 
 async function open_proj() {
     const proj_folder = document.getElementById('dir').value,
-          proj_select_modal = new bootstrap.Modal('#proj_select_modal');
+        proj_select_modal = new bootstrap.Modal('#proj_select_modal');
 
     if (proj_folder) {
         const project_selected = await pywebview.api.open_proj(proj_folder);

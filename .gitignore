@@ -6,3 +6,4 @@ compliance/riscv-arch-test/
 compliance/config.ini
 logs/
 tools/
+cores/

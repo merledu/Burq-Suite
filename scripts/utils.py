@@ -1,7 +1,7 @@
 import subprocess, time, json, os, \
-       logging
+    logging
 
-from globals import configs, testlist
+from globals import configs, testlist, CORE_CFGS
 from frontend.stderr import stderr, open_stderr_window
 
 
@@ -44,4 +44,22 @@ def dut_run_test(obj_path, disasm_dump_path):
     gen_disasm(obj_path, disasm_dump_path)
     os.chdir(configs['dut_path'])
     run_cmd(configs['dut_cmd'].split())
+
+
+def save_core_cfg(name, cfgs):
+    cfg_file = os.path.join(CORE_CFGS, f'{name}.json')
+    print(f'{cfgs = }')
+    with open(cfg_file, 'w', encoding='utf-8') as f:
+        json.dump(cfgs, f)
+
+
+def get_core_cfgs():
+    return [cfg[: -5] for cfg in os.listdir(CORE_CFGS)]
+
+
+def load_core_cfg(name):
+    cfg_file = os.path.join(CORE_CFGS, f'{name}.json')
+    with open(cfg_file, 'r', encoding='utf-8') as f:
+        cfg = json.load(f)
+    return cfg
 

@@ -1,12 +1,13 @@
 async function init_window() {
-    const dut_type = await pywebview.api.get_dut_type();
-    const dut_type_div = document.getElementById(dut_type);
+    const dut_type = await pywebview.api.get_dut_type(),
+        dut_type_div = document.getElementById(dut_type);
 
     dut_type_div.classList.add('rounded-pill');
     switch (dut_type) {
         case 'custom':
             dut_type_div.style.backgroundColor = '#A851FF';
             document.getElementById('custom_dut_configs').classList.remove('d-none');
+            // document.getElementById('results').classList.remove('d-none');
             break;
         case 'prebuilt':
             dut_type_div.style.backgroundColor = '#0CA17E';
@@ -35,8 +36,8 @@ async function get_dir(input_id, root='') {
 
 // CUSTOM DUT CONFIGS START
 function select_target() {
-    const targets = [];
-    const target_num = 6;
+    const targets = [],
+        target_num = 6;
 
     for (let i = 1; i <= target_num; ++i) {
         let target = document.getElementById(`target${i}`);
@@ -44,16 +45,13 @@ function select_target() {
             targets.push(target.value);
         }
     }
-    pywebview.api.select_target(targets.join(''));
+    return targets.join('');
 }
  
  
- function set_csv_file() {
-     pywebview.api.set_csv_file(
-         document.getElementById('csv_dir').value,
-         document.getElementById('csv_file').value
-     );
- }
+function set_csv_file() {
+    pywebview.api.set_csv_file(document.getElementById('csv_dir').value, document.getElementById('csv_file').value);
+}
 // CUSTOM DUT CONFIGS END
 
 
@@ -101,33 +99,33 @@ function remove_test(btn) {
 
 function add_test() {
     const testlist = document.getElementById('testlist'),
-          item_div = document.createElement('div'),
-          testname_div = document.createElement('div'),
-          btn_div = document.createElement('div'),
-          remove_btn = document.createElement('button'),
-          btn_icon = document.createElement('i'),
-          classes = new Map([
-              [item_div, [
-                  'd-flex',
-                  'flex-row',
-                  'p-2',
-                  'border-bottom',
-                  'border-secondary'
-              ]],
-              [testname_div, [
-                  'flex-grow-1',
-                  'overflow-x-hidden',
-                  'text-white',
-                  'fw-semibold',
-                  'd-flex',
-                  'align-items-center'
-              ]],
-              [btn_div, ['d-flex', 'align-items-center', 'ms-3']],
-              [remove_btn, ['btn', 'btn-danger']],
-              [btn_icon, ['bi-dash']]
-          ]),
-          testcase = document.getElementById('testcases'),
-          verif_fw = document.getElementById('verif_fw').value;
+        item_div = document.createElement('div'),
+        testname_div = document.createElement('div'),
+        btn_div = document.createElement('div'),
+        remove_btn = document.createElement('button'),
+        btn_icon = document.createElement('i'),
+        classes = new Map([
+            [item_div, [
+                'd-flex',
+                'flex-row',
+                'p-2',
+                'border-bottom',
+                'border-secondary'
+            ]],
+            [testname_div, [
+                'flex-grow-1',
+                'overflow-x-hidden',
+                'text-white',
+                'fw-semibold',
+                'd-flex',
+                'align-items-center'
+            ]],
+            [btn_div, ['d-flex', 'align-items-center', 'ms-3']],
+            [remove_btn, ['btn', 'btn-danger']],
+            [btn_icon, ['bi-dash']]
+        ]),
+        testcase = document.getElementById('testcases'),
+        verif_fw = document.getElementById('verif_fw').value;
 
     for (let elem of classes) {
         for (let bs_class of elem[1]) {
@@ -160,7 +158,39 @@ function update_progress_label(msg) {
 
 
 // TEST RESULTS START
-async function create_results() {}
+async function create_results() {
+    const test_status_list = await pywebview.api.get_test_status_list(),
+        results = document.getElementById('result_table');
+
+    for (let test of test_status_list) {
+        let test_name_div = document.createElement('div'),
+            test_status_div = document.createElement('div'),
+            row = document.createElement('div'),
+            classes = new Map([
+                [test_name_div, [
+                    'p-2',
+                    'overflow-x-auto',
+                    'text-white',
+                    'border-end',
+                    'border-secondary'
+                ]],
+                [test_status_div, ['p-2', 'overflow-x-auto', 'text-white']],
+                [row, ['d-flex', 'flex-row', 'border-bottom', 'border-secondary']]
+            ]);
+
+        for (let elem of classes) {
+            for (let bs_class of elem[1]) {
+                elem.classList.add(bs_class);
+            }
+        }
+        test_name_div.innerHTML = test[0];
+        test_status_div.innerHTML = test[1];
+        for (let elem of [test_name_div, test_status_div]) {
+            row.append(elem);
+        }
+        results.append(row);
+    }
+}
 // TEST RESULTS END
 
 // NAVIGATION START
@@ -197,10 +227,88 @@ function toggle_elements(hide, show) {
 }
 
 
+async function get_core_cfgs() {
+    const cfgs = await pywebview.api.get_core_cfgs(),
+        load_cfg_select = document.getElementById('load_cfg_select');
+
+    for (let cfg of cfgs) {
+        let cfg_option = document.createElement('option');
+        cfg_option.value = cfg;
+        cfg_option.innerHTML = cfg;
+        load_cfg_select.append(cfg_option);
+    }
+}
+
+
+function open_core_cfg() {
+    const core_cfg_modal = new bootstrap.Modal('#cfg');
+
+    get_core_cfgs();
+    core_cfg_modal.toggle();
+}
+
+
+async function save_core_cfg() {
+    const cfg_name = document.getElementById('save_cfg').value,
+        empty_fields_modal = new bootstrap.Modal('#empty_fields');
+
+    if (await validate_dut_fields()) {
+        if (cfg_name) {
+            let cfgs = {
+                ...[
+                    'dut',
+                    'dut_disasm',
+                    'dut_cmd',
+                    'csv_dir',
+                    'csv_file'
+                ].reduce((obj, id) => {
+                    obj[id] = document.getElementById(id).value;
+                    return obj;
+                }, {}),
+                'target': select_target()
+            }
+            console.log(cfgs);
+            pywebview.api.save_core_cfg(cfg_name, cfgs);
+        }
+    } else {
+        empty_fields_modal.toggle();
+    }
+}
+
+
+async function load_core_cfg() {
+    const cfg_name = document.getElementById('load_cfg_select').value;
+
+    if (cfg_name) {
+        const cfg = await pywebview.api.load_core_cfg(cfg_name),
+            target_num = 6;
+        [
+            'dut',
+            'dut_disasm',
+            'dut_cmd',
+            'csv_dir',
+            'csv_file'
+        ].forEach(
+            id => document.getElementById(id).value = cfg[id]
+        );
+        for (let i = 1; i <= target_num; ++i) {
+            let target_chkbox = document.getElementById(`target${i}`)
+            if (cfg['target'].includes(target_chkbox.value)) {
+                if (!target_chkbox.checked) {
+                    target_chkbox.checked = true;
+                }
+            } else if (target_chkbox.checked) {
+                target_chkbox.checked = false;
+            }
+        }
+    }
+}
+
+
 async function open_test_configs() {
-    const hide = ['right_btn'],
-          show = ['test_configs', 'left_btn', 'zap_btn'],
-          empty_fields_modal = new bootstrap.Modal('#empty_fields');
+    const hide = ['right_btn', 'core_cfg'],
+        show = ['test_configs', 'left_btn', 'zap_btn'],
+        empty_fields_modal = new bootstrap.Modal('#empty_fields');
 
     if (await validate_dut_fields()) {
         switch (await pywebview.api.get_dut_type()) {
@@ -217,7 +325,7 @@ async function open_test_configs() {
 
 async function open_dut_configs() {
     const hide = ['test_configs', 'left_btn', 'zap_btn'],
-          show = ['right_btn'];
+        show = ['right_btn', 'core_cfg'];
 
     switch (await pywebview.api.get_dut_type()) {
         case 'custom':
@@ -230,7 +338,7 @@ async function open_dut_configs() {
 
 function zap_progress() {
     const hide = ['test_configs', 'left_btn', 'zap_btn'],
-          show = ['test_zap'];
+        show = ['test_zap'];
 
     toggle_elements(hide, show);
 }
@@ -252,7 +360,7 @@ async function zap_testlist() {
                     let input_value = document.getElementById(config[1]).value;
                     pywebview.api.set_config(config[0], input_value, config[2] + input_value);
                 }
-                select_target();
+                pywebview.api.select_target(select_target());
                 set_csv_file();
                 break;
         }
@@ -266,7 +374,7 @@ async function zap_testlist() {
 
 function open_results() {
     const hide = ['test_zap'],
-          show = ['results'];
+        show = ['results'];
 
     toggle_elements(hide, show);
 }
