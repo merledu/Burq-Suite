@@ -181,7 +181,25 @@
                     Test Results
                 </h4>
             </div>
-            <div class="overflow-y-auto m-2" id="result_table"></div>
+            <div class="overflow-y-auto m-2" id="result_table">
+                <div class="text-white d-flex flex-row border border-secondary">
+                    <div class="p-2 border-end border-secondary" id="fw_row">
+                        <strong>
+                            Framework
+                        </strong>
+                    </div>
+                    <div class="p-2 border-end border-secondary" id="name_row">
+                        <strong>
+                            Test Name
+                        </strong>
+                    </div>
+                    <div class="p-2" id="status_row">
+                        <strong>
+                            Status
+                        </strong>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Navigation -->
         <div class="d-flex flex-row mt-auto p-2" id="nav_btns">
@@ -197,6 +215,10 @@
             <button type="button" id="zap_btn" class="btn ms-auto btn-outline-warning lightning-effect d-none" onclick="zap_testlist()">
                 <i class="bi-lightning-fill"></i>
                 Zap
+            </button>
+            <button class="btn btn-success ms-auto text-white d-none" onclick="open_proj_browser()" id="proj_browser_btn">
+                <i class="bi-box-arrow-right"></i>
+                Project Browser
             </button>
         </div>
     </div>

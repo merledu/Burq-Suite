@@ -18,6 +18,9 @@ body {
 #result_table {
     height: 438px;
 }
+#fw_row, #name_row, #status_row {
+    width: 237px;
+}
 
 
 /*lightning effect start*/

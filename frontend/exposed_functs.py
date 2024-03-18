@@ -13,7 +13,8 @@ from frontend.tests import (
     set_csv_file,
     set_config,
     zap_testlist,
-    get_test_status_list
+    get_test_status_list,
+    open_proj_browser
 )
 from frontend.test_results import get_dut_name, get_iss
 # from frontend.project_browser import *
@@ -50,6 +51,7 @@ def expose(window):
         set_config,
         zap_testlist,
         get_test_status_list,
+        open_proj_browser,
 
         # test_results
         get_dut_name,
