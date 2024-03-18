@@ -1,4 +1,4 @@
-import logging, os, time
+import logging, os, time, webview
 
 from importlib import import_module
 
@@ -70,7 +70,7 @@ def zap_testlist():
         windows['main'].evaluate_js(
             f'''
             window.update_progress_bar({progress});
-            window.update_progress_label("Executing test {i + 1} of {len(testlist)}: {testlist[i][1]}");
+            window.update_progress_label("Executing test {i + 1} of {len(testlist)}: {testlist[i][1].replace('_', ' ')}");
             '''
         )
         if testlist[i][0] == 'riscv-dv':
@@ -103,7 +103,18 @@ def get_test_status_list():
         if os.path.isfile(current_file):
             with open(current_file, 'r', encoding='utf-8') as f:
                 lines = f.readlines()
-            test_status_list.append([testlist[i], lines[-2].replace('\n', '')])
+            test_status_list.append([testlist[i][0], testlist[i][1].replace('_', ' '), lines[-2].replace('\n', '')])
 
     return test_status_list
+
+
+def open_proj_browser():
+    logging.info('Opening project browser')
+    windows['proj_browser'] = webview.create_window(
+        title='Project Browser',
+        url='frontend/web/project_browser.html',
+        resizable=False,
+        fullscreen=True,
+        on_top=True
+    )
 

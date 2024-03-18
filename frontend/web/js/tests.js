@@ -165,6 +165,7 @@ async function create_results() {
     for (let test of test_status_list) {
         let test_name_div = document.createElement('div'),
             test_status_div = document.createElement('div'),
+            verif_fw_div = document.createElement('div'),
             row = document.createElement('div'),
             classes = new Map([
                 [test_name_div, [
@@ -175,23 +176,25 @@ async function create_results() {
                     'border-secondary'
                 ]],
                 [test_status_div, ['p-2', 'overflow-x-auto', 'text-white']],
-                [row, ['d-flex', 'flex-row', 'border-bottom', 'border-secondary']]
+                [row, ['d-flex', 'flex-row', 'border-bottom', 'border-secondary']],
+                [verif_fw_div, ['text-white', 'border-end', 'border-secondary', 'p-2', 'overflow-x-auto']]
             ]);
 
         for (let elem of classes) {
             for (let bs_class of elem[1]) {
-                elem.classList.add(bs_class);
+                elem[0].classList.add(bs_class);
             }
         }
-        test_name_div.innerHTML = test[0];
-        test_status_div.innerHTML = test[1];
-        for (let elem of [test_name_div, test_status_div]) {
+        for (let [index, elem] of [verif_fw_div, test_name_div, test_status_div].entries()) {
+            elem.innerHTML = test[index];
+            elem.style.width = '237px';
             row.append(elem);
         }
         results.append(row);
     }
 }
 // TEST RESULTS END
+
 
 // NAVIGATION START
 async function validate_dut_fields() {
@@ -374,9 +377,14 @@ async function zap_testlist() {
 
 function open_results() {
     const hide = ['test_zap'],
-        show = ['results'];
+        show = ['results', 'proj_browser_btn'];
 
     toggle_elements(hide, show);
+}
+
+
+function open_proj_browser() {
+    pywebview.api.open_proj_browser();
 }
 // NAVIGATION END
 
