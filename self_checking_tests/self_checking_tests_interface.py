@@ -1,11 +1,10 @@
 import os
-from pathlib import Path
+from globals import SELF_CHECKING_TESTS_ENV
 
 
 def get_self_checking_tests_category():
-    # folders = [f for f in Path('./Self-Checking-Tests').iterdir() if f.is_dir()]
-    folders = [f for f in os.scandir('Self-Checking-Tests/') if f.is_dir()]
-    print(f'{folders = }')
+    return [os.path.basename(f.path) for f in os.scandir(SELF_CHECKING_TESTS_ENV) if f.is_dir()]
+    
 
 
 if __name__ == '__main__':
