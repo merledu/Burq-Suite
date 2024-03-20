@@ -16,7 +16,6 @@ from frontend.tests import (
     get_test_status_list,
     open_proj_browser
 )
-from frontend.test_results import get_dut_name, get_iss
 # from frontend.project_browser import *
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
@@ -52,10 +51,6 @@ def expose(window):
         zap_testlist,
         get_test_status_list,
         open_proj_browser,
-
-        # test_results
-        get_dut_name,
-        get_iss,
 
         # riscv_dv_interface
         riscv_dv_interface.get_working_base_testlist,
