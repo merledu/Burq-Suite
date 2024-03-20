@@ -26,8 +26,8 @@ os.environ['SPIKE_PATH'] = SPIKE
 os.environ['PATH'] = RISCV_GNU_TOOLCHAIN + os.pathsep + os.environ['PATH']
 
 
-# Utilities
-debug = False
+
+debug = False 
 loglevel = logging.DEBUG if debug else logging.INFO
 windows = {}
 configs = {}
