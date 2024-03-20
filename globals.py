@@ -12,6 +12,9 @@ IMAGE_ASSETS = os.path.join(BURQ_SUITE_ROOT, 'frontend', 'assets', 'images')
 RISCV_DV_ENV = os.path.join(BURQ_SUITE_ROOT, 'riscv-dv')
 RISCV_DV_ROOT = os.path.join(RISCV_DV_ENV, 'riscv-dv')
 
+RISCV_ARCH_TEST_SUITE = os.path.join(BURQ_SUITE_ROOT, 'compliance', 'riscv-arch-test', 'riscv-test-suite')
+RISCV_ARCH_TEST_ENV = os.path.join(RISCV_ARCH_TEST_SUITE, 'env')
+
 TOOLS = os.path.join(BURQ_SUITE_ROOT, 'tools')
 RISCV_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv-gnu-toolchain', 'bin')
 SPIKE = os.path.join(TOOLS, 'spike', 'bin')
