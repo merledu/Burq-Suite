@@ -12,13 +12,13 @@ def create_config(ref: str, ref_plugin_dir: str) -> None:
     config.optionxform   = str
 
     # RISCOF configs
-    config['RISCOF']: dict[str, str] = {
+    config['RISCOF']: dict[str, str] = { # type: ignore
         'ReferencePlugin'    : ref,
         'ReferencePluginPath': ref_plugin_dir
     }
 
     # Reference configs
-    config[f'{ref}']: dict[str, str] = {
+    config[f'{ref}']: dict[str, str] = { # type: ignore
         'pluginpath': f'{ref_plugin_dir}'
     }
 
