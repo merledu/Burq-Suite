@@ -62,7 +62,10 @@ def zap_testlist():
     )
     cmp_logs_dir = os.path.join(configs['proj_path'], 'compare_logs')
     configs['cmp_dir'] = cmp_logs_dir
-    os.makedirs(cmp_logs_dir)
+    if not os.path.exists(cmp_logs_dir):
+        os.makedirs(cmp_logs_dir)
+    else:
+        pass
     dump_configs()
     progress_part = 99 / len(testlist)
     progress += 1
@@ -76,7 +79,7 @@ def zap_testlist():
         if testlist[i][0] == 'riscv-dv':
             progress = riscv_dv_interface.riscv_dv_run_test(testlist[i][1], i, progress_part, progress)
         elif testlist[i][0] == 'riscv-arch-test':
-            riscv_compliance_interface.compliance_run_test(progress_part=progress_part, progress=progress)
+            riscv_compliance_interface.compliance_run_test(progress_part, progress)
         elif testlist[i][0] == 'self checking vector tests':
             pass
     windows['main'].evaluate_js(

@@ -56,14 +56,14 @@ def dut_template_setup(file_path, new_sim_cmd_line):
         file.writelines(lines)
 
 
-def compliance_run_test(**progress):
+def compliance_run_test(progress_part, progress):
     dut = configs["dut_path"]
     os.chdir(dut)
     dut_name = os.path.basename(dut)
-    progress['progress'] += (4 / 10) * progress['progress_part']
+    progress += (4 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         '''
     )
     windows['main'].evaluate_js(
@@ -74,10 +74,10 @@ def compliance_run_test(**progress):
     run_command([
         "riscof", "setup", "--dutname=" + dut_name, "--refname=spike"
     ])
-    progress['progress'] += (1 / 10) * progress['progress_part']
+    progress += (1 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         '''
     )
     windows['main'].evaluate_js(
@@ -88,10 +88,10 @@ def compliance_run_test(**progress):
     run_command([
         "riscof", "--verbose", "info", "arch-test", "--clone"
     ])
-    progress['progress'] += (3 / 10) * progress['progress_part']
+    progress += (3 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         '''
     )
     windows['main'].evaluate_js(
@@ -102,10 +102,10 @@ def compliance_run_test(**progress):
     run_command([
         "riscof", "validateyaml", "--config=config.ini"
     ])
-    progress['progress'] += (1 / 10) * progress['progress_part']
+    progress += (1 / 10) * progress_part
     windows['main'].evaluate_js(
         f"""
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         """
     )
     windows['main'].evaluate_js(
@@ -124,10 +124,10 @@ def compliance_run_test(**progress):
     ref_temp_path= f'spike/riscof_spike.py'
     spike_cmd = "            execute += self.ref_exe + ' --isa={0} +signature={1} +signature-granularity=4 {2}'.format(self.isa, sig_file, elf)\n"
     ref_template_setup(ref_temp_path, spike_cmd)
-    progress['progress'] += (1 / 10) * progress['progress_part']
+    progress += (1 / 10) * progress_part
     windows['main'].evaluate_js(
         f"""
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         """
     )
     windows['main'].evaluate_js(
@@ -136,7 +136,7 @@ def compliance_run_test(**progress):
         """
     )
     run_command([
-        "riscof", "--verbose", "info", "run", "--config", "./config.ini", "--suite", "./riscv-arch-test/riscv-test-suite/rv32i_m", "--env", "./riscv-arch-test/riscv-test-suite/env"
+        "riscof", "--verbose", "info", "run", "--config", "./config.ini", "--suite", "./riscv-arch-test/riscv-test-suite", "--env", "./riscv-arch-test/riscv-test-suite/env"
     ])
     
     return progress['progress']
