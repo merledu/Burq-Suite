@@ -8,7 +8,9 @@ import yaml
 
 from globals import (
     configs,
-    windows
+    windows,
+    RISCV_ARCH_TEST_SUITE,
+    RISCV_ARCH_TEST_ENV
 )
 
 def run_command(cmd):
@@ -74,20 +76,20 @@ def compliance_run_test(progress_part, progress):
     run_command([
         "riscof", "setup", "--dutname=" + dut_name, "--refname=spike"
     ])
-    progress += (1 / 10) * progress_part
-    windows['main'].evaluate_js(
-        f'''
-        window.update_progress_bar({progress});
-        '''
-    )
-    windows['main'].evaluate_js(
-        f'''
-        window.update_progress_label("Cloning Riscof Arch Test Suite");
-        '''
-    )
-    run_command([
-        "riscof", "--verbose", "info", "arch-test", "--clone"
-    ])
+    # progress += (1 / 10) * progress_part
+    # windows['main'].evaluate_js(
+    #     f'''
+    #     window.update_progress_bar({progress});
+    #     '''
+    # )
+    # windows['main'].evaluate_js(
+    #     f'''
+    #     window.update_progress_label("Cloning Riscof Arch Test Suite");
+    #     '''
+    # )
+    # run_command([
+    #     "riscof", "--verbose", "info", "arch-test", "--clone"
+    # ])
     progress += (3 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
@@ -114,7 +116,7 @@ def compliance_run_test(progress_part, progress):
         """
     )    
     run_command([
-        "riscof", "testlist", "--config=config.ini", "--suite=riscv-arch-test/riscv-test-suite/", "--env=riscv-arch-test/riscv-test-suite/env"
+        "riscof", "testlist", "--config=config.ini", f"--suite={RISCV_ARCH_TEST_SUITE}", f"--env={RISCV_ARCH_TEST_ENV}"
     ])
     dut_temp_path = f'{dut_name}/riscof_{dut_name}.py'
     work_dir_string = "{testentry['work_dir']}"
@@ -136,7 +138,7 @@ def compliance_run_test(progress_part, progress):
         """
     )
     run_command([
-        "riscof", "--verbose", "info", "run", "--config", "./config.ini", "--suite", "./riscv-arch-test/riscv-test-suite", "--env", "./riscv-arch-test/riscv-test-suite/env"
+        "riscof", "--verbose", "info", "run", "--config", "./config.ini", "--suite", f"{RISCV_ARCH_TEST_SUITE}", "--env", f"{RISCV_ARCH_TEST_ENV}"
     ])
     
     return progress['progress']
