@@ -3,7 +3,7 @@ import subprocess
 import webview
 from frontend.frontend_functs import *
 from frontend.tests import configs
-from scripts.utils import *
+from scripts.utils import run_cmd
 import yaml
 
 from globals import (
@@ -12,9 +12,6 @@ from globals import (
     RISCV_ARCH_TEST_SUITE,
     RISCV_ARCH_TEST_ENV
 )
-
-def run_command(cmd):
-    subprocess.run(cmd, check=True)
 
  
 def dut_yaml_setup(yaml_path, target):
@@ -73,23 +70,9 @@ def compliance_run_test(progress_part, progress):
         window.update_progress_label("Setting up Refrence Model and DUT");
         '''
     )
-    run_command([
+    run_cmd([
         "riscof", "setup", "--dutname=" + dut_name, "--refname=spike"
     ])
-    # progress += (1 / 10) * progress_part
-    # windows['main'].evaluate_js(
-    #     f'''
-    #     window.update_progress_bar({progress});
-    #     '''
-    # )
-    # windows['main'].evaluate_js(
-    #     f'''
-    #     window.update_progress_label("Cloning Riscof Arch Test Suite");
-    #     '''
-    # )
-    # run_command([
-    #     "riscof", "--verbose", "info", "arch-test", "--clone"
-    # ])
     progress += (3 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
@@ -101,7 +84,7 @@ def compliance_run_test(progress_part, progress):
         window.update_progress_label("Validating YAML file");
         '''
     )
-    run_command([
+    run_cmd([
         "riscof", "validateyaml", "--config=config.ini"
     ])
     progress += (1 / 10) * progress_part
@@ -115,7 +98,7 @@ def compliance_run_test(progress_part, progress):
         window.update_progress_label("Generating Testlist");
         """
     )    
-    run_command([
+    run_cmd([
         "riscof", "testlist", "--config=config.ini", f"--suite={RISCV_ARCH_TEST_SUITE}", f"--env={RISCV_ARCH_TEST_ENV}"
     ])
     dut_temp_path = f'{dut_name}/riscof_{dut_name}.py'
@@ -137,7 +120,7 @@ def compliance_run_test(progress_part, progress):
         window.update_progress_label("Running Tests");
         """
     )
-    run_command([
+    run_cmd([
         "riscof", "--verbose", "info", "run", "--config", "./config.ini", "--suite", f"{RISCV_ARCH_TEST_SUITE}", "--env", f"{RISCV_ARCH_TEST_ENV}"
     ])
     
