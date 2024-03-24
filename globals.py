@@ -25,9 +25,9 @@ SELF_CHECKING_TESTS_ROOT = os.path.join(BURQ_SUITE_ROOT, 'self_checking_tests')
 SELF_CHECKING_TESTS_ENV = os.path.join(SELF_CHECKING_TESTS_ROOT, 'Self-Checking-Tests')
 
 # Environment Variables
-os.environ['RISCV_GCC'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-gcc')
-os.environ['RISCV_OBJCOPY'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-objcopy')
-os.environ['SPIKE_PATH'] = SPIKE
+os.environ['RISCV_GCC'] = "/home/hassan/riscv-gnu-toolchain/build/bin/riscv32-unknown-elf-gcc"
+os.environ['RISCV_OBJCOPY'] = "/home/hassan/riscv-gnu-toolchain/build/bin/riscv32-unknown-elf-objcopy"
+os.environ['SPIKE_PATH'] = "/home/hassan/riscv-isa-sim/bin"
 os.environ['PATH'] = RISCV_GNU_TOOLCHAIN + os.pathsep + os.environ['PATH']
 
 

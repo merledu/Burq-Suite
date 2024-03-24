@@ -392,11 +392,13 @@ async function zap_testlist() {
 
 function return_verif_fw() {
     const verif_fw = document.getElementById('verif_fw');
+    return verif_fw.value;
 }
 
 
 function return_testcases() {
     const testcases = document.getElementById('testcases');
+    return testcases.value;
 }
 
 

@@ -103,7 +103,7 @@ def compliance_run_test(progress_part, progress):
     ])
     dut_temp_path = f'{dut_name}/riscof_{dut_name}.py'
     work_dir_string = "{testentry['work_dir']}"
-    new_sim_cmd = f"bash {configs['dut_cmd']} {work_dir_string}"
+    new_sim_cmd = f"{configs['dut_cmd']} {work_dir_string}"
     new_sim_cmd_line = f'''f"{new_sim_cmd}"'''
     dut_template_setup(dut_temp_path, new_sim_cmd_line)
     ref_temp_path= f'spike/riscof_spike.py'
