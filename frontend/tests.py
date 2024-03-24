@@ -8,6 +8,7 @@ from scripts.utils import dump_configs
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 riscv_compliance_interface = import_module('compliance.compliance_interface')
+self_checking_tests_interface = import_module('self_checking_tests.self_checking_tests_interface')
 
 
 def get_dut_type():
@@ -80,8 +81,8 @@ def zap_testlist():
             progress = riscv_dv_interface.riscv_dv_run_test(testlist[i][1], i, progress_part, progress)
         elif testlist[i][0] == 'riscv-arch-test':
             riscv_compliance_interface.compliance_run_test(progress_part, progress)
-        elif testlist[i][0] == 'self checking vector tests':
-            pass
+        elif (testlist[i][0] == 'Burq_Generated_Tests') | (testlist[i][0] == 'Riscv-tests') | (testlist[i][0] == 'Swerv Tests') | (testlist[i][0] ==  'Floating_point_tests_for_azadi') | (testlist[i][0] ==  'MERL_vector_Tests') | (testlist[i][0] ==  'Self-Checking-vector-tests'):
+            self_checking_tests_interface.self_checking_run_test(testlist[i][1], i, progress_part, progress)
     windows['main'].evaluate_js(
         '''
         window.update_progress_bar(100);
