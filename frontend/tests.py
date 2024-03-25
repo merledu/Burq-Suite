@@ -54,7 +54,7 @@ def set_config(key, value, log_info_msg):
 
 
 def zap_testlist():
-    progress = 0
+    progress = 0    
     windows['main'].evaluate_js(
         f'''
         window.update_progress_bar({progress});
@@ -79,7 +79,7 @@ def zap_testlist():
             progress = riscv_dv_interface.riscv_dv_run_test(testlist[i][1], i, progress_part, progress)
         elif testlist[i][0] == 'riscv-arch-test':
             riscv_compliance_interface.compliance_run_test(progress_part, progress)
-        elif (testlist[i][0] == 'Burq_Generated_Tests') | (testlist[i][0] == 'Riscv-tests') | (testlist[i][0] == 'Swerv Tests') | (testlist[i][0] ==  'Floating_point_tests_for_azadi') | (testlist[i][0] ==  'MERL_vector_Tests') | (testlist[i][0] ==  'Self-Checking-vector-tests'):
+        elif testlist[i][0] in ['Burq_Generated_Tests', 'Riscv-tests', 'Swerv Tests', 'Floating_point_tests_for_azadi', 'MERL_vector_Tests', 'Self-Checking-vector-tests']:
             self_checking_tests_interface.self_checking_run_test(testlist[i][1], i, progress_part, progress)
     windows['main'].evaluate_js(
         '''
