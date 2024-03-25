@@ -65,8 +65,6 @@ def zap_testlist():
     configs['cmp_dir'] = cmp_logs_dir
     if not os.path.exists(cmp_logs_dir):
         os.makedirs(cmp_logs_dir)
-    else:
-        pass
     dump_configs()
     progress_part = 99 / len(testlist)
     progress += 1
