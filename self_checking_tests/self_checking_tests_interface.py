@@ -12,8 +12,8 @@ from globals import (
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 
-SIMULATOR = 'pyflow'
-ISS = 'spike'
+SIMULATOR = riscv_dv_interface.SIMULATOR
+ISS = riscv_dv_interface.ISS
 
 
 def get_self_checking_tests_category():
