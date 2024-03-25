@@ -3,16 +3,15 @@ import subprocess
 import webview
 from frontend.frontend_functs import *
 from frontend.tests import configs
-from scripts.utils import *
+from scripts.utils import run_cmd
 import yaml
 
 from globals import (
     configs,
-    windows
+    windows,
+    RISCV_ARCH_TEST_SUITE,
+    RISCV_ARCH_TEST_ENV
 )
-
-def run_command(cmd):
-    subprocess.run(cmd, check=True)
 
  
 def dut_yaml_setup(yaml_path, target):
@@ -56,14 +55,14 @@ def dut_template_setup(file_path, new_sim_cmd_line):
         file.writelines(lines)
 
 
-def compliance_run_test(**progress):
+def compliance_run_test(progress_part, progress):
     dut = configs["dut_path"]
     os.chdir(dut)
     dut_name = os.path.basename(dut)
-    progress['progress'] += (4 / 10) * progress['progress_part']
+    progress += (4 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         '''
     )
     windows['main'].evaluate_js(
@@ -71,27 +70,13 @@ def compliance_run_test(**progress):
         window.update_progress_label("Setting up Refrence Model and DUT");
         '''
     )
-    run_command([
+    run_cmd([
         "riscof", "setup", "--dutname=" + dut_name, "--refname=spike"
     ])
-    progress['progress'] += (1 / 10) * progress['progress_part']
+    progress += (3 / 10) * progress_part
     windows['main'].evaluate_js(
         f'''
-        window.update_progress_bar({progress["progress"]});
-        '''
-    )
-    windows['main'].evaluate_js(
-        f'''
-        window.update_progress_label("Cloning Riscof Arch Test Suite");
-        '''
-    )
-    run_command([
-        "riscof", "--verbose", "info", "arch-test", "--clone"
-    ])
-    progress['progress'] += (3 / 10) * progress['progress_part']
-    windows['main'].evaluate_js(
-        f'''
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         '''
     )
     windows['main'].evaluate_js(
@@ -99,13 +84,13 @@ def compliance_run_test(**progress):
         window.update_progress_label("Validating YAML file");
         '''
     )
-    run_command([
+    run_cmd([
         "riscof", "validateyaml", "--config=config.ini"
     ])
-    progress['progress'] += (1 / 10) * progress['progress_part']
+    progress += (1 / 10) * progress_part
     windows['main'].evaluate_js(
         f"""
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         """
     )
     windows['main'].evaluate_js(
@@ -113,21 +98,21 @@ def compliance_run_test(**progress):
         window.update_progress_label("Generating Testlist");
         """
     )    
-    run_command([
-        "riscof", "testlist", "--config=config.ini", "--suite=riscv-arch-test/riscv-test-suite/", "--env=riscv-arch-test/riscv-test-suite/env"
+    run_cmd([
+        "riscof", "testlist", "--config=config.ini", f"--suite={RISCV_ARCH_TEST_SUITE}", f"--env={RISCV_ARCH_TEST_ENV}"
     ])
     dut_temp_path = f'{dut_name}/riscof_{dut_name}.py'
     work_dir_string = "{testentry['work_dir']}"
-    new_sim_cmd = f"bash {configs['dut_cmd']} {work_dir_string}"
+    new_sim_cmd = f"{configs['dut_cmd']} {work_dir_string}"
     new_sim_cmd_line = f'''f"{new_sim_cmd}"'''
     dut_template_setup(dut_temp_path, new_sim_cmd_line)
     ref_temp_path= f'spike/riscof_spike.py'
     spike_cmd = "            execute += self.ref_exe + ' --isa={0} +signature={1} +signature-granularity=4 {2}'.format(self.isa, sig_file, elf)\n"
     ref_template_setup(ref_temp_path, spike_cmd)
-    progress['progress'] += (1 / 10) * progress['progress_part']
+    progress += (1 / 10) * progress_part
     windows['main'].evaluate_js(
         f"""
-        window.update_progress_bar({progress["progress"]});
+        window.update_progress_bar({progress});
         """
     )
     windows['main'].evaluate_js(
@@ -135,8 +120,8 @@ def compliance_run_test(**progress):
         window.update_progress_label("Running Tests");
         """
     )
-    run_command([
-        "riscof", "--verbose", "info", "run", "--config", "./config.ini", "--suite", "./riscv-arch-test/riscv-test-suite/rv32i_m", "--env", "./riscv-arch-test/riscv-test-suite/env"
+    run_cmd([
+        "riscof", "--verbose", "info", "run", "--config", "./config.ini", "--suite", f"{RISCV_ARCH_TEST_SUITE}", "--env", f"{RISCV_ARCH_TEST_ENV}"
     ])
     
     return progress['progress']

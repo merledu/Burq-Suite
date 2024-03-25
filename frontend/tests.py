@@ -8,6 +8,7 @@ from scripts.utils import dump_configs
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 riscv_compliance_interface = import_module('compliance.compliance_interface')
+self_checking_tests_interface = import_module('self_checking_tests.self_checking_tests_interface')
 
 
 def get_dut_type():
@@ -53,7 +54,7 @@ def set_config(key, value, log_info_msg):
 
 
 def zap_testlist():
-    progress = 0
+    progress = 0    
     windows['main'].evaluate_js(
         f'''
         window.update_progress_bar({progress});
@@ -62,7 +63,8 @@ def zap_testlist():
     )
     cmp_logs_dir = os.path.join(configs['proj_path'], 'compare_logs')
     configs['cmp_dir'] = cmp_logs_dir
-    os.makedirs(cmp_logs_dir)
+    if not os.path.exists(cmp_logs_dir):
+        os.makedirs(cmp_logs_dir)
     dump_configs()
     progress_part = 99 / len(testlist)
     progress += 1
@@ -76,9 +78,9 @@ def zap_testlist():
         if testlist[i][0] == 'riscv-dv':
             progress = riscv_dv_interface.riscv_dv_run_test(testlist[i][1], i, progress_part, progress)
         elif testlist[i][0] == 'riscv-arch-test':
-            riscv_compliance_interface.compliance_run_test(progress_part=progress_part, progress=progress)
-        elif testlist[i][0] == 'self checking vector tests':
-            pass
+            riscv_compliance_interface.compliance_run_test(progress_part, progress)
+        elif testlist[i][0] in ['Burq_Generated_Tests', 'Riscv-tests', 'Swerv Tests', 'Floating_point_tests_for_azadi', 'MERL_vector_Tests', 'Self-Checking-vector-tests']:
+            self_checking_tests_interface.self_checking_run_test(testlist[i][1], i, progress_part, progress)
     windows['main'].evaluate_js(
         '''
         window.update_progress_bar(100);

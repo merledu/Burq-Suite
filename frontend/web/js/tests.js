@@ -56,6 +56,19 @@ function set_csv_file() {
 
 
 // TEST CONFIGS START
+async function get_self_checking_tests_category() {
+    const verif_fw = document.getElementById('verif_fw'),
+        self_checking_category_list = await pywebview.api.get_self_checking_tests_category();
+
+    for (let category of self_checking_category_list) {
+        let category_opt = document.createElement('option');
+        category_opt.value = category;
+        category_opt.innerHTML = category;
+        verif_fw.append(category_opt);
+    }    
+}
+
+
 async function toggle_testcases(verif_fw) {
     const testcases = document.getElementById('testcases');
     let testcase_list = [],
@@ -65,14 +78,15 @@ async function toggle_testcases(verif_fw) {
     default_option.value = '';
     default_option.innerHTML = '--- Select testcase ---';
     testcases.replaceChildren(default_option);
-
+    const selectedVerificationFramework = document.getElementById('verif_fw').value;
     switch (verif_fw) {
         case 'riscv-dv':
             testcase_list = await pywebview.api.get_working_base_testlist();
             break;
         case 'riscv-arch-test':
             break;
-        case 'self checking vector tests':
+        case selectedVerificationFramework:
+            testcase_list = await pywebview.api.get_self_checking_testcases(selectedVerificationFramework);
             break;
     }
     for (let testcase of testcase_list) {
@@ -319,6 +333,7 @@ async function open_test_configs() {
                 document.getElementById('custom_dut_configs').classList.add('d-none');
                 break;
         }
+        get_self_checking_tests_category();
         toggle_elements(hide, show);
     } else {
         empty_fields_modal.toggle();
@@ -372,6 +387,18 @@ async function zap_testlist() {
     } else {
         empty_test_modal.toggle();
     }
+}
+
+
+function return_verif_fw() {
+    const verif_fw = document.getElementById('verif_fw');
+    return verif_fw.value;
+}
+
+
+function return_testcases() {
+    const testcases = document.getElementById('testcases');
+    return testcases.value;
 }
 
 

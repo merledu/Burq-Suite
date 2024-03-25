@@ -3,16 +3,17 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # Install dependencies
-pip3 install wheel pywebview pygobject
+pip install wheel pywebview pygobject
 
 # Install riscv-dv dependencies
-pip3 install -r riscv-dv/riscv-dv/requirements.txt
+pip install -r riscv-dv/riscv-dv/requirements.txt
 
 # Install RISCOF (compliance)
-# pip3 install git+https://github.com/riscv/riscof.git
-# cd compliance
-# riscof --verbose info arch-test --clone
-# cd ..
+pip install git+https://github.com/riscv/riscof.git
+mkdir compliance
+cd compliance
+riscof --verbose info arch-test --clone
+cd ..
 
 # Creating core environment
 mkdir cores
