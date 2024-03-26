@@ -4,3 +4,9 @@
 [submodule "self_checking_tests/Self-Checking-Tests"]
 	path = self_checking_tests/Self-Checking-Tests
 	url = https://github.com/merledu/Self-Checking-Tests.git
+[submodule "tools_submodules/riscv-isa-sim"]
+	path = tools_submodules/riscv-isa-sim
+	url = https://github.com/riscv-software-src/riscv-isa-sim.git
+[submodule "tools_submodules/riscv-gnu-toolchain"]
+	path = tools_submodules/riscv-gnu-toolchain
+	url = https://github.com/riscv-collab/riscv-gnu-toolchain.git
