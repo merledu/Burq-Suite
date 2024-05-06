@@ -37,7 +37,6 @@ SPIKE="$BURQ_SUITE_TOOLS/spike"
 
 
 # Install toolchain
-mkdir tools/
 cd ./tools/
 wget -O- -q https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2023.03.14/riscv32-elf-ubuntu-20.04-nightly-2023.03.14-nightly.tar.gz | tar -xzf -
 mv riscv/ riscv-gnu-toolchain/
