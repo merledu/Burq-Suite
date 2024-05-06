@@ -13,8 +13,8 @@ RISCV_DV_ENV = os.path.join(BURQ_SUITE_ROOT, 'riscv-dv')
 RISCV_DV_ROOT = os.path.join(RISCV_DV_ENV, 'riscv-dv')
 
 TOOLS = os.path.join(BURQ_SUITE_ROOT, 'tools')
-RISCV_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv-gnu-toolchain', 'bin')
-SPIKE = os.path.join(TOOLS, 'spike', 'bin')
+RISCV_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv', 'bin')
+# SPIKE = os.path.join(TOOLS, 'spike', 'bin')
 
 CORE_CFGS = os.path.join(BURQ_SUITE_ROOT, 'cores')
 
