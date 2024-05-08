@@ -44,11 +44,11 @@ cd ../
 
 
 # Install spike
-cd ./tools_submodules/riscv-isa-sim
-mkdir build
-cd build
-../configure --prefix=$SPIKE --enable-commitlog
-make
-make install
-cd ../../../
+# cd ./tools_submodules/riscv-isa-sim
+# mkdir build
+# cd build
+# ../configure --prefix=$SPIKE --enable-commitlog
+# make
+# make install
+# cd ../../../
 
