@@ -1,0 +1,6 @@
+spike filter=lfs diff=lfs merge=lfs -text
+elf2hex filter=lfs diff=lfs merge=lfs -text
+spike-dasm filter=lfs diff=lfs merge=lfs -text
+spike-log-parser filter=lfs diff=lfs merge=lfs -text
+termios-xspike filter=lfs diff=lfs merge=lfs -text
+xspike filter=lfs diff=lfs merge=lfs -text
