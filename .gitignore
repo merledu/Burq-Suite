@@ -6,5 +6,4 @@ compliance/riscv-arch-test/
 compliance/config.ini
 logs/
 tools/riscv-gnu-toolchain
-tools_submodules/riscv-isa-sim
 cores/
