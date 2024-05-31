@@ -32,15 +32,14 @@ sudo pacman -S webkit2gtk dtc boost-libs autoconf automake curl python3 libmpc m
 # PATHS
 BURQ_SUITE_ROOT=`pwd`
 BURQ_SUITE_TOOLS="$BURQ_SUITE_ROOT/tools"
-RISCV_GNU_TOOLCHAIN="$BURQ_SUITE_TOOLS/riscv-gnu-toolchain"
 SPIKE="$BURQ_SUITE_TOOLS/spike"
 
 
 # Install toolchain
-cd ./tools_submodules/riscv-gnu-toolchain
-./configure --prefix=$RISCV_GNU_TOOLCHAIN --enable-multilib
-make
-cd ../../
+cd ./tools
+wget -O- -q https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2023.03.14/riscv32-elf-ubuntu-20.04-nightly-2023.03.14-nightly.tar.gz | tar -xzf -
+mv riscv riscv-gnu-toolchain
+cd ..
 
 
 # Install spike
@@ -50,5 +49,5 @@ cd build
 ../configure --prefix=$SPIKE --enable-commitlog
 make
 make install
-cd ../../../
+cd ../../..
 
