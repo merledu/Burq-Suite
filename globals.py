@@ -13,8 +13,9 @@ RISCV_DV_ENV = os.path.join(BURQ_SUITE_ROOT, 'riscv-dv')
 RISCV_DV_ROOT = os.path.join(RISCV_DV_ENV, 'riscv-dv')
 
 TOOLS = os.path.join(BURQ_SUITE_ROOT, 'tools')
-RISCV_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv-gnu-toolchin', 'bin')
-# SPIKE = os.path.join(TOOLS, 'spike', 'bin')
+RISCV32_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv32-gnu-toolchain', 'bin')
+RISCV64_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv64-gnu-toolchain', 'bin')
+SPIKE = os.path.join(TOOLS, 'spike', 'bin')
 
 CORE_CFGS = os.path.join(BURQ_SUITE_ROOT, 'cores')
 
@@ -25,16 +26,18 @@ SELF_CHECKING_TESTS_ROOT = os.path.join(BURQ_SUITE_ROOT, 'self_checking_tests')
 SELF_CHECKING_TESTS_ENV = os.path.join(SELF_CHECKING_TESTS_ROOT, 'Self-Checking-Tests')
 
 # Environment Variables
-os.environ['RISCV_GCC'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-gcc')
-os.environ['RISCV_OBJCOPY'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-objcopy')
+# os.environ['RISCV_GCC'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-gcc')
+# os.environ['RISCV_OBJCOPY'] = os.path.join(RISCV_GNU_TOOLCHAIN, 'riscv64-unknown-elf-objcopy')
 os.environ['SPIKE_PATH'] = SPIKE
-os.environ['PATH'] = RISCV_GNU_TOOLCHAIN + os.pathsep + os.environ['PATH']
+# os.environ['PATH'] = RISCV_GNU_TOOLCHAIN + os.pathsep + os.environ['PATH']
 
 
-
-debug = False 
+# Global Variables
+debug = False
 loglevel = logging.DEBUG if debug else logging.INFO
 windows = {}
-configs = {}
+# configs = {}
+configs = {'variant': '32'}
 stderr = {}
 testlist = []
+

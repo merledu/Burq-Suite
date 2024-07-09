@@ -6,7 +6,9 @@ from globals import (
     RISCV_DV_ENV,
     configs,
     testlist,
-    windows
+    windows,
+    RISCV32_GNU_TOOLCHAIN,
+    RISCV64_GNU_TOOLCHAIN
 )
 from scripts.utils import run_cmd, dut_run_test
 
@@ -67,6 +69,14 @@ def compare_csv(iss_csv, compare_log_path, dut_name):
 
 def riscv_dv_run_test(test, test_num, progress_part, progress):
     test_dir = os.path.join(configs['proj_path'], f'riscv_dv_out_{test_num}')
+    if configs['variant'] == '64':
+        os.environ['RISCV_GCC'] = os.path.join(RISCV64_GNU_TOOLCHAIN, 'riscv64-unknown-elf-gcc')
+        os.environ['RISCV_OBJCOPY'] = os.path.join(RISCV64_GNU_TOOLCHAIN, 'riscv64-unknown-elf-objcopy')
+        os.environ['PATH'] = RISCV64_GNU_TOOLCHAIN + os.pathsep + os.environ['PATH']
+    else:
+        os.environ['RISCV_GCC'] = os.path.join(RISCV32_GNU_TOOLCHAIN, 'riscv32-unknown-elf-gcc')
+        os.environ['RISCV_OBJCOPY'] = os.path.join(RISCV32_GNU_TOOLCHAIN, 'riscv32-unknown-elf-objcopy')
+        os.environ['PATH'] = RISCV32_GNU_TOOLCHAIN + os.pathsep + os.environ['PATH']
     create_iss_log(test_dir, test, test_num)
     progress += (4 / 10) * progress_part
     windows['main'].evaluate_js(
