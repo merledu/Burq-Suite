@@ -1,3 +1,7 @@
+# Arch specific packages
+sudo pacman -S webkit2gtk dtc boost-libs autoconf automake curl python3 libmpc mpfr gmp gawk base-devel bison flex texinfo gperf libtool patchutils bc zlib expat
+
+
 # Create virtual environment and source it
 python3 -m venv .venv
 source .venv/bin/activate
@@ -22,10 +26,6 @@ cd ..
 mkdir cores
 mkdir logs
 mkdir tools
-
-
-# Arch specific packages
-sudo pacman -S webkit2gtk dtc boost-libs autoconf automake curl python3 libmpc mpfr gmp gawk base-devel bison flex texinfo gperf libtool patchutils bc zlib expat
 
 
 # PATHS
