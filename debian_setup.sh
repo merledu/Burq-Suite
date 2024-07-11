@@ -1,5 +1,5 @@
 # Debian specific packages
-sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0 gir1.2-webkit2-4.1 autoconf automake autotools-dev curl python3 python3-pip libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev ninja-build git cmake libglib2.0-dev device-tree-compiler libboost-regex-dev libcairo2-dev libboost-all-dev libgirepository1.0-dev
+sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0 gir1.2-webkit2-4.1 autoconf automake autotools-dev curl python3 python3-pip libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev ninja-build git cmake libglib2.0-dev device-tree-compiler libboost-regex-dev libcairo2-dev libboost-all-dev libgirepository1.0-dev python3-venv
 
 
 # Create virtual environment and source it
