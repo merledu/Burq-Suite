@@ -36,7 +36,10 @@ def run_cmd(cmd, redirect_to_file=False, stdout_f=''):
 
 
 def gen_disasm(obj_path, dump_path):
-    run_cmd(['riscv64-unknown-elf-objdump', '-d', obj_path], redirect_to_file=True, stdout_f=dump_path)
+    if configs['variant'] == '64':
+        run_cmd(['riscv64-unknown-elf-objdump', '-d', obj_path], redirect_to_file=True, stdout_f=dump_path)
+    else:
+        run_cmd(['riscv32-unknown-elf-objdump', '-d', obj_path], redirect_to_file=True, stdout_f=dump_path)
     logging.info('Generated disassembly')
 
 
