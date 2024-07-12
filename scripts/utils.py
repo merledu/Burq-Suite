@@ -20,6 +20,7 @@ def run_cmd(cmd, redirect_to_file=False, stdout_f=''):
         with open(stdout_f, 'w', encoding='UTF-8') as f:
             cmd_run = subprocess.run(cmd, text=True, stdout=f)
     else:
+        print(cmd)
         cmd_run = subprocess.run(cmd, capture_output=True, text=True)
     if cmd_run.returncode:
         logging.info(cmd_run.returncode)
@@ -30,7 +31,7 @@ def run_cmd(cmd, redirect_to_file=False, stdout_f=''):
         while stderr['halt_exec']:
             time.sleep(0.1)
     elif cmd_run.stderr:
-        logging.debug(cmd_run.stderr)
+        logging.error(cmd_run.stderr)
     else:
         logging.debug(cmd_run.stdout)
 
