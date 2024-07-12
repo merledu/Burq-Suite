@@ -47,6 +47,7 @@ def gen_disasm(obj_path, dump_path):
 def dut_run_test(obj_path, disasm_dump_path):
     gen_disasm(obj_path, disasm_dump_path)
     os.chdir(configs['dut_path'])
+    print(os.getcwd())
     run_cmd(configs['dut_cmd'].split())
 
 
