@@ -20,7 +20,10 @@ function create_new_proj() {
 
 
 async function select_proj_folder(id) {
-    document.getElementById(id).value = await pywebview.api.select_proj_folder();
+    const proj_folder = await pywebview.api.select_proj_folder()
+    if (proj_folder) {
+        document.getElementById(id).value = proj_folder
+    }
 }
 
 

@@ -30,7 +30,10 @@ function open_dut_menu() {
 
 
 async function get_dir(input_id, root='') {
-    document.getElementById(input_id).value = await pywebview.api.get_dir(root);
+    const dir = await pywebview.api.get_dir(root)
+    if (dir) {
+        document.getElementById(input_id).value = dir
+    }
 }
 
 
