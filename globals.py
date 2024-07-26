@@ -33,11 +33,10 @@ os.environ['SPIKE_PATH'] = SPIKE
 
 
 # Global Variables
-debug = False
+debug = True
 loglevel = logging.DEBUG if debug else logging.INFO
 windows = {}
-# configs = {}
-configs = {'variant': '32'}
+configs = {}
 stderr = {}
 testlist = []
 
