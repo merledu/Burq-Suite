@@ -52,21 +52,17 @@ function select_extension() {
 }
 
 
-// CUSTOM VARIANT SELECT
 function select_variant() {
-    const my_variant = [],
-        target_num = 2;
+    const target_num = 2;
 
-    
-    let variant1 = document.getElementById('variant1');
-    let variant2 = document.getElementById('variant2');
-    if(variant1){
-        return variant1.value
-    }else{
-        return variant2.value
+    let variant = null;
+    for (let i =1; i<=target_num; ++i){
+        let temp_variant = document.getElementById(`variant${i}`);
+        if(temp_variant.checked){
+            variant = temp_variant.value
+        }
     }
-
-    
+    return variant
 }
  
  
@@ -331,13 +327,13 @@ async function load_core_cfg() {
             id => document.getElementById(id).value = cfg[id]
         );
         for (let i = 1; i <= target_num; ++i) {
-            let target_chkbox = document.getElementById(`extension${i}`)
-            if (cfg['target'].includes(target_chkbox.value)) {
-                if (!target_chkbox.checked) {
-                    target_chkbox.checked = true;
+            let extension_chkbox = document.getElementById(`extension${i}`)
+            if (cfg['target'].includes(extension_chkbox.value)) {
+                if (!extension_chkbox.checked) {
+                    extension_chkbox.checked = true;
                 }
-            } else if (target_chkbox.checked) {
-                target_chkbox.checked = false;
+            } else if (extension_chkbox.checked) {
+                extension_chkbox.checked = false;
             }
         }
     }
@@ -403,13 +399,10 @@ async function zap_testlist() {
                 pywebview.api.select_extension(select_extension());
                 set_csv_file();
                 break;
-                
         }
-        
         zap_progress();
         pywebview.api.zap_testlist();
     } else {
-        // console.log("empty model");
         empty_test_modal.toggle();
     }
 }
