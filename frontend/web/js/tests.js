@@ -53,16 +53,14 @@ function select_extension() {
 
 
 function select_variant() {
-    const target_num = 2;
+    const variant_num = [1,2];
 
-    let variant = null;
-    for (let i =1; i<=target_num; ++i){
+    for (let i of variant_num){
         let temp_variant = document.getElementById(`variant${i}`);
         if(temp_variant.checked){
-            variant = temp_variant.value
+            return temp_variant.value
         }
     }
-    return variant
 }
  
  
