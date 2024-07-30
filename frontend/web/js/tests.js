@@ -54,8 +54,8 @@ function select_extension() {
 
 function select_variant() {
     const variants = document.getElementsByName('core_variant')
-    for (let v of variants){
-        if(v.checked){
+    for (let v of variants) {
+        if (v.checked) {
             return v.value
         }
     }
