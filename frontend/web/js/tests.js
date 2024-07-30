@@ -53,12 +53,10 @@ function select_extension() {
 
 
 function select_variant() {
-    const variant_num = [1,2];
-
-    for (let i of variant_num){
-        let temp_variant = document.getElementById(`variant${i}`);
-        if(temp_variant.checked){
-            return temp_variant.value
+    const variants = document.getElementsByName('core_variant')
+    for (let v of variants){
+        if(v.checked){
+            return v.value
         }
     }
 }
