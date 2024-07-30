@@ -38,17 +38,27 @@ async function get_dir(input_id, root='') {
 
 
 // CUSTOM DUT CONFIGS START
-function select_target() {
-    const targets = [],
+function select_extension() {
+    const extensions = [],
         target_num = 6;
 
     for (let i = 1; i <= target_num; ++i) {
-        let target = document.getElementById(`target${i}`);
-        if (target.checked) {
-            targets.push(target.value);
+        let extension = document.getElementById(`extension${i}`);
+        if (extension.checked) {
+            extensions.push(extension.value);
         }
     }
-    return targets.join('');
+    return extensions.join('');
+}
+
+
+function select_variant() {
+    const variants = document.getElementsByName('core_variant')
+    for (let v of variants) {
+        if (v.checked) {
+            return v.value
+        }
+    }
 }
  
  
@@ -285,7 +295,8 @@ async function save_core_cfg() {
                     obj[id] = document.getElementById(id).value;
                     return obj;
                 }, {}),
-                'target': select_target()
+                'extension': select_extension(),
+                'variant': select_variant()
             }
             console.log(cfgs);
             pywebview.api.save_core_cfg(cfg_name, cfgs);
@@ -312,13 +323,13 @@ async function load_core_cfg() {
             id => document.getElementById(id).value = cfg[id]
         );
         for (let i = 1; i <= target_num; ++i) {
-            let target_chkbox = document.getElementById(`target${i}`)
-            if (cfg['target'].includes(target_chkbox.value)) {
-                if (!target_chkbox.checked) {
-                    target_chkbox.checked = true;
+            let extension_chkbox = document.getElementById(`extension${i}`)
+            if (cfg['target'].includes(extension_chkbox.value)) {
+                if (!extension_chkbox.checked) {
+                    extension_chkbox.checked = true;
                 }
-            } else if (target_chkbox.checked) {
-                target_chkbox.checked = false;
+            } else if (extension_chkbox.checked) {
+                extension_chkbox.checked = false;
             }
         }
     }
@@ -367,7 +378,6 @@ function zap_progress() {
 
 async function zap_testlist() {
     const empty_test_modal = new bootstrap.Modal('#empty_test');
-
     if (validate_testlist()) {
         switch (await pywebview.api.get_dut_type()) {
             case 'custom':
@@ -381,7 +391,8 @@ async function zap_testlist() {
                     let input_value = document.getElementById(config[1]).value;
                     pywebview.api.set_config(config[0], input_value, config[2] + input_value);
                 }
-                pywebview.api.select_target(select_target());
+                pywebview.api.select_variant(select_variant());
+                pywebview.api.select_extension(select_extension());
                 set_csv_file();
                 break;
         }
