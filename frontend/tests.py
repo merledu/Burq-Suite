@@ -36,10 +36,14 @@ def add_test(verif_fw, test):
     testlist.append([verif_fw, test])
 
 
-def select_target(target):
-    target = 'rv32' + target
-    configs['target'] = target
-    logging.info(f'Selected target: {target}')
+def select_extension(extension):
+    configs['extension'] = extension
+    logging.info(f'Selected extension: {extension}')
+
+
+def select_variant(variant):
+    configs['variant'] = variant
+    logging.info(f'Selected variant: {variant}')
 
 
 def set_csv_file(dir_path, filename):
@@ -61,6 +65,8 @@ def zap_testlist():
         window.update_progress_label("Initializing tests");
         '''
     )
+    configs['target'] = 'rv' + configs['variant'] + configs['extension']
+    
     cmp_logs_dir = os.path.join(configs['proj_path'], 'compare_logs')
     configs['cmp_dir'] = cmp_logs_dir
     if not os.path.exists(cmp_logs_dir):
