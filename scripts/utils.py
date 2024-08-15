@@ -1,160 +1,68 @@
-import re, uuid, os, socket, psutil
+import subprocess, time, json, os, \
+    logging
 
-from icecream import ic
-from operator import le
-
-
-theDictOfFilePaths = {}
-GeneratorFileID = []
-ReportFileID = []
+from globals import configs, testlist, CORE_CFGS
+from frontend.stderr import stderr, open_stderr_window
 
 
-def getFileStructure(rootdir):
-    strct = {}
-
-    for subdir, dirs, files in os.walk(rootdir):
-        for file in files:
-            fullFile = os.path.join(subdir, file)
-            print(fullFile)
-            fullFile = fullFile.replace(rootdir, "")
-            allFolders = fullFile.split("/")
-            # ic(fullFile)
-            id = str(uuid.uuid4())
-            theDictOfFilePaths[id] = fullFile
-            ic(fullFile)
-            if "main.c" in fullFile:
-                GeneratorFileID.append(id)
-            if "test_results.csv" in fullFile:
-                ReportFileID.append(id)
-            if len(list(allFolders)) == 1:
-                if "." not in strct.keys():
-                    strct["."] = [(id,fullFile)]
-                else:
-                    strct["."].append((id,fullFile))
-            else:
-                lalala = strct
-
-                for i in range(len(allFolders)):
-                    if i+1 == len(allFolders)-1: 
-                        if allFolders[i] in lalala.keys():
-                            lalala[allFolders[i]]["."].append((id,allFolders[i+1]))
-                            break
-                        else:
-                            lalala[allFolders[i]] ={
-                                ".":[(id,allFolders[i+1])]
-                            } 
-                            break
-                    else:
-                        if allFolders[i] in lalala.keys():
-                            lalala = lalala[allFolders[i]]
-                        else:
-                            lalala[allFolders[i]] = {}
-                            lalala = lalala[allFolders[i]]
-
-    return strct
+def dump_configs():
+    configs['testlist'] = testlist
+    os.chdir(configs['proj_path'])
+    config_file = os.path.join(configs['proj_path'], 'configs.json')
+    logging.info(f'Dumping configs: {config_file}')
+    with open(config_file, 'w', encoding='UTF-8') as f:
+        json.dump(configs, f)
 
 
-def parseFileStructure(strct, paddCounter=0):
-    if type(strct) == list:
-        stt = ""
-        stt += """
-                    <ul class="list-unstyled">
-                """
-        
-        for i,v in enumerate(strct):
-            stt += f"""<li ><button style="margin-left:{paddCounter+5}px" onclick=openTheFile("{v[0]}") class="btn file-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-code-fill" viewBox="0 0 16 16">
-                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM6.646 7.646a.5.5 0 1 1 .708.708L5.707 10l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 10 8.646 8.354a.5.5 0 1 1 .708-.708z"/>
-                              </svg>{v[1]}</button></li>
-                    """
-        stt += "</ul>"
-
-        return stt
+def run_cmd(cmd, redirect_to_file=False, stdout_f=''):
+    logging.debug(f'Command: {" ".join(cmd)}')
+    if redirect_to_file:
+        with open(stdout_f, 'w', encoding='UTF-8') as f:
+            cmd_run = subprocess.run(cmd, text=True, stdout=f)
     else:
-        theKeys = strct.keys()
-        stt = ""
-        for i,v in strct.items():
-            id = uuid.uuid4()
-            if i != ".":
-                stt += f"""
-                            <div class="accordion-item">
-                <p style="margin-left:{paddCounter}px" class="accordion-header" id="heading{id}">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{id}" aria-expanded="false" aria-controls="collapse{id}">
-                    <img src="assets/icons/folder.png" />  {i}
-                    </button>
-                </p>
-                <div id="collapse{id}" class="accordion-collapse collapse" aria-labelledby="heading{id}" data-bs-parent="#accordionExample">
-                        """
-
-                stt += parseFileStructure(v, paddCounter+10)
-                stt += "</div> </div>"
-            else:
-                stt += parseFileStructure(v, paddCounter+10)
-        
-        return stt
+        cmd_run = subprocess.run(cmd, capture_output=True, text=True)
+    if cmd_run.returncode:
+        logging.info(cmd_run.returncode)
+        logging.error(cmd_run.stderr)
+        stderr['error'] = cmd_run.stderr
+        stderr['halt_exec'] = True
+        open_stderr_window()
+        while stderr['halt_exec']:
+            time.sleep(0.1)
+    elif cmd_run.stderr:
+        logging.error(cmd_run.stderr)
+    else:
+        logging.debug(cmd_run.stdout)
 
 
-def pleaseParseTheFilePath(file):
-    return theDictOfFilePaths[file]
+def gen_disasm(obj_path, dump_path):
+    if configs['variant'] == '64':
+        run_cmd(['riscv64-unknown-elf-objdump', '-d', obj_path], redirect_to_file=True, stdout_f=dump_path)
+    else:
+        run_cmd(['riscv32-unknown-elf-objdump', '-d', obj_path], redirect_to_file=True, stdout_f=dump_path)
+    logging.info('Generated disassembly')
 
 
-def pleaseGeneratorFileUthaKLayAao():
-    ic(GeneratorFileID)
-    return (theDictOfFilePaths[GeneratorFileID[0]],GeneratorFileID[0])
+def dut_run_test(obj_path, disasm_dump_path):
+    gen_disasm(obj_path, disasm_dump_path)
+    os.chdir(configs['dut_path'])
+    run_cmd(configs['dut_cmd'].split())
 
 
-def pleaseReportFileUthaKLayAao():
-    ic(ReportFileID)
-    return (theDictOfFilePaths[ReportFileID[0]],ReportFileID[0])
+def save_core_cfg(name, cfgs):
+    cfg_file = os.path.join(CORE_CFGS, f'{name}.json')
+    print(f'{cfgs = }')
+    with open(cfg_file, 'w', encoding='utf-8') as f:
+        json.dump(cfgs, f)
 
 
-DRIVERS = {
-    "soc":"GeneratorDriver",
-    "coreiwb":"nucleusrv.components.CoreDriverWB",
-    "coreitl":"nucleusrv.components.CoreDriverTL",
-    "gpiowb":"jigsaw.GpioDriverWB",
-    "spiwb":"jigsaw.SpiDriverWB",
-    "uartwb":"jigsaw.UARTHarnessDriver",
-    "gpiotl":"jigsaw.GpioDriverTL",
-    "spitl":"jigsaw.SpiDriverTL",
-    "uarttl":"jigsaw.UARTHarnessDriverTL",
-    "wb":"caravan.bus.wishbone.WishboneDriver",
-    "tl":"caravan.bus.tilelink.TilelinkDriver"
-}
-
-RTL_FILES = {
-    "soc":"Generator.v",
-    "coreiwb":"Top.v",
-    "coreitl":"TopTL.v",
-    "gpiowb":"GpioWB.v",
-    "spiwb":"SpiHarness.v",
-    "uartwb":"uartHarness.v",
-    "gpiotl":"GpioTL.v",
-    "spitl":"SpiHarnessTL.v",
-    "uarttl":"uartHarness_TL.v",
-    "wb":"Harness.v",
-    "tl":"TilelinkHarness.v"
-}
-
-def getEmptyPort():
-    sock = socket.socket()
-    sock.bind(('', 0))
-    return sock.getsockname()[1]
+def get_core_cfgs():
+    return [cfg[: -5] for cfg in os.listdir(CORE_CFGS)]
 
 
-def killSpike():
-    processes = psutil.pids()
-    anyStillRunningSpikeProcess = list(
-        filter(
-            lambda x: psutil.Process(x).name() == "spike", processes
-        )
-    )
+def load_core_cfg(name):
+    cfg_file = os.path.join(CORE_CFGS, f'{name}.json')
+    with open(cfg_file, 'r', encoding='utf-8') as f:
+        cfg = json.load(f)
+    return cfg
 
-    if len(anyStillRunningSpikeProcess) != 0:
-        for spikeProcessID in anyStillRunningSpikeProcess:
-            psutil.Process(spikeProcessID).kill()
-
-
-def getFileID(file):
-    for i,v in theDictOfFilePaths.items():
-        if v == file:
-            return i

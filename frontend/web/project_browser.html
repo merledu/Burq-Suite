@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="bootstrap-icons-1.11.2/font/bootstrap-icons.min.css">
+    <link type="text/css" rel="stylesheet" href="css/global.css">
+    <link type="text/css" rel="stylesheet" href="css/project_browser.css">
+    <title>Project Browser</title>
+</head>
+<body>
+<div class="d-flex flex-column vh-100">
+    <!-- Header -->
+    <div class="d-flex flex-row justify-content-between align-items-center border-bottom border-black">
+        <img src="images/flash64.png" class="img-fluid">
+        <h1 class="text-white" id="proj_name">
+            Hey
+        </h1>
+    </div>
+    <!-- Project Browser -->
+    <div class="d-flex flex-row vh-100" id="browser">
+        <!-- Explorer -->
+        <div class="d-flex flex-column border-end border-black" id="explorer">
+            <div class="d-flex flex-row p-3 justify-content-around align-items-center border-bottom border-black text-white">
+                <span>
+                    Explorer
+                </span>
+                <!--
+                <button class="btn text-white">
+                    <i class="bi-file-earmark-plus-fill"></i>
+                </button>
+                -->
+            </div>
+            <div class="overflow-x-scroll overflow-y-scroll">
+                <ul id="proj_tree" class="text-white"></ul>
+            </div>
+        </div>
+        <!-- File View -->
+        <div>
+            <ul class="nav nav-underline" role="tablist" id="file_tablist"></ul>
+        </div>
+    </div>
+</div>
+<script src="js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js"></script>
+<script src="js/project_browser.js"></script>
+</body>
+</html>

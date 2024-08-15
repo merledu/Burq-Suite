@@ -1,37 +1,24 @@
-# Burq Suite
-A RISC-V automated core verification suite.
+# Burq Suite (v2.0)
 
-## Dependencies
-- nodejs
-- npm
-
-## Getting Started
-1. Clone the repository
-```bash
+## Setup
+Clone the repo.
+```shell
 git clone --recurse-submodules https://github.com/merledu/Burq-Suite.git
 cd Burq-Suite
 ```
-2. Run the installer
-```bash
-./installer.sh
+On Arch Linux:
+```shell
+./arch_setup.sh
 ```
-3. Run the app
-=======
-## Installations
-Install GCC and Spike
-
-
-
-## How to Run
-
-Firstly  go into the cloned directory
-
-
-Run installer.sh file
-
-
-then finally run the app
-
-```bash
-python3 run.py
+On Debian:
+```shell
+./debian_setup.sh
 ```
+
+## Run
+Execute `burq-suite.sh`
+
+## TODOs
+- [ ] Add support for commercial simulators compatible with riscv-dv
+- [ ] Add support for other iss compatible with riscv-dv
+- [ ] Add project tracking

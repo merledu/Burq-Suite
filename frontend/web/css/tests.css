@@ -1,0 +1,115 @@
+body {
+    background-color: #24272E;
+    font-family: ubuntu;
+}
+#dut_types {
+    background-color: #15191A;
+}
+.dut_type_div {
+    background-color: #1A1D22;
+    box-shadow: 10px 10px 10px #00000078;
+}
+#testlist {
+    height: 274px;
+}
+#progress_bar {
+    width: 0%;
+}
+#result_table {
+    height: 438px;
+}
+#fw_row, #name_row, #status_row {
+    width: 237px;
+}
+
+
+/*lightning effect start*/
+.lightning-effect {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    font-weight: bold;
+}
+.lightning-effect:before {
+    content: "";
+    width: 50px;
+    position: absolute;
+    top: 0;
+    left: -50px;
+    bottom: 0;
+    z-index: 9;
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(rgba(255, 255, 255, 0.2)),
+        color-stop(50%, #fff),
+        to(rgba(255, 255, 255, 0.2))
+    );
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.2) 0%,
+        #fff 50%,
+        rgba(255, 255, 255, 0.2) 100%
+    );
+}
+/*Hover*/
+.lightning-effect:hover:before {
+    -webkit-animation: lightning-effect 2s infinite ease-in-out;
+    animation: lightning-effect 2s infinite ease-in-out;
+}
+/*Keyframes*/
+@-webkit-keyframes lightning-effect {
+    0% {
+        left: -50px;
+        background: -webkit-gradient(
+            linear,
+            left top,
+            right top,
+            from(rgba(255, 255, 255, 0.2)),
+            color-stop(50%, #fff),
+            to(rgba(255, 255, 255, 0.2))
+        );
+        background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.2) 0%,
+            #fff 50%,
+            rgba(255, 255, 255, 0.2) 100%
+        );
+    }
+    50% {
+        left: 100%;
+    }
+    to {
+        left: -50px;
+        background: 0 0;
+    }
+}
+@keyframes lightning-effect {
+    0% {
+        left: -50px;
+        background: -webkit-gradient(
+            linear,
+            left top,
+            right top,
+            from(rgba(255, 255, 255, 0.2)),
+            color-stop(50%, #fff),
+            to(rgba(255, 255, 255, 0.2))
+        );
+        background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.2) 0%,
+            #fff 50%,
+            rgba(255, 255, 255, 0.2) 100%
+        );
+    }
+    50% {
+        left: 100%;
+    }
+    to {
+        left: -50px;
+        background: 0 0;
+    }
+}
+/*lightning effect end*/
+

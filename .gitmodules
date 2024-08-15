@@ -1,6 +1,9 @@
-[submodule "web/SoC-Now-Generator"]
-	path = web/SoC-Now-Generator
-	url = https://github.com/merledu/SoC-Now-Generator
-[submodule "dv"]
-	path = dv
-	url = https://github.com/merledu/riscv-dv.git
+[submodule "riscv-dv/riscv-dv"]
+	path = riscv-dv/riscv-dv
+	url = https://github.com/chipsalliance/riscv-dv.git
+[submodule "self_checking_tests/Self-Checking-Tests"]
+	path = self_checking_tests/Self-Checking-Tests
+	url = https://github.com/merledu/Self-Checking-Tests.git
+[submodule "tools_submodules/riscv-isa-sim"]
+	path = tools_submodules/riscv-isa-sim
+	url = https://github.com/riscv-software-src/riscv-isa-sim.git

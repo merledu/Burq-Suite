@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        Configs
+    </title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="bootstrap-icons-1.11.2/font/bootstrap-icons.min.css">
+    <link type="text/css" rel="stylesheet" href="css/global.css">
+    <link type="text/css" rel="stylesheet" href="css/tests.css">
+</head>
+<body>
+<div class="container-fluid d-flex flex-row vh-100 ps-0">
+    <!-- Left Pane -->
+    <div class="container d-flex flex-column p-5 w-50" id="dut_types">
+        <div class="d-flex flex-row">
+            <button class="btn w-auto" onclick="open_dut_menu()">
+                <img src="images/back.png" class="img-fluid">
+            </button>
+        </div>
+        <h2 class="text-white align-self-center mt-5 mb-5">
+            - DUT Type -
+        </h2>
+        <div class="container p-3 mb-4 d-flex flex-row justify-content-center dut_type_div" id="custom">
+            <p class="text-white mt-auto mb-auto">
+                Custom DUT Verification
+            </p>
+        </div>
+        <div class="container p-3 mb-4 d-flex flex-row justify-content-center dut_type_div" id="prebuilt">
+            <p class="text-white mt-auto mb-auto">
+                Prebuilt DUT Verification
+            </p>
+        </div>
+        <div class="container p-3 mb-4 d-flex flex-row justify-content-center dut_type_div" id="soc-now">
+            <p class="text-white mt-auto mb-auto">
+                SoC-Now DUT Verification
+            </p>
+        </div>
+    </div>
+    <!-- Right Menu -->
+    <div class="container d-flex flex-column p-4">
+        <!-- Custom DUT Configs -->
+        <div id="custom_dut_configs" class="h-100 d-none">
+            <div class="d-flex flex-row pb-2 justify-content-center">
+                <h4 class="text-white">
+                    Custom DUT Configs
+                </h4>
+            </div>
+            <!-- Upload DUT -->
+            <div class="input-group p-2">
+                <label class="input-group-text text-black" for="dut">
+                    DUT
+                </label>
+                <input class="form-control text-black" id="dut" readonly>
+                <button class="btn btn-outline-secondary" onclick="get_dir('dut')">
+                    Upload
+                </button>
+            </div>
+            <!-- Select Extension(s) -->
+            <div class="d-flex flex-row p-2">
+                <h5 class="text-white pe-3">
+                    Extensions:
+                </h5>
+                <div class="d-flex flex-column">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="i" id="extension1" checked disabled>
+                        <label for="extension1" class="form-check-label text-white">
+                            I (Integer)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="m" id="extension2">
+                        <label for="extension2" class="form-check-label text-white">
+                            M (Multiplication)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="a" id="extension3">
+                        <label for="extension3" class="form-check-label text-white">
+                            A (Atomic)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="f" id="extension4">
+                        <label for="extension4" class="form-check-label text-white">
+                            F (Single Precision Floating Point)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="d" id="extension5">
+                        <label for="extension5" class="form-check-label text-white">
+                            D (Double Precision Floating Point)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="c" id="extension6">
+                        <label for="extension6" class="form-check-label text-white">
+                            C (Compressed)
+                        </label>
+                    </div>
+                </div>
+                <!-- Select Variant -->
+                <h5 class="text-white pe-3">
+                    Variants:
+                </h5>
+                <div class="d-flex flex-column">
+                    <div class="form-check">
+                        <input class="form-check-input" name="core_variant" type="radio" value="32" id="variant1" checked>
+                        <label for="variant1" class="form-check-label text-white">
+                            32
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="core_variant" type="radio" value="64" id="variant2">
+                        <label for="variant2" class="form-check-label text-white">
+                            64
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Disassembly Dump -->
+            <div class="input-group p-2">
+                <label class="input-group-text" for="dut_disasm">
+                    DUT Disassembly
+                </label>
+                <input class="form-control text-black" id="dut_disasm" readonly>
+                <button class="btn btn-outline-secondary" onclick="get_dir('dut_disasm', document.getElementById('dut').value)">
+                    ...
+                </button>
+            </div>
+            <!-- DUT compile and run testcase -->
+            <div class="input-group p-2">
+                <label class="input-group-text text-black" for="dut_cmd">
+                    CMD
+                </label>
+                <input class="form-control text-black" id="dut_cmd">
+            </div>
+            <!-- DUT CSV path -->
+            <div class="input-group p-2">
+                <span class="input-group-text">
+                    DUT CSV
+                </span>
+                <input class="form-control text-black" id="csv_dir" placeholder="directory path" readonly>
+                <button class="btn btn-outline-secondary" onclick="get_dir('csv_dir', document.getElementById('dut').value)">
+                    /
+                </button>
+                <input class="form-control text-black" id="csv_file" placeholder="filename">
+            </div>
+        </div>
+        <!-- Test Configs -->
+        <div id="test_configs" class="d-flex flex-column flex-grow-1 d-none">
+            <div class="d-flex flex-row pb-2 justify-content-center">
+                <h4 class="text-white">
+                    Test Configs
+                </h4>
+            </div>
+            <!-- Verification Framework -->
+            <div class="input-group p-2">
+                <label class="input-group-text text-black" for="verif_fw">
+                    Verification Framework
+                </label>
+                <select class="form-select" id="verif_fw" onchange="toggle_testcases(this.value)">
+                    <option disabled selected value="">--- Select a verification framework ---</option>
+                    <option value="riscv-dv">RISCV-DV</option>
+                    <option value="riscv-arch-test">RISCV Compliance</option>
+                    <!-- <option value="BURQ-Generated-Tests">BURQ-Generated-Tests</option> -->
+                </select>
+            </div>
+            <!-- Testcase Select -->
+            <div class="input-group p-2">
+                <label class="input-group-text text-black" for="testcases">Testcase</label>
+                <select class="form-select" id="testcases"></select>
+            </div>
+            <!-- Test List Manipulation Buttons -->
+            <div class="d-flex flex-row p-2">
+                <button class="btn btn-outline-danger" type="button" onclick="clear_testlist()">
+                    Clear
+                </button>
+                <button class="btn btn-primary ms-auto" type="button" onclick="add_test()">
+                    Add
+                </button>
+            </div>
+            <!-- Test List View -->
+            <div id="testlist" class="overflow-y-auto m-2"></div>
+        </div>
+        <!-- Zap Progress -->
+        <div class="d-flex flex-column justify-content-center align-items-center h-100 d-none" id="test_zap">
+            <div class="progress w-100">
+                <div id="progress_bar" class="progress-bar progress-bar-striped bg-warning progress-bar-animated"></div>
+            </div>
+            <p class="text-white p-2" id="progress_label"></p>
+        </div>
+        <!-- Test Results -->
+        <div id="results" class="d-flex flex-column justify-content-center h-100 d-none">
+            <div class="d-flex flex-row pb-2 justify-content-center">
+                <h4 class="text-white">
+                    Test Results
+                </h4>
+            </div>
+            <div class="overflow-y-auto m-2" id="result_table">
+                <div class="text-white d-flex flex-row border border-secondary">
+                    <div class="p-2 border-end border-secondary" id="fw_row">
+                        <strong>
+                            Framework
+                        </strong>
+                    </div>
+                    <div class="p-2 border-end border-secondary" id="name_row">
+                        <strong>
+                            Test Name
+                        </strong>
+                    </div>
+                    <div class="p-2" id="status_row">
+                        <strong>
+                            Status
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation -->
+        <div class="d-flex flex-row mt-auto p-2" id="nav_btns">
+            <button class="btn btn-primary me-2" id="core_cfg" onclick="open_core_cfg()">
+                Core Config
+            </button>
+            <button class="btn me-auto text-white border border-white d-none" id="left_btn" onclick="open_dut_configs()">
+                <i class="bi-arrow-left-square-fill"></i>
+            </button>
+            <button class="btn ms-auto text-white border border-white" id="right_btn" onclick="open_test_configs()">
+                <i class="bi-arrow-right-square-fill"></i>
+            </button>
+            <button type="button" id="zap_btn" class="btn ms-auto btn-outline-warning lightning-effect d-none" onclick="zap_testlist()">
+                <i class="bi-lightning-fill"></i>
+                Zap
+            </button>
+            <button class="btn btn-success ms-auto text-white d-none" onclick="open_proj_browser()" id="proj_browser_btn">
+                <i class="bi-box-arrow-right"></i>
+                Project Browser
+            </button>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="empty_fields" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Empty Fields
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Please make sure to fill all the fields before continuing.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="empty_test" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Test List Empty
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Please make sure to select at least one test before continuing.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="cfg" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Core Config
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <label for="save_cfg" class="input-group-text">
+                        Config Name
+                    </label>
+                    <input class="form-control text-black" type="text" id="save_cfg">
+                    <button class="btn btn-primary" onclick="save_core_cfg()" data-bs-dismiss="modal">
+                        Save
+                    </button>
+                </div>
+                <div class="input-group mb-3">
+                    <select class="form-select" id="load_cfg_select">
+                        <option selected value="">--- None ---</option>
+                    </select>
+                    <button class="btn btn-success" onclick="load_core_cfg()" data-bs-dismiss="modal">
+                        Load
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js"></script>
+<script src="js/tests.js"></script>
+</body>
+</html>
+

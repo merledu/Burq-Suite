@@ -1,0 +1,44 @@
+body {
+    background-color: #24272E;
+    font-family: ubuntu;
+}
+button.border.border-0 {
+    background-color: #1A1D22;
+    width: 20%;
+    box-shadow: 10px 10px 10px #00000078;
+    padding: 10px;
+    color: white;
+}
+button.border.border-0:nth-child(1):hover {
+    background-color: #A851FF;
+}
+button.border.border-0:nth-child(2):hover {
+    background-color: #0CA17E;
+}
+button.border.border-0:nth-child(3):hover {
+    background-color: #436EEE;
+}
+span {
+    font-size: x-large;
+    font-weight: bold;
+}
+button.border.border-0:nth-child(1) > span {
+    color: #CF9FFF;
+}
+button.border.border-0:nth-child(2) > span {
+    color: #0FC89C;
+}
+button.border.border-0:hover > span {
+    color: white;
+}
+#soc_now_logo {
+    width: 120px;
+}
+#credit {
+    color: #767676;
+    font-weight: 900;
+}
+#proj_menu {
+    background-color: #15191A;
+}
+

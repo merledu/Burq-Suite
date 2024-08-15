@@ -1,18 +1,9 @@
-# Node specific files
-node_modules
+.venv/
+.idea/
+__pycache__/
 
-# Python specific files
-__pycache__
-venv
-
-# Editor specific files
-.vscode
-.idea
-
-# Burq specific files
-web/pathfile
-web/pathfilev
-
-simulate_rtl/*
-!simulate_rtl/simulate.sh
-!simulate_rtl/Top.cpp
+compliance/riscv-arch-test/
+compliance/config.ini
+logs/
+tools/
+cores/
