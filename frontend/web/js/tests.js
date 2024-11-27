@@ -1,33 +1,29 @@
 async function init_window() {
     const dut_type = await pywebview.api.get_dut_type(),
-        dut_type_div = document.getElementById(dut_type);
-
-    dut_type_div.classList.add('rounded-pill');
+        dut_type_div = document.getElementById(dut_type)
+    dut_type_div.classList.add('rounded-pill')
     switch (dut_type) {
         case 'custom':
-            dut_type_div.style.backgroundColor = '#A851FF';
-            document.getElementById('custom_dut_configs').classList.remove('d-none');
-            // document.getElementById('results').classList.remove('d-none');
-            break;
+            dut_type_div.style.backgroundColor = '#A851FF'
+            document.getElementById('custom_dut_configs').classList.remove('d-none')
+            // document.getElementById('results').classList.remove('d-none')
+            break
         case 'prebuilt':
-            dut_type_div.style.backgroundColor = '#0CA17E';
-            break;
+            dut_type_div.style.backgroundColor = '#0CA17E'
+            break
         case 'soc-now':
-            dut_type_div.style.backgroundColor = '#436EEE';
-            break;
+            dut_type_div.style.backgroundColor = '#436EEE'
+            break
     }
 }
 
-
 window.addEventListener('pywebviewready', () => {
-    init_window();
-});
-
+    init_window()
+})
 
 function open_dut_menu() {
-    pywebview.api.open_dut_menu();
+    pywebview.api.open_dut_menu()
 }
-
 
 async function get_dir(input_id, root='') {
     const dir = await pywebview.api.get_dir(root)

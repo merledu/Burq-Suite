@@ -1,15 +1,16 @@
-const login_modal = new bootstrap.Modal('#login');
+const login_modal = new bootstrap.Modal('#login')
+
 
 window.addEventListener('pywebviewready', () => {
-    pywebview.api.open_login();
-});
-
+    pywebview.api.open_login()
+})
 
 async function login() {
-    const logged_in = await pywebview.api.login(document.getElementById('usr').value, document.getElementById('passwd').value);
-
+    const logged_in = await pywebview.api.login(
+        document.getElementById('usr').value,
+        document.getElementById('passwd').value
+    )
     if (!logged_in) {
-        document.getElementById('failed_login_alert').classList.remove('d-none');
+        document.getElementById('failed_login_alert').classList.remove('d-none')
     }
 }
-

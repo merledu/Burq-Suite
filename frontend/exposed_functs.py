@@ -21,6 +21,7 @@ from self_checking_tests.self_checking_tests_interface import get_self_checking_
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 
+
 def expose(window):
     window.expose(
         # utils
@@ -60,4 +61,3 @@ def expose(window):
         get_self_checking_tests_category,
         get_self_checking_testcases
     )
-

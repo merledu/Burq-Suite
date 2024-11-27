@@ -8,7 +8,7 @@ def open_login():
     time.sleep(3)
     windows['main'].evaluate_js(
         '''
-        login_modal.toggle();
+        login_modal.toggle()
         '''
     )
 
@@ -18,11 +18,10 @@ def login(usr, passwd):
         logging.info('Logged in successfully')
         windows['main'].evaluate_js(
             '''
-            login_modal.toggle();
+            login_modal.toggle()
             '''
         )
         windows['main'].load_url('frontend/web/index.html')
     else:
         logging.info('Incorrect username or password')
         return False
-
