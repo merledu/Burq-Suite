@@ -1,6 +1,12 @@
 import logging, os, webview
 
-from globals import BURQ_SUITE_LOGS, LOGLEVEL, DEBUG, windows
+from globals import (
+    BURQ_SUITE_LOGS,
+    LOGLEVEL,
+    DEBUG,
+    BURQ_SUITE_WEB,
+    windows
+)
 from frontend.exposed_functs import expose
 
 
@@ -13,16 +19,16 @@ if __name__ == '__main__':
         level = LOGLEVEL
     )
     windows['main'] = webview.create_window(
-        title = 'Burq Suite',
-        url='frontend/web/splash.html',
-        #url = 'frontend/web/index.html',
-        #url='frontend/web/tests.html',
+        'Burq Suite',
+        #os.path.join(BURQ_SUITE_WEB, 'splash.html'),
+        os.path.join(BURQ_SUITE_WEB, 'index.html'),
+        #os.path.join(BURQ_SUITE_WEB, 'tests.html'),
         width = 1200,
         height = 600,
         resizable = False
     )
     logging.info('Burq Suite started')
     webview.start(
-        expose, [windows['main']],
+        expose, (windows['main'],),
         debug = DEBUG
     )

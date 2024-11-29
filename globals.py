@@ -6,6 +6,7 @@ HOME = os.environ['HOME']
 
 BURQ_SUITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 BURQ_SUITE_LOGS = os.path.join(BURQ_SUITE_ROOT, 'logs')
+BURQ_SUITE_WEB = os.path.join(BURQ_SUITE_ROOT, 'frontend', 'web')
 
 IMAGE_ASSETS = os.path.join(BURQ_SUITE_ROOT, 'frontend', 'assets', 'images')
 
