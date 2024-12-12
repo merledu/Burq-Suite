@@ -1,6 +1,6 @@
 import os, logging
 from importlib import import_module
-from scripts.utils import run_cmd, dut_run_test
+from utils import run_cmd, dut_run_test
 
 from globals import (
     SELF_CHECKING_TESTS_ENV, 

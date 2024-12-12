@@ -1,6 +1,6 @@
 from importlib import import_module
 
-from scripts.utils import save_core_cfg, get_core_cfgs, load_core_cfg
+from utils import save_core_cfg, get_core_cfgs, load_core_cfg, get_proj_path
 from frontend.splash import open_login, login
 from frontend.index import open_new_proj, select_proj_folder, open_proj, create_new_proj
 from frontend.tests import (
@@ -21,13 +21,13 @@ from self_checking_tests.self_checking_tests_interface import get_self_checking_
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 
-
 def expose(window):
     window.expose(
         # utils
         save_core_cfg,
         get_core_cfgs,
         load_core_cfg,
+        get_proj_path,
 
         # splash
         open_login,

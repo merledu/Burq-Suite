@@ -1,9 +1,8 @@
-import subprocess, time, json, os, \
-    logging
+import time, json, os, logging, \
+    subprocess as sp
 
 from globals import configs, testlist, CORE_CFGS
 from frontend.stderr import stderr, open_stderr_window
-
 
 def dump_configs():
     configs['testlist'] = testlist
@@ -13,14 +12,13 @@ def dump_configs():
     with open(config_file, 'w', encoding='UTF-8') as f:
         json.dump(configs, f)
 
-
 def run_cmd(cmd, redirect_to_file=False, stdout_f=''):
     logging.debug(f'Command: {" ".join(cmd)}')
     if redirect_to_file:
         with open(stdout_f, 'w', encoding='UTF-8') as f:
-            cmd_run = subprocess.run(cmd, text=True, stdout=f)
+            cmd_run = sp.run(cmd, text=True, stdout=f)
     else:
-        cmd_run = subprocess.run(cmd, capture_output=True, text=True)
+        cmd_run = sp.run(cmd, capture_output=True, text=True)
     if cmd_run.returncode:
         logging.info(cmd_run.returncode)
         logging.error(cmd_run.stderr)
@@ -34,7 +32,6 @@ def run_cmd(cmd, redirect_to_file=False, stdout_f=''):
     else:
         logging.debug(cmd_run.stdout)
 
-
 def gen_disasm(obj_path, dump_path):
     if configs['variant'] == '64':
         run_cmd(['riscv64-unknown-elf-objdump', '-d', obj_path], redirect_to_file=True, stdout_f=dump_path)
@@ -42,12 +39,10 @@ def gen_disasm(obj_path, dump_path):
         run_cmd(['riscv32-unknown-elf-objdump', '-d', obj_path], redirect_to_file=True, stdout_f=dump_path)
     logging.info('Generated disassembly')
 
-
 def dut_run_test(obj_path, disasm_dump_path):
     gen_disasm(obj_path, disasm_dump_path)
     os.chdir(configs['dut_path'])
     run_cmd(configs['dut_cmd'].split())
-
 
 def save_core_cfg(name, cfgs):
     cfg_file = os.path.join(CORE_CFGS, f'{name}.json')
@@ -55,10 +50,8 @@ def save_core_cfg(name, cfgs):
     with open(cfg_file, 'w', encoding='utf-8') as f:
         json.dump(cfgs, f)
 
-
 def get_core_cfgs():
     return [cfg[: -5] for cfg in os.listdir(CORE_CFGS)]
-
 
 def load_core_cfg(name):
     cfg_file = os.path.join(CORE_CFGS, f'{name}.json')
@@ -66,3 +59,5 @@ def load_core_cfg(name):
         cfg = json.load(f)
     return cfg
 
+def get_proj_path():
+    return configs['proj_path']

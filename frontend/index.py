@@ -3,7 +3,6 @@ import json, logging, os
 from globals import configs, windows
 from frontend.frontend_functs import select_folder
 
-
 def open_new_proj(dut_type):
     configs['dut_type'] = dut_type
     logging.info(f'Selected DUT type: {dut_type.title()} DUT')
@@ -12,7 +11,6 @@ def open_new_proj(dut_type):
         new_proj_modal.toggle()
         '''
     )
-
 
 def create_new_proj(proj_path):
     logging.info(f'Project path: {proj_path}')
@@ -24,10 +22,8 @@ def create_new_proj(proj_path):
     )
     windows['main'].load_url('frontend/web/tests.html')
 
-
 def select_proj_folder():
     return select_folder(windows['main'])
-
 
 def open_proj(folder):
     try:
@@ -45,4 +41,3 @@ def open_proj(folder):
         return False
     except KeyError:
         return False
-

@@ -3,7 +3,7 @@ import subprocess
 import webview
 from frontend.frontend_functs import *
 from frontend.tests import configs
-from scripts.utils import run_cmd
+from utils import run_cmd
 import yaml
 
 from globals import (

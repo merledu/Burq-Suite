@@ -10,7 +10,7 @@ from globals import (
     RISCV32_GNU_TOOLCHAIN,
     RISCV64_GNU_TOOLCHAIN
 )
-from scripts.utils import run_cmd, dut_run_test
+from utils import run_cmd, dut_run_test
 
 riscv_dv_lib = import_module('riscv-dv.riscv-dv.scripts.lib')
 

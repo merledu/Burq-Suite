@@ -4,7 +4,7 @@ from importlib import import_module
 
 from globals import configs, windows, testlist
 from frontend.frontend_functs import select_folder
-from scripts.utils import dump_configs
+from utils import dump_configs
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 riscv_compliance_interface = import_module('compliance.compliance_interface')
