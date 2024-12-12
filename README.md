@@ -36,9 +36,7 @@ riscof --verbose info arch-test --clone
 cd ..
 
 # Create directories
-mkdir cores
-mkdir logs
-mkdir tools
+mkdir cores logs tools
 
 # PATHS
 BURQ_SUITE_ROOT=`pwd`
@@ -75,3 +73,4 @@ python3 main.py
 - [ ] Add support for commercial simulators compatible with riscv-dv
 - [ ] Add support for other iss compatible with riscv-dv
 - [ ] Add project tracking
+- [ ] Add RISC-V compliance tests
