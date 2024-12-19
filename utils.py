@@ -58,6 +58,3 @@ def load_core_cfg(name):
     with open(cfg_file, 'r', encoding='utf-8') as f:
         cfg = json.load(f)
     return cfg
-
-def get_proj_path():
-    return configs['proj_path']

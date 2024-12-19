@@ -1,40 +1,33 @@
-import os, webview
+import os, webview, \
+    os.path as path
 
-from globals import windows
+from globals import windows, configs
 
-
-def get_proj_name():
-    # return configs['proj_name']
-    return 'Hey'
-
+def get_proj_path():
+    return configs['proj_path']
 
 def close_proj_browser():
-    windows['main'].events.closed -= windows['proj_browser'].destroy
-    windows['proj_browser'].destroy()
+    pass
 
-
-def get_proj_tree():
-    tree_map = []
-
-    # for dirpath, dirnames, filenames in os.walk(configs['proj_dir']):
-    for dirpath, dirnames, filenames in os.walk(os.path.join(os.environ['HOME'], 'temporary', 'riscv-dv-outputs')):
-        tree_map.append({
-            'path': dirpath,
-            'files': filenames,
-            'folders': dirnames
-        })
-
-    return tree_map
-
+def retrieve_dir_contents(root):
+    dirpath, dirnames, filenames = next(os.walk(root))
+    return {
+        'dirnames': [
+            path.join(dirpath, dirname)
+            for dirname in dirnames
+        ],
+        'filenames': [
+            path.join(dirpath, filename)
+            for filename in filenames
+        ]
+    }
 
 def show_file(file): pass
-
 
 def get_test_results():
     return {}
 
-
-def open_proj_browser():
+if __name__ == '__main__':
     windows['proj_browser'] = webview.create_window(
         # title=configs['proj_name'],
         title='',
@@ -44,11 +37,10 @@ def open_proj_browser():
         resizable=False,
         on_top=True
     )
-    windows['proj_browser'].expose(get_proj_name, get_proj_tree)
+    windows['proj_browser'].expose(
+        retrieve_dir_contents,
+        close_proj_browser
+    )
     # windows['main'].events.closed += windows['proj_browser'].destroy
     # windows['proj_browser'].events.closed += close_proj_browser
     webview.start(debug=True)
-
-
-if __name__ == '__main__':
-    open_proj_browser()
