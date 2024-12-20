@@ -5,10 +5,11 @@ from globals import (
     LOGLEVEL,
     DEBUG,
     BURQ_SUITE_WEB,
+    WIDTH,
+    HEIGHT,
     windows
 )
 from frontend.exposed_functs import expose
-
 
 if __name__ == '__main__':
     logging.basicConfig(
@@ -20,12 +21,12 @@ if __name__ == '__main__':
     )
     windows['main'] = webview.create_window(
         'Burq Suite',
-        #os.path.join(BURQ_SUITE_WEB, 'splash.html'),
-        os.path.join(BURQ_SUITE_WEB, 'index.html'),
+        os.path.join(BURQ_SUITE_WEB, 'splash.html'),
+        #os.path.join(BURQ_SUITE_WEB, 'index.html'),
         #os.path.join(BURQ_SUITE_WEB, 'tests.html'),
-        width = 1200,
-        height = 600,
-        resizable = False
+        width = WIDTH,
+        height = HEIGHT,
+        min_size = (WIDTH, HEIGHT)
     )
     logging.info('Burq Suite started')
     webview.start(

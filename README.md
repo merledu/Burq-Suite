@@ -55,7 +55,7 @@ cd ..
 cd ./tools_submodules/riscv-isa-sim
 mkdir build
 cd build
-../configure --prefix=$SPIKE --enable-commitlog
+../configure --prefix=$SPIKE
 make
 make install
 cd ../../..
