@@ -1,6 +1,5 @@
 const new_proj_modal = new bootstrap.Modal('#new_proj_modal')
 
-
 window.addEventListener('pywebviewready', () => {
     document.getElementById('body').classList.remove('d-none')
 })

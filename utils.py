@@ -46,15 +46,15 @@ def dut_run_test(obj_path, disasm_dump_path):
 
 def save_core_cfg(name, cfgs):
     cfg_file = os.path.join(CORE_CFGS, f'{name}.json')
-    print(f'{cfgs = }')
-    with open(cfg_file, 'w', encoding='utf-8') as f:
+    with open(cfg_file, 'w') as f:
         json.dump(cfgs, f)
 
 def get_core_cfgs():
+    # cfg[: -5] for removing '.json' extension from file name
     return [cfg[: -5] for cfg in os.listdir(CORE_CFGS)]
 
 def load_core_cfg(name):
     cfg_file = os.path.join(CORE_CFGS, f'{name}.json')
-    with open(cfg_file, 'r', encoding='utf-8') as f:
+    with open(cfg_file) as f:
         cfg = json.load(f)
     return cfg

@@ -15,10 +15,12 @@ riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 SIMULATOR = riscv_dv_interface.SIMULATOR
 ISS = riscv_dv_interface.ISS
 
-
 def get_self_checking_tests_category():
-    return [os.path.basename(f.path) for f in os.scandir(SELF_CHECKING_TESTS_ENV) if f.is_dir()]
-
+    return [
+        os.path.basename(f.path)
+        for f in os.scandir(SELF_CHECKING_TESTS_ENV)
+            if f.is_dir()
+    ]
 
 def get_self_checking_testcases(verif_fw):
     parent_directories = get_self_checking_tests_category()

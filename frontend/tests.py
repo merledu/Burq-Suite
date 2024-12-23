@@ -10,52 +10,41 @@ riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
 riscv_compliance_interface = import_module('compliance.compliance_interface')
 self_checking_tests_interface = import_module('self_checking_tests.self_checking_tests_interface')
 
-
 def get_dut_type():
     return configs['dut_type']
-
 
 def open_dut_menu():
     windows['main'].load_url('frontend/web/index.html')
     configs.clear()
 
-
 def get_dir(root_dir=''):
     return select_folder(windows['main'], root_dir) if root_dir else select_folder(windows['main'])
-
 
 def clear_testlist():
     testlist.clear()
 
-
 def remove_test(test):
     testlist.pop(test)
 
-
 def add_test(verif_fw, test):
     testlist.append([verif_fw, test])
-
 
 def select_extension(extension):
     configs['extension'] = extension
     logging.info(f'Selected extension: {extension}')
 
-
 def select_variant(variant):
     configs['variant'] = variant
     logging.info(f'Selected variant: {variant}')
-
 
 def set_csv_file(dir_path, filename):
     file = os.path.join(dir_path, filename)
     configs['dut_csv'] = file
     logging.info(f'DUT CSV file selected: {file}')
 
-
 def set_config(key, value, log_info_msg):
     configs[key] = value
     logging.info(log_info_msg)
-
 
 def zap_testlist():
     progress = 0    
@@ -100,7 +89,6 @@ def zap_testlist():
         '''
     )
 
-
 def get_test_status_list():
     test_status_list = []
     logfiles = os.listdir(configs['cmp_dir'])
@@ -111,7 +99,6 @@ def get_test_status_list():
                 lines = f.readlines()
             test_status_list.append([testlist[i][0], testlist[i][1].replace('_', ' '), lines[-2].replace('\n', '')])
     return test_status_list
-
 
 def open_proj_browser():
     logging.info('Opening project browser')
