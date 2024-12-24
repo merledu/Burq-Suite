@@ -24,13 +24,13 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # Install dependencies
-pip install wheel pywebview pygobject
+pip3 install --upgrade --force-reinstall --no-cache-dir wheel pywebview pygobject
 
 # Install riscv-dv dependencies
-pip install -r riscv-dv/riscv-dv/requirements.txt
+pip3 install --upgrade --force-reinstall --no-cache-dir -r riscv-dv/riscv-dv/requirements.txt
 
 # Install RISCOF (compliance)
-pip install git+https://github.com/riscv/riscof.git@d38859f85fe407bcacddd2efcd355ada4683aee4
+pip3 install git+https://github.com/riscv/riscof.git@d38859f85fe407bcacddd2efcd355ada4683aee4
 cd compliance
 riscof --verbose info arch-test --clone
 cd ..

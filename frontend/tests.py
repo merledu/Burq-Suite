@@ -50,8 +50,8 @@ def zap_testlist():
     progress = 0    
     windows['main'].evaluate_js(
         f'''
-        window.update_progress_bar({progress})
-        window.update_progress_label("Initializing tests")
+        window.update_progress_bar({progress});
+        window.update_progress_label("Initializing tests");
         '''
     )
     configs['target'] = 'rv' + configs['variant'] + configs['extension']

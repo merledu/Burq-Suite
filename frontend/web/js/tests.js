@@ -3,61 +3,64 @@ const empty_fields_modal = new bootstrap.Modal('#empty_fields');
 
 async function init_window() {
     const dut_type = await pywebview.api.get_dut_type(),
-        dut_type_div = document.getElementById(dut_type)
-    dut_type_div.classList.add('rounded-pill')
+        dut_type_div = document.getElementById(dut_type);
+    dut_type_div.classList.add('rounded-pill');
     switch (dut_type) {
         case 'custom':
-            dut_type_div.style.backgroundColor = '#A851FF'
-            document.getElementById('custom_dut_configs').classList.remove('d-none')
-            // document.getElementById('results').classList.remove('d-none')
-            break
+            dut_type_div.style.backgroundColor = '#A851FF';
+            document.getElementById('custom_dut_configs').classList.remove('d-none');
+            // document.getElementById('results').classList.remove('d-none');
+            break;
         case 'prebuilt':
-            dut_type_div.style.backgroundColor = '#0CA17E'
-            break
+            dut_type_div.style.backgroundColor = '#0CA17E';
+            break;
         case 'soc-now':
-            dut_type_div.style.backgroundColor = '#436EEE'
-            break
+            dut_type_div.style.backgroundColor = '#436EEE';
+            break;
     }
 }
 
 window.addEventListener('pywebviewready', () => {
-    init_window()
+    init_window();
 })
 
 function open_dut_menu() {
-    pywebview.api.open_dut_menu()
+    pywebview.api.open_dut_menu();
 }
 
 async function get_dir(input_id, root='') {
-    const dir = await pywebview.api.get_dir(root)
+    const dir = await pywebview.api.get_dir(root);
     if (dir) {
-        document.getElementById(input_id).value = dir
+        document.getElementById(input_id).value = dir;
     }
 }
 
 // CUSTOM DUT CONFIGS START
 function select_extension() {
     const extensions = [],
-        exts = document.getElementsByName('core_ext')
+        exts = document.getElementsByName('core_ext');
     for (let ext of exts) {
         if (ext.checked) {
-            extensions.push(ext.value)
+            extensions.push(ext.value);
         }
     }
-    return extensions.join('')
+    return extensions.join('');
 }
 
 function select_variant() {
-    const variants = document.getElementsByName('core_variant')
+    const variants = document.getElementsByName('core_variant');
     for (let v of variants) {
         if (v.checked) {
-            return v.value
+            return v.value;
         }
     }
 }
  
 function set_csv_file() {
-    pywebview.api.set_csv_file(document.getElementById('csv_dir').value, document.getElementById('csv_file').value)
+    pywebview.api.set_csv_file(
+        document.getElementById('csv_dir').value,
+        document.getElementById('csv_file').value
+    );
 }
 // CUSTOM DUT CONFIGS END
 
@@ -74,29 +77,29 @@ async function get_self_checking_tests_category() {
 }
 
 async function toggle_testcases(verif_fw) {
-    const testcases = document.getElementById('testcases')
+    const testcases = document.getElementById('testcases');
     let testcase_list = [],
-        default_option = document.createElement('option')
-    default_option.disabled = true
-    default_option.value = ''
-    default_option.innerHTML = '--- Select testcase ---'
-    testcases.replaceChildren(default_option)
-    const selectedVerificationFramework = document.getElementById('verif_fw').value
+        default_option = document.createElement('option');
+    default_option.disabled = true;
+    default_option.value = '';
+    default_option.innerHTML = '--- Select testcase ---';
+    testcases.replaceChildren(default_option);
+    const selectedVerificationFramework = document.getElementById('verif_fw').value;
     switch (verif_fw) {
         case 'riscv-dv':
-            testcase_list = await pywebview.api.get_working_base_testlist()
-            break
+            testcase_list = await pywebview.api.get_working_base_testlist();
+            break;
         case 'riscv-arch-test':
-            break
+            break;
         case selectedVerificationFramework:
-            testcase_list = await pywebview.api.get_self_checking_testcases(selectedVerificationFramework)
+            testcase_list = await pywebview.api.get_self_checking_testcases(selectedVerificationFramework);
             break;
     }
     for (let testcase of testcase_list) {
-        let testcase_opt = document.createElement('option')
-        testcase_opt.value = testcase
-        testcase_opt.innerHTML = testcase.replace(/_/g, ' ')
-        testcases.append(testcase_opt)
+        let testcase_opt = document.createElement('option');
+        testcase_opt.value = testcase;
+        testcase_opt.innerHTML = testcase.replace(/_/g, ' ');
+        testcases.append(testcase_opt);
     }
 }
 
@@ -106,7 +109,7 @@ function clear_testlist() {
 }
 
 function remove_test(btn) {
-    const item_div = btn.parentElement.parentElement
+    const item_div = btn.parentElement.parentElement;
     pywebview.api.remove_test([...item_div.parentElement.children].indexOf(item_div));
     item_div.remove();
 }
@@ -140,7 +143,6 @@ function add_test() {
         ]),
         testcase = document.getElementById('testcases'),
         verif_fw = document.getElementById('verif_fw').value;
-
     for (let elem of classes) {
         for (let bs_class of elem[1]) {
             elem[0].classList.add(bs_class);
@@ -237,23 +239,23 @@ function toggle_elements(hide, show) {
 
 async function get_core_cfgs() {
     const cfgs = await pywebview.api.get_core_cfgs(),
-        load_cfg_select = document.getElementById('load_cfg_select')
-    load_cfg_select.replaceChildren(load_cfg_select.firstElementChild)
+        load_cfg_select = document.getElementById('load_cfg_select');
+    load_cfg_select.replaceChildren(load_cfg_select.firstElementChild);
     for (let cfg of cfgs) {
-        let cfg_option = document.createElement('option')
-        cfg_option.value = cfg
-        cfg_option.innerHTML = cfg
-        load_cfg_select.append(cfg_option)
+        let cfg_option = document.createElement('option');
+        cfg_option.value = cfg;
+        cfg_option.innerHTML = cfg;
+        load_cfg_select.append(cfg_option);
     }
 }
 
 function open_core_cfg() {
-    get_core_cfgs()
-    core_cfg_modal.toggle()
+    get_core_cfgs();
+    core_cfg_modal.toggle();
 }
 
 async function save_core_cfg() {
-    const cfg_name = document.getElementById('save_cfg').value
+    const cfg_name = document.getElementById('save_cfg').value;
     if (await validate_dut_fields()) {
         if (cfg_name) {
             let cfgs = {
@@ -264,16 +266,16 @@ async function save_core_cfg() {
                     'csv_dir',
                     'csv_file'
                 ].reduce((obj, id) => {
-                    obj[id] = document.getElementById(id).value
-                    return obj
+                    obj[id] = document.getElementById(id).value;
+                    return obj;
                 }, {}),
                 'extension': select_extension(),
                 'variant': select_variant()
-            }
-            pywebview.api.save_core_cfg(cfg_name, cfgs)
+            };
+            pywebview.api.save_core_cfg(cfg_name, cfgs);
         }
     } else {
-        empty_fields_modal.toggle()
+        empty_fields_modal.toggle();
     }
 }
 
@@ -351,7 +353,7 @@ async function zap_testlist() {
         switch (await pywebview.api.get_dut_type()) {
             case 'custom':
                 const config_list = [
-                    // [config_key, input_tag_id, log_info_msg]
+                    // Pattern: [config_key, input_tag_id, log_info_msg]
                     ['dut_path', 'dut', 'Uploaded DUT: '],
                     ['dut_disasm_path', 'dut_disasm', 'DUT disassembly dump directory: '],
                     ['dut_cmd', 'dut_cmd', 'DUT command: ']
@@ -360,8 +362,8 @@ async function zap_testlist() {
                     let input_value = document.getElementById(config[1]).value;
                     pywebview.api.set_config(config[0], input_value, config[2] + input_value);
                 }
-                pywebview.api.select_variant(select_variant());
                 pywebview.api.select_extension(select_extension());
+                pywebview.api.select_variant(select_variant());
                 set_csv_file();
                 break;
         }
