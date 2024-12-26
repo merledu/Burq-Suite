@@ -1,13 +1,13 @@
 import os, logging
-from importlib import import_module
-from utils import run_cmd, dut_run_test
 
+from importlib import import_module
+
+from utils import run_cmd, dut_run_test
 from globals import (
     SELF_CHECKING_TESTS_ENV, 
     RISCV_DV_ROOT,
     configs,
-    windows,
-    testlist
+    windows
 )
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
@@ -27,18 +27,21 @@ def get_self_checking_testcases(verif_fw):
     subdirectories = {}
     for parent_dir in parent_directories:
         full_parent_path = os.path.join(SELF_CHECKING_TESTS_ENV, parent_dir)
-        subdirectories[parent_dir] = [os.path.basename(f.path) for f in os.scandir(full_parent_path) if f.is_dir()]
+        subdirectories[parent_dir] = [
+            os.path.basename(f.path)
+            for f in os.scandir(full_parent_path)
+                if f.is_dir()
+        ]
     return subdirectories[verif_fw]
-
 
 def get_verif_fw_testscases():
     verif_fw = windows['main'].evaluate_js(
-        f'''
+        '''
         window.return_verif_fw();
         '''
     )
     testcases = windows['main'].evaluate_js(
-        f'''
+        '''
         window.return_testcases();
         '''
     )  
@@ -55,9 +58,8 @@ def create_iss_log(test_num, test_dir):
         '--c_test', f"{SELF_CHECKING_TESTS_ENV}/{verif_fw}/{testcases}/{testcases}.c",
         '--output', test_dir
     ])
-    logging.info(f'{testlist[test_num][1]} generated')
-    
-    
+    logging.info(f'{configs["testlist"][test_num][1]} generated')
+
 def self_checking_run_test(test, test_num, progress_part, progress):
     test_dir = os.path.join(configs['proj_path'], f'self_checking_tests_out_{test_num}')
     create_iss_log(test_num, test_dir)
@@ -105,4 +107,3 @@ def self_checking_run_test(test, test_num, progress_part, progress):
         """
     )
     return progress
-

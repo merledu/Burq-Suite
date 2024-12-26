@@ -8,7 +8,7 @@ def open_new_proj(dut_type):
     logging.info(f'Selected DUT type: {dut_type.title()} DUT')
     windows['main'].evaluate_js(
         '''
-        new_proj_modal.toggle()
+        new_proj_modal.toggle();
         '''
     )
 
@@ -17,7 +17,7 @@ def create_new_proj(proj_path):
     configs['proj_path'] = proj_path
     windows['main'].evaluate_js(
         '''
-        new_proj_modal.toggle()
+        new_proj_modal.toggle();
         '''
     )
     windows['main'].load_url('frontend/web/tests.html')

@@ -1,5 +1,6 @@
 const core_cfg_modal = new bootstrap.Modal('#cfg');
 const empty_fields_modal = new bootstrap.Modal('#empty_fields');
+const empty_test_modal = new bootstrap.Modal('#empty_test');
 
 async function init_window() {
     const dut_type = await pywebview.api.get_dut_type(),
@@ -9,7 +10,6 @@ async function init_window() {
         case 'custom':
             dut_type_div.style.backgroundColor = '#A851FF';
             document.getElementById('custom_dut_configs').classList.remove('d-none');
-            // document.getElementById('results').classList.remove('d-none');
             break;
         case 'prebuilt':
             dut_type_div.style.backgroundColor = '#0CA17E';
@@ -77,22 +77,22 @@ async function get_self_checking_tests_category() {
 }
 
 async function toggle_testcases(verif_fw) {
-    const testcases = document.getElementById('testcases');
-    let testcase_list = [],
-        default_option = document.createElement('option');
+    const testcases = document.getElementById('testcases'),
+        default_option = document.createElement('option'),
+        selected_verif_fw = document.getElementById('verif_fw').value;
+    let testcase_list = [];
     default_option.disabled = true;
     default_option.value = '';
     default_option.innerHTML = '--- Select testcase ---';
     testcases.replaceChildren(default_option);
-    const selectedVerificationFramework = document.getElementById('verif_fw').value;
     switch (verif_fw) {
         case 'riscv-dv':
             testcase_list = await pywebview.api.get_working_base_testlist();
             break;
         case 'riscv-arch-test':
             break;
-        case selectedVerificationFramework:
-            testcase_list = await pywebview.api.get_self_checking_testcases(selectedVerificationFramework);
+        case selected_verif_fw:
+            testcase_list = await pywebview.api.get_self_checking_testcases(selected_verif_fw);
             break;
     }
     for (let testcase of testcase_list) {
@@ -175,21 +175,15 @@ async function create_results() {
     const test_status_list = await pywebview.api.get_test_status_list(),
         results = document.getElementById('result_table');
     for (let test of test_status_list) {
-        let test_name_div = document.createElement('div'),
+        const test_name_div = document.createElement('div'),
             test_status_div = document.createElement('div'),
             verif_fw_div = document.createElement('div'),
             row = document.createElement('div'),
             classes = new Map([
-                [test_name_div, [
-                    'p-2',
-                    'overflow-x-auto',
-                    'text-white',
-                    'border-end',
-                    'border-secondary'
-                ]],
-                [test_status_div, ['p-2', 'overflow-x-auto', 'text-white']],
+                [test_name_div, ['p-2', 'overflow-x-auto', 'border-end', 'border-secondary']],
+                [test_status_div, ['p-2', 'overflow-x-auto']],
                 [row, ['d-flex', 'flex-row', 'border-bottom', 'border-secondary']],
-                [verif_fw_div, ['text-white', 'border-end', 'border-secondary', 'p-2', 'overflow-x-auto']]
+                [verif_fw_div, ['border-end', 'border-secondary', 'p-2', 'overflow-x-auto']]
             ]);
         for (let elem of classes) {
             for (let bs_class of elem[1]) {
@@ -348,7 +342,6 @@ function zap_progress() {
 }
 
 async function zap_testlist() {
-    const empty_test_modal = new bootstrap.Modal('#empty_test');
     if (validate_testlist()) {
         switch (await pywebview.api.get_dut_type()) {
             case 'custom':

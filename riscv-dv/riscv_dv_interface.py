@@ -1,19 +1,18 @@
 import os, logging
+
 from importlib import import_module
 
 from globals import (
     RISCV_DV_ROOT,
     RISCV_DV_ENV,
-    configs,
-    testlist,
-    windows,
     RISCV32_GNU_TOOLCHAIN,
-    RISCV64_GNU_TOOLCHAIN
+    RISCV64_GNU_TOOLCHAIN,
+    configs,
+    windows
 )
 from utils import run_cmd, dut_run_test
 
 riscv_dv_lib = import_module('riscv-dv.riscv-dv.scripts.lib')
-
 
 RISCV_DV_YAMLS = os.path.join(RISCV_DV_ROOT, 'yaml')
 TESTLIST_YAML = os.path.join(RISCV_DV_ENV, 'working_base_testlist.yaml')
@@ -22,12 +21,12 @@ ITERATIONS = '1'
 SIMULATOR = 'pyflow'
 ISS = 'spike'
 
-
 def get_working_base_testlist():
     logging.info('Getting working base testlist')
-    working_testlist = riscv_dv_lib.read_yaml(TESTLIST_YAML)
-    return [test['test'] for test in working_testlist]
-
+    return [
+        test['test']
+        for test in riscv_dv_lib.read_yaml(TESTLIST_YAML)
+    ]
 
 def create_iss_log(test_dir, test, test_num):
     os.chdir(RISCV_DV_ROOT)
@@ -41,8 +40,7 @@ def create_iss_log(test_dir, test, test_num):
         '--simulator', SIMULATOR,
         '--iss', ISS
     ])
-    logging.info(f'{testlist[test_num][1]} generated')
-
+    logging.info(f'{configs["testlist"][test_num][1]} generated')
 
 def create_iss_csv(iss, csv_path, log_path):
     os.chdir(RISCV_DV_SCRIPTS)
@@ -52,7 +50,6 @@ def create_iss_csv(iss, csv_path, log_path):
         '--csv', csv_path
     ])
     logging.info('ISS CSV created')
-
 
 def compare_csv(iss_csv, compare_log_path, dut_name):
     os.chdir(RISCV_DV_SCRIPTS)
@@ -65,7 +62,6 @@ def compare_csv(iss_csv, compare_log_path, dut_name):
         '--log', compare_log_path,
         '--mismatch_print_limit', '100'
     ])
-
 
 def riscv_dv_run_test(test, test_num, progress_part, progress):
     test_dir = os.path.join(configs['proj_path'], f'riscv_dv_out_{test_num}')
@@ -117,4 +113,3 @@ def riscv_dv_run_test(test, test_num, progress_part, progress):
         """
     )
     return progress
-

@@ -1,16 +1,15 @@
-import time, json, os, logging, \
+import json, os, logging, \
     subprocess as sp
 
-from globals import configs, testlist, CORE_CFGS
-from frontend.stderr import stderr, open_stderr_window
+from globals import BURQ_SUITE_ROOT, CORE_CFGS, configs
 
 def dump_configs():
-    configs['testlist'] = testlist
     os.chdir(configs['proj_path'])
     config_file = os.path.join(configs['proj_path'], 'configs.json')
     logging.info(f'Dumping configs: {config_file}')
     with open(config_file, 'w', encoding='UTF-8') as f:
         json.dump(configs, f)
+    os.chdir(BURQ_SUITE_ROOT)
 
 def run_cmd(cmd, redirect_to_file=False, stdout_f=''):
     logging.debug(f'Command: {" ".join(cmd)}')
@@ -22,11 +21,6 @@ def run_cmd(cmd, redirect_to_file=False, stdout_f=''):
     if cmd_run.returncode:
         logging.info(cmd_run.returncode)
         logging.error(cmd_run.stderr)
-        stderr['error'] = cmd_run.stderr
-        stderr['halt_exec'] = True
-        open_stderr_window()
-        while stderr['halt_exec']:
-            time.sleep(0.1)
     elif cmd_run.stderr:
         logging.error(cmd_run.stderr)
     else:

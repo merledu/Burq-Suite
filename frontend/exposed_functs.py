@@ -1,7 +1,7 @@
 from importlib import import_module
 
 from utils import save_core_cfg, get_core_cfgs, load_core_cfg
-from frontend.splash import open_login#, login
+from frontend.splash import open_index#, login
 from frontend.index import open_new_proj, select_proj_folder, open_proj, create_new_proj
 from frontend.tests import (
     get_dut_type,
@@ -29,7 +29,7 @@ def expose(window):
         load_core_cfg,
 
         # splash
-        open_login,
+        open_index,
         # SoC-Now is not up yet, therefore skip login
         #login,
 

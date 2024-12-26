@@ -58,68 +58,72 @@
                     Upload
                 </button>
             </div>
-            <!-- Select Extension(s) -->
-            <div class="d-flex flex-row p-2">
-                <h5 class="text-white pe-3">
-                    Extensions:
-                </h5>
-                <div class="d-flex flex-column">
-                    <div class="form-check">
-                        <input class="form-check-input" name="core_ext" type="checkbox" value="i" id="extension1" checked disabled>
-                        <label for="extension1" class="form-check-label text-white">
-                            I (Integer)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="core_ext" type="checkbox" value="m" id="extension2">
-                        <label for="extension2" class="form-check-label text-white">
-                            M (Multiplication)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="core_ext" type="checkbox" value="a" id="extension3">
-                        <label for="extension3" class="form-check-label text-white">
-                            A (Atomic)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="core_ext" type="checkbox" value="f" id="extension4">
-                        <label for="extension4" class="form-check-label text-white">
-                            F (Single Precision Floating Point)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="core_ext" type="checkbox" value="d" id="extension5">
-                        <label for="extension5" class="form-check-label text-white">
-                            D (Double Precision Floating Point)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="core_ext" type="checkbox" value="c" id="extension6">
-                        <label for="extension6" class="form-check-label text-white">
-                            C (Compressed)
-                        </label>
+            <!-- Target Selection -->
+            <div class="d-flex flex-row">
+                <!-- Select Extension(s) -->
+                <div class="d-flex flex-row p-2">
+                    <h5 class="text-white pe-3">
+                        Extensions:
+                    </h5>
+                    <div class="d-flex flex-column">
+                        <div class="form-check">
+                            <input class="form-check-input" name="core_ext" type="checkbox" value="i" id="extension1" checked disabled>
+                            <label for="extension1" class="form-check-label text-white">
+                                I (Integer)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="core_ext" type="checkbox" value="m" id="extension2">
+                            <label for="extension2" class="form-check-label text-white">
+                                M (Multiplication)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="core_ext" type="checkbox" value="a" id="extension3">
+                            <label for="extension3" class="form-check-label text-white">
+                                A (Atomic)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="core_ext" type="checkbox" value="f" id="extension4">
+                            <label for="extension4" class="form-check-label text-white">
+                                F (Single Precision Floating Point)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="core_ext" type="checkbox" value="d" id="extension5">
+                            <label for="extension5" class="form-check-label text-white">
+                                D (Double Precision Floating Point)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="core_ext" type="checkbox" value="c" id="extension6">
+                            <label for="extension6" class="form-check-label text-white">
+                                C (Compressed)
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <!-- Select Variant -->
-                <h5 class="text-white pe-3">
-                    Variants:
-                </h5>
-                <div class="d-flex flex-column">
-                    <div class="form-check">
-                        <input class="form-check-input" name="core_variant" type="radio" value="32" id="variant1" checked>
-                        <label for="variant1" class="form-check-label text-white">
-                            32
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="core_variant" type="radio" value="64" id="variant2">
-                        <label for="variant2" class="form-check-label text-white">
-                            64
-                        </label>
+                <div class="d-flex flex-row p-2">
+                    <h5 class="text-white pe-3">
+                        Variants:
+                    </h5>
+                    <div class="d-flex flex-column">
+                        <div class="form-check">
+                            <input class="form-check-input" name="core_variant" type="radio" value="32" id="variant1" checked>
+                            <label for="variant1" class="form-check-label text-white">
+                                32
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="core_variant" type="radio" value="64" id="variant2">
+                            <label for="variant2" class="form-check-label text-white">
+                                64
+                            </label>
+                        </div>
                     </div>
                 </div>
-
             </div>
             <!-- Disassembly Dump -->
             <div class="input-group p-2">
@@ -199,8 +203,8 @@
                     Test Results
                 </h4>
             </div>
-            <div class="overflow-y-auto m-2" id="result_table">
-                <div class="text-white d-flex flex-row border border-secondary">
+            <div class="overflow-y-auto m-2 text-white" id="result_table">
+                <div class="d-flex flex-row border border-secondary">
                     <div class="p-2 border-end border-secondary" id="fw_row">
                         <strong>
                             Framework

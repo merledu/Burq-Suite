@@ -1,7 +1,7 @@
 //const login_modal = new bootstrap.Modal('#login')
 
-window.addEventListener('pywebviewready', async () => {
-    pywebview.api.open_login()
+window.addEventListener('pywebviewready', () => {
+    pywebview.api.open_index()
 })
 
 // SoC-Now is not up yet, therefore skip login
