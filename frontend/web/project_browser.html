@@ -3,46 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="bootstrap-icons-1.11.2/font/bootstrap-icons.min.css">
+    <link type="text/css" rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
+    <link type="text/css" rel="stylesheet" href="codemirror-5.65.18/lib/codemirror.css">
+    <link type="text/css" rel="stylesheet" href="codemirror-5.65.18/theme/cobalt.css">
     <link type="text/css" rel="stylesheet" href="css/global.css">
     <link type="text/css" rel="stylesheet" href="css/project_browser.css">
-    <title>Project Browser</title>
+    <title>
+        Project Browser
+    </title>
 </head>
 <body>
 <div class="d-flex flex-column vh-100">
-    <!-- Header -->
-    <div class="d-flex flex-row justify-content-between align-items-center border-bottom border-black">
-        <img src="images/flash64.png" class="img-fluid">
-        <h1 class="text-white" id="proj_name">
-            Hey
-        </h1>
+    <!-- Action Bar -->
+    <div id="action_bar" class="d-flex flex-row p-2 justify-content-between align-items-center border-bottom border-black">
+        <button type="button" class="btn btn-outline-danger action_btns" onclick="return_to_index()">
+            <i class="bi-arrow-return-left"></i>
+        </button>
+        <h4 class="text-white" id="proj_name"></h4>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-success action_btns">
+                <i class="bi-hammer"></i>
+            </button>
+            <button type="button" class="btn btn-success action_btns">
+                <i class="bi-play-fill"></i>
+            </button>
+            <button type="button" class="btn btn-success action_btns">
+                <i class="bi-floppy-fill"></i>
+            </button>
+        </div>
     </div>
-    <!-- Project Browser -->
-    <div class="d-flex flex-row vh-100" id="browser">
-        <!-- Explorer -->
-        <div class="d-flex flex-column border-end border-black" id="explorer">
-            <div class="d-flex flex-row p-3 justify-content-around align-items-center border-bottom border-black text-white">
-                <span>
+    <!-- Project Area -->
+    <div id="proj_area" class="d-flex flex-row">
+        <!-- File Tree -->
+        <div id="file_tree" class="d-flex flex-column">
+            <div class="d-flex flex-row p-2 align-items-center border-bottom border-black text-white">
+                <span class="ms-auto me-auto">
                     Explorer
                 </span>
-                <!--
-                <button class="btn text-white">
-                    <i class="bi-file-earmark-plus-fill"></i>
-                </button>
-                -->
+                <div class="btn-group ms-auto" role="group">
+                    <button class="btn text-white" type="button">
+                        <i class="bi-folder-plus"></i>
+                    </button>
+                    <button class="btn text-white" type="button">
+                        <i class="bi-file-earmark-plus-fill"></i>
+                    </button>
+                </div>
             </div>
-            <div class="overflow-x-scroll overflow-y-scroll">
-                <ul id="proj_tree" class="text-white"></ul>
+            <div class="overflow-x-scroll overflow-y-scroll text-white" id="proj_tree">
             </div>
         </div>
-        <!-- File View -->
+        <!-- Code Area -->
+        <div id="code_area" class="d-flex flex-column">
+            <!-- Editor -->
+            <div id="editor">
+                <textarea id="editor_textarea"></textarea>
+            </div>
+            <!-- Output Console -->
+            <div id="output_console" class="">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            Compilation Log
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Output
+                        </a>
+                    </li>
+                </ul>
+                Test text
+            </div>
+        </div>
+        <!-- Artifacts -->
+        <div id="artifacts">
+        </div>
+    </div>
+    <!-- Project Browser
+    <div class="d-flex flex-row vh-100" id="browser">
+        <!-- Explorer
+        <div class="d-flex flex-column border-end border-black" id="explorer">
+        </div>
+        <!-- File View
         <div>
             <ul class="nav nav-underline" role="tablist" id="file_tablist"></ul>
         </div>
     </div>
+    -->
 </div>
-<script src="js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js"></script>
+<script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+<script src="codemirror-5.65.18/lib/codemirror.js"></script>
+<script src="codemirror-5.65.18/mode/clike/clike.js"></script>
+<script src="codemirror-5.65.18/mode/gas/gas.js"></script>
 <script src="js/project_browser.js"></script>
 </body>
 </html>

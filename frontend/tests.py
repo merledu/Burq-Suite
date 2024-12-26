@@ -1,8 +1,8 @@
-import logging, os, time, webview
+import logging, os, time
 
 from importlib import import_module
 
-from globals import configs, windows
+from globals import BURQ_SUITE_ROOT, configs, windows
 from frontend.frontend_functs import select_folder
 from utils import dump_configs
 
@@ -82,6 +82,7 @@ def zap_testlist():
         '''
     )
     time.sleep(1)
+    os.chdir(BURQ_SUITE_ROOT)
     windows['main'].evaluate_js(
         '''
         create_results();

@@ -21,6 +21,7 @@ if __name__ == '__main__':
     windows['main'] = webview.create_window(
         'Burq Suite',
         os.path.join(BURQ_SUITE_WEB, 'splash.html'),
+        #os.path.join(BURQ_SUITE_WEB, 'project_browser.html'),
         width = WIDTH,
         height = HEIGHT,
         min_size = (WIDTH, HEIGHT)

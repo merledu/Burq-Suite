@@ -17,6 +17,7 @@ from frontend.tests import (
     get_test_status_list,
     open_proj_browser
 )
+from frontend.project_browser import get_proj_name, return_to_index, get_proj_path, retrieve_dir_contents
 from self_checking_tests.self_checking_tests_interface import get_self_checking_tests_category, get_self_checking_testcases
 
 riscv_dv_interface = import_module('riscv-dv.riscv_dv_interface')
@@ -53,6 +54,12 @@ def expose(window):
         zap_testlist,
         get_test_status_list,
         open_proj_browser,
+
+        # project_browser
+        get_proj_name,
+        return_to_index,
+        get_proj_path,
+        retrieve_dir_contents,
 
         # riscv_dv_interface
         riscv_dv_interface.get_working_base_testlist,

@@ -1,82 +1,65 @@
-async function get_proj_tree() {
-    const tree_map = await pywebview.api.get_proj_tree(),
-        create_dir_node = (current_node, path) => {
-            current_node.append(document.createElement('li'));
-
-            current_node = current_node.lastElementChild;
-            current_node.append(document.createElement('span'));
-
-            current_node = current_node.lastElementChild;
-            current_node.classList.add('caret');
-            current_node.innerHTML = path[path.length-1];
-            current_node.after(document.createElement('ul'));
-
-            current_node = current_node.nextElementSibling;
-            current_node.classList.add('nested');
-            current_node.previousElementSibling.addEventListener('click', () => {
-                current_node.classList.toggle('active');
-                current_node.previousElementSibling.classList.toggle('caret-down');
-            });
-
-            return current_node;
-        },
-        create_file_node = (current_node, file_list) => {
-            for (let file of file_list) {
-                current_node.append(document.createElement('li'));
-
-                current_node = current_node.lastElementChild;
-                current_node.innerHTML = file;
-                current_node.addEventListener('click', () => {})
-
-                current_node = current_node.parentElement;
-            }
-            return current_node;
-        };
-    let current_node = document.getElementById('proj_tree'),
-        root_path_len = tree_map[0]['path'].split('/').length - 1,
-        lvl = 0,
-        path = [];
-
-    for (let i = 0; i < tree_map.length; ++i) {
-        path = tree_map[i]['path'].split('/');
-        let path_len = (path.length - 1) % root_path_len;
-
-        if (lvl > path_len) {
-            let backtrack_ndx = i - 1;
-            while (lvl > path_len) {
-                current_node = create_file_node(current_node, tree_map[backtrack_ndx]['files']);
-                for (let j = 0; j < 2; ++j) {
-                    current_node = current_node.parentElement;
-                }
-                --lvl;
-            }
-        }
-        current_node = create_dir_node(current_node, path);
-        ++lvl;
+const myCodeMirror = CodeMirror.fromTextArea(
+    document.getElementById("editor_textarea"), {
+        mode: "text/x-csrc",
+        theme: "cobalt",
+        indentUnit: 4,
+        lineNumbers: true,
+        spellcheck: false
     }
-    let tree_last_ndx = tree_map.length - 1;
-    while (tree_map.length) {
-        current_node = create_file_node(current_node, tree_map[tree_last_ndx]['files']);
-        for (let j = 0; j < 2; ++j) {
-            current_node = current_node.parentElement;
-        }
-        path.pop();
-        let backtrack_path = path.join('/');
-        while (tree_map.length && backtrack_path !== tree_map[tree_last_ndx]['path']) {
-            tree_map.pop();
-            tree_last_ndx = tree_map.length - 1;
-        }
-    }
+);
+
+function return_to_index() {
+    pywebview.api.return_to_index();
 }
 
+async function toggle_dir(dir_node) {
+    if (dir_node.children.length === 1) {
+        await expand_dir(dir_node, dir_node.id);
+    }
+    dir_node.children[1].classList.toggle('active');
+    dir_node.children[0].classList.toggle('caret-down');
+}
+
+async function expand_dir(dir_node, path) {
+    const dir_struct = await pywebview.api.retrieve_dir_contents(path),
+        folder_node = document.createElement('ul');
+    folder_node.classList.add('folder_node', 'nested');
+    dir_node.appendChild(folder_node);
+    for (let node of dir_struct.dirnames) {
+        const li_node = document.createElement('li'),
+            span_node = document.createElement('span');
+        li_node.id = node;
+        span_node.className = 'dir';
+        span_node.innerHTML = node.split('/').pop();
+        span_node.onclick = async () => {
+            await toggle_dir(li_node);
+        };
+        li_node.appendChild(span_node);
+        folder_node.appendChild(li_node);
+    }
+    for (let node of dir_struct.filenames) {
+        const li_node = document.createElement('li'),
+            span_node = document.createElement('span');
+        li_node.id = node;
+        span_node.className = 'file';
+        span_node.innerHTML = node.split('/').pop();
+        li_node.appendChild(span_node);
+        folder_node.appendChild(li_node);
+    }
+}
 
 async function init_window() {
     document.getElementById('proj_name').innerHTML = await pywebview.api.get_proj_name();
-    get_proj_tree();
+    const file_tree_div = document.getElementById('proj_tree');
+    await expand_dir(
+        file_tree_div,
+        await pywebview.api.get_proj_path()
+    );
+    if (file_tree_div.children.length === 1) {
+        file_tree_div.children[0].classList.toggle('nested');
+    }
 }
-
 
 window.addEventListener('pywebviewready', () => {
     init_window();
 });
-
