@@ -10,12 +10,16 @@ button.border.border-0 {
     color: white;
 }
 button.border.border-0:nth-child(1):hover {
-    background-color: #A851FF;
+    background-color: #EA5485;
+    color: #1A1D22;
 }
 button.border.border-0:nth-child(2):hover {
-    background-color: #0CA17E;
+    background-color: #A851FF;
 }
 button.border.border-0:nth-child(3):hover {
+    background-color: #0CA17E;
+}
+button.border.border-0:nth-child(4):hover {
     background-color: #436EEE;
 }
 span {
@@ -23,9 +27,12 @@ span {
     font-weight: bold;
 }
 button.border.border-0:nth-child(1) > span {
-    color: #CF9FFF;
+    color: #EA5485;
 }
 button.border.border-0:nth-child(2) > span {
+    color: #CF9FFF;
+}
+button.border.border-0:nth-child(3) > span {
     color: #0FC89C;
 }
 button.border.border-0:hover > span {

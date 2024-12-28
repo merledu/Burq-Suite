@@ -31,9 +31,7 @@ async function expand_dir(dir_node, path) {
         li_node.id = node;
         span_node.className = 'dir';
         span_node.innerHTML = node.split('/').pop();
-        span_node.onclick = async () => {
-            await toggle_dir(li_node);
-        };
+        span_node.setAttribute('onclick', `await toggle_dir(${li_node})`);
         li_node.appendChild(span_node);
         folder_node.appendChild(li_node);
     }

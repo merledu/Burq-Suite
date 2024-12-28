@@ -20,7 +20,10 @@ def create_new_proj(proj_path):
         new_proj_modal.toggle();
         '''
     )
-    windows['main'].load_url('frontend/web/tests.html')
+    if configs['dut_type'] == 'create custom test':
+        windows['main'].load_url('frontend/web/project_browser.html')
+    else:
+        windows['main'].load_url('frontend/web/tests.html')
 
 def select_proj_folder():
     return select_folder(windows['main'])
