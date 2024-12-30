@@ -4,8 +4,9 @@ body {
 }
 #proj_area {
     height: 100%;
+    overflow: hidden;
 }
-#file_tree {
+#explorer {
     width: 20%;
     border: solid #0A0e14 1px;
     padding: 0;

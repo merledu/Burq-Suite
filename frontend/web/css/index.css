@@ -11,7 +11,6 @@ button.border.border-0 {
 }
 button.border.border-0:nth-child(1):hover {
     background-color: #EA5485;
-    color: #1A1D22;
 }
 button.border.border-0:nth-child(2):hover {
     background-color: #A851FF;

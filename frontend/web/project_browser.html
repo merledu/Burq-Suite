@@ -28,15 +28,16 @@
             <button type="button" class="btn btn-success action_btns" disabled>
                 <i class="bi-play-fill"></i>
             </button>
-            <button type="button" class="btn btn-success action_btns" onclick="">
+            <button type="button" class="btn btn-success action_btns" onclick="save_file()">
                 <i class="bi-floppy-fill"></i>
             </button>
         </div>
     </div>
     <!-- Project Area -->
     <div id="proj_area" class="d-flex flex-row">
-        <!-- File Tree -->
-        <div id="file_tree" class="d-flex flex-column">
+        <!-- Explorer -->
+        <div id="explorer" class="d-flex flex-column">
+            <!-- Header -->
             <div class="d-flex flex-row p-2 align-items-center border-bottom border-black text-white">
                 <span class="ms-auto me-auto">
                     Explorer
@@ -50,7 +51,8 @@
                     </button>
                 </div>
             </div>
-            <div class="overflow-x-scroll overflow-y-scroll text-white" id="proj_tree">
+            <!-- File Tree -->
+            <div class="overflow-x-scroll overflow-y-scroll text-white mb-0" id="file_tree">
             </div>
         </div>
         <!-- Code Area -->

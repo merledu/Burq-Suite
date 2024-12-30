@@ -3,12 +3,16 @@ import os, logging, \
 
 from globals import configs, windows
 
-def get_proj_name():
-    return path.basename(configs['proj_path'])
-
 def return_to_index():
     logging.info('Returning to index')
     windows['main'].load_url('frontend/web/index.html')
+
+def get_proj_name():
+    return path.basename(configs['proj_path'])
+
+def save_file(file, file_content):
+    with open(file, 'w') as f:
+        f.write(file_content)
 
 def get_proj_path():
     return configs['proj_path']
