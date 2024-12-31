@@ -20,6 +20,11 @@ def save_file(file, file_content):
 def create_file(file_path):
     open(file_path, 'w').close()
 
+def get_file_content(file_path):
+    with open(file_path) as f:
+        content = f.read()
+    return content
+
 def retrieve_dir_contents(root):
     dirpath, dirnames, filenames = next(os.walk(root))
     return {

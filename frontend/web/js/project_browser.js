@@ -12,7 +12,8 @@ const current_file = {
         lineNumbers: true,
         spellcheck: false
     }
-), new_file_modal = new bootstrap.Modal('#new_file_modal');
+), new_file_modal = new bootstrap.Modal('#new_file_modal')
+    new_dir_modal = new bootsrap.Modal('#new_dir_modal');
 
 function return_to_index() {
     pywebview.api.return_to_index();
@@ -30,7 +31,16 @@ function save_file() {
 }
 
 function create_dir() {
-
+    pywebview.api.create_dir(
+        current_dir.path.concat(
+            '/',
+            document.getElementById('new_dir').value
+        )
+    );
+    current_dir.node.lastElementChild.remove();
+    await expand_dir(current_dir.node, current_dir.path);
+    if (current_dir.node.children.length === 1) {
+        current_dir.node.children[0].classList.toggle('nested');
 }
 
 async function create_file() {
@@ -45,6 +55,10 @@ async function create_file() {
     if (current_dir.node.children.length === 1) {
         current_dir.node.children[0].classList.toggle('nested');
     }
+}
+
+async function select_file() {
+    const file_content = await pywebview.api.get_file_contents(current_file.path);
 }
 
 async function toggle_dir(dir_node) {
@@ -89,6 +103,7 @@ async function expand_dir(dir_node, path) {
                 node_path_array.length - 2
             ).join('/');
             current_dir.node = dir_node;
+            select_file();
             console.log(current_dir);
         }
         li_node.appendChild(span_node);
