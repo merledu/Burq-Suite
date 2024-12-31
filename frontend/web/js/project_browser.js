@@ -1,5 +1,10 @@
-let current_file = '';
-const myCodeMirror = CodeMirror.fromTextArea(
+const current_file = {
+    path: '',
+    node: null
+}, current_dir = {
+    path: '',
+    node: null
+}, myCodeMirror = CodeMirror.fromTextArea(
     document.getElementById("editor_textarea"), {
         mode: "text/x-csrc",
         theme: "cobalt",
@@ -7,7 +12,7 @@ const myCodeMirror = CodeMirror.fromTextArea(
         lineNumbers: true,
         spellcheck: false
     }
-);
+), new_file_modal = new bootstrap.Modal('#new_file_modal');
 
 function return_to_index() {
     pywebview.api.return_to_index();
@@ -24,6 +29,24 @@ function save_file() {
     }
 }
 
+function create_dir() {
+
+}
+
+async function create_file() {
+    pywebview.api.create_file(
+        current_dir.path.concat(
+            '/',
+            document.getElementById('new_file').value
+        )
+    );
+    current_dir.node.lastElementChild.remove();
+    await expand_dir(current_dir.node, current_dir.path);
+    if (current_dir.node.children.length === 1) {
+        current_dir.node.children[0].classList.toggle('nested');
+    }
+}
+
 async function toggle_dir(dir_node) {
     if (dir_node.children.length === 1) {
         await expand_dir(dir_node, dir_node.id);
@@ -35,7 +58,7 @@ async function toggle_dir(dir_node) {
 async function expand_dir(dir_node, path) {
     const dir_struct = await pywebview.api.retrieve_dir_contents(path),
         folder_node = document.createElement('ul');
-    folder_node.classList.add('folder_node', 'nested');
+    folder_node.classList.add('folder_node', 'nested', 'ps-3');
     dir_node.appendChild(folder_node);
     for (let node_path of dir_struct.dirnames) {
         const li_node = document.createElement('li'),
@@ -45,6 +68,8 @@ async function expand_dir(dir_node, path) {
         span_node.innerHTML = node_path.split('/').pop();
         span_node.onclick = () => {
             toggle_dir(li_node);
+            current_dir.path = node_path;
+            current_dir.node = li_node;
         }
         li_node.appendChild(span_node);
         folder_node.appendChild(li_node);
@@ -56,7 +81,15 @@ async function expand_dir(dir_node, path) {
         span_node.className = 'file';
         span_node.innerHTML = node_path.split('/').pop();
         span_node.onclick = () => {
-            current_file = node_path;
+            current_file.path = node_path;
+            current_file.node = li_node;
+            const node_path_array = node_path.split('/');
+            current_dir.path = node_path_array.slice(
+                0,
+                node_path_array.length - 2
+            ).join('/');
+            current_dir.node = dir_node;
+            console.log(current_dir);
         }
         li_node.appendChild(span_node);
         folder_node.appendChild(li_node);
@@ -64,8 +97,10 @@ async function expand_dir(dir_node, path) {
 }
 
 async function init_window() {
+    current_dir.path = await pywebview.api.get_proj_path();
     document.getElementById('proj_name').innerHTML = await pywebview.api.get_proj_name();
     const file_tree_div = document.getElementById('file_tree');
+    current_dir.node = file_tree_div;
     await expand_dir(
         file_tree_div,
         await pywebview.api.get_proj_path()

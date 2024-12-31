@@ -3,6 +3,9 @@ import os, logging, \
 
 from globals import configs, windows
 
+def get_proj_path():
+    return configs['proj_path']
+
 def return_to_index():
     logging.info('Returning to index')
     windows['main'].load_url('frontend/web/index.html')
@@ -14,8 +17,8 @@ def save_file(file, file_content):
     with open(file, 'w') as f:
         f.write(file_content)
 
-def get_proj_path():
-    return configs['proj_path']
+def create_file(file_path):
+    open(file_path, 'w').close()
 
 def retrieve_dir_contents(root):
     dirpath, dirnames, filenames = next(os.walk(root))

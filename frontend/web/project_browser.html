@@ -34,7 +34,7 @@
         </div>
     </div>
     <!-- Project Area -->
-    <div id="proj_area" class="d-flex flex-row">
+    <div id="proj_area" class="d-flex flex-row flex-grow-1">
         <!-- Explorer -->
         <div id="explorer" class="d-flex flex-column">
             <!-- Header -->
@@ -46,14 +46,13 @@
                     <button class="btn text-white" type="button">
                         <i class="bi-folder-plus"></i>
                     </button>
-                    <button class="btn text-white" type="button">
+                    <button class="btn text-white" type="button" onclick="new_file_modal.toggle()">
                         <i class="bi-file-earmark-plus-fill"></i>
                     </button>
                 </div>
             </div>
             <!-- File Tree -->
-            <div class="overflow-x-scroll overflow-y-scroll text-white mb-0" id="file_tree">
-            </div>
+            <div class="overflow-x-scroll overflow-y-scroll text-white mb-0" id="file_tree"></div>
         </div>
         <!-- Code Area -->
         <div id="code_area" class="d-flex flex-column">
@@ -93,6 +92,31 @@
         </div>
     </div>
     -->
+</div>
+<div class="modal fade" tabindex="-1" id="new_file_modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    New File
+                </h5>
+                <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group ps-3 pe-3 pb-2">
+                    <label class="input-group-text text-black" for="new_file">
+                        Filename:
+                    </label>
+                    <input class="form-control text-black" id="new_file">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary ms-auto" onclick="create_file()" data-bs-dismiss="modal">
+                    Create File
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 <script src="codemirror-5.65.18/lib/codemirror.js"></script>
