@@ -16,7 +16,9 @@ body {
 }
 .dir {
     cursor: pointer;
+    /*
     user-select: none;
+    */
 }
 .dir::before {
     content: '\25B6';

@@ -17,6 +17,12 @@ def save_file(file, file_content):
     with open(file, 'w') as f:
         f.write(file_content)
 
+def create_dir(dir_path):
+    try:
+        os.mkdir(dir_path)
+    except FileExistsError:
+        pass
+
 def create_file(file_path):
     open(file_path, 'w').close()
 
@@ -37,5 +43,3 @@ def retrieve_dir_contents(root):
             for filename in filenames
         ]
     }
-
-def show_file(file): pass

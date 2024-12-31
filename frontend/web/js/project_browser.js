@@ -13,24 +13,26 @@ const current_file = {
         spellcheck: false
     }
 ), new_file_modal = new bootstrap.Modal('#new_file_modal')
-    new_dir_modal = new bootsrap.Modal('#new_dir_modal');
+    new_dir_modal = new bootstrap.Modal('#new_dir_modal'),
+    invalid_save_modal = new bootstrap.Modal('#invalid_save_modal');
+myCodeMirror.setSize(null, '100%');
 
 function return_to_index() {
     pywebview.api.return_to_index();
 }
 
 function save_file() {
-    if (current_file) {
+    if (current_file.node) {
         pywebview.api.save_file(
-            current_file,
+            current_file.path,
             myCodeMirror.getValue()
         );
     } else {
-
+        
     }
 }
 
-function create_dir() {
+async function create_dir() {
     pywebview.api.create_dir(
         current_dir.path.concat(
             '/',
@@ -41,6 +43,7 @@ function create_dir() {
     await expand_dir(current_dir.node, current_dir.path);
     if (current_dir.node.children.length === 1) {
         current_dir.node.children[0].classList.toggle('nested');
+    }
 }
 
 async function create_file() {
@@ -57,8 +60,12 @@ async function create_file() {
     }
 }
 
-async function select_file() {
-    const file_content = await pywebview.api.get_file_contents(current_file.path);
+async function get_file_content() {
+    myCodeMirror.setValue(
+        await pywebview.api.get_file_content(
+            current_file.path
+        )
+    );
 }
 
 async function toggle_dir(dir_node) {
@@ -92,6 +99,7 @@ async function expand_dir(dir_node, path) {
         const li_node = document.createElement('li'),
             span_node = document.createElement('span');
         li_node.id = node_path;
+        li_node.classList.add('ps-3');
         span_node.className = 'file';
         span_node.innerHTML = node_path.split('/').pop();
         span_node.onclick = () => {
@@ -100,11 +108,10 @@ async function expand_dir(dir_node, path) {
             const node_path_array = node_path.split('/');
             current_dir.path = node_path_array.slice(
                 0,
-                node_path_array.length - 2
+                node_path_array.length - 1
             ).join('/');
             current_dir.node = dir_node;
-            select_file();
-            console.log(current_dir);
+            get_file_content();
         }
         li_node.appendChild(span_node);
         folder_node.appendChild(li_node);
