@@ -17,7 +17,7 @@ RISCV32_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv32-gnu-toolchain', 'bin')
 RISCV64_GNU_TOOLCHAIN = os.path.join(TOOLS, 'riscv64-gnu-toolchain', 'bin')
 SPIKE = os.path.join(TOOLS, 'spike', 'bin')
 
-CORE_CFGS = os.path.join(BURQ_SUITE_ROOT, 'cores')
+CORE_CFGS = os.path.join(BURQ_SUITE_ROOT, 'core_cfgs')
 
 RISCV_ARCH_TEST_SUITE = os.path.join(BURQ_SUITE_ROOT, 'compliance', 'riscv-arch-test', 'riscv-test-suite')
 RISCV_ARCH_TEST_ENV = os.path.join(RISCV_ARCH_TEST_SUITE, 'env')

@@ -3,7 +3,7 @@
 __pycache__/
 logs/
 tools/
-cores/
+core_cfgs/
 
 .python-version
 compliance/riscv-arch-test/

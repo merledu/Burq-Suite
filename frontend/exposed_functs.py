@@ -24,7 +24,8 @@ from frontend.project_browser import (
     retrieve_dir_contents,
     create_file,
     get_file_content,
-    create_dir
+    create_dir,
+    save_file
 )
 from self_checking_tests.self_checking_tests_interface import get_self_checking_tests_category, get_self_checking_testcases
 
@@ -71,6 +72,7 @@ def expose(window):
         create_file,
         get_file_content,
         create_dir,
+        save_file,
 
         # riscv_dv_interface
         riscv_dv_interface.get_working_base_testlist,

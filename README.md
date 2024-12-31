@@ -29,7 +29,7 @@ riscof --verbose info arch-test --clone
 cd ..
 
 # Create directories
-mkdir cores logs tools
+mkdir core_cfgs logs tools
 
 # PATHS
 BURQ_SUITE_ROOT=`pwd`
