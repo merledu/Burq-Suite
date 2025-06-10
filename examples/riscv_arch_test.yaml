@@ -2,11 +2,12 @@ main:
     out: path/to/output/dir
 tests:
     riscv_arch_test:
-        dut:
-            name: dut
-            target_run: 1
-        ref:
-            name: ref
+        plugins:
+            dut:
+                name: dut
+                target_run: 1
+            ref:
+                name: ref
         ispec:
             hart_ids:
                 - 0

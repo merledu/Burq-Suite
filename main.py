@@ -54,7 +54,7 @@ if __name__ == '__main__':
     for k in conf['tests']:
         if k == 'riscv_arch_test':
             test = conf['tests']['riscv_arch_test']
-            mkdir_plugins(
-                join(main['out'], test['dut']['name'], test['ref']['name']),
-                join(main['out'], test['ref']['name'], test['ref']['name']),
-            )
+            plugin_paths = mkdir_plugins(main['out'], test['plugins'])
+            for plugin in ('dut', 'ref'):
+                test['plugins'][plugin]['path'] = plugin_paths[plugin]
+            dump_config_ini(test)
