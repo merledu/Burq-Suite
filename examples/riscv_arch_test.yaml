@@ -1,0 +1,23 @@
+main:
+    out: path/to/output/dir
+tests:
+    riscv_arch_test:
+        dut:
+            name: dut
+            target_run: 1
+        ref:
+            name: ref
+        ispec:
+            hart_ids:
+                - 0
+            hart0:
+                ISA: RV32I
+                physical_addr_sz: 32
+                User_Spec_Version: '2.3'
+                supported_xlen:
+                    - 32
+        pspec:
+            nmi:
+                label: nmi_vector
+            reset:
+                label: reset_vector
