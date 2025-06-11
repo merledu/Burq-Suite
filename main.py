@@ -2,7 +2,7 @@ from os.path import join
 from argparse import ArgumentParser
 from ruamel.yaml import YAML
 
-from riscv_arch_test.riscv_arch_test_interface import mkdir_plugins, dump_config_ini
+from riscv_arch_test.riscv_arch_test_interface import mkdir_plugins, dump_cfg_ini
 #from globals import (
 #    BURQ_SUITE_LOGS,
 #    LOGLEVEL,
@@ -50,11 +50,12 @@ if __name__ == '__main__':
     #)
     args = parse_args()
     conf = read_conf(args.conf)
-    main = conf['main']
     for k in conf['tests']:
         if k == 'riscv_arch_test':
             test = conf['tests']['riscv_arch_test']
-            plugin_paths = mkdir_plugins(main['out'], test['plugins'])
+            prj = join(conf['out'], f'{test['dut']['name']}_riscv_arch_test')
+            mkdir_plugins(prj, test['dut']['name'], test['ref']['name'])
+            test['plugins']['prj'] = plugin_paths['prj']
             for plugin in ('dut', 'ref'):
                 test['plugins'][plugin]['path'] = plugin_paths[plugin]
-            dump_config_ini(test)
+            dump_cfg_ini(test['plugins'])

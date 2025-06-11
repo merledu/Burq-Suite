@@ -1,13 +1,11 @@
-main:
-    out: path/to/output/dir
+out: path/to/output/dir
 tests:
     riscv_arch_test:
-        plugins:
-            dut:
-                name: dut
-                target_run: 1
-            ref:
-                name: ref
+        dut:
+            name: dut
+            target_run: 1
+        ref:
+            name: ref
         ispec:
             hart_ids:
                 - 0
