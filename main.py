@@ -1,8 +1,9 @@
 from os.path import join
 from argparse import ArgumentParser
+
 from ruamel.yaml import YAML
 
-from riscv_arch_test.riscv_arch_test_interface import mkdir_plugins, dump_cfg_ini
+from riscv_arch_test.riscv_arch_test import mkdir_plugins, dump_cfg_ini, dump_dut_yamls, cp_dut_link_ld
 #from globals import (
 #    BURQ_SUITE_LOGS,
 #    LOGLEVEL,
@@ -53,9 +54,34 @@ if __name__ == '__main__':
     for k in conf['tests']:
         if k == 'riscv_arch_test':
             test = conf['tests']['riscv_arch_test']
-            prj = join(conf['out'], f'{test['dut']['name']}_riscv_arch_test')
-            mkdir_plugins(prj, test['dut']['name'], test['ref']['name'])
-            test['plugins']['prj'] = plugin_paths['prj']
-            for plugin in ('dut', 'ref'):
-                test['plugins'][plugin]['path'] = plugin_paths[plugin]
-            dump_cfg_ini(test['plugins'])
+            test_dir = join(
+                conf['out'],
+                f'{test['dut']['name']}_riscv_arch_test'
+            )
+            mkdir_plugins(
+                test['dut']['name'],
+                test['ref']['name'],
+                test_dir
+            )
+            dump_cfg_ini(
+                test['dut']['name'],
+                test['ref']['name'],
+                test_dir,
+                test['dut']['target']
+            )
+            dump_dut_yamls(
+                join(
+                    test_dir,
+                    test['dut']['name']
+                ), {
+                    'isa': test['isa'],
+                    'platform': test['platform']
+                }
+            )
+            cp_dut_link_ld(
+                test['dut']['link_ld'],
+                join(
+                    test_dir,
+                    test['dut']['name']
+                )
+            )

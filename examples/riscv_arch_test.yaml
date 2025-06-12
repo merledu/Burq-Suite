@@ -4,9 +4,10 @@ tests:
         dut:
             name: dut
             target_run: 1
+            link_ld: path/to/dut/linker/script
         ref:
             name: ref
-        ispec:
+        isa:
             hart_ids:
                 - 0
             hart0:
@@ -15,7 +16,7 @@ tests:
                 User_Spec_Version: '2.3'
                 supported_xlen:
                     - 32
-        pspec:
+        platform:
             nmi:
                 label: nmi_vector
             reset:
