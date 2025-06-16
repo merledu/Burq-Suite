@@ -3,19 +3,19 @@ import re
 import shutil
 import subprocess
 import shlex
-import logging
 import random
 import string
 from string import Template
 import sys
 
+from logging import getLogger
 from os.path import join
 
+from riscof.pluginTemplate import pluginTemplate
 import riscof.utils as utils
 import riscof.constants as constants
-from riscof.pluginTemplate import pluginTemplate
 
-logger = logging.getLogger()
+logger = getLogger()
 
 class dut(pluginTemplate):
     __model__ = None
@@ -24,7 +24,8 @@ class dut(pluginTemplate):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         config = kwargs['config']
-        dut.__model__ = config[]
+        self.__model__ = config.name
+        self.dut_exe = 
 
         # In case of an RTL based DUT, this would be point to the final binary executable of your
         # test-bench produced by a simulator (like verilator, vcs, incisive, etc). In case of an iss or
