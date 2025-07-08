@@ -1,9 +1,4 @@
-from os.path import dirname, abspath, join
-
 # Paths
-BURQ_SUITE_ROOT = dirname(abspath(__file__))
-RISCV_ARCH_TEST_SUITE = join(BURQ_SUITE_ROOT, 'riscv_arch_test', 'riscv-arch-test', 'riscv-test-suite')
-RISCV_ARCH_TEST_ENV = join(RISCV_ARCH_TEST_SUITE, 'env')
 #HOME = os.environ['HOME']
 #BURQ_SUITE_LOGS = os.path.join(BURQ_SUITE_ROOT, 'logs')
 #BURQ_SUITE_WEB = os.path.join(BURQ_SUITE_ROOT, 'frontend', 'web')

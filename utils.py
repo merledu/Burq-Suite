@@ -1,7 +1,18 @@
 import json, os, logging, \
     subprocess as sp
 
-from globals import BURQ_SUITE_ROOT, CORE_CFGS, configs
+from os.path import dirname, abspath, join
+
+# PATHS
+BURQ_SUITE_ROOT = dirname(abspath(__file__))
+RV_ARCH_TEST = {
+    'interface': join(BURQ_SUITE_ROOT, 'riscv_arch_test')
+}
+RV_ARCH_TEST['riscv-arch-test'] = join(RV_ARCH_TEST['interface'], 'riscv-arch-test')
+RV_ARCH_TEST['suite'] = join(RV_ARCH_TEST['riscv-arch-test'], 'riscv-test-suite')
+RV_ARCH_TEST['env'] = join(RV_ARCH_TEST['suite'], 'env')
+RV_ARCH_TEST['dut_plugin_dir'] = join(RV_ARCH_TEST['interface'], 'dut_plugin')
+RV_ARCH_TEST['dut_plugin'] = join(RV_ARCH_TEST['dut_plugin_dir'], 'riscof_dut.py')
 
 def dump_configs():
     os.chdir(configs['proj_path'])
