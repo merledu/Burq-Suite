@@ -5,68 +5,48 @@ from shutil import copyfile
 
 from ruamel.yaml import YAML
 
-DUT_YAMLS = {
-    'isa': '{}_isa.yaml',
-    'platform': '{}_platform.yaml'
-}
-CFG_INI = 'config.ini'
+from utils import RV_ARCH_TEST
 
-def mkdir_plugins(dut, ref, out):
+def gen_cfg_ini(prj_dir, dut, ref):
     '''
-    Setup riscof test directory structure.
+    Generate the `config.ini` file.
     Args:
+        prj_dir:
+            Path string to project directory.
         dut:
-            Name of DUT.
+            Dictionary with the following fields.
+            - linker_script[str]: Path to the DUT linker script.
+            - name[str]: Name of DUT.
+            - elf[str]: DUT simulation ELF path.
+            - elf_args[str]: DUT simulation ELF arguments.
+            - timeout[int]: DUT simulation timeout.
         ref:
-            Name of reference.
-        out:
-            Path to riscof test directory.
-    Returns:
-        None
-    '''
-    for plugin in (dut, ref):
-        makedirs(join(out, plugin, 'env'))
-
-def dump_cfg_ini(
-    dut, ref, out,
-    target_run = True
-):
-    '''
-    Dump the `config.ini` file.
-    Args:
-        out:
-            Path to riscof test directory.
-        dut:
-            Name of DUT.
-        ref:
-            Name of reference.
-        target_run:
-            Whether to execute the tests or not. Default: True
+            Name of reference. Valid values in RV_ARCH_TEST['plugins'] keys (except 'dut').
     Returns:
         None
     '''
     cfg = ConfigParser()
     cfg['RISCOF'] = {
-        'ReferencePlugin': ref,
-        'ReferencePluginPath': join(out, ref),
-        'DUTPlugin': dut,
-        'DUTPluginPath': join(out, dut)
+        'DUTPlugin': RV_ARCH_TEST['plugins']['dut']['cls'],
+        'DUTPluginPath': RV_ARCH_TEST['plugins']['dut']['path'],
+        'ReferencePlugin': RV_ARCH_TEST['plugins'][ref]['cls'],
+        'ReferencePluginPath': RV_ARCH_TEST['plugins'][ref]['path']
     }
-    cfg[dut] = {
-        'pluginpath': cfg['RISCOF']['DUTPluginPath'],
-        'ispec': DUT_YAMLS['isa'].format(
-            join(cfg['RISCOF']['DUTPluginPath'], dut)
-        ),
-        'pspec': DUT_YAMLS['platform'].format(
-            join(cfg['RISCOF']['DUTPluginPath'], dut)
-        ),
-        'target_run': target_run
+    cfg[RV_ARCH_TEST['plugins']['dut']['cls']] = {
+        'args': dut['elf_args'],
+        'name': dut['name'],
+        'ispec': join(prj_dir, RV_ARCH_TEST['plugins']['dut']['isa']),
+        'link_ld': dut['linker_script'],
+        'path': dut['elf'],
+        'env': prj_dir,
+        'pspec': join(prj_dir, RV_ARCH_TEST['plugins']['dut']['platform']),
+        'timeout': dut['timeout']
     }
-    cfg[ref] = {
+    cfg[RV_ARCH_TEST['plugins'][ref]['cls']] = {
         'pluginpath': cfg['RISCOF']['ReferencePluginPath']
     }
     with open(
-        join(out, CFG_INI), 'w'
+        join(prj_dir, RV_ARCH_TEST['cfg']), 'w'
     ) as f:
         cfg.write(f)
 

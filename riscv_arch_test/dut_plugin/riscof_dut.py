@@ -5,39 +5,33 @@ from os import remove
 from riscof.pluginTemplate import pluginTemplate
 from riscof.utils import load_yaml, makeUtil
 
-from utils import RV_ARCH_TEST
-
 logger = getLogger()
 
 class dut(pluginTemplate):
     __model__ = None
-    __version__ = None
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         config = kwargs['config']
-        self.__model__ = config.name
-        self.plugin_path = RV_ARCH_TEST['dut_plugin_dir']
-        self.isa_spec = RV_ARCH_TEST['ispec']
-        self.platform_spec = RV_ARCH_TEST['pspec']
-        self.dut_exe = config['PATH']
-        self.dut_cmd_args = config['cmd_args']
+        self.__model__ = config['name']
+        self.dut_elf = config['path']
+        self.dut_elf_args = config['args']
+        self.env = config['env']
+        self.isa_spec = config['ispec']
         self.link_ld = config['link_ld']
-        self.num_jobs = config['jobs']
-        self.model_test = config['model_test']
-        self.target_run = bool(int(config['target_run']))
+        self.platform_spec = config['pspec']
         self.timeout = int(config['timeout'])
 
         self.work_dir = None
-        self.suite_dir = None
-        self.compile_cmd = None
-        self.xlen = None
-        self.abi = None
-        self.makefile = None
+        #self.suite_dir = None
+        #self.compile_cmd = None
+        #self.xlen = None
+        #self.abi = None
+        #self.makefile = None
 
     def initialise(self, suite, work_dir, archtest_env):
         self.work_dir = work_dir
-        self.suite_dir = suite
+        #self.suite_dir = suite
         self.compile_cmd = ' '.join((
             'riscv{}-unknown-elf-gcc',
             '-march={}',

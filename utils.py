@@ -3,16 +3,33 @@ import json, os, logging, \
 
 from os.path import dirname, abspath, join
 
-# PATHS
-BURQ_SUITE_ROOT = dirname(abspath(__file__))
+# Constants
+BURQ_SUITE_ROOT = dirname(
+    abspath(__file__)
+)
 RV_ARCH_TEST = {
     'interface': join(BURQ_SUITE_ROOT, 'riscv_arch_test')
 }
 RV_ARCH_TEST['riscv-arch-test'] = join(RV_ARCH_TEST['interface'], 'riscv-arch-test')
 RV_ARCH_TEST['suite'] = join(RV_ARCH_TEST['riscv-arch-test'], 'riscv-test-suite')
 RV_ARCH_TEST['env'] = join(RV_ARCH_TEST['suite'], 'env')
-RV_ARCH_TEST['dut_plugin_dir'] = join(RV_ARCH_TEST['interface'], 'dut_plugin')
-RV_ARCH_TEST['dut_plugin'] = join(RV_ARCH_TEST['dut_plugin_dir'], 'riscof_dut.py')
+RV_ARCH_TEST['cfg'] = 'config.ini'
+RV_ARCH_TEST['plugins'] = {
+    'dut': {
+        'cls': 'DUT',
+        'path': join(RV_ARCH_TEST['interface'], 'dut_plugin'),
+        'isa': 'dut_isa.yaml',
+        'platform': 'dut_platform.yaml'
+    },
+    'sail': {
+        'cls': 'Sail',
+        'path': join(RV_ARCH_TEST['interface'], 'sail_plugin')
+    },
+    'spike': {
+        'cls': 'Spike',
+        'path': join(RV_ARCH_TEST['interface'], 'spike_plugin')
+    }
+}
 
 def dump_configs():
     os.chdir(configs['proj_path'])
