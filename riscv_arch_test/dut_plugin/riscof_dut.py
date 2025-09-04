@@ -14,12 +14,12 @@ class dut(pluginTemplate):
         super().__init__(*args, **kwargs)
         config = kwargs['config']
         self.__model__ = config['name']
-        self.dut_elf = config['path']
-        self.dut_elf_args = config['args']
+        self.elf = config['elf']
+        self.elf_args = config['elf_args']
         self.env = config['env']
-        self.isa_spec = config['ispec']
+        self.ispec = config['ispec']
         self.link_ld = config['link_ld']
-        self.platform_spec = config['pspec']
+        self.pspec = config['pspec']
         self.timeout = int(config['timeout'])
 
         self.work_dir = None

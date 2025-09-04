@@ -21,8 +21,8 @@ RV_ARCH_TEST['plugins'] = {
         'isa': 'dut_isa.yaml',
         'platform': 'dut_platform.yaml'
     },
-    'sail': {
-        'cls': 'Sail',
+    'sail_riscv': {
+        'cls': 'SailRISCV',
         'path': join(RV_ARCH_TEST['interface'], 'sail_plugin')
     },
     'spike': {

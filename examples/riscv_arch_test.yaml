@@ -1,12 +1,11 @@
-out: path/to/output/dir
+prj_dir: path/to/project/directory
+name: project_name
+elf: path/to/dut/elf
+elf_args: ''
 tests:
     riscv_arch_test:
         dut:
-            name: dut
-            target_run: 1
-            link_ld: path/to/dut/linker/script
-        ref:
-            name: ref
+            link_ld: 
         isa:
             hart_ids:
                 - 0

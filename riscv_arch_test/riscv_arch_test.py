@@ -9,16 +9,16 @@ from utils import RV_ARCH_TEST
 
 def gen_cfg_ini(prj_dir, dut, ref):
     '''
-    Generate the `config.ini` file.
+    Generate a project specific `config.ini` file.
     Args:
         prj_dir:
             Path string to project directory.
         dut:
             Dictionary with the following fields.
-            - linker_script[str]: Path to the DUT linker script.
-            - name[str]: Name of DUT.
             - elf[str]: DUT simulation ELF path.
             - elf_args[str]: DUT simulation ELF arguments.
+            - name[str]: Name of DUT.
+            - link_ld[str]: Path to the DUT linker script.
             - timeout[int]: DUT simulation timeout.
         ref:
             Name of reference. Valid values in RV_ARCH_TEST['plugins'] keys (except 'dut').
@@ -33,12 +33,12 @@ def gen_cfg_ini(prj_dir, dut, ref):
         'ReferencePluginPath': RV_ARCH_TEST['plugins'][ref]['path']
     }
     cfg[RV_ARCH_TEST['plugins']['dut']['cls']] = {
-        'args': dut['elf_args'],
+        'elf': dut['elf'],
+        'elf_args': dut['elf_args'],
+        'env': prj_dir,
         'name': dut['name'],
         'ispec': join(prj_dir, RV_ARCH_TEST['plugins']['dut']['isa']),
-        'link_ld': dut['linker_script'],
-        'path': dut['elf'],
-        'env': prj_dir,
+        'link_ld': dut['link_ld'],
         'pspec': join(prj_dir, RV_ARCH_TEST['plugins']['dut']['platform']),
         'timeout': dut['timeout']
     }
@@ -50,9 +50,9 @@ def gen_cfg_ini(prj_dir, dut, ref):
     ) as f:
         cfg.write(f)
 
-def dump_dut_yaml(path, dut_yamls):
+def gen_dut_yaml(path, dut_yamls):
     '''
-    Dump the DUT plugin YAML files.
+    Generate a project specific DUT plugin YAML file.
     Args:
         path:
             DUT plugin path.
