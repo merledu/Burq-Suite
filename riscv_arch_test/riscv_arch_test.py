@@ -32,14 +32,16 @@ def gen_cfg_ini(prj_dir, dut, ref):
         'ReferencePlugin': RV_ARCH_TEST['plugins'][ref]['cls'],
         'ReferencePluginPath': RV_ARCH_TEST['plugins'][ref]['path']
     }
+    ispec = join(prj_dir, RV_ARCH_TEST['plugins']['dut']['isa'])
+    pspec = join(prj_dir, RV_ARCH_TEST['plugins']['dut']['platform'])
     cfg[RV_ARCH_TEST['plugins']['dut']['cls']] = {
         'elf': dut['elf'],
         'elf_args': dut['elf_args'],
         'env': prj_dir,
         'name': dut['name'],
-        'ispec': join(prj_dir, RV_ARCH_TEST['plugins']['dut']['isa']),
+        'ispec': ispec,
         'link_ld': dut['link_ld'],
-        'pspec': join(prj_dir, RV_ARCH_TEST['plugins']['dut']['platform']),
+        'pspec': pspec,
         'timeout': dut['timeout']
     }
     cfg[RV_ARCH_TEST['plugins'][ref]['cls']] = {
@@ -50,12 +52,10 @@ def gen_cfg_ini(prj_dir, dut, ref):
     ) as f:
         cfg.write(f)
 
-def gen_dut_yaml(path, dut_yamls):
+def gen_dut_yaml():
     '''
-    Generate a project specific DUT plugin YAML file.
+    Generate project specific DUT plugin YAML files.
     Args:
-        path:
-            DUT plugin path.
         dut_yamls:
             Dictionary containing YAML inputs of `dut_isa.yaml` and `dut_platform.yaml`.
             The values of this dictionary needs to be a dictionary that may be read from YAML files
