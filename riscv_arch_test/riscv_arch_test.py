@@ -7,12 +7,10 @@ from ruamel.yaml import YAML
 
 from utils import RV_ARCH_TEST
 
-def gen_cfg_ini(prj_dir, dut, ref):
+def gen_cfg_ini(dut, prj_dir, ref):
     '''
     Generate a project specific `config.ini` file.
     Args:
-        prj_dir:
-            Path string to project directory.
         dut:
             Dictionary with the following fields.
             - elf[str]: DUT simulation ELF path.
@@ -20,6 +18,8 @@ def gen_cfg_ini(prj_dir, dut, ref):
             - name[str]: Name of DUT.
             - link_ld[str]: Path to the DUT linker script.
             - timeout[int]: DUT simulation timeout.
+        prj_dir:
+            Path string to project directory.
         ref:
             Name of reference. Valid values in RV_ARCH_TEST['plugins'] keys (except 'dut').
     Returns:
@@ -52,23 +52,20 @@ def gen_cfg_ini(prj_dir, dut, ref):
     ) as f:
         cfg.write(f)
 
-def gen_dut_yaml():
+def gen_dut_yaml(dut_yamls, prj_dir):
     '''
     Generate project specific DUT plugin YAML files.
     Args:
         dut_yamls:
-            Dictionary containing YAML inputs of `dut_isa.yaml` and `dut_platform.yaml`.
-            The values of this dictionary needs to be a dictionary that may be read from YAML files
-            or programmatically created and needs to contain the structure described in [RISCV-Config][2].
+            Dictionary containing the following fields.
+            - isa[dict]: Dictionary with the schema of `dut_isa.yaml`.
+            - platform[dict]: Dictionary with the schema of `dut_platform.yaml`.
+            Schema for `dut_isa.yaml` and `dut_platform.yaml` are described in [RISCV-Config][1].
             For information relating to RISCOF, see [here][1].
-            [1]: https://riscof.readthedocs.io/en/stable/inputs.html#yaml-specs
-            [2]: https://riscv-config.readthedocs.io/en/stable/yaml-specs.html
-            ```
-            {
-                'isa': {},
-                'platform': {}
-            }
-            ```
+            [1]: https://riscv-config.readthedocs.io/en/stable/yaml-specs.html
+            [2]: https://riscof.readthedocs.io/en/stable/inputs.html#yaml-specs
+        prj_dir:
+            Path string to project directory.
     Returns:
         None
     '''
@@ -79,27 +76,19 @@ def gen_dut_yaml():
     yaml.default_flow_style = False
     for k in dut_yamls:
         with open(
-            DUT_YAMLS[k].format(
-                join(
-                    path,
-                    path.split(sep)[-1]
-                )
-            ), 'w'
+            join(prj_dir, f'dut_{k}.yaml'),
+            'w'
         ) as f:
-            yaml.dump(dut_yamls, f)
+            yaml.dump(dut_yamls[k], f)
 
-def cp_dut_link_ld(src, dest):
+def gen_dut_link_ld(link_ld, prj_dir):
     '''
-    Copy DUT link.ld script to DUT plugin directory.
+    Generate DUT link.ld with the provided format.
     Args:
-        src:
+        link_ld:
             Full file path of DUT link.ld script.
         dest:
             DUT plugin path.
     Returns:
         None
     '''
-    copyfile(
-        src,
-        join(dest, 'env', 'link.ld')
-    )
